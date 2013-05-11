@@ -1,0 +1,84 @@
+<?xml version="1.0" ?> 
+<project name="${build.dir.modFloder}" default="build">
+	
+	<property file="build.properties" prefix="build"/>
+	<property file="count.properties" prefix="count"/>
+	
+	<target name="clean">
+		<delete file="${build.dir.development}\${build.dir.mcp}\src\minecraft\mcmod.info" />
+		<delete dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\${build.dir.modPackege}" />
+		<delete dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\${build.dir.modLib}" />
+		<delete dir="${build.dir.development}\${build.dir.mcp}\reobf\minecraft" />
+	</target>
+	
+	<target name="incrementBuildNumber">
+		<propertyfile file="count.properties">
+			<entry key="count" type="int" operation="+" default="1"/>
+		</propertyfile>
+	</target>
+	
+	<target name="prepare">
+		<copy todir="${build.dir.development}\${build.dir.mcp}\src\minecraft">
+			<fileset dir="${build.dir.development}\${build.dir.Mods}\${build.dir.modFloder}\${build.dir.src}" />
+		</copy>
+		<copy todir="${build.dir.development}\${build.dir.mcp}\src\minecraft">
+			<fileset dir="${build.dir.development}\${build.dir.Mods}\${build.dir.modFloder}\${build.dir.lib}" />
+		</copy>
+	</target>
+	
+	<target name="replaceTokens">
+		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@VERSION@" value="${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}" />
+		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@FINGERPRINT@" value="${build.release.mod.fingerprint}" />
+		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@BUILD@" value="${count.count}" />
+	</target>
+	
+	<target name="recompile">
+		<exec dir="${build.dir.development}\${build.dir.mcp}" executable="cmd" osfamily="windows">
+			<arg line="/c recompile.bat" />
+		</exec>
+		<exec dir="${build.dir.development}\${build.dir.mcp}" executable="bash" osfamily="unix">
+			<arg line="recompile.sh" />
+		</exec>
+	</target>
+	
+	<target name="reobfuscate">
+		<exec dir="${build.dir.development}\${build.dir.mcp}" executable="cmd" osfamily="windows">
+			<arg line="/c reobfuscate_srg.bat" />
+		</exec>
+		<exec dir="${build.dir.development}\${build.dir.mcp}" executable="bash" osfamily="unix">
+			<arg line="reobfuscate_srg.sh" />
+		</exec>
+	</target>
+		
+	<target name="singJAR">
+		<signjar jar="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar"
+            signedjar="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar"
+            alias="${build.key.alias}"
+            storepass="${build.key.storepass}"
+            keystore="${build.key.store}"/>
+	</target>
+		
+	<target name="release">
+		<!-- Prep for the build -->
+		<antcall target="clean" />
+		<antcall target="incrementBuildNumber" />
+		<antcall target="prepare" />
+		<antcall target="replaceTokens" />
+		<antcall target="recompile" />		
+		<antcall target="reobfuscate" />
+		
+		<!-- Build the jar -->
+		<mkdir dir="${build.dir.release}" />
+		<jar destfile="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar">
+			<fileset dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\" includes="mcmod.info" />
+			<fileset dir="${build.dir.development}\${build.dir.mcp}\reobf\minecraft" />
+			<fileset dir="${build.dir.development}\${build.dir.Mods}\${build.dir.modFloder}\${build.dir.res}" />
+		</jar>
+		
+		<!-- Sing the jar -->
+		<antcall target="singJAR" />
+
+		<!-- Clean up the mcp source now that we are done -->
+		<!--<antcall target="clean" />-->
+	</target>
+</project>

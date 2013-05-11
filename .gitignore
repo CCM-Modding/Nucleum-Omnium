@@ -1,5 +1,14 @@
 *.class
-
+build.properties
+.DS_Store
+.DS_Store*
+.Spotlight-V100
+.Trashes
+.classpath
+.project
+bin
+Thumbs.db
+*.ks
 # Package Files #
 *.jar
 *.war

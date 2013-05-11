@@ -1,0 +1,17 @@
+[
+{
+  "modid": "NucleumOmnium",
+  "name": "Nucleum-Omnium",
+  "description": "Main CCM Mod",
+  "credits": "By claycorp, captain_shadows, and Morton.",
+  "logoFile": "/mods/nucleum-omnium/textures/logo.png",
+  "version": "@VERSION@ (@BUILD@)",
+  "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
+  "updateUrl": "https://github.com/CCM-Modding/Nucleum-Omnium/tree/master/Releases",
+  "authors": [ "claycorp", "captain_shadows", "morton00000" ],
+  "screenshots": [ "/mods/nucleum-omnium/textures/screenshots/screenshot.png" ],
+  "dependencies": [
+     "required-after:Forge@[7.7.2.688,)"
+  ]
+}
+]
