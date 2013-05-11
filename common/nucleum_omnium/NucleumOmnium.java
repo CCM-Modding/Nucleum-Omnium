@@ -19,10 +19,17 @@ import cpw.mods.fml.common.network.NetworkMod;
 @Mod(modid = Archive.MOD_ID,
      name = Archive.MOD_NAME,
      version = Archive.MOD_VERSION,
-     useMetadata = true,
+     useMetadata = false,
      dependencies = Archive.MOD_DEPENDANCIES,
      certificateFingerprint = Archive.MOD_FIGERPRINT)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = Archive.MOD_CHANNEL/*, packetHandler = PacketHandler.class*/)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = Archive.MOD_CHANNEL/*
+                                                                                                  * ,
+                                                                                                  * packetHandler
+                                                                                                  * =
+                                                                                                  * PacketHandler
+                                                                                                  * .
+                                                                                                  * class
+                                                                                                  */)
 public class NucleumOmnium
 {
 
@@ -30,13 +37,13 @@ public class NucleumOmnium
      * The Harvestry Instance
      */
     @Instance(Archive.MOD_ID)
-    public static NucleumOmnium   instance;
+    public static NucleumOmnium instance;
 
     /**
      * The Harvestry proxy
      */
     @SidedProxy(serverSide = Locations.SERVER_PROXY, clientSide = Locations.CLIENT_PROXY)
-    public static CommonProxy proxy;
+    public static CommonProxy   proxy;
 
     @FingerprintWarning
     public void invalidFingerprint(final FMLFingerprintViolationEvent event)
@@ -45,7 +52,7 @@ public class NucleumOmnium
          * Report (log) to the user that the version of Harvestry they are using
          * has been changed/tampered with
          */
-        //Handler.log(Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
+        // Handler.log(Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
     }
 
     @PreInit
@@ -57,7 +64,8 @@ public class NucleumOmnium
     @Init
     public void init(final FMLInitializationEvent event)
     {
-
+        proxy.initCapes();
+        proxy.initStats();
     }
 
     @PostInit
