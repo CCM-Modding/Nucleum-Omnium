@@ -1,19 +1,8 @@
-package harvestry;
+package nucleum_omnium;
 
-import harvestry.block.ModBlocks;
-import harvestry.configuration.Config;
-import harvestry.core.handlers.Handler;
-import harvestry.core.handlers.LanguageHandler;
-import harvestry.core.proxy.CommonProxy;
-import harvestry.creativetab.HarvestryTabs;
-import harvestry.item.ModItems;
-import harvestry.network.PacketHandler;
-import harvestry.utils.lib.Archive;
-import harvestry.utils.lib.Locations;
-import harvestry.utils.registry.Registry;
-
-import java.util.logging.Level;
-
+import nucleum_omnium.proxy.CommonProxy;
+import nucleum_omnium.utils.lib.Archive;
+import nucleum_omnium.utils.lib.Locations;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.FingerprintWarning;
 import cpw.mods.fml.common.Mod.Init;
@@ -33,7 +22,7 @@ import cpw.mods.fml.common.network.NetworkMod;
      useMetadata = true,
      dependencies = Archive.MOD_DEPENDANCIES,
      certificateFingerprint = Archive.MOD_FIGERPRINT)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = Archive.MOD_CHANNEL, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = Archive.MOD_CHANNEL/*, packetHandler = PacketHandler.class*/)
 public class NucleumOmnium
 {
 
@@ -56,7 +45,7 @@ public class NucleumOmnium
          * Report (log) to the user that the version of Harvestry they are using
          * has been changed/tampered with
          */
-        Handler.log(Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
+        //Handler.log(Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
     }
 
     @PreInit
