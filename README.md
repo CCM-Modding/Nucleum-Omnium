@@ -1,6 +1,4 @@
-Nucleum-Omnium
-==============
-
+###Nucleum-Omnium
 This is the Main Mod for all the CCM-Modding mods.
 
 It is required for all of our mods.
