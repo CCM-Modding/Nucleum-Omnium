@@ -1,11 +1,11 @@
-package nucleum_omnium.utils.lib;
+package ccm.nucleum_omnium.utils.lib;
 
 public final class Locations
 {
 
     public static final String LANGUAGE_FILE = "/mods/" + Archive.MOD_ID + "/lang/";
 
-    public static final String proxy         = Archive.MOD_ID + ".proxy.";
+    public static final String proxy         = "ccm." + Archive.MOD_ID + ".proxy.";
 
     public static final String CLIENT_PROXY  = proxy + "ClientProxy";
 

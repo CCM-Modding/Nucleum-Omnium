@@ -1,4 +1,4 @@
-package nucleum_omnium.utils.lib;
+package ccm.nucleum_omnium.utils.lib;
 
 public final class Archive
 {
@@ -11,7 +11,7 @@ public final class Archive
 
     public static final String MOD_FIGERPRINT          = "@FINGERPRINT@";
 
-    public static final String MOD_CHANNEL             = MOD_ID;
+    public static final String MOD_CHANNEL             = "CCM";
 
     public static final String MOD_DEPENDANCIES        = "required-after:Forge@[7.7.2.688,)";
 

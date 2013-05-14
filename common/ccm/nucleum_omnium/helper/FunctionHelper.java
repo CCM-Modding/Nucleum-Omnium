@@ -1,4 +1,4 @@
-package nucleum_omnium.helper;
+package ccm.nucleum_omnium.helper;
 
 import java.util.List;
 

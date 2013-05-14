@@ -1,4 +1,4 @@
-package nucleum_omnium.helper;
+package ccm.nucleum_omnium.helper;
 
 import net.minecraft.item.Item;
 
@@ -10,7 +10,7 @@ public class TextureHelper
      *            Name of the thing to make a texture
      * @return The texture version of the name
      */
-    public static String getTextureFromName(final String name, String texturePath)
+    public static String getTextureFromName(final String name, final String texturePath)
     {
         return texturePath + name;
     }
@@ -18,7 +18,7 @@ public class TextureHelper
     /**
      * @return The texture.
      */
-    public static String getTexture(final Item item, String texturePath)
+    public static String getTexture(final Item item, final String texturePath)
     {
         return texturePath + ItemHelper.getItemName(item);
     }

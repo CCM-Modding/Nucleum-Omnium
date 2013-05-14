@@ -1,4 +1,4 @@
-package nucleum_omnium.utils.lib;
+package ccm.nucleum_omnium.utils.lib;
 
 public class Languages
 {

@@ -1,4 +1,4 @@
-package nucleum_omnium.proxy;
+package ccm.nucleum_omnium.proxy;
 
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
