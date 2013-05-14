@@ -5,18 +5,19 @@ import java.net.URL;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.client.model.IModelCustomLoader;
 import net.minecraftforge.client.model.ModelFormatException;
-import net.minecraftforge.client.model.obj.WavefrontObject;
 
-
-public class TcnModelLoader implements IModelCustomLoader {
+public class TechneModelLoader implements IModelCustomLoader
+{
 
     @Override
     public String getType()
     {
-        return "TCN model";
+        return "Techne model";
     }
 
-    private static final String[] types = { "tcn" };
+    private static final String[] types =
+                                        { "tcn" };
+
     @Override
     public String[] getSuffixes()
     {
@@ -28,4 +29,5 @@ public class TcnModelLoader implements IModelCustomLoader {
     {
         return new TechneModel(resourceName, resource);
     }
+
 }

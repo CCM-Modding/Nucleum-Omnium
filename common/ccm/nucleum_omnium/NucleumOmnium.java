@@ -2,7 +2,9 @@ package ccm.nucleum_omnium;
 
 import java.util.logging.Level;
 
+import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.common.MinecraftForge;
+import ccm.nucleum_omnium.client.model.tcn.TechneModelLoader;
 import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.proxy.CommonProxy;
 import ccm.nucleum_omnium.utils.lib.Archive;
@@ -70,6 +72,7 @@ public class NucleumOmnium
     {
         proxy.initCapes();
         proxy.initStats();
+        AdvancedModelLoader.registerModelHandler(new TechneModelLoader());
     }
 
     @PostInit
