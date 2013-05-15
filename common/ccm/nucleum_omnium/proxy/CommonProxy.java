@@ -1,7 +1,5 @@
 package ccm.nucleum_omnium.proxy;
 
-import org.modstats.Modstats;
-
 public class CommonProxy
 {
 
@@ -10,12 +8,4 @@ public class CommonProxy
      */
     public void initCapes()
     {}
-
-    /**
-     * Initializes the Stats
-     */
-    public void initStats()
-    {
-        Modstats.instance().getReporter().registerMod(this);
-    }
 }

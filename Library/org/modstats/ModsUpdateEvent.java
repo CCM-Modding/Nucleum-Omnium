@@ -61,5 +61,4 @@ public class ModsUpdateEvent extends Event
     {
         return updatedMods;
     }
-    
 }

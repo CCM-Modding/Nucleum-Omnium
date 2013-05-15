@@ -7,6 +7,7 @@ import net.minecraftforge.common.MinecraftForge;
 import ccm.nucleum_omnium.client.model.tcn.TechneModelLoader;
 import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.proxy.CommonProxy;
+import ccm.nucleum_omnium.stats.StatEventHandler;
 import ccm.nucleum_omnium.utils.lib.Archive;
 import ccm.nucleum_omnium.utils.lib.Locations;
 import ccm.nucleum_omnium.worldgen.WorldGenHandler;
@@ -33,7 +34,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @NetworkMod(clientSideRequired = true,
             serverSideRequired = false,
             channels = Archive.MOD_CHANNEL)
-public class NucleumOmnium
+public class NucleumOmnium implements IMod
 {
 
     /**
@@ -48,6 +49,34 @@ public class NucleumOmnium
     @SidedProxy(serverSide = Locations.SERVER_PROXY,
                 clientSide = Locations.CLIENT_PROXY)
     public static CommonProxy   proxy;
+    
+    @Override
+    public String getModId()
+    {
+        // TODO Auto-generated method stub
+        return Archive.MOD_ID;
+    }
+
+    @Override
+    public String getModName()
+    {
+        // TODO Auto-generated method stub
+        return Archive.MOD_NAME;
+    }
+
+    @Override
+    public String getModPrefix()
+    {
+        // TODO Auto-generated method stub
+        return Archive.MOD_PREFIX;
+    }
+
+    @Override
+    public String getModVersion()
+    {
+        // TODO Auto-generated method stub
+        return Archive.MOD_VERSION;
+    }
 
     @FingerprintWarning
     public void invalidFingerprint(final FMLFingerprintViolationEvent event)
@@ -71,7 +100,8 @@ public class NucleumOmnium
     public void init(final FMLInitializationEvent event)
     {
         proxy.initCapes();
-        proxy.initStats();
+        MinecraftForge.EVENT_BUS.register(new StatEventHandler());
+        StatEventHandler.addModToList(this);
         AdvancedModelLoader.registerModelHandler(new TechneModelLoader());
     }
 

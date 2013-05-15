@@ -249,7 +249,6 @@ public class TechneModel extends ModelBase implements IModelCustom
         ModelRenderer part = parts.get(partName);
         if (part != null){
             bindTexture();
-
             part.renderWithRotation(1.0F);
         }
     }
