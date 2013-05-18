@@ -24,9 +24,9 @@ public class FileExeption extends RuntimeException
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("The mod ");
-        sb.append(mod.getModName());
+        sb.append(this.mod.getModName());
         sb.append(" has had a Problem loading it's Language files.\nIT'S NOT MY FAULT! Below is how to fix it.\n");
         sb.append("Delete any file that does NOT end with '.xml' from your lang folder located inside ");
         sb.append(this.languageLocation);

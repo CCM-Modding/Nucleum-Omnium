@@ -24,9 +24,9 @@ public class DupeExeption extends RuntimeException
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("The mod ");
-        sb.append(mod.getModName());
+        sb.append(this.mod.getModName());
         sb.append(" has a Problem.\nIT'S NOT MY FAULT! Below is how to fix it.\n");
         sb.append(this.mError);
         sb.append("\nDO NOT COME TO ME WITH THIS. YOU CAUSED IT YOURSELF, AND I TOLD YOU HOW TO FIX IT!");

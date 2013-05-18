@@ -10,17 +10,18 @@ import cpw.mods.fml.common.FMLLog;
 
 public final class Handler
 {
+
     /*
      * *******************************************************************
      * Log Stuff
      * *******************************************************************
      */
-    private static Logger                 logger;
+    private static Logger logger;
 
     /**
      * Initializes the Logger for this Mod.
      */
-    public static void initLog(IMod mod)
+    public static void initLog(final IMod mod)
     {
         logger = Logger.getLogger(mod.getModId());
         logger.setParent(FMLLog.getLogger());
@@ -55,16 +56,16 @@ public final class Handler
      * Mod State Check
      * *******************************************************************
      */
-    
+
     private static HashMap<IMod, Boolean> modsLoaded = new HashMap<IMod, Boolean>();
-    
+
     /**
      * Checks if the Mod has being loaded before and throws a exception. The
      * default response is false. Other wise you should get a Exception.
      * 
      * @return false if the Mod has not being loaded yet.
      */
-    public static boolean isModLoaded(IMod mod)
+    public static boolean isModLoaded(final IMod mod)
     {
         if (!modsLoaded.containsKey(mod)){
             modsLoaded.put(mod, false);
@@ -77,7 +78,7 @@ public final class Handler
     /**
      * "Loads" the Mod. In respect to {@link isModLoaded()}
      */
-    public static void loadMod(IMod mod)
+    public static void loadMod(final IMod mod)
     {
         if (!modsLoaded.get(mod)){
             modsLoaded.remove(mod);
@@ -90,7 +91,7 @@ public final class Handler
     /**
      * "UnLoads" the Mod. In respect to {@link isModLoaded()}
      */
-    public static void unLoadMod(IMod mod)
+    public static void unLoadMod(final IMod mod)
     {
         if (modsLoaded.containsKey(mod)){
             modsLoaded.remove(mod);
@@ -98,9 +99,9 @@ public final class Handler
         }
     }
 
-    private static void throwError(IMod mod)
+    private static void throwError(final IMod mod)
     {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("Why did you install my Mod twice? Remove the second ");
         sb.append(mod.getModName());
         sb.append("-Universal-");

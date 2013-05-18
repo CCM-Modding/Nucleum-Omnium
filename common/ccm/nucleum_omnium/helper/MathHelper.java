@@ -61,26 +61,27 @@ public class MathHelper
     {
         return clampInt(rand.nextInt(maxValue), 1, maxValue);
     }
-    
+
     /**
-     * A table of sin values computed from 0 (inclusive) to 2*pi (exclusive), with steps of 2*PI / 65536.
+     * A table of sin values computed from 0 (inclusive) to 2*pi (exclusive), with steps of 2*PI /
+     * 65536.
      */
     private static float[] SIN_TABLE = new float[65536];
 
     /**
      * sin looked up in a table
      */
-    public static final float sin(float par0)
+    public static final float sin(final float par0)
     {
-        return SIN_TABLE[(int)(par0 * 10430.378F) & 65535];
+        return SIN_TABLE[(int) (par0 * 10430.378F) & 65535];
     }
 
     /**
      * cos looked up in the sin table with the appropriate offset
      */
-    public static final float cos(float par0)
+    public static final float cos(final float par0)
     {
-        return SIN_TABLE[(int)(par0 * 10430.378F + 16384.0F) & 65535];
+        return SIN_TABLE[(int) ((par0 * 10430.378F) + 16384.0F) & 65535];
     }
 
     private MathHelper()

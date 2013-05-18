@@ -22,7 +22,7 @@ public class WorldGenMineable extends WorldGenerator
     private final int                 genClusterSize;
 
     public WorldGenMineable(final ItemStack ore,
-                                  final int clusterSize)
+                            final int clusterSize)
     {
         this.myResource = new ArrayList<ResourceEntry>();
         this.myResource.add(new WorldGenHandler.ResourceEntry(ore, 1));
@@ -30,7 +30,7 @@ public class WorldGenMineable extends WorldGenerator
     }
 
     public WorldGenMineable(final WorldGenHandler.ResourceEntry resource,
-                                  final int clusterSize)
+                            final int clusterSize)
     {
         this.myResource = new ArrayList<ResourceEntry>();
         this.myResource.add(resource);
@@ -38,15 +38,15 @@ public class WorldGenMineable extends WorldGenerator
     }
 
     public WorldGenMineable(final List<ResourceEntry> resource,
-                                  final int clusterSize)
+                            final int clusterSize)
     {
         this.myResource = resource;
         this.genClusterSize = clusterSize;
     }
 
     public WorldGenMineable(final ItemStack ore,
-                                  final int clusterSize,
-                                  final int blockID)
+                            final int clusterSize,
+                            final int blockID)
     {
         this.myResource = new ArrayList<ResourceEntry>();
         this.myResource.add(new WorldGenHandler.ResourceEntry(ore, 1));
@@ -55,8 +55,8 @@ public class WorldGenMineable extends WorldGenerator
     }
 
     public WorldGenMineable(final WorldGenHandler.ResourceEntry resource,
-                                  final int clusterSize,
-                                  final int blockID)
+                            final int clusterSize,
+                            final int blockID)
     {
         this.myResource = new ArrayList<ResourceEntry>();
         this.myResource.add(resource);
@@ -65,8 +65,8 @@ public class WorldGenMineable extends WorldGenerator
     }
 
     public WorldGenMineable(final List<ResourceEntry> resource,
-                                  final int clusterSize,
-                                  final int blockID)
+                            final int clusterSize,
+                            final int blockID)
     {
         this.myResource = resource;
         this.genClusterSize = clusterSize;

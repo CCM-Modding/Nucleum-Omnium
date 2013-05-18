@@ -16,14 +16,14 @@ public class StatEventHandler
     private static List<ModVersionData> updates = new LinkedList<ModVersionData>();
 
     @ForgeSubscribe
-    public void onModsUpdate(ModsUpdateEvent event)
+    public void onModsUpdate(final ModsUpdateEvent event)
     {
-        for (ModVersionData data : updates){
+        for (final ModVersionData data : updates){
             event.add(data);
         }
     }
 
-    public static void addModToList(IMod mod)
+    public static void addModToList(final IMod mod)
     {
         updates.add(new ModVersionData(mod.getModPrefix(), mod.getModName(), mod.getModVersion()));
     }

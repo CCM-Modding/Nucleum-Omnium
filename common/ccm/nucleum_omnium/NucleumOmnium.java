@@ -49,7 +49,7 @@ public class NucleumOmnium implements IMod
     @SidedProxy(serverSide = Locations.SERVER_PROXY,
                 clientSide = Locations.CLIENT_PROXY)
     public static CommonProxy   proxy;
-    
+
     @Override
     public String getModId()
     {

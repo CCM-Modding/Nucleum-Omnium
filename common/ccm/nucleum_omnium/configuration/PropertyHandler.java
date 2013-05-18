@@ -11,22 +11,22 @@ import ccm.nucleum_omnium.IMod;
 public class PropertyHandler
 {
 
-    private int                                   baseItemID;
+    private final int                             baseItemID;
 
-    private int                                   baseBlockID;
+    private final int                             baseBlockID;
 
     private static HashMap<IMod, Boolean>         hasPropertyHandler = new HashMap<IMod, Boolean>();
 
     private static HashMap<IMod, PropertyHandler> idHandler          = new HashMap<IMod, PropertyHandler>();
 
-    private PropertyHandler(int baseItemID,
-                            int baseBlockID)
+    private PropertyHandler(final int baseItemID,
+                            final int baseBlockID)
     {
         this.baseItemID = baseItemID;
         this.baseBlockID = baseBlockID;
     }
 
-    public static PropertyHandler getConfigInstance(IMod requester, int baseItemID, int baseBlockID)
+    public static PropertyHandler getConfigInstance(final IMod requester, final int baseItemID, final int baseBlockID)
     {
         if (!hasPropertyHandler.containsKey(requester)){
             hasPropertyHandler.put(requester, true);
@@ -38,26 +38,26 @@ public class PropertyHandler
     /**
      * @return The next Item ID
      */
-    public Property getNextItem(Configuration config, String itemDescription)
+    public Property getNextItem(final Configuration config, final String itemDescription)
     {
         for (int i = 0; i < Item.itemsList.length; i++){
             if (Item.itemsList[i] == null){
                 return config.getItem(itemDescription, i);
             }
         }
-        return config.getItem(itemDescription, baseItemID);
+        return config.getItem(itemDescription, this.baseItemID);
     }
 
     /**
      * @return The next Block ID
      */
-    public Property getNextBlock(Configuration config, String blockDescription)
+    public Property getNextBlock(final Configuration config, final String blockDescription)
     {
         for (int i = 0; i < Block.blocksList.length; i++){
             if (Block.blocksList[i] == null){
                 return config.getBlock(blockDescription, i);
             }
         }
-        return config.getBlock(blockDescription, baseBlockID);
+        return config.getBlock(blockDescription, this.baseBlockID);
     }
 }

@@ -18,30 +18,34 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public final class DeveloperCapesAPI {
+public final class DeveloperCapesAPI
+{
 
-    private static DeveloperCapesAPI instance;
+    private static DeveloperCapesAPI      instance;
 
-    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final Minecraft        mc        = Minecraft.getMinecraft();
 
-    private HashMap<String, String> users;
-    private HashMap<String, String> groupUrls;
+    private final HashMap<String, String> users;
 
-    private boolean tickSetUp = false;
+    private final HashMap<String, String> groupUrls;
+
+    private boolean                       tickSetUp = false;
 
     /**
      * Object constructor.
      */
-    private DeveloperCapesAPI() {
-        users = new HashMap<String, String>();
-        groupUrls = new HashMap<String, String>();
+    private DeveloperCapesAPI()
+    {
+        this.users = new HashMap<String, String>();
+        this.groupUrls = new HashMap<String, String>();
     }
 
     /**
      * Get's the current DeveloperCapesAPI instance, or creates a new one if
      * necessary.
      */
-    public static DeveloperCapesAPI getInstance() {
+    public static DeveloperCapesAPI getInstance()
+    {
         if (instance == null){
             instance = new DeveloperCapesAPI();
         }
@@ -56,16 +60,17 @@ public final class DeveloperCapesAPI {
      *            The URL of the .txt file containing the groups, members of
      *            said groups, and the group's cape URL.
      */
-    public void init(String parTxtUrl) {
+    public void init(final String parTxtUrl)
+    {
         try{
-            URL url = new URL(parTxtUrl);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            final URL url = new URL(parTxtUrl);
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
 
             String username = "";
             String group = "";
             String capeUrl = "";
-            
+
             while ((line = reader.readLine()) != null){
 
                 // excludes commented lines
@@ -75,7 +80,7 @@ public final class DeveloperCapesAPI {
                         // when char : is found do stuff.
                         if (line.charAt(i) == '='){
                             group = line.substring(0, i);
-                            String subLine = line.substring(i + 1);
+                            final String subLine = line.substring(i + 1);
 
                             if (subLine.startsWith("http")){
                                 capeUrl = subLine;
@@ -90,7 +95,7 @@ public final class DeveloperCapesAPI {
                     }
                 }
             }
-        }catch(IOException e){
+        }catch(final IOException e){
             e.printStackTrace();
         }
 
@@ -110,9 +115,10 @@ public final class DeveloperCapesAPI {
      * @param parGroup
      *            The group to add that Username to.
      */
-    public void addUser(String parUsername, String parGroup) {
-        if (getUserGroup(parUsername) == null){
-            users.put(parUsername, parGroup);
+    public void addUser(final String parUsername, final String parGroup)
+    {
+        if (this.getUserGroup(parUsername) == null){
+            this.users.put(parUsername, parGroup);
 
         }
     }
@@ -124,8 +130,9 @@ public final class DeveloperCapesAPI {
      *            The Username to get from the users HashMap.
      * @return The Username found in the users HashMap.
      */
-    public String getUserGroup(String parUsername) {
-        return users.get(parUsername.toLowerCase());
+    public String getUserGroup(final String parUsername)
+    {
+        return this.users.get(parUsername.toLowerCase());
     }
 
     /**
@@ -136,9 +143,10 @@ public final class DeveloperCapesAPI {
      * @param parCapeUrl
      *            The corresponding URL to add.
      */
-    public void addGroupUrl(String parGroup, String parCapeUrl) {
-        if (getGroupUrl(parGroup) == null){
-            groupUrls.put(parGroup, parCapeUrl);
+    public void addGroupUrl(final String parGroup, final String parCapeUrl)
+    {
+        if (this.getGroupUrl(parGroup) == null){
+            this.groupUrls.put(parGroup, parCapeUrl);
         }
     }
 
@@ -149,7 +157,8 @@ public final class DeveloperCapesAPI {
      *            The name of the group to get the URL from.
      * @return The group URL.
      */
-    public String getGroupUrl(String group) {
-        return groupUrls.get(group);
+    public String getGroupUrl(final String group)
+    {
+        return this.groupUrls.get(group);
     }
 }

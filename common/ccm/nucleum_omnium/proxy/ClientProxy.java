@@ -1,6 +1,5 @@
 package ccm.nucleum_omnium.proxy;
 
-
 import ccm.nucleum_omnium.utils.lib.Locations;
 
 import com.jadarstudios.api.developercapesapi.DeveloperCapesAPI;

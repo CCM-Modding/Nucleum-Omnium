@@ -3,7 +3,6 @@ package ccm.nucleum_omnium;
 import java.io.File;
 
 import net.minecraftforge.common.Configuration;
-
 import ccm.nucleum_omnium.helper.LanguageHelper;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -21,10 +20,10 @@ public abstract class BaseMod implements IMod
     {
         return new File(this.config_Folder.getAbsolutePath() + "/" + this.getModName() + ".cfg");
     }
-    
+
     protected Configuration getConfig()
     {
-        return new Configuration(getConfigFile());
+        return new Configuration(this.getConfigFile());
     }
 
     protected String getConfigBaseFolder()

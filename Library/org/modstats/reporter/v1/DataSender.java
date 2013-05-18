@@ -1,18 +1,16 @@
 /**
  * Copyright (c) <2012>, Oleg Romanovskiy <shedarhome@gmail.com> aka Shedar
  * All rights reserved.
- * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the author nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- * 
+ * * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
+ * documentation and/or other materials provided with the distribution.
+ * * Neither the name of the author nor the
+ * names of its contributors may be used to endorse or promote products
+ * derived from this software without specific prior written permission.
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -66,229 +64,201 @@ import cpw.mods.fml.common.versioning.ComparableVersion;
 
 class DataSender extends Thread
 {
-    private static final String urlAutoTemplate = "http://modstats.org/api/v1/report?mc=%s&user=%s&data=%s&sign=%s&beta=%b&strict=%b";
+
+    private static final String urlAutoTemplate   = "http://modstats.org/api/v1/report?mc=%s&user=%s&data=%s&sign=%s&beta=%b&strict=%b";
+
     private static final String urlManualTemplate = "http://modstats.org/api/v1/check?mc=%s&user=%s&data=%s&sign=%s&beta=%b&strict=%b";
-    
-    private final Reporter reporter;
-    public final boolean manual;
-    
-    public DataSender(Reporter reporter, boolean manual)
+
+    private final Reporter      reporter;
+
+    public final boolean        manual;
+
+    public DataSender(final Reporter reporter,
+                      final boolean manual)
     {
         this.reporter = reporter;
         this.manual = manual;
     }
-    
-    private String toHexString(byte[] bytes) {
-        char[] hexArray = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
-        char[] hexChars = new char[bytes.length * 2];
+
+    private String toHexString(final byte[] bytes)
+    {
+        final char[] hexArray =
+        { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+        final char[] hexChars = new char[bytes.length * 2];
         int v;
-        for ( int j = 0; j < bytes.length; j++ ) {
+        for (int j = 0; j < bytes.length; j++){
             v = bytes[j] & 0xFF;
-            hexChars[j*2] = hexArray[v/16];
-            hexChars[j*2 + 1] = hexArray[v%16];
+            hexChars[j * 2] = hexArray[v / 16];
+            hexChars[(j * 2) + 1] = hexArray[v % 16];
         }
         return new String(hexChars);
     }
-    
+
     private String getPlayerId() throws IOException
     {
-        File statDir =  new File(Minecraft.getMinecraftDir(), "stats");
-        if(!statDir.exists())
-        {
+        final File statDir = new File(Minecraft.getMinecraftDir(), "stats");
+        if (!statDir.exists()){
             statDir.mkdirs();
         }
         String mac = "";
-        try
-        {
-            InetAddress address = InetAddress.getLocalHost();
-            NetworkInterface ni = NetworkInterface.getByInetAddress(address);
-            byte[] macArray = ni.getHardwareAddress();
-            if(macArray != null)
-            {
-                mac = toHexString(macArray);
+        try{
+            final InetAddress address = InetAddress.getLocalHost();
+            final NetworkInterface ni = NetworkInterface.getByInetAddress(address);
+            final byte[] macArray = ni.getHardwareAddress();
+            if (macArray != null){
+                mac = this.toHexString(macArray);
+            }
+        }catch(final Exception ex){}
+        final File uidFile = new File(statDir, "player.uid");
+        if (uidFile.exists() && uidFile.canRead() && (uidFile.length() == (32 + mac.length()))){
+            final String data = Files.toString(uidFile, Charsets.US_ASCII);
+            final String storedMac = data.substring(32);
+            if (storedMac.equalsIgnoreCase(mac)){
+                return data.substring(0, 32);
             }
         }
-        catch(Exception ex)
-        {
-        }
-        File uidFile = new File(statDir, "player.uid");
-        if(uidFile.exists() && uidFile.canRead() && uidFile.length() == 32+mac.length())
-        {
-            String data = Files.toString(uidFile, Charsets.US_ASCII);
-            String storedMac = data.substring(32);
-            if(storedMac.equalsIgnoreCase(mac))
-                return data.substring(0, 32);
-        }
         uidFile.createNewFile();
-        if(uidFile.canWrite())
-        {
-            String uid = UUID.randomUUID().toString().replace("-", "");
-            FileOutputStream output = new FileOutputStream(uidFile);
-            output.write((uid+mac).getBytes());
+        if (uidFile.canWrite()){
+            final String uid = UUID.randomUUID().toString().replace("-", "");
+            final FileOutputStream output = new FileOutputStream(uidFile);
+            output.write((uid + mac).getBytes());
             output.close();
             return uid;
         }
         return "";
     }
-    
-    private String getSignature(String data)
+
+    private String getSignature(final String data)
     {
         return Hashing.md5().hashString(data).toString();
     }
-    
+
     private String getData()
     {
-        StringBuilder b = new StringBuilder();
-        for (Map.Entry<String, ModVersionData> item : reporter.registeredMods.entrySet())
-        {
+        final StringBuilder b = new StringBuilder();
+        for (final Map.Entry<String, ModVersionData> item : this.reporter.registeredMods.entrySet()){
             b.append(item.getKey()).append("+").append(item.getValue().version).append("$");
         }
         return b.toString();
     }
-    
-    private boolean checkIsNewer(String current, String received)
+
+    private boolean checkIsNewer(final String current, final String received)
     {
         return new ComparableVersion(received).compareTo(new ComparableVersion(current)) > 0;
     }
-    
-    
-    private void parseResponse(String response)
+
+    private void parseResponse(final String response)
     {
-        try
-        {
-            JsonRootNode json = (new JdomParser()).parse(response);
-            //empty result
-            if(!json.isNode("mods"))
-            {
+        try{
+            final JsonRootNode json = (new JdomParser()).parse(response);
+            // empty result
+            if (!json.isNode("mods")){
                 FMLLog.info("[Modstats] Empty result");
                 return;
             }
-            List<JsonNode> modList = json.getArrayNode("mods");
-            ModsUpdateEvent event = new ModsUpdateEvent();
-            for (JsonNode modObject : modList)
-            {
-                String prefix = modObject.getStringValue("code");
-                if(!reporter.registeredMods.containsKey(prefix))
-                {
+            final List<JsonNode> modList = json.getArrayNode("mods");
+            final ModsUpdateEvent event = new ModsUpdateEvent();
+            for (final JsonNode modObject : modList){
+                final String prefix = modObject.getStringValue("code");
+                if (!this.reporter.registeredMods.containsKey(prefix)){
                     FMLLog.warning("[Modstats] Extra mod '%s' in service response", prefix);
                     continue;
                 }
-                String version = modObject.getStringValue("ver");
-                if(version==null || version.equals(reporter.registeredMods.get(prefix).version))
-                {
+                final String version = modObject.getStringValue("ver");
+                if ((version == null) || version.equals(this.reporter.registeredMods.get(prefix).version)){
                     continue;
                 }
-                if(checkIsNewer(reporter.registeredMods.get(prefix).version, version))
-                {
-                    ModVersionData data = new ModVersionData(prefix, reporter.registeredMods.get(prefix).name, version);
-                    Map<JsonStringNode, JsonNode> fields = modObject.getFields();
-                    for (Map.Entry<JsonStringNode, JsonNode> entry : fields.entrySet())
-                    {
-                        String fieldName = entry.getKey().getText();
-                        if(fieldName.equals("code") || fieldName.equals("ver"))
-                            continue;
-                        if(!(entry.getValue() instanceof JsonStringNode))
-                        {
-                            FMLLog.warning(String.format("[Modstats] Too complex data in response for field '%s'.", fieldName)); 
+                if (this.checkIsNewer(this.reporter.registeredMods.get(prefix).version, version)){
+                    final ModVersionData data = new ModVersionData(prefix, this.reporter.registeredMods.get(prefix).name, version);
+                    final Map<JsonStringNode, JsonNode> fields = modObject.getFields();
+                    for (final Map.Entry<JsonStringNode, JsonNode> entry : fields.entrySet()){
+                        final String fieldName = entry.getKey().getText();
+                        if (fieldName.equals("code") || fieldName.equals("ver")){
                             continue;
                         }
-                        String value = ((JsonStringNode)entry.getValue()).getText();
-                        if(fieldName.equals("chlog"))
-                        {
+                        if (!(entry.getValue() instanceof JsonStringNode)){
+                            FMLLog.warning(String.format("[Modstats] Too complex data in response for field '%s'.", fieldName));
+                            continue;
+                        }
+                        final String value = ((JsonStringNode) entry.getValue()).getText();
+                        if (fieldName.equals("chlog")){
                             data.changeLogUrl = value;
-                        }
-                        else if(fieldName.equals("link"))
-                        {
+                        }else if (fieldName.equals("link")){
                             data.downloadUrl = value;
-                        }
-                        else
-                        {
+                        }else{
                             data.extraFields.put(fieldName, value);
                         }
                     }
                     event.add(data);
                 }
-                
+
             }
-            if(event.getUpdatedMods().size() > 0)
-            {
+            if (event.getUpdatedMods().size() > 0){
                 MinecraftForge.EVENT_BUS.post(event);
             }
-            if(!event.isCanceled() && event.getUpdatedMods().size() > 0)
-            {
-                List<ModVersionData> updatedModsToOutput = event.getUpdatedMods();
-                StringBuilder builder = new StringBuilder("Updates found: ");
-                Iterator<ModVersionData> iterator = updatedModsToOutput.iterator();
-                while(iterator.hasNext())
-                {
-                    ModVersionData modVersionData = iterator.next();
-                    builder.append(modVersionData.name)
-                        .append(" (")
-                        .append(modVersionData.version)
-                        .append(")")
-                        .append(iterator.hasNext()?",":".");
+            if (!event.isCanceled() && (event.getUpdatedMods().size() > 0)){
+                final List<ModVersionData> updatedModsToOutput = event.getUpdatedMods();
+                final StringBuilder builder = new StringBuilder("Updates found: ");
+                final Iterator<ModVersionData> iterator = updatedModsToOutput.iterator();
+                while (iterator.hasNext()){
+                    final ModVersionData modVersionData = iterator.next();
+                    builder.append(modVersionData.name).append(" (").append(modVersionData.version).append(")").append(iterator.hasNext() ? "," : ".");
                 }
                 FMLLog.info("[Modstats] %s", builder.toString());
-                if(!reporter.config.logOnly && FMLCommonHandler.instance().getSide().isClient())
-                {
-                    Minecraft mc = FMLClientHandler.instance().getClient();
+                if (!this.reporter.config.logOnly && FMLCommonHandler.instance().getSide().isClient()){
+                    final Minecraft mc = FMLClientHandler.instance().getClient();
                     int maxTries = 30;
-                    while(mc.thePlayer==null && maxTries>0)
-                    {
-                        try
-                        {
+                    while ((mc.thePlayer == null) && (maxTries > 0)){
+                        try{
                             sleep(1000);
-                        } catch (InterruptedException e)
-                        {
-                        }
+                        }catch(final InterruptedException e){}
                         maxTries--;
                     }
-                    if(mc.thePlayer != null)
-                    {
+                    if (mc.thePlayer != null){
                         mc.thePlayer.addChatMessage(builder.toString());
                     }
                 }
             }
-                
-        } catch (InvalidSyntaxException e)
-        {
+
+        }catch(final InvalidSyntaxException e){
             FMLLog.warning("[Modstats] Can't parse response: '%s'.", e.getMessage());
         }
     }
 
-    
     @Override
-    public void run() 
+    public void run()
     {
-        try
-        {
-            String data = getData();
-            String playerId = getPlayerId();
-            String hash = getSignature(playerId+"!"+data);
-            String template = manual?urlManualTemplate:urlAutoTemplate;
-            String mcVersion = new CallableMinecraftVersion(null).minecraftVersion();
-            URL url = new URL(String.format(template, mcVersion, playerId, data, hash, reporter.config.betaNotifications, reporter.config.forCurrentMinecraftVersion));
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        try{
+            final String data = this.getData();
+            final String playerId = this.getPlayerId();
+            final String hash = this.getSignature(playerId + "!" + data);
+            final String template = this.manual ? urlManualTemplate : urlAutoTemplate;
+            final String mcVersion = new CallableMinecraftVersion(null).minecraftVersion();
+            final URL url = new URL(String.format(template,
+                                                  mcVersion,
+                                                  playerId,
+                                                  data,
+                                                  hash,
+                                                  this.reporter.config.betaNotifications,
+                                                  this.reporter.config.forCurrentMinecraftVersion));
+            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
             String out = "";
-            while ((line = reader.readLine()) != null) {
-                //in most cases it will contain just one line
+            while ((line = reader.readLine()) != null){
+                // in most cases it will contain just one line
                 out += line;
             }
             reader.close();
-            parseResponse(out);
-        } catch (MalformedURLException e)
-        {
+            this.parseResponse(out);
+        }catch(final MalformedURLException e){
             FMLLog.warning("[Modstats] Invalid stat report url");
-        } catch (IOException e)
-        {
-            FMLLog.info("[Modstats] Stat wasn't reported '"+e.getMessage()+"'");
-        } catch(Exception e)
-        {
-            FMLLog.warning("[Modstats] Something wrong: "+e.toString());
+        }catch(final IOException e){
+            FMLLog.info("[Modstats] Stat wasn't reported '" + e.getMessage() + "'");
+        }catch(final Exception e){
+            FMLLog.warning("[Modstats] Something wrong: " + e.toString());
         }
     }
 }

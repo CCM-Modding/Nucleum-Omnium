@@ -1,18 +1,16 @@
 /**
  * Copyright (c) <2012>, Oleg Romanovskiy <shedarhome@gmail.com> aka Shedar
  * All rights reserved.
- * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the author nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- * 
+ * * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
+ * documentation and/or other materials provided with the distribution.
+ * * Neither the name of the author nor the
+ * names of its contributors may be used to endorse or promote products
+ * derived from this software without specific prior written permission.
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -32,26 +30,32 @@ import java.util.Map;
 
 public class ModVersionData
 {
-    public String prefix;
-    public String name;
-    public String version;
-    public String downloadUrl;
-    public String changeLogUrl;
-    
+
+    public String              prefix;
+
+    public String              name;
+
+    public String              version;
+
+    public String              downloadUrl;
+
+    public String              changeLogUrl;
+
     public Map<String, String> extraFields;
-    
-    
+
     public ModVersionData()
     {
-        extraFields  = new  HashMap<String, String>();
+        this.extraFields = new HashMap<String, String>();
     }
-    
-    public ModVersionData(String prefix, String name, String version)
+
+    public ModVersionData(final String prefix,
+                          final String name,
+                          final String version)
     {
         this.prefix = prefix;
         this.name = name;
         this.version = version;
-        extraFields = new HashMap<String, String>();
+        this.extraFields = new HashMap<String, String>();
     }
 
     @Override
@@ -59,56 +63,63 @@ public class ModVersionData
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((changeLogUrl == null) ? 0 : changeLogUrl.hashCode());
-        result = prime * result + ((downloadUrl == null) ? 0 : downloadUrl.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((prefix == null) ? 0 : prefix.hashCode());
-        result = prime * result + ((version == null) ? 0 : version.hashCode());
+        result = (prime * result) + ((this.changeLogUrl == null) ? 0 : this.changeLogUrl.hashCode());
+        result = (prime * result) + ((this.downloadUrl == null) ? 0 : this.downloadUrl.hashCode());
+        result = (prime * result) + ((this.name == null) ? 0 : this.name.hashCode());
+        result = (prime * result) + ((this.prefix == null) ? 0 : this.prefix.hashCode());
+        result = (prime * result) + ((this.version == null) ? 0 : this.version.hashCode());
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(final Object obj)
     {
-        if (this == obj)
+        if (this == obj){
             return true;
-        if (obj == null)
+        }
+        if (obj == null){
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (this.getClass() != obj.getClass()){
             return false;
-        ModVersionData other = (ModVersionData) obj;
-        if (changeLogUrl == null)
-        {
-            if (other.changeLogUrl != null)
+        }
+        final ModVersionData other = (ModVersionData) obj;
+        if (this.changeLogUrl == null){
+            if (other.changeLogUrl != null){
                 return false;
-        } else if (!changeLogUrl.equals(other.changeLogUrl))
+            }
+        }else if (!this.changeLogUrl.equals(other.changeLogUrl)){
             return false;
-        if (downloadUrl == null)
-        {
-            if (other.downloadUrl != null)
+        }
+        if (this.downloadUrl == null){
+            if (other.downloadUrl != null){
                 return false;
-        } else if (!downloadUrl.equals(other.downloadUrl))
+            }
+        }else if (!this.downloadUrl.equals(other.downloadUrl)){
             return false;
-        if (name == null)
-        {
-            if (other.name != null)
+        }
+        if (this.name == null){
+            if (other.name != null){
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        }else if (!this.name.equals(other.name)){
             return false;
-        if (prefix == null)
-        {
-            if (other.prefix != null)
+        }
+        if (this.prefix == null){
+            if (other.prefix != null){
                 return false;
-        } else if (!prefix.equals(other.prefix))
+            }
+        }else if (!this.prefix.equals(other.prefix)){
             return false;
-        if (version == null)
-        {
-            if (other.version != null)
+        }
+        if (this.version == null){
+            if (other.version != null){
                 return false;
-        } else if (!version.equals(other.version))
+            }
+        }else if (!this.version.equals(other.version)){
             return false;
+        }
         return true;
     }
-    
-    
+
 }
