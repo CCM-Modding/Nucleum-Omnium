@@ -38,13 +38,13 @@ public class NucleumOmnium implements IMod
 {
 
     /**
-     * The Harvestry Instance
+     * The Instance
      */
     @Instance(Archive.MOD_ID)
     public static NucleumOmnium instance;
 
     /**
-     * The Harvestry proxy
+     * The proxy
      */
     @SidedProxy(serverSide = Locations.SERVER_PROXY,
                 clientSide = Locations.CLIENT_PROXY)
@@ -53,28 +53,24 @@ public class NucleumOmnium implements IMod
     @Override
     public String getModId()
     {
-        // TODO Auto-generated method stub
         return Archive.MOD_ID;
     }
 
     @Override
     public String getModName()
     {
-        // TODO Auto-generated method stub
         return Archive.MOD_NAME;
     }
 
     @Override
     public String getModPrefix()
     {
-        // TODO Auto-generated method stub
         return Archive.MOD_PREFIX;
     }
 
     @Override
     public String getModVersion()
     {
-        // TODO Auto-generated method stub
         return Archive.MOD_VERSION;
     }
 
