@@ -2,6 +2,7 @@
 <project name="${build.dir.modFloder}" default="build">
 	
 	<property file="build.properties" prefix="build"/>
+	<property file="key.properties" prefix="key"/>
 	<property file="count.properties" prefix="count"/>
 	
 	<target name="clean">
@@ -28,7 +29,7 @@
 	
 	<target name="replaceTokens">
 		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@VERSION@" value="${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}" />
-		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@FINGERPRINT@" value="${build.release.mod.fingerprint}" />
+		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@FINGERPRINT@" value="${key.fingerprint}" />
 		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@BUILD@" value="${count.count}" />
 	</target>
 	
@@ -49,13 +50,22 @@
 			<arg line="reobfuscate_srg.sh" />
 		</exec>
 	</target>
+	
+	<target name="create-JAR">
+		<mkdir dir="${build.dir.release}" />
+		<jar destfile="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar">
+			<fileset dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\" includes="mcmod.info" />
+			<fileset dir="${build.dir.development}\${build.dir.mcp}\reobf\minecraft" />
+			<fileset dir="${build.dir.development}\${build.dir.Mods}\${build.dir.modFloder}\${build.dir.res}" />
+		</jar>
+	</target>
 		
 	<target name="singJAR">
 		<signjar jar="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar"
             signedjar="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar"
-            alias="${build.key.alias}"
-            storepass="${build.key.storepass}"
-            keystore="${build.key.store}"/>
+            alias="${key.alias}"
+            storepass="${key.pass}"
+            keystore="${key.store}"/>
 	</target>
 		
 	<target name="release">
@@ -66,19 +76,14 @@
 		<antcall target="replaceTokens" />
 		<antcall target="recompile" />		
 		<antcall target="reobfuscate" />
-		
+				
 		<!-- Build the jar -->
-		<mkdir dir="${build.dir.release}" />
-		<jar destfile="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar">
-			<fileset dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\" includes="mcmod.info" />
-			<fileset dir="${build.dir.development}\${build.dir.mcp}\reobf\minecraft" />
-			<fileset dir="${build.dir.development}\${build.dir.Mods}\${build.dir.modFloder}\${build.dir.res}" />
-		</jar>
+		<antcall target="create-JAR" />
 		
 		<!-- Sing the jar -->
 		<antcall target="singJAR" />
 
 		<!-- Clean up the mcp source now that we are done -->
-		<!--<antcall target="clean" />-->
+		<antcall target="clean" />
 	</target>
 </project>
