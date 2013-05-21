@@ -9,6 +9,7 @@
 		<delete file="${build.dir.development}\${build.dir.mcp}\src\minecraft\mcmod.info" />
 		<delete dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\${build.dir.modPackege}" />
 		<delete dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\${build.dir.modLib}" />
+		<delete dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\${build.dir.modLib2}" />
 		<delete dir="${build.dir.development}\${build.dir.mcp}\reobf\minecraft" />
 	</target>
 	
