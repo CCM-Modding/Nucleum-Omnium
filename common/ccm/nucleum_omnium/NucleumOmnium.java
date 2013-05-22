@@ -98,7 +98,7 @@ public class NucleumOmnium implements IMod
         proxy.initCapes();
         MinecraftForge.EVENT_BUS.register(new StatEventHandler());
         StatEventHandler.addModToList(this);
-        AdvancedModelLoader.registerModelHandler(new TechneModelLoader());
+        if (event.getSide().isClient()) AdvancedModelLoader.registerModelHandler(new TechneModelLoader());
     }
 
     @PostInit
