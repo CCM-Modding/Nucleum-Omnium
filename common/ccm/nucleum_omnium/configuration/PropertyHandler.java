@@ -21,9 +21,9 @@ public class PropertyHandler
 
     private static HashMap<IMod, PropertyHandler> idHandler          = new HashMap<IMod, PropertyHandler>();
 
-    private List<Integer>                         freeItemIDs        = new LinkedList<Integer>();
+    private final List<Integer>                   freeItemIDs        = new LinkedList<Integer>();
 
-    private List<Integer>                         freeBlockIDs       = new LinkedList<Integer>();
+    private final List<Integer>                   freeBlockIDs       = new LinkedList<Integer>();
 
     private PropertyHandler(final int baseItemID,
                             final int baseBlockID)
@@ -46,15 +46,15 @@ public class PropertyHandler
      */
     public Property getNextUsableItemID(final Configuration config, final String itemName)
     {
-        if (freeItemIDs.isEmpty()){
-            resetItemIDs();
-            if (freeItemIDs.get(0) == 0){
+        if (this.freeItemIDs.isEmpty()){
+            this.resetItemIDs();
+            if (this.freeItemIDs.get(0) == 0){
                 return config.getItem(itemName, this.baseItemID);
             }else{
-                return config.getItem(itemName, freeItemIDs.remove(0));
+                return config.getItem(itemName, this.freeItemIDs.remove(0));
             }
         }else{
-            return config.getItem(itemName, freeItemIDs.remove(0));
+            return config.getItem(itemName, this.freeItemIDs.remove(0));
         }
     }
 
@@ -63,15 +63,15 @@ public class PropertyHandler
      */
     public Property getNextUsableBlockID(final Configuration config, final String blockName)
     {
-        if (freeBlockIDs.isEmpty()){
-            resetBlockIDs();
-            if (freeBlockIDs.get(0) == 0){
+        if (this.freeBlockIDs.isEmpty()){
+            this.resetBlockIDs();
+            if (this.freeBlockIDs.get(0) == 0){
                 return config.getBlock(blockName, this.baseBlockID);
             }else{
-                return config.getBlock(blockName, freeBlockIDs.remove(0));
+                return config.getBlock(blockName, this.freeBlockIDs.remove(0));
             }
         }else{
-            return config.getBlock(blockName, freeBlockIDs.remove(0));
+            return config.getBlock(blockName, this.freeBlockIDs.remove(0));
         }
     }
 
@@ -79,7 +79,7 @@ public class PropertyHandler
     {
         for (int i = 6000; i < Item.itemsList.length; i++){
             if (Item.itemsList[i] == null){
-                freeItemIDs.add(i);
+                this.freeItemIDs.add(i);
             }
         }
     }
@@ -88,7 +88,7 @@ public class PropertyHandler
     {
         for (int i = 300; i < Block.blocksList.length; i++){
             if (Block.blocksList[i] == null){
-                freeBlockIDs.add(i);
+                this.freeBlockIDs.add(i);
             }
         }
     }

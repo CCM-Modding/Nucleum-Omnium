@@ -25,6 +25,6 @@ public class StatEventHandler
 
     public static void addModToList(final IMod mod)
     {
-        updates.add(new ModVersionData(mod.getModPrefix(), mod.getModName(), mod.getModVersion()));
+        updates.add(new ModVersionData(mod.getPrefix(), mod.getName(), mod.getVersion()));
     }
 }

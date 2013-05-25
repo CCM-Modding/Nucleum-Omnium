@@ -51,25 +51,25 @@ public class NucleumOmnium implements IMod
     public static CommonProxy   proxy;
 
     @Override
-    public String getModId()
+    public String getId()
     {
         return Archive.MOD_ID;
     }
 
     @Override
-    public String getModName()
+    public String getName()
     {
         return Archive.MOD_NAME;
     }
 
     @Override
-    public String getModPrefix()
+    public String getPrefix()
     {
         return Archive.MOD_PREFIX;
     }
 
     @Override
-    public String getModVersion()
+    public String getVersion()
     {
         return Archive.MOD_VERSION;
     }
@@ -81,7 +81,7 @@ public class NucleumOmnium implements IMod
          * Report (log) to the user that the version of Harvestry they are using
          * has been changed/tampered with
          */
-        Handler.log(Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
+        Handler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
     }
 
     @PreInit
@@ -98,7 +98,9 @@ public class NucleumOmnium implements IMod
         proxy.initCapes();
         MinecraftForge.EVENT_BUS.register(new StatEventHandler());
         StatEventHandler.addModToList(this);
-        if (event.getSide().isClient()) AdvancedModelLoader.registerModelHandler(new TechneModelLoader());
+        if (event.getSide().isClient()){
+            AdvancedModelLoader.registerModelHandler(new TechneModelLoader());
+        }
     }
 
     @PostInit

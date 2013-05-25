@@ -3,11 +3,11 @@ package ccm.nucleum_omnium;
 public interface IMod
 {
 
-    public String getModId();
+    public String getId();
 
-    public String getModName();
+    public String getName();
 
-    public String getModPrefix();
+    public String getPrefix();
 
-    public String getModVersion();
+    public String getVersion();
 }

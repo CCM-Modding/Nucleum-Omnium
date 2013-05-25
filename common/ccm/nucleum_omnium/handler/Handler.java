@@ -16,38 +16,68 @@ public final class Handler
      * Log Stuff
      * *******************************************************************
      */
-    private static Logger logger;
+    private static HashMap<IMod, Logger> modsLogged = new HashMap<IMod, Logger>();
 
     /**
      * Initializes the Logger for this Mod.
      */
     public static void initLog(final IMod mod)
     {
-        logger = Logger.getLogger(mod.getModId());
-        logger.setParent(FMLLog.getLogger());
+        Logger tmp;
+        tmp = Logger.getLogger(mod.getId());
+        tmp.setParent(FMLLog.getLogger());
+        if (!modsLogged.containsKey(mod)){
+            modsLogged.put(mod, tmp);
+        }else{
+            throwDupe(mod);
+        }
     }
 
     /**
      * Logs a Object.
      */
-    public static void log(final Level logLevel, final Object message)
+    public static void log(final IMod mod, final Object msg)
     {
-        if (logger != null){
-            logger.log(logLevel, message.toString());
+        if (modsLogged.containsKey(mod)){
+            modsLogged.get(mod).log(Level.INFO, msg.toString());
         }else{
-            Logger.getAnonymousLogger().log(logLevel, message.toString());
+            Logger.getAnonymousLogger().log(Level.INFO, msg.toString());
         }
     }
 
     /**
      * Logs a Object, and a Throwable.
      */
-    public static void log(final Level level, final String msg, final Throwable t)
+    public static void log(final IMod mod, final Object msg, final Throwable t)
     {
-        if (logger != null){
-            logger.log(level, msg, t);
+        if (modsLogged.containsKey(mod)){
+            modsLogged.get(mod).log(Level.INFO, msg.toString(), t);
         }else{
-            Logger.getAnonymousLogger().log(level, msg, t);
+            Logger.getAnonymousLogger().log(Level.INFO, msg.toString(), t);
+        }
+    }
+
+    /**
+     * Logs a Object.
+     */
+    public static void log(final IMod mod, final Level logLevel, final Object msg)
+    {
+        if (modsLogged.containsKey(mod)){
+            modsLogged.get(mod).log(logLevel, msg.toString());
+        }else{
+            Logger.getAnonymousLogger().log(logLevel, msg.toString());
+        }
+    }
+
+    /**
+     * Logs a Object, and a Throwable.
+     */
+    public static void log(final IMod mod, final Level logLevel, final Object msg, final Throwable t)
+    {
+        if (modsLogged.containsKey(mod)){
+            modsLogged.get(mod).log(logLevel, msg.toString(), t);
+        }else{
+            Logger.getAnonymousLogger().log(logLevel, msg.toString(), t);
         }
     }
 
@@ -70,7 +100,7 @@ public final class Handler
         if (!modsLoaded.containsKey(mod)){
             modsLoaded.put(mod, false);
         }else{
-            throwError(mod);
+            throwDupe(mod);
         }
         return modsLoaded.get(mod);
     }
@@ -84,7 +114,7 @@ public final class Handler
             modsLoaded.remove(mod);
             modsLoaded.put(mod, true);
         }else{
-            throwError(mod);
+            throwDupe(mod);
         }
     }
 
@@ -99,15 +129,8 @@ public final class Handler
         }
     }
 
-    private static void throwError(final IMod mod)
+    private static void throwDupe(final IMod mod)
     {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Why did you install my Mod twice? Remove the second ");
-        sb.append(mod.getModName());
-        sb.append("-Universal-");
-        sb.append(mod.getModVersion());
-        sb.append(".jar out of your mods-Folder, you need only one of them. And another Question: Why the Hax did Forge not detect that before me?");
-        sb.append(mod.getModName());
-        throw new DupeExeption(mod, sb.toString());
+        throw new DupeExeption(mod);
     }
 }
