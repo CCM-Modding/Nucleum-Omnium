@@ -1,5 +1,9 @@
 package ccm.nucleum_omnium.proxy;
 
+import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraftforge.common.MinecraftForge;
+import ccm.nucleum_omnium.client.model.tcn.TechneModelLoader;
+import ccm.nucleum_omnium.handler.events.EventRain;
 import ccm.nucleum_omnium.utils.lib.Locations;
 
 import com.jadarstudios.api.developercapesapi.DeveloperCapesAPI;
@@ -7,14 +11,21 @@ import com.jadarstudios.api.developercapesapi.DeveloperCapesAPI;
 public class ClientProxy extends CommonProxy
 {
 
-    /**
-     * Initializes the Capes. Original code that adds capes is found in this
-     * Github repository: https://github.com/jadar/DeveloperCapesAPI
-     */
     @Override
     public void initCapes()
     {
         // Link for the file that makes the capes work
         DeveloperCapesAPI.getInstance().init(Locations.CAPES);
+    }
+
+    @Override
+    public void initEventHandling()
+    {
+        MinecraftForge.EVENT_BUS.register(new EventRain());
+    }
+    
+    @Override
+    public void initModelHandlers(){
+        AdvancedModelLoader.registerModelHandler(new TechneModelLoader());
     }
 }
