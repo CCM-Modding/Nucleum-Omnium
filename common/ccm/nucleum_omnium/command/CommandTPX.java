@@ -2,6 +2,8 @@ package ccm.nucleum_omnium.command;
 
 import java.util.List;
 
+import ccm.nucleum_omnium.helper.FunctionHelper;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.NumberInvalidException;
@@ -58,29 +60,29 @@ public class CommandTPX extends CommandBase
                     }
 
                     player.mountEntity((Entity) null);
-                    player.playerNetServerHandler.setPlayerLocation(player1.posX, player1.posY, player1.posZ, player1.rotationYaw, player1.rotationPitch);
-                    player1.worldObj = player.worldObj;
+                    FunctionHelper.teleportPlayer(player, player1);
                 }
             }else if (player.worldObj != null){
                 int i = args.length - 3;
-                double d0 = this.getXorY(sender, player.posX, args[i++]);
-                double d1 = this.getPos(sender, player.posY, args[i++], 0, 0);
-                double d2 = this.getXorY(sender, player.posZ, args[i++]);
+                double d1 = this.checkPosition(sender, player.dimension, args[i++]);
+                double d2 = this.checkPosition(sender, player.posX, args[i++]);
+                double d3 = this.checkPositionWithBounds(sender, player.posY, args[i++], 0, 0);
+                double d4 = this.checkPosition(sender, player.posZ, args[i++]);
                 player.mountEntity((Entity) null);
-                player.setPositionAndUpdate(d0, d1, d2);
+                FunctionHelper.teleportPlayer(player, d1, d2, d3, d4);
                 //player.worldObj;
                 notifyAdmins(sender, "commands.tpx.success.coordinates", new Object[]
-                { player.getEntityName(), Double.valueOf(d0), Double.valueOf(d1), Double.valueOf(d2) });
+                { player.getEntityName(), Double.valueOf(d2), Double.valueOf(d3), Double.valueOf(d4) });
             }
         }
     }
 
-    private double getXorY(ICommandSender sender, double postion, String argPos)
+    private double checkPosition(ICommandSender sender, double postion, String argPos)
     {
-        return this.getPos(sender, postion, argPos, -30000000, 30000000);
+        return this.checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
     }
 
-    private double getPos(ICommandSender sender, double postion, String argPos, int min, int max)
+    private double checkPositionWithBounds(ICommandSender sender, double postion, String argPos, int min, int max)
     {
         boolean flag = argPos.startsWith("~");
         double d1 = flag ? postion : 0.0D;

@@ -92,16 +92,6 @@ public class NucleumOmnium implements IMod
         Handler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
     }
 
-    @ServerStarting
-    public void serverStarting(FMLServerStartingEvent event)
-    {
-
-        // Initialize the custom commands
-        CommandHandler.initCommands(event);
-        
-        server = event.getServer();
-    }
-
     @PreInit
     public void preInit(final FMLPreInitializationEvent evt)
     {
@@ -130,5 +120,15 @@ public class NucleumOmnium implements IMod
     public void PostInit(final FMLPostInitializationEvent event)
     {
         ModHandler.init();
+    }
+    
+    @ServerStarting
+    public void serverStarting(FMLServerStartingEvent event)
+    {
+
+        // Initialize the custom commands
+        CommandHandler.initCommands(event);
+        
+        server = event.getServer();
     }
 }

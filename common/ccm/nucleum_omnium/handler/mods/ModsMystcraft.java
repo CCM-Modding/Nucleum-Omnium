@@ -1,6 +1,6 @@
 package ccm.nucleum_omnium.handler.mods;
 
-import ccm.nucleum_omnium.utils.lib.Archive;
+import ccm.nucleum_omnium.NucleumOmnium;
 
 public class ModsMystcraft implements IModHandler
 {
@@ -8,6 +8,6 @@ public class ModsMystcraft implements IModHandler
     @Override
     public void init()
     {
-        Archive.mystLoaded = true;
+        NucleumOmnium.mystLoaded = true;
     }
 }

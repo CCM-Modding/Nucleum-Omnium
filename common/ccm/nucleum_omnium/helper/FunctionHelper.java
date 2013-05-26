@@ -4,6 +4,8 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenDesert;
 
@@ -90,6 +92,50 @@ public final class FunctionHelper
             ret[i++] = e.intValue();
         }
         return ret;
+    }
+
+    /**
+     * Teleports a player to another
+     * 
+     * @param player
+     *            Player to send
+     * @param player1
+     *            Player that gets send
+     */
+    public static void teleportPlayer(EntityPlayerMP player, EntityPlayerMP player1)
+    {
+        if (player.dimension != player1.dimension){
+            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, player1.dimension);
+        }
+        player.playerNetServerHandler.setPlayerLocation(player1.posX, player1.posY, player1.posZ, player1.rotationYaw, player1.rotationPitch);
+        player.prevPosX = player.posX = player1.posX;
+        player.prevPosY = player.posY = player1.posY;
+        player.prevPosZ = player.posZ = player1.posZ;
+    }
+
+    /**
+     * Teleports a player to coordinates
+     * 
+     * @param player
+     *            Player to send
+     * @param d1
+     *            The dimension to send the player to
+     * @param d2
+     *            The X coordinate to send the player to
+     * @param d3
+     *            The Y coordinate to send the player to
+     * @param d4
+     *            The Z coordinate to send the player to
+     */
+    public static void teleportPlayer(EntityPlayerMP player, double d1, double d2, double d3, double d4)
+    {
+        if (player.dimension != d1){
+            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, (int) d1);
+        }
+        player.setPositionAndUpdate(d2, d3, d4);
+        player.prevPosX = player.posX = d2;
+        player.prevPosY = player.posY = d3;
+        player.prevPosZ = player.posZ = d4;
     }
 
     private FunctionHelper()
