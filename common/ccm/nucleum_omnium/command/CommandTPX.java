@@ -43,7 +43,7 @@ public class CommandTPX extends CommandBase
             if (args.length != 2 && args.length != 5){
                 player = getCommandSenderAsPlayer(sender);
             }else{
-                player = getPlayer(sender, args[0]);
+                player = func_82359_c(sender, args[0]);
 
                 if (player == null){
                     throw new PlayerNotFoundException();
@@ -52,7 +52,7 @@ public class CommandTPX extends CommandBase
 
             if (args.length != 3 && args.length != 5){
                 if (args.length == 1 || args.length == 2){
-                    EntityPlayerMP player1 = getPlayer(sender, args[args.length - 1]);
+                    EntityPlayerMP player1 = func_82359_c(sender, args[args.length - 1]);
 
                     if (player1 == null){
                         throw new PlayerNotFoundException();
