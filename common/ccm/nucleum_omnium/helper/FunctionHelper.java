@@ -102,7 +102,7 @@ public final class FunctionHelper
      * @param player1
      *            Player that gets send
      */
-    public static void teleportPlayer(EntityPlayerMP player, EntityPlayerMP player1)
+    public static void teleportPlayer(final EntityPlayerMP player, final EntityPlayerMP player1)
     {
         if (player.dimension != player1.dimension){
             MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, player1.dimension);
@@ -127,10 +127,10 @@ public final class FunctionHelper
      * @param d4
      *            The Z coordinate to send the player to
      */
-    public static void teleportPlayer(EntityPlayerMP player, int d1, double d2, double d3, double d4)
+    public static void teleportPlayer(final EntityPlayerMP player, final int d1, final double d2, final double d3, final double d4)
     {
         if (player.dimension != d1){
-            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, (int) d1);
+            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, d1);
         }
         player.setPositionAndUpdate(d2, d3, d4);
         player.prevPosX = player.posX = d2;

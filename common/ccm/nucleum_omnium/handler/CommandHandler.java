@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 public class CommandHandler
 {
 
-    public static void initCommands(FMLServerStartingEvent event)
+    public static void initCommands(final FMLServerStartingEvent event)
     {
 
         event.registerServerCommand(new CommandNO());

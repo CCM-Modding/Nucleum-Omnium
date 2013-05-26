@@ -1,8 +1,8 @@
 package ccm.nucleum_omnium.handler.events;
 
-import ccm.nucleum_omnium.utils.lib.Properties;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.ForgeSubscribe;
+import ccm.nucleum_omnium.utils.lib.Properties;
 
 public class EventRain
 {

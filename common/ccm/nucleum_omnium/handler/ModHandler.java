@@ -13,19 +13,19 @@ public class ModHandler
 
     private static List<ModHandling> modsHandling = new LinkedList<ModHandling>();
 
-    public static void addModToHandle(IModHandler handler, String modName)
+    public static void addModToHandle(final IModHandler handler, final String modName)
     {
         modsHandling.add(new ModHandling(handler, modName, null));
     }
 
-    public static void addModToHandle(IModHandler handler, String modName, String exeption)
+    public static void addModToHandle(final IModHandler handler, final String modName, final String exeption)
     {
         modsHandling.add(new ModHandling(handler, modName, exeption));
     }
 
     public static void init()
     {
-        for (ModHandling handler : modsHandling){
+        for (final ModHandling handler : modsHandling){
             if (handler.getModExeption() != null){
                 handleMod(handler.getHandler(), handler.getModName(), handler.getModExeption());
             }else{
@@ -34,19 +34,19 @@ public class ModHandler
         }
     }
 
-    public static void handleMod(IModHandler handler, String modName)
+    public static void handleMod(final IModHandler handler, final String modName)
     {
         if (Loader.isModLoaded(modName)){
             handler.init();
         }
     }
 
-    public static void handleMod(IModHandler handler, String modName, String exeption)
+    public static void handleMod(final IModHandler handler, final String modName, final String exeption)
     {
         if (Loader.isModLoaded(modName)){
             try{
                 handler.init();
-            }catch(Exception e){
+            }catch(final Exception e){
 
                 Handler.log(NucleumOmnium.instance, exeption);
             }

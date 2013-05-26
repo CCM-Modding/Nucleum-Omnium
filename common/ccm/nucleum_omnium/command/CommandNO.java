@@ -17,22 +17,23 @@ public class CommandNO extends CommandBase
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender commandSender)
+    public boolean canCommandSenderUseCommand(final ICommandSender commandSender)
     {
 
         return true;
     }
 
     @Override
-    public void processCommand(ICommandSender icommandsender, String[] astring)
+    public void processCommand(final ICommandSender icommandsender, final String[] astring)
     {
         // TODO Auto-generated method stub
 
     }
-    
+
     @Override
     @SuppressWarnings("rawtypes")
-    public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
+    public List addTabCompletionOptions(final ICommandSender commandSender, final String[] args)
+    {
         return null;
     }
 }

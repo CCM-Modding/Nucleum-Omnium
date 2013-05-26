@@ -3,15 +3,15 @@ package ccm.nucleum_omnium.handler.mods;
 public class ModHandling
 {
 
-    private IModHandler handler;
+    private final IModHandler handler;
 
-    private String      modName;
+    private final String      modName;
 
-    private String      modExeption;
+    private final String      modExeption;
 
-    public ModHandling(IModHandler handler,
-                       String modName,
-                       String modExeption)
+    public ModHandling(final IModHandler handler,
+                       final String modName,
+                       final String modExeption)
     {
         this.handler = handler;
         this.modName = modName;
@@ -20,16 +20,16 @@ public class ModHandling
 
     public IModHandler getHandler()
     {
-        return handler;
+        return this.handler;
     }
 
     public String getModName()
     {
-        return modName;
+        return this.modName;
     }
 
     public String getModExeption()
     {
-        return modExeption;
+        return this.modExeption;
     }
 }

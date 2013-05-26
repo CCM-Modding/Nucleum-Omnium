@@ -7,7 +7,7 @@ public class CommonProxy
 {
 
     /**
-     * Initializes the Capes Client Side Only. 
+     * Initializes the Capes Client Side Only.
      * Original code that adds capes is found in this
      * Github repository: {@link https://github.com/jadar/DeveloperCapesAPI }
      */

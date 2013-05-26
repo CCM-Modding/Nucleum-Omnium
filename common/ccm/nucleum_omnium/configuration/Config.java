@@ -8,7 +8,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 public class Config
 {
 
-    public static void init(Configuration config)
+    public static void init(final Configuration config)
     {
         if (FMLCommonHandler.instance().getSide().isServer()){
             initServerConfigs(config);
@@ -17,10 +17,10 @@ public class Config
         }
     }
 
-    private static void initServerConfigs(Configuration config)
+    private static void initServerConfigs(final Configuration config)
     {}
 
-    private static void initClientConfigs(Configuration config)
+    private static void initClientConfigs(final Configuration config)
     {
         config.addCustomCategoryComment(Properties.CLIENT_SIDE, "This Category only has client side options");
 

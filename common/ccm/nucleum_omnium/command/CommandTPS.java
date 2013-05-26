@@ -47,7 +47,7 @@ public class CommandTPS extends CommandBase
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args)
+    public void processCommand(final ICommandSender sender, final String[] args)
     {
         if (args.length < 1){
             double tps = this.getTps(null);

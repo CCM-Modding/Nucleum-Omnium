@@ -21,9 +21,9 @@ public class PropertyHandler
 
     private static HashMap<IMod, PropertyHandler> idHandler          = new HashMap<IMod, PropertyHandler>();
 
-    private List<Integer>                         freeItemIDs        = new LinkedList<Integer>();
+    private final List<Integer>                   freeItemIDs        = new LinkedList<Integer>();
 
-    private List<Integer>                         freeBlockIDs       = new LinkedList<Integer>();
+    private final List<Integer>                   freeBlockIDs       = new LinkedList<Integer>();
 
     private PropertyHandler(final int baseItemID,
                             final int baseBlockID)

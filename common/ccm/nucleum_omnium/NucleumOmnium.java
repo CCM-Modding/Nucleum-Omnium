@@ -131,7 +131,7 @@ public class NucleumOmnium extends BaseMod implements IMod
     }
 
     @ServerStarting
-    public void serverStarting(FMLServerStartingEvent event)
+    public void serverStarting(final FMLServerStartingEvent event)
     {
 
         // Initialize the custom commands

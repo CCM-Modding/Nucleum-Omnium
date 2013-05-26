@@ -23,9 +23,10 @@ public class ClientProxy extends CommonProxy
     {
         MinecraftForge.EVENT_BUS.register(new EventRain());
     }
-    
+
     @Override
-    public void initModelHandlers(){
+    public void initModelHandlers()
+    {
         AdvancedModelLoader.registerModelHandler(new TechneModelLoader());
     }
 }
