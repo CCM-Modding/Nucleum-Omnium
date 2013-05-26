@@ -4,6 +4,8 @@ public class Properties
 {
 
     public static final String CLIENT_SIDE = "Client Only";
+    
+    public static final String SERVER_SIDE = "Server Only";
 
-    public static boolean      rain;
+    public static boolean      rain        = false;
 }
