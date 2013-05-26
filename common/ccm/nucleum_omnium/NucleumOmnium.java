@@ -4,6 +4,7 @@ import java.util.logging.Level;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
+import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.handler.ModHandler;
@@ -38,7 +39,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @NetworkMod(clientSideRequired = true,
             serverSideRequired = false,
             channels = Archive.MOD_CHANNEL)
-public class NucleumOmnium implements IMod
+public class NucleumOmnium extends BaseMod implements IMod
 {
 
     /**
@@ -55,8 +56,8 @@ public class NucleumOmnium implements IMod
     public static CommonProxy     proxy;
 
     public static MinecraftServer server;
-    
-    public static boolean mystLoaded = false;
+
+    public static boolean         mystLoaded = false;
 
     @Override
     public String getId()
@@ -95,11 +96,16 @@ public class NucleumOmnium implements IMod
     @PreInit
     public void preInit(final FMLPreInitializationEvent evt)
     {
-        Handler.initLog(this);
+        if (!Handler.isModLoaded(this)){
 
-        GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
+            Handler.initLog(this);
 
-        MinecraftForge.ORE_GEN_BUS.register(WorldGenHandler.instance);
+            Config.init(this.initializeConfig(evt));
+
+            GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
+
+            MinecraftForge.ORE_GEN_BUS.register(WorldGenHandler.instance);
+        }
     }
 
     @Init
@@ -120,15 +126,17 @@ public class NucleumOmnium implements IMod
     public void PostInit(final FMLPostInitializationEvent event)
     {
         ModHandler.init();
+
+        Handler.loadMod(this);
     }
-    
+
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event)
     {
 
         // Initialize the custom commands
         CommandHandler.initCommands(event);
-        
+
         server = event.getServer();
     }
 }
