@@ -127,7 +127,7 @@ public final class FunctionHelper
      * @param d4
      *            The Z coordinate to send the player to
      */
-    public static void teleportPlayer(EntityPlayerMP player, double d1, double d2, double d3, double d4)
+    public static void teleportPlayer(EntityPlayerMP player, int d1, double d2, double d3, double d4)
     {
         if (player.dimension != d1){
             MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, (int) d1);

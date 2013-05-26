@@ -2,8 +2,6 @@ package ccm.nucleum_omnium.command;
 
 import java.util.List;
 
-import ccm.nucleum_omnium.helper.FunctionHelper;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.NumberInvalidException;
@@ -12,6 +10,7 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import ccm.nucleum_omnium.helper.FunctionHelper;
 
 public class CommandTPX extends CommandBase
 {
@@ -63,16 +62,15 @@ public class CommandTPX extends CommandBase
                     FunctionHelper.teleportPlayer(player, player1);
                 }
             }else if (player.worldObj != null){
-                int i = args.length - 3;
-                double d1 = this.checkPosition(sender, player.dimension, args[i++]);
+                int i = args.length - 4;
+                int d1 = parseInt(sender, args[i++]);
                 double d2 = this.checkPosition(sender, player.posX, args[i++]);
                 double d3 = this.checkPositionWithBounds(sender, player.posY, args[i++], 0, 0);
                 double d4 = this.checkPosition(sender, player.posZ, args[i++]);
                 player.mountEntity((Entity) null);
                 FunctionHelper.teleportPlayer(player, d1, d2, d3, d4);
-                //player.worldObj;
                 notifyAdmins(sender, "commands.tpx.success.coordinates", new Object[]
-                { player.getEntityName(), Double.valueOf(d2), Double.valueOf(d3), Double.valueOf(d4) });
+                { player.getEntityName(), Double.valueOf(d1), Double.valueOf(d2), Double.valueOf(d3), Double.valueOf(d4) });
             }
         }
     }
