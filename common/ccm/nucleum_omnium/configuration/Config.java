@@ -24,7 +24,7 @@ public class Config
                 initClientConfigs(config);
             }
         }catch(final Exception e){
-            Handler.log(NucleumOmnium.instance, Level.SEVERE, Archive.MOD_NAME + " has had a problem loading its configuration/n");
+            Handler.log(NucleumOmnium.instance, Level.SEVERE, Archive.NO_NAME + " has had a problem loading its configuration/n");
             e.printStackTrace();
         }finally{
             if (config.hasChanged()){
@@ -47,6 +47,6 @@ public class Config
     {
         config.addCustomCategoryComment(Properties.CLIENT_SIDE, "This Category only has client side options");
 
-        Properties.rain = config.get(Properties.CLIENT_SIDE, "Should " + Archive.MOD_NAME + " turn off the rain sound for your client?", false).getBoolean(false);
+        Properties.rain = config.get(Properties.CLIENT_SIDE, "Should " + Archive.NO_NAME + " turn off the rain sound for your client?", false).getBoolean(false);
     }
 }

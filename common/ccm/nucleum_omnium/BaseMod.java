@@ -4,11 +4,14 @@ import java.io.File;
 
 import net.minecraftforge.common.Configuration;
 import ccm.nucleum_omnium.helper.LanguageHelper;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public abstract class BaseMod implements IMod
 {
+
+    protected Mod  mod = this.getClass().getAnnotation(Mod.class);
 
     protected File config_Folder;
 
@@ -47,5 +50,25 @@ public abstract class BaseMod implements IMod
                                                          LanguageHelper.getLocaleFromFileName(localizationFile),
                                                          LanguageHelper.isXMLLanguageFile(localizationFile));
         }
+    }
+
+    public String getId()
+    {
+        return mod.modid();
+    }
+
+    public String getName()
+    {
+        return mod.name();
+    }
+
+    public String getPrefix()
+    {
+        return mod.modid();
+    }
+
+    public String getVersion()
+    {
+        return mod.version();
     }
 }

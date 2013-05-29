@@ -3,7 +3,6 @@ package ccm.nucleum_omnium;
 import java.util.logging.Level;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.common.MinecraftForge;
 import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.Handler;
@@ -13,7 +12,6 @@ import ccm.nucleum_omnium.proxy.CommonProxy;
 import ccm.nucleum_omnium.stats.StatEventHandler;
 import ccm.nucleum_omnium.utils.lib.Archive;
 import ccm.nucleum_omnium.utils.lib.Locations;
-import ccm.nucleum_omnium.worldgen.WorldGenHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.FingerprintWarning;
 import cpw.mods.fml.common.Mod.Init;
@@ -28,26 +26,23 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = Archive.MOD_ID,
-     name = Archive.MOD_NAME,
+@Mod(modid = Archive.NO_ID,
+     name = Archive.NO_NAME,
      version = Archive.MOD_VERSION,
-     useMetadata = false,
-     dependencies = Archive.MOD_DEPENDANCIES,
+     dependencies = Archive.NO_DEPENDANCIES,
      certificateFingerprint = Archive.MOD_FIGERPRINT)
 @NetworkMod(clientSideRequired = true,
             serverSideRequired = false,
             channels = Archive.MOD_CHANNEL)
 public class NucleumOmnium extends BaseMod implements IMod
 {
-
     /**
      * The Instance
      */
-    @Instance(Archive.MOD_ID)
+    @Instance(Archive.NO_ID)
     public static NucleumOmnium   instance;
-
+    
     /**
      * The proxy
      */
@@ -58,30 +53,8 @@ public class NucleumOmnium extends BaseMod implements IMod
     public static MinecraftServer server;
 
     public static boolean         mystLoaded = false;
-
-    @Override
-    public String getId()
-    {
-        return Archive.MOD_ID;
-    }
-
-    @Override
-    public String getName()
-    {
-        return Archive.MOD_NAME;
-    }
-
-    @Override
-    public String getPrefix()
-    {
-        return Archive.MOD_PREFIX;
-    }
-
-    @Override
-    public String getVersion()
-    {
-        return Archive.MOD_VERSION;
-    }
+    
+    protected Mod  mod = this.getClass().getAnnotation(Mod.class);
 
     @FingerprintWarning
     public void invalidFingerprint(final FMLFingerprintViolationEvent event)
@@ -101,10 +74,6 @@ public class NucleumOmnium extends BaseMod implements IMod
             Handler.initLog(this);
 
             Config.init(this.initializeConfig(evt));
-
-            GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
-
-            MinecraftForge.ORE_GEN_BUS.register(WorldGenHandler.instance);
         }
     }
 
