@@ -37,7 +37,7 @@ public class TickHandlerWorld implements ITickHandler
             final long xSeed = rand.nextLong() >> 3;
             final long zSeed = rand.nextLong() >> 3;
             rand.setSeed(((xSeed * c.chunkX) + (zSeed * c.chunkZ)) ^ worldSeed);
-            WorldGenHandler.instance.generateWorld(rand, c.chunkX, c.chunkZ, world, false);
+            //WorldGenHandler.instance.generateWorld(rand, c.chunkX, c.chunkZ, world, false);
             chunks.remove(0);
             chunksToGen.put(Integer.valueOf(dim), chunks);
         }

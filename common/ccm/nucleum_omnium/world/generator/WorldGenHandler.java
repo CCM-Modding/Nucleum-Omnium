@@ -1,121 +1,159 @@
 package ccm.nucleum_omnium.world.generator;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomItem;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.world.ChunkDataEvent;
-import net.minecraftforge.event.world.ChunkDataEvent.Load;
-import ccm.nucleum_omnium.NucleumOmnium;
-import ccm.nucleum_omnium.handler.Handler;
-import ccm.nucleum_omnium.utils.lib.Properties;
-import ccm.nucleum_omnium.world.utils.ChunkCoord;
-import ccm.nucleum_omnium.world.utils.IOreGenerator;
-import ccm.nucleum_omnium.world.utils.IOreHandler;
-import ccm.nucleum_omnium.world.utils.TickHandlerWorld;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class WorldGenHandler implements IWorldGenerator, IOreHandler
+public class WorldGenHandler implements IWorldGenerator
 {
 
-    private static List<IOreGenerator> ores               = new ArrayList<IOreGenerator>();
+    private static List<GeneratorEntry> generatorListNether  = new ArrayList<GeneratorEntry>();
 
-    private static HashSet<String>     oreNames           = new HashSet<String>();
+    private static List<GeneratorEntry> generatorListSurface = new ArrayList<GeneratorEntry>();
 
-    private static HashSet<Integer>    dimensionBlacklist = new HashSet<Integer>();
+    private static List<GeneratorEntry> generatorListEnd     = new ArrayList<GeneratorEntry>();
 
-    public static WorldGenHandler      instance           = new WorldGenHandler();
-
-    @ForgeSubscribe
-    public void handleChunkSaveEvent(final ChunkDataEvent.Save event)
-    {
-        final NBTTagCompound tag = new NBTTagCompound();
-
-        if (Properties.retroOreGen){
-            tag.setBoolean("CCM-Ores", true);
-        }
-        event.getData().setTag("CCM-Nucleum_World", tag);
-    }
-
-    @ForgeSubscribe
-    @SuppressWarnings("unchecked")
-    public void handleChunkLoadEvent(final Load event)
-    {
-        final int dim = event.world.provider.dimensionId;
-
-        if (dimensionBlacklist.contains(Integer.valueOf(dim))){
-            return;
-        }
-        boolean ores = false;
-        boolean regen = false;
-        final NBTTagCompound tag = (NBTTagCompound) event.getData().getTag("CCM-Nucleum_World");
-
-        if (tag != null){
-            ores = (!tag.hasKey("CCM-Ores")) && (Properties.retroOreGen);
-        }
-        final ChunkCoord cCoord = new ChunkCoord(event.getChunk());
-
-        if ((tag == null) || (Properties.retroOreGen)){
-            regen = true;
-        }
-        if (ores){
-            Handler.log(NucleumOmnium.instance, "Regenerating ores for the chunk at " + cCoord.toString() + ".");
-            regen = true;
-        }
-        if (regen){
-            ArrayList<ChunkCoord> chunks = (ArrayList<ChunkCoord>) TickHandlerWorld.chunksToGen.get(Integer.valueOf(dim));
-
-            if (chunks == null){
-                TickHandlerWorld.chunksToGen.put(Integer.valueOf(dim), new ArrayList<ChunkCoord>());
-                chunks = (ArrayList<ChunkCoord>) TickHandlerWorld.chunksToGen.get(Integer.valueOf(dim));
-            }
-            if (chunks != null){
-                chunks.add(cCoord);
-                TickHandlerWorld.chunksToGen.put(Integer.valueOf(dim), chunks);
-            }
-        }
-    }
+    public static WorldGenHandler       instance             = new WorldGenHandler();
 
     @Override
     public void generate(final Random random, final int chunkX, final int chunkZ, final World world, final IChunkProvider chunkGenerator, final IChunkProvider chunkProvider)
     {
-        this.generateWorld(random, chunkX, chunkZ, world, true);
+
+        this.generateWorld(world, random, chunkX, chunkZ);
     }
 
-    @Override
-    public boolean registerOre(final IOreGenerator feature)
+    protected void genStandardOre1(final World world, final GeneratorEntry entry, final Random random, final int blockX, final int blockZ)
     {
-        if (oreNames.contains(feature.getOreName())){
-            return false;
+        for (int i = 0; i < entry.count; i++){
+            final int x = blockX + random.nextInt(16);
+            final int y = entry.minY + random.nextInt(entry.maxY - entry.minY);
+            final int z = blockZ + random.nextInt(16);
+            entry.worldGen.generate(world, random, x, y, z);
         }
-        oreNames.add(feature.getOreName());
-        ores.add(feature);
-        return true;
     }
 
-    public static boolean addFeature(final IOreGenerator feature)
+    protected void genStandardOre2(final World world, final GeneratorEntry entry, final Random random, final int blockX, final int blockZ)
     {
-        return instance.registerOre(feature);
+        for (int i = 0; i < entry.count; i++){
+            final int x = blockX + random.nextInt(16);
+            final int y = (random.nextInt(entry.maxY) + random.nextInt(entry.maxY) + entry.minY) - entry.maxY;
+            final int z = blockZ + random.nextInt(16);
+            entry.worldGen.generate(world, random, x, y, z);
+        }
     }
 
-    public void generateWorld(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
+    public static void addNetherGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
     {
-        if ((!newGen) && (!Properties.retroOreGen)){
-            return;
+        generatorListNether.add(new GeneratorEntry(generator, minY, maxY, count, type));
+    }
+
+    public static void addSurfaceGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
+    {
+        generatorListSurface.add(new GeneratorEntry(generator, minY, maxY, count, type));
+    }
+
+    public static void addEndGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
+    {
+        generatorListEnd.add(new GeneratorEntry(generator, minY, maxY, count, type));
+    }
+
+    public static void prependNetherGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
+    {
+        generatorListNether.add(0, new GeneratorEntry(generator, minY, maxY, count, type));
+    }
+
+    public static void prependSurfaceGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
+    {
+        generatorListSurface.add(0, new GeneratorEntry(generator, minY, maxY, count, type));
+    }
+
+    public static void prependEndGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
+    {
+        generatorListEnd.add(0, new GeneratorEntry(generator, minY, maxY, count, type));
+    }
+
+    private void generateWorld(final World world, final Random random, final int chunkX, final int chunkZ)
+    {
+        List<GeneratorEntry> toGenList;
+        switch (world.provider.dimensionId) {
+            case -1:
+                toGenList = generatorListNether;
+                break;
+            case 0:
+                toGenList = generatorListSurface;
+                break;
+            case 1:
+                toGenList = generatorListEnd;
+                break;
+            default:
+                toGenList = generatorListSurface;
         }
-        if ((world.provider.dimensionId == 1) || (world.provider.dimensionId == -1)){
-            return;
+
+        final int blockX = chunkX * 16;
+        final int blockZ = chunkZ * 16;
+
+        for (final GeneratorEntry entry : toGenList){
+            if (entry.type == GenType.ORE_1.ordinal()){
+                this.genStandardOre1(world, entry, random, blockX, blockZ);
+            }else if (entry.type == GenType.ORE_2.ordinal()){
+                this.genStandardOre2(world, entry, random, blockX, blockZ);
+            }
         }
-        for (final IOreGenerator ore : ores){
-            ore.generateOre(random, chunkX, chunkZ, world, newGen);
+    }
+
+    public static enum GenType
+    {
+        ORE_1,
+        ORE_2;
+    }
+
+    public static class GeneratorEntry
+    {
+
+        public final WorldGenerator worldGen;
+
+        public final int            minY;
+
+        public final int            maxY;
+
+        public final int            count;
+
+        public final int            type;
+
+        public GeneratorEntry(final WorldGenerator worldGen,
+                              final int minY,
+                              final int maxY,
+                              final int count,
+                              final int type)
+        {
+            this.worldGen = worldGen;
+            this.minY = minY;
+            this.maxY = maxY;
+            this.count = count;
+            this.type = type;
         }
-        if (!newGen){
-            world.getChunkFromChunkCoords(chunkX, chunkZ).setChunkModified();
+    }
+
+    public static class ResourceEntry extends WeightedRandomItem
+    {
+
+        public final int blockId;
+
+        public final int metadata;
+
+        public ResourceEntry(final ItemStack ore,
+                             final int weight)
+        {
+            super(weight);
+            this.blockId = ore.itemID;
+            this.metadata = ore.getItemDamage();
         }
     }
 }

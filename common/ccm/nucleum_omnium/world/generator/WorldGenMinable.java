@@ -22,7 +22,7 @@ public class WorldGenMinable extends WorldGenerator
     private int                             genBlockID = Block.stone.blockID;
 
     public WorldGenMinable(final ItemStack ore,
-                                  final int clusterSize)
+                           final int clusterSize)
     {
         this.cluster = new ArrayList<RandomWeightedBlock>();
         this.cluster.add(new RandomWeightedBlock(ore));
@@ -30,7 +30,7 @@ public class WorldGenMinable extends WorldGenerator
     }
 
     public WorldGenMinable(final RandomWeightedBlock resource,
-                                  final int clusterSize)
+                           final int clusterSize)
     {
         this.cluster = new ArrayList<RandomWeightedBlock>();
         this.cluster.add(resource);
@@ -38,15 +38,15 @@ public class WorldGenMinable extends WorldGenerator
     }
 
     public WorldGenMinable(final List<RandomWeightedBlock> resource,
-                                  final int clusterSize)
+                           final int clusterSize)
     {
         this.cluster = resource;
         this.genClusterSize = clusterSize;
     }
 
     public WorldGenMinable(final ItemStack ore,
-                                  final int clusterSize,
-                                  final int blockID)
+                           final int clusterSize,
+                           final int blockID)
     {
         this.cluster = new ArrayList<RandomWeightedBlock>();
         this.cluster.add(new RandomWeightedBlock(ore, 1));
@@ -55,8 +55,8 @@ public class WorldGenMinable extends WorldGenerator
     }
 
     public WorldGenMinable(final RandomWeightedBlock resource,
-                                  final int clusterSize,
-                                  final int blockID)
+                           final int clusterSize,
+                           final int blockID)
     {
         this.cluster = new ArrayList<RandomWeightedBlock>();
         this.cluster.add(resource);
@@ -65,8 +65,8 @@ public class WorldGenMinable extends WorldGenerator
     }
 
     public WorldGenMinable(final List<RandomWeightedBlock> resource,
-                                  final int clusterSize,
-                                  final int blockID)
+                           final int clusterSize,
+                           final int blockID)
     {
         this.cluster = resource;
         this.genClusterSize = clusterSize;
