@@ -2,6 +2,10 @@ package ccm.nucleum_omnium;
 
 import java.util.logging.Level;
 
+import lib.org.modstats.ModstatInfo;
+
+import net.minecraft.server.MinecraftServer;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.FingerprintWarning;
 import cpw.mods.fml.common.Mod.Init;
@@ -17,15 +21,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-import net.minecraft.server.MinecraftServer;
-
 import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.handler.ModHandler;
 import ccm.nucleum_omnium.handler.mods.ModsMystcraft;
 import ccm.nucleum_omnium.proxy.CommonProxy;
-import ccm.nucleum_omnium.stats.StatEventHandler;
 import ccm.nucleum_omnium.utils.lib.Archive;
 import ccm.nucleum_omnium.utils.lib.Languages;
 import ccm.nucleum_omnium.utils.lib.Locations;
@@ -38,6 +39,7 @@ import ccm.nucleum_omnium.utils.lib.Locations;
 @NetworkMod(clientSideRequired = true,
             serverSideRequired = false,
             channels = Archive.MOD_CHANNEL)
+@ModstatInfo(prefix = Archive.MOD_PREFIX)
 public class NucleumOmnium extends BaseMod implements IMod
 {
 
@@ -89,8 +91,6 @@ public class NucleumOmnium extends BaseMod implements IMod
         proxy.initEventHandling();
 
         proxy.initModelHandlers();
-
-        StatEventHandler.addModToList(this);
 
         ModHandler.addModToHandle(new ModsMystcraft(), "Mystcraft");
 

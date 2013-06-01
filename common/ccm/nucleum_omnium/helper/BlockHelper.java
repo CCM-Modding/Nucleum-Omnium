@@ -113,15 +113,15 @@ public final class BlockHelper
         rotateType[Block.dropper.blockID] = RotationType.SIX_WAY;
     }
 
-    public static int getCurrentMousedOverSide(World world, EntityPlayer player)
+    public static int getCurrentMousedOverSide(final World world, final EntityPlayer player)
     {
 
-        double distance = player.capabilities.isCreativeMode ? 5.0F : 4.5F;
-        Vec3 posVec = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
+        final double distance = player.capabilities.isCreativeMode ? 5.0F : 4.5F;
+        final Vec3 posVec = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
         Vec3 lookVec = player.getLook(1);
         posVec.yCoord += player.getEyeHeight();
         lookVec = posVec.addVector(lookVec.xCoord * distance, lookVec.yCoord * distance, lookVec.zCoord * distance);
-        MovingObjectPosition mouseOver = player.worldObj.rayTraceBlocks(posVec, lookVec);
+        final MovingObjectPosition mouseOver = player.worldObj.rayTraceBlocks(posVec, lookVec);
 
         if (mouseOver != null){
             return mouseOver.sideHit;
@@ -129,83 +129,83 @@ public final class BlockHelper
         return 0;
     }
 
-    public static TileEntity getAdjacentTileEntity(World world, int x, int y, int z, ForgeDirection dir)
+    public static TileEntity getAdjacentTileEntity(final World world, final int x, final int y, final int z, final ForgeDirection dir)
     {
 
         return world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
     }
 
-    public static TileEntity getAdjacentTileEntity(World world, int x, int y, int z, int side)
+    public static TileEntity getAdjacentTileEntity(final World world, final int x, final int y, final int z, final int side)
     {
 
         return getAdjacentTileEntity(world, x, y, z, ForgeDirection.values()[side]);
     }
 
-    public static TileEntity getAdjacentTileEntity(TileEntity refTile, ForgeDirection dir)
+    public static TileEntity getAdjacentTileEntity(final TileEntity refTile, final ForgeDirection dir)
     {
 
         return getAdjacentTileEntity(refTile.worldObj, refTile.xCoord, refTile.yCoord, refTile.zCoord, dir);
     }
 
-    public static TileEntity getAdjacentTileEntity(TileEntity refTile, int side)
+    public static TileEntity getAdjacentTileEntity(final TileEntity refTile, final int side)
     {
 
         return getAdjacentTileEntity(refTile.worldObj, refTile.xCoord, refTile.yCoord, refTile.zCoord, ForgeDirection.values()[side]);
     }
 
     /* COORDINATE TRANSFORM */
-    public static int[] getAdjacentCoordinatesForSide(int x, int y, int z, int side)
+    public static int[] getAdjacentCoordinatesForSide(final int x, final int y, final int z, final int side)
     {
 
         return new int[]
         { x + SIDE_COORD_MOD[side][0], y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2] };
     }
 
-    public static int[] getAdjacentCoordinatesForSide(TileEntity tile, int side)
+    public static int[] getAdjacentCoordinatesForSide(final TileEntity tile, final int side)
     {
 
         return new int[]
         { tile.xCoord + SIDE_COORD_MOD[side][0], tile.yCoord + SIDE_COORD_MOD[side][1], tile.zCoord + SIDE_COORD_MOD[side][2] };
     }
 
-    public static int getLeftSide(int side)
+    public static int getLeftSide(final int side)
     {
 
         return SIDE_LEFT[side];
     }
 
-    public static int getRightSide(int side)
+    public static int getRightSide(final int side)
     {
 
         return SIDE_RIGHT[side];
     }
 
-    public static int getOppositeSide(int side)
+    public static int getOppositeSide(final int side)
     {
 
         return SIDE_OPPOSITE[side];
     }
 
-    public static int getAboveSide(int side)
+    public static int getAboveSide(final int side)
     {
 
         return SIDE_ABOVE[side];
     }
 
-    public static int getBelowSide(int side)
+    public static int getBelowSide(final int side)
     {
 
         return SIDE_BELOW[side];
     }
 
     /* BLOCK ROTATION */
-    public static boolean canRotate(int blockId)
+    public static boolean canRotate(final int blockId)
     {
 
         return rotateType[blockId] != 0;
     }
 
-    public static int rotateVanillaBlock(World world, int bId, int bMeta, int x, int y, int z)
+    public static int rotateVanillaBlock(final World world, final int bId, int bMeta, final int x, final int y, final int z)
     {
 
         switch (rotateType[bId]) {
@@ -226,7 +226,7 @@ public final class BlockHelper
             case RotationType.STAIRS:
                 return ++bMeta % 8;
             case RotationType.REDSTONE:
-                int upper = bMeta & 0xC;
+                final int upper = bMeta & 0xC;
                 int lower = bMeta & 0x3;
                 return upper + (++lower % 4);
             case RotationType.LOG:
@@ -266,7 +266,7 @@ public final class BlockHelper
         }
     }
 
-    public static int rotateVanillaBlockAlt(World world, int bId, int bMeta, int x, int y, int z)
+    public static int rotateVanillaBlockAlt(final World world, final int bId, int bMeta, final int x, final int y, final int z)
     {
 
         switch (rotateType[bId]) {
@@ -287,8 +287,8 @@ public final class BlockHelper
             case RotationType.STAIRS:
                 return (bMeta + 7) % 8;
             case RotationType.REDSTONE:
-                int upper = bMeta & 0xC;
-                int lower = bMeta & 0x3;
+                final int upper = bMeta & 0xC;
+                final int lower = bMeta & 0x3;
                 return upper + ((lower + 3) % 4);
             case RotationType.LOG:
                 return (bMeta + 8) % 12;
@@ -326,20 +326,20 @@ public final class BlockHelper
         }
     }
 
-    public static boolean isBlock(int bId)
+    public static boolean isBlock(final int bId)
     {
 
         return (bId < 0) || (bId >= Block.blocksList.length) ? null : Block.blocksList[bId] != null;
     }
 
-    public static List<ItemStack> breakBlock(World worldObj, int x, int y, int z, int blockId, int fortune, boolean doBreak)
+    public static List<ItemStack> breakBlock(final World worldObj, final int x, final int y, final int z, final int blockId, final int fortune, final boolean doBreak)
     {
 
         if (Block.blocksList[blockId].getBlockHardness(worldObj, x, y, z) == -1){
             return new LinkedList<ItemStack>();
         }
-        int meta = worldObj.getBlockMetadata(x, y, z);
-        List<ItemStack> stacks = Block.blocksList[blockId].getBlockDropped(worldObj, x, y, z, meta, fortune);
+        final int meta = worldObj.getBlockMetadata(x, y, z);
+        final List<ItemStack> stacks = Block.blocksList[blockId].getBlockDropped(worldObj, x, y, z, meta, fortune);
 
         if (!doBreak){
             return stacks;
@@ -347,10 +347,10 @@ public final class BlockHelper
         worldObj.playAuxSFXAtEntity(null, 2001, x, y, z, blockId + (meta << 12));
         worldObj.setBlock(x, y, z, 0);
 
-        List<?> result = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x - 2, y - 2, z - 2, x + 3, y + 3, z + 3));
+        final List<?> result = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x - 2, y - 2, z - 2, x + 3, y + 3, z + 3));
         for (int i = 0; i < result.size(); i++){
             if (result.get(i) instanceof EntityItem){
-                EntityItem entity = (EntityItem) result.get(i);
+                final EntityItem entity = (EntityItem) result.get(i);
                 if (entity.isDead || (entity.getEntityItem().stackSize <= 0)){
                     continue;
                 }

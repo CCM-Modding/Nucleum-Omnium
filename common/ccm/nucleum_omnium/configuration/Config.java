@@ -2,9 +2,9 @@ package ccm.nucleum_omnium.configuration;
 
 import java.util.logging.Level;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-
 import net.minecraftforge.common.Configuration;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.handler.Handler;

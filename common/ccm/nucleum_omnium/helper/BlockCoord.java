@@ -21,9 +21,9 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
 
     public int                z;
 
-    public BlockCoord(int x,
-                      int y,
-                      int z)
+    public BlockCoord(final int x,
+                      final int y,
+                      final int z)
     {
 
         this.x = x;
@@ -31,7 +31,7 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
         this.z = z;
     }
 
-    public BlockCoord(TileEntity tile)
+    public BlockCoord(final TileEntity tile)
     {
 
         this.x = tile.xCoord;
@@ -39,15 +39,15 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
         this.z = tile.zCoord;
     }
 
-    public void step(int dir)
+    public void step(final int dir)
     {
 
-        x += BlockHelper.SIDE_COORD_MOD[dir][0];
-        y += BlockHelper.SIDE_COORD_MOD[dir][1];
-        z += BlockHelper.SIDE_COORD_MOD[dir][2];
+        this.x += BlockHelper.SIDE_COORD_MOD[dir][0];
+        this.y += BlockHelper.SIDE_COORD_MOD[dir][1];
+        this.z += BlockHelper.SIDE_COORD_MOD[dir][2];
     }
 
-    public void step(int dir, int dist)
+    public void step(final int dir, final int dist)
     {
 
         switch (dir) {
@@ -76,17 +76,17 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
     public BlockCoord copy()
     {
 
-        return new BlockCoord(x, y, z);
+        return new BlockCoord(this.x, this.y, this.z);
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(final Object obj)
     {
 
         if (!(obj instanceof BlockCoord)){
             return false;
         }
-        BlockCoord other = (BlockCoord) obj;
+        final BlockCoord other = (BlockCoord) obj;
         return (this.x == other.x) && (this.y == other.y) && (this.z == other.z);
     }
 
@@ -109,7 +109,7 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
 
     /* Comparable */
     @Override
-    public int compareTo(BlockCoord other)
+    public int compareTo(final BlockCoord other)
     {
 
         return this.x == other.x ? this.y == other.y ? this.z - other.z : this.y - other.y : this.x - other.x;

@@ -50,7 +50,7 @@ public class MathHelper
     /**
      * Returns the greatest integer less than or equal to the double argument
      */
-    public static int floor_double(double d)
+    public static int floor_double(final double d)
     {
 
         return net.minecraft.util.MathHelper.floor_double(d);
@@ -80,13 +80,13 @@ public class MathHelper
         return clampInt(rand.nextInt(maxValue), 1, maxValue);
     }
 
-    public static double sin(double d)
+    public static double sin(final double d)
     {
 
         return SIN_TABLE[(int) ((float) d * 10430.378F) & 65535];
     }
 
-    public static double cos(double d)
+    public static double cos(final double d)
     {
 
         return SIN_TABLE[(int) (((float) d * 10430.378F) + 16384.0F) & 65535];

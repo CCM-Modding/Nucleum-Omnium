@@ -5,10 +5,10 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Random;
 
+import net.minecraft.world.World;
+
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
-
-import net.minecraft.world.World;
 
 import ccm.nucleum_omnium.helper.ChunkCoord;
 import ccm.nucleum_omnium.world.generator.WorldGenHandler;

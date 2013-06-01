@@ -1,5 +1,7 @@
 package ccm.nucleum_omnium.world;
 
+import net.minecraftforge.common.MinecraftForge;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -11,8 +13,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-
-import net.minecraftforge.common.MinecraftForge;
 
 import ccm.nucleum_omnium.BaseMod;
 import ccm.nucleum_omnium.IMod;

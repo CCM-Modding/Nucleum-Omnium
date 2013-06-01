@@ -1,9 +1,5 @@
 package ccm.nucleum_omnium.proxy;
 
-import net.minecraftforge.common.MinecraftForge;
-
-import ccm.nucleum_omnium.stats.StatEventHandler;
-
 public class CommonProxy
 {
 
@@ -19,9 +15,7 @@ public class CommonProxy
      * Initializes All the events
      */
     public void initEventHandling()
-    {
-        MinecraftForge.EVENT_BUS.register(new StatEventHandler());
-    }
+    {}
 
     /**
      * Initializes All Model Handlers

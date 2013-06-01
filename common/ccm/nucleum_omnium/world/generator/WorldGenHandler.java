@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.IWorldGenerator;
+import lib.cofh.api.world.IFeatureGenerator;
+import lib.cofh.api.world.IFeatureHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,24 +16,24 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.ChunkDataEvent.Load;
 import net.minecraftforge.event.world.ChunkDataEvent.Save;
 
+import cpw.mods.fml.common.IWorldGenerator;
+
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.helper.ChunkCoord;
-import ccm.nucleum_omnium.world.utils.IOreGenerator;
-import ccm.nucleum_omnium.world.utils.IOreHandler;
 import ccm.nucleum_omnium.world.utils.TickHandlerWorld;
 import ccm.nucleum_omnium.world.utils.lib.Properties;
 
-public class WorldGenHandler implements IWorldGenerator, IOreHandler
+public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
 {
 
-    private final List<IOreGenerator> ores               = new ArrayList<IOreGenerator>();
+    private final List<IFeatureGenerator> ores               = new ArrayList<IFeatureGenerator>();
 
-    private final HashSet<String>     OreNames           = new HashSet<String>();
+    private final HashSet<String>         oreNames           = new HashSet<String>();
 
-    private final HashSet<Integer>    dimensionBlacklist = new HashSet<Integer>();
+    private final HashSet<Integer>        dimensionBlacklist = new HashSet<Integer>();
 
-    public static WorldGenHandler     instance           = new WorldGenHandler();
+    public static WorldGenHandler         instance           = new WorldGenHandler();
 
     @ForgeSubscribe
     public void handleChunkSaveEvent(final Save event)
@@ -101,19 +102,19 @@ public class WorldGenHandler implements IWorldGenerator, IOreHandler
     }
 
     @Override
-    public boolean registerOre(final IOreGenerator ore)
+    public boolean registerFeature(final IFeatureGenerator feature)
     {
-        if (this.OreNames.contains(ore.getOreName())){
+        if (this.oreNames.contains(feature.getFeatureName())){
             return false;
         }
-        this.OreNames.add(ore.getOreName());
-        this.ores.add(ore);
+        this.oreNames.add(feature.getFeatureName());
+        this.ores.add(feature);
         return true;
     }
 
-    public static boolean addOre(final IOreGenerator Ore)
+    public static boolean addOre(final IFeatureGenerator Ore)
     {
-        return instance.registerOre(Ore);
+        return instance.registerFeature(Ore);
     }
 
     public void generateWorld(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
@@ -126,8 +127,8 @@ public class WorldGenHandler implements IWorldGenerator, IOreHandler
         if ((world.provider.dimensionId == 1) || (world.provider.dimensionId == -1)){
             return;
         }
-        for (final IOreGenerator ore : this.ores){
-            ore.generateOre(random, chunkX, chunkZ, world, newGen);
+        for (final IFeatureGenerator feature : this.ores){
+            feature.generateFeature(random, chunkX, chunkZ, world, newGen);
         }
         if (!newGen){
             world.getChunkFromChunkCoords(chunkX, chunkZ).setChunkModified();
