@@ -27,10 +27,11 @@ package org.modstats.reporter.v1;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
+
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
 
 public class Config
 {

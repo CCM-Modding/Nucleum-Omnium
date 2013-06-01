@@ -3,10 +3,10 @@ package ccm.nucleum_omnium.stats;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraftforge.event.ForgeSubscribe;
-
 import org.modstats.ModVersionData;
 import org.modstats.ModsUpdateEvent;
+
+import net.minecraftforge.event.ForgeSubscribe;
 
 import ccm.nucleum_omnium.IMod;
 

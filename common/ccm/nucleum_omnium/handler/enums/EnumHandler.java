@@ -8,40 +8,44 @@ import net.minecraft.item.ItemStack;
 
 public class EnumHandler
 {
-    private Field field;
+
+    private Field  field;
+
     private Object type;
-    
-    public EnumHandler(Class<?> container, String fieldName){
+
+    public EnumHandler(final Class<?> container,
+                       final String fieldName)
+    {
         try{
-            field = container.getDeclaredField(fieldName);
-            field.get(field);
-            type = field;
-        }catch(NoSuchFieldException e){
+            this.field = container.getDeclaredField(fieldName);
+            this.field.get(this.field);
+            this.type = this.field;
+        }catch(final NoSuchFieldException e){
             e.printStackTrace();
-        }catch(IllegalArgumentException e){
+        }catch(final IllegalArgumentException e){
             e.printStackTrace();
-        }catch(IllegalAccessException e){
+        }catch(final IllegalAccessException e){
             e.printStackTrace();
         }
     }
-    
-    public ItemStack getItemIS(Enum<? extends IEnum> enumType)
+
+    public ItemStack getItemIS(final Enum<? extends IEnum> enumType)
     {
-        return new ItemStack((Item)type, 1, enumType.ordinal());
+        return new ItemStack((Item) this.type, 1, enumType.ordinal());
     }
 
-    public ItemStack getItemIS(Enum<? extends IEnum> enumType, int amount)
+    public ItemStack getItemIS(final Enum<? extends IEnum> enumType, final int amount)
     {
-        return new ItemStack((Item)type, amount, enumType.ordinal());
-    }
-    
-    public ItemStack getBlockIS(Enum<? extends IEnum> enumType)
-    {
-        return new ItemStack((Block)type, 1, enumType.ordinal());
+        return new ItemStack((Item) this.type, amount, enumType.ordinal());
     }
 
-    public ItemStack getBlockIS(Enum<? extends IEnum> enumType, int amount)
+    public ItemStack getBlockIS(final Enum<? extends IEnum> enumType)
     {
-        return new ItemStack((Block)type, amount, enumType.ordinal());
+        return new ItemStack((Block) this.type, 1, enumType.ordinal());
+    }
+
+    public ItemStack getBlockIS(final Enum<? extends IEnum> enumType, final int amount)
+    {
+        return new ItemStack((Block) this.type, amount, enumType.ordinal());
     }
 }

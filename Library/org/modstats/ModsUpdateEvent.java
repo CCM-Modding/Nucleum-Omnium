@@ -28,9 +28,10 @@ package org.modstats;
 import java.util.LinkedList;
 import java.util.List;
 
+import cpw.mods.fml.common.FMLLog;
+
 import net.minecraftforge.event.Cancelable;
 import net.minecraftforge.event.Event;
-import cpw.mods.fml.common.FMLLog;
 
 @Cancelable
 public class ModsUpdateEvent extends Event

@@ -9,12 +9,13 @@ package com.jadarstudios.api.developercapesapi;
 import java.util.EnumSet;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 
 @SideOnly(Side.CLIENT)
 public class DeveloperCapesTickHandler implements ITickHandler

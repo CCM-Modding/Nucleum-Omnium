@@ -6,7 +6,9 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.world.World;
+
 import ccm.nucleum_omnium.NucleumOmnium;
+import ccm.nucleum_omnium.utils.lib.Commands;
 
 public class CommandTPS extends CommandBase
 {
@@ -43,7 +45,7 @@ public class CommandTPS extends CommandBase
     @Override
     public String getCommandName()
     {
-        return "tps";
+        return Commands.COMMAND_TPS;
     }
 
     @Override
@@ -145,5 +147,14 @@ public class CommandTPS extends CommandBase
 
             sender.sendChatToPlayer("Entities: " + world.loadedEntityList.size() + " - Tile entities: " + world.loadedTileEntityList.size());
         }
+    }
+
+    /**
+     * Makes sure anyone can use it
+     */
+    @Override
+    public boolean canCommandSenderUseCommand(final ICommandSender sender)
+    {
+        return true;
     }
 }

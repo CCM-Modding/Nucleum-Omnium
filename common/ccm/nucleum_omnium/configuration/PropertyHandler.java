@@ -11,13 +11,13 @@ import net.minecraftforge.common.Property;
 public class PropertyHandler
 {
 
-    private int           baseItemID;
+    private final int           baseItemID;
 
-    private int           baseBlockID;
+    private final int           baseBlockID;
 
-    private List<Integer> freeItemIDs  = new LinkedList<Integer>();
+    private final List<Integer> freeItemIDs  = new LinkedList<Integer>();
 
-    private List<Integer> freeBlockIDs = new LinkedList<Integer>();
+    private final List<Integer> freeBlockIDs = new LinkedList<Integer>();
 
     public PropertyHandler(final int baseItemID,
                            final int baseBlockID)

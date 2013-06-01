@@ -1,6 +1,7 @@
 package ccm.nucleum_omnium.proxy;
 
 import net.minecraftforge.common.MinecraftForge;
+
 import ccm.nucleum_omnium.stats.StatEventHandler;
 
 public class CommonProxy

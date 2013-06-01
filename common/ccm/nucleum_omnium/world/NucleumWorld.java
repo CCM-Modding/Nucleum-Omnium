@@ -1,13 +1,5 @@
 package ccm.nucleum_omnium.world;
 
-import net.minecraftforge.common.MinecraftForge;
-import ccm.nucleum_omnium.BaseMod;
-import ccm.nucleum_omnium.IMod;
-import ccm.nucleum_omnium.utils.lib.Archive;
-import ccm.nucleum_omnium.utils.lib.Properties;
-import ccm.nucleum_omnium.world.configuration.Config;
-import ccm.nucleum_omnium.world.generator.WorldGenHandler;
-import ccm.nucleum_omnium.world.utils.TickHandlerWorld;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -20,10 +12,20 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = Archive.NW_ID,
-     name = Archive.NW_NAME,
+import net.minecraftforge.common.MinecraftForge;
+
+import ccm.nucleum_omnium.BaseMod;
+import ccm.nucleum_omnium.IMod;
+import ccm.nucleum_omnium.world.configuration.Config;
+import ccm.nucleum_omnium.world.generator.WorldGenHandler;
+import ccm.nucleum_omnium.world.utils.TickHandlerWorld;
+import ccm.nucleum_omnium.world.utils.lib.Archive;
+import ccm.nucleum_omnium.world.utils.lib.Properties;
+
+@Mod(modid = Archive.MOD_ID,
+     name = Archive.MOD_NAME,
      version = Archive.MOD_VERSION,
-     dependencies = Archive.NW_DEPENDANCIES,
+     dependencies = Archive.MOD_DEPENDANCIES,
      certificateFingerprint = Archive.MOD_FIGERPRINT)
 @NetworkMod(clientSideRequired = true,
             serverSideRequired = false)

@@ -3,13 +3,9 @@ package ccm.nucleum_omnium.utils.lib;
 public final class Archive
 {
 
-    public static final String NO_ID                  = "nucleum_omnium";
-    
-    public static final String NW_ID                  = "nucleum_world";
+    public static final String MOD_ID                  = "nucleum_omnium";
 
-    public static final String NO_NAME                = "Nucleum Omnium";
-    
-    public static final String NW_NAME                = "Nucleum World";
+    public static final String MOD_NAME                = "Nucleum Omnium";
 
     public static final String MOD_PREFIX              = "nucleum";
 
@@ -19,9 +15,7 @@ public final class Archive
 
     public static final String MOD_CHANNEL             = "CCM";
 
-    public static final String NO_DEPENDANCIES        = "required-after:Forge@[7.7.2.688,)";
-    
-    public static final String NW_DEPENDANCIES        = "required-after:nucleum_omnium";
+    public static final String MOD_DEPENDANCIES        = "required-after:Forge@[7.7.2.688,)";
 
     public static final String INVALID_FINGERPRINT_MSG = "error.invalidFingerPrint";
 }

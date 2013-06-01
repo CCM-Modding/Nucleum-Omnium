@@ -3,7 +3,6 @@ package ccm.nucleum_omnium.world.utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomItem;
 
-
 public class RandomWeightedBlock extends WeightedRandomItem
 {
 

@@ -1,159 +1,171 @@
 package ccm.nucleum_omnium.world.generator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomItem;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class WorldGenHandler implements IWorldGenerator
+import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.world.ChunkDataEvent.Load;
+import net.minecraftforge.event.world.ChunkDataEvent.Save;
+
+import ccm.nucleum_omnium.NucleumOmnium;
+import ccm.nucleum_omnium.handler.Handler;
+import ccm.nucleum_omnium.world.utils.ChunkCoord;
+import ccm.nucleum_omnium.world.utils.IOreGenerator;
+import ccm.nucleum_omnium.world.utils.IOreHandler;
+import ccm.nucleum_omnium.world.utils.TickHandlerWorld;
+import ccm.nucleum_omnium.world.utils.lib.Properties;
+
+public class WorldGenHandler implements IWorldGenerator, IOreHandler
 {
 
-    private static List<GeneratorEntry> generatorListNether  = new ArrayList<GeneratorEntry>();
+    private final List<IOreGenerator> ores               = new ArrayList<IOreGenerator>();
 
-    private static List<GeneratorEntry> generatorListSurface = new ArrayList<GeneratorEntry>();
+    private final HashSet<String>     OreNames           = new HashSet<String>();
 
-    private static List<GeneratorEntry> generatorListEnd     = new ArrayList<GeneratorEntry>();
+    private final HashSet<Integer>    dimensionBlacklist = new HashSet<Integer>();
 
-    public static WorldGenHandler       instance             = new WorldGenHandler();
+    public static WorldGenHandler     instance           = new WorldGenHandler();
 
-    @Override
-    public void generate(final Random random, final int chunkX, final int chunkZ, final World world, final IChunkProvider chunkGenerator, final IChunkProvider chunkProvider)
+    @ForgeSubscribe
+    public void handleChunkSaveEvent(final Save event)
     {
+        final NBTTagCompound tag = new NBTTagCompound();
 
-        this.generateWorld(world, random, chunkX, chunkZ);
-    }
-
-    protected void genStandardOre1(final World world, final GeneratorEntry entry, final Random random, final int blockX, final int blockZ)
-    {
-        for (int i = 0; i < entry.count; i++){
-            final int x = blockX + random.nextInt(16);
-            final int y = entry.minY + random.nextInt(entry.maxY - entry.minY);
-            final int z = blockZ + random.nextInt(16);
-            entry.worldGen.generate(world, random, x, y, z);
+        if ((Properties.retroFlatBedrock) && (Properties.genFlatBedrock)){
+            tag.setBoolean("Bedrock", true);
         }
-    }
-
-    protected void genStandardOre2(final World world, final GeneratorEntry entry, final Random random, final int blockX, final int blockZ)
-    {
-        for (int i = 0; i < entry.count; i++){
-            final int x = blockX + random.nextInt(16);
-            final int y = (random.nextInt(entry.maxY) + random.nextInt(entry.maxY) + entry.minY) - entry.maxY;
-            final int z = blockZ + random.nextInt(16);
-            entry.worldGen.generate(world, random, x, y, z);
+        if (Properties.retroOreGen){
+            tag.setBoolean("Ores", true);
         }
+        event.getData().setTag("Properties", tag);
     }
 
-    public static void addNetherGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
+    @ForgeSubscribe
+    @SuppressWarnings(
+    { "unchecked", "rawtypes" })
+    public void handleChunkLoadEvent(final Load event)
     {
-        generatorListNether.add(new GeneratorEntry(generator, minY, maxY, count, type));
-    }
+        final int dim = event.world.provider.dimensionId;
 
-    public static void addSurfaceGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
-    {
-        generatorListSurface.add(new GeneratorEntry(generator, minY, maxY, count, type));
-    }
-
-    public static void addEndGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
-    {
-        generatorListEnd.add(new GeneratorEntry(generator, minY, maxY, count, type));
-    }
-
-    public static void prependNetherGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
-    {
-        generatorListNether.add(0, new GeneratorEntry(generator, minY, maxY, count, type));
-    }
-
-    public static void prependSurfaceGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
-    {
-        generatorListSurface.add(0, new GeneratorEntry(generator, minY, maxY, count, type));
-    }
-
-    public static void prependEndGenerator(final WorldGenerator generator, final int minY, final int maxY, final int count, final int type)
-    {
-        generatorListEnd.add(0, new GeneratorEntry(generator, minY, maxY, count, type));
-    }
-
-    private void generateWorld(final World world, final Random random, final int chunkX, final int chunkZ)
-    {
-        List<GeneratorEntry> toGenList;
-        switch (world.provider.dimensionId) {
-            case -1:
-                toGenList = generatorListNether;
-                break;
-            case 0:
-                toGenList = generatorListSurface;
-                break;
-            case 1:
-                toGenList = generatorListEnd;
-                break;
-            default:
-                toGenList = generatorListSurface;
+        if (this.dimensionBlacklist.contains(Integer.valueOf(dim))){
+            return;
         }
+        boolean bedrock = false;
+        boolean ores = false;
+        boolean regen = false;
+        final NBTTagCompound tag = (NBTTagCompound) event.getData().getTag("Properties");
 
-        final int blockX = chunkX * 16;
-        final int blockZ = chunkZ * 16;
+        if (tag != null){
+            bedrock = (!tag.hasKey("Bedrock")) && (Properties.retroFlatBedrock) && (Properties.genFlatBedrock);
+            ores = (!tag.hasKey("Ores")) && (Properties.retroOreGen);
+        }
+        final ChunkCoord cCoord = new ChunkCoord(event.getChunk());
 
-        for (final GeneratorEntry entry : toGenList){
-            if (entry.type == GenType.ORE_1.ordinal()){
-                this.genStandardOre1(world, entry, random, blockX, blockZ);
-            }else if (entry.type == GenType.ORE_2.ordinal()){
-                this.genStandardOre2(world, entry, random, blockX, blockZ);
+        if ((tag == null) && (((Properties.retroFlatBedrock) && (Properties.genFlatBedrock)) || (Properties.retroOreGen))){
+            regen = true;
+        }
+        if (bedrock){
+            Handler.log(NucleumOmnium.instance, "Regenerating flat bedrock for the chunk at " + cCoord.toString() + ".");
+            regen = true;
+        }
+        if (ores){
+            Handler.log(NucleumOmnium.instance, "Regenerating ores for the chunk at " + cCoord.toString() + ".");
+            regen = true;
+        }
+        if (regen){
+            ArrayList chunks = TickHandlerWorld.chunksToGen.get(Integer.valueOf(dim));
+
+            if (chunks == null){
+                TickHandlerWorld.chunksToGen.put(Integer.valueOf(dim), new ArrayList<ChunkCoord>());
+                chunks = TickHandlerWorld.chunksToGen.get(Integer.valueOf(dim));
+            }
+            if (chunks != null){
+                chunks.add(cCoord);
+                TickHandlerWorld.chunksToGen.put(Integer.valueOf(dim), chunks);
             }
         }
     }
 
-    public static enum GenType
+    @Override
+    public void generate(final Random random, final int chunkX, final int chunkZ, final World world, final IChunkProvider chunkGenerator, final IChunkProvider chunkProvider)
     {
-        ORE_1,
-        ORE_2;
+        this.generateWorld(random, chunkX, chunkZ, world, true);
     }
 
-    public static class GeneratorEntry
+    @Override
+    public boolean registerOre(final IOreGenerator ore)
     {
+        if (this.OreNames.contains(ore.getOreName())){
+            return false;
+        }
+        this.OreNames.add(ore.getOreName());
+        this.ores.add(ore);
+        return true;
+    }
 
-        public final WorldGenerator worldGen;
+    public static boolean addOre(final IOreGenerator Ore)
+    {
+        return instance.registerOre(Ore);
+    }
 
-        public final int            minY;
+    public void generateWorld(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
+    {
+        this.replaceBedrock(random, chunkX, chunkZ, world, newGen);
 
-        public final int            maxY;
-
-        public final int            count;
-
-        public final int            type;
-
-        public GeneratorEntry(final WorldGenerator worldGen,
-                              final int minY,
-                              final int maxY,
-                              final int count,
-                              final int type)
-        {
-            this.worldGen = worldGen;
-            this.minY = minY;
-            this.maxY = maxY;
-            this.count = count;
-            this.type = type;
+        if ((!newGen) && (!Properties.retroOreGen)){
+            return;
+        }
+        if ((world.provider.dimensionId == 1) || (world.provider.dimensionId == -1)){
+            return;
+        }
+        for (final IOreGenerator ore : this.ores){
+            ore.generateOre(random, chunkX, chunkZ, world, newGen);
+        }
+        if (!newGen){
+            world.getChunkFromChunkCoords(chunkX, chunkZ).setChunkModified();
         }
     }
 
-    public static class ResourceEntry extends WeightedRandomItem
+    public void replaceBedrock(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
+        if ((!Properties.genFlatBedrock) || ((!newGen) && (!Properties.retroFlatBedrock))){
+            return;
+        }
+        final boolean isNether = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase().equals("hell");
 
-        public final int blockId;
-
-        public final int metadata;
-
-        public ResourceEntry(final ItemStack ore,
-                             final int weight)
-        {
-            super(weight);
-            this.blockId = ore.itemID;
-            this.metadata = ore.getItemDamage();
+        if (isNether){
+            for (int blockX = 0; blockX < 16; blockX++){
+                for (int blockZ = 0; blockZ < 16; blockZ++){
+                    for (int blockY = 126; blockY > 121; blockY--){
+                        if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID){
+                            world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, Block.netherrack.blockID, 0, 2);
+                        }
+                    }
+                    for (int blockY = 5; blockY > 0; blockY--){
+                        if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID){
+                            world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, Block.netherrack.blockID, 0, 2);
+                        }
+                    }
+                }
+            }
+        }else{
+            for (int blockX = 0; blockX < 16; blockX++){
+                for (int blockZ = 0; blockZ < 16; blockZ++){
+                    for (int blockY = 5; blockY > 0; blockY--){
+                        if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID){
+                            world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, Block.stone.blockID, 0, 2);
+                        }
+                    }
+                }
+            }
         }
     }
 }

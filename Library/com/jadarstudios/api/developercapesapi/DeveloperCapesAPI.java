@@ -12,10 +12,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 
-import net.minecraft.client.Minecraft;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraft.client.Minecraft;
 
 @SideOnly(Side.CLIENT)
 public final class DeveloperCapesAPI

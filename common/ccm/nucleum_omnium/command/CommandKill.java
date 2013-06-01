@@ -8,13 +8,15 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 
+import ccm.nucleum_omnium.utils.lib.Commands;
+
 public class CommandKill extends CommandBase
 {
 
     @Override
     public String getCommandName()
     {
-        return "kill";
+        return Commands.COMMAND_KILL;
     }
 
     /**
@@ -31,15 +33,15 @@ public class CommandKill extends CommandBase
     {
         return sender.translateString("commands.kill.usage", new Object[0]);
     }
-    
+
     @Override
-    public void processCommand(ICommandSender sender, String[] args)
+    public void processCommand(final ICommandSender sender, final String[] args)
     {
-        EntityPlayerMP entityplayermp = func_82359_c(sender, args[0]);
+        final EntityPlayerMP entityplayermp = func_82359_c(sender, args[0]);
         entityplayermp.attackEntityFrom(DamageSource.outOfWorld, 1000);
         sender.sendChatToPlayer("Ouch. That looks like it hurt.");
     }
-    
+
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */

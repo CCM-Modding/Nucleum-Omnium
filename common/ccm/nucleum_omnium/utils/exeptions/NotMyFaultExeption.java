@@ -2,6 +2,7 @@ package ccm.nucleum_omnium.utils.exeptions;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.crash.CrashReport;
+
 import ccm.nucleum_omnium.IMod;
 
 public class NotMyFaultExeption extends RuntimeException

@@ -18,12 +18,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraftforge.client.model.IModelCustom;
-import net.minecraftforge.client.model.ModelFormatException;
-
 import org.lwjgl.opengl.GL11;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -34,6 +28,12 @@ import org.xml.sax.SAXException;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.client.model.IModelCustom;
+import net.minecraftforge.client.model.ModelFormatException;
 
 /**
  * Techne model importer, based on iChun's Hats importer

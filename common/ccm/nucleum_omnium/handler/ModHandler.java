@@ -3,10 +3,11 @@ package ccm.nucleum_omnium.handler;
 import java.util.LinkedList;
 import java.util.List;
 
+import cpw.mods.fml.common.Loader;
+
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.handler.mods.IModHandler;
 import ccm.nucleum_omnium.handler.mods.ModHandling;
-import cpw.mods.fml.common.Loader;
 
 public class ModHandler
 {

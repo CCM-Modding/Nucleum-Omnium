@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import cpw.mods.fml.common.FMLLog;
+
 import ccm.nucleum_omnium.IMod;
 import ccm.nucleum_omnium.utils.exeptions.DupeExeption;
-import cpw.mods.fml.common.FMLLog;
 
 public final class Handler
 {

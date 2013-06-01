@@ -1,12 +1,13 @@
 package ccm.nucleum_omnium.proxy;
 
+import com.jadarstudios.api.developercapesapi.DeveloperCapesAPI;
+
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.common.MinecraftForge;
+
 import ccm.nucleum_omnium.client.model.tcn.TechneModelLoader;
 import ccm.nucleum_omnium.handler.events.EventRain;
 import ccm.nucleum_omnium.utils.lib.Locations;
-
-import com.jadarstudios.api.developercapesapi.DeveloperCapesAPI;
 
 public class ClientProxy extends CommonProxy
 {

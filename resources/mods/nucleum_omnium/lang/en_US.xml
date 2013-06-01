@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>English (US) Language File</comment>
+	<!-- ******************************* Commands ***************************** -->
+	<entry key="commands.tpx.success">Teleported %s to %s</entry>
+    <entry key="commands.tpx.success.coordinates">Teleported %s to %.2f,%.2f,%.2f,%.2f</entry>
+	<entry key="commands.tpx.usage">/tpx [target player] {destination player} OR /tp [target player] {Dimension ID} {x} {y} {z}</entry>
+
+	<!-- ******************************** Errors ****************************** -->
+	<entry key="error.invalidFingerPrint">The version of Nucleum-Ominium that you are currently using has being tampered with!!!!!</entry>
+</properties>

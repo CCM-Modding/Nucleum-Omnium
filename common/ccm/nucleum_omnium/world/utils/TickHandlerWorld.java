@@ -5,10 +5,12 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Random;
 
-import net.minecraft.world.World;
-import ccm.nucleum_omnium.world.generator.WorldGenHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
+
+import net.minecraft.world.World;
+
+import ccm.nucleum_omnium.world.generator.WorldGenHandler;
 
 public class TickHandlerWorld implements ITickHandler
 {
@@ -37,7 +39,7 @@ public class TickHandlerWorld implements ITickHandler
             final long xSeed = rand.nextLong() >> 3;
             final long zSeed = rand.nextLong() >> 3;
             rand.setSeed(((xSeed * c.chunkX) + (zSeed * c.chunkZ)) ^ worldSeed);
-            //WorldGenHandler.instance.generateWorld(rand, c.chunkX, c.chunkZ, world, false);
+            WorldGenHandler.instance.generateWorld(rand, c.chunkX, c.chunkZ, world, false);
             chunks.remove(0);
             chunksToGen.put(Integer.valueOf(dim), chunks);
         }

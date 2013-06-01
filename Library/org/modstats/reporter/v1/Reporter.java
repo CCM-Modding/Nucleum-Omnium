@@ -28,10 +28,6 @@ package org.modstats.reporter.v1;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.world.WorldEvent;
-
 import org.modstats.IModstatsReporter;
 import org.modstats.ModVersionData;
 import org.modstats.ModstatInfo;
@@ -39,6 +35,10 @@ import org.modstats.ModstatInfo;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
+
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.world.WorldEvent;
 
 public class Reporter implements IModstatsReporter
 {

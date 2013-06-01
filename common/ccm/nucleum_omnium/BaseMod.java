@@ -2,11 +2,13 @@ package ccm.nucleum_omnium;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
-import ccm.nucleum_omnium.helper.LanguageHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+
+import net.minecraftforge.common.Configuration;
+
+import ccm.nucleum_omnium.helper.LanguageHelper;
 
 public abstract class BaseMod implements IMod
 {
@@ -52,23 +54,27 @@ public abstract class BaseMod implements IMod
         }
     }
 
+    @Override
     public String getId()
     {
-        return mod.modid();
+        return this.mod.modid();
     }
 
+    @Override
     public String getName()
     {
-        return mod.name();
+        return this.mod.name();
     }
 
+    @Override
     public String getPrefix()
     {
-        return mod.modid();
+        return this.mod.modid();
     }
 
+    @Override
     public String getVersion()
     {
-        return mod.version();
+        return this.mod.version();
     }
 }
