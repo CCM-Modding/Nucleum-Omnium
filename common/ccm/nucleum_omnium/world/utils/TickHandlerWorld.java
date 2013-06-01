@@ -10,6 +10,7 @@ import cpw.mods.fml.common.TickType;
 
 import net.minecraft.world.World;
 
+import ccm.nucleum_omnium.helper.ChunkCoord;
 import ccm.nucleum_omnium.world.generator.WorldGenHandler;
 
 public class TickHandlerWorld implements ITickHandler

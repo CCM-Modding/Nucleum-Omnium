@@ -17,7 +17,7 @@ import net.minecraftforge.event.world.ChunkDataEvent.Save;
 
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.handler.Handler;
-import ccm.nucleum_omnium.world.utils.ChunkCoord;
+import ccm.nucleum_omnium.helper.ChunkCoord;
 import ccm.nucleum_omnium.world.utils.IOreGenerator;
 import ccm.nucleum_omnium.world.utils.IOreHandler;
 import ccm.nucleum_omnium.world.utils.TickHandlerWorld;
