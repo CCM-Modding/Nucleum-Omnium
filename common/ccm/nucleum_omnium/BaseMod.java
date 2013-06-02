@@ -6,9 +6,6 @@ import net.minecraftforge.common.Configuration;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-
-import ccm.nucleum_omnium.helper.LanguageHelper;
 
 public abstract class BaseMod implements IMod
 {
@@ -43,15 +40,6 @@ public abstract class BaseMod implements IMod
         this.setConfigFolderBase(evt.getModConfigurationDirectory());
 
         return this.getConfig();
-    }
-
-    protected void loadLangs(final String[] languages)
-    {
-        for (final String localizationFile : languages){
-            LanguageRegistry.instance().loadLocalization(localizationFile,
-                                                         LanguageHelper.getLocaleFromFileName(localizationFile),
-                                                         LanguageHelper.isXMLLanguageFile(localizationFile));
-        }
     }
 
     @Override

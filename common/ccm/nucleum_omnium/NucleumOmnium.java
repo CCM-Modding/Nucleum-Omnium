@@ -24,11 +24,11 @@ import cpw.mods.fml.common.network.NetworkMod;
 import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.Handler;
+import ccm.nucleum_omnium.handler.LanguageHandler;
 import ccm.nucleum_omnium.handler.ModHandler;
 import ccm.nucleum_omnium.handler.mods.ModsMystcraft;
 import ccm.nucleum_omnium.proxy.CommonProxy;
 import ccm.nucleum_omnium.utils.lib.Archive;
-import ccm.nucleum_omnium.utils.lib.Languages;
 import ccm.nucleum_omnium.utils.lib.Locations;
 
 @Mod(modid = Archive.MOD_ID,
@@ -94,7 +94,7 @@ public class NucleumOmnium extends BaseMod implements IMod
 
         ModHandler.addModToHandle(new ModsMystcraft(), "Mystcraft");
 
-        this.loadLangs(Languages.LANGUAGE_FILES);
+        new LanguageHandler(Locations.LANGUAGE_FILE, Archive.LANGUAGE_FILES);
     }
 
     @PostInit
