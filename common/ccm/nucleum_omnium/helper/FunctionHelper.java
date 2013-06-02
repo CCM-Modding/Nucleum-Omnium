@@ -73,6 +73,18 @@ public final class FunctionHelper
         }
         return dimensions;
     }
+    
+    public static boolean isNumric(String s)
+    {
+        try
+        {
+            return !Float.valueOf(s).isNaN();
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
 
     private FunctionHelper()
     {}
