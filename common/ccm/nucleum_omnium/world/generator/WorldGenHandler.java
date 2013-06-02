@@ -41,12 +41,12 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         final NBTTagCompound tag = new NBTTagCompound();
 
         if ((Properties.retroFlatBedrock) && (Properties.genFlatBedrock)){
-            tag.setBoolean("Bedrock", true);
+            tag.setBoolean("CCM-Bedrock", true);
         }
         if (Properties.retroOreGen){
-            tag.setBoolean("Ores", true);
+            tag.setBoolean("CCM-Ores", true);
         }
-        event.getData().setTag("Properties", tag);
+        event.getData().setTag("CCM-Properties", tag);
     }
 
     @ForgeSubscribe
@@ -62,11 +62,11 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         boolean bedrock = false;
         boolean ores = false;
         boolean regen = false;
-        final NBTTagCompound tag = (NBTTagCompound) event.getData().getTag("Properties");
+        final NBTTagCompound tag = (NBTTagCompound) event.getData().getTag("CCM-Properties");
 
         if (tag != null){
-            bedrock = (!tag.hasKey("Bedrock")) && (Properties.retroFlatBedrock) && (Properties.genFlatBedrock);
-            ores = (!tag.hasKey("Ores")) && (Properties.retroOreGen);
+            bedrock = (!tag.hasKey("CCM-Bedrock")) && (Properties.retroFlatBedrock) && (Properties.genFlatBedrock);
+            ores = (!tag.hasKey("CCM-Ores")) && (Properties.retroOreGen);
         }
         final ChunkCoord cCoord = new ChunkCoord(event.getChunk());
 
@@ -122,9 +122,6 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         this.replaceBedrock(random, chunkX, chunkZ, world, newGen);
 
         if ((!newGen) && (!Properties.retroOreGen)){
-            return;
-        }
-        if ((world.provider.dimensionId == 1) || (world.provider.dimensionId == -1)){
             return;
         }
         for (final IFeatureGenerator feature : this.ores){

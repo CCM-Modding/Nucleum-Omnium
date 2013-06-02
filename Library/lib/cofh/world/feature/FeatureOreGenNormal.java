@@ -1,5 +1,6 @@
 package lib.cofh.world.feature;
 
+import java.util.Locale;
 import java.util.Random;
 
 import net.minecraft.world.World;
@@ -43,7 +44,7 @@ public class FeatureOreGenNormal extends FeatureBase
         final int blockZ = chunkZ * 16;
 
         if (this.type > 0){
-            final String biomeName = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase();
+            final String biomeName = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase(Locale.ENGLISH);
             final boolean onList = this.biomes.contains(biomeName);
 
             if (((this.type == 1) && !onList) || ((this.type == 2) && onList)){

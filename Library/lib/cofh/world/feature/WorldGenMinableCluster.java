@@ -131,5 +131,4 @@ public class WorldGenMinableCluster extends WorldGenerator
         }
         return true;
     }
-
 }
