@@ -42,7 +42,8 @@ public class Config
 
     private static void initServerConfigs(final Configuration config)
     {
-        config.addCustomCategoryComment(Properties.SERVER_SIDE, "This Category only has server side options");
+        // config.addCustomCategoryComment(Properties.SERVER_SIDE,
+        // "This Category only has server side options");
     }
 
     private static void initClientConfigs(final Configuration config)

@@ -24,9 +24,9 @@ public class ConfigHandler
 
     ArrayList<String>[]       itemEntries    = new ArrayList[3];
 
-    TreeMap<String, Property> blockIds       = new TreeMap();
+    TreeMap<String, Property> blockIds       = new TreeMap<String, Property>();
 
-    TreeMap<String, Property> itemIds        = new TreeMap();
+    TreeMap<String, Property> itemIds        = new TreeMap<String, Property>();
 
     int                       blockIdCounter = 0;
 

@@ -11,13 +11,13 @@ import net.minecraftforge.common.Property;
 public class PropertyHandler
 {
 
-    private final int           baseItemID;
+    private int           baseItemID;
 
-    private final int           baseBlockID;
+    private int           baseBlockID;
 
-    private final List<Integer> freeItemIDs  = new LinkedList<Integer>();
+    private List<Integer> freeItemIDs  = new LinkedList<Integer>();
 
-    private final List<Integer> freeBlockIDs = new LinkedList<Integer>();
+    private List<Integer> freeBlockIDs = new LinkedList<Integer>();
 
     public PropertyHandler(final int baseItemID,
                            final int baseBlockID)
@@ -31,15 +31,15 @@ public class PropertyHandler
      */
     public Property getNextUsableItemID(final Configuration config, final String itemName)
     {
-        if (this.freeItemIDs.isEmpty()){
-            this.resetItemIDs();
-            if (this.freeItemIDs.get(0) == 0){
-                return config.getItem(itemName, this.baseItemID);
+        if (freeItemIDs.isEmpty()){
+            resetItemIDs();
+            if (freeItemIDs.get(0) == 0){
+                return config.getItem(itemName, baseItemID);
             }else{
-                return config.getItem(itemName, this.freeItemIDs.remove(0));
+                return config.getItem(itemName, freeItemIDs.remove(0));
             }
         }else{
-            return config.getItem(itemName, this.freeItemIDs.remove(0));
+            return config.getItem(itemName, freeItemIDs.remove(0));
         }
     }
 
@@ -48,15 +48,15 @@ public class PropertyHandler
      */
     public Property getNextUsableBlockID(final Configuration config, final String blockName)
     {
-        if (this.freeBlockIDs.isEmpty()){
-            this.resetBlockIDs();
-            if (this.freeBlockIDs.get(0) == 0){
-                return config.getBlock(blockName, this.baseBlockID);
+        if (freeBlockIDs.isEmpty()){
+            resetBlockIDs();
+            if (freeBlockIDs.get(0) == 0){
+                return config.getBlock(blockName, baseBlockID);
             }else{
-                return config.getBlock(blockName, this.freeBlockIDs.remove(0));
+                return config.getBlock(blockName, freeBlockIDs.remove(0));
             }
         }else{
-            return config.getBlock(blockName, this.freeBlockIDs.remove(0));
+            return config.getBlock(blockName, freeBlockIDs.remove(0));
         }
     }
 
@@ -64,7 +64,7 @@ public class PropertyHandler
     {
         for (int i = 6000; i < Item.itemsList.length; i++){
             if (Item.itemsList[i] == null){
-                this.freeItemIDs.add(i);
+                freeItemIDs.add(i);
             }
         }
     }
@@ -73,7 +73,7 @@ public class PropertyHandler
     {
         for (int i = 300; i < Block.blocksList.length; i++){
             if (Block.blocksList[i] == null){
-                this.freeBlockIDs.add(i);
+                freeBlockIDs.add(i);
             }
         }
     }
