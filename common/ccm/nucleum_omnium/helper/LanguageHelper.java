@@ -2,7 +2,7 @@ package ccm.nucleum_omnium.helper;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-public final class LanguageHelper
+public final class LanguageHelper extends BaseHelper
 {
 
     /***
@@ -13,7 +13,7 @@ public final class LanguageHelper
      * @return {@link String} representation of the locale took from the file
      *         name.
      */
-    public static String getLocaleFromFileName(final String fileName)
+    public static String getLangFromFileName(final String fileName)
     {
         return fileName.substring(fileName.lastIndexOf('/') + 1, fileName.lastIndexOf('.'));
     }
@@ -42,7 +42,4 @@ public final class LanguageHelper
     {
         return fileName.endsWith(".xml");
     }
-
-    private LanguageHelper()
-    {}
 }

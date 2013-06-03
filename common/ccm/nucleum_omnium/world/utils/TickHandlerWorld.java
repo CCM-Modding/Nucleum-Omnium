@@ -5,12 +5,13 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Random;
 
+import lib.cofh.util.ChunkCoord;
+
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
-import ccm.nucleum_omnium.helper.ChunkCoord;
 import ccm.nucleum_omnium.world.generator.WorldGenHandler;
 
 public class TickHandlerWorld implements ITickHandler

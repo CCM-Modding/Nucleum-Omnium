@@ -15,21 +15,21 @@ public class LanguageHandler
         ArrayList<String> langs = new ArrayList<String>();
 
         for (String lang : supportedLangs){
-            langs.add(path + lang + ".xml");
+            langs.add(path + "/" + lang + ".xml");
         }
 
         loadLangs(langs);
     }
 
     /***
-     * Loads in all the localization files from the supportedLangs String Array
+     * Loads in all the localization files from the langs String Array
      */
     private void loadLangs(ArrayList<String> langs)
     {
-        // For every file specified in supportedLangs, load them into the Language Registry
+        // For every file specified in langs, load them into the Language Registry
         for (String localizationFile : langs){
             LanguageRegistry.instance().loadLocalization(localizationFile,
-                                                         LanguageHelper.getLocaleFromFileName(localizationFile),
+                                                         LanguageHelper.getLangFromFileName(localizationFile),
                                                          LanguageHelper.isXMLLanguageFile(localizationFile));
         }
     }

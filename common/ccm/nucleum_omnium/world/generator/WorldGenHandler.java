@@ -7,6 +7,7 @@ import java.util.Random;
 
 import lib.cofh.api.world.IFeatureGenerator;
 import lib.cofh.api.world.IFeatureHandler;
+import lib.cofh.util.ChunkCoord;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +21,6 @@ import cpw.mods.fml.common.IWorldGenerator;
 
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.handler.Handler;
-import ccm.nucleum_omnium.helper.ChunkCoord;
 import ccm.nucleum_omnium.world.utils.TickHandlerWorld;
 import ccm.nucleum_omnium.world.utils.lib.Properties;
 

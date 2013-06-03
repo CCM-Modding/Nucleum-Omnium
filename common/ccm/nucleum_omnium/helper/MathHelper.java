@@ -1,11 +1,7 @@
 package ccm.nucleum_omnium.helper;
 
-import java.util.Random;
-
-public class MathHelper
+public class MathHelper extends BaseHelper
 {
-
-    protected static Random rand = new Random();
 
     /**
      * Checks if the value is within the specified parameters
@@ -52,7 +48,4 @@ public class MathHelper
     {
         return clampInt(rand.nextInt(maxValue), 1, maxValue);
     }
-
-    private MathHelper()
-    {}
 }

@@ -2,7 +2,7 @@ package ccm.nucleum_omnium.helper;
 
 import net.minecraft.item.Item;
 
-public class TextureHelper
+public class TextureHelper extends BaseHelper
 {
 
     /**
@@ -22,7 +22,4 @@ public class TextureHelper
     {
         return texturePath + ItemHelper.getItemName(item);
     }
-
-    private TextureHelper()
-    {}
 }

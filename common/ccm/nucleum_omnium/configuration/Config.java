@@ -11,7 +11,7 @@ import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.utils.lib.Archive;
 import ccm.nucleum_omnium.utils.lib.Properties;
 
-public class Config
+public final class Config
 {
 
     public static void init(final Configuration config)
@@ -26,7 +26,7 @@ public class Config
                 initClientConfigs(config);
             }
         }catch(final Exception e){
-            Handler.log(NucleumOmnium.instance, Level.SEVERE, Archive.MOD_NAME + " has had a problem loading its configuration/n");
+            Handler.log(NucleumOmnium.instance, Level.SEVERE, Archive.MOD_NAME + " has had a problem loading its configuration\n");
             e.printStackTrace();
         }finally{
             if (config.hasChanged()){

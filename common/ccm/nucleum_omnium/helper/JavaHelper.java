@@ -2,7 +2,7 @@ package ccm.nucleum_omnium.helper;
 
 import java.util.List;
 
-public final class JavaHelper
+public final class JavaHelper extends BaseHelper
 {
 
     /**
@@ -56,7 +56,4 @@ public final class JavaHelper
         }
         return ret;
     }
-
-    private JavaHelper()
-    {}
 }

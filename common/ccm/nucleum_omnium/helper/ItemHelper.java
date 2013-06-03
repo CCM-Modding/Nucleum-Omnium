@@ -3,7 +3,7 @@ package ccm.nucleum_omnium.helper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemHelper
+public class ItemHelper extends BaseHelper
 {
 
     /**
@@ -36,7 +36,4 @@ public class ItemHelper
     {
         return item.getUnlocalizedName().substring(item.getUnlocalizedName().indexOf(".") + 1);
     }
-
-    private ItemHelper()
-    {}
 }

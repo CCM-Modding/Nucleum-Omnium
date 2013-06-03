@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class InventoryHelper
+public class InventoryHelper extends BaseHelper
 {
 
     private static final String slot = "slot";
@@ -115,7 +115,4 @@ public class InventoryHelper
         }
         return startSlot;
     }
-
-    private InventoryHelper()
-    {}
 }

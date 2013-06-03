@@ -24,7 +24,7 @@ public class Config
             Properties.retroOreGen = config.get("World Generation", "Should " + Archive.MOD_NAME + " regenerate all ores, added by CCM Mods?", false).getBoolean(false);
 
         }catch(final Exception e){
-            Handler.log(NucleumOmnium.instance, Level.SEVERE, Archive.MOD_NAME + " has had a problem loading its configuration/n");
+            Handler.log(NucleumOmnium.instance, Level.SEVERE, Archive.MOD_NAME + " has had a problem loading its configuration\n");
             e.printStackTrace();
         }finally{
             if (config.hasChanged()){

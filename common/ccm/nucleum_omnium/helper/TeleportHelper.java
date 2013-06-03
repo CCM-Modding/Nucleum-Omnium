@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
-public final class TeleportHelper
+public final class TeleportHelper extends BaseHelper
 {
 
     /**
@@ -128,7 +128,4 @@ public final class TeleportHelper
 
         return d1;
     }
-
-    private TeleportHelper()
-    {}
 }
