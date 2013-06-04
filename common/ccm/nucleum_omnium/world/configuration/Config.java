@@ -12,7 +12,20 @@ import ccm.nucleum_omnium.world.utils.lib.Properties;
 public class Config
 {
 
-    public static void init(final Configuration config)
+    public Configuration config;
+
+    public Config(Configuration config)
+    {
+        this.config = config;
+        init(config);
+    }
+
+    public Configuration getConfig()
+    {
+        return config;
+    }
+
+    private void init(final Configuration config)
     {
         try{
             Handler.log(NucleumOmnium.instance, "Loading World Configuration");

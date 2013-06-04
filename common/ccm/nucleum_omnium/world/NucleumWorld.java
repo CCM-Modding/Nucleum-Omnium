@@ -32,10 +32,12 @@ import ccm.nucleum_omnium.world.utils.lib.Properties;
 public class NucleumWorld extends BaseMod implements IMod
 {
 
+    public static Config config;
+
     @PreInit
     public void preInit(final FMLPreInitializationEvent evt)
     {
-        Config.init(this.initializeConfig(evt));
+        config = new Config(this.initializeConfig(evt));
 
         GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
 
