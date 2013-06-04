@@ -30,22 +30,33 @@ public class MathHelper extends BaseHelper
      * 
      * @param maxValue
      *            The max value of the Integer
+     * @param zero
+     *            If the number returned is allowed to be 0 the pass in true, otherwise pass in
+     *            false. If you pass in false then the minimum will be 1. For higher minimums check
+     *            {@code getRandomInt(int minValue, int maxValue)}
      * @return the random Integer
      */
-    public static int getRandomInt(final int maxValue)
+    public static int getRandomInt(final int maxValue, boolean zero)
     {
-        return rand.nextInt(maxValue);
+        if (zero){
+            return rand.nextInt(maxValue);
+        }else{
+            return clampInt(rand.nextInt(maxValue), 1, maxValue);
+        }
     }
 
     /**
      * Gets a random Integer
      * 
+     * @param minValue
+     *            The min value of the Integer
      * @param maxValue
      *            The max value of the Integer
-     * @return the random Integer (0 not being a option)
+     * @return the random Integer
      */
-    public static int getRandomNon0Int(final int maxValue)
+    public static int getRandomInt(final int minValue, final int maxValue)
     {
-        return clampInt(rand.nextInt(maxValue), 1, maxValue);
+
+        return clampInt(rand.nextInt(maxValue), minValue, maxValue);
     }
 }

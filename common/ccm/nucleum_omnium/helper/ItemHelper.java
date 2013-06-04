@@ -19,7 +19,7 @@ public class ItemHelper extends BaseHelper
     public static void damageItem(final ItemStack[] inventory, final int slot, final int damage)
     {
         if (inventory[slot] != null){
-            if (inventory[slot].attemptDamageItem(MathHelper.getRandomInt(damage), MathHelper.rand)){
+            if (inventory[slot].attemptDamageItem(MathHelper.getRandomInt(damage, false), rand)){
                 inventory[slot] = null;
             }
         }
