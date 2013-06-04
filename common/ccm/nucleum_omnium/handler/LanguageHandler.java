@@ -9,28 +9,27 @@ import ccm.nucleum_omnium.helper.LanguageHelper;
 public class LanguageHandler
 {
 
-    public LanguageHandler(String path,
-                           String[] supportedLangs)
+    public LanguageHandler(final String path,
+                           final String[] supportedLangs)
     {
-        ArrayList<String> langs = new ArrayList<String>();
+        final ArrayList<String> langs = new ArrayList<String>();
 
-        for (String lang : supportedLangs){
+        for (final String lang : supportedLangs){
             langs.add(path + "/" + lang + ".xml");
         }
 
-        loadLangs(langs);
+        this.loadLangs(langs);
     }
 
     /***
      * Loads in all the localization files from the langs String Array
      */
-    private void loadLangs(ArrayList<String> langs)
+    private void loadLangs(final ArrayList<String> langs)
     {
         // For every file specified in langs, load them into the Language Registry
-        for (String localizationFile : langs){
-            LanguageRegistry.instance().loadLocalization(localizationFile,
-                                                         LanguageHelper.getLangFromFileName(localizationFile),
-                                                         LanguageHelper.isXMLLanguageFile(localizationFile));
+        for (final String localizationFile : langs){
+            LanguageRegistry.instance()
+                    .loadLocalization(localizationFile, LanguageHelper.getLangFromFileName(localizationFile), LanguageHelper.isXMLLanguageFile(localizationFile));
         }
     }
 }

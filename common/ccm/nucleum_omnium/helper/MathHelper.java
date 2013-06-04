@@ -36,7 +36,7 @@ public class MathHelper extends BaseHelper
      *            {@code getRandomInt(int minValue, int maxValue)}
      * @return the random Integer
      */
-    public static int getRandomInt(final int maxValue, boolean zero)
+    public static int getRandomInt(final int maxValue, final boolean zero)
     {
         if (zero){
             return rand.nextInt(maxValue);

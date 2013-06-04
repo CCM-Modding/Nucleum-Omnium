@@ -137,7 +137,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         if ((!Properties.genFlatBedrock) || ((!newGen) && (!Properties.retroFlatBedrock))){
             return;
         }
-        final boolean isNether = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase().equals("hell");
+        final boolean isNether = world.provider.isHellWorld;
 
         if (isNether){
             for (int blockX = 0; blockX < 16; blockX++){
