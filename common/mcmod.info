@@ -1,33 +1,37 @@
 [
 {
-  "modid": "NucleumOmnium",
-  "name": "Nucleum-Omnium",
-  "description": "Main CCM Mod",
-  "credits": "By claycorp, captain_shadows, and Morton.",
+  "modid": "nucleum_omnium",
+  "name": "Nucleum Omnium",
+  "description": "Main Mod (A CCM Mod)",
+  "credits": "Made By Captain Shadows, ClayCorp, and Morton, with special help from AbrarSyed(and the rest of the FE team) and Dries007, Also a big thanks to The COFH Team, Jadar",
   "logoFile": "/mods/nucleum-omnium/textures/logo.png",
   "version": "@VERSION@ (@BUILD@)",
   "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
   "updateUrl": "https://github.com/CCM-Modding/Nucleum-Omnium/tree/master/Releases",
-  "authors": [ "claycorp", "captain_shadows", "morton00000" ],
+  "authors": [ "claycorp", 
+	       "captain_shadows", 
+               "morton00000" ],
   "screenshots": [ "/mods/nucleum-omnium/textures/screenshots/screenshot.png" ],
   "dependencies": [
      "required-after:Forge@[7.7.2.688,)"
   ]
 },
 {
-  "modid": "NucleumWorld",
-  "name": "Nucleum-World",
-  "description": "World Gen CCM Mod",
-  "credits": "By claycorp, captain_shadows, and Morton.",
+  "modid": "nucleum_world",
+  "name": "Nucleum World",
+  "description": "World Gen (A CCM Mod)",
+  "credits": "Made By Captain Shadows, ClayCorp, and Morton, with special help from AbrarSyed(and the rest of the FE team) and Dries007, Also a big thanks to The COFH Team, Jadar",
   "logoFile": "/mods/nucleum-omnium/textures/logo.png",
   "version": "@VERSION@ (@BUILD@)",
   "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
   "updateUrl": "https://github.com/CCM-Modding/Nucleum-Omnium/tree/master/Releases",
-  "authors": [ "claycorp", "captain_shadows", "morton00000" ],
+  "authors": [ "claycorp", 
+	       "captain_shadows", 
+               "morton00000" ],
   "parent":"NucleumOmnium",
   "screenshots": [ "/mods/nucleum-omnium/textures/screenshots/screenshot.png" ],
   "dependencies": [
-     "required-after:Forge@[7.7.2.688,)"
+     "required-after:nucleum_omnium"
   ]
 }
 ]
