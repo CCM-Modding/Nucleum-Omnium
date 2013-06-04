@@ -1,4 +1,4 @@
-package ccm.nucleum_omnium.handler.enums;
+package ccm.nucleum_omnium.helper.enums;
 
 import net.minecraft.util.Icon;
 
