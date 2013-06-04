@@ -16,7 +16,7 @@ import net.minecraftforge.common.Configuration;
 
 import ccm.nucleum_omnium.world.generator.WorldGenHandler;
 
-public class WorldGeneration
+public class WorldGenerator
 {
 
     public static void addOverworldGen(final String modName,
@@ -26,10 +26,9 @@ public class WorldGeneration
                                        final int numClusters,
                                        final int minY,
                                        final int maxY,
-                                       final boolean regen,
                                        final boolean enable)
     {
-        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, regen, enable, Block.stone.blockID);
+        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.stone.blockID);
     }
 
     public static void addEndGen(final String modName,
@@ -39,10 +38,9 @@ public class WorldGeneration
                                  final int numClusters,
                                  final int minY,
                                  final int maxY,
-                                 final boolean regen,
                                  final boolean enable)
     {
-        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, regen, enable, Block.whiteStone.blockID);
+        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.whiteStone.blockID);
     }
 
     public static void addNetherGen(final String modName,
@@ -52,22 +50,12 @@ public class WorldGeneration
                                     final int numClusters,
                                     final int minY,
                                     final int maxY,
-                                    final boolean regen,
                                     final boolean enable)
     {
-        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, regen, enable, Block.netherrack.blockID);
+        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.netherrack.blockID);
     }
 
-    private static void addWorldGen(String modName,
-                                    ItemStack stack,
-                                    String oreName,
-                                    int clusterSize,
-                                    int numClusters,
-                                    int minY,
-                                    int maxY,
-                                    boolean regen,
-                                    boolean enable,
-                                    int blockToReplace)
+    private static void addWorldGen(String modName, ItemStack stack, String oreName, int clusterSize, int numClusters, int minY, int maxY, boolean enable, int blockToReplace)
     {
         Configuration config = NucleumWorld.config.getConfig();
         modName = modName + "." + oreName.toLowerCase(Locale.ENGLISH);
@@ -80,7 +68,7 @@ public class WorldGeneration
         numClusters = config.get(modName, "NumClusters", numClusters).getInt();
         minY = config.get(modName, strMin, minY).getInt();
         maxY = config.get(modName, strMax, maxY).getInt();
-        regen = config.get(modName, "RetroGen", enable).getBoolean(enable);
+        boolean regen = config.get(modName, "RetroGen", enable).getBoolean(enable);
 
         cat.setComment("Generating settings for " + StringHelper.titleCase(oreName));
 
