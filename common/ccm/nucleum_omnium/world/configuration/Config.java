@@ -9,7 +9,7 @@ import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.world.utils.lib.Archive;
 import ccm.nucleum_omnium.world.utils.lib.Properties;
 
-public class Config
+public class Config extends Configuration
 {
 
     public Configuration config;
