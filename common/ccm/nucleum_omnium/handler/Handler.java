@@ -35,6 +35,25 @@ public final class Handler
     }
 
     /**
+     * Logs a Object. This version is only tto be used in cases where the parent mod is unkown
+     */
+    public static void log(final Object msg)
+    {
+
+        Logger.getAnonymousLogger().log(Level.INFO, msg.toString());
+    }
+
+    /**
+     * Logs a Object, and a Throwable. This version is only tto be used in cases where the parent
+     * mod is unkown
+     */
+    public static void log(final Object msg, final Throwable t)
+    {
+
+        Logger.getAnonymousLogger().log(Level.INFO, msg.toString(), t);
+    }
+
+    /**
      * Logs a Object.
      */
     public static void log(final IMod mod, final Object msg)
@@ -59,7 +78,7 @@ public final class Handler
     }
 
     /**
-     * Logs a Object.
+     * Logs a Object, with a specified {@link Level}
      */
     public static void log(final IMod mod, final Level logLevel, final Object msg)
     {
@@ -71,7 +90,7 @@ public final class Handler
     }
 
     /**
-     * Logs a Object, and a Throwable.
+     * Logs a Object, and a Throwable, with a specified {@link Level}
      */
     public static void log(final IMod mod, final Level logLevel, final Object msg, final Throwable t)
     {

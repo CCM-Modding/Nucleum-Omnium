@@ -1,18 +1,18 @@
-package ccm.nucleum_omnium.world.utils;
+package ccm.nucleum_world.utils;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Random;
 
-import lib.cofh.util.ChunkCoord;
-
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
-import ccm.nucleum_omnium.world.generator.WorldGenHandler;
+import lib.cofh.util.ChunkCoord;
+
+import ccm.nucleum_world.generator.WorldGenHandler;
 
 public class TickHandlerWorld implements ITickHandler
 {

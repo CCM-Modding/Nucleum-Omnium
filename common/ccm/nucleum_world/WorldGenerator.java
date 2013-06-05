@@ -1,20 +1,20 @@
-package ccm.nucleum_omnium.world;
+package ccm.nucleum_world;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import lib.cofh.api.world.WeightedRandomBlock;
-import lib.cofh.util.StringHelper;
-import lib.cofh.world.feature.FeatureOreGenUniform;
-import lib.cofh.world.feature.WorldGenMinableCluster;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ConfigCategory;
 import net.minecraftforge.common.Configuration;
 
-import ccm.nucleum_omnium.world.generator.WorldGenHandler;
+import lib.cofh.api.world.WeightedRandomBlock;
+import lib.cofh.util.StringHelper;
+import lib.cofh.world.feature.FeatureOreGenUniform;
+import lib.cofh.world.feature.WorldGenMinableCluster;
+
+import ccm.nucleum_world.generator.WorldGenHandler;
 
 public class WorldGenerator
 {
@@ -55,20 +55,28 @@ public class WorldGenerator
         addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.netherrack.blockID);
     }
 
-    private static void addWorldGen(String modName, ItemStack stack, String oreName, int clusterSize, int numClusters, int minY, int maxY, boolean enable, int blockToReplace)
+    private static void addWorldGen(String modName,
+                                    final ItemStack stack,
+                                    final String oreName,
+                                    int clusterSize,
+                                    int numClusters,
+                                    int minY,
+                                    int maxY,
+                                    final boolean enable,
+                                    final int blockToReplace)
     {
-        Configuration config = NucleumWorld.config.getConfig();
+        final Configuration config = NucleumWorld.config.getConfig();
         modName = modName + "." + oreName.toLowerCase(Locale.ENGLISH);
         final ConfigCategory cat = config.getCategory(modName);
 
-        String strMin = "MinY";
-        String strMax = "MaxY";
+        final String strMin = "MinY";
+        final String strMax = "MaxY";
 
         clusterSize = config.get(modName, "ClusterSize", clusterSize).getInt();
         numClusters = config.get(modName, "NumClusters", numClusters).getInt();
         minY = config.get(modName, strMin, minY).getInt();
         maxY = config.get(modName, strMax, maxY).getInt();
-        boolean regen = config.get(modName, "RetroGen", enable).getBoolean(enable);
+        final boolean regen = config.get(modName, "RetroGen", enable).getBoolean(enable);
 
         cat.setComment("Generating settings for " + StringHelper.titleCase(oreName));
 

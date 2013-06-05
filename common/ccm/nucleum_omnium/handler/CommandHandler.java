@@ -2,11 +2,11 @@ package ccm.nucleum_omnium.handler;
 
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.command.CommandKill;
 import ccm.nucleum_omnium.command.CommandNO;
 import ccm.nucleum_omnium.command.CommandTPS;
 import ccm.nucleum_omnium.command.CommandTPX;
+import ccm.nucleum_omnium.utils.lib.Properties;
 
 public class CommandHandler
 {
@@ -20,7 +20,7 @@ public class CommandHandler
 
         event.registerServerCommand(new CommandKill());
 
-        if (!NucleumOmnium.mystLoaded){
+        if (!Properties.mystLoaded){
             event.registerServerCommand(new CommandTPX());
         }
     }

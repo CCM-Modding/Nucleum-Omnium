@@ -1,8 +1,8 @@
 package ccm.nucleum_omnium.proxy;
 
-import lib.com.jadarstudios.api.developercapesapi.DeveloperCapesAPI;
-
 import net.minecraftforge.common.MinecraftForge;
+
+import lib.com.jadarstudios.api.developercapesapi.DeveloperCapesAPI;
 
 import ccm.nucleum_omnium.handler.events.EventRain;
 import ccm.nucleum_omnium.utils.lib.Locations;

@@ -1,4 +1,4 @@
-package ccm.nucleum_omnium.world;
+package ccm.nucleum_world;
 
 import net.minecraftforge.common.MinecraftForge;
 
@@ -16,11 +16,12 @@ import cpw.mods.fml.relauncher.Side;
 
 import ccm.nucleum_omnium.BaseMod;
 import ccm.nucleum_omnium.IMod;
-import ccm.nucleum_omnium.world.configuration.Config;
-import ccm.nucleum_omnium.world.generator.WorldGenHandler;
-import ccm.nucleum_omnium.world.utils.TickHandlerWorld;
-import ccm.nucleum_omnium.world.utils.lib.Archive;
-import ccm.nucleum_omnium.world.utils.lib.Properties;
+
+import ccm.nucleum_world.configuration.Config;
+import ccm.nucleum_world.generator.WorldGenHandler;
+import ccm.nucleum_world.utils.TickHandlerWorld;
+import ccm.nucleum_world.utils.lib.Archive;
+import ccm.nucleum_world.utils.lib.Properties;
 
 @Mod(modid = Archive.MOD_ID,
      name = Archive.MOD_NAME,

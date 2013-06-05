@@ -38,7 +38,12 @@ public class ModHandler
     public static void handleMod(final IModHandler handler, final String modName)
     {
         if (Loader.isModLoaded(modName)){
-            handler.init();
+            try{
+                handler.init();
+            }catch(final Exception e){
+
+                Handler.log(String.format("A CCM Mods has failed to load %s, pleace inform the CCM Team", modName));
+            }
         }
     }
 

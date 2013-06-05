@@ -1,4 +1,4 @@
-package ccm.nucleum_omnium.world.utils.lib;
+package ccm.nucleum_world.utils.lib;
 
 public class Properties
 {

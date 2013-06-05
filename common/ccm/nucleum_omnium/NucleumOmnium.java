@@ -2,8 +2,6 @@ package ccm.nucleum_omnium;
 
 import java.util.logging.Level;
 
-import lib.org.modstats.ModstatInfo;
-
 import net.minecraft.server.MinecraftServer;
 
 import cpw.mods.fml.common.Mod;
@@ -21,13 +19,15 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
+import lib.org.modstats.ModstatInfo;
+
 import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.Handler;
-import ccm.nucleum_omnium.handler.LanguageHandler;
 import ccm.nucleum_omnium.handler.ModHandler;
 import ccm.nucleum_omnium.handler.mods.ModsMystcraft;
 import ccm.nucleum_omnium.proxy.CommonProxy;
+import ccm.nucleum_omnium.utils.language.OmniumLanguagePack;
 import ccm.nucleum_omnium.utils.lib.Archive;
 import ccm.nucleum_omnium.utils.lib.Locations;
 
@@ -58,9 +58,7 @@ public class NucleumOmnium extends BaseMod implements IMod
 
     public static MinecraftServer server;
 
-    public static boolean         mystLoaded = false;
-
-    protected Mod                 mod        = this.getClass().getAnnotation(Mod.class);
+    protected Mod                 mod = this.getClass().getAnnotation(Mod.class);
 
     @FingerprintWarning
     public void invalidFingerprint(final FMLFingerprintViolationEvent event)
@@ -94,7 +92,7 @@ public class NucleumOmnium extends BaseMod implements IMod
 
         ModHandler.addModToHandle(new ModsMystcraft(), "Mystcraft");
 
-        new LanguageHandler(Locations.LANGUAGE_FILE, Archive.LANGUAGE_FILES);
+        new OmniumLanguagePack().loadLangs();
     }
 
     @PostInit
@@ -108,7 +106,6 @@ public class NucleumOmnium extends BaseMod implements IMod
     @ServerStarting
     public void serverStarting(final FMLServerStartingEvent event)
     {
-
         // Initialize the custom commands
         CommandHandler.initCommands(event);
 

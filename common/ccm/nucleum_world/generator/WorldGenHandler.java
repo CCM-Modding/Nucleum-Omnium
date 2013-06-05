@@ -1,13 +1,9 @@
-package ccm.nucleum_omnium.world.generator;
+package ccm.nucleum_world.generator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-
-import lib.cofh.api.world.IFeatureGenerator;
-import lib.cofh.api.world.IFeatureHandler;
-import lib.cofh.util.ChunkCoord;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,10 +15,15 @@ import net.minecraftforge.event.world.ChunkDataEvent.Save;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
+import lib.cofh.api.world.IFeatureGenerator;
+import lib.cofh.api.world.IFeatureHandler;
+import lib.cofh.util.ChunkCoord;
+
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.handler.Handler;
-import ccm.nucleum_omnium.world.utils.TickHandlerWorld;
-import ccm.nucleum_omnium.world.utils.lib.Properties;
+
+import ccm.nucleum_world.utils.TickHandlerWorld;
+import ccm.nucleum_world.utils.lib.Properties;
 
 public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
 {
