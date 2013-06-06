@@ -10,9 +10,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.network.IGuiHandler;
+
+import ccm.nucleum_omnium.IMod;
 
 public class GUIHandler implements IGuiHandler
 {
@@ -31,25 +31,22 @@ public class GUIHandler implements IGuiHandler
         return instance;
     }
 
-    public static void registerGuiServer(final Class<? extends Container> container, final Object mod, final String guiID)
+    public static void registerGuiServer(final IMod mod, final String guiID, final Class<? extends Container> container)
     {
-        final ModContainer mc = FMLCommonHandler.instance().findContainerFor(mod);
-        final String fixedID = guiID + mc.getName();
+        final String fixedID = guiID + mod.getName();
         containerList.put(fixedID.hashCode(), container);
     }
 
-    public static void registerGuiClient(final Class<? extends GuiContainer> gui, final Class<? extends Container> container, final Object mod, final String guiID)
+    public static void registerGuiClient(final IMod mod, final String guiID, final Class<? extends GuiContainer> gui, final Class<? extends Container> container)
     {
-        final ModContainer mc = FMLCommonHandler.instance().findContainerFor(mod);
-        final String fixedID = guiID + mc.getName();
+        final String fixedID = guiID + mod.getName();
         guiList.put(fixedID.hashCode(), gui);
         containerList.put(fixedID.hashCode(), container);
     }
 
-    public static void openGui(final String guiID, final Object mod, final EntityPlayer player, final World world, final int x, final int y, final int z)
+    public static void openGui(final IMod mod, final String guiID, final EntityPlayer player, final World world, final int x, final int y, final int z)
     {
-        final ModContainer mc = FMLCommonHandler.instance().findContainerFor(mod);
-        final String fixedID = guiID + mc.getName();
+        final String fixedID = guiID + mod.getName();
         player.openGui(mod, fixedID.hashCode(), world, x, y, z);
     }
 
