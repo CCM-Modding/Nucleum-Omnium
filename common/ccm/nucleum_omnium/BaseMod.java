@@ -2,39 +2,66 @@ package ccm.nucleum_omnium;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
+import lib.org.modstats.ModstatInfo;
+
+import ccm.nucleum_omnium.configuration.AdvConfiguration;
+
+/**
+ * This class should be the super class of any CCM Mod, as it not only offers a couple nice
+ * Configuration helpers, but it also keeps from having to implement the methods inside of
+ * {@link IMod}
+ * 
+ * @author CaptainShadows
+ */
 public abstract class BaseMod implements IMod
 {
 
-    protected Mod  mod = this.getClass().getAnnotation(Mod.class);
+    private File config_Folder;
 
-    protected File config_Folder;
-
+    /**
+     * @param folder
+     *            The Folder in which to store all files in
+     */
     protected void setConfigFolderBase(final File folder)
     {
-        this.config_Folder = new File(folder.getAbsolutePath() + "/" + this.getConfigBaseFolder() + "/");
+        this.config_Folder = new File(folder.getAbsolutePath() + "/" + this.getConfigFolder() + "/");
     }
 
+    /**
+     * @return A new {@link File}
+     */
     protected File getConfigFile()
     {
         return new File(this.config_Folder.getAbsolutePath() + "/" + this.getName() + ".cfg");
     }
 
-    protected Configuration getConfig()
+    /**
+     * @return A new instance of {@link AdvConfiguration}
+     */
+    protected AdvConfiguration getConfig()
     {
-        return new Configuration(this.getConfigFile());
+        return new AdvConfiguration(this.getConfigFile());
     }
 
-    protected String getConfigBaseFolder()
+    /**
+     * @return The name of the Config Folder to put all configs in. Defaults to "CCM-Modding"
+     */
+    protected String getConfigFolder()
     {
         return "CCM-Modding";
     }
 
-    protected Configuration initializeConfig(final FMLPreInitializationEvent evt)
+    /**
+     * This is a shorter way of creating a new Configuration File
+     * 
+     * @param evt
+     *            A FMLPreInitializationEvent
+     * @return A new instance of {@link AdvConfiguration}
+     */
+    protected AdvConfiguration initializeConfig(final FMLPreInitializationEvent evt)
     {
 
         this.setConfigFolderBase(evt.getModConfigurationDirectory());
@@ -45,24 +72,24 @@ public abstract class BaseMod implements IMod
     @Override
     public String getId()
     {
-        return this.mod.modid();
+        return this.getClass().getAnnotation(Mod.class).modid();
     }
 
     @Override
     public String getName()
     {
-        return this.mod.name();
+        return this.getClass().getAnnotation(Mod.class).name();
     }
 
     @Override
     public String getPrefix()
     {
-        return this.mod.modid();
+        return this.getClass().getAnnotation(ModstatInfo.class).prefix();
     }
 
     @Override
     public String getVersion()
     {
-        return this.mod.version();
+        return this.getClass().getAnnotation(Mod.class).version();
     }
 }

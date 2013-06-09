@@ -58,8 +58,6 @@ public class NucleumOmnium extends BaseMod implements IMod
 
     public static MinecraftServer server;
 
-    protected Mod                 mod = this.getClass().getAnnotation(Mod.class);
-
     @FingerprintWarning
     public void invalidFingerprint(final FMLFingerprintViolationEvent event)
     {
