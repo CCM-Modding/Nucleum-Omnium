@@ -1,12 +1,12 @@
-captain=http://i.imgur.com/KY5fYMR.png
+captain=http://imgur.com/FY74h82
 captain=captain_shadows
 clay=https://dl.dropboxusercontent.com/u/129059125/Capes/ClayCape.png
 clay=claycorp
-kat=http://i.imgur.com/ACbnzpL.png
+kat=http://imgur.com/q4sIKl9
 kat=nerane
 morton=http://i.imgur.com/lBV7Ag4.png
 morton=morton00000
-chip=http://driesgames.game-server.cc/capes/coffee.png
-chip=ChipUK
 dries007=http://driesgames.game-server.cc/capes/coffee_1.png
 dries007=dries007
+chip=http://driesgames.game-server.cc/capes/coffee.png
+chip=ChipUK
