@@ -24,7 +24,7 @@ import lib.org.modstats.ModstatInfo;
 import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.Handler;
-import ccm.nucleum_omnium.handler.ModHandler;
+import ccm.nucleum_omnium.handler.mods.ModHandler;
 import ccm.nucleum_omnium.handler.mods.ModsMystcraft;
 import ccm.nucleum_omnium.proxy.CommonProxy;
 import ccm.nucleum_omnium.utils.language.OmniumLanguagePack;
@@ -90,7 +90,7 @@ public class NucleumOmnium extends BaseMod implements IMod
 
         proxy.initModelHandlers();
 
-        ModHandler.addModToHandle(new ModsMystcraft(), "Mystcraft");
+        ModHandler.addModToHandle(new ModsMystcraft());
 
         new OmniumLanguagePack().loadLangs();
     }

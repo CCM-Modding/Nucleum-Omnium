@@ -33,10 +33,4 @@ public class DupeExeption extends NotMyFaultExeption
         this.tmpErrorSB.append("And another Question: Why the Hax did Forge not detect that before me?\n");
         this.errorSB.replace(this.errorSB.lastIndexOf("|"), this.errorSB.lastIndexOf("|") + 1, this.tmpErrorSB.toString());
     }
-
-    @Override
-    public String toString()
-    {
-        return this.errorSB.toString();
-    }
 }

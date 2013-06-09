@@ -35,10 +35,4 @@ public class FileExeption extends NotMyFaultExeption
         this.tmpErrorSB.append(".jar in your mods folder\n");
         this.errorSB.replace(this.errorSB.lastIndexOf("|"), this.errorSB.lastIndexOf("|") + 1, this.tmpErrorSB.toString());
     }
-
-    @Override
-    public String toString()
-    {
-        return this.errorSB.toString();
-    }
 }

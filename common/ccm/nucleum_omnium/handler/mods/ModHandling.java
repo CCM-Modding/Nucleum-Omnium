@@ -10,11 +10,10 @@ public class ModHandling
     private final String      modExeption;
 
     public ModHandling(final IModHandler handler,
-                       final String modName,
                        final String modExeption)
     {
         this.handler = handler;
-        this.modName = modName;
+        this.modName = handler.getModName();
         this.modExeption = modExeption;
     }
 

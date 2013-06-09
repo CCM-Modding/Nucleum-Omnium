@@ -1,80 +1,178 @@
 package ccm.nucleum_omnium.configuration;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.ConfigCategory;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
+import ccm.nucleum_omnium.utils.lib.Properties;
+
+/**
+ * This is a copy of cofh.util.ConfigHandler, edited to fit the needs of all the CCM Mods
+ * 
+ * @author King Lemming, Edited by: Captain Shadows
+ */
 public class PropertyHandler
 {
 
-    private final int           baseItemID;
+    private int           baseBlockID = 300;
 
-    private final int           baseBlockID;
+    private int           baseItemID  = 5000;
 
-    private final List<Integer> freeItemIDs  = new LinkedList<Integer>();
+    private Configuration config;
 
-    private final List<Integer> freeBlockIDs = new LinkedList<Integer>();
-
-    public PropertyHandler(final int baseItemID,
-                           final int baseBlockID)
+    public PropertyHandler(final int baseBlockID,
+                           final int baseItemID)
     {
-        this.baseItemID = baseItemID;
         this.baseBlockID = baseBlockID;
+        this.baseItemID = baseItemID;
     }
 
-    /**
-     * @return The next Item ID
-     */
-    public Property getNextUsableItemID(final Configuration config, final String itemName)
+    public void setConfiguration(final Configuration config)
     {
-        if (this.freeItemIDs.isEmpty()){
-            this.resetItemIDs();
-            if (this.freeItemIDs.get(0) == 0){
-                return config.getItem(itemName, this.baseItemID);
-            }else{
-                return config.getItem(itemName, this.freeItemIDs.remove(0));
-            }
-        }else{
-            return config.getItem(itemName, this.freeItemIDs.remove(0));
+        this.config = config;
+        config.load();
+    }
+
+    public void updateBlockIDs(final boolean clear)
+    {
+        if (clear){
+            Properties.freeBlockIDs.clear();
         }
-    }
-
-    /**
-     * @return The next Block ID
-     */
-    public Property getNextUsableBlockID(final Configuration config, final String blockName)
-    {
-        if (this.freeBlockIDs.isEmpty()){
-            this.resetBlockIDs();
-            if (this.freeBlockIDs.get(0) == 0){
-                return config.getBlock(blockName, this.baseBlockID);
-            }else{
-                return config.getBlock(blockName, this.freeBlockIDs.remove(0));
-            }
-        }else{
-            return config.getBlock(blockName, this.freeBlockIDs.remove(0));
-        }
-    }
-
-    private void resetItemIDs()
-    {
-        for (int i = 6000; i < Item.itemsList.length; i++){
-            if (Item.itemsList[i] == null){
-                this.freeItemIDs.add(i);
-            }
-        }
-    }
-
-    private void resetBlockIDs()
-    {
-        for (int i = 300; i < Block.blocksList.length; i++){
+        for (int i = this.baseBlockID; i < Block.blocksList.length; i++){
             if (Block.blocksList[i] == null){
-                this.freeBlockIDs.add(i);
+                if (!Properties.freeBlockIDs.contains(Integer.valueOf(i))){
+                    Properties.freeBlockIDs.add(Integer.valueOf(i));
+                }
+            }else{
+                if (Properties.freeBlockIDs.contains(Integer.valueOf(i))){
+                    Properties.freeBlockIDs.remove(Integer.valueOf(i));
+                }
             }
+        }
+        if (Properties.freeBlockIDs.isEmpty()){
+            throw new RuntimeException("The CCM PropertyHandler has not been able to find any free block IDs");
+        }
+    }
+
+    public void updateItemIDs(final boolean clear)
+    {
+        if (clear){
+            Properties.freeItemIDs.clear();
+        }
+        for (int i = this.baseItemID; i < Item.itemsList.length; i++){
+            if (Item.itemsList[i] == null){
+                if (!Properties.freeItemIDs.contains(Integer.valueOf(i))){
+                    Properties.freeItemIDs.add(Integer.valueOf(i));
+                }
+            }else{
+                if (Properties.freeItemIDs.contains(Integer.valueOf(i))){
+                    Properties.freeItemIDs.remove(Integer.valueOf(i));
+                }
+            }
+        }
+        if (Properties.freeItemIDs.isEmpty()){
+            throw new RuntimeException("The CCM PropertyHandler has not been able to find any free item IDs");
+        }
+    }
+
+    public int getBlockId(final String name)
+    {
+        if (Properties.knownBlockIds.containsKey(name)){
+            final Property ret = Properties.knownBlockIds.get(name);
+
+            if (ret == null){
+                return -1;
+            }
+            return ret.getInt();
+        }else{
+            if (Properties.freeBlockIDs.isEmpty()){
+                this.updateItemIDs(false);
+                return Properties.freeBlockIDs.remove(0);
+            }else{
+                return Properties.freeBlockIDs.remove(0);
+            }
+        }
+    }
+
+    public int getItemId(final String name)
+    {
+        if (Properties.knownItemIds.containsKey(name)){
+            final Property ret = Properties.knownItemIds.get(name);
+
+            if (ret == null){
+                return -1;
+            }
+            return ret.getInt();
+        }else{
+            if (Properties.freeItemIDs.isEmpty()){
+                this.updateItemIDs(false);
+                return Properties.freeItemIDs.remove(0);
+            }else{
+                return Properties.freeItemIDs.remove(0);
+            }
+        }
+    }
+
+    public int get(final String category, final String key, final int defaultValue)
+    {
+
+        return this.config.get(category, key, defaultValue).getInt();
+    }
+
+    public boolean get(final String category, final String key, final boolean defaultValue)
+    {
+
+        return this.config.get(category, key, defaultValue).getBoolean(defaultValue);
+    }
+
+    public String get(final String category, final String key, final String defaultValue)
+    {
+
+        return this.config.get(category, key, defaultValue).getString();
+    }
+
+    public Property getProperty(final String category, final String key, final int defaultValue)
+    {
+
+        return this.config.get(category, key, defaultValue);
+    }
+
+    public Property getProperty(final String category, final String key, final boolean defaultValue)
+    {
+
+        return this.config.get(category, key, defaultValue);
+    }
+
+    public Property getProperty(final String category, final String key, final String defaultValue)
+    {
+
+        return this.config.get(category, key, defaultValue);
+    }
+
+    public ConfigCategory getCategory(final String category)
+    {
+
+        return this.config.getCategory(category);
+    }
+
+    public boolean hasCategory(final String category)
+    {
+
+        return this.config.hasCategory(category);
+    }
+
+    public boolean hasKey(final String category, final String key)
+    {
+
+        return this.config.hasKey(category, key);
+    }
+
+    public void save()
+    {
+        if (this.config.hasChanged()){
+            this.config.save();
         }
     }
 }
