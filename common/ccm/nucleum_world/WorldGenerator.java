@@ -2,7 +2,6 @@ package ccm.nucleum_world;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -27,7 +26,7 @@ public class WorldGenerator
                                        final int maxY,
                                        final boolean enable)
     {
-        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.stone.blockID);
+        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.stone);
     }
 
     public static void addEndGen(final String modName,
@@ -39,7 +38,7 @@ public class WorldGenerator
                                  final int maxY,
                                  final boolean enable)
     {
-        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.whiteStone.blockID);
+        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.whiteStone);
     }
 
     public static void addNetherGen(final String modName,
@@ -51,7 +50,7 @@ public class WorldGenerator
                                     final int maxY,
                                     final boolean enable)
     {
-        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.netherrack.blockID);
+        addWorldGen(modName, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.netherrack);
     }
 
     private static void addWorldGen(String modName,
@@ -62,13 +61,13 @@ public class WorldGenerator
                                     int minY,
                                     int maxY,
                                     final boolean enable,
-                                    final int blockToReplace)
+                                    final Block blockToReplace)
     {
-        modName = modName + "." + oreName.toLowerCase(Locale.ENGLISH);
+        modName = modName + "." + StringHelper.titleCase(oreName);
         final ConfigCategory cat = NucleumWorld.config.getCategory(modName);
 
-        final String strMin = "MinY";
-        final String strMax = "MaxY";
+        final String strMin = "MinHeight";
+        final String strMax = "MaxHeight";
 
         clusterSize = NucleumWorld.config.get(modName, "ClusterSize", clusterSize).getInt();
         numClusters = NucleumWorld.config.get(modName, "NumClusters", numClusters).getInt();
@@ -76,7 +75,7 @@ public class WorldGenerator
         maxY = NucleumWorld.config.get(modName, strMax, maxY).getInt();
         final boolean regen = NucleumWorld.config.get(modName, "RetroGen", enable).getBoolean(enable);
 
-        cat.setComment("Generating settings for " + StringHelper.titleCase(oreName));
+        cat.setComment("Configurations for " + StringHelper.titleCase(oreName));
 
         NucleumWorld.config.save();
 
@@ -86,6 +85,6 @@ public class WorldGenerator
 
         final List<WeightedRandomBlock> resList = new ArrayList<WeightedRandomBlock>();
         resList.add(new WeightedRandomBlock(stack));
-        WorldGenHandler.addOre(new FeatureOreGenUniform(oreName, new WorldGenMinableCluster(resList, clusterSize, blockToReplace), numClusters, minY, maxY, regen));
+        WorldGenHandler.addOre(new FeatureOreGenUniform(oreName, new WorldGenMinableCluster(resList, clusterSize, blockToReplace.blockID), numClusters, minY, maxY, regen));
     }
 }

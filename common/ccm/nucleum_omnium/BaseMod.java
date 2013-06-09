@@ -43,7 +43,7 @@ public abstract class BaseMod implements IMod
      */
     protected AdvConfiguration getConfig()
     {
-        return new AdvConfiguration(this.getConfigFile());
+        return new AdvConfiguration(this.getConfigFile(), true);
     }
 
     /**
