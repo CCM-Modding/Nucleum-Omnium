@@ -25,7 +25,7 @@ public class AdvConfiguration extends Configuration
      * @param configFile
      *            The File to make a Configuration File out of
      */
-    public AdvConfiguration(File configFile)
+    public AdvConfiguration(final File configFile)
     {
         super(configFile);
     }

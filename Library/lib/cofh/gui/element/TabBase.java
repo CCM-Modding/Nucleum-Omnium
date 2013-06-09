@@ -1,10 +1,10 @@
 package lib.cofh.gui.element;
 
+import org.lwjgl.opengl.GL11;
+
 import lib.cofh.gui.GuiBase;
 import lib.cofh.gui.TabTracker;
 import lib.cofh.render.RenderHelper;
-
-import org.lwjgl.opengl.GL11;
 
 /**
  * Base class for a tab element. Has self-contained rendering methods and a link back to the

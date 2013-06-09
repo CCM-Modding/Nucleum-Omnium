@@ -1,7 +1,5 @@
 package lib.cofh.util.fluid;
 
-import lib.cofh.util.ItemHelper;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
@@ -12,6 +10,8 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+
+import lib.cofh.util.ItemHelper;
 
 public class BucketHandler
 {

@@ -1,8 +1,8 @@
 package lib.cofh.api.energy;
 
-import lib.cofh.util.MathHelper;
-
 import net.minecraft.nbt.NBTTagCompound;
+
+import lib.cofh.util.MathHelper;
 
 /**
  * Reference implementation of {@link IEnergyStorage}. Use/extend this or implement your own.

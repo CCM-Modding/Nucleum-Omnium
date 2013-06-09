@@ -30,6 +30,7 @@
 	
 	<target name="replaceTokens">
 		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@VERSION@" value="${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}" />
+		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@THANKS@" value="Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats" />
 		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@FINGERPRINT@" value="${key.fingerprint}" />
 		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@BUILD@" value="${count.count}" />
 	</target>

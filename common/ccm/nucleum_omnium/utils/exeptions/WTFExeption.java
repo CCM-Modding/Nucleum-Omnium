@@ -12,7 +12,7 @@ public class WTFExeption extends NotMyFaultExeption
 
     private final StringBuilder tmpErrorSB       = new StringBuilder();
 
-    public WTFExeption(IMod mod)
+    public WTFExeption(final IMod mod)
     {
         super(mod);
         this.addString();

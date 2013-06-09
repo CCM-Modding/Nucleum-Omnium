@@ -40,9 +40,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import lib.org.modstats.ModVersionData;
-import lib.org.modstats.ModsUpdateEvent;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.crash.CallableMinecraftVersion;
 import net.minecraftforge.common.MinecraftForge;
@@ -61,6 +58,9 @@ import cpw.mods.fml.common.versioning.ComparableVersion;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
+
+import lib.org.modstats.ModVersionData;
+import lib.org.modstats.ModsUpdateEvent;
 
 class DataSender extends Thread
 {

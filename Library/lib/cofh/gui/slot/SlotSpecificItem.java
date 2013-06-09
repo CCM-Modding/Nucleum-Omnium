@@ -1,10 +1,10 @@
 package lib.cofh.gui.slot;
 
-import lib.cofh.util.inventory.ComparableItemStack;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import lib.cofh.util.inventory.ComparableItemStack;
 
 public class SlotSpecificItem extends Slot
 {

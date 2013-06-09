@@ -7,7 +7,6 @@ import java.util.Locale;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ConfigCategory;
-import net.minecraftforge.common.Configuration;
 
 import lib.cofh.api.world.WeightedRandomBlock;
 import lib.cofh.util.StringHelper;
@@ -65,22 +64,21 @@ public class WorldGenerator
                                     final boolean enable,
                                     final int blockToReplace)
     {
-        final Configuration config = NucleumWorld.config.getConfig();
         modName = modName + "." + oreName.toLowerCase(Locale.ENGLISH);
-        final ConfigCategory cat = config.getCategory(modName);
+        final ConfigCategory cat = NucleumWorld.config.getCategory(modName);
 
         final String strMin = "MinY";
         final String strMax = "MaxY";
 
-        clusterSize = config.get(modName, "ClusterSize", clusterSize).getInt();
-        numClusters = config.get(modName, "NumClusters", numClusters).getInt();
-        minY = config.get(modName, strMin, minY).getInt();
-        maxY = config.get(modName, strMax, maxY).getInt();
-        final boolean regen = config.get(modName, "RetroGen", enable).getBoolean(enable);
+        clusterSize = NucleumWorld.config.get(modName, "ClusterSize", clusterSize).getInt();
+        numClusters = NucleumWorld.config.get(modName, "NumClusters", numClusters).getInt();
+        minY = NucleumWorld.config.get(modName, strMin, minY).getInt();
+        maxY = NucleumWorld.config.get(modName, strMax, maxY).getInt();
+        final boolean regen = NucleumWorld.config.get(modName, "RetroGen", enable).getBoolean(enable);
 
         cat.setComment("Generating settings for " + StringHelper.titleCase(oreName));
 
-        config.save();
+        NucleumWorld.config.save();
 
         if (!enable){
             return;

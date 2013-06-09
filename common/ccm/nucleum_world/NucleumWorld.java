@@ -16,8 +16,8 @@ import cpw.mods.fml.relauncher.Side;
 
 import ccm.nucleum_omnium.BaseMod;
 import ccm.nucleum_omnium.IMod;
+import ccm.nucleum_omnium.configuration.AdvConfiguration;
 
-import ccm.nucleum_world.configuration.Config;
 import ccm.nucleum_world.generator.WorldGenHandler;
 import ccm.nucleum_world.utils.TickHandlerWorld;
 import ccm.nucleum_world.utils.lib.Archive;
@@ -33,12 +33,12 @@ import ccm.nucleum_world.utils.lib.Properties;
 public class NucleumWorld extends BaseMod implements IMod
 {
 
-    public static Config config;
+    public static AdvConfiguration config;
 
     @PreInit
     public void preInit(final FMLPreInitializationEvent evt)
     {
-        config = new Config(this.initializeConfig(evt));
+        config = this.initializeConfig(evt);
 
         GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
 

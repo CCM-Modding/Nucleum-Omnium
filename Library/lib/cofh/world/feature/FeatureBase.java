@@ -3,10 +3,10 @@ package lib.cofh.world.feature;
 import java.util.HashSet;
 import java.util.Random;
 
-import lib.cofh.api.world.IFeatureGenerator;
-
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import lib.cofh.api.world.IFeatureGenerator;
 
 public abstract class FeatureBase implements IFeatureGenerator
 {

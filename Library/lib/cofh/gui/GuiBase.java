@@ -2,11 +2,6 @@ package lib.cofh.gui;
 
 import java.util.ArrayList;
 
-import lib.cofh.gui.element.ElementBase;
-import lib.cofh.gui.element.TabBase;
-import lib.cofh.render.IconRegistry;
-import lib.cofh.render.RenderHelper;
-
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -14,6 +9,11 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.Icon;
+
+import lib.cofh.gui.element.ElementBase;
+import lib.cofh.gui.element.TabBase;
+import lib.cofh.render.IconRegistry;
+import lib.cofh.render.RenderHelper;
 
 /**
  * Base class for a modular GUIs. Works with Elements {@link ElementBase} and Tabs {@link TabBase}
