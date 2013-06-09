@@ -8,3 +8,5 @@ morton=http://i.imgur.com/lBV7Ag4.png
 morton=morton00000
 chip=http://driesgames.game-server.cc/capes/coffee.png
 chip=ChipUK
+dries007=http://driesgames.game-server.cc/capes/coffee_1.png
+dries007=dries007
