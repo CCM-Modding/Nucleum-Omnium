@@ -5,8 +5,6 @@ import java.io.File;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-import lib.org.modstats.ModstatInfo;
-
 import ccm.nucleum_omnium.configuration.AdvConfiguration;
 
 /**
@@ -79,12 +77,6 @@ public abstract class BaseMod implements IMod
     public String getName()
     {
         return this.getClass().getAnnotation(Mod.class).name();
-    }
-
-    @Override
-    public String getPrefix()
-    {
-        return this.getClass().getAnnotation(ModstatInfo.class).prefix();
     }
 
     @Override

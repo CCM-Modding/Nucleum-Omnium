@@ -2,7 +2,7 @@
 {
   "modid": "nucleum_omnium",
   "name": "Nucleum Omnium",
-  "description": "Main Mod (A CCM Mod)",
+  "description": "Core functionality for all CCM Mods",
   "credits": "@THANKS@",
   "logoFile": "/mods/nucleum-omnium/textures/logo.png",
   "version": "@VERSION@ (@BUILD@)",
@@ -11,9 +11,9 @@
   "authors": [ "claycorp", 
 	       "captain_shadows", 
                "morton00000" ],
-  "screenshots": [ "/mods/nucleum-omnium/textures/screenshots/screenshot.png" ],
+  "parent":"",
   "dependencies": [
-     "required-after:Forge@[7.7.2.688,)"
+     "required-after:Forge@[7.8.0.688,)"
   ]
 },
 {
@@ -28,8 +28,24 @@
   "authors": [ "claycorp", 
 	       "captain_shadows", 
                "morton00000" ],
-  "parent":"NucleumOmnium",
-  "screenshots": [ "/mods/nucleum-omnium/textures/screenshots/screenshot.png" ],
+  "parent":"nucleum_omnium",
+  "dependencies": [
+     "required-after:nucleum_omnium"
+  ]
+},
+{
+  "modid": "nucleum_network",
+  "name": "Nucleum Network",
+  "description": "World Gen (A CCM Mod)",
+  "credits": "@THANKS@",
+  "logoFile": "/mods/nucleum-omnium/textures/logo.png",
+  "version": "@VERSION@ (@BUILD@)",
+  "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
+  "updateUrl": "https://github.com/CCM-Modding/Nucleum-Omnium/tree/master/Releases",
+  "authors": [ "claycorp", 
+	       "captain_shadows", 
+               "morton00000" ],
+  "parent":"nucleum_omnium",
   "dependencies": [
      "required-after:nucleum_omnium"
   ]

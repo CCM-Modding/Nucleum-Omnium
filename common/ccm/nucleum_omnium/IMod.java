@@ -20,11 +20,6 @@ public interface IMod
     public String getName();
 
     /**
-     * @return The Assinged Prefix
-     */
-    public String getPrefix();
-
-    /**
      * @return The Mod's Version
      */
     public String getVersion();

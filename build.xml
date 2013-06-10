@@ -1,15 +1,20 @@
 <?xml version="1.0" ?> 
-<project name="${build.dir.modFloder}" default="build">
+<project name="${build.dir.modFloder}" default="release" basedir=".">
 	
 	<property file="build.properties" prefix="build"/>
 	<property file="key.properties" prefix="key"/>
 	<property file="count.properties" prefix="count"/>
+	<property name="names.ver" value="${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}"/>
+	<property name="names.jar" value="${build.dir.release}\${build.release.mod.name}-${names.ver}.jar"/>
+	<property name="dir.mcp" value="${build.dir.development}\${build.dir.mcp}"/>
+	<property name="dir.mods" value="${build.dir.development}\${build.dir.Mods}\${build.dir.modFloder}"/>
 	
 	<target name="clean">
-		<delete file="${build.dir.development}\${build.dir.mcp}\src\minecraft\mcmod.info" />
-		<delete dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\${build.dir.modPackege}" />
-		<delete dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\${build.dir.modLib}" />
-		<delete dir="${build.dir.development}\${build.dir.mcp}\reobf\minecraft" />
+		<delete file="${dir.mcp}\src\minecraft\mcmod.info" />
+		<delete file="${dir.mcp}\src\minecraft\ccm_at.cfg" />
+		<delete dir="${dir.mcp}\src\minecraft\${build.dir.modPackege}" />
+		<delete dir="${dir.mcp}\src\minecraft\${build.dir.modLib}" />
+		<delete dir="${dir.mcp}\reobf\minecraft" />
 	</target>
 	
 	<target name="incrementBuildNumber">
@@ -18,72 +23,66 @@
 		</propertyfile>
 	</target>
 	
-	<target name="prepare">
-		<copy todir="${build.dir.development}\${build.dir.mcp}\src\minecraft">
-			<fileset dir="${build.dir.development}\${build.dir.Mods}\${build.dir.modFloder}\${build.dir.src}" />
+	<target name="prepare" depends="incrementBuildNumber, clean">
+		<copy todir="${dir.mcp}\src\minecraft" overwrite="true">
+			<fileset dir="${dir.mods}\${build.dir.src}" />
 		</copy>
-		<copy todir="${build.dir.development}\${build.dir.mcp}\src\minecraft">
-			<fileset dir="${build.dir.development}\${build.dir.Mods}\${build.dir.modFloder}\${build.dir.lib}" />
+		<copy todir="${dir.mcp}\src\minecraft" overwrite="true">
+			<fileset dir="${dir.mods}\${build.dir.lib}" />
 		</copy>
 	</target>
 	
-	<target name="replaceTokens">
-		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@VERSION@" value="${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}" />
-		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@THANKS@" value="Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible" />
-		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@FINGERPRINT@" value="${key.fingerprint}" />
-		<replace dir="${build.dir.development}\${build.dir.mcp}\src\minecraft" token="@BUILD@" value="${count.count}" />
+	<target name="replaceTokens" depends="prepare">
+		<replace dir="${dir.mcp}\src\minecraft" token="@VERSION@" value="${names.ver}" />
+		<replace dir="${dir.mcp}\src\minecraft" token="@THANKS@" value="Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible" />
+		<replace dir="${dir.mcp}\src\minecraft" token="@FINGERPRINT@" value="${key.fingerprint}" />
+		<replace dir="${dir.mcp}\src\minecraft" token="@BUILD@" value="${count.count}" />
 	</target>
 	
-	<target name="recompile">
-		<exec dir="${build.dir.development}\${build.dir.mcp}" executable="cmd" osfamily="windows">
+	<target name="recompile" depends="replaceTokens">
+		<exec dir="${dir.mcp}" executable="cmd" osfamily="windows">
 			<arg line="/c recompile.bat" />
 		</exec>
-		<exec dir="${build.dir.development}\${build.dir.mcp}" executable="bash" osfamily="unix">
+		<exec dir="${dir.mcp}" executable="bash" osfamily="unix">
 			<arg line="recompile.sh" />
 		</exec>
 	</target>
 	
-	<target name="reobfuscate">
-		<exec dir="${build.dir.development}\${build.dir.mcp}" executable="cmd" osfamily="windows">
+	<target name="reobfuscate" depends="recompile">
+		<exec dir="${dir.mcp}" executable="cmd" osfamily="windows">
 			<arg line="/c reobfuscate_srg.bat" />
 		</exec>
-		<exec dir="${build.dir.development}\${build.dir.mcp}" executable="bash" osfamily="unix">
+		<exec dir="${dir.mcp}" executable="bash" osfamily="unix">
 			<arg line="reobfuscate_srg.sh" />
 		</exec>
 	</target>
-	
-	<target name="create-JAR">
-		<mkdir dir="${build.dir.release}" />
-		<jar destfile="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar">
-			<fileset dir="${build.dir.development}\${build.dir.mcp}\src\minecraft\" includes="mcmod.info" />
-			<fileset dir="${build.dir.development}\${build.dir.mcp}\reobf\minecraft" />
-			<fileset dir="${build.dir.development}\${build.dir.Mods}\${build.dir.modFloder}\${build.dir.res}" />
+		
+	<target name="create-JAR" depends="reobfuscate">
+		<jar destfile="${names.jar}" >
+			<fileset dir="${dir.mcp}\src\minecraft\" includes="mcmod.info, ccm_at.cfg" />
+			<fileset dir="${dir.mcp}\reobf\minecraft" />
+			<fileset dir="${dir.mods}\${build.dir.res}" />
+			<manifest>
+				<attribute name="FMLCorePlugin" 
+						   value="ccm.nucleum_omnium.OmniumLoader" />
+				<attribute name="MCVersion" 
+						   value="${build.MCver}" />
+				<attribute name="BuildNumber" 
+				           value="${count.count}" />
+    		</manifest>
 		</jar>
 	</target>
 		
-	<target name="singJAR">
-		<signjar jar="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar"
-            signedjar="${build.dir.release}\${build.release.mod.name}-${build.release.mod.majorVersion}.${build.release.mod.minorVersion}.${build.release.mod.revision}.jar"
-            alias="${key.alias}"
-            storepass="${key.pass}"
-            keystore="${key.store}"/>
+	<target name="singJAR" depends="create-JAR">
+		<signjar jar="${names.jar}"
+                 signedjar="${names.jar}"
+                 alias="${key.alias}"
+                 storepass="${key.pass}"
+                 keystore="${key.store}"
+			     sectionsonly="true"/>
 	</target>
-		
-	<target name="release">
-		<!-- Prep for the build -->
-		<antcall target="clean" />
-		<antcall target="incrementBuildNumber" />
-		<antcall target="prepare" />
-		<antcall target="replaceTokens" />
-		<antcall target="recompile" />		
-		<antcall target="reobfuscate" />
-				
-		<!-- Build the jar -->
-		<antcall target="create-JAR" />
-		
-		<!-- Sing the jar -->
-		<antcall target="singJAR" />
-
+			
+	<target name="release" depends="singJAR">
 		<!-- Clean up the mcp source now that we are done -->
 		<antcall target="clean" />
 	</target>

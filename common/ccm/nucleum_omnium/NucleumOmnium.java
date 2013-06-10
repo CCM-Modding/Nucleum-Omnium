@@ -1,27 +1,22 @@
 package ccm.nucleum_omnium;
 
-import java.util.logging.Level;
+import java.util.Arrays;
 
 import net.minecraft.server.MinecraftServer;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.FingerprintWarning;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.DummyModContainer;
+import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Mod.ServerStarting;
+import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 
-import lib.org.modstats.ModstatInfo;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
-import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.handler.mods.ModHandler;
@@ -31,16 +26,7 @@ import ccm.nucleum_omnium.utils.language.OmniumLanguagePack;
 import ccm.nucleum_omnium.utils.lib.Archive;
 import ccm.nucleum_omnium.utils.lib.Locations;
 
-@Mod(modid = Archive.MOD_ID,
-     name = Archive.MOD_NAME,
-     version = Archive.MOD_VERSION,
-     dependencies = Archive.MOD_DEPENDANCIES,
-     certificateFingerprint = Archive.MOD_FIGERPRINT)
-@NetworkMod(clientSideRequired = true,
-            serverSideRequired = false,
-            channels = Archive.MOD_CHANNEL)
-@ModstatInfo(prefix = Archive.MOD_PREFIX)
-public class NucleumOmnium extends BaseMod implements IMod
+public class NucleumOmnium extends DummyModContainer implements IMod
 {
 
     /**
@@ -58,28 +44,38 @@ public class NucleumOmnium extends BaseMod implements IMod
 
     public static MinecraftServer server;
 
-    @FingerprintWarning
-    public void invalidFingerprint(final FMLFingerprintViolationEvent event)
+    public NucleumOmnium()
     {
-        /*
-         * Report (log) to the user that the version of Harvestry they are using
-         * has been changed/tampered with
-         */
-        Handler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
+        super(new ModMetadata());
+        ModMetadata meta = super.getMetadata();
+        meta.modId = Archive.MOD_ID;
+        meta.name = Archive.MOD_NAME;
+        meta.version = Archive.MOD_VERSION;
+        meta.authorList = Arrays.asList("Captain_Shadows");
+        meta.url = "https://github.com/CCM-Modding/Nucleum-Omnium";
+        meta.updateUrl = "https://github.com/CCM-Modding/Nucleum-Omnium/tree/master/Releases";
+        meta.credits = "@THANKS@";
+        meta.logoFile = "/mods/nucleum-omnium/textures/logo.png";
+        meta.description = "Core functionality for all CCM Mods";
     }
 
-    @PreInit
+    @Override
+    public boolean registerBus(EventBus bus, LoadController controller)
+    {
+        bus.register(this);
+        return true;
+    }
+
+    @Subscribe
     public void preInit(final FMLPreInitializationEvent evt)
     {
         if (!Handler.isModLoaded(this)){
 
             Handler.initLog(this);
-
-            Config.init(this.initializeConfig(evt));
         }
     }
 
-    @Init
+    @Subscribe
     public void init(final FMLInitializationEvent event)
     {
         proxy.initCapes();
@@ -93,7 +89,7 @@ public class NucleumOmnium extends BaseMod implements IMod
         new OmniumLanguagePack().loadLangs();
     }
 
-    @PostInit
+    @Subscribe
     public void PostInit(final FMLPostInitializationEvent event)
     {
         ModHandler.init();
@@ -101,12 +97,18 @@ public class NucleumOmnium extends BaseMod implements IMod
         Handler.loadMod(this);
     }
 
-    @ServerStarting
+    @Subscribe
     public void serverStarting(final FMLServerStartingEvent event)
     {
         // Initialize the custom commands
         CommandHandler.initCommands(event);
 
         server = event.getServer();
+    }
+
+    @Override
+    public String getId()
+    {
+        return Archive.MOD_ID;
     }
 }
