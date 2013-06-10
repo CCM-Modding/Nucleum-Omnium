@@ -21,12 +21,12 @@ public class OmniumAT extends AccessTransformer
 
         mapFileList.add("ccm_at.cfg");
 
-        for (String file : mapFileList){
-            readMapFile(file);
+        for (final String file : mapFileList){
+            this.readMapFile(file);
         }
     }
 
-    public static void addTransformerMap(String mapFile)
+    public static void addTransformerMap(final String mapFile)
     {
         if (instance == null){
             mapFileList.add(mapFile);
@@ -35,14 +35,14 @@ public class OmniumAT extends AccessTransformer
         }
     }
 
-    private void readMapFile(String mapFile)
+    private void readMapFile(final String mapFile)
     {
         System.out.println("Adding Accesstransformer map: " + mapFile);
         try{
-            Method parentMapFile = AccessTransformer.class.getDeclaredMethod("readMapFile", String.class);
+            final Method parentMapFile = AccessTransformer.class.getDeclaredMethod("readMapFile", String.class);
             parentMapFile.setAccessible(true);
             parentMapFile.invoke(this, mapFile);
-        }catch(Exception e){
+        }catch(final Exception e){
             throw new RuntimeException(e);
         }
     }

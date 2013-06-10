@@ -47,7 +47,7 @@ public class NucleumOmnium extends DummyModContainer implements IMod
     public NucleumOmnium()
     {
         super(new ModMetadata());
-        ModMetadata meta = super.getMetadata();
+        final ModMetadata meta = super.getMetadata();
         meta.modId = Archive.MOD_ID;
         meta.name = Archive.MOD_NAME;
         meta.version = Archive.MOD_VERSION;
@@ -60,7 +60,7 @@ public class NucleumOmnium extends DummyModContainer implements IMod
     }
 
     @Override
-    public boolean registerBus(EventBus bus, LoadController controller)
+    public boolean registerBus(final EventBus bus, final LoadController controller)
     {
         bus.register(this);
         return true;
