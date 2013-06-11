@@ -25,7 +25,7 @@ public final class Handler
     public static void initLog(final IMod mod)
     {
         Logger tmp;
-        tmp = Logger.getLogger(mod.getId());
+        tmp = Logger.getLogger(mod.getModId());
         tmp.setParent(FMLLog.getLogger());
         if (!modsLogged.containsKey(mod)){
             modsLogged.put(mod, tmp);

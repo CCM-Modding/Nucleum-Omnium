@@ -68,7 +68,7 @@ public abstract class BaseMod implements IMod
     }
 
     @Override
-    public String getId()
+    public String getModId()
     {
         return this.getClass().getAnnotation(Mod.class).modid();
     }
