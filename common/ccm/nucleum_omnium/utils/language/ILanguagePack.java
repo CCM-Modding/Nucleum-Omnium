@@ -15,12 +15,12 @@ import ccm.nucleum_omnium.helper.LanguageHelper;
 public abstract class ILanguagePack
 {
 
-    protected String       currentPath;
+    protected String     currentPath;
 
     /**
-     * Protected {@code List<String>} that contains the languages, Shared with all Language Packs
+     * Private {@code List<String>} that contains the languages, Shared with all Language Packs
      */
-    protected List<String> supportedLanguages = new ArrayList<String>();
+    private List<String> supportedLanguages = new ArrayList<String>();
 
     /**
      * Sets the currentPath and Clears the {@code List<String> supportedLanguages}
