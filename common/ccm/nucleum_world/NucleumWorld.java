@@ -25,9 +25,7 @@ import ccm.nucleum_world.utils.lib.Properties;
 
 @Mod(modid = Archive.MOD_ID,
      name = Archive.MOD_NAME,
-     version = Archive.MOD_VERSION,
-     dependencies = Archive.MOD_DEPENDANCIES,
-     certificateFingerprint = Archive.MOD_FIGERPRINT)
+     version = Archive.MOD_VERSION)
 public class NucleumWorld extends BaseMod implements IMod
 {
 
