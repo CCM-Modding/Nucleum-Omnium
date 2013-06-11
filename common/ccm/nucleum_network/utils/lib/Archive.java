@@ -15,7 +15,5 @@ public final class Archive
 
     public static final String MOD_CHANNEL             = "CCM";
 
-    public static final String MOD_DEPENDANCIES        = "required-after:nucleum_omnium";
-
     public static final String INVALID_FINGERPRINT_MSG = "error.invalidFingerPrint";
 }
