@@ -9,7 +9,7 @@ public final class Archive
 
     public static final String MOD_PREFIX              = "nucleum";
 
-    public static final String MOD_VERSION             = "@VERSION@ (@BUILD@)";
+    public static final String MOD_VERSION             = "@VERSION@";
 
     public static final String MOD_FIGERPRINT          = "@FINGERPRINT@";
 
