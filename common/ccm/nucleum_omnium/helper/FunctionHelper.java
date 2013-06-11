@@ -9,6 +9,7 @@ import net.minecraft.world.biome.BiomeGenDesert;
 
 import ccm.nucleum_omnium.NucleumOmnium;
 
+
 public final class FunctionHelper extends BaseHelper
 {
 
