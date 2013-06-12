@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
 @MCVersion(value = "1.5.2")
-@TransformerExclusions("ccm.nucleum_omnium")
+@TransformerExclusions("ccm")
 public class OmniumLoader implements IFMLLoadingPlugin
 {
 
