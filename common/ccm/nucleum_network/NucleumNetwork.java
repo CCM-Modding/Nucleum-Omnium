@@ -19,6 +19,7 @@ import ccm.nucleum_network.utils.lib.Archive;
 @Mod(modid = Archive.MOD_ID,
      name = Archive.MOD_NAME,
      version = Archive.MOD_VERSION,
+     dependencies = Archive.MOD_DEPENDANCIES,
      certificateFingerprint = Archive.MOD_FIGERPRINT)
 @NetworkMod(clientSideRequired = true,
             serverSideRequired = false,
