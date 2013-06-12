@@ -3,6 +3,18 @@ package ccm.nucleum;
 import java.util.Arrays;
 
 import net.minecraft.server.MinecraftServer;
+import ccm.nucleum.handler.CommandHandler;
+import ccm.nucleum.handler.Handler;
+import ccm.nucleum.handler.mods.ModHandler;
+import ccm.nucleum.handler.mods.ModsMystcraft;
+import ccm.nucleum.helper.DataHelper;
+import ccm.nucleum.proxy.CommonProxy;
+import ccm.nucleum.utils.language.OmniumLanguagePack;
+import ccm.nucleum.utils.lib.Archive;
+import ccm.nucleum.utils.lib.Locations;
+
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
 import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.LoadController;
@@ -13,18 +25,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
-
-import ccm.nucleum.handler.CommandHandler;
-import ccm.nucleum.handler.Handler;
-import ccm.nucleum.handler.mods.ModHandler;
-import ccm.nucleum.handler.mods.ModsMystcraft;
-import ccm.nucleum.proxy.CommonProxy;
-import ccm.nucleum.utils.language.OmniumLanguagePack;
-import ccm.nucleum.utils.lib.Archive;
-import ccm.nucleum.utils.lib.Locations;
 
 public class NucleumOmnium extends DummyModContainer implements IMod
 {
@@ -104,5 +104,7 @@ public class NucleumOmnium extends DummyModContainer implements IMod
         CommandHandler.initCommands(event);
 
         server = event.getServer();
+        
+        DataHelper.init();
     }
 }
