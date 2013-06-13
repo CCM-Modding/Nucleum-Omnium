@@ -1,7 +1,13 @@
 package ccm.nucleum.world;
 
 import net.minecraftforge.common.MinecraftForge;
-
+import ccm.nucleum.BaseMod;
+import ccm.nucleum.IMod;
+import ccm.nucleum.configuration.AdvConfiguration;
+import ccm.nucleum.world.generator.WorldGenHandler;
+import ccm.nucleum.world.utils.TickHandlerWorld;
+import ccm.nucleum.world.utils.lib.Archive;
+import ccm.nucleum.world.utils.lib.Properties;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -14,21 +20,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-
-import ccm.nucleum.BaseMod;
-import ccm.nucleum.IMod;
-import ccm.nucleum.configuration.AdvConfiguration;
-import ccm.nucleum.world.generator.WorldGenHandler;
-import ccm.nucleum.world.utils.TickHandlerWorld;
-import ccm.nucleum.world.utils.lib.Archive;
-import ccm.nucleum.world.utils.lib.Properties;
-
 @Mod(modid = Archive.MOD_ID,
      name = Archive.MOD_NAME,
      version = Archive.MOD_VERSION,
      dependencies = Archive.MOD_DEPENDANCIES)
-public class NucleumWorld extends BaseMod implements IMod
-{
+public class NucleumWorld extends BaseMod implements IMod {
 
     /**
      * The Instance
@@ -39,9 +35,8 @@ public class NucleumWorld extends BaseMod implements IMod
     public static AdvConfiguration config;
 
     @PreInit
-    public void preInit(final FMLPreInitializationEvent evt)
-    {
-        config = this.initializeConfig(evt);
+    public void preInit(final FMLPreInitializationEvent evt) {
+        NucleumWorld.config = this.initializeConfig(evt);
 
         GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
 
@@ -51,14 +46,12 @@ public class NucleumWorld extends BaseMod implements IMod
     }
 
     @Init
-    public void initialize(final FMLInitializationEvent event)
-    {}
+    public void initialize(final FMLInitializationEvent event) {
+    }
 
     @PostInit
-    public void modsLoaded(final FMLPostInitializationEvent event)
-    {
-        if (Properties.retroOreGen){
+    public void modsLoaded(final FMLPostInitializationEvent event) {
+        if (Properties.retroOreGen)
             TickRegistry.registerTickHandler(TickHandlerWorld.instance, Side.SERVER);
-        }
     }
 }

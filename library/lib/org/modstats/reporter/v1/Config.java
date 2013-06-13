@@ -29,12 +29,10 @@ import java.io.File;
 
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
-
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 
-public class Config
-{
+public class Config {
 
     private static final String CONFIG_NAME = "modstats.cfg";
 
@@ -46,9 +44,8 @@ public class Config
 
     public boolean              logOnly;
 
-    public Config()
-    {
-        final File configLocation = new File(Loader.instance().getConfigDir(), CONFIG_NAME);
+    public Config() {
+        final File configLocation = new File(Loader.instance().getConfigDir(), Config.CONFIG_NAME);
         final Configuration configuration = new Configuration(configLocation);
         configuration.load();
 
@@ -70,7 +67,9 @@ public class Config
 
         configuration.save();
 
-        FMLLog.info("[Modstats] Config loaded. allowUpdates: %b,  betaNotification: %b, strict: %b", this.allowUpdates, this.betaNotifications, this.forCurrentMinecraftVersion);
+        FMLLog.info(
+                "[Modstats] Config loaded. allowUpdates: %b,  betaNotification: %b, strict: %b",
+                this.allowUpdates, this.betaNotifications, this.forCurrentMinecraftVersion);
     }
 
 }

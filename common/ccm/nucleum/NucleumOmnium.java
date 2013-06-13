@@ -26,8 +26,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-public class NucleumOmnium extends DummyModContainer implements IMod
-{
+public class NucleumOmnium extends DummyModContainer implements IMod {
 
     /**
      * The Instance
@@ -44,8 +43,7 @@ public class NucleumOmnium extends DummyModContainer implements IMod
 
     public static MinecraftServer server;
 
-    public NucleumOmnium()
-    {
+    public NucleumOmnium() {
         super(new ModMetadata());
         final ModMetadata meta = this.getMetadata();
         meta.modId = Archive.MOD_ID;
@@ -60,29 +58,24 @@ public class NucleumOmnium extends DummyModContainer implements IMod
     }
 
     @Override
-    public boolean registerBus(final EventBus bus, final LoadController controller)
-    {
+    public boolean registerBus(final EventBus bus, final LoadController controller) {
         bus.register(this);
         return true;
     }
 
     @Subscribe
-    public void preInit(final FMLPreInitializationEvent evt)
-    {
-        if (!Handler.isModLoaded(this)){
-
+    public void preInit(final FMLPreInitializationEvent evt) {
+        if (!Handler.isModLoaded(this))
             Handler.initLog(this);
-        }
     }
 
     @Subscribe
-    public void init(final FMLInitializationEvent event)
-    {
-        proxy.initCapes();
+    public void init(final FMLInitializationEvent event) {
+        NucleumOmnium.proxy.initCapes();
 
-        proxy.initEventHandling();
+        NucleumOmnium.proxy.initEventHandling();
 
-        proxy.initModelHandlers();
+        NucleumOmnium.proxy.initModelHandlers();
 
         ModHandler.addModToHandle(new ModsMystcraft());
 
@@ -90,21 +83,19 @@ public class NucleumOmnium extends DummyModContainer implements IMod
     }
 
     @Subscribe
-    public void PostInit(final FMLPostInitializationEvent event)
-    {
+    public void PostInit(final FMLPostInitializationEvent event) {
         ModHandler.init();
 
         Handler.loadMod(this);
     }
 
     @Subscribe
-    public void serverStarting(final FMLServerStartingEvent event)
-    {
+    public void serverStarting(final FMLServerStartingEvent event) {
         // Initialize the custom commands
         CommandHandler.initCommands(event);
 
-        server = event.getServer();
-        
+        NucleumOmnium.server = event.getServer();
+
         DataHelper.init();
     }
 }

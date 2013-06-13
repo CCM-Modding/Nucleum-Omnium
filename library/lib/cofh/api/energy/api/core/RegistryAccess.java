@@ -5,8 +5,7 @@ package lib.cofh.api.energy.api.core;
  * 
  * @author Zeldo Kavira
  */
-public class RegistryAccess
-{
+public class RegistryAccess {
 
     public static ISimpleRegistry capeRegistry = new NullSimpleRegistry();
 

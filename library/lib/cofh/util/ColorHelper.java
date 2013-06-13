@@ -5,11 +5,10 @@ package lib.cofh.util;
  * 
  * @author King Lemming
  */
-public final class ColorHelper
-{
+public final class ColorHelper {
 
-    private ColorHelper()
-    {}
+    private ColorHelper() {
+    }
 
     public static final String BLACK          = (char) 167 + "0";
 
@@ -77,29 +76,16 @@ public final class ColorHelper
 
     public static final int    DYE_WHITE      = 0xFFFFFF;
 
-    public static final int[]  DYE_COLORS     =
-                                              {
-                    DYE_BLACK,
-                    DYE_RED,
-                    DYE_GREEN,
-                    DYE_BROWN,
-                    DYE_BLUE,
-                    DYE_PURPLE,
-                    DYE_CYAN,
-                    DYE_LIGHT_GRAY,
-                    DYE_GRAY,
-                    DYE_PINK,
-                    DYE_LIME,
-                    DYE_YELLOW,
-                    DYE_LIGHT_BLUE,
-                    DYE_MAGENTA,
-                    DYE_ORANGE,
-                    DYE_WHITE                };
+    public static final int[]  DYE_COLORS     = { ColorHelper.DYE_BLACK, ColorHelper.DYE_RED,
+            ColorHelper.DYE_GREEN, ColorHelper.DYE_BROWN, ColorHelper.DYE_BLUE,
+            ColorHelper.DYE_PURPLE, ColorHelper.DYE_CYAN, ColorHelper.DYE_LIGHT_GRAY,
+            ColorHelper.DYE_GRAY, ColorHelper.DYE_PINK, ColorHelper.DYE_LIME,
+            ColorHelper.DYE_YELLOW, ColorHelper.DYE_LIGHT_BLUE, ColorHelper.DYE_MAGENTA,
+            ColorHelper.DYE_ORANGE, ColorHelper.DYE_WHITE };
 
-    public static int getDyeColor(final int color)
-    {
+    public static int getDyeColor(final int color) {
 
-        return (color < 0) || (color > 15) ? 0xFFFFFF : DYE_COLORS[color];
+        return color < 0 || color > 15 ? 0xFFFFFF : ColorHelper.DYE_COLORS[color];
     }
 
 }

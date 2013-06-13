@@ -5,13 +5,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
- * This class allows for OreDictionary-compatible ItemStack comparisons.
- * The intended purpose of this is for things such as Recipe Handlers or HashMaps of ItemStacks.
+ * This class allows for OreDictionary-compatible ItemStack comparisons. The
+ * intended purpose of this is for things such as Recipe Handlers or HashMaps of
+ * ItemStacks.
  * 
  * @author King Lemming
  */
-public class ComparableItemStack
-{
+public class ComparableItemStack {
 
     public int itemID    = -1;
 
@@ -21,10 +21,9 @@ public class ComparableItemStack
 
     public int oreID     = -1;
 
-    public ComparableItemStack(final ItemStack stack)
-    {
+    public ComparableItemStack(final ItemStack stack) {
 
-        if (stack != null){
+        if (stack != null) {
             this.itemID = stack.itemID;
             this.metadata = stack.getItemDamage();
             this.stackSize = stack.stackSize;
@@ -32,10 +31,7 @@ public class ComparableItemStack
         }
     }
 
-    public ComparableItemStack(final int itemID,
-                               final int damage,
-                               final int stackSize)
-    {
+    public ComparableItemStack(final int itemID, final int damage, final int stackSize) {
 
         this.itemID = itemID;
         this.metadata = damage;
@@ -43,8 +39,7 @@ public class ComparableItemStack
         this.oreID = OreDictionary.getOreID(this.toItemStack());
     }
 
-    public ComparableItemStack(final ComparableItemStack stack)
-    {
+    public ComparableItemStack(final ComparableItemStack stack) {
 
         this.itemID = stack.itemID;
         this.metadata = stack.metadata;
@@ -52,10 +47,9 @@ public class ComparableItemStack
         this.oreID = stack.oreID;
     }
 
-    public ComparableItemStack(final String oreName)
-    {
+    public ComparableItemStack(final String oreName) {
 
-        if (!OreDictionary.getOres(oreName).isEmpty()){
+        if (!OreDictionary.getOres(oreName).isEmpty()) {
             final ItemStack ore = OreDictionary.getOres(oreName).get(0);
             this.itemID = ore.itemID;
             this.metadata = ore.getItemDamage();
@@ -64,57 +58,51 @@ public class ComparableItemStack
         }
     }
 
-    public boolean isItemEqual(final ComparableItemStack other)
-    {
+    public boolean isItemEqual(final ComparableItemStack other) {
 
-        return (other != null) && (((this.oreID != -1) && (this.oreID == other.oreID)) || ((this.itemID == other.itemID) && (this.metadata == other.metadata)));
+        return other != null
+                && (this.oreID != -1 && this.oreID == other.oreID || this.itemID == other.itemID
+                        && this.metadata == other.metadata);
     }
 
-    public boolean isStackEqual(final ComparableItemStack other)
-    {
+    public boolean isStackEqual(final ComparableItemStack other) {
 
-        return this.isItemEqual(other) && (this.stackSize == other.stackSize);
+        return this.isItemEqual(other) && this.stackSize == other.stackSize;
     }
 
-    public boolean isStackValid()
-    {
+    public boolean isStackValid() {
 
         return this.getItem() != null;
     }
 
-    public Item getItem()
-    {
+    public Item getItem() {
 
-        return (this.itemID < 0) || (this.itemID >= 32000) ? null : Item.itemsList[this.itemID];
+        return this.itemID < 0 || this.itemID >= 32000 ? null : Item.itemsList[this.itemID];
     }
 
-    public ItemStack toItemStack()
-    {
+    public ItemStack toItemStack() {
 
-        return (this.itemID < 0) || (this.itemID >= 32000) ? null : new ItemStack(this.itemID, this.stackSize, this.metadata);
+        return this.itemID < 0 || this.itemID >= 32000 ? null : new ItemStack(this.itemID,
+                this.stackSize, this.metadata);
     }
 
     @Override
-    public ComparableItemStack clone()
-    {
+    public ComparableItemStack clone() {
 
         return new ComparableItemStack(this);
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
 
-        return this.oreID != -1 ? this.oreID : this.metadata | (this.itemID << 16);
+        return this.oreID != -1 ? this.oreID : this.metadata | this.itemID << 16;
     }
 
     @Override
-    public boolean equals(final Object o)
-    {
+    public boolean equals(final Object o) {
 
-        if (!(o instanceof ComparableItemStack)){
+        if (!(o instanceof ComparableItemStack))
             return false;
-        }
         return this.isItemEqual((ComparableItemStack) o);
     }
 

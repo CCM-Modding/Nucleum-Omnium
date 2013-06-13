@@ -1,25 +1,24 @@
 package ccm.nucleum.proxy;
 
-public class CommonProxy
-{
+public class CommonProxy {
 
     /**
-     * Initializes the Capes Client Side Only.
-     * Original code that adds capes is found in this
-     * Github repository: {@link https://github.com/jadar/DeveloperCapesAPI }
+     * Initializes the Capes Client Side Only. Original code that adds capes is
+     * found in this Github repository: {@link https
+     * ://github.com/jadar/DeveloperCapesAPI }
      */
-    public void initCapes()
-    {}
+    public void initCapes() {
+    }
 
     /**
      * Initializes All the events
      */
-    public void initEventHandling()
-    {}
+    public void initEventHandling() {
+    }
 
     /**
      * Initializes All Model Handlers
      */
-    public void initModelHandlers()
-    {}
+    public void initModelHandlers() {
+    }
 }

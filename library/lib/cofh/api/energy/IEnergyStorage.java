@@ -1,13 +1,12 @@
 package lib.cofh.api.energy;
 
 /**
- * An energy storage is the unit of interaction with Energy inventories.
- * A reference implementation can be found at {@link EnergyStorage}.
+ * An energy storage is the unit of interaction with Energy inventories. A
+ * reference implementation can be found at {@link EnergyStorage}.
  * 
  * @author King Lemming
  */
-public interface IEnergyStorage
-{
+public interface IEnergyStorage {
 
     /**
      * Adds energy to the storage. Returns quantity of energy that was accepted.
@@ -16,19 +15,21 @@ public interface IEnergyStorage
      *            Maximum amount of energy to be inserted.
      * @param doReceive
      *            If false, the insertion will only be simulated.
-     * @return Amount of energy that was (or would have been, if simulated) accepted by the storage.
+     * @return Amount of energy that was (or would have been, if simulated)
+     *         accepted by the storage.
      */
     int receiveEnergy(int maxReceive, boolean doReceive);
 
     /**
-     * Removes energy from the storage. Returns quantity of energy that was removed.
+     * Removes energy from the storage. Returns quantity of energy that was
+     * removed.
      * 
      * @param maxExtract
      *            Maximum amount of energy to be extracted.
      * @param doExtract
      *            If false, the extraction will only be simulated.
-     * @return Amount of energy that was (or would have been, if simulated) extracted from the
-     *         storage.
+     * @return Amount of energy that was (or would have been, if simulated)
+     *         extracted from the storage.
      */
     int extractEnergy(int maxExtract, boolean doExtract);
 

@@ -28,8 +28,7 @@ package lib.org.modstats;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModVersionData
-{
+public class ModVersionData {
 
     public String              prefix;
 
@@ -43,15 +42,11 @@ public class ModVersionData
 
     public Map<String, String> extraFields;
 
-    public ModVersionData()
-    {
+    public ModVersionData() {
         this.extraFields = new HashMap<String, String>();
     }
 
-    public ModVersionData(final String prefix,
-                          final String name,
-                          final String version)
-    {
+    public ModVersionData(final String prefix, final String name, final String version) {
         this.prefix = prefix;
         this.name = name;
         this.version = version;
@@ -59,66 +54,51 @@ public class ModVersionData
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = (prime * result) + ((this.changeLogUrl == null) ? 0 : this.changeLogUrl.hashCode());
-        result = (prime * result) + ((this.downloadUrl == null) ? 0 : this.downloadUrl.hashCode());
-        result = (prime * result) + ((this.name == null) ? 0 : this.name.hashCode());
-        result = (prime * result) + ((this.prefix == null) ? 0 : this.prefix.hashCode());
-        result = (prime * result) + ((this.version == null) ? 0 : this.version.hashCode());
+        result = prime * result + (this.changeLogUrl == null ? 0 : this.changeLogUrl.hashCode());
+        result = prime * result + (this.downloadUrl == null ? 0 : this.downloadUrl.hashCode());
+        result = prime * result + (this.name == null ? 0 : this.name.hashCode());
+        result = prime * result + (this.prefix == null ? 0 : this.prefix.hashCode());
+        result = prime * result + (this.version == null ? 0 : this.version.hashCode());
         return result;
     }
 
     @Override
-    public boolean equals(final Object obj)
-    {
-        if (this == obj){
+    public boolean equals(final Object obj) {
+        if (this == obj)
             return true;
-        }
-        if (obj == null){
+        if (obj == null)
             return false;
-        }
-        if (this.getClass() != obj.getClass()){
+        if (this.getClass() != obj.getClass())
             return false;
-        }
         final ModVersionData other = (ModVersionData) obj;
-        if (this.changeLogUrl == null){
-            if (other.changeLogUrl != null){
+        if (this.changeLogUrl == null) {
+            if (other.changeLogUrl != null)
                 return false;
-            }
-        }else if (!this.changeLogUrl.equals(other.changeLogUrl)){
+        } else if (!this.changeLogUrl.equals(other.changeLogUrl))
             return false;
-        }
-        if (this.downloadUrl == null){
-            if (other.downloadUrl != null){
+        if (this.downloadUrl == null) {
+            if (other.downloadUrl != null)
                 return false;
-            }
-        }else if (!this.downloadUrl.equals(other.downloadUrl)){
+        } else if (!this.downloadUrl.equals(other.downloadUrl))
             return false;
-        }
-        if (this.name == null){
-            if (other.name != null){
+        if (this.name == null) {
+            if (other.name != null)
                 return false;
-            }
-        }else if (!this.name.equals(other.name)){
+        } else if (!this.name.equals(other.name))
             return false;
-        }
-        if (this.prefix == null){
-            if (other.prefix != null){
+        if (this.prefix == null) {
+            if (other.prefix != null)
                 return false;
-            }
-        }else if (!this.prefix.equals(other.prefix)){
+        } else if (!this.prefix.equals(other.prefix))
             return false;
-        }
-        if (this.version == null){
-            if (other.version != null){
+        if (this.version == null) {
+            if (other.version != null)
                 return false;
-            }
-        }else if (!this.version.equals(other.version)){
+        } else if (!this.version.equals(other.version))
             return false;
-        }
         return true;
     }
 

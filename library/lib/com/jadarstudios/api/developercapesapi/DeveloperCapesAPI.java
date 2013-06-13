@@ -13,14 +13,12 @@ import java.net.URL;
 import java.util.HashMap;
 
 import net.minecraft.client.Minecraft;
-
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public final class DeveloperCapesAPI
-{
+public final class DeveloperCapesAPI {
 
     private static DeveloperCapesAPI      instance;
 
@@ -35,8 +33,7 @@ public final class DeveloperCapesAPI
     /**
      * Object constructor.
      */
-    private DeveloperCapesAPI()
-    {
+    private DeveloperCapesAPI() {
         this.users = new HashMap<String, String>();
         this.groupUrls = new HashMap<String, String>();
     }
@@ -45,12 +42,10 @@ public final class DeveloperCapesAPI
      * Get's the current DeveloperCapesAPI instance, or creates a new one if
      * necessary.
      */
-    public static DeveloperCapesAPI getInstance()
-    {
-        if (instance == null){
-            instance = new DeveloperCapesAPI();
-        }
-        return instance;
+    public static DeveloperCapesAPI getInstance() {
+        if (DeveloperCapesAPI.instance == null)
+            DeveloperCapesAPI.instance = new DeveloperCapesAPI();
+        return DeveloperCapesAPI.instance;
     }
 
     /**
@@ -61,50 +56,47 @@ public final class DeveloperCapesAPI
      *            The URL of the .txt file containing the groups, members of
      *            said groups, and the group's cape URL.
      */
-    public void init(final String parTxtUrl)
-    {
-        try{
+    public void init(final String parTxtUrl) {
+        try {
             final URL url = new URL(parTxtUrl);
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            final BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(url.openStream()));
             String line;
 
             String username = "";
             String group = "";
             String capeUrl = "";
 
-            while ((line = reader.readLine()) != null){
-
+            while ((line = reader.readLine()) != null)
                 // excludes commented lines
-                if (!line.startsWith("#")){
+                if (!line.startsWith("#"))
                     // loops through characters.
-                    for (int i = 0; i < line.length(); i++){
+                    for (int i = 0; i < line.length(); i++)
                         // when char : is found do stuff.
-                        if (line.charAt(i) == '='){
+                        if (line.charAt(i) == '=') {
                             group = line.substring(0, i);
                             final String subLine = line.substring(i + 1);
 
-                            if (subLine.startsWith("http")){
+                            if (subLine.startsWith("http")) {
                                 capeUrl = subLine;
-                                getInstance().addGroupUrl(group, capeUrl);
-                                mc.renderEngine.obtainImageData(capeUrl, new DeveloperCapesImageBufferDownload());
+                                DeveloperCapesAPI.getInstance().addGroupUrl(group, capeUrl);
+                                DeveloperCapesAPI.mc.renderEngine.obtainImageData(capeUrl,
+                                        new DeveloperCapesImageBufferDownload());
                                 continue;
-                            }else{
+                            } else {
                                 username = subLine.toLowerCase();
-                                getInstance().addUser(username, group);
+                                DeveloperCapesAPI.getInstance().addUser(username, group);
                             }
                         }
-                    }
-                }
-            }
-        }catch(final IOException e){
+        } catch (final IOException e) {
             e.printStackTrace();
         }
 
         // Makes sure to set up only one tick handler.
-        if (!instance.tickSetUp){
+        if (!DeveloperCapesAPI.instance.tickSetUp) {
             // Sets up the tick handler for capes.
             TickRegistry.registerTickHandler(new DeveloperCapesTickHandler(), Side.CLIENT);
-            instance.tickSetUp = true;
+            DeveloperCapesAPI.instance.tickSetUp = true;
         }
     }
 
@@ -116,12 +108,9 @@ public final class DeveloperCapesAPI
      * @param parGroup
      *            The group to add that Username to.
      */
-    public void addUser(final String parUsername, final String parGroup)
-    {
-        if (this.getUserGroup(parUsername) == null){
+    public void addUser(final String parUsername, final String parGroup) {
+        if (this.getUserGroup(parUsername) == null)
             this.users.put(parUsername, parGroup);
-
-        }
     }
 
     /**
@@ -131,8 +120,7 @@ public final class DeveloperCapesAPI
      *            The Username to get from the users HashMap.
      * @return The Username found in the users HashMap.
      */
-    public String getUserGroup(final String parUsername)
-    {
+    public String getUserGroup(final String parUsername) {
         return this.users.get(parUsername.toLowerCase());
     }
 
@@ -144,11 +132,9 @@ public final class DeveloperCapesAPI
      * @param parCapeUrl
      *            The corresponding URL to add.
      */
-    public void addGroupUrl(final String parGroup, final String parCapeUrl)
-    {
-        if (this.getGroupUrl(parGroup) == null){
+    public void addGroupUrl(final String parGroup, final String parCapeUrl) {
+        if (this.getGroupUrl(parGroup) == null)
             this.groupUrls.put(parGroup, parCapeUrl);
-        }
     }
 
     /**
@@ -158,8 +144,7 @@ public final class DeveloperCapesAPI
      *            The name of the group to get the URL from.
      * @return The group URL.
      */
-    public String getGroupUrl(final String group)
-    {
+    public String getGroupUrl(final String group) {
         return this.groupUrls.get(group);
     }
 }

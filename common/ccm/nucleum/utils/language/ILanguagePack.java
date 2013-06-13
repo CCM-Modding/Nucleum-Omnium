@@ -3,30 +3,29 @@ package ccm.nucleum.utils.language;
 import java.util.ArrayList;
 import java.util.List;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-
 import ccm.nucleum.helper.LanguageHelper;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * The Super Class of ANY Language Pack within all the CCM Mods
  * 
  * @author CaptainShadows
  */
-public abstract class ILanguagePack
-{
+public abstract class ILanguagePack {
 
-    protected String     currentPath;
-
-    /**
-     * Private {@code List<String>} that contains the languages, Shared with all Language Packs
-     */
-    private List<String> supportedLanguages = new ArrayList<String>();
+    protected String           currentPath;
 
     /**
-     * Sets the currentPath and Clears the {@code List<String> supportedLanguages}
+     * Private {@code List<String>} that contains the languages, Shared with all
+     * Language Packs
      */
-    public ILanguagePack(final String currentPath)
-    {
+    private final List<String> supportedLanguages = new ArrayList<String>();
+
+    /**
+     * Sets the currentPath and Clears the
+     * {@code List<String> supportedLanguages}
+     */
+    public ILanguagePack(final String currentPath) {
         this.currentPath = currentPath;
         this.supportedLanguages.clear();
     }
@@ -36,21 +35,20 @@ public abstract class ILanguagePack
      * 
      * @param name
      *            The name of the language
-     * @return The usable version of that name. For our purposes that version should get added to
-     *         the {@code List<String> supportedLanguages}
+     * @return The usable version of that name. For our purposes that version
+     *         should get added to the {@code List<String> supportedLanguages}
      */
-    public String getPath(final String name)
-    {
+    public String getPath(final String name) {
         return this.currentPath + name + ".xml";
     }
 
     /***
      * Loads in all the language files into MineCraft
      */
-    public void loadLangs()
-    {
-        for (final String langFile : this.supportedLanguages){
-            LanguageRegistry.instance().loadLocalization(langFile, LanguageHelper.getLangFromFileName(langFile), LanguageHelper.isXMLLanguageFile(langFile));
-        }
+    public void loadLangs() {
+        for (final String langFile : this.supportedLanguages)
+            LanguageRegistry.instance().loadLocalization(langFile,
+                    LanguageHelper.getLangFromFileName(langFile),
+                    LanguageHelper.isXMLLanguageFile(langFile));
     }
 }

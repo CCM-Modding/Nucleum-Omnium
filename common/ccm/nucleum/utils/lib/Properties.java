@@ -6,8 +6,7 @@ import java.util.TreeMap;
 
 import net.minecraftforge.common.Property;
 
-public class Properties
-{
+public class Properties {
 
     public static boolean                   mystLoaded    = false;
 

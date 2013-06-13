@@ -2,11 +2,9 @@ package ccm.nucleum.utils.exeptions;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.crash.CrashReport;
-
 import ccm.nucleum.IMod;
 
-public class NotMyFaultExeption extends RuntimeException
-{
+public class NotMyFaultExeption extends RuntimeException {
 
     /**
      * This Exception, and All its sub-Classes are NOT my Fault
@@ -17,30 +15,27 @@ public class NotMyFaultExeption extends RuntimeException
 
     protected StringBuilder   errorSB          = new StringBuilder();
 
-    public NotMyFaultExeption(final IMod mod)
-    {
+    public NotMyFaultExeption(final IMod mod) {
         this.mod = mod;
         this.addString();
     }
 
-    private void addString()
-    {
+    private void addString() {
         this.errorSB.append("The mod '");
         this.errorSB.append(this.mod.getName());
         this.errorSB.append("' has a Problem.\nIT'S NOT MY FAULT! ");
         this.errorSB.append("Below is how to fix it.\n \n");
         this.errorSB.append("|");
-        this.errorSB.append("\nDO NOT COME TO ME WITH THIS. YOU CAUSED IT YOURSELF, AND I TOLD YOU HOW TO FIX IT!\n");
+        this.errorSB
+                .append("\nDO NOT COME TO ME WITH THIS. YOU CAUSED IT YOURSELF, AND I TOLD YOU HOW TO FIX IT!\n");
     }
 
-    protected void crashMC()
-    {
+    protected void crashMC() {
         Minecraft.getMinecraft().crashed(CrashReport.makeCrashReport(this, this.toString()));
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.errorSB.toString();
     }
 }

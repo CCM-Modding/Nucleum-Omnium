@@ -1,7 +1,6 @@
 package ccm.nucleum.utils.lib;
 
-public class Commands
-{
+public class Commands {
 
     public static final String COMMAND_NO   = "no";
 

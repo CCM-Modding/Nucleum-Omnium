@@ -12,41 +12,37 @@ import net.minecraft.util.Icon;
  * 
  * @author King Lemming
  */
-public class IconRegistry
-{
+public class IconRegistry {
 
     public static Map<String, Icon> icons = new HashMap<String, Icon>();
 
-    public static void addIcon(final String iconName, final String iconLocation, final IconRegister ir)
-    {
+    public static void addIcon(final String iconName, final String iconLocation,
+            final IconRegister ir) {
 
-        icons.put(iconName, ir.registerIcon(iconLocation));
+        IconRegistry.icons.put(iconName, ir.registerIcon(iconLocation));
     }
 
-    public static void addIcon(final String iconName, final Icon icon)
-    {
+    public static void addIcon(final String iconName, final Icon icon) {
 
-        icons.put(iconName, icon);
+        IconRegistry.icons.put(iconName, icon);
     }
 
-    public static void addCustomIcon(final String iconName, final String iconLocation, final TextureMap ir)
-    {
+    public static void addCustomIcon(final String iconName, final String iconLocation,
+            final TextureMap ir) {
 
         final TextureCustom icon = new TextureCustom(iconLocation);
         ir.setTextureEntry(iconLocation, icon);
-        icons.put(iconName, icon);
+        IconRegistry.icons.put(iconName, icon);
     }
 
-    public static Icon getIcon(final String iconName)
-    {
+    public static Icon getIcon(final String iconName) {
 
-        return icons.get(iconName);
+        return IconRegistry.icons.get(iconName);
     }
 
-    public static Icon getIcon(final String iconName, final int iconOffset)
-    {
+    public static Icon getIcon(final String iconName, final int iconOffset) {
 
-        return icons.get(iconName + iconOffset);
+        return IconRegistry.icons.get(iconName + iconOffset);
     }
 
 }

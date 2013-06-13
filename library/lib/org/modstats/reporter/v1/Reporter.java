@@ -28,20 +28,17 @@ package lib.org.modstats.reporter.v1;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import lib.org.modstats.IModstatsReporter;
+import lib.org.modstats.ModVersionData;
+import lib.org.modstats.ModstatInfo;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.WorldEvent;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 
-import lib.org.modstats.IModstatsReporter;
-import lib.org.modstats.ModVersionData;
-import lib.org.modstats.ModstatInfo;
-
-public class Reporter implements IModstatsReporter
-{
+public class Reporter implements IModstatsReporter {
 
     public Map<String, ModVersionData> registeredMods;
 
@@ -54,33 +51,26 @@ public class Reporter implements IModstatsReporter
      */
     private final boolean              checkedAuto;
 
-    public Reporter()
-    {
+    public Reporter() {
         this.checkedAuto = false;
         this.registeredMods = new ConcurrentHashMap<String, ModVersionData>(2, 0.9f, 1);
         MinecraftForge.EVENT_BUS.register(this);
         this.config = new Config();
     }
 
-    private void startCheck(final boolean manual)
-    {
-        if (!this.config.allowUpdates){
+    private void startCheck(final boolean manual) {
+        if (!this.config.allowUpdates)
             return;
-        }
         // only manual check is allowed on servers
-        if (!FMLCommonHandler.instance().getSide().isClient() && !manual){
+        if (!FMLCommonHandler.instance().getSide().isClient() && !manual)
             return;
-        }
-        if (this.registeredMods.isEmpty()){
+        if (this.registeredMods.isEmpty())
             return;
-        }
         DataSender currentSender = this.sender;
-        if (!manual && this.checkedAuto){
+        if (!manual && this.checkedAuto)
             return;
-        }
-        if ((currentSender != null) && ((currentSender.manual == false) || manual)){
+        if (currentSender != null && (currentSender.manual == false || manual))
             return;
-        }
         currentSender = new DataSender(this, manual);
         currentSender.start();
         this.sender = currentSender;
@@ -88,52 +78,47 @@ public class Reporter implements IModstatsReporter
     }
 
     @ForgeSubscribe
-    public void worldLoad(final WorldEvent.Load event)
-    {
+    public void worldLoad(final WorldEvent.Load event) {
         this.startCheck(false);
     }
 
     @Override
-    public void registerMod(final Object mod)
-    {
-        if (!this.config.allowUpdates){
+    public void registerMod(final Object mod) {
+        if (!this.config.allowUpdates)
             return;
-        }
-        if (mod == null){
+        if (mod == null) {
             FMLLog.warning("[Modstats] Can't register null mod.");
             return;
         }
         final ModstatInfo info = mod.getClass().getAnnotation(ModstatInfo.class);
-        if (info == null){
+        if (info == null) {
             FMLLog.warning("[Modstats] ModstatsInfo annotation not found for given mod.");
             return;
         }
 
-        if ((info.prefix() == null) || info.prefix().equals("")){
+        if (info.prefix() == null || info.prefix().equals("")) {
             FMLLog.warning("[Modstats] Mod prefix can't be empty.");
             return;
         }
         final Mod modData = mod.getClass().getAnnotation(Mod.class);
         ModVersionData data;
-        if (modData == null){
-            if ((info.name() == null) || info.name().equals("")){
+        if (modData == null) {
+            if (info.name() == null || info.name().equals("")) {
                 FMLLog.warning("[Modstats] Mod name can't be empty.");
                 return;
             }
-            if ((info.version() == null) || info.version().equals("")){
+            if (info.version() == null || info.version().equals("")) {
                 FMLLog.warning("[Modstats] Mod version can't be empty.");
                 return;
             }
             data = new ModVersionData(info.prefix(), info.name(), info.version());
-        }else{
+        } else
             data = new ModVersionData(info.prefix(), modData.name(), modData.version());
-        }
         this.registeredMods.put(info.prefix(), data);
     }
 
     @Override
-    public void doManualCheck()
-    {
+    public void doManualCheck() {
         this.startCheck(true);
     }
 

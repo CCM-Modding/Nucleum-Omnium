@@ -1,7 +1,6 @@
 package ccm.nucleum.world.utils.lib;
 
-public class Properties
-{
+public class Properties {
 
     public static boolean retroOreGen           = false;
 

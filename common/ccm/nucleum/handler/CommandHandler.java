@@ -1,18 +1,15 @@
 package ccm.nucleum.handler;
 
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-
 import ccm.nucleum.command.CommandKill;
 import ccm.nucleum.command.CommandNO;
 import ccm.nucleum.command.CommandTPS;
 import ccm.nucleum.command.CommandTPX;
 import ccm.nucleum.utils.lib.Properties;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-public class CommandHandler
-{
+public class CommandHandler {
 
-    public static void initCommands(final FMLServerStartingEvent event)
-    {
+    public static void initCommands(final FMLServerStartingEvent event) {
 
         event.registerServerCommand(new CommandNO());
 
@@ -20,8 +17,7 @@ public class CommandHandler
 
         event.registerServerCommand(new CommandKill());
 
-        if (!Properties.mystLoaded){
+        if (!Properties.mystLoaded)
             event.registerServerCommand(new CommandTPX());
-        }
     }
 }

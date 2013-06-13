@@ -5,8 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class InventoryHelper extends BaseHelper
-{
+public class InventoryHelper extends BaseHelper {
 
     private static final String slot = "slot";
 
@@ -17,16 +16,14 @@ public class InventoryHelper extends BaseHelper
      *            The stacks in the current inventory to add to the NBTTagList.
      * @return The NBTTagList associated to the inventory.
      */
-    public static NBTTagList writeInventoryToNBT(final ItemStack[] stacks)
-    {
+    public static NBTTagList writeInventoryToNBT(final ItemStack[] stacks) {
         NBTTagCompound stackNBT;
         final NBTTagList list = new NBTTagList();
-        for (int i = 0; i < stacks.length; i++){
-            if (stacks[i] == null){
+        for (int i = 0; i < stacks.length; i++) {
+            if (stacks[i] == null)
                 continue;
-            }
             stackNBT = new NBTTagCompound();
-            stackNBT.setInteger(slot, i);
+            stackNBT.setInteger(InventoryHelper.slot, i);
             stacks[i].writeToNBT(stackNBT);
             list.appendTag(stackNBT);
         }
@@ -42,14 +39,13 @@ public class InventoryHelper extends BaseHelper
      *            The size of the Inventory.
      * @return The Items on the inventory.
      */
-    public static ItemStack[] readInventoryFromNBT(final NBTTagList list, final int size)
-    {
+    public static ItemStack[] readInventoryFromNBT(final NBTTagList list, final int size) {
         final ItemStack[] stacks = new ItemStack[size];
         NBTTagCompound compound;
         int index;
-        for (int i = 0; i < list.tagCount(); i++){
+        for (int i = 0; i < list.tagCount(); i++) {
             compound = (NBTTagCompound) list.tagAt(i);
-            index = compound.getInteger(slot);
+            index = compound.getInteger(InventoryHelper.slot);
             stacks[index] = ItemStack.loadItemStackFromNBT(compound);
         }
         return stacks;
@@ -68,33 +64,31 @@ public class InventoryHelper extends BaseHelper
      *            The inventory (A class implementing {@link IInventory})
      * @return The new {@link ItemStack}.
      */
-    public static ItemStack decrStackSize(final int slot, final int amount, final ItemStack[] stacks, final IInventory inventory)
-    {
-        if (stacks[slot] != null){
+    public static ItemStack decrStackSize(final int slot, final int amount,
+            final ItemStack[] stacks, final IInventory inventory) {
+        if (stacks[slot] != null) {
             ItemStack itemstack;
-            if (stacks[slot].stackSize <= amount){
+            if (stacks[slot].stackSize <= amount) {
                 itemstack = stacks[slot];
                 stacks[slot] = null;
                 inventory.onInventoryChanged();
                 return itemstack;
-            }else{
+            } else {
                 itemstack = stacks[slot].splitStack(amount);
-                if (stacks[slot].stackSize == 0){
+                if (stacks[slot].stackSize == 0)
                     stacks[slot] = null;
-                }
                 inventory.onInventoryChanged();
                 return itemstack;
             }
-        }else{
+        } else
             return null;
-        }
     }
 
     /**
-     * Checks the Inventory Array for either a empty slot or one that contains the output Item
-     * Example: {@code this.inventory[getBestInventory(this.inventory, 3, itemstack)]} That should
-     * work in
-     * the Counter
+     * Checks the Inventory Array for either a empty slot or one that contains
+     * the output Item Example:
+     * {@code this.inventory[getBestInventory(this.inventory, 3, itemstack)]}
+     * That should work in the Counter
      * 
      * @param inventory
      *            The inventory to search
@@ -104,15 +98,13 @@ public class InventoryHelper extends BaseHelper
      *            The output
      * @return The Slot number
      */
-    public static int getBestInventory(final ItemStack[] inventory, final int startSlot, final ItemStack output)
-    {
-        for (int j = startSlot; j < inventory.length; j++){
-            if (inventory[j] == output){
+    public static int getBestInventory(final ItemStack[] inventory, final int startSlot,
+            final ItemStack output) {
+        for (int j = startSlot; j < inventory.length; j++)
+            if (inventory[j] == output)
                 return j;
-            }else if (inventory[j] == null){
+            else if (inventory[j] == null)
                 return j;
-            }
-        }
         return startSlot;
     }
 }

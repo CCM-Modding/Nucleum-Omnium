@@ -8,8 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
-public final class TeleportHelper extends BaseHelper
-{
+public final class TeleportHelper extends BaseHelper {
 
     /**
      * Teleports a player to another
@@ -19,18 +18,19 @@ public final class TeleportHelper extends BaseHelper
      * @param player1
      *            Player that gets send
      */
-    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player, final EntityPlayerMP player1)
-    {
+    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
+            final EntityPlayerMP player1) {
         player.mountEntity((Entity) null);
-        if (player.dimension != player1.dimension){
-            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, player1.dimension);
-        }
-        player.playerNetServerHandler.setPlayerLocation(player1.posX, player1.posY, player1.posZ, player1.rotationYaw, player1.rotationPitch);
+        if (player.dimension != player1.dimension)
+            MinecraftServer.getServer().getConfigurationManager()
+                    .transferPlayerToDimension(player, player1.dimension);
+        player.playerNetServerHandler.setPlayerLocation(player1.posX, player1.posY, player1.posZ,
+                player1.rotationYaw, player1.rotationPitch);
         player.prevPosX = player.posX = player1.posX;
         player.prevPosY = player.posY = player1.posY;
         player.prevPosZ = player.posZ = player1.posZ;
-        CommandBase.notifyAdmins(sender, "commands.tpx.success", new Object[]
-        { player.getEntityName(), player1.getEntityName() });
+        CommandBase.notifyAdmins(sender, "commands.tpx.success",
+                new Object[] { player.getEntityName(), player1.getEntityName() });
     }
 
     /**
@@ -47,18 +47,19 @@ public final class TeleportHelper extends BaseHelper
      * @param d4
      *            The Z coordinate to send the player to
      */
-    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player, final int d1, final double d2, final double d3, final double d4)
-    {
+    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
+            final int d1, final double d2, final double d3, final double d4) {
         player.mountEntity((Entity) null);
-        if (player.dimension != d1){
-            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, d1);
-        }
+        if (player.dimension != d1)
+            MinecraftServer.getServer().getConfigurationManager()
+                    .transferPlayerToDimension(player, d1);
         player.setPositionAndUpdate(d2, d3, d4);
         player.prevPosX = player.posX = d2;
         player.prevPosY = player.posY = d3;
         player.prevPosZ = player.posZ = d4;
-        CommandBase.notifyAdmins(sender, "commands.tpx.success.coordinates", new Object[]
-        { player.getEntityName(), Double.valueOf(d1), Double.valueOf(d2), Double.valueOf(d3), Double.valueOf(d4) });
+        CommandBase.notifyAdmins(sender, "commands.tpx.success.coordinates",
+                new Object[] { player.getEntityName(), Double.valueOf(d1), Double.valueOf(d2),
+                        Double.valueOf(d3), Double.valueOf(d4) });
     }
 
     /**
@@ -67,8 +68,7 @@ public final class TeleportHelper extends BaseHelper
      * @param sender
      * @return The EntityPlayerMP corresponding to who send it
      */
-    public static EntityPlayerMP getPlayer(final ICommandSender sender)
-    {
+    public static EntityPlayerMP getPlayer(final ICommandSender sender) {
         return CommandBase.getCommandSenderAsPlayer(sender);
     }
 
@@ -80,50 +80,44 @@ public final class TeleportHelper extends BaseHelper
      * @param sender
      * @return The EntityPlayerMP corresponding to the name
      */
-    public static EntityPlayerMP getPlayer(final ICommandSender sender, final String name)
-    {
+    public static EntityPlayerMP getPlayer(final ICommandSender sender, final String name) {
         final EntityPlayerMP player = CommandBase.func_82359_c(sender, name);
 
-        if (player == null){
+        if (player == null)
             throw new PlayerNotFoundException();
-        }
         return player;
     }
 
-    public static double checkPosition(final ICommandSender sender, final double postion, final String argPos)
-    {
-        return checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
+    public static double checkPosition(final ICommandSender sender, final double postion,
+            final String argPos) {
+        return TeleportHelper.checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
     }
 
-    public static double checkPositionWithBounds(final ICommandSender sender, final double postion, String argPos, final int min, final int max)
-    {
+    public static double checkPositionWithBounds(final ICommandSender sender, final double postion,
+            String argPos, final int min, final int max) {
         final boolean flag = argPos.startsWith("~");
         double d1 = flag ? postion : 0.0D;
 
-        if (!flag || (argPos.length() > 1)){
+        if (!flag || argPos.length() > 1) {
             final boolean flag1 = argPos.contains(".");
 
-            if (flag){
+            if (flag)
                 argPos = argPos.substring(1);
-            }
 
             d1 += CommandBase.parseDouble(sender, argPos);
 
-            if (!flag1 && !flag){
+            if (!flag1 && !flag)
                 d1 += 0.5D;
-            }
         }
 
-        if ((min != 0) || (max != 0)){
-            if (d1 < min){
-                throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[]
-                { Double.valueOf(d1), Integer.valueOf(min) });
-            }
+        if (min != 0 || max != 0) {
+            if (d1 < min)
+                throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[] {
+                        Double.valueOf(d1), Integer.valueOf(min) });
 
-            if (d1 > max){
-                throw new NumberInvalidException("commands.generic.double.tooBig", new Object[]
-                { Double.valueOf(d1), Integer.valueOf(max) });
-            }
+            if (d1 > max)
+                throw new NumberInvalidException("commands.generic.double.tooBig", new Object[] {
+                        Double.valueOf(d1), Integer.valueOf(max) });
         }
 
         return d1;

@@ -5,12 +5,9 @@ import java.util.Random;
 import ccm.nucleum.NucleumOmnium;
 import ccm.nucleum.utils.exeptions.InstantiationExeption;
 
+public class BaseHelper {
 
-public class BaseHelper
-{
-
-    protected BaseHelper()
-    {
+    protected BaseHelper() {
         throw new InstantiationExeption(NucleumOmnium.instance);
     }
 

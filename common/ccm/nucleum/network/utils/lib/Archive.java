@@ -1,7 +1,6 @@
 package ccm.nucleum.network.utils.lib;
 
-public final class Archive
-{
+public final class Archive {
 
     public static final String MOD_ID                  = "nucleum_network";
 

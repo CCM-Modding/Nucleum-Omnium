@@ -8,43 +8,36 @@ import net.minecraft.item.ItemStack;
  * 
  * @author Zeldo Kavira
  */
-public final class InventoryCraftingFalse extends InventoryCrafting
-{
+public final class InventoryCraftingFalse extends InventoryCrafting {
 
-    public InventoryCraftingFalse(final int width,
-                                  final int height)
-    {
+    public InventoryCraftingFalse(final int width, final int height) {
 
         super(null, width, height);
     }
 
     @Override
-    public ItemStack decrStackSize(final int slot, final int amount)
-    {
+    public ItemStack decrStackSize(final int slot, final int amount) {
 
-        if (this.stackList[slot] != null){
+        if (this.stackList[slot] != null) {
             ItemStack stack;
 
-            if (this.stackList[slot].stackSize <= amount){
+            if (this.stackList[slot].stackSize <= amount) {
                 stack = this.stackList[slot];
                 this.stackList[slot] = null;
                 return stack;
-            }else{
+            } else {
                 stack = this.stackList[slot].splitStack(amount);
 
-                if (this.stackList[slot].stackSize == 0){
+                if (this.stackList[slot].stackSize == 0)
                     this.stackList[slot] = null;
-                }
                 return stack;
             }
-        }else{
+        } else
             return null;
-        }
     }
 
     @Override
-    public void setInventorySlotContents(final int slot, final ItemStack stack)
-    {
+    public void setInventorySlotContents(final int slot, final ItemStack stack) {
 
         this.stackList[slot] = stack;
     }

@@ -3,18 +3,17 @@ package lib.cofh.api.energy;
 import net.minecraft.item.ItemStack;
 
 /**
- * Implement this interface on Item classes that support external manipulation of their internal
- * energy storages.
- * A reference implementation is provided {@link ItemEnergyContainer}.
+ * Implement this interface on Item classes that support external manipulation
+ * of their internal energy storages. A reference implementation is provided
+ * {@link ItemEnergyContainer}.
  * 
  * @author King Lemming
  */
-public interface IEnergyContainerItem
-{
+public interface IEnergyContainerItem {
 
     /**
-     * Adds energy to an item. Returns the quantity of energy that was accepted. This should always
-     * return 0 if the item cannot be externally charged.
+     * Adds energy to an item. Returns the quantity of energy that was accepted.
+     * This should always return 0 if the item cannot be externally charged.
      * 
      * @param theItem
      *            ItemStack to be charged.
@@ -27,8 +26,9 @@ public interface IEnergyContainerItem
     int receiveEnergy(ItemStack theItem, int maxReceive, boolean doReceive);
 
     /**
-     * Removes energy from an item. Returns the quantity of energy that was removed. This should
-     * always return 0 if the item cannot be externally discharged.
+     * Removes energy from an item. Returns the quantity of energy that was
+     * removed. This should always return 0 if the item cannot be externally
+     * discharged.
      * 
      * @param theItem
      *            ItemStack to be discharged.

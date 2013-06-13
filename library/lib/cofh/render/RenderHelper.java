@@ -1,7 +1,5 @@
 package lib.cofh.render;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -10,13 +8,14 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
+import org.lwjgl.opengl.GL11;
+
 /**
  * Contains various helper functions to assist with rendering.
  * 
  * @author King Lemming
  */
-public final class RenderHelper
-{
+public final class RenderHelper {
 
     public static final double RENDER_OFFSET  = 1.0D / 1024.0D;
 
@@ -24,33 +23,29 @@ public final class RenderHelper
 
     public static final String MC_ITEM_SHEET  = "/gui/items.png";
 
-    private RenderHelper()
-    {
+    private RenderHelper() {
 
     }
 
-    public static final RenderEngine engine()
-    {
+    public static final RenderEngine engine() {
 
         return Minecraft.getMinecraft().renderEngine;
     }
 
-    public static final Tessellator tessellator()
-    {
+    public static final Tessellator tessellator() {
 
         return Tessellator.instance;
     }
 
-    public static void renderItemAsBlock(final RenderBlocks renderer, final ItemStack item, final double translateX, final double translateY, final double translateZ)
-    {
+    public static void renderItemAsBlock(final RenderBlocks renderer, final ItemStack item,
+            final double translateX, final double translateY, final double translateZ) {
 
-        final Tessellator tessellator = tessellator();
+        final Tessellator tessellator = RenderHelper.tessellator();
         final Block block = Block.stone;
         final Icon texture = item.getIconIndex();
 
-        if (texture == null){
+        if (texture == null)
             return;
-        }
         renderer.setRenderBoundsFromBlock(block);
 
         GL11.glTranslated(translateX, translateY, translateZ);
@@ -76,40 +71,36 @@ public final class RenderHelper
         tessellator.draw();
     }
 
-    public static final void bindItemTexture(final ItemStack stack)
-    {
+    public static final void bindItemTexture(final ItemStack stack) {
 
-        engine().bindTexture(stack.getItemSpriteNumber() == 0 ? MC_BLOCK_SHEET : MC_ITEM_SHEET);
+        RenderHelper.engine().bindTexture(
+                stack.getItemSpriteNumber() == 0 ? RenderHelper.MC_BLOCK_SHEET
+                        : RenderHelper.MC_ITEM_SHEET);
     }
 
-    public static final void bindTexture(final String string)
-    {
+    public static final void bindTexture(final String string) {
 
-        engine().bindTexture(string);
+        RenderHelper.engine().bindTexture(string);
     }
 
-    public static final void setBlockTextureSheet()
-    {
+    public static final void setBlockTextureSheet() {
 
-        bindTexture(MC_BLOCK_SHEET);
+        RenderHelper.bindTexture(RenderHelper.MC_BLOCK_SHEET);
     }
 
-    public static final void setItemTextureSheet()
-    {
+    public static final void setItemTextureSheet() {
 
-        bindTexture(MC_ITEM_SHEET);
+        RenderHelper.bindTexture(RenderHelper.MC_ITEM_SHEET);
     }
 
-    public static final void setDefaultFontTextureSheet()
-    {
+    public static final void setDefaultFontTextureSheet() {
 
-        bindTexture("/font/default.png");
+        RenderHelper.bindTexture("/font/default.png");
     }
 
-    public static final void setSGAFontTextureSheet()
-    {
+    public static final void setSGAFontTextureSheet() {
 
-        bindTexture("/font/alternate.png");
+        RenderHelper.bindTexture("/font/alternate.png");
     }
 
 }
