@@ -14,10 +14,8 @@ import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid = Archive.MOD_ID,
-     name = Archive.MOD_NAME,
-     version = Archive.MOD_VERSION,
-     dependencies = Archive.MOD_DEPENDANCIES,
-     certificateFingerprint = Archive.MOD_FIGERPRINT)
+     certificateFingerprint = Archive.MOD_FIGERPRINT,
+     useMetadata = true)
 @NetworkMod(clientSideRequired = true,
             serverSideRequired = false,
             channels = Archive.MOD_CHANNEL)

@@ -6,11 +6,7 @@ public final class Archive extends BaseNIClass {
     
     public static final String MOD_ID                  = "nucleum_network";
     
-    public static final String MOD_NAME                = "Nucleum Network";
-    
     public static final String MOD_PREFIX              = "nucleum";
-    
-    public static final String MOD_VERSION             = "@VERSION@";
     
     public static final String MOD_FIGERPRINT          = "@FINGERPRINT@";
     
