@@ -48,6 +48,7 @@ public class NucleumOmnium extends DummyModContainer implements IMod {
         final ModMetadata meta = getMetadata();
         meta.modId = Archive.MOD_ID;
         meta.name = Archive.MOD_NAME;
+        meta.version = "@VERSION@";
         meta.authorList = Arrays.asList("Captain_Shadows");
         meta.url = "https://github.com/CCM-Modding/Nucleum-Omnium";
         meta.updateUrl = "http://driesgames.game-server.cc:8080/view/CCM/job/Nucleum-Omnium/";
