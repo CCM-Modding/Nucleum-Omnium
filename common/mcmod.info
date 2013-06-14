@@ -50,7 +50,7 @@
                "morton00000" ],
   "parent":"nucleum_omnium",
   "dependencies": [
-     "required-after:nucleum_omnium"
+     "required-after:nucleum_world"
   ]
 }
 ]
