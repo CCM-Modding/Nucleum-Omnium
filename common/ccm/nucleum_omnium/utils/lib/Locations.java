@@ -4,7 +4,7 @@ public final class Locations {
     
     public static final String LANGUAGE_FILE = "/mods/" + Archive.MOD_ID + "/lang/";
     
-    public static final String proxy         = "ccm.nucleum.proxy.";
+    public static final String proxy         = "ccm." + Archive.MOD_ID + ".proxy.";
     
     public static final String CLIENT_PROXY  = Locations.proxy + "ClientProxy";
     
