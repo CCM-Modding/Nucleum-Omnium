@@ -25,33 +25,34 @@ import cpw.mods.fml.relauncher.Side;
      version = Archive.MOD_VERSION,
      dependencies = Archive.MOD_DEPENDANCIES)
 public class NucleumWorld extends BaseMod implements IMod {
-
+    
     /**
      * The Instance
      */
     @Instance(Archive.MOD_ID)
     public static NucleumWorld     instance;
-
+    
     public static AdvConfiguration config;
-
+    
     @PreInit
     public void preInit(final FMLPreInitializationEvent evt) {
-        NucleumWorld.config = this.initializeConfig(evt);
-
+        NucleumWorld.config = initializeConfig(evt);
+        
         GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
-
+        
         MinecraftForge.EVENT_BUS.register(WorldGenHandler.instance);
-
+        
         MinecraftForge.ORE_GEN_BUS.register(WorldGenHandler.instance);
     }
-
+    
     @Init
     public void initialize(final FMLInitializationEvent event) {
     }
-
+    
     @PostInit
     public void modsLoaded(final FMLPostInitializationEvent event) {
-        if (Properties.retroOreGen)
+        if (Properties.retroOreGen) {
             TickRegistry.registerTickHandler(TickHandlerWorld.instance, Side.SERVER);
+        }
     }
 }

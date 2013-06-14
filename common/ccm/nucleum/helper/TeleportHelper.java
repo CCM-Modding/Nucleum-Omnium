@@ -7,9 +7,12 @@ import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import ccm.nucleum.BaseNIClass;
+import ccm.nucleum.NucleumOmnium;
+import ccm.nucleum.utils.exeptions.WTFExeption;
 
-public final class TeleportHelper extends BaseHelper {
-
+public final class TeleportHelper extends BaseNIClass {
+    
     /**
      * Teleports a player to another
      * 
@@ -21,47 +24,54 @@ public final class TeleportHelper extends BaseHelper {
     public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
             final EntityPlayerMP player1) {
         player.mountEntity((Entity) null);
-        if (player.dimension != player1.dimension)
+        if (player.dimension != player1.dimension) {
             MinecraftServer.getServer().getConfigurationManager()
                     .transferPlayerToDimension(player, player1.dimension);
-        player.playerNetServerHandler.setPlayerLocation(player1.posX, player1.posY, player1.posZ,
-                player1.rotationYaw, player1.rotationPitch);
+        }
+        player.playerNetServerHandler.setPlayerLocation(player1.posX,
+                                                        player1.posY,
+                                                        player1.posZ,
+                                                        player1.rotationYaw,
+                                                        player1.rotationPitch);
         player.prevPosX = player.posX = player1.posX;
         player.prevPosY = player.posY = player1.posY;
         player.prevPosZ = player.posZ = player1.posZ;
-        CommandBase.notifyAdmins(sender, "commands.tpx.success",
-                new Object[] { player.getEntityName(), player1.getEntityName() });
+        CommandBase.notifyAdmins(sender,
+                                 "commands.tpx.success",
+                                 new Object[] { player.getEntityName(), player1.getEntityName() });
     }
-
+    
     /**
      * Teleports a player to coordinates
      * 
      * @param player
      *            Player to send
-     * @param d1
+     * @param dimension
      *            The dimension to send the player to
-     * @param d2
+     * @param x
      *            The X coordinate to send the player to
-     * @param d3
+     * @param y
      *            The Y coordinate to send the player to
-     * @param d4
+     * @param z
      *            The Z coordinate to send the player to
      */
     public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
-            final int d1, final double d2, final double d3, final double d4) {
+            final int dimension, final double x, final double y, final double z) {
         player.mountEntity((Entity) null);
-        if (player.dimension != d1)
+        if (player.dimension != dimension) {
             MinecraftServer.getServer().getConfigurationManager()
-                    .transferPlayerToDimension(player, d1);
-        player.setPositionAndUpdate(d2, d3, d4);
-        player.prevPosX = player.posX = d2;
-        player.prevPosY = player.posY = d3;
-        player.prevPosZ = player.posZ = d4;
-        CommandBase.notifyAdmins(sender, "commands.tpx.success.coordinates",
-                new Object[] { player.getEntityName(), Double.valueOf(d1), Double.valueOf(d2),
-                        Double.valueOf(d3), Double.valueOf(d4) });
+                    .transferPlayerToDimension(player, dimension);
+        }
+        player.setPositionAndUpdate(x, y, z);
+        player.prevPosX = player.posX = x;
+        player.prevPosY = player.posY = y;
+        player.prevPosZ = player.posZ = z;
+        CommandBase.notifyAdmins(sender,
+                                 "commands.tpx.success.coordinates",
+                                 new Object[] { player.getEntityName(), Integer.valueOf(dimension),
+                                         Double.valueOf(x), Double.valueOf(y), Double.valueOf(z) });
     }
-
+    
     /**
      * Gets a player
      * 
@@ -71,7 +81,7 @@ public final class TeleportHelper extends BaseHelper {
     public static EntityPlayerMP getPlayer(final ICommandSender sender) {
         return CommandBase.getCommandSenderAsPlayer(sender);
     }
-
+    
     /**
      * Gets a player name form a specified string
      * 
@@ -82,44 +92,57 @@ public final class TeleportHelper extends BaseHelper {
      */
     public static EntityPlayerMP getPlayer(final ICommandSender sender, final String name) {
         final EntityPlayerMP player = CommandBase.func_82359_c(sender, name);
-
-        if (player == null)
+        
+        if (player == null) {
             throw new PlayerNotFoundException();
+        }
         return player;
     }
-
+    
     public static double checkPosition(final ICommandSender sender, final double postion,
             final String argPos) {
         return TeleportHelper.checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
     }
-
+    
     public static double checkPositionWithBounds(final ICommandSender sender, final double postion,
             String argPos, final int min, final int max) {
         final boolean flag = argPos.startsWith("~");
         double d1 = flag ? postion : 0.0D;
-
-        if (!flag || argPos.length() > 1) {
+        
+        if (!flag || (argPos.length() > 1)) {
             final boolean flag1 = argPos.contains(".");
-
-            if (flag)
+            
+            if (flag) {
                 argPos = argPos.substring(1);
-
+            }
+            
             d1 += CommandBase.parseDouble(sender, argPos);
-
-            if (!flag1 && !flag)
+            
+            if (!flag1 && !flag) {
                 d1 += 0.5D;
+            }
         }
-
-        if (min != 0 || max != 0) {
-            if (d1 < min)
-                throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[] {
-                        Double.valueOf(d1), Integer.valueOf(min) });
-
-            if (d1 > max)
-                throw new NumberInvalidException("commands.generic.double.tooBig", new Object[] {
-                        Double.valueOf(d1), Integer.valueOf(max) });
+        
+        if ((min != 0) || (max != 0)) {
+            if (d1 < min) {
+                if (d1 < -30000000 && d1 >= -300000000) {
+                    throw new NumberInvalidException("commands.generic.double.tooSmall",
+                            new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
+                } else if (d1 < -300000000 && d1 >= Integer.MIN_VALUE) {
+                    throw new WTFExeption(NucleumOmnium.instance);
+                }
+            }
+            
+            if (d1 > max) {
+                if (d1 > 30000000 && d1 <= 300000000) {
+                    throw new NumberInvalidException("commands.generic.double.tooBig",
+                            new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
+                } else if (d1 > 300000000 && d1 <= Integer.MAX_VALUE) {
+                    throw new WTFExeption(NucleumOmnium.instance);
+                }
+            }
         }
-
+        
         return d1;
     }
 }

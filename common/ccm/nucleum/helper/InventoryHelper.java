@@ -4,11 +4,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import ccm.nucleum.BaseNIClass;
 
-public class InventoryHelper extends BaseHelper {
-
+public class InventoryHelper extends BaseNIClass {
+    
     private static final String slot = "slot";
-
+    
     /**
      * Writes a inventory to a NBTTagList.
      * 
@@ -20,8 +21,9 @@ public class InventoryHelper extends BaseHelper {
         NBTTagCompound stackNBT;
         final NBTTagList list = new NBTTagList();
         for (int i = 0; i < stacks.length; i++) {
-            if (stacks[i] == null)
+            if (stacks[i] == null) {
                 continue;
+            }
             stackNBT = new NBTTagCompound();
             stackNBT.setInteger(InventoryHelper.slot, i);
             stacks[i].writeToNBT(stackNBT);
@@ -29,7 +31,7 @@ public class InventoryHelper extends BaseHelper {
         }
         return list;
     }
-
+    
     /**
      * Reads a Inventory from a NBTTagList.
      * 
@@ -50,7 +52,7 @@ public class InventoryHelper extends BaseHelper {
         }
         return stacks;
     }
-
+    
     /**
      * Decreases the {@link ItemStack} size in a slot.
      * 
@@ -75,15 +77,17 @@ public class InventoryHelper extends BaseHelper {
                 return itemstack;
             } else {
                 itemstack = stacks[slot].splitStack(amount);
-                if (stacks[slot].stackSize == 0)
+                if (stacks[slot].stackSize == 0) {
                     stacks[slot] = null;
+                }
                 inventory.onInventoryChanged();
                 return itemstack;
             }
-        } else
+        } else {
             return null;
+        }
     }
-
+    
     /**
      * Checks the Inventory Array for either a empty slot or one that contains
      * the output Item Example:
@@ -100,11 +104,13 @@ public class InventoryHelper extends BaseHelper {
      */
     public static int getBestInventory(final ItemStack[] inventory, final int startSlot,
             final ItemStack output) {
-        for (int j = startSlot; j < inventory.length; j++)
-            if (inventory[j] == output)
+        for (int j = startSlot; j < inventory.length; j++) {
+            if (inventory[j] == output) {
                 return j;
-            else if (inventory[j] == null)
+            } else if (inventory[j] == null) {
                 return j;
+            }
+        }
         return startSlot;
     }
 }

@@ -2,14 +2,14 @@ package ccm.nucleum.helper;
 
 import java.util.List;
 
-public final class JavaHelper extends BaseHelper {
+import ccm.nucleum.BaseNIClass;
 
+public final class JavaHelper extends BaseNIClass {
+    
     /**
-     * Checks if a string is a number
-     * 
      * @param str
      *            The String to test
-     * @return true if it is a Number; false otherwise
+     * @return true if it is a Number. false otherwise
      */
     @SuppressWarnings("unused")
     public static boolean isNumeric(final String str) {
@@ -20,34 +20,32 @@ public final class JavaHelper extends BaseHelper {
         }
         return true;
     }
-
+    
     /**
-     * Converts a {@code List<Integer>} to a {@code int[]}
-     * 
      * @param list
-     *            The {@code List<Integer>} to convert into a {@code int[]}
+     *            A {@code List<Integer>}
      * @return The corresponding {@code int[]}
      */
     public static int[] toIntArray(final List<Integer> list) {
         final int[] ret = new int[list.size()];
         int i = 0;
-        for (final Integer e : list)
+        for (final Integer e : list) {
             ret[i++] = e.intValue();
+        }
         return ret;
     }
-
+    
     /**
-     * Converts a {@code List<Float>} to a {@code float[]}
-     * 
      * @param list
-     *            The {@code List<Float>} to convert into a {@code float[]}
+     *            A {@code List<Float>}
      * @return The corresponding {@code float[]}
      */
     public static float[] toFloatArray(final List<Float> list) {
         final float[] ret = new float[list.size()];
         int i = 0;
-        for (final Float e : list)
+        for (final Float e : list) {
             ret[i++] = e.intValue();
+        }
         return ret;
     }
 }

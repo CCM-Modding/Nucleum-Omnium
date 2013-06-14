@@ -12,39 +12,40 @@ import net.minecraft.world.World;
 import ccm.nucleum.IMod;
 import cpw.mods.fml.common.network.IGuiHandler;
 
-public class GUIHandler implements IGuiHandler {
-
+public final class GUIHandler implements IGuiHandler {
+    
     private static Map<Integer, Class<? extends GuiContainer>> guiList       = new HashMap<Integer, Class<? extends GuiContainer>>();
-
+    
     private static Map<Integer, Class<? extends Container>>    containerList = new HashMap<Integer, Class<? extends Container>>();
-
+    
     private static GUIHandler                                  instance;
-
+    
     public static GUIHandler instance() {
-        if (GUIHandler.instance == null)
+        if (GUIHandler.instance == null) {
             GUIHandler.instance = new GUIHandler();
+        }
         return GUIHandler.instance;
     }
-
+    
     public static void registerGuiServer(final IMod mod, final String guiID,
             final Class<? extends Container> container) {
         final String fixedID = guiID + mod.getName();
         GUIHandler.containerList.put(fixedID.hashCode(), container);
     }
-
+    
     public static void registerGuiClient(final IMod mod, final String guiID,
             final Class<? extends GuiContainer> gui, final Class<? extends Container> container) {
         final String fixedID = guiID + mod.getName();
         GUIHandler.guiList.put(fixedID.hashCode(), gui);
         GUIHandler.containerList.put(fixedID.hashCode(), container);
     }
-
+    
     public static void openGui(final IMod mod, final String guiID, final EntityPlayer player,
             final World world, final int x, final int y, final int z) {
         final String fixedID = guiID + mod.getName();
         player.openGui(mod, fixedID.hashCode(), world, x, y, z);
     }
-
+    
     @Override
     public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world,
             final int x, final int y, final int z) {
@@ -59,7 +60,7 @@ public class GUIHandler implements IGuiHandler {
         }
         return container;
     }
-
+    
     @Override
     public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world,
             final int x, final int y, final int z) {

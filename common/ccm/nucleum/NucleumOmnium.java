@@ -27,25 +27,25 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class NucleumOmnium extends DummyModContainer implements IMod {
-
+    
     /**
      * The Instance
      */
     @Instance(Archive.MOD_ID)
     public static NucleumOmnium   instance;
-
+    
     /**
      * The proxy
      */
     @SidedProxy(serverSide = Locations.SERVER_PROXY,
                 clientSide = Locations.CLIENT_PROXY)
     public static CommonProxy     proxy;
-
+    
     public static MinecraftServer server;
-
+    
     public NucleumOmnium() {
         super(new ModMetadata());
-        final ModMetadata meta = this.getMetadata();
+        final ModMetadata meta = getMetadata();
         meta.modId = Archive.MOD_ID;
         meta.name = Archive.MOD_NAME;
         meta.version = Archive.MOD_VERSION;
@@ -56,46 +56,47 @@ public class NucleumOmnium extends DummyModContainer implements IMod {
         meta.logoFile = "/mods/nucleum-omnium/textures/logo.png";
         meta.description = "Core functionality for all CCM Mods";
     }
-
+    
     @Override
     public boolean registerBus(final EventBus bus, final LoadController controller) {
         bus.register(this);
         return true;
     }
-
+    
     @Subscribe
     public void preInit(final FMLPreInitializationEvent evt) {
-        if (!Handler.isModLoaded(this))
+        if (!Handler.isModLoaded(this)) {
             Handler.initLog(this);
+        }
     }
-
+    
     @Subscribe
     public void init(final FMLInitializationEvent event) {
         NucleumOmnium.proxy.initCapes();
-
+        
         NucleumOmnium.proxy.initEventHandling();
-
+        
         NucleumOmnium.proxy.initModelHandlers();
-
+        
         ModHandler.addModToHandle(new ModsMystcraft());
-
+        
         new OmniumLanguagePack().loadLangs();
     }
-
+    
     @Subscribe
     public void PostInit(final FMLPostInitializationEvent event) {
         ModHandler.init();
-
+        
         Handler.loadMod(this);
     }
-
+    
     @Subscribe
     public void serverStarting(final FMLServerStartingEvent event) {
         // Initialize the custom commands
         CommandHandler.initCommands(event);
-
+        
         NucleumOmnium.server = event.getServer();
-
+        
         DataHelper.init();
     }
 }

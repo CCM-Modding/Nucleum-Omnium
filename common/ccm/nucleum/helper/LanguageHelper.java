@@ -1,9 +1,10 @@
 package ccm.nucleum.helper;
 
+import ccm.nucleum.BaseNIClass;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-public final class LanguageHelper extends BaseHelper {
-
+public final class LanguageHelper extends BaseNIClass {
+    
     /***
      * Returns the locale from the file name.
      * 
@@ -15,7 +16,7 @@ public final class LanguageHelper extends BaseHelper {
     public static String getLangFromFileName(final String fileName) {
         return fileName.substring(fileName.lastIndexOf('/') + 1, fileName.lastIndexOf('.'));
     }
-
+    
     /**
      * Gets the localized String.
      * 
@@ -26,7 +27,7 @@ public final class LanguageHelper extends BaseHelper {
     public static String getLocalizedString(final String key) {
         return LanguageRegistry.instance().getStringLocalization(key);
     }
-
+    
     /***
      * Simple test to determine if a specified file name represents a XML file
      * or not

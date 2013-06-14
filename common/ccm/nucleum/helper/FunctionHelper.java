@@ -6,10 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenDesert;
+import ccm.nucleum.BaseNIClass;
 import ccm.nucleum.NucleumOmnium;
 
-public final class FunctionHelper extends BaseHelper {
-
+public final class FunctionHelper extends BaseNIClass {
+    
     /**
      * Checks if the sun is visible
      * 
@@ -29,10 +30,10 @@ public final class FunctionHelper extends BaseHelper {
         return world.isDaytime()
                 && !world.provider.hasNoSky
                 && world.canBlockSeeTheSky(xCoord, yCoord, zCoord)
-                && (world.getWorldChunkManager().getBiomeGenAt(xCoord, yCoord) instanceof BiomeGenDesert || !world
-                        .isRaining() && !world.isThundering());
+                && ((world.getWorldChunkManager().getBiomeGenAt(xCoord, yCoord) instanceof BiomeGenDesert) || (!world
+                        .isRaining() && !world.isThundering()));
     }
-
+    
     /**
      * Checks if there is Lava or Fire below the block
      * 
@@ -50,14 +51,15 @@ public final class FunctionHelper extends BaseHelper {
     public static boolean isFireBelow(final World world, final int xCoord, final int yCoord,
             final int zCoord) {
         final Block block = Block.blocksList[world.getBlockId(xCoord, yCoord, zCoord)];
-        if (block.blockMaterial == Material.fire)
+        if (block.blockMaterial == Material.fire) {
             return true;
-        else if (block.blockMaterial == Material.lava)
+        } else if (block.blockMaterial == Material.lava) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
-
+    
     /**
      * Gets all the Dimensions listed by their Dimension ID
      * 
@@ -65,8 +67,9 @@ public final class FunctionHelper extends BaseHelper {
      */
     public static HashMap<Integer, World> getDimensions() {
         final HashMap<Integer, World> dimensions = new HashMap<Integer, World>();
-        for (final World world : NucleumOmnium.server.worldServers)
+        for (final World world : NucleumOmnium.server.worldServers) {
             dimensions.put(Integer.valueOf(world.provider.dimensionId), world);
+        }
         return dimensions;
     }
 }

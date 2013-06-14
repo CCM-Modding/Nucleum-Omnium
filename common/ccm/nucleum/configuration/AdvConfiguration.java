@@ -12,11 +12,11 @@ import net.minecraftforge.common.Property;
  * Forge Configurations.
  */
 public class AdvConfiguration extends Configuration {
-
+    
     public AdvConfiguration() {
         super();
     }
-
+    
     /**
      * Creates a configuration file for the file given in parameter.
      * 
@@ -26,7 +26,7 @@ public class AdvConfiguration extends Configuration {
     public AdvConfiguration(final File configFile) {
         super(configFile);
     }
-
+    
     /**
      * Creates a configuration file for the file given in parameter. And makes
      * sure that the categories are case sensitive
@@ -40,7 +40,7 @@ public class AdvConfiguration extends Configuration {
     public AdvConfiguration(final File configFile, final boolean caseSensitiveCustomCategories) {
         super(configFile, caseSensitiveCustomCategories);
     }
-
+    
     /**
      * Gets or creates a block id property. If the block id property key is
      * already in the configuration, then it will be used. Otherwise, defaultId
@@ -57,7 +57,7 @@ public class AdvConfiguration extends Configuration {
     public Property getBlock(final String key, final int defaultID) {
         return this.getBlock(Configuration.CATEGORY_BLOCK, key, defaultID, null);
     }
-
+    
     /**
      * Gets or creates a block id property. If the block id property key is
      * already in the configuration, then it will be used. Otherwise, defaultId
@@ -76,7 +76,7 @@ public class AdvConfiguration extends Configuration {
     public Property getBlock(final String key, final int defaultID, final String comment) {
         return this.getBlock(Configuration.CATEGORY_BLOCK, key, defaultID, comment);
     }
-
+    
     /**
      * Gets or creates a block id property. If the block id property key is
      * already in the configuration, then it will be used. Otherwise, defaultId
@@ -93,9 +93,9 @@ public class AdvConfiguration extends Configuration {
      */
     @Override
     public Property getBlock(final String category, final String key, final int defaultID) {
-        return super.getBlock(category, key, this.getFreeID(defaultID, Block.blocksList));
+        return super.getBlock(category, key, getFreeID(defaultID, Block.blocksList));
     }
-
+    
     /**
      * Gets or creates a block id property. If the block id property key is
      * already in the configuration, then it will be used. Otherwise, defaultId
@@ -115,9 +115,9 @@ public class AdvConfiguration extends Configuration {
     @Override
     public Property getBlock(final String category, final String key, final int defaultID,
             final String comment) {
-        return super.getBlock(category, key, this.getFreeID(defaultID, Block.blocksList), comment);
+        return super.getBlock(category, key, getFreeID(defaultID, Block.blocksList), comment);
     }
-
+    
     /**
      * Special version of getBlock to be used when you want to garentee the ID
      * you get is below 256 This should ONLY be used by mods who do low level
@@ -143,10 +143,12 @@ public class AdvConfiguration extends Configuration {
     @Override
     public Property getTerrainBlock(final String category, final String key, final int defaultID,
             final String comment) {
-        return super.getTerrainBlock(category, key,
-                this.getTerrainFreeID(defaultID, Block.blocksList), comment);
+        return super.getTerrainBlock(category,
+                                     key,
+                                     getTerrainFreeID(defaultID, Block.blocksList),
+                                     comment);
     }
-
+    
     /**
      * Gets or creates a item id property. If the item id property key is
      * already in the configuration, then it will be used. Otherwise, defaultId
@@ -163,7 +165,7 @@ public class AdvConfiguration extends Configuration {
     public Property getItem(final String key, final int defaultID) {
         return this.getItem(Configuration.CATEGORY_ITEM, key, defaultID, null);
     }
-
+    
     /**
      * Gets or creates a item id property. If the item id property key is
      * already in the configuration, then it will be used. Otherwise, defaultId
@@ -182,7 +184,7 @@ public class AdvConfiguration extends Configuration {
     public Property getItem(final String key, final int defaultID, final String comment) {
         return this.getItem(Configuration.CATEGORY_ITEM, key, defaultID, comment);
     }
-
+    
     /**
      * Gets or creatse a item id property. If the item id property key is
      * already in the configuration, then it will be used. Otherwise, defaultId
@@ -201,7 +203,7 @@ public class AdvConfiguration extends Configuration {
     public Property getItem(final String category, final String key, final int defaultID) {
         return this.getItem(category, key, defaultID, null);
     }
-
+    
     /**
      * Gets or creates a item id property. If the item id property key is
      * already in the configuration, then it will be used. Otherwise, defaultId
@@ -221,10 +223,10 @@ public class AdvConfiguration extends Configuration {
     @Override
     public Property getItem(final String category, final String key, final int defaultID,
             final String comment) {
-
-        return super.getItem(category, key, this.getFreeID(defaultID, Item.itemsList), comment);
+        
+        return super.getItem(category, key, getFreeID(defaultID, Item.itemsList), comment);
     }
-
+    
     /**
      * Gets a free ID by checking against the array passed in
      * 
@@ -235,19 +237,20 @@ public class AdvConfiguration extends Configuration {
      *            {@code Block.blocksList}
      */
     private int getFreeID(final int defaultID, final Object[] array) {
-        if (array[defaultID] == null)
+        if (array[defaultID] == null) {
             return defaultID;
-        else {
+        } else {
             int freeID = defaultID;
-            for (int i = freeID; i < array.length; i++)
+            for (int i = freeID; i < array.length; i++) {
                 if (array[i] == null) {
                     freeID = i;
                     break;
                 }
+            }
             return freeID;
         }
     }
-
+    
     /**
      * Special version of getFreeID used for and only for terrain gen ids
      * 
@@ -258,24 +261,27 @@ public class AdvConfiguration extends Configuration {
      *            The array to search in; Typically {@code Block.blocksList}
      */
     private int getTerrainFreeID(final int defaultID, final Object[] array) {
-        if (defaultID < 256 && array[defaultID] == null)
+        if ((defaultID < 256) && (array[defaultID] == null)) {
             return defaultID;
-        else {
+        } else {
             int freeID;
-            if (defaultID < 256)
+            if (defaultID < 256) {
                 freeID = defaultID;
-            else
+            } else {
                 freeID = 1;
-            for (int i = freeID; i < array.length; i++)
-                if (array[i] == null)
+            }
+            for (int i = freeID; i < array.length; i++) {
+                if (array[i] == null) {
                     if (i < 256) {
                         freeID = i;
                         break;
                     }
+                }
+            }
             return freeID;
         }
     }
-
+    
     /**
      * @param category
      * @param key
@@ -283,10 +289,10 @@ public class AdvConfiguration extends Configuration {
      * @return
      */
     public int getProp(final String category, final String key, final int defaultValue) {
-
+        
         return super.get(category, key, defaultValue).getInt();
     }
-
+    
     /**
      * @param category
      * @param key
@@ -294,10 +300,10 @@ public class AdvConfiguration extends Configuration {
      * @return
      */
     public boolean getProp(final String category, final String key, final boolean defaultValue) {
-
+        
         return super.get(category, key, defaultValue).getBoolean(defaultValue);
     }
-
+    
     /**
      * @param category
      * @param key
@@ -305,10 +311,10 @@ public class AdvConfiguration extends Configuration {
      * @return
      */
     public String getProp(final String category, final String key, final String defaultValue) {
-
+        
         return super.get(category, key, defaultValue).getString();
     }
-
+    
     /**
      * @param category
      * @param key
@@ -316,10 +322,10 @@ public class AdvConfiguration extends Configuration {
      * @return
      */
     public Property getProperty(final String category, final String key, final int defaultValue) {
-
+        
         return super.get(category, key, defaultValue);
     }
-
+    
     /**
      * @param category
      * @param key
@@ -327,10 +333,10 @@ public class AdvConfiguration extends Configuration {
      * @return
      */
     public Property getProperty(final String category, final String key, final boolean defaultValue) {
-
+        
         return super.get(category, key, defaultValue);
     }
-
+    
     /**
      * @param category
      * @param key
@@ -338,10 +344,10 @@ public class AdvConfiguration extends Configuration {
      * @return
      */
     public Property getProperty(final String category, final String key, final String defaultValue) {
-
+        
         return super.get(category, key, defaultValue);
     }
-
+    
     /**
      * If a pre-existing Configuration file didn't exist it creates a new one.
      * If there were changes to the existing Configuration file, It saves them.
@@ -349,7 +355,8 @@ public class AdvConfiguration extends Configuration {
      */
     @Override
     public void save() {
-        if (super.hasChanged())
+        if (super.hasChanged()) {
             super.save();
+        }
     }
 }

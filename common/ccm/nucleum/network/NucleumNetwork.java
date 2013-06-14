@@ -23,13 +23,13 @@ import cpw.mods.fml.common.network.NetworkMod;
             channels = Archive.MOD_CHANNEL)
 @ModstatInfo(prefix = Archive.MOD_PREFIX)
 public class NucleumNetwork extends BaseMod implements IMod {
-
+    
     /**
      * The Instance
      */
     @Instance(Archive.MOD_ID)
     public static NucleumNetwork instance;
-
+    
     @FingerprintWarning
     public void invalidFingerprint(final FMLFingerprintViolationEvent event) {
         /*

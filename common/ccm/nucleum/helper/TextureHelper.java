@@ -1,9 +1,10 @@
 package ccm.nucleum.helper;
 
 import net.minecraft.item.Item;
+import ccm.nucleum.BaseNIClass;
 
-public class TextureHelper extends BaseHelper {
-
+public class TextureHelper extends BaseNIClass {
+    
     /**
      * @param name
      *            Name of the thing to make a texture
@@ -12,7 +13,7 @@ public class TextureHelper extends BaseHelper {
     public static String getTextureFromName(final String name, final String texturePath) {
         return texturePath + name;
     }
-
+    
     /**
      * @return The texture.
      */

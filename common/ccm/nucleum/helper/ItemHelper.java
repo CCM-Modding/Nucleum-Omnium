@@ -2,9 +2,10 @@ package ccm.nucleum.helper;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import ccm.nucleum.BaseNIClass;
 
-public class ItemHelper extends BaseHelper {
-
+public class ItemHelper extends BaseNIClass {
+    
     /**
      * Damages a Item inside of a inventory.
      * 
@@ -16,12 +17,14 @@ public class ItemHelper extends BaseHelper {
      *            The maximum amount of damage possible.
      */
     public static void damageItem(final ItemStack[] inventory, final int slot, final int damage) {
-        if (inventory[slot] != null)
+        if (inventory[slot] != null) {
             if (inventory[slot].attemptDamageItem(MathHelper.getRandomInt(damage, false),
-                    BaseHelper.rand))
+                                                  BaseNIClass.rand)) {
                 inventory[slot] = null;
+            }
+        }
     }
-
+    
     /**
      * Gets an Items Unlocalized name without the item prefix.
      * 

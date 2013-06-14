@@ -5,16 +5,16 @@ import java.io.File;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.DimensionManager;
+import ccm.nucleum.BaseNIClass;
 
 /**
  * Use this class to save per-server data.
  * 
  * @author Dries007
- * 
  */
-public class DataHelper {
+public final class DataHelper extends BaseNIClass {
     private static File root;
-
+    
     /**
      * To be called on server start.
      */
@@ -22,7 +22,7 @@ public class DataHelper {
         DataHelper.root = new File(DimensionManager.getCurrentSaveRootDirectory(), "CCM-Modding");
         DataHelper.root.mkdirs();
     }
-
+    
     /**
      * Use to get a (new) folder for your mod only.
      * 
@@ -34,7 +34,7 @@ public class DataHelper {
         folder.mkdirs();
         return folder;
     }
-
+    
     /**
      * Make sure you don't just override the old file. Read it, then manipulate,
      * then save.
@@ -51,24 +51,25 @@ public class DataHelper {
             final NBTTagCompound data) {
         try {
             final File folder = DataHelper.getModFolder(modID);
-
+            
             final File tempFile = new File(folder, fileName.trim() + "_tmp.dat");
             final File realFile = new File(folder, fileName.trim() + ".dat");
-
+            
             CompressedStreamTools.write(data, tempFile);
-
-            if (realFile.exists())
+            
+            if (realFile.exists()) {
                 realFile.delete();
-
+            }
+            
             tempFile.renameTo(realFile);
-
+            
             return true;
         } catch (final Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-
+    
     /**
      * Use this before you save data...
      * 
@@ -81,20 +82,21 @@ public class DataHelper {
     public static NBTTagCompound readData(final String modID, final String fileName) {
         try {
             final File folder = DataHelper.getModFolder(modID);
-
+            
             final File file = new File(folder, fileName.trim() + ".dat");
-
-            if (!file.exists())
+            
+            if (!file.exists()) {
                 return new NBTTagCompound();
-            else
+            } else {
                 return CompressedStreamTools.read(file);
-
+            }
+            
         } catch (final Exception e) {
             e.printStackTrace();
             return new NBTTagCompound();
         }
     }
-
+    
     /**
      * Remove a data file.
      * 
@@ -108,7 +110,7 @@ public class DataHelper {
         try {
             final File folder = DataHelper.getModFolder(modID);
             final File file = new File(folder, fileName.trim() + ".dat");
-
+            
             return file.delete();
         } catch (final Exception e) {
             e.printStackTrace();

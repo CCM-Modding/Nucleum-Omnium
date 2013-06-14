@@ -4,9 +4,10 @@
 	<comment>English (US) Language File</comment>
 	<!-- ******************************* Commands ***************************** -->
 	<entry key="commands.tpx.success">Teleported %s to %s</entry>
-    <entry key="commands.tpx.success.coordinates">Teleported %s to %.2f,%.2f,%.2f,%.2f</entry>
+    <entry key="commands.tpx.success.coordinates">Teleported %s to %s,%.2f,%.2f,%.2f</entry>
 	<entry key="commands.tpx.usage">/tpx [target player] {destination player} OR /tp [target player] {Dimension ID} {x} {y} {z}</entry>
 
 	<!-- ******************************** Errors ****************************** -->
-	<entry key="error.invalidFingerPrint">The version of Nucleum-Ominium that you are currently using has being tampered with!!!!!</entry>
+	<entry key="error.invalid.fingerPrint">The version of Nucleum-Ominium that you are currently using has being tampered with!!!!!</entry>
+	<entry key="error.invalid.dim">%s tried to teleport into a Dimension that doesn't exist (Dimension ID: %s)</entry>
 </properties>

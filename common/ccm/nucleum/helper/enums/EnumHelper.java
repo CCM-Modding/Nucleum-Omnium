@@ -1,29 +1,60 @@
 package ccm.nucleum.helper.enums;
 
 import net.minecraft.item.ItemStack;
-import ccm.nucleum.helper.BaseHelper;
+import ccm.nucleum.BaseNIClass;
 
-public final class EnumHelper extends BaseHelper {
-
-    public static ItemStack getItemIS(final Enum<? extends IItemEnum> enumOrdinal) {
-
-        return new ItemStack(((IItemEnum) enumOrdinal).getBaseItem().itemID, 1,
-                enumOrdinal.ordinal());
+/**
+ * This is The class used to get a new {@link ItemStack} instance from any
+ * {@link Enum} implementing {@link IItemEnum} or {@link IBlockEnum}
+ * 
+ * @author Captain_Shadows
+ */
+public final class EnumHelper extends BaseNIClass {
+    
+    /**
+     * @param itemEnum
+     *            The Enum constant who's Enum extends {@link IItemEnum} to get
+     *            the instance from
+     * @return a new {@link ItemStack} instance
+     */
+    public static ItemStack getItemIS(final Enum<? extends IItemEnum> itemEnum) {
+        return new ItemStack(((IItemEnum) itemEnum).getBaseItem().itemID, 1, itemEnum.ordinal());
     }
-
-    public static ItemStack getItemIS(final Enum<? extends IItemEnum> enumOrdinal, final int amount) {
-        return new ItemStack(((IItemEnum) enumOrdinal).getBaseItem().itemID, amount,
-                enumOrdinal.ordinal());
+    
+    /**
+     * @param itemEnum
+     *            The Enum constant who's Enum extends {@link IItemEnum} to get
+     *            the instance from
+     * @param amount
+     *            The amount of items that the ItemStack instance should contain
+     * @return a new {@link ItemStack} instance
+     */
+    public static ItemStack getItemIS(final Enum<? extends IItemEnum> itemEnum, final int amount) {
+        return new ItemStack(((IItemEnum) itemEnum).getBaseItem().itemID, amount,
+                itemEnum.ordinal());
     }
-
-    public static ItemStack getBlockIS(final Enum<? extends IBlockEnum> enumOrdinal) {
-        return new ItemStack(((IBlockEnum) enumOrdinal).getBaseBlock().blockID, 1,
-                enumOrdinal.ordinal());
+    
+    /**
+     * @param blockEnum
+     *            The Enum constant who's Enum extends {@link IBlockEnum} to get
+     *            the instance from
+     * @return a new {@link ItemStack} instance
+     */
+    public static ItemStack getBlockIS(final Enum<? extends IBlockEnum> blockEnum) {
+        return new ItemStack(((IBlockEnum) blockEnum).getBaseBlock().blockID, 1,
+                blockEnum.ordinal());
     }
-
-    public static ItemStack getBlockIS(final Enum<? extends IBlockEnum> enumOrdinal,
-            final int amount) {
-        return new ItemStack(((IBlockEnum) enumOrdinal).getBaseBlock().blockID, amount,
-                enumOrdinal.ordinal());
+    
+    /**
+     * @param blockEnum
+     *            The Enum constant who's Enum extends {@link IBlockEnum} to get
+     *            the instance from
+     * @param amount
+     *            The amount of items that the ItemStack instance should contain
+     * @return a new {@link ItemStack} instance
+     */
+    public static ItemStack getBlockIS(final Enum<? extends IBlockEnum> blockEnum, final int amount) {
+        return new ItemStack(((IBlockEnum) blockEnum).getBaseBlock().blockID, amount,
+                blockEnum.ordinal());
     }
 }

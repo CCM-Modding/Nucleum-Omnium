@@ -1,7 +1,9 @@
 package ccm.nucleum.helper;
 
-public class MathHelper extends BaseHelper {
+import ccm.nucleum.BaseNIClass;
 
+public class MathHelper extends BaseNIClass {
+    
     /**
      * Checks if the value is within the specified parameters
      * 
@@ -14,13 +16,15 @@ public class MathHelper extends BaseHelper {
      * @return The value if it is more than the min and less than the max
      */
     public static int clampInt(final int value, final int min, final int max) {
-        if (value < min)
+        if (value < min) {
             return min;
-        if (value > max)
+        }
+        if (value > max) {
             return max;
+        }
         return value;
     }
-
+    
     /**
      * Gets a random Integer
      * 
@@ -34,12 +38,13 @@ public class MathHelper extends BaseHelper {
      * @return the random Integer
      */
     public static int getRandomInt(final int maxValue, final boolean zero) {
-        if (zero)
-            return BaseHelper.rand.nextInt(maxValue);
-        else
-            return MathHelper.clampInt(BaseHelper.rand.nextInt(maxValue), 1, maxValue);
+        if (zero) {
+            return BaseNIClass.rand.nextInt(maxValue);
+        } else {
+            return MathHelper.clampInt(BaseNIClass.rand.nextInt(maxValue), 1, maxValue);
+        }
     }
-
+    
     /**
      * Gets a random Integer
      * 
@@ -50,7 +55,7 @@ public class MathHelper extends BaseHelper {
      * @return the random Integer
      */
     public static int getRandomInt(final int minValue, final int maxValue) {
-
-        return MathHelper.clampInt(BaseHelper.rand.nextInt(maxValue), minValue, maxValue);
+        
+        return MathHelper.clampInt(BaseNIClass.rand.nextInt(maxValue), minValue, maxValue);
     }
 }
