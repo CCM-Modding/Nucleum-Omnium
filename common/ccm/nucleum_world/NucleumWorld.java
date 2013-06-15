@@ -34,7 +34,7 @@ public class NucleumWorld extends BaseMod implements IMod {
     
     @PreInit
     public void preInit(final FMLPreInitializationEvent evt) {
-        NucleumWorld.config = initializeConfig(evt);
+        config = initializeConfig(evt);
         
         GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
         
@@ -52,5 +52,10 @@ public class NucleumWorld extends BaseMod implements IMod {
         if (Properties.retroOreGen) {
             TickRegistry.registerTickHandler(TickHandlerWorld.instance, Side.SERVER);
         }
+    }
+    
+    @Override
+    public AdvConfiguration getConfigFile() {
+        return config;
     }
 }

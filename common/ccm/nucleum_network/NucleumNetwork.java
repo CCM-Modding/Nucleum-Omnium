@@ -6,6 +6,7 @@ import lib.org.modstats.ModstatInfo;
 import ccm.nucleum_network.utils.lib.Archive;
 import ccm.nucleum_omnium.BaseMod;
 import ccm.nucleum_omnium.IMod;
+import ccm.nucleum_omnium.configuration.AdvConfiguration;
 import ccm.nucleum_omnium.handler.Handler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.FingerprintWarning;
@@ -35,5 +36,10 @@ public class NucleumNetwork extends BaseMod implements IMod {
          * using has been changed/tampered with
          */
         Handler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
+    }
+    
+    @Override
+    public AdvConfiguration getConfigFile() {
+        return null;
     }
 }

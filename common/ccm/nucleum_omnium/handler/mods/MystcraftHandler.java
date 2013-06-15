@@ -2,7 +2,7 @@ package ccm.nucleum_omnium.handler.mods;
 
 import ccm.nucleum_omnium.utils.lib.Properties;
 
-public final class ModsMystcraft implements IModHandler {
+public final class MystcraftHandler implements IModHandler {
     
     @Override
     public String getModName() {

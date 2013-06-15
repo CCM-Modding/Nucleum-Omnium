@@ -109,7 +109,7 @@ public class CommandTPS extends CommandBase {
             sender.sendChatToPlayer("--------------------------------------------------");
         } else if (JavaHelper.isNumeric(args[0])) {
             
-            int dim = Integer.parseInt(args[0]);
+            final int dim = Integer.parseInt(args[0]);
             
             final World world = NucleumOmnium.server.worldServerForDimension(dim);
             if (world == null) {

@@ -8,7 +8,14 @@ import net.minecraft.block.Block;
  * 
  * @author Captain_Shadows
  */
-public interface IBlockEnum extends IEnum {
+public interface IBlockEnum {
+    
+    /**
+     * @param base
+     *            The Block to set the enum's base block as
+     */
+    public void setBaseBlock(Block base);
+    
     /**
      * @return A new {@link Block} instance, the instance should be the
      *         registered and instantiated Block that contains all of these sub

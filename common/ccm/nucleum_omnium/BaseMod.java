@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 /**
  * This class should be the super class of any CCM Mod, as it not only offers a
  * few nice Configuration helpers, but it also keeps from having to implement
- * the methods inside of {@link IMod}
+ * some of the methods inside of {@link IMod}
  * 
  * @author CaptainShadows
  */
@@ -28,15 +28,15 @@ public abstract class BaseMod implements IMod {
     /**
      * @return A new {@link File}
      */
-    protected File getConfigFile() {
+    protected File getConfigurationFile() {
         return new File(config_Folder.getAbsolutePath() + "/" + getName() + ".cfg");
     }
     
     /**
      * @return A new instance of {@link AdvConfiguration}
      */
-    protected AdvConfiguration getConfig() {
-        return new AdvConfiguration(getConfigFile(), true);
+    protected AdvConfiguration getAdvConfigFile() {
+        return new AdvConfiguration(getConfigurationFile(), true);
     }
     
     /**
@@ -58,7 +58,7 @@ public abstract class BaseMod implements IMod {
         
         setConfigFolderBase(evt.getModConfigurationDirectory());
         
-        return getConfig();
+        return getAdvConfigFile();
     }
     
     @Override

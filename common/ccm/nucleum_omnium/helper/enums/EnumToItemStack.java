@@ -9,7 +9,7 @@ import ccm.nucleum_omnium.BaseNIClass;
  * 
  * @author Captain_Shadows
  */
-public final class EnumHelper extends BaseNIClass {
+public final class EnumToItemStack extends BaseNIClass {
     
     /**
      * @param itemEnum

@@ -1,5 +1,7 @@
 package ccm.nucleum_omnium;
 
+import ccm.nucleum_omnium.configuration.AdvConfiguration;
+
 /**
  * A inteface used to determine which class is actually a Main mod Class. Thus
  * it should only be implemented in the same class as you would extend
@@ -23,4 +25,9 @@ public interface IMod {
      * @return The Mod's Version
      */
     public String getVersion();
+    
+    /**
+     * @return The AdvConfiguration file that belongs to the mod
+     */
+    public AdvConfiguration getConfigFile();
 }

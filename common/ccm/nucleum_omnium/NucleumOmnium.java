@@ -3,10 +3,11 @@ package ccm.nucleum_omnium;
 import java.util.Arrays;
 
 import net.minecraft.server.MinecraftServer;
+import ccm.nucleum_omnium.configuration.AdvConfiguration;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.handler.mods.ModHandler;
-import ccm.nucleum_omnium.handler.mods.ModsMystcraft;
+import ccm.nucleum_omnium.handler.mods.MystcraftHandler;
 import ccm.nucleum_omnium.helper.DataHelper;
 import ccm.nucleum_omnium.proxy.CommonProxy;
 import ccm.nucleum_omnium.utils.language.OmniumLanguagePack;
@@ -78,14 +79,14 @@ public class NucleumOmnium extends DummyModContainer implements IMod {
         
         NucleumOmnium.proxy.initModelHandlers();
         
-        ModHandler.addModToHandle(new ModsMystcraft());
+        ModHandler.instance().addModToHandle(new MystcraftHandler());
         
         new OmniumLanguagePack().loadLangs();
     }
     
     @Subscribe
     public void PostInit(final FMLPostInitializationEvent event) {
-        ModHandler.init();
+        ModHandler.instance().init();
         
         Handler.loadMod(this);
     }
@@ -98,5 +99,10 @@ public class NucleumOmnium extends DummyModContainer implements IMod {
         NucleumOmnium.server = event.getServer();
         
         DataHelper.init();
+    }
+    
+    @Override
+    public AdvConfiguration getConfigFile() {
+        return null;
     }
 }

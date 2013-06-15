@@ -125,19 +125,19 @@ public final class TeleportHelper extends BaseNIClass {
         
         if ((min != 0) || (max != 0)) {
             if (d1 < min) {
-                if (d1 < -30000000 && d1 >= -300000000) {
+                if ((d1 < -30000000) && (d1 >= -300000000)) {
                     throw new NumberInvalidException("commands.generic.double.tooSmall",
                             new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
-                } else if (d1 < -300000000 && d1 >= Integer.MIN_VALUE) {
+                } else if ((d1 < -300000000) && (d1 >= Integer.MIN_VALUE)) {
                     throw new WTFExeption(NucleumOmnium.instance);
                 }
             }
             
             if (d1 > max) {
-                if (d1 > 30000000 && d1 <= 300000000) {
+                if ((d1 > 30000000) && (d1 <= 300000000)) {
                     throw new NumberInvalidException("commands.generic.double.tooBig",
                             new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
-                } else if (d1 > 300000000 && d1 <= Integer.MAX_VALUE) {
+                } else if ((d1 > 300000000) && (d1 <= Integer.MAX_VALUE)) {
                     throw new WTFExeption(NucleumOmnium.instance);
                 }
             }

@@ -3,34 +3,42 @@ package ccm.nucleum_omnium.handler.mods;
 import java.util.ArrayList;
 import java.util.List;
 
-import ccm.nucleum_omnium.BaseNIClass;
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.handler.Handler;
 import cpw.mods.fml.common.Loader;
 
-public final class ModHandler extends BaseNIClass {
+public final class ModHandler {
     
-    private static List<ModHandling> modsHandling = new ArrayList<ModHandling>();
+    private static ModHandler       instance;
     
-    public static void addModToHandle(final IModHandler handler) {
-        ModHandler.modsHandling.add(new ModHandling(handler, null));
+    private final List<ModHandling> modsHandling = new ArrayList<ModHandling>();
+    
+    public static ModHandler instance() {
+        if (instance == null) {
+            instance = new ModHandler();
+        }
+        return instance;
     }
     
-    public static void addModToHandle(final IModHandler handler, final String exeption) {
-        ModHandler.modsHandling.add(new ModHandling(handler, exeption));
+    public void addModToHandle(final IModHandler handler) {
+        modsHandling.add(new ModHandling(handler, null));
     }
     
-    public static void init() {
-        for (final ModHandling handler : ModHandler.modsHandling) {
+    public void addModToHandle(final IModHandler handler, final String exeption) {
+        modsHandling.add(new ModHandling(handler, exeption));
+    }
+    
+    public void init() {
+        for (final ModHandling handler : modsHandling) {
             if (handler.getModExeption() != null) {
-                ModHandler.handleMod(handler.getHandler(), handler.getModExeption());
+                handleMod(handler.getHandler(), handler.getModExeption());
             } else {
-                ModHandler.handleMod(handler.getHandler());
+                handleMod(handler.getHandler());
             }
         }
     }
     
-    public static void handleMod(final IModHandler handler) {
+    private void handleMod(final IModHandler handler) {
         if (Loader.isModLoaded(handler.getModName())) {
             try {
                 handler.init();
@@ -43,7 +51,7 @@ public final class ModHandler extends BaseNIClass {
         }
     }
     
-    public static void handleMod(final IModHandler handler, final String exeption) {
+    private void handleMod(final IModHandler handler, final String exeption) {
         if (Loader.isModLoaded(handler.getModName())) {
             try {
                 handler.init();
