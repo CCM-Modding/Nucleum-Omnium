@@ -10,7 +10,7 @@ import net.minecraftforge.common.ForgeDirection;
  * @author King Lemming
  */
 public interface IEnergyHandler {
-
+    
     /**
      * Add energy to an IEnergyHandler, internal distribution is left entirely
      * to the IEnergyHandler.
@@ -25,27 +25,27 @@ public interface IEnergyHandler {
      *         received.
      */
     int receiveEnergy(ForgeDirection from, int maxReceive, boolean doReceive);
-
+    
     /**
      * Returns true if energy can be received from the given direction.
      */
     boolean canReceiveEnergy(ForgeDirection from);
-
+    
     /**
      * Returns true if the IEnergyHandler sends energy in the given direction.
      * If energy is provided/produced on a given side should return true for
      * that side.
      */
     boolean canSendEnergy(ForgeDirection from);
-
+    
     /**
      * Returns the amount of energy currently stored.
      */
     int getEnergyStored(ForgeDirection from);
-
+    
     /**
      * Returns the maximum amount of energy that can be stored.
      */
     int getMaxEnergyStored(ForgeDirection from);
-
+    
 }

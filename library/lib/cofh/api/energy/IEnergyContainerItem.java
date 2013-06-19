@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
  * @author King Lemming
  */
 public interface IEnergyContainerItem {
-
+    
     /**
      * Adds energy to an item. Returns the quantity of energy that was accepted.
      * This should always return 0 if the item cannot be externally charged.
@@ -24,7 +24,7 @@ public interface IEnergyContainerItem {
      * @return Amount of energy that was accepted by the item.
      */
     int receiveEnergy(ItemStack theItem, int maxReceive, boolean doReceive);
-
+    
     /**
      * Removes energy from an item. Returns the quantity of energy that was
      * removed. This should always return 0 if the item cannot be externally
@@ -39,15 +39,15 @@ public interface IEnergyContainerItem {
      * @return Amount of energy that was removed from the item.
      */
     int extractEnergy(ItemStack theItem, int maxExtract, boolean doExtract);
-
+    
     /**
      * Get the amount of energy currently stored in the item.
      */
     int getEnergyStored(ItemStack theItem);
-
+    
     /**
      * Get the max amount of energy that can be stored in the item.
      */
     int getMaxEnergyStored(ItemStack theItem);
-
+    
 }

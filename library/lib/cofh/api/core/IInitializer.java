@@ -1,4 +1,4 @@
-package lib.cofh.api.energy.api.core;
+package lib.cofh.api.core;
 
 /**
  * Interface which can be put on just about anything to allow for iteration
@@ -7,11 +7,11 @@ package lib.cofh.api.energy.api.core;
  * @author King Lemming
  */
 public interface IInitializer {
-
+    
     public boolean preInit();
-
+    
     public boolean initialize();
-
+    
     public boolean postInit();
-
+    
 }

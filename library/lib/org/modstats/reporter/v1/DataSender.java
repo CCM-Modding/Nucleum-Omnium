@@ -1,26 +1,25 @@
 /**
- * Copyright (c) <2012>, Oleg Romanovskiy <shedarhome@gmail.com> aka Shedar
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- * * Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer.
- * * Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
- * * Neither the name of the author nor the
- * names of its contributors may be used to endorse or promote products
- * derived from this software without specific prior written permission.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * Copyright (c) <2012>, Oleg Romanovskiy <shedarhome@gmail.com> aka Shedar All
+ * rights reserved. Redistribution and use in source and binary forms, with or
+ * without modification, are permitted provided that the following conditions
+ * are met: * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer. *
+ * Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution. * Neither the name of
+ * the author nor the names of its contributors may be used to endorse or
+ * promote products derived from this software without specific prior written
+ * permission. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
+ * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package lib.org.modstats.reporter.v1;
@@ -61,20 +60,20 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.versioning.ComparableVersion;
 
 class DataSender extends Thread {
-
+    
     private static final String urlAutoTemplate   = "http://modstats.org/api/v1/report?mc=%s&user=%s&data=%s&sign=%s&beta=%b&strict=%b";
-
+    
     private static final String urlManualTemplate = "http://modstats.org/api/v1/check?mc=%s&user=%s&data=%s&sign=%s&beta=%b&strict=%b";
-
+    
     private final Reporter      reporter;
-
+    
     public final boolean        manual;
-
+    
     public DataSender(final Reporter reporter, final boolean manual) {
         this.reporter = reporter;
         this.manual = manual;
     }
-
+    
     private String toHexString(final byte[] bytes) {
         final char[] hexArray = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c',
                 'd', 'e', 'f' };
@@ -83,30 +82,33 @@ class DataSender extends Thread {
         for (int j = 0; j < bytes.length; j++) {
             v = bytes[j] & 0xFF;
             hexChars[j * 2] = hexArray[v / 16];
-            hexChars[j * 2 + 1] = hexArray[v % 16];
+            hexChars[(j * 2) + 1] = hexArray[v % 16];
         }
         return new String(hexChars);
     }
-
+    
     private String getPlayerId() throws IOException {
         final File statDir = new File(Minecraft.getMinecraftDir(), "stats");
-        if (!statDir.exists())
+        if (!statDir.exists()) {
             statDir.mkdirs();
+        }
         String mac = "";
         try {
             final InetAddress address = InetAddress.getLocalHost();
             final NetworkInterface ni = NetworkInterface.getByInetAddress(address);
             final byte[] macArray = ni.getHardwareAddress();
-            if (macArray != null)
-                mac = this.toHexString(macArray);
+            if (macArray != null) {
+                mac = toHexString(macArray);
+            }
         } catch (final Exception ex) {
         }
         final File uidFile = new File(statDir, "player.uid");
-        if (uidFile.exists() && uidFile.canRead() && uidFile.length() == 32 + mac.length()) {
+        if (uidFile.exists() && uidFile.canRead() && (uidFile.length() == (32 + mac.length()))) {
             final String data = Files.toString(uidFile, Charsets.US_ASCII);
             final String storedMac = data.substring(32);
-            if (storedMac.equalsIgnoreCase(mac))
+            if (storedMac.equalsIgnoreCase(mac)) {
                 return data.substring(0, 32);
+            }
         }
         uidFile.createNewFile();
         if (uidFile.canWrite()) {
@@ -118,22 +120,23 @@ class DataSender extends Thread {
         }
         return "";
     }
-
+    
     private String getSignature(final String data) {
         return Hashing.md5().hashString(data).toString();
     }
-
+    
     private String getData() {
         final StringBuilder b = new StringBuilder();
-        for (final Map.Entry<String, ModVersionData> item : this.reporter.registeredMods.entrySet())
+        for (final Map.Entry<String, ModVersionData> item : reporter.registeredMods.entrySet()) {
             b.append(item.getKey()).append("+").append(item.getValue().version).append("$");
+        }
         return b.toString();
     }
-
+    
     private boolean checkIsNewer(final String current, final String received) {
         return new ComparableVersion(received).compareTo(new ComparableVersion(current)) > 0;
     }
-
+    
     private void parseResponse(final String response) {
         try {
             final JsonRootNode json = new JdomParser().parse(response);
@@ -146,43 +149,47 @@ class DataSender extends Thread {
             final ModsUpdateEvent event = new ModsUpdateEvent();
             for (final JsonNode modObject : modList) {
                 final String prefix = modObject.getStringValue("code");
-                if (!this.reporter.registeredMods.containsKey(prefix)) {
+                if (!reporter.registeredMods.containsKey(prefix)) {
                     FMLLog.warning("[Modstats] Extra mod '%s' in service response", prefix);
                     continue;
                 }
                 final String version = modObject.getStringValue("ver");
-                if (version == null
-                        || version.equals(this.reporter.registeredMods.get(prefix).version))
+                if ((version == null)
+                        || version.equals(reporter.registeredMods.get(prefix).version)) {
                     continue;
-                if (this.checkIsNewer(this.reporter.registeredMods.get(prefix).version, version)) {
+                }
+                if (checkIsNewer(reporter.registeredMods.get(prefix).version, version)) {
                     final ModVersionData data = new ModVersionData(prefix,
-                            this.reporter.registeredMods.get(prefix).name, version);
+                            reporter.registeredMods.get(prefix).name, version);
                     final Map<JsonStringNode, JsonNode> fields = modObject.getFields();
                     for (final Map.Entry<JsonStringNode, JsonNode> entry : fields.entrySet()) {
                         final String fieldName = entry.getKey().getText();
-                        if (fieldName.equals("code") || fieldName.equals("ver"))
+                        if (fieldName.equals("code") || fieldName.equals("ver")) {
                             continue;
+                        }
                         if (!(entry.getValue() instanceof JsonStringNode)) {
-                            FMLLog.warning(String.format(
-                                    "[Modstats] Too complex data in response for field '%s'.",
-                                    fieldName));
+                            FMLLog.warning(String
+                                    .format("[Modstats] Too complex data in response for field '%s'.",
+                                            fieldName));
                             continue;
                         }
                         final String value = ((JsonStringNode) entry.getValue()).getText();
-                        if (fieldName.equals("chlog"))
+                        if (fieldName.equals("chlog")) {
                             data.changeLogUrl = value;
-                        else if (fieldName.equals("link"))
+                        } else if (fieldName.equals("link")) {
                             data.downloadUrl = value;
-                        else
+                        } else {
                             data.extraFields.put(fieldName, value);
+                        }
                     }
                     event.add(data);
                 }
-
+                
             }
-            if (event.getUpdatedMods().size() > 0)
+            if (event.getUpdatedMods().size() > 0) {
                 MinecraftForge.EVENT_BUS.post(event);
-            if (!event.isCanceled() && event.getUpdatedMods().size() > 0) {
+            }
+            if (!event.isCanceled() && (event.getUpdatedMods().size() > 0)) {
                 final List<ModVersionData> updatedModsToOutput = event.getUpdatedMods();
                 final StringBuilder builder = new StringBuilder("Updates found: ");
                 final Iterator<ModVersionData> iterator = updatedModsToOutput.iterator();
@@ -192,39 +199,43 @@ class DataSender extends Thread {
                             .append(")").append(iterator.hasNext() ? "," : ".");
                 }
                 FMLLog.info("[Modstats] %s", builder.toString());
-                if (!this.reporter.config.logOnly
-                        && FMLCommonHandler.instance().getSide().isClient()) {
+                if (!reporter.config.logOnly && FMLCommonHandler.instance().getSide().isClient()) {
                     final Minecraft mc = FMLClientHandler.instance().getClient();
                     int maxTries = 30;
-                    while (mc.thePlayer == null && maxTries > 0) {
+                    while ((mc.thePlayer == null) && (maxTries > 0)) {
                         try {
                             Thread.sleep(1000);
                         } catch (final InterruptedException e) {
                         }
                         maxTries--;
                     }
-                    if (mc.thePlayer != null)
+                    if (mc.thePlayer != null) {
                         mc.thePlayer.addChatMessage(builder.toString());
+                    }
                 }
             }
-
+            
         } catch (final InvalidSyntaxException e) {
             FMLLog.warning("[Modstats] Can't parse response: '%s'.", e.getMessage());
         }
     }
-
+    
     @Override
     public void run() {
         try {
-            final String data = this.getData();
-            final String playerId = this.getPlayerId();
-            final String hash = this.getSignature(playerId + "!" + data);
-            final String template = this.manual ? DataSender.urlManualTemplate
+            final String data = getData();
+            final String playerId = getPlayerId();
+            final String hash = getSignature(playerId + "!" + data);
+            final String template = manual ? DataSender.urlManualTemplate
                     : DataSender.urlAutoTemplate;
             final String mcVersion = new CallableMinecraftVersion(null).minecraftVersion();
-            final URL url = new URL(String.format(template, mcVersion, playerId, data, hash,
-                    this.reporter.config.betaNotifications,
-                    this.reporter.config.forCurrentMinecraftVersion));
+            final URL url = new URL(String.format(template,
+                                                  mcVersion,
+                                                  playerId,
+                                                  data,
+                                                  hash,
+                                                  reporter.config.betaNotifications,
+                                                  reporter.config.forCurrentMinecraftVersion));
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
@@ -232,11 +243,12 @@ class DataSender extends Thread {
                     connection.getInputStream()));
             String line;
             String out = "";
-            while ((line = reader.readLine()) != null)
+            while ((line = reader.readLine()) != null) {
                 // in most cases it will contain just one line
                 out += line;
+            }
             reader.close();
-            this.parseResponse(out);
+            parseResponse(out);
         } catch (final MalformedURLException e) {
             FMLLog.warning("[Modstats] Invalid stat report url");
         } catch (final IOException e) {

@@ -10,7 +10,7 @@ import net.minecraft.util.Icon;
  * @author Zeldo Kavira
  */
 public interface ISidedBlockTexture {
-
+    
     public Icon getBlockTexture(int side, int pass);
-
+    
 }

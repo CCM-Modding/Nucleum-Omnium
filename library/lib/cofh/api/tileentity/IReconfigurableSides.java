@@ -7,7 +7,7 @@ package lib.cofh.api.tileentity;
  * @author King Lemming
  */
 public interface IReconfigurableSides {
-
+    
     /**
      * Decrement the config for a given side.
      * 
@@ -16,7 +16,7 @@ public interface IReconfigurableSides {
      * @return True if config was changed, false otherwise.
      */
     public boolean decrSide(int side);
-
+    
     /**
      * Increment the config for a given side.
      * 
@@ -25,7 +25,7 @@ public interface IReconfigurableSides {
      * @return True if config was changed, false otherwise.
      */
     public boolean incrSide(int side);
-
+    
     /**
      * Set the config for a given side.
      * 
@@ -36,17 +36,17 @@ public interface IReconfigurableSides {
      * @return True of config was set, false otherwise.
      */
     public boolean setSide(int side, int config);
-
+    
     /**
      * Reset configs on all sides to their base values.
      * 
      * @return True if reset was successful, false otherwise.
      */
     public boolean resetSides();
-
+    
     /**
      * Returns the number of possible config settings for a given side.
      */
     public int getNumConfig(int side);
-
+    
 }

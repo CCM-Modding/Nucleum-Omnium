@@ -15,58 +15,57 @@ import cpw.mods.fml.common.TickType;
  * @author King Lemming
  */
 public class TickHandlerVersion implements IScheduledTickHandler {
-
+    
     public static TickHandlerVersion         instance       = new TickHandlerVersion();
-
+    
     private static ArrayList<VersionHandler> modVersionInfo = new ArrayList<VersionHandler>();
-
     private static boolean                   initialized;
-
     private static boolean                   sent;
-
     private static int                       modIndex       = 0;
-
+    
     /**
      * This should only be called when the TickHandlerVersion instance is
      * registered as a Tick Handler.
      */
     public static boolean initialize() {
-
-        if (TickHandlerVersion.initialized)
+        
+        if (initialized) {
             return false;
-        TickHandlerVersion.initialized = true;
+        }
+        initialized = true;
         return true;
     }
-
+    
     /**
      * This should be checked by all mods making use of this class. If this
      * returns true, then the tick handler should NOT be registered again.
      */
     public static boolean isInitialized() {
-
-        return TickHandlerVersion.initialized;
+        
+        return initialized;
     }
-
+    
     public static boolean registerModVersionInfo(final VersionHandler info) {
-
-        if (TickHandlerVersion.modVersionInfo.contains(info))
+        
+        if (modVersionInfo.contains(info)) {
             return false;
-        TickHandlerVersion.modVersionInfo.add(info);
+        }
+        modVersionInfo.add(info);
         return true;
     }
-
+    
     @Override
     public void tickStart(final EnumSet<TickType> type, final Object... tickData) {
-
-        if (TickHandlerVersion.sent)
-            return;
-        if (TickHandlerVersion.modIndex >= TickHandlerVersion.modVersionInfo.size()) {
-            TickHandlerVersion.sent = true;
+        
+        if (sent) {
             return;
         }
-        final VersionHandler anInfo = TickHandlerVersion.modVersionInfo
-                .get(TickHandlerVersion.modIndex);
-
+        if (modIndex >= modVersionInfo.size()) {
+            sent = true;
+            return;
+        }
+        final VersionHandler anInfo = modVersionInfo.get(modIndex);
+        
         if (anInfo.isNewVersionAvailable()) {
             final EntityPlayer player = (EntityPlayer) tickData[0];
             player.sendChatToPlayer(ColorHelper.YELLOW + "[" + anInfo.modName + "] "
@@ -74,34 +73,35 @@ public class TickHandlerVersion implements IScheduledTickHandler {
                     + anInfo.getLatestVersion());
             player.sendChatToPlayer(ColorHelper.LIGHT_GRAY + anInfo.getVersionDescription());
         }
-        TickHandlerVersion.modIndex++;
+        modIndex++;
     }
-
+    
     @Override
     public void tickEnd(final EnumSet<TickType> type, final Object... tickData) {
-
+        
     }
-
+    
     @Override
     public EnumSet<TickType> ticks() {
-
-        if (TickHandlerVersion.sent)
+        
+        if (TickHandlerVersion.sent) {
             return EnumSet.noneOf(TickType.class);
+        }
         return EnumSet.of(TickType.PLAYER);
     }
-
+    
     @Override
     public String getLabel() {
-
-        return "cofh.version";
+        
+        return "lib.cofh.version";
     }
-
+    
     @Override
     public int nextTickSpacing() {
-
-        if (!TickHandlerVersion.sent)
+        
+        if (!sent) {
             return 200;
+        }
         return 72000;
     }
-
 }

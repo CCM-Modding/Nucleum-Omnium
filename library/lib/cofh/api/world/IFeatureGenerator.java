@@ -14,13 +14,13 @@ import net.minecraft.world.gen.feature.WorldGenerator;
  * @author King Lemming
  */
 public interface IFeatureGenerator {
-
+    
     /**
      * Returns the name of the feature, used for displaying in the World.cfg
      * file.
      */
     public String getFeatureName();
-
+    
     /**
      * Generates the world feature.
      * 
@@ -40,5 +40,5 @@ public interface IFeatureGenerator {
      */
     public boolean generateFeature(Random random, int chunkX, int chunkZ, World world,
             boolean newGen);
-
+    
 }

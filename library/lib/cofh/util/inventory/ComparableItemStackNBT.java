@@ -11,41 +11,44 @@ import net.minecraft.nbt.NBTTagCompound;
  * @author King Lemming
  */
 public class ComparableItemStackNBT extends ComparableItemStack {
-
+    
     public NBTTagCompound tag;
-
+    
     public ComparableItemStackNBT(final ItemStack stack) {
-
+        
         super(stack);
-
-        if (stack != null)
-            if (stack.stackTagCompound != null)
-                this.tag = (NBTTagCompound) stack.stackTagCompound.copy();
+        
+        if (stack != null) {
+            if (stack.stackTagCompound != null) {
+                tag = (NBTTagCompound) stack.stackTagCompound.copy();
+            }
+        }
     }
-
+    
     @Override
     public boolean isStackEqual(final ComparableItemStack other) {
-
-        return super.isStackEqual(other) && this.isStackTagEqual((ComparableItemStackNBT) other);
+        
+        return super.isStackEqual(other) && isStackTagEqual((ComparableItemStackNBT) other);
     }
-
+    
     private boolean isStackTagEqual(final ComparableItemStackNBT other) {
-
-        return this.tag == null ? other.tag == null : other.tag == null ? false : this.tag
-                .equals(other.tag);
+        
+        return tag == null ? other.tag == null : other.tag == null ? false : tag.equals(other.tag);
     }
-
+    
     @Override
     public ItemStack toItemStack() {
-
-        if (this.tag == null)
+        
+        if (tag == null) {
             return super.toItemStack();
-        if (this.itemID < 0 || this.itemID >= 32000)
+        }
+        if ((itemID < 0) || (itemID >= 32000)) {
             return null;
-        final ItemStack ret = new ItemStack(this.itemID, this.stackSize, this.metadata);
-        ret.stackTagCompound = (NBTTagCompound) this.tag.copy();
-
+        }
+        final ItemStack ret = new ItemStack(itemID, stackSize, metadata);
+        ret.stackTagCompound = (NBTTagCompound) tag.copy();
+        
         return ret;
     }
-
+    
 }

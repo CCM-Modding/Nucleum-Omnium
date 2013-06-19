@@ -20,14 +20,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.tileentity.TileBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class SubBlock {
-    
+    /*
+     * DATA
+     */
     private MainBlock               mainBlock;
     private CreativeTabs            tab;
     int                             meta;
@@ -51,6 +52,21 @@ public class SubBlock {
     public Icon                     icon;
     public String                   iconName;
     
+    /*
+     * Constructors
+     */
+    /**
+     * Creates a new SubBlock instance
+     * 
+     * @param id
+     *            The ID of the MainBlock to use (Put the same for multiple
+     *            instances if you want them to all correspond to the same block
+     *            ID)
+     * @param meta
+     *            The metadata to use (Typically the enum.ordinal())
+     * @param iconName
+     *            The full path of the Icon, ex: harvestry:coal
+     */
     public SubBlock(int id, int meta, String iconName) {
         if (Block.blocksList[id] == null) {
             mainBlock = new MainBlock(id);
@@ -64,6 +80,20 @@ public class SubBlock {
         this.iconName = iconName;
     }
     
+    /**
+     * Creates a new SubBlock instance
+     * 
+     * @param id
+     *            The ID of the MainBlock to use (Put the same for multiple
+     *            instances if you want them to all correspond to the same block
+     *            ID)
+     * @param meta
+     *            The metadata to use (Typically the enum.ordinal())
+     * @param material
+     *            The Material that the block should be made of
+     * @param iconName
+     *            The full path of the Icon, ex: harvestry:coal
+     */
     public SubBlock(int id, int meta, Material material, String iconName) {
         if (Block.blocksList[id] == null) {
             mainBlock = new MainBlock(id, material);
@@ -77,12 +107,24 @@ public class SubBlock {
         this.iconName = iconName;
     }
     
-    // Listeners
+    /*
+     * Listeners
+     */
+    /**
+     * @param displayL
+     *            the {@link IDisplayListener} who's randomDisplayTick method
+     *            will be called for this instance
+     */
     public void addDisplayListener(IDisplayListener displayL) {
         mainBlock.setTickRandomly(meta);
         displayList.add(displayL);
     }
     
+    /**
+     * @param collisionL
+     *            the {@link ICollisionListener} who's collide method will be
+     *            called for this instance
+     */
     public void addCollisionListener(ICollisionListener collisionL) {
         collisionEffect = true;
         collisionList.add(collisionL);
@@ -113,6 +155,57 @@ public class SubBlock {
             cl.collide(world, x, y, z, par5Entity, meta);
     }
     
+    /*
+     * Instance Modifiers
+     */
+    public SubBlock setCreativeTab(CreativeTabs tab) {
+        mainBlock.setCreativeTab(tab);
+        this.tab = tab;
+        return this;
+    }
+    
+    public SubBlock setUnlocalizedName(String string) {
+        unlocName = string;
+        mainBlock.setUnlocalizedName(unlocName);
+        return this;
+    }
+    
+    public SubBlock setBlockDrops(ItemStack item, int min, int max) {
+        drop = item.copy();
+        dropMin = min;
+        dropMax = max;
+        return this;
+    }
+    
+    public SubBlock setHardness(float hardness) {
+        this.hardness = hardness;
+        
+        if (blockResistance < hardness * 5.0F) {
+            blockResistance = hardness * 5.0F;
+        }
+        
+        return this;
+    }
+    
+    public SubBlock setResistance(float ressistance) {
+        blockResistance = ressistance * 3;
+        return this;
+    }
+    
+    public SubBlock setSlipperiness(float slipperiness) {
+        this.mainBlock.slipperiness = slipperiness;
+        return this;
+    }
+    
+    public SubBlock setTileEntity(TileEntity te) {
+        this.te = te;
+        hasTE = true;
+        return this;
+    }
+    
+    /*
+     * Block Redirect Methods
+     */
     public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
         return icon;
     }
@@ -126,20 +219,8 @@ public class SubBlock {
         return icon;
     }
     
-    public SubBlock setCreativeTab(CreativeTabs tab) {
-        mainBlock.setCreativeTab(tab);
-        this.tab = tab;
-        return this;
-    }
-    
     public CreativeTabs getCreativeTab() {
         return tab;
-    }
-    
-    public SubBlock setUnlocalizedName(String string) {
-        unlocName = string;
-        mainBlock.setUnlocalizedName(unlocName);
-        return this;
     }
     
     public String getUnlocalizedName() {
@@ -148,12 +229,6 @@ public class SubBlock {
     
     public Block getBlock() {
         return mainBlock;
-    }
-    
-    public void setBlockDrops(ItemStack item, int min, int max) {
-        drop = item.copy();
-        dropMin = min;
-        dropMax = max;
     }
     
     public int quantityDroppedWithBonus(int fortune, Random rand) {
@@ -172,32 +247,13 @@ public class SubBlock {
         }
     }
     
-    public SubBlock setHardness(float hardness) {
-        this.hardness = hardness;
-        
-        if (blockResistance < hardness * 5.0F) {
-            blockResistance = hardness * 5.0F;
-        }
-        
-        return this;
-    }
-    
     public float getBlockHardness() {
         return hardness;
-    }
-    
-    public SubBlock setResistance(float ressistance) {
-        blockResistance = ressistance * 3;
-        return this;
     }
     
     public float getExplosionResistance(Entity entity, World world, int x, int y, int z,
             double explosionX, double explosionY, double explosionZ) {
         return blockResistance / 5.0F;
-    }
-    
-    public String toString() {
-        return super.toString() + mainBlock.getUnlocalizedName();
     }
     
     public int damageDropped(int meta) {
@@ -209,14 +265,7 @@ public class SubBlock {
     }
     
     public int getDamageValue(World world, int x, int y, int z) {
-        Handler.log(meta);
         return meta;
-    }
-    
-    public SubBlock setTileEntity(TileEntity te) {
-        this.te = te;
-        hasTE = true;
-        return this;
     }
     
     public TileEntity createTileEntity(World world, int meta) {
@@ -290,5 +339,13 @@ public class SubBlock {
             ((TileBase) world.getBlockTileEntity(x, y, z)).setOwner(living.getEntityName());
             ((TileBase) world.getBlockTileEntity(x, y, z)).setOrientation(direction);
         }
+    }
+    
+    /*
+     * Object Redirect Methods
+     */
+    @Override
+    public String toString() {
+        return super.toString() + mainBlock.getUnlocalizedName();
     }
 }

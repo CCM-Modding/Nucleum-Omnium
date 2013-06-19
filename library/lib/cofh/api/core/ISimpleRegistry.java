@@ -1,12 +1,12 @@
-package lib.cofh.api.energy.api.core;
+package lib.cofh.api.core;
 
 /**
- * Basic interface for the Cape and Skin Registries.
+ * Basic interface for the Cape and Skin Registers.
  * 
  * @author Zeldo Kavira
  */
 public interface ISimpleRegistry {
-
+    
     /**
      * Register a new entry.
      * 
@@ -17,5 +17,5 @@ public interface ISimpleRegistry {
      * @return True if registration was successful.
      */
     public boolean register(String playerName, String URL);
-
+    
 }

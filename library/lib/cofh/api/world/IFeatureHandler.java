@@ -7,7 +7,7 @@ package lib.cofh.api.world;
  * @author King Lemming
  */
 public interface IFeatureHandler {
-
+    
     /**
      * Register a feature with an IFeatureHandler.
      * 
@@ -17,5 +17,5 @@ public interface IFeatureHandler {
      *         that name existed.
      */
     public boolean registerFeature(IFeatureGenerator feature);
-
+    
 }
