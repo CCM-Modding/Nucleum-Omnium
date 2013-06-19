@@ -36,8 +36,7 @@ public final class DataHelper extends BaseNIClass {
     }
     
     /**
-     * Make sure you don't just override the old file. Read it, then manipulate,
-     * then save.
+     * Make sure you don't just override the old file. Read it, then manipulate, then save.
      * 
      * @param modID
      *            for the folder.
@@ -47,8 +46,7 @@ public final class DataHelper extends BaseNIClass {
      *            in NBT format.
      * @return true if success.
      */
-    public static boolean saveData(final String modID, final String fileName,
-            final NBTTagCompound data) {
+    public static boolean saveData(final String modID, final String fileName, final NBTTagCompound data) {
         try {
             final File folder = DataHelper.getModFolder(modID);
             

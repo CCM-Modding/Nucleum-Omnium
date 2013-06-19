@@ -59,15 +59,13 @@ public class SubBlock {
      * Creates a new SubBlock instance
      * 
      * @param id
-     *            The ID of the MainBlock to use (Put the same for multiple
-     *            instances if you want them to all correspond to the same block
-     *            ID)
+     *            The ID of the MainBlock to use (Put the same for multiple instances if you want them to all correspond to the same block ID)
      * @param meta
      *            The metadata to use (Typically the enum.ordinal())
      * @param iconName
      *            The full path of the Icon, ex: harvestry:coal
      */
-    public SubBlock(int id, int meta, String iconName) {
+    public SubBlock(final int id, final int meta, final String iconName) {
         if (Block.blocksList[id] == null) {
             mainBlock = new MainBlock(id);
             mainBlock.addSubBlock(this, meta);
@@ -84,9 +82,7 @@ public class SubBlock {
      * Creates a new SubBlock instance
      * 
      * @param id
-     *            The ID of the MainBlock to use (Put the same for multiple
-     *            instances if you want them to all correspond to the same block
-     *            ID)
+     *            The ID of the MainBlock to use (Put the same for multiple instances if you want them to all correspond to the same block ID)
      * @param meta
      *            The metadata to use (Typically the enum.ordinal())
      * @param material
@@ -94,7 +90,7 @@ public class SubBlock {
      * @param iconName
      *            The full path of the Icon, ex: harvestry:coal
      */
-    public SubBlock(int id, int meta, Material material, String iconName) {
+    public SubBlock(final int id, final int meta, final Material material, final String iconName) {
         if (Block.blocksList[id] == null) {
             mainBlock = new MainBlock(id, material);
             mainBlock.addSubBlock(this, meta);
@@ -112,92 +108,86 @@ public class SubBlock {
      */
     /**
      * @param displayL
-     *            the {@link IDisplayListener} who's randomDisplayTick method
-     *            will be called for this instance
+     *            the {@link IDisplayListener} who's randomDisplayTick method will be called for this instance
      */
-    public void addDisplayListener(IDisplayListener displayL) {
+    public void addDisplayListener(final IDisplayListener displayL) {
         mainBlock.setTickRandomly(meta);
         displayList.add(displayL);
     }
     
     /**
      * @param collisionL
-     *            the {@link ICollisionListener} who's collide method will be
-     *            called for this instance
+     *            the {@link ICollisionListener} who's collide method will be called for this instance
      */
-    public void addCollisionListener(ICollisionListener collisionL) {
+    public void addCollisionListener(final ICollisionListener collisionL) {
         collisionEffect = true;
         collisionList.add(collisionL);
     }
     
-    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-        for (IDisplayListener dl : displayList) {
+    public void randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand) {
+        for (final IDisplayListener dl : displayList) {
             dl.randomDisplayTick(world, x, y, z, rand);
         }
     }
     
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world, final int x, final int y, final int z) {
         if (collisionEffect) {
-            float var5 = 0.025F;
-            return AxisAlignedBB.getAABBPool().getAABB(x,
-                                                       y,
-                                                       z,
-                                                       (x + 1),
-                                                       ((y + 1.0F) - var5),
-                                                       (z + 1));
+            final float var5 = 0.025F;
+            return AxisAlignedBB.getAABBPool().getAABB(x, y, z, (x + 1), ((y + 1.0F) - var5), (z + 1));
         }
         
         return null;
     }
     
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity par5Entity) {
-        for (ICollisionListener cl : collisionList)
+    public void onEntityCollidedWithBlock(final World world, final int x, final int y, final int z, final Entity par5Entity) {
+        for (final ICollisionListener cl : collisionList) {
             cl.collide(world, x, y, z, par5Entity, meta);
+        }
     }
     
     /*
      * Instance Modifiers
      */
-    public SubBlock setCreativeTab(CreativeTabs tab) {
+    public SubBlock setCreativeTab(final CreativeTabs tab) {
         mainBlock.setCreativeTab(tab);
         this.tab = tab;
         return this;
     }
     
-    public SubBlock setUnlocalizedName(String string) {
+    public SubBlock setUnlocalizedName(final String string) {
         unlocName = string;
         mainBlock.setUnlocalizedName(unlocName);
         return this;
     }
     
-    public SubBlock setBlockDrops(ItemStack item, int min, int max) {
+    public SubBlock setBlockDrops(final ItemStack item, final int min, final int max) {
         drop = item.copy();
         dropMin = min;
         dropMax = max;
         return this;
     }
     
-    public SubBlock setHardness(float hardness) {
+    public SubBlock setHardness(final float hardness) {
         this.hardness = hardness;
         
-        if (blockResistance < hardness * 5.0F) {
+        if (blockResistance < (hardness * 5.0F)) {
             blockResistance = hardness * 5.0F;
         }
         
         return this;
     }
     
-    public SubBlock setResistance(float ressistance) {
+    public SubBlock setResistance(final float ressistance) {
         blockResistance = ressistance * 3;
         return this;
     }
     
-    public SubBlock setSlipperiness(float slipperiness) {
-        this.mainBlock.slipperiness = slipperiness;
+    public SubBlock setSlipperiness(final float slipperiness) {
+        mainBlock.slipperiness = slipperiness;
         return this;
     }
     
-    public SubBlock setTileEntity(TileEntity te) {
+    public SubBlock setTileEntity(final TileEntity te) {
         this.te = te;
         hasTE = true;
         return this;
@@ -206,16 +196,16 @@ public class SubBlock {
     /*
      * Block Redirect Methods
      */
-    public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
+    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side) {
         return icon;
     }
     
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister) {
-        this.icon = iconRegister.registerIcon(iconName);
+    public void registerIcons(final IconRegister iconRegister) {
+        icon = iconRegister.registerIcon(iconName);
     }
     
-    public Icon getBlockTextureFromSide(int side) {
+    public Icon getBlockTextureFromSide(final int side) {
         return icon;
     }
     
@@ -231,15 +221,15 @@ public class SubBlock {
         return mainBlock;
     }
     
-    public int quantityDroppedWithBonus(int fortune, Random rand) {
-        if (drop != null && dropMax > 1) {
+    public int quantityDroppedWithBonus(final int fortune, final Random rand) {
+        if ((drop != null) && (dropMax > 1)) {
             return dropMin + rand.nextInt(dropMax + fortune) + fortune;
         } else {
             return 1;
         }
     }
     
-    public int idDropped(Random rand, int par3) {
+    public int idDropped(final Random rand, final int par3) {
         if (drop != null) {
             return drop.itemID;
         } else {
@@ -251,12 +241,18 @@ public class SubBlock {
         return hardness;
     }
     
-    public float getExplosionResistance(Entity entity, World world, int x, int y, int z,
-            double explosionX, double explosionY, double explosionZ) {
+    public float getExplosionResistance(final Entity entity,
+                                        final World world,
+                                        final int x,
+                                        final int y,
+                                        final int z,
+                                        final double explosionX,
+                                        final double explosionY,
+                                        final double explosionZ) {
         return blockResistance / 5.0F;
     }
     
-    public int damageDropped(int meta) {
+    public int damageDropped(final int meta) {
         if (idDropped(new Random(), meta) == mainBlock.blockID) {
             return meta;
         } else {
@@ -264,11 +260,11 @@ public class SubBlock {
         }
     }
     
-    public int getDamageValue(World world, int x, int y, int z) {
+    public int getDamageValue(final World world, final int x, final int y, final int z) {
         return meta;
     }
     
-    public TileEntity createTileEntity(World world, int meta) {
+    public TileEntity createTileEntity(final World world, final int meta) {
         return te;
     }
     
@@ -276,7 +272,7 @@ public class SubBlock {
         return hasTE;
     }
     
-    public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+    public void breakBlock(final World world, final int x, final int y, final int z, final int id, final int meta) {
         if (hasTE == true) {
             if (te instanceof IInventory) {
                 FunctionHelper.dropInventory(world, x, y, z);
@@ -284,25 +280,32 @@ public class SubBlock {
         }
     }
     
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int wut,
-            float clickX, float clickY, float clockZ) {
-        if (world.isRemote)
+    public boolean onBlockActivated(final World world,
+                                    final int x,
+                                    final int y,
+                                    final int z,
+                                    final EntityPlayer player,
+                                    final int wut,
+                                    final float clickX,
+                                    final float clickY,
+                                    final float clockZ) {
+        if (world.isRemote) {
             return true;
-        if (player.isSneaking())
+        }
+        if (player.isSneaking()) {
             return false;
-        else
+        } else {
             return false;
+        }
     }
     
-    public void onBlockAdded(World world, int x, int y, int z) {
-    }
+    public void onBlockAdded(final World world, final int x, final int y, final int z) {}
     
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living,
-            ItemStack itemStack) {
+    public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLiving living, final ItemStack itemStack) {
         
         if (hasTE == true) {
             int direction = 0;
-            final int facing = MathHelper.floor_double(living.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+            final int facing = MathHelper.floor_double(((living.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
             
             switch (facing) {
                 case 0:
@@ -333,8 +336,7 @@ public class SubBlock {
             }
             
             if (itemStack.hasDisplayName()) {
-                ((TileBase) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack
-                        .getDisplayName());
+                ((TileBase) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
             }
             ((TileBase) world.getBlockTileEntity(x, y, z)).setOwner(living.getEntityName());
             ((TileBase) world.getBlockTileEntity(x, y, z)).setOrientation(direction);

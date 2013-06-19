@@ -44,9 +44,7 @@ public final class ModHandler {
                 handler.init();
             } catch (final Exception e) {
                 
-                Handler.log(String
-                        .format("A CCM Mod has failed to load it's compatibility with %s, pleace inform the CCM Team",
-                                handler.getModName()));
+                Handler.log(String.format("A CCM Mod has failed to load it's compatibility with %s, pleace inform the CCM Team", handler.getModName()));
             }
         }
     }

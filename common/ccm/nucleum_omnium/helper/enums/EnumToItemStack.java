@@ -4,8 +4,7 @@ import net.minecraft.item.ItemStack;
 import ccm.nucleum_omnium.BaseNIClass;
 
 /**
- * This is The class used to get a new {@link ItemStack} instance from any
- * {@link Enum} implementing {@link IItemEnum} or {@link IBlockEnum}
+ * This is The class used to get a new {@link ItemStack} instance from any {@link Enum} implementing {@link IItemEnum} or {@link IBlockEnum}
  * 
  * @author Captain_Shadows
  */
@@ -13,8 +12,7 @@ public final class EnumToItemStack extends BaseNIClass {
     
     /**
      * @param itemEnum
-     *            The Enum constant who's Enum extends {@link IItemEnum} to get
-     *            the instance from
+     *            The Enum constant who's Enum extends {@link IItemEnum} to get the instance from
      * @return a new {@link ItemStack} instance
      */
     public static ItemStack getItemIS(final Enum<? extends IItemEnum> itemEnum) {
@@ -23,8 +21,7 @@ public final class EnumToItemStack extends BaseNIClass {
     
     /**
      * @param itemEnum
-     *            The Enum constant who's Enum extends {@link IItemEnum} to get
-     *            the instance from
+     *            The Enum constant who's Enum extends {@link IItemEnum} to get the instance from
      * @param amount
      *            The amount of items that the ItemStack instance should contain
      * @return a new {@link ItemStack} instance
@@ -35,8 +32,7 @@ public final class EnumToItemStack extends BaseNIClass {
     
     /**
      * @param blockEnum
-     *            The Enum constant who's Enum extends {@link IBlockEnum} to get
-     *            the instance from
+     *            The Enum constant who's Enum extends {@link IBlockEnum} to get the instance from
      * @return a new {@link ItemStack} instance
      */
     public static ItemStack getBlockIS(final Enum<? extends IBlockEnum> blockEnum) {
@@ -45,8 +41,7 @@ public final class EnumToItemStack extends BaseNIClass {
     
     /**
      * @param blockEnum
-     *            The Enum constant who's Enum extends {@link IBlockEnum} to get
-     *            the instance from
+     *            The Enum constant who's Enum extends {@link IBlockEnum} to get the instance from
      * @param amount
      *            The amount of items that the ItemStack instance should contain
      * @return a new {@link ItemStack} instance

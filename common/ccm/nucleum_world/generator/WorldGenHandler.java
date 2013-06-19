@@ -58,24 +58,20 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler {
         final NBTTagCompound tag = (NBTTagCompound) event.getData().getTag("CCM-Properties");
         
         if (tag != null) {
-            bedrock = !tag.hasKey("CCM-Bedrock") && Properties.retroFlatBedrock
-                    && Properties.genFlatBedrock;
+            bedrock = !tag.hasKey("CCM-Bedrock") && Properties.retroFlatBedrock && Properties.genFlatBedrock;
             ores = !tag.hasKey("CCM-Ores") && Properties.retroOreGen;
         }
         final ChunkCoord cCoord = new ChunkCoord(event.getChunk());
         
-        if ((tag == null)
-                && ((Properties.retroFlatBedrock && Properties.genFlatBedrock) || Properties.retroOreGen)) {
+        if ((tag == null) && ((Properties.retroFlatBedrock && Properties.genFlatBedrock) || Properties.retroOreGen)) {
             regen = true;
         }
         if (bedrock) {
-            Handler.log(NucleumOmnium.instance, "Regenerating flat bedrock for the chunk at "
-                    + cCoord.toString() + ".");
+            Handler.log(NucleumOmnium.instance, "Regenerating flat bedrock for the chunk at " + cCoord.toString() + ".");
             regen = true;
         }
         if (ores) {
-            Handler.log(NucleumOmnium.instance,
-                        "Regenerating ores for the chunk at " + cCoord.toString() + ".");
+            Handler.log(NucleumOmnium.instance, "Regenerating ores for the chunk at " + cCoord.toString() + ".");
             regen = true;
         }
         if (regen) {
@@ -93,9 +89,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler {
     }
     
     @Override
-    public void generate(final Random random, final int chunkX, final int chunkZ,
-            final World world, final IChunkProvider chunkGenerator,
-            final IChunkProvider chunkProvider) {
+    public void generate(final Random random, final int chunkX, final int chunkZ, final World world, final IChunkProvider chunkGenerator, final IChunkProvider chunkProvider) {
         generateWorld(random, chunkX, chunkZ, world, true);
     }
     
@@ -113,8 +107,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler {
         return WorldGenHandler.instance.registerFeature(Ore);
     }
     
-    public void generateWorld(final Random random, final int chunkX, final int chunkZ,
-            final World world, final boolean newGen) {
+    public void generateWorld(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen) {
         replaceBedrock(random, chunkX, chunkZ, world, newGen);
         
         if (!newGen && !Properties.retroOreGen) {
@@ -128,8 +121,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler {
         }
     }
     
-    public void replaceBedrock(final Random random, final int chunkX, final int chunkZ,
-            final World world, final boolean newGen) {
+    public void replaceBedrock(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen) {
         if (!Properties.genFlatBedrock || (!newGen && !Properties.retroFlatBedrock)) {
             return;
         }
@@ -139,25 +131,13 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler {
             for (int blockX = 0; blockX < 16; blockX++) {
                 for (int blockZ = 0; blockZ < 16; blockZ++) {
                     for (int blockY = 126; blockY > 121; blockY--) {
-                        if (world
-                                .getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID) {
-                            world.setBlock((chunkX * 16) + blockX,
-                                           blockY,
-                                           (chunkZ * 16) + blockZ,
-                                           Block.netherrack.blockID,
-                                           0,
-                                           2);
+                        if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID) {
+                            world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, Block.netherrack.blockID, 0, 2);
                         }
                     }
                     for (int blockY = 5; blockY > 0; blockY--) {
-                        if (world
-                                .getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID) {
-                            world.setBlock((chunkX * 16) + blockX,
-                                           blockY,
-                                           (chunkZ * 16) + blockZ,
-                                           Block.netherrack.blockID,
-                                           0,
-                                           2);
+                        if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID) {
+                            world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, Block.netherrack.blockID, 0, 2);
                         }
                     }
                 }
@@ -166,14 +146,8 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler {
             for (int blockX = 0; blockX < 16; blockX++) {
                 for (int blockZ = 0; blockZ < 16; blockZ++) {
                     for (int blockY = 5; blockY > 0; blockY--) {
-                        if (world
-                                .getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID) {
-                            world.setBlock((chunkX * 16) + blockX,
-                                           blockY,
-                                           (chunkZ * 16) + blockZ,
-                                           Block.stone.blockID,
-                                           0,
-                                           2);
+                        if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID) {
+                            world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, Block.stone.blockID, 0, 2);
                         }
                     }
                 }

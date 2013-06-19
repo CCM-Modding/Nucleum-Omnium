@@ -1,6 +1,5 @@
 /**
- * Copyright (c) Jadar, 2013 Developer Capes API by Jadar License: Lesser GNU
- * Public License v3 (http://www.gnu.org/licenses/lgpl.html) version 1.3.1
+ * Copyright (c) Jadar, 2013 Developer Capes API by Jadar License: Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html) version 1.3.1
  */
 package lib.com.jadarstudios.api.developercapesapi;
 
@@ -37,8 +36,7 @@ public final class DeveloperCapesAPI {
     }
     
     /**
-     * Get's the current DeveloperCapesAPI instance, or creates a new one if
-     * necessary.
+     * Get's the current DeveloperCapesAPI instance, or creates a new one if necessary.
      */
     public static DeveloperCapesAPI getInstance() {
         if (DeveloperCapesAPI.instance == null) {
@@ -48,18 +46,15 @@ public final class DeveloperCapesAPI {
     }
     
     /**
-     * Set up capes. All cape URLs are in the txt file passed in.
-     * https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt
+     * Set up capes. All cape URLs are in the txt file passed in. https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt
      * 
      * @param parTxtUrl
-     *            The URL of the .txt file containing the groups, members of
-     *            said groups, and the group's cape URL.
+     *            The URL of the .txt file containing the groups, members of said groups, and the group's cape URL.
      */
     public void init(final String parTxtUrl) {
         try {
             final URL url = new URL(parTxtUrl);
-            final BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(url.openStream()));
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
             
             String username = "";
@@ -79,9 +74,7 @@ public final class DeveloperCapesAPI {
                             if (subLine.startsWith("http")) {
                                 capeUrl = subLine;
                                 DeveloperCapesAPI.getInstance().addGroupUrl(group, capeUrl);
-                                DeveloperCapesAPI.mc.renderEngine
-                                        .obtainImageData(capeUrl,
-                                                         new DeveloperCapesImageBufferDownload());
+                                DeveloperCapesAPI.mc.renderEngine.obtainImageData(capeUrl, new DeveloperCapesImageBufferDownload());
                                 continue;
                             } else {
                                 username = subLine.toLowerCase();

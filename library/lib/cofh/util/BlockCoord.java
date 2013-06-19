@@ -5,8 +5,7 @@ import java.io.Serializable;
 import net.minecraft.tileentity.TileEntity;
 
 /**
- * Standardized implementation for representing and manipulating Block
- * Coordinates. Provides standard Java Collection interaction.
+ * Standardized implementation for representing and manipulating Block Coordinates. Provides standard Java Collection interaction.
  * 
  * @author King Lemming
  */

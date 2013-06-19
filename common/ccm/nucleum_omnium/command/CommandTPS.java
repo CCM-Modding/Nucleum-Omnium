@@ -29,9 +29,7 @@ public class CommandTPS extends CommandBase {
     }
     
     private double getTickMs(final World world) {
-        return getTickTimeSum(world == null ? NucleumOmnium.server.tickTimeArray
-                : (long[]) NucleumOmnium.server.worldTickTimes.get(Integer
-                        .valueOf(world.provider.dimensionId))) * 1.0E-006D;
+        return getTickTimeSum(world == null ? NucleumOmnium.server.tickTimeArray : (long[]) NucleumOmnium.server.worldTickTimes.get(Integer.valueOf(world.provider.dimensionId))) * 1.0E-006D;
     }
     
     private double getTps(final World world) {
@@ -52,19 +50,23 @@ public class CommandTPS extends CommandBase {
             
             sender.sendChatToPlayer("--------------------------------------------------");
             
-            sender.sendChatToPlayer("Overall: " + CommandTPS.floatfmt.format(tps) + " TPS/"
-                    + CommandTPS.floatfmt.format(tickms) + "MS (" + (int) ((tps / 20.0D) * 100.0D)
-                    + "%)");
+            sender.sendChatToPlayer("Overall: " + CommandTPS.floatfmt.format(tps) + " TPS/" + CommandTPS.floatfmt.format(tickms) + "MS (" + (int) ((tps / 20.0D) * 100.0D) + "%)");
             
             sender.sendChatToPlayer("");
             
             for (final World world : NucleumOmnium.server.worldServers) {
                 tps = getTps(world);
                 tickms = getTickMs(world);
-                sender.sendChatToPlayer(world.provider.getDimensionName() + " ["
-                        + world.provider.dimensionId + "]: " + CommandTPS.floatfmt.format(tps)
-                        + " TPS/" + CommandTPS.floatfmt.format(tickms) + "MS ("
-                        + (int) ((tps / 20.0D) * 100.0D) + "%)");
+                sender.sendChatToPlayer(world.provider.getDimensionName()
+                                        + " ["
+                                        + world.provider.dimensionId
+                                        + "]: "
+                                        + CommandTPS.floatfmt.format(tps)
+                                        + " TPS/"
+                                        + CommandTPS.floatfmt.format(tickms)
+                                        + "MS ("
+                                        + (int) ((tps / 20.0D) * 100.0D)
+                                        + "%)");
             }
             
             sender.sendChatToPlayer("--------------------------------------------------");
@@ -75,11 +77,8 @@ public class CommandTPS extends CommandBase {
             sender.sendChatToPlayer("--------------------------------------------------");
             
             sender.sendChatToPlayer("Overall server tick:");
-            sender.sendChatToPlayer("TPS: " + CommandTPS.floatfmt.format(tps) + " TPS of "
-                    + CommandTPS.floatfmt.format(20L) + " TPS (" + (int) ((tps / 20.0D) * 100.0D)
-                    + "%)");
-            sender.sendChatToPlayer("Tick time: " + CommandTPS.floatfmt.format(tickms) + " ms of "
-                    + CommandTPS.floatfmt.format(50L) + " ms");
+            sender.sendChatToPlayer("TPS: " + CommandTPS.floatfmt.format(tps) + " TPS of " + CommandTPS.floatfmt.format(20L) + " TPS (" + (int) ((tps / 20.0D) * 100.0D) + "%)");
+            sender.sendChatToPlayer("Tick time: " + CommandTPS.floatfmt.format(tickms) + " ms of " + CommandTPS.floatfmt.format(50L) + " ms");
             
             sender.sendChatToPlayer("--------------------------------------------------");
         } else if (args[0].toLowerCase().charAt(0) == 'a') {
@@ -87,11 +86,8 @@ public class CommandTPS extends CommandBase {
             final double tps = getTps(null);
             sender.sendChatToPlayer("--------------------------------------------------");
             sender.sendChatToPlayer("Overall server tick:");
-            sender.sendChatToPlayer("TPS: " + CommandTPS.floatfmt.format(tps) + " TPS of "
-                    + CommandTPS.floatfmt.format(20L) + " TPS (" + (int) ((tps / 20.0D) * 100.0D)
-                    + "%)");
-            sender.sendChatToPlayer("Tick time: " + CommandTPS.floatfmt.format(tickms) + " ms of "
-                    + CommandTPS.floatfmt.format(50L) + " ms");
+            sender.sendChatToPlayer("TPS: " + CommandTPS.floatfmt.format(tps) + " TPS of " + CommandTPS.floatfmt.format(20L) + " TPS (" + (int) ((tps / 20.0D) * 100.0D) + "%)");
+            sender.sendChatToPlayer("Tick time: " + CommandTPS.floatfmt.format(tickms) + " ms of " + CommandTPS.floatfmt.format(50L) + " ms");
             sender.sendChatToPlayer("");
             int loadedChunks = 0;
             int entities = 0;
@@ -119,16 +115,11 @@ public class CommandTPS extends CommandBase {
             final double tickms = getTickMs(world);
             final double tps = getTps(world);
             sender.sendChatToPlayer("--------------------------------------------------");
-            sender.sendChatToPlayer(world.provider.getDimensionName() + " ["
-                    + world.provider.dimensionId + "]");
-            sender.sendChatToPlayer("Loaded chunks: "
-                    + world.getChunkProvider().getLoadedChunkCount());
+            sender.sendChatToPlayer(world.provider.getDimensionName() + " [" + world.provider.dimensionId + "]");
+            sender.sendChatToPlayer("Loaded chunks: " + world.getChunkProvider().getLoadedChunkCount());
             sender.sendChatToPlayer("");
-            sender.sendChatToPlayer("TPS: " + CommandTPS.floatfmt.format(tps) + "/"
-                    + CommandTPS.floatfmt.format(20L) + " TPS (" + (int) ((tps / 20.0D) * 100.0D)
-                    + "%)");
-            sender.sendChatToPlayer("Tick: " + CommandTPS.floatfmt.format(tickms) + " ms of "
-                    + CommandTPS.floatfmt.format(50L) + " ms");
+            sender.sendChatToPlayer("TPS: " + CommandTPS.floatfmt.format(tps) + "/" + CommandTPS.floatfmt.format(20L) + " TPS (" + (int) ((tps / 20.0D) * 100.0D) + "%)");
+            sender.sendChatToPlayer("Tick: " + CommandTPS.floatfmt.format(tickms) + " ms of " + CommandTPS.floatfmt.format(50L) + " ms");
             sender.sendChatToPlayer("");
             sender.sendChatToPlayer("Entities: " + world.loadedEntityList.size());
             sender.sendChatToPlayer("Tile entities: " + world.loadedTileEntityList.size());

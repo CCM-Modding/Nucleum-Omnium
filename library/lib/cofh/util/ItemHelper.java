@@ -10,8 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
- * Contains various helper functions to assist with {@link Item} and
- * {@link ItemStack} manipulation and interaction.
+ * Contains various helper functions to assist with {@link Item} and {@link ItemStack} manipulation and interaction.
  * 
  * @author King Lemming
  */
@@ -50,9 +49,11 @@ public final class ItemHelper {
                 }
             }
         }
-        if ((dmgItems[1] != null) && (dmgItems[0].itemID == dmgItems[1].itemID)
-                && (dmgItems[0].stackSize == 1) && (dmgItems[1].stackSize == 1)
-                && Item.itemsList[dmgItems[0].itemID].isRepairable()) {
+        if ((dmgItems[1] != null)
+            && (dmgItems[0].itemID == dmgItems[1].itemID)
+            && (dmgItems[0].stackSize == 1)
+            && (dmgItems[1].stackSize == 1)
+            && Item.itemsList[dmgItems[0].itemID].isRepairable()) {
             final Item theItem = Item.itemsList[dmgItems[0].itemID];
             final int var13 = theItem.getMaxDamage() - dmgItems[0].getItemDamageForDisplay();
             final int var8 = theItem.getMaxDamage() - dmgItems[1].getItemDamageForDisplay();
@@ -73,9 +74,7 @@ public final class ItemHelper {
     }
     
     /**
-     * Get a hashcode based on the ItemStack's ID and Metadata. As both of these
-     * are shorts, this should be collision-free for non-NBT sensitive
-     * ItemStacks.
+     * Get a hashcode based on the ItemStack's ID and Metadata. As both of these are shorts, this should be collision-free for non-NBT sensitive ItemStacks.
      * 
      * @param stack
      *            The ItemStack to get a hashcode for.
@@ -87,8 +86,7 @@ public final class ItemHelper {
     }
     
     /**
-     * Get a hashcode based on an ID and Metadata pair. As both of these are
-     * shorts, this should be collision-free if NBT is not involved.
+     * Get a hashcode based on an ID and Metadata pair. As both of these are shorts, this should be collision-free if NBT is not involved.
      * 
      * @param id
      *            ID value to use.
@@ -102,8 +100,7 @@ public final class ItemHelper {
     }
     
     /**
-     * Extract the ID from a hashcode created from one of the getHashCode()
-     * methods in this class.
+     * Extract the ID from a hashcode created from one of the getHashCode() methods in this class.
      */
     public static int getIDFromHashCode(final int hashCode) {
         
@@ -111,8 +108,7 @@ public final class ItemHelper {
     }
     
     /**
-     * Extract the Metadata from a hashcode created from one of the
-     * getHashCode() methods in this class.
+     * Extract the Metadata from a hashcode created from one of the getHashCode() methods in this class.
      */
     public static int getMetaFromHashCode(final int hashCode) {
         
@@ -137,31 +133,26 @@ public final class ItemHelper {
     /**
      * Determine if a player is holding a registered Fluid Container.
      */
-/*    public static boolean isPlayerHoldingFluidContainer(final EntityPlayer player) {
-        
-        return FluidContainerRegistry.isContainer(player.getCurrentEquippedItem());
-    }*/
+    /*
+     * public static boolean isPlayerHoldingFluidContainer(final EntityPlayer player) { return FluidContainerRegistry.isContainer(player.getCurrentEquippedItem()); }
+     */
     
     /**
      * Determine if a player is holding an ItemStack of a specific Item type.
      */
     public static boolean isPlayerHoldingItem(final Item item, final EntityPlayer player) {
         
-        final Item equipped = player.getCurrentEquippedItem() != null ? player
-                .getCurrentEquippedItem().getItem() : null;
+        final Item equipped = player.getCurrentEquippedItem() != null ? player.getCurrentEquippedItem().getItem() : null;
         return item == null ? equipped == null : item.equals(equipped);
     }
     
     /**
-     * Determine if a player is holding an ItemStack with a specific Item ID,
-     * Metadata, and NBT.
+     * Determine if a player is holding an ItemStack with a specific Item ID, Metadata, and NBT.
      */
     public static boolean isPlayerHoldingItemStack(final ItemStack stack, final EntityPlayer player) {
         
-        final ItemStack equipped = player.getCurrentEquippedItem() != null ? player
-                .getCurrentEquippedItem() : null;
-        return stack == null ? equipped == null : (equipped != null) && stack.isItemEqual(equipped)
-                && ItemStack.areItemStackTagsEqual(stack, equipped);
+        final ItemStack equipped = player.getCurrentEquippedItem() != null ? player.getCurrentEquippedItem() : null;
+        return stack == null ? equipped == null : (equipped != null) && stack.isItemEqual(equipped) && ItemStack.areItemStackTagsEqual(stack, equipped);
     }
     
     /* Inventory Utilities */
@@ -178,8 +169,7 @@ public final class ItemHelper {
     }
     
     /**
-     * Add an ItemStack to an inventory. Return true if the entire stack was
-     * added.
+     * Add an ItemStack to an inventory. Return true if the entire stack was added.
      * 
      * @param inventory
      *            The inventory.
@@ -188,16 +178,14 @@ public final class ItemHelper {
      * @param startIndex
      *            First slot to attempt to add into. Does not loop around fully.
      */
-    public static boolean addItemStackToInventory(final ItemStack[] inventory, ItemStack stack,
-            final int startIndex) {
+    public static boolean addItemStackToInventory(final ItemStack[] inventory, ItemStack stack, final int startIndex) {
         
         if (stack == null) {
             return true;
         }
         int openSlot = -1;
         for (int i = startIndex; i < inventory.length; i++) {
-            if (areItemStacksEqualNoNBT(stack, inventory[i])
-                    && (inventory[i].getMaxStackSize() > inventory[i].stackSize)) {
+            if (areItemStacksEqualNoNBT(stack, inventory[i]) && (inventory[i].getMaxStackSize() > inventory[i].stackSize)) {
                 final int hold = inventory[i].getMaxStackSize() - inventory[i].stackSize;
                 if (hold >= stack.stackSize) {
                     inventory[i].stackSize += stack.stackSize;
@@ -235,17 +223,18 @@ public final class ItemHelper {
             return false;
         }
         return (stackA.itemID == stackB.itemID)
-                && (stackA.getItemDamage() == OreDictionary.WILDCARD_VALUE ? true : stackB
-                        .getItemDamage() == OreDictionary.WILDCARD_VALUE ? true : stackA
-                        .getHasSubtypes() == false ? true : stackB.getItemDamage() == stackA
-                        .getItemDamage());
+               && (stackA.getItemDamage() == OreDictionary.WILDCARD_VALUE
+                                                                         ? true
+                                                                         : stackB.getItemDamage() == OreDictionary.WILDCARD_VALUE
+                                                                                                                                 ? true
+                                                                                                                                 : stackA.getHasSubtypes() == false
+                                                                                                                                                                   ? true
+                                                                                                                                                                   : stackB.getItemDamage() == stackA.getItemDamage());
     }
     
-    public static boolean craftingEquivalence(final ItemStack checked, final ItemStack source,
-            final String oreDict) {
+    public static boolean craftingEquivalence(final ItemStack checked, final ItemStack source, final String oreDict) {
         
-        return areItemStacksEqualNoNBT(checked, source) ? true : oreDict == null ? false
-                : getOreName(checked).equalsIgnoreCase(oreDict);
+        return areItemStacksEqualNoNBT(checked, source) ? true : oreDict == null ? false : getOreName(checked).equalsIgnoreCase(oreDict);
     }
     
 }

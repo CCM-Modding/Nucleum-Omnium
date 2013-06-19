@@ -37,12 +37,13 @@ public class BucketHandler {
         event.setResult(Result.ALLOW);
     }
     
-    public static boolean registerBucket(final int blockId, final int blockMeta,
-            final ItemStack bucket) {
+    public static boolean registerBucket(final int blockId, final int blockMeta, final ItemStack bucket) {
         
-        if ((blockId <= 0) || (blockMeta < 0) || (bucket == null)
-                || buckets.containsKey(ItemHelper.getHashCode(blockId, blockMeta))
-                || buckets.inverse().containsKey(ItemHelper.getHashCode(bucket))) {
+        if ((blockId <= 0)
+            || (blockMeta < 0)
+            || (bucket == null)
+            || buckets.containsKey(ItemHelper.getHashCode(blockId, blockMeta))
+            || buckets.inverse().containsKey(ItemHelper.getHashCode(bucket))) {
             return false;
         }
         buckets.put(ItemHelper.getHashCode(blockId, blockMeta), ItemHelper.getHashCode(bucket));
@@ -64,23 +65,16 @@ public class BucketHandler {
         }
         world.setBlock(x, y, z, 0);
         final int hashCode = buckets.get(ItemHelper.getHashCode(blockId, blockMeta));
-        return new ItemStack(ItemHelper.getIDFromHashCode(hashCode), 1,
-                ItemHelper.getMetaFromHashCode(hashCode));
+        return new ItemStack(ItemHelper.getIDFromHashCode(hashCode), 1, ItemHelper.getMetaFromHashCode(hashCode));
     }
     
-    public static boolean emptyBucket(final World world, final int x, final int y, final int z,
-            final ItemStack bucket) {
+    public static boolean emptyBucket(final World world, final int x, final int y, final int z, final ItemStack bucket) {
         
         if (!buckets.inverse().containsKey(ItemHelper.getHashCode(bucket))) {
             return false;
         }
         final int hashCode = buckets.inverse().get(ItemHelper.getHashCode(bucket));
-        world.setBlock(x,
-                       y,
-                       z,
-                       ItemHelper.getIDFromHashCode(hashCode),
-                       ItemHelper.getMetaFromHashCode(hashCode),
-                       3);
+        world.setBlock(x, y, z, ItemHelper.getIDFromHashCode(hashCode), ItemHelper.getMetaFromHashCode(hashCode), 3);
         return true;
     }
     

@@ -15,8 +15,7 @@ public final class StringHelper {
         
     }
     
-    public static int getSplitStringHeight(final FontRenderer fontRenderer, final String input,
-            final int width) {
+    public static int getSplitStringHeight(final FontRenderer fontRenderer, final String input, final int width) {
         
         final List<?> stringRows = fontRenderer.listFormattedStringToWidth(input, width);
         return stringRows.size() * fontRenderer.FONT_HEIGHT;

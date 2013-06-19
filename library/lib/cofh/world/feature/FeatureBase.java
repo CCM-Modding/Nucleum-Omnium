@@ -21,8 +21,7 @@ public abstract class FeatureBase implements IFeatureGenerator {
         this.regen = regen;
     }
     
-    public FeatureBase(final String name, final WorldGenerator worldGen, final byte type,
-            final boolean regen) {
+    public FeatureBase(final String name, final WorldGenerator worldGen, final byte type, final boolean regen) {
         
         this.name = name;
         this.type = type;
@@ -37,7 +36,6 @@ public abstract class FeatureBase implements IFeatureGenerator {
     }
     
     @Override
-    public abstract boolean generateFeature(Random random, int chunkX, int chunkZ, World world,
-            boolean newGen);
+    public abstract boolean generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGen);
     
 }

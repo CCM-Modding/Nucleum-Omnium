@@ -31,9 +31,7 @@ public class MathHelper extends BaseNIClass {
      * @param maxValue
      *            The max value of the Integer
      * @param zero
-     *            If the number returned is allowed to be 0 the pass in true,
-     *            otherwise pass in false. If you pass in false then the minimum
-     *            will be 1. For higher minimums check
+     *            If the number returned is allowed to be 0 the pass in true, otherwise pass in false. If you pass in false then the minimum will be 1. For higher minimums check
      *            {@code getRandomInt(int minValue, int maxValue)}
      * @return the random Integer
      */

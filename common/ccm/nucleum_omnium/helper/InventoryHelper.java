@@ -66,8 +66,7 @@ public class InventoryHelper extends BaseNIClass {
      *            The inventory (A class implementing {@link IInventory})
      * @return The new {@link ItemStack}.
      */
-    public static ItemStack decrStackSize(final int slot, final int amount,
-            final ItemStack[] stacks, final IInventory inventory) {
+    public static ItemStack decrStackSize(final int slot, final int amount, final ItemStack[] stacks, final IInventory inventory) {
         if (stacks[slot] != null) {
             ItemStack itemstack;
             if (stacks[slot].stackSize <= amount) {
@@ -89,10 +88,8 @@ public class InventoryHelper extends BaseNIClass {
     }
     
     /**
-     * Checks the Inventory Array for either a empty slot or one that contains
-     * the output Item Example:
-     * {@code this.inventory[getBestInventory(this.inventory, 3, itemstack)]}
-     * That should work in the Counter
+     * Checks the Inventory Array for either a empty slot or one that contains the output Item Example: {@code this.inventory[getBestInventory(this.inventory, 3, itemstack)]} That
+     * should work in the Counter
      * 
      * @param inventory
      *            The inventory to search
@@ -102,8 +99,7 @@ public class InventoryHelper extends BaseNIClass {
      *            The output
      * @return The Slot number
      */
-    public static int getBestInventory(final ItemStack[] inventory, final int startSlot,
-            final ItemStack output) {
+    public static int getBestInventory(final ItemStack[] inventory, final int startSlot, final ItemStack output) {
         for (int j = startSlot; j < inventory.length; j++) {
             if (inventory[j] == output) {
                 return j;

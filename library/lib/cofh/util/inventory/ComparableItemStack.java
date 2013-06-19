@@ -5,9 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
- * This class allows for OreDictionary-compatible ItemStack comparisons. The
- * intended purpose of this is for things such as Recipe Handlers or HashMaps of
- * ItemStacks.
+ * This class allows for OreDictionary-compatible ItemStack comparisons. The intended purpose of this is for things such as Recipe Handlers or HashMaps of ItemStacks.
  * 
  * @author King Lemming
  */
@@ -89,8 +87,7 @@ public class ComparableItemStack {
     
     public boolean isItemEqual(final ComparableItemStack other) {
         
-        return (other != null)
-                && (((oreID != -1) && (oreID == other.oreID)) || ((itemID == other.itemID) && (metadata == other.metadata)));
+        return (other != null) && (((oreID != -1) && (oreID == other.oreID)) || ((itemID == other.itemID) && (metadata == other.metadata)));
     }
     
     public boolean isStackEqual(final ComparableItemStack other) {
@@ -110,8 +107,7 @@ public class ComparableItemStack {
     
     public ItemStack toItemStack() {
         
-        return (itemID < 0) || (itemID >= 32000) ? null
-                : new ItemStack(itemID, stackSize, metadata);
+        return (itemID < 0) || (itemID >= 32000) ? null : new ItemStack(itemID, stackSize, metadata);
     }
     
     @Override

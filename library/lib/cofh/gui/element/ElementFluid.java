@@ -4,18 +4,16 @@ import lib.cofh.gui.GuiBase;
 
 public class ElementFluid extends ElementBase {
     
-    //public FluidStack fluid;
+    // public FluidStack fluid;
     
     public ElementFluid(final GuiBase gui, final int posX, final int posY) {
         
         super(gui, posX, posY);
     }
     
-/*    public ElementFluid setFluid(final FluidStack fluid) {
-        
-        this.fluid = fluid;
-        return this;
-    }*/
+    /*
+     * public ElementFluid setFluid(final FluidStack fluid) { this.fluid = fluid; return this; }
+     */
     
     @Override
     public void draw() {
@@ -23,7 +21,7 @@ public class ElementFluid extends ElementBase {
         if (!visible) {
             return;
         }
-        //gui.drawFluid(posX, posY, fluid, sizeX, sizeY);
+        // gui.drawFluid(posX, posY, fluid, sizeX, sizeY);
     }
     
     @Override

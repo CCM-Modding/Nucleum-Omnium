@@ -16,8 +16,7 @@ public class IconRegistry {
     
     public static Map<String, Icon> icons = new HashMap<String, Icon>();
     
-    public static void addIcon(final String iconName, final String iconLocation,
-            final IconRegister ir) {
+    public static void addIcon(final String iconName, final String iconLocation, final IconRegister ir) {
         
         icons.put(iconName, ir.registerIcon(iconLocation));
     }
@@ -27,8 +26,7 @@ public class IconRegistry {
         icons.put(iconName, icon);
     }
     
-    public static void addCustomIcon(final String iconName, final String iconLocation,
-            final TextureMap ir) {
+    public static void addCustomIcon(final String iconName, final String iconLocation, final TextureMap ir) {
         
         final TextureCustom icon = new TextureCustom(iconLocation);
         ir.setTextureEntry(iconLocation, icon);

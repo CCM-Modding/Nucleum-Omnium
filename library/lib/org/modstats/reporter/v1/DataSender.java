@@ -1,25 +1,13 @@
 /**
- * Copyright (c) <2012>, Oleg Romanovskiy <shedarhome@gmail.com> aka Shedar All
- * rights reserved. Redistribution and use in source and binary forms, with or
- * without modification, are permitted provided that the following conditions
- * are met: * Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer. *
- * Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution. * Neither the name of
- * the author nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written
- * permission. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
- * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
- * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * Copyright (c) <2012>, Oleg Romanovskiy <shedarhome@gmail.com> aka Shedar All rights reserved. Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met: * Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+ * disclaimer. * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other
+ * materials provided with the distribution. * Neither the name of the author nor the names of its contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
+ * BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package lib.org.modstats.reporter.v1;
@@ -75,8 +63,7 @@ class DataSender extends Thread {
     }
     
     private String toHexString(final byte[] bytes) {
-        final char[] hexArray = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c',
-                'd', 'e', 'f' };
+        final char[] hexArray = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
         final char[] hexChars = new char[bytes.length * 2];
         int v;
         for (int j = 0; j < bytes.length; j++) {
@@ -100,8 +87,7 @@ class DataSender extends Thread {
             if (macArray != null) {
                 mac = toHexString(macArray);
             }
-        } catch (final Exception ex) {
-        }
+        } catch (final Exception ex) {}
         final File uidFile = new File(statDir, "player.uid");
         if (uidFile.exists() && uidFile.canRead() && (uidFile.length() == (32 + mac.length()))) {
             final String data = Files.toString(uidFile, Charsets.US_ASCII);
@@ -154,13 +140,11 @@ class DataSender extends Thread {
                     continue;
                 }
                 final String version = modObject.getStringValue("ver");
-                if ((version == null)
-                        || version.equals(reporter.registeredMods.get(prefix).version)) {
+                if ((version == null) || version.equals(reporter.registeredMods.get(prefix).version)) {
                     continue;
                 }
                 if (checkIsNewer(reporter.registeredMods.get(prefix).version, version)) {
-                    final ModVersionData data = new ModVersionData(prefix,
-                            reporter.registeredMods.get(prefix).name, version);
+                    final ModVersionData data = new ModVersionData(prefix, reporter.registeredMods.get(prefix).name, version);
                     final Map<JsonStringNode, JsonNode> fields = modObject.getFields();
                     for (final Map.Entry<JsonStringNode, JsonNode> entry : fields.entrySet()) {
                         final String fieldName = entry.getKey().getText();
@@ -168,9 +152,7 @@ class DataSender extends Thread {
                             continue;
                         }
                         if (!(entry.getValue() instanceof JsonStringNode)) {
-                            FMLLog.warning(String
-                                    .format("[Modstats] Too complex data in response for field '%s'.",
-                                            fieldName));
+                            FMLLog.warning(String.format("[Modstats] Too complex data in response for field '%s'.", fieldName));
                             continue;
                         }
                         final String value = ((JsonStringNode) entry.getValue()).getText();
@@ -195,8 +177,7 @@ class DataSender extends Thread {
                 final Iterator<ModVersionData> iterator = updatedModsToOutput.iterator();
                 while (iterator.hasNext()) {
                     final ModVersionData modVersionData = iterator.next();
-                    builder.append(modVersionData.name).append(" (").append(modVersionData.version)
-                            .append(")").append(iterator.hasNext() ? "," : ".");
+                    builder.append(modVersionData.name).append(" (").append(modVersionData.version).append(")").append(iterator.hasNext() ? "," : ".");
                 }
                 FMLLog.info("[Modstats] %s", builder.toString());
                 if (!reporter.config.logOnly && FMLCommonHandler.instance().getSide().isClient()) {
@@ -205,8 +186,7 @@ class DataSender extends Thread {
                     while ((mc.thePlayer == null) && (maxTries > 0)) {
                         try {
                             Thread.sleep(1000);
-                        } catch (final InterruptedException e) {
-                        }
+                        } catch (final InterruptedException e) {}
                         maxTries--;
                     }
                     if (mc.thePlayer != null) {
@@ -226,21 +206,13 @@ class DataSender extends Thread {
             final String data = getData();
             final String playerId = getPlayerId();
             final String hash = getSignature(playerId + "!" + data);
-            final String template = manual ? DataSender.urlManualTemplate
-                    : DataSender.urlAutoTemplate;
+            final String template = manual ? DataSender.urlManualTemplate : DataSender.urlAutoTemplate;
             final String mcVersion = new CallableMinecraftVersion(null).minecraftVersion();
-            final URL url = new URL(String.format(template,
-                                                  mcVersion,
-                                                  playerId,
-                                                  data,
-                                                  hash,
-                                                  reporter.config.betaNotifications,
-                                                  reporter.config.forCurrentMinecraftVersion));
+            final URL url = new URL(String.format(template, mcVersion, playerId, data, hash, reporter.config.betaNotifications, reporter.config.forCurrentMinecraftVersion));
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
             String out = "";
             while ((line = reader.readLine()) != null) {

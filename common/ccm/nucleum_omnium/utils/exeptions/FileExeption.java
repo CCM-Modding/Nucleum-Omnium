@@ -24,14 +24,11 @@ public class FileExeption extends NotMyFaultExeption {
     }
     
     private void addString() {
-        tmpErrorSB
-                .append("Delete any file that does NOT end with '.xml' from your lang folder located inside ");
+        tmpErrorSB.append("Delete any file that does NOT end with '.xml' from your lang folder located inside ");
         tmpErrorSB.append(languageLocation);
         tmpErrorSB.append(" which is inside of the ");
         tmpErrorSB.append(mod.getName());
         tmpErrorSB.append(".jar in your mods folder\n");
-        errorSB.replace(errorSB.lastIndexOf("|"),
-                        errorSB.lastIndexOf("|") + 1,
-                        tmpErrorSB.toString());
+        errorSB.replace(errorSB.lastIndexOf("|"), errorSB.lastIndexOf("|") + 1, tmpErrorSB.toString());
     }
 }

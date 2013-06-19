@@ -1,8 +1,7 @@
 package lib.cofh.api.tileentity;
 
 /**
- * Implement this interface on Tile Entities which allow for reconfiguration of
- * their sides. Coordination with the containing block is required.
+ * Implement this interface on Tile Entities which allow for reconfiguration of their sides. Coordination with the containing block is required.
  * 
  * @author King Lemming
  */

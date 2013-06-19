@@ -16,14 +16,12 @@ public abstract class ILanguagePack {
     protected String           currentPath;
     
     /**
-     * Private {@code List<String>} that contains the languages, Shared with all
-     * Language Packs
+     * Private {@code List<String>} that contains the languages, Shared with all Language Packs
      */
     private final List<String> supportedLanguages = new ArrayList<String>();
     
     /**
-     * Sets the currentPath and Clears the
-     * {@code List<String> supportedLanguages}
+     * Sets the currentPath and Clears the {@code List<String> supportedLanguages}
      */
     public ILanguagePack(final String currentPath) {
         this.currentPath = currentPath;
@@ -35,8 +33,7 @@ public abstract class ILanguagePack {
      * 
      * @param name
      *            The name of the language
-     * @return The usable version of that name. For our purposes that version
-     *         should get added to the {@code List<String> supportedLanguages}
+     * @return The usable version of that name. For our purposes that version should get added to the {@code List<String> supportedLanguages}
      */
     public String getPath(final String name) {
         return currentPath + name + ".xml";
@@ -47,10 +44,7 @@ public abstract class ILanguagePack {
      */
     public void loadLangs() {
         for (final String langFile : supportedLanguages) {
-            LanguageRegistry.instance()
-                    .loadLocalization(langFile,
-                                      LanguageHelper.getLangFromFileName(langFile),
-                                      LanguageHelper.isXMLLanguageFile(langFile));
+            LanguageRegistry.instance().loadLocalization(langFile, LanguageHelper.getLangFromFileName(langFile), LanguageHelper.isXMLLanguageFile(langFile));
         }
     }
 }

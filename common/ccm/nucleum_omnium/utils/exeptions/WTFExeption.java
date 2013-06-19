@@ -20,8 +20,6 @@ public class WTFExeption extends NotMyFaultExeption {
         tmpErrorSB.append("What the Hax are you tring to do???\n");
         tmpErrorSB.append("DO NOT TRY TO GO TO THE FAR LANDS!!\n");
         tmpErrorSB.append("Herobrine Lives there... \n");
-        errorSB.replace(errorSB.lastIndexOf("|"),
-                        errorSB.lastIndexOf("|") + 1,
-                        tmpErrorSB.toString());
+        errorSB.replace(errorSB.lastIndexOf("|"), errorSB.lastIndexOf("|") + 1, tmpErrorSB.toString());
     }
 }

@@ -35,8 +35,7 @@ public final class RenderHelper {
         return Tessellator.instance;
     }
     
-    public static void renderItemAsBlock(final RenderBlocks renderer, final ItemStack item,
-            final double translateX, final double translateY, final double translateZ) {
+    public static void renderItemAsBlock(final RenderBlocks renderer, final ItemStack item, final double translateX, final double translateY, final double translateZ) {
         
         final Tessellator tessellator = tessellator();
         final Block block = Block.stone;
@@ -70,13 +69,10 @@ public final class RenderHelper {
         tessellator.draw();
     }
     
-/*    public static final Icon getFluidTexture(final FluidStack fluid) {
-        
-        if ((fluid == null) || (fluid.getFluid() == null)) {
-            return FluidRegistry.LAVA.getIcon();
-        }
-        return fluid.getFluid().getIcon(fluid);
-    }*/
+    /*
+     * public static final Icon getFluidTexture(final FluidStack fluid) { if ((fluid == null) || (fluid.getFluid() == null)) { return FluidRegistry.LAVA.getIcon(); } return
+     * fluid.getFluid().getIcon(fluid); }
+     */
     
     public static final void bindItemTexture(final ItemStack stack) {
         

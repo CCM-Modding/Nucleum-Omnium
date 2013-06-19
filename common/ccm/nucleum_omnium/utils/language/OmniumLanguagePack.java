@@ -10,8 +10,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class OmniumLanguagePack extends ILanguagePack {
     
     /**
-     * Private {@code List<String>} that contains the languages, Shared with all
-     * Language Packs
+     * Private {@code List<String>} that contains the languages, Shared with all Language Packs
      */
     private final List<String> supportedLanguages = new ArrayList<String>();
     
@@ -27,10 +26,7 @@ public class OmniumLanguagePack extends ILanguagePack {
     @Override
     public void loadLangs() {
         for (final String langFile : supportedLanguages) {
-            LanguageRegistry.instance()
-                    .loadLocalization(langFile,
-                                      LanguageHelper.getLangFromFileName(langFile),
-                                      LanguageHelper.isXMLLanguageFile(langFile));
+            LanguageRegistry.instance().loadLocalization(langFile, LanguageHelper.getLangFromFileName(langFile), LanguageHelper.isXMLLanguageFile(langFile));
         }
     }
 }

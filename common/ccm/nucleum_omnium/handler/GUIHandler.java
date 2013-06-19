@@ -27,34 +27,28 @@ public final class GUIHandler implements IGuiHandler {
         return GUIHandler.instance;
     }
     
-    public static void registerGuiServer(final IMod mod, final String guiID,
-            final Class<? extends Container> container) {
+    public static void registerGuiServer(final IMod mod, final String guiID, final Class<? extends Container> container) {
         final String fixedID = guiID + mod.getName();
         GUIHandler.containerList.put(fixedID.hashCode(), container);
     }
     
-    public static void registerGuiClient(final IMod mod, final String guiID,
-            final Class<? extends GuiContainer> gui, final Class<? extends Container> container) {
+    public static void registerGuiClient(final IMod mod, final String guiID, final Class<? extends GuiContainer> gui, final Class<? extends Container> container) {
         final String fixedID = guiID + mod.getName();
         GUIHandler.guiList.put(fixedID.hashCode(), gui);
         GUIHandler.containerList.put(fixedID.hashCode(), container);
     }
     
-    public static void openGui(final IMod mod, final String guiID, final EntityPlayer player,
-            final World world, final int x, final int y, final int z) {
+    public static void openGui(final IMod mod, final String guiID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
         final String fixedID = guiID + mod.getName();
         player.openGui(mod, fixedID.hashCode(), world, x, y, z);
     }
     
     @Override
-    public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world,
-            final int x, final int y, final int z) {
+    public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
         final TileEntity te = world.getBlockTileEntity(x, y, z);
         Container container = null;
         try {
-            container = GUIHandler.containerList.get(ID)
-                    .getConstructor(InventoryPlayer.class, TileEntity.class)
-                    .newInstance(player.inventory, te);
+            container = GUIHandler.containerList.get(ID).getConstructor(InventoryPlayer.class, TileEntity.class).newInstance(player.inventory, te);
         } catch (final Exception e) {
             e.printStackTrace();
         }
@@ -62,14 +56,11 @@ public final class GUIHandler implements IGuiHandler {
     }
     
     @Override
-    public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world,
-            final int x, final int y, final int z) {
+    public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
         final TileEntity te = world.getBlockTileEntity(x, y, z);
         GuiContainer gui = null;
         try {
-            gui = GUIHandler.guiList.get(ID)
-                    .getConstructor(InventoryPlayer.class, TileEntity.class)
-                    .newInstance(player.inventory, te);
+            gui = GUIHandler.guiList.get(ID).getConstructor(InventoryPlayer.class, TileEntity.class).newInstance(player.inventory, te);
         } catch (final Exception e) {
             e.printStackTrace();
         }

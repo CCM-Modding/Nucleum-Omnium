@@ -45,8 +45,7 @@ public class NucleumWorld extends BaseMod implements IMod {
     }
     
     @Init
-    public void initialize(final FMLInitializationEvent event) {
-    }
+    public void initialize(final FMLInitializationEvent event) {}
     
     @PostInit
     public void modsLoaded(final FMLPostInitializationEvent event) {

@@ -16,8 +16,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Base class for a modular GUIs. Works with Elements {@link ElementBase} and
- * Tabs {@link TabBase} which are both modular elements.
+ * Base class for a modular GUIs. Works with Elements {@link ElementBase} and Tabs {@link TabBase} which are both modular elements.
  * 
  * @author King Lemming
  */
@@ -161,11 +160,9 @@ public abstract class GuiBase extends GuiContainer {
     public TabBase addTab(final TabBase tab) {
         
         tabs.add(tab);
-        if ((TabTracker.getOpenedLeftTab() != null)
-                && tab.getClass().equals(TabTracker.getOpenedLeftTab())) {
+        if ((TabTracker.getOpenedLeftTab() != null) && tab.getClass().equals(TabTracker.getOpenedLeftTab())) {
             tab.setFullyOpen();
-        } else if ((TabTracker.getOpenedRightTab() != null)
-                && tab.getClass().equals(TabTracker.getOpenedRightTab())) {
+        } else if ((TabTracker.getOpenedRightTab() != null) && tab.getClass().equals(TabTracker.getOpenedRightTab())) {
             tab.setFullyOpen();
         }
         return tab;
@@ -221,17 +218,14 @@ public abstract class GuiBase extends GuiContainer {
     
     /* HELPERS */
     /**
-     * Essentially a placeholder method for tabs to use should they need to draw
-     * a button.
+     * Essentially a placeholder method for tabs to use should they need to draw a button.
      */
-    public void drawButton(final Icon icon, final int x, final int y, final int spriteSheet,
-            final int mode) {
+    public void drawButton(final Icon icon, final int x, final int y, final int spriteSheet, final int mode) {
         
         drawIcon(icon, x, y, spriteSheet);
     }
     
-    public void drawButton(final String iconName, final int x, final int y, final int spriteSheet,
-            final int mode) {
+    public void drawButton(final String iconName, final int x, final int y, final int spriteSheet, final int mode) {
         
         drawButton(IconRegistry.getIcon(iconName), x, y, spriteSheet, mode);
     }
@@ -240,15 +234,11 @@ public abstract class GuiBase extends GuiContainer {
      * Simple method used to draw a fluid of arbitrary size.
      */
     /*
-     * public void drawFluid(final int x, final int y, final FluidStack fluid,
-     * final int width, final int height) { if ((fluid == null) ||
-     * (fluid.getFluid() == null)) { return; }
-     * RenderHelper.setBlockTextureSheet(); drawTiledTexture(x, y,
-     * fluid.getFluid().getIcon(fluid), width, height); }
+     * public void drawFluid(final int x, final int y, final FluidStack fluid, final int width, final int height) { if ((fluid == null) || (fluid.getFluid() == null)) { return; }
+     * RenderHelper.setBlockTextureSheet(); drawTiledTexture(x, y, fluid.getFluid().getIcon(fluid), width, height); }
      */
     
-    public void drawTiledTexture(final int x, final int y, final Icon icon, final int width,
-            final int height) {
+    public void drawTiledTexture(final int x, final int y, final Icon icon, final int width, final int height) {
         
         int i = 0;
         int j = 0;
@@ -282,23 +272,20 @@ public abstract class GuiBase extends GuiContainer {
         drawIcon(IconRegistry.getIcon(iconName), x, y, spriteSheet);
     }
     
-    public void drawSizedTexturedModalRect(final int x, final int y, final int u, final int v,
-            final int width, final int height, final float texW, final float texH) {
+    public void drawSizedTexturedModalRect(final int x, final int y, final int u, final int v, final int width, final int height, final float texW, final float texH) {
         
         final float texU = 1 / texW;
         final float texV = 1 / texH;
         final Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(x + 0, y + height, zLevel, (u + 0) * texU, (v + height) * texV);
-        tessellator.addVertexWithUV(x + width, y + height, zLevel, (u + width) * texU, (v + height)
-                * texV);
+        tessellator.addVertexWithUV(x + width, y + height, zLevel, (u + width) * texU, (v + height) * texV);
         tessellator.addVertexWithUV(x + width, y + 0, zLevel, (u + width) * texU, (v + 0) * texV);
         tessellator.addVertexWithUV(x + 0, y + 0, zLevel, (u + 0) * texU, (v + 0) * texV);
         tessellator.draw();
     }
     
-    public void drawScaledTexturedModelRectFromIcon(final int x, final int y, final Icon icon,
-            final int width, final int height) {
+    public void drawScaledTexturedModelRectFromIcon(final int x, final int y, final Icon icon, final int width, final int height) {
         
         if (icon == null) {
             return;
@@ -310,12 +297,9 @@ public abstract class GuiBase extends GuiContainer {
         
         final Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x + 0, y + height, zLevel, minU, minV
-                + (((maxV - minV) * height) / 16F));
-        tessellator.addVertexWithUV(x + width, y + height, zLevel, minU
-                + (((maxU - minU) * width) / 16F), minV + (((maxV - minV) * height) / 16F));
-        tessellator.addVertexWithUV(x + width, y + 0, zLevel, minU
-                + (((maxU - minU) * width) / 16F), minV);
+        tessellator.addVertexWithUV(x + 0, y + height, zLevel, minU, minV + (((maxV - minV) * height) / 16F));
+        tessellator.addVertexWithUV(x + width, y + height, zLevel, minU + (((maxU - minU) * width) / 16F), minV + (((maxV - minV) * height) / 16F));
+        tessellator.addVertexWithUV(x + width, y + 0, zLevel, minU + (((maxU - minU) * width) / 16F), minV);
         tessellator.addVertexWithUV(x + 0, y + 0, zLevel, minU, minV);
         tessellator.draw();
     }

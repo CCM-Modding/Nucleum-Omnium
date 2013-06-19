@@ -1,8 +1,7 @@
 package lib.cofh.util;
 
 /**
- * Contains various math-related helper functions. Often faster than
- * conventional implementations.
+ * Contains various math-related helper functions. Often faster than conventional implementations.
  * 
  * @author King Lemming
  */
@@ -60,8 +59,7 @@ public final class MathHelper {
         return a + ((b - a) * ratio);
     }
     
-    public static double approachExp(final double a, final double b, final double ratio,
-            final double cap) {
+    public static double approachExp(final double a, final double b, final double ratio, final double cap) {
         
         double d = (b - a) * ratio;
         
@@ -71,8 +69,7 @@ public final class MathHelper {
         return a + d;
     }
     
-    public static double retreatExp(final double a, final double b, final double c,
-            final double ratio, final double kick) {
+    public static double retreatExp(final double a, final double b, final double c, final double ratio, final double kick) {
         
         final double d = (Math.abs(c - a) + kick) * ratio;
         
@@ -103,8 +100,7 @@ public final class MathHelper {
         return r == a ? b : r;
     }
     
-    public static int retreatExpI(final int a, final int b, final int c, final double ratio,
-            final int kick) {
+    public static int retreatExpI(final int a, final int b, final int c, final double ratio, final int kick) {
         
         final int r = (int) Math.round(retreatExp(a, b, c, ratio, kick));
         return r == a ? b : r;
@@ -116,8 +112,7 @@ public final class MathHelper {
     }
     
     /**
-     * Unchecked implementation to round a number. Parameter should be known to
-     * be valid in advance.
+     * Unchecked implementation to round a number. Parameter should be known to be valid in advance.
      */
     public static int round(final double d) {
         
@@ -125,8 +120,7 @@ public final class MathHelper {
     }
     
     /**
-     * Unchecked implementation to round a number up. Parameter should be known
-     * to be valid in advance.
+     * Unchecked implementation to round a number up. Parameter should be known to be valid in advance.
      */
     public static int ceil(final double d) {
         
@@ -134,8 +128,7 @@ public final class MathHelper {
     }
     
     /**
-     * Unchecked implementation to determine the smaller of two Floats.
-     * Parameters should be known to be valid in advance.
+     * Unchecked implementation to determine the smaller of two Floats. Parameters should be known to be valid in advance.
      */
     public static float minF(final float a, final float b) {
         
@@ -143,8 +136,7 @@ public final class MathHelper {
     }
     
     /**
-     * Unchecked implementation to determine the larger of two Floats.
-     * Parameters should be known to be valid in advance.
+     * Unchecked implementation to determine the larger of two Floats. Parameters should be known to be valid in advance.
      */
     public static float maxF(final float a, final float b) {
         
@@ -152,8 +144,7 @@ public final class MathHelper {
     }
     
     /**
-     * Unchecked implementation to determine the smaller of two Integers.
-     * Parameters should be known to be valid in advance.
+     * Unchecked implementation to determine the smaller of two Integers. Parameters should be known to be valid in advance.
      */
     public static int minI(final int a, final int b) {
         
@@ -161,8 +152,7 @@ public final class MathHelper {
     }
     
     /**
-     * Unchecked implementation to determine the larger of two Integers.
-     * Parameters should be known to be valid in advance.
+     * Unchecked implementation to determine the larger of two Integers. Parameters should be known to be valid in advance.
      */
     public static int maxI(final int a, final int b) {
         

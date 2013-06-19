@@ -13,8 +13,7 @@ public final class Handler extends BaseNIClass {
     
     /*
      * *******************************************************************
-     * Log Stuff
-     * *******************************************************************
+     * Log Stuff *******************************************************************
      */
     private static HashMap<IMod, Logger> modsLogged = new HashMap<IMod, Logger>();
     
@@ -22,7 +21,7 @@ public final class Handler extends BaseNIClass {
      * Initializes the Logger for this Mod.
      */
     public static void initLog(final IMod mod) {
-        Logger tmp = Logger.getLogger(mod.getModId());
+        final Logger tmp = Logger.getLogger(mod.getModId());
         tmp.setParent(FMLLog.getLogger());
         if (!Handler.modsLogged.containsKey(mod)) {
             Handler.modsLogged.put(mod, tmp);
@@ -32,16 +31,14 @@ public final class Handler extends BaseNIClass {
     }
     
     /**
-     * Logs a Object. This version is only to be used in cases where the parent
-     * mod is unknown
+     * Logs a Object. This version is only to be used in cases where the parent mod is unknown
      */
     public static void log(final Object msg) {
         System.out.println(msg);
     }
     
     /**
-     * Logs a Object, and a Throwable. This version is only to be used in cases
-     * where the parent mod is unknown
+     * Logs a Object, and a Throwable. This version is only to be used in cases where the parent mod is unknown
      */
     public static void log(final Object msg, final Throwable t) {
         System.out.println(msg + " \n" + t.toString());
@@ -93,14 +90,12 @@ public final class Handler extends BaseNIClass {
     
     /*
      * *******************************************************************
-     * Mod State Check
-     * *******************************************************************
+     * Mod State Check *******************************************************************
      */
     private static HashMap<IMod, Boolean> modsLoaded = new HashMap<IMod, Boolean>();
     
     /**
-     * Checks if the Mod has being loaded before and throws a exception. The
-     * default response is false. Other wise you should get a Exception.
+     * Checks if the Mod has being loaded before and throws a exception. The default response is false. Other wise you should get a Exception.
      * 
      * @return false if the Mod has not being loaded yet.
      */

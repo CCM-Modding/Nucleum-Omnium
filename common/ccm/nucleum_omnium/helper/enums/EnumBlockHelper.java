@@ -9,7 +9,7 @@ import ccm.nucleum_omnium.helper.TextureHelper;
 
 public final class EnumBlockHelper extends BaseNIClass {
     
-    public static Block createBlock(Enum<? extends IBlockEnum> blockEnum, SubBlock subBlock) {
+    public static Block createBlock(final Enum<? extends IBlockEnum> blockEnum, final SubBlock subBlock) {
         
         ((IBlockEnum) blockEnum).setBaseBlock(subBlock.getBlock());
         
@@ -18,37 +18,33 @@ public final class EnumBlockHelper extends BaseNIClass {
         return ((IBlockEnum) blockEnum).getBaseBlock();
     }
     
-    public static Block createBlock(Enum<? extends IBlockEnum> blockEnum, int blockID,
-            String textureLoc) {
+    public static Block createBlock(final Enum<? extends IBlockEnum> blockEnum, final int blockID, final String textureLoc) {
         
-        ((IBlockEnum) blockEnum).setBaseBlock(new SubBlock(blockID, blockEnum.ordinal(),
-                TextureHelper.getTextureFromName(blockEnum.name(), textureLoc))
-                .setUnlocalizedName(blockEnum.name()).getBlock());
+        ((IBlockEnum) blockEnum).setBaseBlock(new SubBlock(blockID, blockEnum.ordinal(), TextureHelper.getTextureFromName(blockEnum.name(), textureLoc)).setUnlocalizedName(blockEnum.name())
+                                                                                                                                                        .getBlock());
         
         MainBlock.registerID(((IBlockEnum) blockEnum).getBaseBlock().blockID);
         
         return ((IBlockEnum) blockEnum).getBaseBlock();
     }
     
-    public static Block createBlock(Enum<? extends IBlockEnum> blockEnum, int blockID,
-            String textureLoc, CreativeTabs tab) {
+    public static Block createBlock(final Enum<? extends IBlockEnum> blockEnum, final int blockID, final String textureLoc, final CreativeTabs tab) {
         
-        ((IBlockEnum) blockEnum).setBaseBlock(new SubBlock(blockID, blockEnum.ordinal(),
-                TextureHelper.getTextureFromName(blockEnum.name(), textureLoc))
-                .setUnlocalizedName(blockEnum.name()).setCreativeTab(tab).getBlock());
+        ((IBlockEnum) blockEnum).setBaseBlock(new SubBlock(blockID, blockEnum.ordinal(), TextureHelper.getTextureFromName(blockEnum.name(), textureLoc)).setUnlocalizedName(blockEnum.name())
+                                                                                                                                                        .setCreativeTab(tab)
+                                                                                                                                                        .getBlock());
         
         MainBlock.registerID(((IBlockEnum) blockEnum).getBaseBlock().blockID);
         
         return ((IBlockEnum) blockEnum).getBaseBlock();
     }
     
-    public static Block createBlock(Enum<? extends IBlockEnum> blockEnum, int blockID,
-            String textureLoc, CreativeTabs tab, float hardness) {
+    public static Block createBlock(final Enum<? extends IBlockEnum> blockEnum, final int blockID, final String textureLoc, final CreativeTabs tab, final float hardness) {
         
-        ((IBlockEnum) blockEnum).setBaseBlock(new SubBlock(blockID, blockEnum.ordinal(),
-                TextureHelper.getTextureFromName(blockEnum.name(), textureLoc))
-                .setUnlocalizedName(blockEnum.name()).setCreativeTab(tab).setHardness(hardness)
-                .getBlock());
+        ((IBlockEnum) blockEnum).setBaseBlock(new SubBlock(blockID, blockEnum.ordinal(), TextureHelper.getTextureFromName(blockEnum.name(), textureLoc)).setUnlocalizedName(blockEnum.name())
+                                                                                                                                                        .setCreativeTab(tab)
+                                                                                                                                                        .setHardness(hardness)
+                                                                                                                                                        .getBlock());
         
         MainBlock.registerID(((IBlockEnum) blockEnum).getBaseBlock().blockID);
         

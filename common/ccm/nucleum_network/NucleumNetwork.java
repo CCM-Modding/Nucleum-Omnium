@@ -39,8 +39,7 @@ public class NucleumNetwork extends BaseMod implements IMod {
     @FingerprintWarning
     public void invalidFingerprint(final FMLFingerprintViolationEvent event) {
         /*
-         * Report (log) to the user that the version of Nucleum Omnium they are
-         * using has been changed/tampered with
+         * Report (log) to the user that the version of Nucleum Omnium they are using has been changed/tampered with
          */
         Handler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
     }

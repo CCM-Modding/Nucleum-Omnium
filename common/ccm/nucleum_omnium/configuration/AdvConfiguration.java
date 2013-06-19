@@ -8,8 +8,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
 /**
- * This class offers advanced configurations capabilities, to "Enhance" normal
- * Forge Configurations.
+ * This class offers advanced configurations capabilities, to "Enhance" normal Forge Configurations.
  */
 public class AdvConfiguration extends Configuration {
     
@@ -28,24 +27,20 @@ public class AdvConfiguration extends Configuration {
     }
     
     /**
-     * Creates a configuration file for the file given in parameter. And makes
-     * sure that the categories are case sensitive
+     * Creates a configuration file for the file given in parameter. And makes sure that the categories are case sensitive
      * 
      * @param configFile
      *            The File to make a Configuration File out of
      * @param caseSensitiveCustomCategories
-     *            True if you want your custom categories to be case sensitive,
-     *            False otherwise
+     *            True if you want your custom categories to be case sensitive, False otherwise
      */
     public AdvConfiguration(final File configFile, final boolean caseSensitiveCustomCategories) {
         super(configFile, caseSensitiveCustomCategories);
     }
     
     /**
-     * Gets or creates a block id property. If the block id property key is
-     * already in the configuration, then it will be used. Otherwise, defaultId
-     * will be used, except if already taken, in which case this will try to
-     * determine a free default id.
+     * Gets or creates a block id property. If the block id property key is already in the configuration, then it will be used. Otherwise, defaultId will be used, except if already
+     * taken, in which case this will try to determine a free default id.
      * 
      * @param key
      *            Normally a String containig the name of the block
@@ -59,10 +54,8 @@ public class AdvConfiguration extends Configuration {
     }
     
     /**
-     * Gets or creates a block id property. If the block id property key is
-     * already in the configuration, then it will be used. Otherwise, defaultId
-     * will be used, except if already taken, in which case this will try to
-     * determine a free default id.
+     * Gets or creates a block id property. If the block id property key is already in the configuration, then it will be used. Otherwise, defaultId will be used, except if already
+     * taken, in which case this will try to determine a free default id.
      * 
      * @param key
      *            Normally a String containig the name of the block
@@ -78,10 +71,8 @@ public class AdvConfiguration extends Configuration {
     }
     
     /**
-     * Gets or creates a block id property. If the block id property key is
-     * already in the configuration, then it will be used. Otherwise, defaultId
-     * will be used, except if already taken, in which case this will try to
-     * determine a free default id.
+     * Gets or creates a block id property. If the block id property key is already in the configuration, then it will be used. Otherwise, defaultId will be used, except if already
+     * taken, in which case this will try to determine a free default id.
      * 
      * @param category
      *            A custom Category in wich to put the block in
@@ -97,10 +88,8 @@ public class AdvConfiguration extends Configuration {
     }
     
     /**
-     * Gets or creates a block id property. If the block id property key is
-     * already in the configuration, then it will be used. Otherwise, defaultId
-     * will be used, except if already taken, in which case this will try to
-     * determine a free default id.
+     * Gets or creates a block id property. If the block id property key is already in the configuration, then it will be used. Otherwise, defaultId will be used, except if already
+     * taken, in which case this will try to determine a free default id.
      * 
      * @param category
      *            A custom Category in wich to put the block in
@@ -113,47 +102,34 @@ public class AdvConfiguration extends Configuration {
      * @return A {@link Property} containig the ID of the block
      */
     @Override
-    public Property getBlock(final String category, final String key, final int defaultID,
-            final String comment) {
+    public Property getBlock(final String category, final String key, final int defaultID, final String comment) {
         return super.getBlock(category, key, getFreeID(defaultID, Block.blocksList), comment);
     }
     
     /**
-     * Special version of getBlock to be used when you want to garentee the ID
-     * you get is below 256 This should ONLY be used by mods who do low level
-     * terrain generation, or ones that add new biomes. EXA: ExtraBiomesXL,
-     * Biomes o' Plennty Specifically, if your block is used BEFORE the Chunk is
-     * created, and placed in the terrain byte array directly. If you add a new
-     * biome and you set the top/filler block, they need to be <256, nothing
-     * else. If you're adding a new ore, DON'T call this function. Normal mods
-     * such as '50 new ores' do not need to be below 256 so should use the
-     * normal getBlock
+     * Special version of getBlock to be used when you want to garentee the ID you get is below 256 This should ONLY be used by mods who do low level terrain generation, or ones
+     * that add new biomes. EXA: ExtraBiomesXL, Biomes o' Plennty Specifically, if your block is used BEFORE the Chunk is created, and placed in the terrain byte array directly. If
+     * you add a new biome and you set the top/filler block, they need to be <256, nothing else. If you're adding a new ore, DON'T call this function. Normal mods such as '50 new
+     * ores' do not need to be below 256 so should use the normal getBlock
      * 
      * @param category
      *            A custom Category in wich to put the block in
      * @param key
      *            Normally a String containig the name of the block
      * @param defaultID
-     *            the ID to be checked, in here it is checked to be less than
-     *            256, otherwise the check begins at 1
+     *            the ID to be checked, in here it is checked to be less than 256, otherwise the check begins at 1
      * @param comment
      *            A comment about the block
      * @return A {@link Property} containig the ID of the block
      */
     @Override
-    public Property getTerrainBlock(final String category, final String key, final int defaultID,
-            final String comment) {
-        return super.getTerrainBlock(category,
-                                     key,
-                                     getTerrainFreeID(defaultID, Block.blocksList),
-                                     comment);
+    public Property getTerrainBlock(final String category, final String key, final int defaultID, final String comment) {
+        return super.getTerrainBlock(category, key, getTerrainFreeID(defaultID, Block.blocksList), comment);
     }
     
     /**
-     * Gets or creates a item id property. If the item id property key is
-     * already in the configuration, then it will be used. Otherwise, defaultId
-     * will be used, except if already taken, in which case this will try to
-     * determine a free default id.
+     * Gets or creates a item id property. If the item id property key is already in the configuration, then it will be used. Otherwise, defaultId will be used, except if already
+     * taken, in which case this will try to determine a free default id.
      * 
      * @param key
      *            Normally a String containig the name of the item
@@ -167,10 +143,8 @@ public class AdvConfiguration extends Configuration {
     }
     
     /**
-     * Gets or creates a item id property. If the item id property key is
-     * already in the configuration, then it will be used. Otherwise, defaultId
-     * will be used, except if already taken, in which case this will try to
-     * determine a free default id.
+     * Gets or creates a item id property. If the item id property key is already in the configuration, then it will be used. Otherwise, defaultId will be used, except if already
+     * taken, in which case this will try to determine a free default id.
      * 
      * @param key
      *            Normally a String containig the name of the item
@@ -186,10 +160,8 @@ public class AdvConfiguration extends Configuration {
     }
     
     /**
-     * Gets or creatse a item id property. If the item id property key is
-     * already in the configuration, then it will be used. Otherwise, defaultId
-     * will be used, except if already taken, in which case this will try to
-     * determine a free default id.
+     * Gets or creatse a item id property. If the item id property key is already in the configuration, then it will be used. Otherwise, defaultId will be used, except if already
+     * taken, in which case this will try to determine a free default id.
      * 
      * @param category
      *            A custom Category in wich to put the item in
@@ -205,10 +177,8 @@ public class AdvConfiguration extends Configuration {
     }
     
     /**
-     * Gets or creates a item id property. If the item id property key is
-     * already in the configuration, then it will be used. Otherwise, defaultId
-     * will be used, except if already taken, in which case this will try to
-     * determine a free default id.
+     * Gets or creates a item id property. If the item id property key is already in the configuration, then it will be used. Otherwise, defaultId will be used, except if already
+     * taken, in which case this will try to determine a free default id.
      * 
      * @param category
      *            A custom Category in wich to put the item in
@@ -221,8 +191,7 @@ public class AdvConfiguration extends Configuration {
      * @return A {@link Property} containig the ID of the item
      */
     @Override
-    public Property getItem(final String category, final String key, final int defaultID,
-            final String comment) {
+    public Property getItem(final String category, final String key, final int defaultID, final String comment) {
         
         return super.getItem(category, key, getFreeID(defaultID, Item.itemsList), comment);
     }
@@ -233,8 +202,7 @@ public class AdvConfiguration extends Configuration {
      * @param defaultID
      *            The ID in which to begin the search
      * @param array
-     *            The array to search in; Typically {@code Item.itemsList} or
-     *            {@code Block.blocksList}
+     *            The array to search in; Typically {@code Item.itemsList} or {@code Block.blocksList}
      */
     private int getFreeID(final int defaultID, final Object[] array) {
         if (array[defaultID] == null) {
@@ -255,8 +223,7 @@ public class AdvConfiguration extends Configuration {
      * Special version of getFreeID used for and only for terrain gen ids
      * 
      * @param defaultID
-     *            The ID in which to begin the search. IT SHOULD BE < 256, if it
-     *            is not it will be set to 1
+     *            The ID in which to begin the search. IT SHOULD BE < 256, if it is not it will be set to 1
      * @param array
      *            The array to search in; Typically {@code Block.blocksList}
      */
@@ -349,9 +316,8 @@ public class AdvConfiguration extends Configuration {
     }
     
     /**
-     * If a pre-existing Configuration file didn't exist it creates a new one.
-     * If there were changes to the existing Configuration file, It saves them.
-     * Otherwise it doesn't do anything
+     * If a pre-existing Configuration file didn't exist it creates a new one. If there were changes to the existing Configuration file, It saves them. Otherwise it doesn't do
+     * anything
      */
     @Override
     public void save() {

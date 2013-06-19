@@ -5,8 +5,7 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
- * Implement this interface on Tile Entities which can send state information
- * through chat.
+ * Implement this interface on Tile Entities which can send state information through chat.
  * 
  * @author Zeldo Kavira
  */

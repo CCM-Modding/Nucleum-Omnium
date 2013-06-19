@@ -40,7 +40,7 @@ public final class CommandHelper extends BaseNIClass {
         return player;
     }
     
-    public static void tellAdmins(ICommandSender sender, String message, Object... objects) {
+    public static void tellAdmins(final ICommandSender sender, final String message, final Object... objects) {
         CommandBase.notifyAdmins(sender, message, objects);
     }
     
@@ -52,24 +52,16 @@ public final class CommandHelper extends BaseNIClass {
      * @param player1
      *            Player that gets send
      */
-    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
-            final EntityPlayerMP player1) {
+    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player, final EntityPlayerMP player1) {
         player.mountEntity((Entity) null);
         if (player.dimension != player1.dimension) {
-            MinecraftServer.getServer().getConfigurationManager()
-                    .transferPlayerToDimension(player, player1.dimension);
+            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, player1.dimension);
         }
-        player.playerNetServerHandler.setPlayerLocation(player1.posX,
-                                                        player1.posY,
-                                                        player1.posZ,
-                                                        player1.rotationYaw,
-                                                        player1.rotationPitch);
+        player.playerNetServerHandler.setPlayerLocation(player1.posX, player1.posY, player1.posZ, player1.rotationYaw, player1.rotationPitch);
         player.prevPosX = player.posX = player1.posX;
         player.prevPosY = player.posY = player1.posY;
         player.prevPosZ = player.posZ = player1.posZ;
-        tellAdmins(sender,
-                   "commands.tpx.success",
-                   new Object[] { player.getEntityName(), player1.getEntityName() });
+        tellAdmins(sender, "commands.tpx.success", new Object[] { player.getEntityName(), player1.getEntityName() });
     }
     
     /**
@@ -86,12 +78,10 @@ public final class CommandHelper extends BaseNIClass {
      * @param z
      *            The Z coordinate to send the player to
      */
-    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
-            final int dimension, final double x, final double y, final double z) {
+    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player, final int dimension, final double x, final double y, final double z) {
         player.mountEntity((Entity) null);
         if (player.dimension != dimension) {
-            MinecraftServer.getServer().getConfigurationManager()
-                    .transferPlayerToDimension(player, dimension);
+            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, dimension);
         }
         player.setPositionAndUpdate(x, y, z);
         player.prevPosX = player.posX = x;
@@ -99,17 +89,14 @@ public final class CommandHelper extends BaseNIClass {
         player.prevPosZ = player.posZ = z;
         tellAdmins(sender,
                    "commands.tpx.success.coordinates",
-                   new Object[] { player.getEntityName(), Integer.valueOf(dimension),
-                           Double.valueOf(x), Double.valueOf(y), Double.valueOf(z) });
+                   new Object[] { player.getEntityName(), Integer.valueOf(dimension), Double.valueOf(x), Double.valueOf(y), Double.valueOf(z) });
     }
     
-    public static double checkPosition(final ICommandSender sender, final double postion,
-            final String argPos) {
+    public static double checkPosition(final ICommandSender sender, final double postion, final String argPos) {
         return CommandHelper.checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
     }
     
-    public static double checkPositionWithBounds(final ICommandSender sender, final double postion,
-            String argPos, final int min, final int max) {
+    public static double checkPositionWithBounds(final ICommandSender sender, final double postion, String argPos, final int min, final int max) {
         final boolean flag = argPos.startsWith("~");
         double d1 = flag ? postion : 0.0D;
         
@@ -130,8 +117,7 @@ public final class CommandHelper extends BaseNIClass {
         if ((min != 0) || (max != 0)) {
             if (d1 < min) {
                 if ((d1 < -30000000) && (d1 >= -300000000)) {
-                    throw new NumberInvalidException("commands.generic.double.tooSmall",
-                            new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
+                    throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
                 } else if ((d1 < -300000000) && (d1 >= Integer.MIN_VALUE)) {
                     throw new WTFExeption(NucleumOmnium.instance);
                 }
@@ -139,8 +125,7 @@ public final class CommandHelper extends BaseNIClass {
             
             if (d1 > max) {
                 if ((d1 > 30000000) && (d1 <= 300000000)) {
-                    throw new NumberInvalidException("commands.generic.double.tooBig",
-                            new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
+                    throw new NumberInvalidException("commands.generic.double.tooBig", new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
                 } else if ((d1 > 300000000) && (d1 <= Integer.MAX_VALUE)) {
                     throw new WTFExeption(NucleumOmnium.instance);
                 }

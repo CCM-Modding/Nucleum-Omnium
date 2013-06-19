@@ -48,20 +48,16 @@ public class CommandKill extends CommandBase {
     }
     
     /**
-     * Adds the strings available in this command to the given list of tab
-     * completion options.
+     * Adds the strings available in this command to the given list of tab completion options.
      */
     @Override
     @SuppressWarnings("rawtypes")
     public List addTabCompletionOptions(final ICommandSender sender, final String[] args) {
-        return (args.length != 1) && (args.length != 2) ? null : CommandBase
-                .getListOfStringsMatchingLastWord(args, MinecraftServer.getServer()
-                        .getAllUsernames());
+        return (args.length != 1) && (args.length != 2) ? null : CommandBase.getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames());
     }
     
     /**
-     * Return whether the specified command parameter index is a username
-     * parameter.
+     * Return whether the specified command parameter index is a username parameter.
      */
     @Override
     public boolean isUsernameIndex(final String[] args, final int userIndex) {

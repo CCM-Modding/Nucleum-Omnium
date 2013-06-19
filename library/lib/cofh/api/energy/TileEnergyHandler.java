@@ -24,8 +24,7 @@ public class TileEnergyHandler extends TileEntity implements IEnergyHandler {
     
     /* IEnergyHandler */
     @Override
-    public int receiveEnergy(final ForgeDirection from, final int maxReceive,
-            final boolean doReceive) {
+    public int receiveEnergy(final ForgeDirection from, final int maxReceive, final boolean doReceive) {
         
         return storage.receiveEnergy(maxReceive, doReceive);
     }

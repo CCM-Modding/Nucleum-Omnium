@@ -10,8 +10,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
 /**
- * This is effectively a wrapper for Forge Configurations. It allows for easier
- * manipulation of Config files.
+ * This is effectively a wrapper for Forge Configurations. It allows for easier manipulation of Config files.
  * 
  * @author King Lemming
  */
@@ -160,9 +159,7 @@ public class ConfigHandler {
         for (final ArrayList<String> blockEntrie : blockEntries) {
             for (final String entry : blockEntrie) {
                 if (modConfiguration.hasKey(Configuration.CATEGORY_BLOCK, entry)) {
-                    final int existingId = modConfiguration
-                            .getCategory(Configuration.CATEGORY_BLOCK).getValues().get(entry)
-                            .getInt();
+                    final int existingId = modConfiguration.getCategory(Configuration.CATEGORY_BLOCK).getValues().get(entry).getInt();
                     assignedIds.add(existingId);
                     blockIds.put(entry, modConfiguration.getBlock(entry, existingId));
                 }
@@ -187,9 +184,7 @@ public class ConfigHandler {
         for (final ArrayList<String> itemEntrie : itemEntries) {
             for (final String entry : itemEntrie) {
                 if (modConfiguration.hasKey(Configuration.CATEGORY_ITEM, entry)) {
-                    final int existingId = modConfiguration
-                            .getCategory(Configuration.CATEGORY_ITEM).getValues().get(entry)
-                            .getInt();
+                    final int existingId = modConfiguration.getCategory(Configuration.CATEGORY_ITEM).getValues().get(entry).getInt();
                     assignedIds.add(existingId);
                     itemIds.put(entry, modConfiguration.getItem(entry, existingId));
                 }
@@ -220,15 +215,13 @@ public class ConfigHandler {
         modConfiguration.save();
     }
     
-    public boolean renameProperty(final String category, final String key,
-            final String newCategory, final String newKey, final boolean forceValue) {
+    public boolean renameProperty(final String category, final String key, final String newCategory, final String newKey, final boolean forceValue) {
         
         if (modConfiguration.hasKey(category, key)) {
             final Property prop = modConfiguration.getCategory(category).get(key);
             
             if (prop.isIntValue()) {
-                final int value = modConfiguration.getCategory(category).getValues().get(key)
-                        .getInt();
+                final int value = modConfiguration.getCategory(category).getValues().get(key).getInt();
                 removeProperty(category, key);
                 
                 if (forceValue) {
@@ -236,8 +229,7 @@ public class ConfigHandler {
                 }
                 modConfiguration.get(newCategory, newKey, value);
             } else if (prop.isBooleanValue()) {
-                final boolean value = modConfiguration.getCategory(category).getValues().get(key)
-                        .getBoolean(false);
+                final boolean value = modConfiguration.getCategory(category).getValues().get(key).getBoolean(false);
                 removeProperty(category, key);
                 
                 if (forceValue) {
@@ -245,8 +237,7 @@ public class ConfigHandler {
                 }
                 modConfiguration.get(newCategory, newKey, value);
             } else if (prop.isDoubleValue()) {
-                final double value = modConfiguration.getCategory(category).getValues().get(key)
-                        .getDouble(0.0);
+                final double value = modConfiguration.getCategory(category).getValues().get(key).getDouble(0.0);
                 removeProperty(category, key);
                 
                 if (forceValue) {
@@ -254,8 +245,7 @@ public class ConfigHandler {
                 }
                 modConfiguration.get(newCategory, newKey, value);
             } else {
-                final String value = modConfiguration.getCategory(category).getValues().get(key)
-                        .getString();
+                final String value = modConfiguration.getCategory(category).getValues().get(key).getString();
                 removeProperty(category, key);
                 
                 if (forceValue) {

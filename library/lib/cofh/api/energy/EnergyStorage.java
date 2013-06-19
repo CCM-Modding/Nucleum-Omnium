@@ -4,8 +4,7 @@ import lib.cofh.util.MathHelper;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * Reference implementation of {@link IEnergyStorage}. Use/extend this or
- * implement your own.
+ * Reference implementation of {@link IEnergyStorage}. Use/extend this or implement your own.
  * 
  * @author King Lemming
  */
@@ -74,8 +73,7 @@ public class EnergyStorage implements IEnergyStorage {
     @Override
     public int receiveEnergy(final int maxReceive, final boolean doReceive) {
         
-        final int energyReceived = MathHelper.minI(capacity - energy,
-                                                   MathHelper.minI(this.maxReceive, maxReceive));
+        final int energyReceived = MathHelper.minI(capacity - energy, MathHelper.minI(this.maxReceive, maxReceive));
         
         if (doReceive) {
             energy += energyReceived;
@@ -86,8 +84,7 @@ public class EnergyStorage implements IEnergyStorage {
     @Override
     public int extractEnergy(final int maxExtract, final boolean doExtract) {
         
-        final int energyExtracted = MathHelper.minI(energy,
-                                                    MathHelper.minI(this.maxExtract, maxExtract));
+        final int energyExtracted = MathHelper.minI(energy, MathHelper.minI(this.maxExtract, maxExtract));
         
         if (doExtract) {
             energy -= energyExtracted;

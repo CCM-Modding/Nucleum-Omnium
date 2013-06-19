@@ -58,8 +58,8 @@ public final class JavaHelper extends BaseNIClass {
      * @return A new instance of said {@code List<T>}
      * @author Reika
      */
-    public static <T> List<T> copyList(List<T> list) {
-        List<T> newList = new ArrayList<T>(list);
+    public static <T> List<T> copyList(final List<T> list) {
+        final List<T> newList = new ArrayList<T>(list);
         return newList;
     }
 }

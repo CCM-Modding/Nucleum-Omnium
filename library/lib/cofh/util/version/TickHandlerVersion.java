@@ -3,14 +3,13 @@ package lib.cofh.util.version;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-import lib.cofh.util.ColorHelper;
+import lib.cofh.util.DyeColors;
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.IScheduledTickHandler;
 import cpw.mods.fml.common.TickType;
 
 /**
- * Handles chat notifications to players regarding mod updates. Please note the
- * initialization structure.
+ * Handles chat notifications to players regarding mod updates. Please note the initialization structure.
  * 
  * @author King Lemming
  */
@@ -24,8 +23,7 @@ public class TickHandlerVersion implements IScheduledTickHandler {
     private static int                       modIndex       = 0;
     
     /**
-     * This should only be called when the TickHandlerVersion instance is
-     * registered as a Tick Handler.
+     * This should only be called when the TickHandlerVersion instance is registered as a Tick Handler.
      */
     public static boolean initialize() {
         
@@ -37,8 +35,7 @@ public class TickHandlerVersion implements IScheduledTickHandler {
     }
     
     /**
-     * This should be checked by all mods making use of this class. If this
-     * returns true, then the tick handler should NOT be registered again.
+     * This should be checked by all mods making use of this class. If this returns true, then the tick handler should NOT be registered again.
      */
     public static boolean isInitialized() {
         
@@ -68,10 +65,15 @@ public class TickHandlerVersion implements IScheduledTickHandler {
         
         if (anInfo.isNewVersionAvailable()) {
             final EntityPlayer player = (EntityPlayer) tickData[0];
-            player.sendChatToPlayer(ColorHelper.YELLOW + "[" + anInfo.modName + "] "
-                    + ColorHelper.WHITE + "A new version is available: " + ColorHelper.LIGHT_BLUE
-                    + anInfo.getLatestVersion());
-            player.sendChatToPlayer(ColorHelper.LIGHT_GRAY + anInfo.getVersionDescription());
+            player.sendChatToPlayer(DyeColors.YELLOW
+                                    + "["
+                                    + anInfo.modName
+                                    + "] "
+                                    + DyeColors.WHITE
+                                    + "A new version is available: "
+                                    + DyeColors.LIGHT_BLUE
+                                    + anInfo.getLatestVersion());
+            player.sendChatToPlayer(DyeColors.LIGHT_GRAY + anInfo.getVersionDescription());
         }
         modIndex++;
     }

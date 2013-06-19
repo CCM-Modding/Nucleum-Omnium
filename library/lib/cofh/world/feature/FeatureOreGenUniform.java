@@ -13,8 +13,7 @@ public class FeatureOreGenUniform extends FeatureBase {
     final int            minY;
     final int            maxY;
     
-    public FeatureOreGenUniform(final String name, final WorldGenerator worldGen, final int count,
-            final int minY, final int maxY, final boolean regen) {
+    public FeatureOreGenUniform(final String name, final WorldGenerator worldGen, final int count, final int minY, final int maxY, final boolean regen) {
         
         super(name, regen);
         this.worldGen = worldGen;
@@ -25,8 +24,7 @@ public class FeatureOreGenUniform extends FeatureBase {
     
     /* IFeatureGenerator */
     @Override
-    public boolean generateFeature(final Random random, final int chunkX, final int chunkZ,
-            final World world, final boolean newGen) {
+    public boolean generateFeature(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen) {
         
         if (!newGen && !regen) {
             return false;
@@ -35,8 +33,7 @@ public class FeatureOreGenUniform extends FeatureBase {
         final int blockZ = chunkZ * 16;
         
         if (type > 0) {
-            final String biomeName = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName
-                    .toLowerCase(Locale.ENGLISH);
+            final String biomeName = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase(Locale.ENGLISH);
             final boolean onList = biomes.contains(biomeName);
             
             if (((type == 1) && !onList) || ((type == 2) && onList)) {

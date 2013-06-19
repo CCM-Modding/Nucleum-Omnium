@@ -6,8 +6,7 @@ import net.minecraft.client.gui.FontRenderer;
 import cpw.mods.fml.client.FMLClientHandler;
 
 /**
- * Base class for a modular GUI element. Has self-contained rendering methods
- * and a link back to the {@link GuiBase} it is a part of.
+ * Base class for a modular GUI element. Has self-contained rendering methods and a link back to the {@link GuiBase} it is a part of.
  * 
  * @author King Lemming
  */
@@ -90,8 +89,7 @@ public abstract class ElementBase {
         mouseX += gui.guiLeft;
         mouseY += gui.guiTop;
         
-        if ((mouseX >= posX) && (mouseX <= (posX + sizeX)) && (mouseY >= posY)
-                && (mouseY <= (posY + sizeY))) {
+        if ((mouseX >= posX) && (mouseX <= (posX + sizeX)) && (mouseY >= posY) && (mouseY <= (posY + sizeY))) {
             return true;
         }
         return false;
@@ -102,8 +100,7 @@ public abstract class ElementBase {
         return false;
     }
     
-    public void drawTexturedModalRect(final int x, final int y, final int u, final int v,
-            final int width, final int height) {
+    public void drawTexturedModalRect(final int x, final int y, final int u, final int v, final int width, final int height) {
         
         gui.drawSizedTexturedModalRect(x, y, u, v, width, height, texW, texH);
     }

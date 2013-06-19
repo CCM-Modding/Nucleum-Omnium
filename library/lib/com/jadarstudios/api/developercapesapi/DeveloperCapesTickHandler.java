@@ -1,6 +1,5 @@
 /**
- * Copyright (c) Jadar, 2013 Developer Capes API by Jadar License: Lesser GNU
- * Public License v3 (http://www.gnu.org/licenses/lgpl.html) version 1.3.1
+ * Copyright (c) Jadar, 2013 Developer Capes API by Jadar License: Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html) version 1.3.1
  */
 package lib.com.jadarstudios.api.developercapesapi;
 
@@ -24,11 +23,9 @@ public class DeveloperCapesTickHandler implements ITickHandler {
     @Override
     public void tickStart(final EnumSet<TickType> type, final Object... tickData) {
         /*
-         * Will not run if there is no world, and if there are player entities
-         * in the playerEntities list.
+         * Will not run if there is no world, and if there are player entities in the playerEntities list.
          */
-        if ((DeveloperCapesTickHandler.mc.theWorld != null)
-                && (DeveloperCapesTickHandler.mc.theWorld.playerEntities.size() > 0)) {
+        if ((DeveloperCapesTickHandler.mc.theWorld != null) && (DeveloperCapesTickHandler.mc.theWorld.playerEntities.size() > 0)) {
             
             // Grabs a list of all the players, and the world.
             @SuppressWarnings("unchecked")
@@ -44,21 +41,17 @@ public class DeveloperCapesTickHandler implements ITickHandler {
                     
                     if (player.cloakUrl.startsWith("http://skins.minecraft.net/MinecraftCloaks/")) {
                         /*
-                         * Lowers the case of the Username, so that there are no
-                         * problems with the Username's case.
+                         * Lowers the case of the Username, so that there are no problems with the Username's case.
                          */
                         final String lowerUsername = player.username.toLowerCase();
                         
                         if (DeveloperCapesTickHandler.instance.getUserGroup(lowerUsername) != null) {
                             
                             /*
-                             * Gets the user from the hash map and gets the cape
-                             * URL.
+                             * Gets the user from the hash map and gets the cape URL.
                              */
-                            final String userGroup = DeveloperCapesTickHandler.instance
-                                    .getUserGroup(lowerUsername);
-                            final String groupUrl = DeveloperCapesTickHandler.instance
-                                    .getGroupUrl(userGroup);
+                            final String userGroup = DeveloperCapesTickHandler.instance.getUserGroup(lowerUsername);
+                            final String groupUrl = DeveloperCapesTickHandler.instance.getGroupUrl(userGroup);
                             
                             // Sets the cape URL.
                             player.cloakUrl = groupUrl;
@@ -73,8 +66,7 @@ public class DeveloperCapesTickHandler implements ITickHandler {
      * Not used, stub method.
      */
     @Override
-    public void tickEnd(final EnumSet<TickType> type, final Object... tickData) {
-    }
+    public void tickEnd(final EnumSet<TickType> type, final Object... tickData) {}
     
     @Override
     public EnumSet<TickType> ticks() {

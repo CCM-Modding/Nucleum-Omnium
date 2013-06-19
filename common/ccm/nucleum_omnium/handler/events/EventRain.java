@@ -9,8 +9,7 @@ public final class EventRain {
     @ForgeSubscribe
     public void rainStopper(final PlaySoundEvent event) {
         if (Properties.rain) {
-            if ((event != null) && (event.source != null)
-                    && event.source.soundName.startsWith("ambient/weather/rain")) {
+            if ((event != null) && (event.source != null) && event.source.soundName.startsWith("ambient/weather/rain")) {
                 event.result = null;
             }
         }

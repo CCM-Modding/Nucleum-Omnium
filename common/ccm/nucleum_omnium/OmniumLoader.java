@@ -31,6 +31,5 @@ public class OmniumLoader implements IFMLLoadingPlugin {
     }
     
     @Override
-    public void injectData(final Map<String, Object> data) {
-    }
+    public void injectData(final Map<String, Object> data) {}
 }

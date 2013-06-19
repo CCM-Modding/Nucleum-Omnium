@@ -35,8 +35,7 @@ public class OmniumAT extends AccessTransformer {
     private void readMapFile(final String mapFile) {
         System.out.println("Adding Accesstransformer map: " + mapFile);
         try {
-            final Method parentMapFile = AccessTransformer.class.getDeclaredMethod("readMapFile",
-                                                                                   String.class);
+            final Method parentMapFile = AccessTransformer.class.getDeclaredMethod("readMapFile", String.class);
             parentMapFile.setAccessible(true);
             parentMapFile.invoke(this, mapFile);
         } catch (final Exception e) {

@@ -9,9 +9,8 @@ import java.util.logging.Logger;
 import cpw.mods.fml.common.FMLLog;
 
 /**
- * This class allows a mod to easily implement a version update checker. It also
- * contains some version comparison functions which may be used at any point.
- * Instances of this class should be registered with {@link TickHandlerVersion}.
+ * This class allows a mod to easily implement a version update checker. It also contains some version comparison functions which may be used at any point. Instances of this class
+ * should be registered with {@link TickHandlerVersion}.
  * 
  * @author King Lemming
  */
@@ -85,8 +84,7 @@ public class VersionHandler {
         releaseURL = url;
     }
     
-    public VersionHandler(final String name, final String version, final String url,
-            final Logger logger) {
+    public VersionHandler(final String name, final String version, final String url, final Logger logger) {
         
         modName = name;
         modVersion = latestModVersion = version;
@@ -147,8 +145,7 @@ public class VersionHandler {
             
             try {
                 final URL versionFile = new URL(releaseURL);
-                final BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        versionFile.openStream()));
+                final BufferedReader reader = new BufferedReader(new InputStreamReader(versionFile.openStream()));
                 latestModVersion = reader.readLine();
                 description = reader.readLine();
                 criticalUpdate = Boolean.parseBoolean(reader.readLine());
@@ -156,19 +153,15 @@ public class VersionHandler {
                 reader.close();
                 
                 if (beforeTargetVersion(modVersion, latestModVersion)) {
-                    modLogger.log(Level.INFO, "An updated version of " + modName
-                            + " is available: " + latestModVersion + ".");
+                    modLogger.log(Level.INFO, "An updated version of " + modName + " is available: " + latestModVersion + ".");
                     newVersion = true;
                     
                     if (criticalUpdate) {
-                        modLogger
-                                .log(Level.INFO,
-                                     "This update has been marked as CRITICAL and will ignore notification suppression.");
+                        modLogger.log(Level.INFO, "This update has been marked as CRITICAL and will ignore notification suppression.");
                     }
                     if (beforeTargetVersion(MC_VERSION, latestMCVersion)) {
                         newMinecraftVersion = true;
-                        modLogger.log(Level.INFO, "This update is for Minecraft " + latestMCVersion
-                                + ".");
+                        modLogger.log(Level.INFO, "This update is for Minecraft " + latestMCVersion + ".");
                     }
                 }
             } catch (final Exception e) {

@@ -8,29 +8,29 @@ import net.minecraft.util.StringTranslate;
 
 public class MainItemBlock extends ItemBlock {
     
-    public MainItemBlock(int id) {
+    public MainItemBlock(final int id) {
         super(id);
         setHasSubtypes(true);
     }
     
+    @Override
     public CreativeTabs[] getCreativeTabs() {
-        return ((MainBlock) Block.blocksList[this.getBlockID()]).getCreativeTabArray();
+        return ((MainBlock) Block.blocksList[getBlockID()]).getCreativeTabArray();
     }
     
     @Override
-    public String getItemDisplayName(ItemStack itemStack) {
+    public String getItemDisplayName(final ItemStack itemStack) {
         return StringTranslate.getInstance().translateNamedKey(this.getUnlocalizedName(itemStack));
     }
     
     @Override
-    public int getMetadata(int metadata) {
+    public int getMetadata(final int metadata) {
         return metadata;
     }
     
     @Override
-    public String getUnlocalizedName(ItemStack itemstack) {
+    public String getUnlocalizedName(final ItemStack itemstack) {
         
-        return ((MainBlock) Block.blocksList[this.getBlockID()]).getSubBlocks()[itemstack
-                .getItemDamage()].getUnlocalizedName();
+        return ((MainBlock) Block.blocksList[getBlockID()]).getSubBlocks()[itemstack.getItemDamage()].getUnlocalizedName();
     }
 }

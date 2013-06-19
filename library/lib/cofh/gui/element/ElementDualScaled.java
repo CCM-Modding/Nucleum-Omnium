@@ -46,12 +46,7 @@ public class ElementDualScaled extends ElementBase {
         switch (mode) {
             case 0:
                 // vertical bottom -> top
-                drawTexturedModalRect(posX,
-                                      (posY + sizeY) - quantity,
-                                      sizeX,
-                                      sizeY - quantity,
-                                      sizeX,
-                                      quantity);
+                drawTexturedModalRect(posX, (posY + sizeY) - quantity, sizeX, sizeY - quantity, sizeX, quantity);
                 return;
             case 1:
                 // horizontal left -> right
@@ -59,12 +54,7 @@ public class ElementDualScaled extends ElementBase {
                 return;
             case 2:
                 // horizontal right -> left
-                drawTexturedModalRect((posX + sizeX) - quantity,
-                                      posY,
-                                      (sizeX + sizeX) - quantity,
-                                      0,
-                                      quantity,
-                                      sizeY);
+                drawTexturedModalRect((posX + sizeX) - quantity, posY, (sizeX + sizeX) - quantity, 0, quantity, sizeY);
                 return;
         }
     }

@@ -3,8 +3,7 @@ package lib.cofh.gui;
 import lib.cofh.gui.element.TabBase;
 
 /**
- * Keeps track of which tabs should be open by default when a player opens a
- * GUI.
+ * Keeps track of which tabs should be open by default when a player opens a GUI.
  * 
  * @author King Lemming
  */

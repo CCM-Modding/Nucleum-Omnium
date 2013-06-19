@@ -4,9 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * Extension of {@link ComparableItemStack} except NBT sensitive. It is expected
- * that this will have limited use, so this is a child class for overhead
- * performance reasons.
+ * Extension of {@link ComparableItemStack} except NBT sensitive. It is expected that this will have limited use, so this is a child class for overhead performance reasons.
  * 
  * @author King Lemming
  */

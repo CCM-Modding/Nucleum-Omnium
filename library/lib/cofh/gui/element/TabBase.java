@@ -7,8 +7,7 @@ import lib.cofh.gui.render.RenderHelper;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Base class for a tab element. Has self-contained rendering methods and a link
- * back to the {@link GuiBase} it is a part of.
+ * Base class for a tab element. Has self-contained rendering methods and a link back to the {@link GuiBase} it is a part of.
  * 
  * @author King Lemming
  */
@@ -76,16 +75,13 @@ public abstract class TabBase extends ElementBase {
         }
     }
     
-    public boolean intersectsWith(final int mouseX, final int mouseY, final int shiftX,
-            final int shiftY) {
+    public boolean intersectsWith(final int mouseX, final int mouseY, final int shiftX, final int shiftY) {
         
         if (side == 0) {
-            if ((mouseX <= shiftX) && (mouseX >= (shiftX - currentWidth)) && (mouseY >= shiftY)
-                    && (mouseY <= (shiftY + currentHeight))) {
+            if ((mouseX <= shiftX) && (mouseX >= (shiftX - currentWidth)) && (mouseY >= shiftY) && (mouseY <= (shiftY + currentHeight))) {
                 return true;
             }
-        } else if ((mouseX >= shiftX) && (mouseX <= (shiftX + currentWidth)) && (mouseY >= shiftY)
-                && (mouseY <= (shiftY + currentHeight))) {
+        } else if ((mouseX >= shiftX) && (mouseX <= (shiftX + currentWidth)) && (mouseY >= shiftY) && (mouseY <= (shiftY + currentHeight))) {
             return true;
         }
         return false;
@@ -102,42 +98,17 @@ public abstract class TabBase extends ElementBase {
         if (side == 0) {
             RenderHelper.bindTexture(textureLeft);
             
-            gui.drawTexturedModalRect(posX - currentWidth,
-                                      posY + 4,
-                                      0,
-                                      (256 - currentHeight) + 4,
-                                      4,
-                                      currentHeight - 4);
-            gui.drawTexturedModalRect((posX - currentWidth) + 4,
-                                      posY,
-                                      (256 - currentWidth) + 4,
-                                      0,
-                                      currentWidth - 4,
-                                      4);
+            gui.drawTexturedModalRect(posX - currentWidth, posY + 4, 0, (256 - currentHeight) + 4, 4, currentHeight - 4);
+            gui.drawTexturedModalRect((posX - currentWidth) + 4, posY, (256 - currentWidth) + 4, 0, currentWidth - 4, 4);
             gui.drawTexturedModalRect(posX - currentWidth, posY, 0, 0, 4, 4);
-            gui.drawTexturedModalRect((posX - currentWidth) + 4,
-                                      posY + 4,
-                                      (256 - currentWidth) + 4,
-                                      (256 - currentHeight) + 4,
-                                      currentWidth - 4,
-                                      currentHeight - 4);
+            gui.drawTexturedModalRect((posX - currentWidth) + 4, posY + 4, (256 - currentWidth) + 4, (256 - currentHeight) + 4, currentWidth - 4, currentHeight - 4);
         } else {
             RenderHelper.bindTexture(textureRight);
             
             gui.drawTexturedModalRect(posX, posY, 0, 256 - currentHeight, 4, currentHeight);
-            gui.drawTexturedModalRect(posX + 4,
-                                      posY,
-                                      (256 - currentWidth) + 4,
-                                      0,
-                                      currentWidth - 4,
-                                      4);
+            gui.drawTexturedModalRect(posX + 4, posY, (256 - currentWidth) + 4, 0, currentWidth - 4, 4);
             gui.drawTexturedModalRect(posX, posY, 0, 0, 4, 4);
-            gui.drawTexturedModalRect(posX + 4,
-                                      posY + 4,
-                                      (256 - currentWidth) + 4,
-                                      (256 - currentHeight) + 4,
-                                      currentWidth - 4,
-                                      currentHeight - 4);
+            gui.drawTexturedModalRect(posX + 4, posY + 4, (256 - currentWidth) + 4, (256 - currentHeight) + 4, currentWidth - 4, currentHeight - 4);
         }
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
     }

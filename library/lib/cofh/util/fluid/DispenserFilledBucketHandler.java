@@ -13,8 +13,7 @@ public final class DispenserFilledBucketHandler extends BehaviorDefaultDispenseI
     private final BehaviorDefaultDispenseItem defaultDispenserItemBehavior = new BehaviorDefaultDispenseItem();
     
     /**
-     * Dispense the specified stack, play the dispense sound and spawn
-     * particles.
+     * Dispense the specified stack, play the dispense sound and spawn particles.
      */
     @Override
     public ItemStack dispenseStack(final IBlockSource blockSource, final ItemStack stackBucket) {

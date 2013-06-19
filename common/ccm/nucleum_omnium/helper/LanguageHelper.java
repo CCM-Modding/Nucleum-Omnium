@@ -10,8 +10,7 @@ public final class LanguageHelper extends BaseNIClass {
      * 
      * @param fileName
      *            String representing the file name of the file in question.
-     * @return {@link String} representation of the locale took from the file
-     *         name.
+     * @return {@link String} representation of the locale took from the file name.
      */
     public static String getLangFromFileName(final String fileName) {
         return fileName.substring(fileName.lastIndexOf('/') + 1, fileName.lastIndexOf('.'));
@@ -29,8 +28,7 @@ public final class LanguageHelper extends BaseNIClass {
     }
     
     /***
-     * Simple test to determine if a specified file name represents a XML file
-     * or not
+     * Simple test to determine if a specified file name represents a XML file or not
      * 
      * @param fileName
      *            String representing the file name of the file in question

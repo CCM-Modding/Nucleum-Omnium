@@ -3,8 +3,7 @@ package ccm.nucleum_omnium.utils.exeptions;
 import ccm.nucleum_omnium.IMod;
 
 /**
- * This Exception is not MY Fault, The user put 2 of my mods in, and somehow
- * forge let it through
+ * This Exception is not MY Fault, The user put 2 of my mods in, and somehow forge let it through
  */
 public class DupeExeption extends NotMyFaultExeption {
     
@@ -26,10 +25,7 @@ public class DupeExeption extends NotMyFaultExeption {
         tmpErrorSB.append(mod.getName());
         tmpErrorSB.append(".jar out of your mods-Folder.\n ");
         tmpErrorSB.append("You only need one of them.\n ");
-        tmpErrorSB
-                .append("And another Question: Why the Hax did Forge not detect that before me?\n");
-        errorSB.replace(errorSB.lastIndexOf("|"),
-                        errorSB.lastIndexOf("|") + 1,
-                        tmpErrorSB.toString());
+        tmpErrorSB.append("And another Question: Why the Hax did Forge not detect that before me?\n");
+        errorSB.replace(errorSB.lastIndexOf("|"), errorSB.lastIndexOf("|") + 1, tmpErrorSB.toString());
     }
 }
