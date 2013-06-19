@@ -9,6 +9,15 @@ import ccm.nucleum_omnium.helper.TextureHelper;
 
 public final class EnumBlockHelper extends BaseNIClass {
     
+    public static Block createBlock(Enum<? extends IBlockEnum> blockEnum, SubBlock subBlock) {
+        
+        ((IBlockEnum) blockEnum).setBaseBlock(subBlock.getBlock());
+        
+        MainBlock.registerID(((IBlockEnum) blockEnum).getBaseBlock().blockID);
+        
+        return ((IBlockEnum) blockEnum).getBaseBlock();
+    }
+    
     public static Block createBlock(Enum<? extends IBlockEnum> blockEnum, int blockID,
             String textureLoc) {
         

@@ -18,7 +18,7 @@ public final class EnumToItemStack extends BaseNIClass {
      * @return a new {@link ItemStack} instance
      */
     public static ItemStack getItemIS(final Enum<? extends IItemEnum> itemEnum) {
-        return new ItemStack(((IItemEnum) itemEnum).getBaseItem().itemID, 1, itemEnum.ordinal());
+        return new ItemStack(((IItemEnum) itemEnum).getBaseItem(), 1, itemEnum.ordinal());
     }
     
     /**
@@ -30,8 +30,7 @@ public final class EnumToItemStack extends BaseNIClass {
      * @return a new {@link ItemStack} instance
      */
     public static ItemStack getItemIS(final Enum<? extends IItemEnum> itemEnum, final int amount) {
-        return new ItemStack(((IItemEnum) itemEnum).getBaseItem().itemID, amount,
-                itemEnum.ordinal());
+        return new ItemStack(((IItemEnum) itemEnum).getBaseItem(), amount, itemEnum.ordinal());
     }
     
     /**
@@ -41,8 +40,7 @@ public final class EnumToItemStack extends BaseNIClass {
      * @return a new {@link ItemStack} instance
      */
     public static ItemStack getBlockIS(final Enum<? extends IBlockEnum> blockEnum) {
-        return new ItemStack(((IBlockEnum) blockEnum).getBaseBlock().blockID, 1,
-                blockEnum.ordinal());
+        return new ItemStack(((IBlockEnum) blockEnum).getBaseBlock(), 1, blockEnum.ordinal());
     }
     
     /**
@@ -54,7 +52,6 @@ public final class EnumToItemStack extends BaseNIClass {
      * @return a new {@link ItemStack} instance
      */
     public static ItemStack getBlockIS(final Enum<? extends IBlockEnum> blockEnum, final int amount) {
-        return new ItemStack(((IBlockEnum) blockEnum).getBaseBlock().blockID, amount,
-                blockEnum.ordinal());
+        return new ItemStack(((IBlockEnum) blockEnum).getBaseBlock(), amount, blockEnum.ordinal());
     }
 }
