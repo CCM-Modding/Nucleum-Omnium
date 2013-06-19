@@ -11,7 +11,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.helper.JavaHelper;
-import ccm.nucleum_omnium.helper.TeleportHelper;
+import ccm.nucleum_omnium.helper.CommandHelper;
 import ccm.nucleum_omnium.utils.lib.Commands;
 
 public class CommandTPX extends CommandBase {
@@ -42,8 +42,8 @@ public class CommandTPX extends CommandBase {
                         .get(Integer.parseInt(args[args.length - 1]));
                 if (dimension != null) {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();
-                    TeleportHelper.teleportPlayer(sender,
-                                                  TeleportHelper.getPlayer(sender),
+                    CommandHelper.teleportPlayer(sender,
+                                                  CommandHelper.getPlayer(sender),
                                                   dimension.provider.dimensionId,
                                                   spawn.posX,
                                                   spawn.posY,
@@ -55,9 +55,9 @@ public class CommandTPX extends CommandBase {
                                                      args[args.length - 1] });
                 }
             } else {
-                TeleportHelper.teleportPlayer(sender,
-                                              TeleportHelper.getPlayer(sender),
-                                              TeleportHelper.getPlayer(sender,
+                CommandHelper.teleportPlayer(sender,
+                                              CommandHelper.getPlayer(sender),
+                                              CommandHelper.getPlayer(sender,
                                                                        args[args.length - 1]));
             }
         } else if (args.length == 2) {
@@ -66,8 +66,8 @@ public class CommandTPX extends CommandBase {
                         .get(Integer.parseInt(args[args.length - 1]));
                 if (dimension != null) {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();
-                    TeleportHelper.teleportPlayer(sender,
-                                                  TeleportHelper.getPlayer(sender,
+                    CommandHelper.teleportPlayer(sender,
+                                                  CommandHelper.getPlayer(sender,
                                                                            args[args.length - 2]),
                                                   dimension.provider.dimensionId,
                                                   spawn.posX,
@@ -80,37 +80,37 @@ public class CommandTPX extends CommandBase {
                                                      args[args.length - 1] });
                 }
             } else {
-                TeleportHelper.teleportPlayer(sender, TeleportHelper
-                        .getPlayer(sender, args[args.length - 2]), TeleportHelper
+                CommandHelper.teleportPlayer(sender, CommandHelper
+                        .getPlayer(sender, args[args.length - 2]), CommandHelper
                         .getPlayer(sender, args[args.length - 1]));
             }
         } else if (args.length == 4) {
-            final EntityPlayerMP player = TeleportHelper.getPlayer(sender);
+            final EntityPlayerMP player = CommandHelper.getPlayer(sender);
             if (player.worldObj != null) {
                 int i = args.length - 4;
                 final int dimension = CommandBase.parseInt(sender, args[i++]);
-                final double x = TeleportHelper.checkPosition(sender, player.posX, args[i++]);
-                final double y = TeleportHelper.checkPositionWithBounds(sender,
+                final double x = CommandHelper.checkPosition(sender, player.posX, args[i++]);
+                final double y = CommandHelper.checkPositionWithBounds(sender,
                                                                         player.posY,
                                                                         args[i++],
                                                                         0,
                                                                         0);
-                final double z = TeleportHelper.checkPosition(sender, player.posZ, args[i++]);
-                TeleportHelper.teleportPlayer(sender, player, dimension, x, y, z);
+                final double z = CommandHelper.checkPosition(sender, player.posZ, args[i++]);
+                CommandHelper.teleportPlayer(sender, player, dimension, x, y, z);
             }
         } else if (args.length == 5) {
-            final EntityPlayerMP player = TeleportHelper.getPlayer(sender, args[args.length - 5]);
+            final EntityPlayerMP player = CommandHelper.getPlayer(sender, args[args.length - 5]);
             if (player.worldObj != null) {
                 int i = args.length - 4;
                 final int dimension = CommandBase.parseInt(sender, args[i++]);
-                final double x = TeleportHelper.checkPosition(sender, player.posX, args[i++]);
-                final double y = TeleportHelper.checkPositionWithBounds(sender,
+                final double x = CommandHelper.checkPosition(sender, player.posX, args[i++]);
+                final double y = CommandHelper.checkPositionWithBounds(sender,
                                                                         player.posY,
                                                                         args[i++],
                                                                         0,
                                                                         0);
-                final double z = TeleportHelper.checkPosition(sender, player.posZ, args[i++]);
-                TeleportHelper.teleportPlayer(sender, player, dimension, x, y, z);
+                final double z = CommandHelper.checkPosition(sender, player.posZ, args[i++]);
+                CommandHelper.teleportPlayer(sender, player, dimension, x, y, z);
             }
         } else {
             throw new WrongUsageException("commands.tpx.usage", new Object[0]);

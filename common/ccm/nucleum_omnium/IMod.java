@@ -22,11 +22,6 @@ public interface IMod {
     public String getName();
     
     /**
-     * @return The Mod's Version
-     */
-    public String getVersion();
-    
-    /**
      * @return The AdvConfiguration file that belongs to the mod
      */
     public AdvConfiguration getConfigFile();

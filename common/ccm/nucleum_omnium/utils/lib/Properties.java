@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.TreeMap;
 
 import net.minecraftforge.common.Property;
+import ccm.nucleum_omnium.BaseNIClass;
 
-public class Properties {
+public final class Properties extends BaseNIClass {
     
     public static boolean                   mystLoaded    = false;
     

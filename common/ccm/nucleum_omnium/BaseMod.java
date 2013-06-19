@@ -70,9 +70,4 @@ public abstract class BaseMod implements IMod {
     public String getName() {
         return this.getClass().getAnnotation(Mod.class).name();
     }
-    
-    @Override
-    public String getVersion() {
-        return this.getClass().getAnnotation(Mod.class).version();
-    }
 }

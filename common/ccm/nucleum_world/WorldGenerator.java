@@ -62,13 +62,10 @@ public class WorldGenerator {
         modName = modName + "." + StringHelper.titleCase(oreName);
         final ConfigCategory cat = NucleumWorld.config.getCategory(modName);
         
-        final String strMin = "MinHeight";
-        final String strMax = "MaxHeight";
-        
         clusterSize = NucleumWorld.config.get(modName, "ClusterSize", clusterSize).getInt();
         numClusters = NucleumWorld.config.get(modName, "NumClusters", numClusters).getInt();
-        minY = NucleumWorld.config.get(modName, strMin, minY).getInt();
-        maxY = NucleumWorld.config.get(modName, strMax, maxY).getInt();
+        minY = NucleumWorld.config.get(modName, "MinHeight", minY).getInt();
+        maxY = NucleumWorld.config.get(modName, "MaxHeight", maxY).getInt();
         final boolean regen = NucleumWorld.config.get(modName, "RetroGen", enable)
                 .getBoolean(enable);
         

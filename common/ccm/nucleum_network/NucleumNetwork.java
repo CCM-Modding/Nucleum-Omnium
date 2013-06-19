@@ -3,7 +3,9 @@ package ccm.nucleum_network;
 import java.util.logging.Level;
 
 import lib.org.modstats.ModstatInfo;
+import ccm.nucleum_network.proxy.CommonProxy;
 import ccm.nucleum_network.utils.lib.Archive;
+import ccm.nucleum_network.utils.lib.Locations;
 import ccm.nucleum_omnium.BaseMod;
 import ccm.nucleum_omnium.IMod;
 import ccm.nucleum_omnium.configuration.AdvConfiguration;
@@ -11,6 +13,7 @@ import ccm.nucleum_omnium.handler.Handler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.FingerprintWarning;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
@@ -28,6 +31,10 @@ public class NucleumNetwork extends BaseMod implements IMod {
      */
     @Instance(Archive.MOD_ID)
     public static NucleumNetwork instance;
+    
+    @SidedProxy(serverSide = Locations.SERVER_PROXY,
+                clientSide = Locations.CLIENT_PROXY)
+    public static CommonProxy    proxy;
     
     @FingerprintWarning
     public void invalidFingerprint(final FMLFingerprintViolationEvent event) {

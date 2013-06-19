@@ -11,66 +11,7 @@ import ccm.nucleum_omnium.BaseNIClass;
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.utils.exeptions.WTFExeption;
 
-public final class TeleportHelper extends BaseNIClass {
-    
-    /**
-     * Teleports a player to another
-     * 
-     * @param player
-     *            Player to send
-     * @param player1
-     *            Player that gets send
-     */
-    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
-            final EntityPlayerMP player1) {
-        player.mountEntity((Entity) null);
-        if (player.dimension != player1.dimension) {
-            MinecraftServer.getServer().getConfigurationManager()
-                    .transferPlayerToDimension(player, player1.dimension);
-        }
-        player.playerNetServerHandler.setPlayerLocation(player1.posX,
-                                                        player1.posY,
-                                                        player1.posZ,
-                                                        player1.rotationYaw,
-                                                        player1.rotationPitch);
-        player.prevPosX = player.posX = player1.posX;
-        player.prevPosY = player.posY = player1.posY;
-        player.prevPosZ = player.posZ = player1.posZ;
-        CommandBase.notifyAdmins(sender,
-                                 "commands.tpx.success",
-                                 new Object[] { player.getEntityName(), player1.getEntityName() });
-    }
-    
-    /**
-     * Teleports a player to coordinates
-     * 
-     * @param player
-     *            Player to send
-     * @param dimension
-     *            The dimension to send the player to
-     * @param x
-     *            The X coordinate to send the player to
-     * @param y
-     *            The Y coordinate to send the player to
-     * @param z
-     *            The Z coordinate to send the player to
-     */
-    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
-            final int dimension, final double x, final double y, final double z) {
-        player.mountEntity((Entity) null);
-        if (player.dimension != dimension) {
-            MinecraftServer.getServer().getConfigurationManager()
-                    .transferPlayerToDimension(player, dimension);
-        }
-        player.setPositionAndUpdate(x, y, z);
-        player.prevPosX = player.posX = x;
-        player.prevPosY = player.posY = y;
-        player.prevPosZ = player.posZ = z;
-        CommandBase.notifyAdmins(sender,
-                                 "commands.tpx.success.coordinates",
-                                 new Object[] { player.getEntityName(), Integer.valueOf(dimension),
-                                         Double.valueOf(x), Double.valueOf(y), Double.valueOf(z) });
-    }
+public final class CommandHelper extends BaseNIClass {
     
     /**
      * Gets a player
@@ -99,9 +40,72 @@ public final class TeleportHelper extends BaseNIClass {
         return player;
     }
     
+    public static void tellAdmins(ICommandSender sender, String message, Object... objects) {
+        CommandBase.notifyAdmins(sender, message, objects);
+    }
+    
+    /**
+     * Teleports a player to another
+     * 
+     * @param player
+     *            Player to send
+     * @param player1
+     *            Player that gets send
+     */
+    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
+            final EntityPlayerMP player1) {
+        player.mountEntity((Entity) null);
+        if (player.dimension != player1.dimension) {
+            MinecraftServer.getServer().getConfigurationManager()
+                    .transferPlayerToDimension(player, player1.dimension);
+        }
+        player.playerNetServerHandler.setPlayerLocation(player1.posX,
+                                                        player1.posY,
+                                                        player1.posZ,
+                                                        player1.rotationYaw,
+                                                        player1.rotationPitch);
+        player.prevPosX = player.posX = player1.posX;
+        player.prevPosY = player.posY = player1.posY;
+        player.prevPosZ = player.posZ = player1.posZ;
+        tellAdmins(sender,
+                   "commands.tpx.success",
+                   new Object[] { player.getEntityName(), player1.getEntityName() });
+    }
+    
+    /**
+     * Teleports a player to coordinates
+     * 
+     * @param player
+     *            Player to send
+     * @param dimension
+     *            The dimension to send the player to
+     * @param x
+     *            The X coordinate to send the player to
+     * @param y
+     *            The Y coordinate to send the player to
+     * @param z
+     *            The Z coordinate to send the player to
+     */
+    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player,
+            final int dimension, final double x, final double y, final double z) {
+        player.mountEntity((Entity) null);
+        if (player.dimension != dimension) {
+            MinecraftServer.getServer().getConfigurationManager()
+                    .transferPlayerToDimension(player, dimension);
+        }
+        player.setPositionAndUpdate(x, y, z);
+        player.prevPosX = player.posX = x;
+        player.prevPosY = player.posY = y;
+        player.prevPosZ = player.posZ = z;
+        tellAdmins(sender,
+                   "commands.tpx.success.coordinates",
+                   new Object[] { player.getEntityName(), Integer.valueOf(dimension),
+                           Double.valueOf(x), Double.valueOf(y), Double.valueOf(z) });
+    }
+    
     public static double checkPosition(final ICommandSender sender, final double postion,
             final String argPos) {
-        return TeleportHelper.checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
+        return CommandHelper.checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
     }
     
     public static double checkPositionWithBounds(final ICommandSender sender, final double postion,

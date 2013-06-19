@@ -24,8 +24,6 @@ public class DupeExeption extends NotMyFaultExeption {
     private void addString() {
         tmpErrorSB.append("Why did you install my Mod twice?\n Remove the second ");
         tmpErrorSB.append(mod.getName());
-        tmpErrorSB.append("-Universal-");
-        tmpErrorSB.append(mod.getVersion());
         tmpErrorSB.append(".jar out of your mods-Folder.\n ");
         tmpErrorSB.append("You only need one of them.\n ");
         tmpErrorSB

@@ -1,5 +1,6 @@
 package ccm.nucleum_omnium.helper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ccm.nucleum_omnium.BaseNIClass;
@@ -47,5 +48,18 @@ public final class JavaHelper extends BaseNIClass {
             ret[i++] = e.intValue();
         }
         return ret;
+    }
+    
+    /**
+     * Copy's a {@code List<T>}
+     * 
+     * @param list
+     *            The {@code List<T>} to copy
+     * @return A new instance of said {@code List<T>}
+     * @author Reika
+     */
+    public static <T> List<T> copyList(List<T> list) {
+        List<T> newList = new ArrayList<T>(list);
+        return newList;
     }
 }

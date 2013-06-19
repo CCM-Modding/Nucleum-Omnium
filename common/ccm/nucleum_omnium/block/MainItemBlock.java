@@ -19,8 +19,7 @@ public class MainItemBlock extends ItemBlock {
     
     @Override
     public String getItemDisplayName(ItemStack itemStack) {
-        return ("" + StringTranslate.getInstance()
-                .translateNamedKey(this.getLocalizedName(itemStack))).trim();
+        return StringTranslate.getInstance().translateNamedKey(this.getUnlocalizedName(itemStack));
     }
     
     @Override
@@ -30,7 +29,8 @@ public class MainItemBlock extends ItemBlock {
     
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        int meta = itemstack.getItemDamage();
-        return getUnlocalizedName() + "." + meta;
+        
+        return ((MainBlock) Block.blocksList[this.getBlockID()]).getSubBlocks()[itemstack
+                .getItemDamage()].getUnlocalizedName();
     }
 }

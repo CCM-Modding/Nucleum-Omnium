@@ -7,6 +7,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
+import ccm.nucleum_omnium.helper.CommandHelper;
 import ccm.nucleum_omnium.utils.lib.Commands;
 
 public class CommandKill extends CommandBase {
@@ -31,9 +32,19 @@ public class CommandKill extends CommandBase {
     
     @Override
     public void processCommand(final ICommandSender sender, final String[] args) {
-        final EntityPlayerMP entityplayermp = CommandBase.func_82359_c(sender, args[0]);
-        entityplayermp.attackEntityFrom(DamageSource.outOfWorld, 1000);
-        sender.sendChatToPlayer("Ouch. That looks like it hurt.");
+        if (args.length == 1) {
+            final EntityPlayerMP playerDead = CommandHelper.getPlayer(sender, args[0]);
+            playerDead.attackEntityFrom(DamageSource.outOfWorld, 100000);
+            playerDead.sendChatToPlayer("Ouch. That looks like it hurt.");
+        } else {
+            final EntityPlayerMP playerDead = CommandHelper.getPlayer(sender);
+            if (args.length == 0) {
+                playerDead.attackEntityFrom(DamageSource.outOfWorld, 100000);
+                playerDead.sendChatToPlayer("Ouch. That looks like it hurt.");
+            } else {
+                playerDead.sendChatToPlayer(getCommandUsage(sender));
+            }
+        }
     }
     
     /**

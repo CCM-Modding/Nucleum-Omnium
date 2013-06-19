@@ -4,7 +4,7 @@
 	<comment>English (US) Language File</comment>
 	<!-- ******************************* Commands ***************************** -->
 	<entry key="commands.tpx.success">Teleported %s to %s</entry>
-    <entry key="commands.tpx.success.coordinates">Teleported %s to %s,%.2f,%.2f,%.2f</entry>
+    <entry key="commands.tpx.success.coordinates">Teleported %s to %s, %.2f, %.2f, %.2f</entry>
 	<entry key="commands.tpx.usage">/tpx [target player] {destination player} OR /tp [target player] {Dimension ID} {x} {y} {z}</entry>
 
 	<!-- ******************************** Errors ****************************** -->

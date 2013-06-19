@@ -4,6 +4,11 @@ import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenDesert;
 import ccm.nucleum_omnium.BaseNIClass;
@@ -71,5 +76,47 @@ public final class FunctionHelper extends BaseNIClass {
             dimensions.put(Integer.valueOf(world.provider.dimensionId), world);
         }
         return dimensions;
+    }
+    
+    /**
+     * Drops the Inventory that is contained in the {@link TileEntity}.
+     * 
+     * @param world
+     *            The world in witch to drop the Items in.
+     * @param x
+     *            The x location
+     * @param y
+     *            The y location.
+     * @param z
+     *            The z location.
+     */
+    public static void dropInventory(final World world, final int x, final int y, final int z) {
+        final TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        if (tileEntity != null) {
+            if (!(tileEntity instanceof IInventory))
+                return;
+            final IInventory inventory = (IInventory) tileEntity;
+            for (int i = 0; i < inventory.getSizeInventory(); i++) {
+                final ItemStack itemStack = inventory.getStackInSlot(i);
+                if (itemStack != null && itemStack.stackSize > 0) {
+                    final float dX = rand.nextFloat() * 0.8F + 0.1F;
+                    final float dY = rand.nextFloat() * 0.8F + 0.1F;
+                    final float dZ = rand.nextFloat() * 0.8F + 0.1F;
+                    final EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ,
+                            new ItemStack(itemStack.itemID, itemStack.stackSize,
+                                    itemStack.getItemDamage()));
+                    if (itemStack.hasTagCompound()) {
+                        entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack
+                                .getTagCompound().copy());
+                    }
+                    final float factor = 0.05F;
+                    entityItem.motionX = rand.nextGaussian() * factor;
+                    entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+                    entityItem.motionZ = rand.nextGaussian() * factor;
+                    world.spawnEntityInWorld(entityItem);
+                    itemStack.stackSize = 0;
+                }
+            }
+        }
     }
 }

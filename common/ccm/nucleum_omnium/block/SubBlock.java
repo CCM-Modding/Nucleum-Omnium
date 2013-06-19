@@ -9,11 +9,18 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
+import ccm.nucleum_omnium.helper.FunctionHelper;
+import ccm.nucleum_omnium.tileentity.TileBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -32,7 +39,12 @@ public class SubBlock {
     
     public List<IDisplayListener>   displayList   = new ArrayList<IDisplayListener>();
     public List<ICollisionListener> collisionList = new ArrayList<ICollisionListener>();
+    
+    private TileEntity              te            = null;
+    private boolean                 hasTE         = false;
     private boolean                 collisionEffect;
+    
+    private String                  unlocName;
     
     public Icon                     icon;
     public String                   iconName;
@@ -83,12 +95,12 @@ public class SubBlock {
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
         if (collisionEffect) {
             float var5 = 0.025F;
-            return AxisAlignedBB.getAABBPool().getAABB((double) x,
-                                                       (double) y,
-                                                       (double) z,
-                                                       (double) (x + 1),
-                                                       (double) ((float) (y + 1) - var5),
-                                                       (double) (z + 1));
+            return AxisAlignedBB.getAABBPool().getAABB(x,
+                                                       y,
+                                                       z,
+                                                       (x + 1),
+                                                       ((y + 1.0F) - var5),
+                                                       (z + 1));
         }
         
         return null;
@@ -101,7 +113,6 @@ public class SubBlock {
     
     public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
         return icon;
-        
     }
     
     @SideOnly(Side.CLIENT)
@@ -124,8 +135,13 @@ public class SubBlock {
     }
     
     public SubBlock setUnlocalizedName(String string) {
-        mainBlock.setUnlocalizedName(string);
+        unlocName = string;
+        mainBlock.setUnlocalizedName(unlocName);
         return this;
+    }
+    
+    public String getUnlocalizedName() {
+        return unlocName;
     }
     
     public Block getBlock() {
@@ -139,17 +155,19 @@ public class SubBlock {
     }
     
     public int quantityDroppedWithBonus(int fortune, Random rand) {
-        if (drop != null && dropMax > 1)
+        if (drop != null && dropMax > 1) {
             return dropMin + rand.nextInt(dropMax + fortune) + fortune;
-        else
+        } else {
             return 1;
+        }
     }
     
     public int idDropped(Random rand, int par3) {
-        if (drop != null)
+        if (drop != null) {
             return drop.itemID;
-        else
+        } else {
             return mainBlock.blockID;
+        }
     }
     
     public SubBlock setHardness(float hardness) {
@@ -180,10 +198,11 @@ public class SubBlock {
     }
     
     public int damageDropped(int meta) {
-        if (idDropped(new Random(), meta) == mainBlock.blockID)
+        if (idDropped(new Random(), meta) == mainBlock.blockID) {
             return meta;
-        else
+        } else {
             return 0;
+        }
     }
     
     public int getDamageValue(World world, int x, int y, int z) {
@@ -191,4 +210,70 @@ public class SubBlock {
         return meta;
     }
     
+    public SubBlock setTileEntity(TileEntity te) {
+        this.te = te;
+        hasTE = true;
+        return this;
+    }
+    
+    public TileEntity createTileEntity(World world, int meta) {
+        return te;
+    }
+    
+    public boolean hasTileEntity() {
+        return hasTE;
+    }
+    
+    public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+        FunctionHelper.dropInventory(world, x, y, z);
+    }
+    
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int wut,
+            float clickX, float clickY, float clockZ) {
+        return true;
+    }
+    
+    public void onBlockAdded(World world, int x, int y, int z) {
+    }
+    
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living,
+            ItemStack itemStack) {
+        
+        int direction = 0;
+        final int facing = MathHelper.floor_double(living.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        
+        switch (facing) {
+            case 0:
+                direction = ForgeDirection.NORTH.ordinal();
+                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
+                break;
+            case 1:
+                direction = ForgeDirection.EAST.ordinal();
+                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
+                break;
+            case 2:
+                direction = ForgeDirection.SOUTH.ordinal();
+                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
+                break;
+            case 3:
+                direction = ForgeDirection.WEST.ordinal();
+                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
+                break;
+            default:
+                direction = ForgeDirection.NORTH.ordinal();
+                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
+                break;
+        }
+        world.setBlockMetadataWithNotify(x, y, z, direction, 3);
+        
+        if (hasTE == true) {
+            
+            if (itemStack.hasDisplayName()) {
+                ((TileBase) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack
+                        .getDisplayName());
+            }
+            ((TileBase) world.getBlockTileEntity(x, y, z)).setOwner(living.getEntityName());
+            ((TileBase) world.getBlockTileEntity(x, y, z)).setOrientation(direction);
+        }
+    }
 }

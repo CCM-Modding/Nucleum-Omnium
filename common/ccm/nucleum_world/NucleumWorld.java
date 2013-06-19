@@ -21,6 +21,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Archive.MOD_ID,
+     name = Archive.MOD_NAME,
      useMetadata = true)
 public class NucleumWorld extends BaseMod implements IMod {
     

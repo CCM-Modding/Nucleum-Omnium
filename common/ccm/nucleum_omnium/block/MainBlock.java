@@ -9,7 +9,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -72,6 +75,10 @@ public class MainBlock extends Block {
         return meta;
     }
     
+    public SubBlock[] getSubBlocks() {
+        return subBlocks;
+    }
+    
     @Override
     @SideOnly(Side.CLIENT)
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -107,7 +114,9 @@ public class MainBlock extends Block {
     
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
         int meta = world.getBlockMetadata(x, y, z);
-        subBlocks[meta].onEntityCollidedWithBlock(world, x, y, z, entity);
+        if (subBlocks[meta] != null) {
+            subBlocks[meta].onEntityCollidedWithBlock(world, x, y, z, entity);
+        }
     }
     
     public void randDisplayTick(World world, int x, int y, int z, Random rand) {
@@ -148,10 +157,11 @@ public class MainBlock extends Block {
      */
     @Override
     public Icon getIcon(int par1, int par2) {
-        if (subBlocks[par2] != null)
+        if (subBlocks[par2] != null) {
             return subBlocks[par2].getBlockTextureFromSide(par1);
-        
-        return null;
+        } else {
+            return null;
+        }
     }
     
     @Override
@@ -230,5 +240,89 @@ public class MainBlock extends Block {
             return new CreativeTabs[0];
         
         return tabs.toArray(new CreativeTabs[tabs.size()]);
+    }
+    
+    @Override
+    public TileEntity createTileEntity(World world, int meta) {
+        if (subBlocks[meta] != null) {
+            return subBlocks[meta].createTileEntity(world, meta);
+        } else {
+            return null;
+        }
+    }
+    
+    @Override
+    public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+        if (subBlocks[meta] != null) {
+            subBlocks[meta].breakBlock(world, x, y, z, id, meta);
+        }
+        super.breakBlock(world, x, y, z, id, meta);
+    }
+    
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int wut,
+            float clickX, float clickY, float clockZ) {
+        int meta = world.getBlockMetadata(x, y, z);
+        if (world.isRemote)
+            return true;
+        if (player.isSneaking())
+            return false;
+        else if (subBlocks[meta] != null) {
+            return subBlocks[meta].onBlockActivated(world,
+                                                    x,
+                                                    y,
+                                                    z,
+                                                    player,
+                                                    wut,
+                                                    clickX,
+                                                    clickY,
+                                                    clockZ);
+        }
+        return true;
+        
+    }
+    
+    @Override
+    public void onBlockAdded(final World world, final int x, final int y, final int z) {
+        super.onBlockAdded(world, x, y, z);
+        this.setDefaultDirection(world, x, y, z);
+        int meta = world.getBlockMetadata(x, y, z);
+        if (subBlocks[meta] != null) {
+            subBlocks[meta].onBlockAdded(world, x, y, z);
+        }
+    }
+    
+    /**
+     * Sets the direction of the block when placed
+     */
+    @Override
+    public void onBlockPlacedBy(final World world, final int x, final int y, final int z,
+            final EntityLiving living, final ItemStack itemStack) {
+        int meta = world.getBlockMetadata(x, y, z);
+        if (subBlocks[meta] != null) {
+            subBlocks[meta].onBlockPlacedBy(world, x, y, z, living, itemStack);
+        }
+    }
+    
+    /**
+     * set a blocks direction
+     */
+    private void setDefaultDirection(final World world, final int x, final int y, final int z) {
+        if (!world.isRemote) {
+            final int north = world.getBlockId(x, y, z - 1);
+            final int south = world.getBlockId(x, y, z + 1);
+            final int west = world.getBlockId(x - 1, y, z);
+            final int east = world.getBlockId(x + 1, y, z);
+            byte byt = 3;
+            if (Block.opaqueCubeLookup[north] && !Block.opaqueCubeLookup[south])
+                byt = 3;
+            if (Block.opaqueCubeLookup[south] && !Block.opaqueCubeLookup[north])
+                byt = 2;
+            if (Block.opaqueCubeLookup[west] && !Block.opaqueCubeLookup[east])
+                byt = 5;
+            if (Block.opaqueCubeLookup[east] && !Block.opaqueCubeLookup[west])
+                byt = 4;
+            world.setBlockMetadataWithNotify(x, y, z, byt, 2);
+        }
     }
 }

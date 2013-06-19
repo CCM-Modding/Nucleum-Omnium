@@ -10,13 +10,36 @@ import ccm.nucleum_omnium.helper.TextureHelper;
 public final class EnumBlockHelper extends BaseNIClass {
     
     public static Block createBlock(Enum<? extends IBlockEnum> blockEnum, int blockID,
+            String textureLoc) {
+        
+        ((IBlockEnum) blockEnum).setBaseBlock(new SubBlock(blockID, blockEnum.ordinal(),
+                TextureHelper.getTextureFromName(blockEnum.name(), textureLoc))
+                .setUnlocalizedName(blockEnum.name()).getBlock());
+        
+        MainBlock.registerID(((IBlockEnum) blockEnum).getBaseBlock().blockID);
+        
+        return ((IBlockEnum) blockEnum).getBaseBlock();
+    }
+    
+    public static Block createBlock(Enum<? extends IBlockEnum> blockEnum, int blockID,
             String textureLoc, CreativeTabs tab) {
         
-        Block temp = new SubBlock(blockID, blockEnum.ordinal(),
+        ((IBlockEnum) blockEnum).setBaseBlock(new SubBlock(blockID, blockEnum.ordinal(),
                 TextureHelper.getTextureFromName(blockEnum.name(), textureLoc))
-                .setUnlocalizedName(blockEnum.name()).setCreativeTab(tab).getBlock();
+                .setUnlocalizedName(blockEnum.name()).setCreativeTab(tab).getBlock());
         
-        ((IBlockEnum) blockEnum).setBaseBlock(temp);
+        MainBlock.registerID(((IBlockEnum) blockEnum).getBaseBlock().blockID);
+        
+        return ((IBlockEnum) blockEnum).getBaseBlock();
+    }
+    
+    public static Block createBlock(Enum<? extends IBlockEnum> blockEnum, int blockID,
+            String textureLoc, CreativeTabs tab, float hardness) {
+        
+        ((IBlockEnum) blockEnum).setBaseBlock(new SubBlock(blockID, blockEnum.ordinal(),
+                TextureHelper.getTextureFromName(blockEnum.name(), textureLoc))
+                .setUnlocalizedName(blockEnum.name()).setCreativeTab(tab).setHardness(hardness)
+                .getBlock());
         
         MainBlock.registerID(((IBlockEnum) blockEnum).getBaseBlock().blockID);
         

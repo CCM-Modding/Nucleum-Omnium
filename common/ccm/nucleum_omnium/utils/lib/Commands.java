@@ -1,6 +1,8 @@
 package ccm.nucleum_omnium.utils.lib;
 
-public class Commands {
+import ccm.nucleum_omnium.BaseNIClass;
+
+public final class Commands extends BaseNIClass {
     
     public static final String COMMAND_NO   = "no";
     
