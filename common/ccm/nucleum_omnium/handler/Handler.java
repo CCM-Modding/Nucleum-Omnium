@@ -22,8 +22,7 @@ public final class Handler extends BaseNIClass {
      * Initializes the Logger for this Mod.
      */
     public static void initLog(final IMod mod) {
-        Logger tmp;
-        tmp = Logger.getLogger(mod.getModId());
+        Logger tmp = Logger.getLogger(mod.getModId());
         tmp.setParent(FMLLog.getLogger());
         if (!Handler.modsLogged.containsKey(mod)) {
             Handler.modsLogged.put(mod, tmp);
@@ -33,21 +32,19 @@ public final class Handler extends BaseNIClass {
     }
     
     /**
-     * Logs a Object. This version is only tto be used in cases where the parent
-     * mod is unkown
+     * Logs a Object. This version is only to be used in cases where the parent
+     * mod is unknown
      */
     public static void log(final Object msg) {
-        
-        Logger.getAnonymousLogger().log(Level.INFO, msg.toString());
+        System.out.println(msg);
     }
     
     /**
-     * Logs a Object, and a Throwable. This version is only tto be used in cases
-     * where the parent mod is unkown
+     * Logs a Object, and a Throwable. This version is only to be used in cases
+     * where the parent mod is unknown
      */
     public static void log(final Object msg, final Throwable t) {
-        
-        Logger.getAnonymousLogger().log(Level.INFO, msg.toString(), t);
+        System.out.println(msg + " \n" + t.toString());
     }
     
     /**
@@ -57,7 +54,7 @@ public final class Handler extends BaseNIClass {
         if (Handler.modsLogged.containsKey(mod)) {
             Handler.modsLogged.get(mod).log(Level.INFO, msg.toString());
         } else {
-            Logger.getAnonymousLogger().log(Level.INFO, msg.toString());
+            log(msg);
         }
     }
     
@@ -68,7 +65,7 @@ public final class Handler extends BaseNIClass {
         if (Handler.modsLogged.containsKey(mod)) {
             Handler.modsLogged.get(mod).log(Level.INFO, msg.toString(), t);
         } else {
-            Logger.getAnonymousLogger().log(Level.INFO, msg.toString(), t);
+            log(msg, t);
         }
     }
     

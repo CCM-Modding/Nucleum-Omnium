@@ -11,6 +11,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -19,6 +20,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.tileentity.TileBase;
 import cpw.mods.fml.relauncher.Side;
@@ -189,7 +191,8 @@ public class SubBlock {
         return this;
     }
     
-    public float getExplosionResistance(Entity entity) {
+    public float getExplosionResistance(Entity entity, World world, int x, int y, int z,
+            double explosionX, double explosionY, double explosionZ) {
         return blockResistance / 5.0F;
     }
     
@@ -206,7 +209,7 @@ public class SubBlock {
     }
     
     public int getDamageValue(World world, int x, int y, int z) {
-        System.out.println(meta);
+        Handler.log(meta);
         return meta;
     }
     
@@ -225,12 +228,21 @@ public class SubBlock {
     }
     
     public void breakBlock(World world, int x, int y, int z, int id, int meta) {
-        FunctionHelper.dropInventory(world, x, y, z);
+        if (hasTE == true) {
+            if (te instanceof IInventory) {
+                FunctionHelper.dropInventory(world, x, y, z);
+            }
+        }
     }
     
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int wut,
             float clickX, float clickY, float clockZ) {
-        return true;
+        if (world.isRemote)
+            return true;
+        if (player.isSneaking())
+            return false;
+        else
+            return false;
     }
     
     public void onBlockAdded(World world, int x, int y, int z) {
@@ -239,34 +251,37 @@ public class SubBlock {
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living,
             ItemStack itemStack) {
         
-        int direction = 0;
-        final int facing = MathHelper.floor_double(living.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-        
-        switch (facing) {
-            case 0:
-                direction = ForgeDirection.NORTH.ordinal();
-                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
-                break;
-            case 1:
-                direction = ForgeDirection.EAST.ordinal();
-                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
-                break;
-            case 2:
-                direction = ForgeDirection.SOUTH.ordinal();
-                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
-                break;
-            case 3:
-                direction = ForgeDirection.WEST.ordinal();
-                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
-                break;
-            default:
-                direction = ForgeDirection.NORTH.ordinal();
-                world.setBlockMetadataWithNotify(x, y, z, direction, 2);
-                break;
-        }
-        world.setBlockMetadataWithNotify(x, y, z, direction, 3);
-        
         if (hasTE == true) {
+            int direction = 0;
+            final int facing = MathHelper.floor_double(living.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+            
+            switch (facing) {
+                case 0:
+                    direction = ForgeDirection.NORTH.ordinal();
+                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
+                    world.markBlockForUpdate(x, y, z);
+                    break;
+                case 1:
+                    direction = ForgeDirection.EAST.ordinal();
+                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
+                    world.markBlockForUpdate(x, y, z);
+                    break;
+                case 2:
+                    direction = ForgeDirection.SOUTH.ordinal();
+                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
+                    world.markBlockForUpdate(x, y, z);
+                    break;
+                case 3:
+                    direction = ForgeDirection.WEST.ordinal();
+                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
+                    world.markBlockForUpdate(x, y, z);
+                    break;
+                default:
+                    direction = ForgeDirection.NORTH.ordinal();
+                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
+                    world.markBlockForUpdate(x, y, z);
+                    break;
+            }
             
             if (itemStack.hasDisplayName()) {
                 ((TileBase) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack

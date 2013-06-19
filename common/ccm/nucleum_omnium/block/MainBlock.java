@@ -205,9 +205,16 @@ public class MainBlock extends Block {
     public float getExplosionResistance(Entity entity, World world, int x, int y, int z,
             double explosionX, double explosionY, double explosionZ) {
         int meta = world.getBlockMetadata(x, y, z);
-        if (subBlocks[meta] != null)
-            return subBlocks[meta].getExplosionResistance(entity);
-        
+        if (subBlocks[meta] != null) {
+            return subBlocks[meta].getExplosionResistance(entity,
+                                                          world,
+                                                          x,
+                                                          y,
+                                                          z,
+                                                          explosionX,
+                                                          explosionY,
+                                                          explosionZ);
+        }
         return 0;
     }
     
@@ -226,19 +233,19 @@ public class MainBlock extends Block {
      */
     @Override
     public Block setCreativeTab(CreativeTabs par1CreativeTabs) {
-        if (tabs == null)
+        if (tabs == null) {
             tabs = new ArrayList<CreativeTabs>();
-        
-        if (!tabs.contains(par1CreativeTabs))
+        }
+        if (!tabs.contains(par1CreativeTabs)) {
             tabs.add(par1CreativeTabs);
-        
+        }
         return this;
     }
     
     public CreativeTabs[] getCreativeTabArray() {
-        if (tabs == null)
+        if (tabs == null) {
             return new CreativeTabs[0];
-        
+        }
         return tabs.toArray(new CreativeTabs[tabs.size()]);
     }
     
@@ -253,40 +260,41 @@ public class MainBlock extends Block {
     
     @Override
     public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+        super.breakBlock(world, x, y, z, id, meta);
         if (subBlocks[meta] != null) {
             subBlocks[meta].breakBlock(world, x, y, z, id, meta);
         }
-        super.breakBlock(world, x, y, z, id, meta);
     }
     
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int wut,
             float clickX, float clickY, float clockZ) {
         int meta = world.getBlockMetadata(x, y, z);
-        if (world.isRemote)
-            return true;
-        if (player.isSneaking())
+        if (subBlocks[meta] != null) {
+            if (subBlocks[meta].hasTileEntity()) {
+                return subBlocks[meta].onBlockActivated(world,
+                                                        x,
+                                                        y,
+                                                        z,
+                                                        player,
+                                                        wut,
+                                                        clickX,
+                                                        clickY,
+                                                        clockZ);
+            } else {
+                return false;
+            }
+        } else {
             return false;
-        else if (subBlocks[meta] != null) {
-            return subBlocks[meta].onBlockActivated(world,
-                                                    x,
-                                                    y,
-                                                    z,
-                                                    player,
-                                                    wut,
-                                                    clickX,
-                                                    clickY,
-                                                    clockZ);
         }
-        return true;
-        
     }
     
     @Override
     public void onBlockAdded(final World world, final int x, final int y, final int z) {
         super.onBlockAdded(world, x, y, z);
-        this.setDefaultDirection(world, x, y, z);
+        
         int meta = world.getBlockMetadata(x, y, z);
+        
         if (subBlocks[meta] != null) {
             subBlocks[meta].onBlockAdded(world, x, y, z);
         }
@@ -298,31 +306,11 @@ public class MainBlock extends Block {
     @Override
     public void onBlockPlacedBy(final World world, final int x, final int y, final int z,
             final EntityLiving living, final ItemStack itemStack) {
+        
         int meta = world.getBlockMetadata(x, y, z);
+        
         if (subBlocks[meta] != null) {
             subBlocks[meta].onBlockPlacedBy(world, x, y, z, living, itemStack);
-        }
-    }
-    
-    /**
-     * set a blocks direction
-     */
-    private void setDefaultDirection(final World world, final int x, final int y, final int z) {
-        if (!world.isRemote) {
-            final int north = world.getBlockId(x, y, z - 1);
-            final int south = world.getBlockId(x, y, z + 1);
-            final int west = world.getBlockId(x - 1, y, z);
-            final int east = world.getBlockId(x + 1, y, z);
-            byte byt = 3;
-            if (Block.opaqueCubeLookup[north] && !Block.opaqueCubeLookup[south])
-                byt = 3;
-            if (Block.opaqueCubeLookup[south] && !Block.opaqueCubeLookup[north])
-                byt = 2;
-            if (Block.opaqueCubeLookup[west] && !Block.opaqueCubeLookup[east])
-                byt = 5;
-            if (Block.opaqueCubeLookup[east] && !Block.opaqueCubeLookup[west])
-                byt = 4;
-            world.setBlockMetadataWithNotify(x, y, z, byt, 2);
         }
     }
 }
