@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeDirection;
-import ccm.nucleum_omnium.tileentity.TileBase;
+import ccm.nucleum_omnium.tileentity.BaseTE;
 import ccm.nucleum_omnium.utils.lib.BlockFacings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,7 +39,7 @@ public class SBMutlyTexture extends SubBlock {
     @Override
     public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side) {
         
-        TileBase te = (TileBase) blockAccess.getBlockTileEntity(x, y, z);
+        BaseTE te = (BaseTE) blockAccess.getBlockTileEntity(x, y, z);
         
         if (goodSides.contains(BlockFacings.Top) && side == ForgeDirection.UP.ordinal()) {
             return icons[BlockFacings.Top.ordinal()];

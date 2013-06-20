@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import ccm.nucleum_omnium.tileentity.TileBase;
+import ccm.nucleum_omnium.tileentity.BaseTE;
 import ccm.nucleum_omnium.utils.lib.BlockFacings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -40,14 +40,10 @@ public class SBActiveMachine extends SBMutlyTexture {
     @Override
     public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side) {
         
-        TileBase te = (TileBase) blockAccess.getBlockTileEntity(x, y, z);
+        BaseTE te = (BaseTE) blockAccess.getBlockTileEntity(x, y, z);
         
-        if (goodSides.contains(BlockFacings.Front) && side == te.getOrientation().ordinal()) {
-            if (isActive) {
-                return icons[7];
-            } else {
-                return super.getBlockTexture(blockAccess, x, y, z, side);
-            }
+        if (goodSides.contains(BlockFacings.Front) && (side == te.getOrientation().ordinal()) && isActive) {
+            return icons[7];
         } else {
             return super.getBlockTexture(blockAccess, x, y, z, side);
         }

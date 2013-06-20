@@ -1,4 +1,4 @@
-package ccm.nucleum_omnium.at;
+package ccm.nucleum_omnium.asm;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

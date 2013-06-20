@@ -21,7 +21,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import ccm.nucleum_omnium.helper.FunctionHelper;
-import ccm.nucleum_omnium.tileentity.TileBase;
+import ccm.nucleum_omnium.helper.enums.IBlockEnum;
+import ccm.nucleum_omnium.tileentity.BaseTE;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -305,7 +306,10 @@ public class SubBlock {
     
     public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLiving living, final ItemStack itemStack) {
         
-        if (hasTE == true) {
+        if (hasTE == true && te != null) {
+            
+            BaseTE temp = (BaseTE) world.getBlockTileEntity(x, y, z);
+            
             int direction = 0;
             final int facing = MathHelper.floor_double(((living.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
             
@@ -330,18 +334,15 @@ public class SubBlock {
                     world.notifyBlockChange(x, y, z, mainBlock.blockID);
                     world.markBlockForUpdate(x, y, z);
                     break;
-                default:
-                    direction = ForgeDirection.NORTH.ordinal();
-                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
-                    world.markBlockForUpdate(x, y, z);
-                    break;
             }
             
+            world.markBlockForUpdate(x, y, z);
+            
             if (itemStack.hasDisplayName()) {
-                ((TileBase) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
+                temp.setCustomName(itemStack.getDisplayName());
             }
-            ((TileBase) world.getBlockTileEntity(x, y, z)).setOwner(living.getEntityName());
-            ((TileBase) world.getBlockTileEntity(x, y, z)).setOrientation(direction);
+            temp.setOwner(living.getEntityName());
+            temp.setOrientation(direction);
         }
     }
     
@@ -351,5 +352,24 @@ public class SubBlock {
     @Override
     public String toString() {
         return super.toString() + mainBlock.getUnlocalizedName();
+    }
+    
+    /*
+     * Static Factory's
+     */
+    public static SubBlock setUp(final Enum<? extends IBlockEnum> blockEnum, final SubBlock instance) {
+        
+        MainBlock block = (MainBlock) instance.getBlock();
+        
+        ((IBlockEnum) blockEnum).setBaseBlock(block);
+        
+        MainBlock.registerID(block.blockID);
+        
+        return instance;
+    }
+    
+    public static SubBlock createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc) {
+        
+        return setUp(blockEnum, new SubBlock(id, blockEnum.ordinal(), textureLoc).setUnlocalizedName(blockEnum.name()));
     }
 }

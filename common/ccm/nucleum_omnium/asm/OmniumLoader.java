@@ -1,4 +1,4 @@
-package ccm.nucleum_omnium;
+package ccm.nucleum_omnium.asm;
 
 import java.util.Map;
 

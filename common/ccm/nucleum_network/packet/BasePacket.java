@@ -5,46 +5,54 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.network.INetworkManager;
-import ccm.nucleum_network.PacketTypeHandler;
-import cpw.mods.fml.common.network.Player;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import ccm.nucleum_omnium.NucleumOmnium;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
-public class BasePacket {
+public abstract class BasePacket {
+    protected int     packetId;
+    protected boolean isChunkDataPacket = false;
+    protected String  channel           = "CCM";
     
-    public PacketTypeHandler packetType;
-    
-    public boolean           isChunkDataPacket;
-    
-    public BasePacket(final PacketTypeHandler packetType, final boolean isChunkDataPacket) {
-        this.packetType = packetType;
-        this.isChunkDataPacket = isChunkDataPacket;
+    public int getPacketId() {
+        return this.packetId;
     }
     
-    public void execute(final INetworkManager network, final Player player) {}
-    
-    public byte[] populate() {
-        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        final DataOutputStream dos = new DataOutputStream(bos);
+    public Packet getPacket() {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        DataOutputStream data = new DataOutputStream(bytes);
         try {
-            dos.writeByte(packetType.ordinal());
-            writeData(dos);
-        } catch (final IOException e) {
-            e.printStackTrace(System.err);
+            data.writeByte(getPacketId());
+            writeData(data);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        return bos.toByteArray();
+        
+        Packet250CustomPayload packet = new Packet250CustomPayload();
+        packet.channel = this.channel;
+        packet.data = bytes.toByteArray();
+        packet.length = packet.data.length;
+        packet.isChunkDataPacket = this.isChunkDataPacket;
+        return packet;
     }
     
-    public void readData(final DataInputStream data) throws IOException {}
-    
-    public void readPopulate(final DataInputStream data) {
+    public Packet getTinyPacket() {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        DataOutputStream data = new DataOutputStream(bytes);
         try {
-            readData(data);
-        } catch (final IOException e) {
-            e.printStackTrace(System.err);
+            writeData(data);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+        return PacketDispatcher.getTinyPacket(NucleumOmnium.instance, (short) this.packetId, bytes.toByteArray());
     }
     
-    public void setKey(final int key) {}
+    public static Packet getTinyPacket(int packetId, ByteArrayOutputStream data) {
+        return PacketDispatcher.getTinyPacket(NucleumOmnium.instance, (short) packetId, data.toByteArray());
+    }
     
-    public void writeData(final DataOutputStream dos) throws IOException {}
+    public abstract void readData(DataInputStream paramDataInputStream) throws IOException;
+    
+    public abstract void writeData(DataOutputStream paramDataOutputStream) throws IOException;
 }

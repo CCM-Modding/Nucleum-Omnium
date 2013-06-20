@@ -4,9 +4,7 @@ import net.minecraft.world.World;
 
 public final class ServerHelper {
     
-    private ServerHelper() {
-        
-    }
+    private ServerHelper() {}
     
     public static final boolean isClientWorld(final World world) {
         
