@@ -2,7 +2,7 @@
 {
   "modid": "nucleum_omnium",
   "name": "Nucleum Omnium",
-  "description": "Core functionality for all CCM Mods",
+  "description": "Main CCM Mod",
   "credits": "Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
   "logoFile": "/mods/nucleum-omnium/textures/logo.png",
   "version": "@VERSION@",
