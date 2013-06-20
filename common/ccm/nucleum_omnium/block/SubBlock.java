@@ -26,12 +26,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class SubBlock {
+    
     /*
      * DATA
      */
     private MainBlock               mainBlock;
     private CreativeTabs            tab;
-    int                             meta;
+    private int                     meta;
     
     private ItemStack               drop;
     private int                     dropMin;
@@ -40,14 +41,15 @@ public class SubBlock {
     private float                   hardness;
     private float                   blockResistance;
     
-    public List<IDisplayListener>   displayList   = new ArrayList<IDisplayListener>();
-    public List<ICollisionListener> collisionList = new ArrayList<ICollisionListener>();
-    
-    private TileEntity              te            = null;
-    private boolean                 hasTE         = false;
     private boolean                 collisionEffect;
     
     private String                  unlocName;
+    
+    private TileEntity              te            = null;
+    private boolean                 hasTE         = false;
+    
+    public List<IDisplayListener>   displayList   = new ArrayList<IDisplayListener>();
+    public List<ICollisionListener> collisionList = new ArrayList<ICollisionListener>();
     
     public Icon                     icon;
     public String                   iconName;
