@@ -12,7 +12,7 @@ public final class Locations extends BaseNIClass {
     
     public static final String SERVER_PROXY  = proxy + "CommonProxy";
     
-    public static final String HD_CAPES      = "https://raw.github.com/CCM-Modding/Nucleum-Omnium/master/capes.txt";
+    public static final String HD_CAPES      = "https://raw.github.com/CCM-Modding/Nucleum-Omnium/master/hd_capes.txt";
     
     public static final String CAPES         = "https://raw.github.com/CCM-Modding/Nucleum-Omnium/master/capes.txt";
 }
