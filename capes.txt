@@ -1,4 +1,4 @@
-captain=http://i.imgur.com/FY74h82.jpg
+captain=http://i.imgur.com/FwfsU12.jpg
 captain=captain_shadows
 clay=https://dl.dropboxusercontent.com/u/129059125/Capes/ClayCape.png
 clay=claycorp
