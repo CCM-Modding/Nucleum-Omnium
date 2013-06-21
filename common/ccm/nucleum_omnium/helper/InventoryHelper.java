@@ -88,7 +88,7 @@ public class InventoryHelper extends BaseNIClass {
     }
     
     /**
-     * Checks the Inventory Array for either a empty slot or one that contains the output Item Example: {@code this.inventory[getBestInventory(this.inventory, 3, itemstack)]} That
+     * Checks the Inventory Array for either a empty slot or one that contains the output Item Example: {@code inventory[getBestInventory(this.inventory, 3, itemstack)]} That
      * should work in the Counter
      * 
      * @param inventory
@@ -100,13 +100,24 @@ public class InventoryHelper extends BaseNIClass {
      * @return The Slot number
      */
     public static int getBestInventory(final ItemStack[] inventory, final int startSlot, final ItemStack output) {
-        for (int j = startSlot; j < inventory.length; j++) {
-            if (inventory[j] == output) {
-                return j;
-            } else if (inventory[j] == null) {
-                return j;
+        
+        if (inventory[startSlot].isItemEqual(output)) {
+            return startSlot;
+        } else if (inventory[startSlot] == null) {
+            return startSlot;
+        } else {
+            int bestSlot = startSlot;
+            
+            for (int slot = startSlot; slot < inventory.length; slot++) {
+                if (inventory[slot].isItemEqual(output)) {
+                    bestSlot = slot;
+                    break;
+                } else if (inventory[slot] == null) {
+                    bestSlot = slot;
+                    break;
+                }
             }
+            return bestSlot;
         }
-        return startSlot;
     }
 }
