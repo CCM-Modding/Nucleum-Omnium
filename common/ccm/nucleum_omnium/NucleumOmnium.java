@@ -7,6 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import ccm.nucleum_network.PacketHandler;
 import ccm.nucleum_network.TinyPacketHandler;
 import ccm.nucleum_omnium.configuration.AdvConfiguration;
+import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.handler.mods.ModHandler;
@@ -68,6 +69,10 @@ public class NucleumOmnium extends BaseMod implements IMod {
     public void preInit(final FMLPreInitializationEvent evt) {
         if (!Handler.isModLoaded(this)) {
             Handler.initLog(this);
+            
+            config = initializeConfig(evt);
+            
+            Config.init(config);
         }
     }
     

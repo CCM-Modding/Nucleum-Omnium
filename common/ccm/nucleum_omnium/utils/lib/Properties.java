@@ -17,6 +17,8 @@ public final class Properties extends BaseNIClass {
     
     public static boolean                   rain          = false;
     
+    public static boolean                   capeHD        = false;
+    
     public static List<Integer>             freeBlockIDs  = new ArrayList<Integer>();
     
     public static List<Integer>             freeItemIDs   = new ArrayList<Integer>();

@@ -29,13 +29,14 @@ public final class Config {
     }
     
     private static void initServerConfigs(final AdvConfiguration config) {
-        // config.addCustomCategoryComment(Properties.SERVER_SIDE,
-        // "This Category only has server side options");
+        // config.addCustomCategoryComment(Properties.SERVER_SIDE, "This Category only has server side options");
     }
     
     private static void initClientConfigs(final AdvConfiguration config) {
         config.addCustomCategoryComment(Properties.CLIENT_SIDE, "This Category only has client side options");
         
         Properties.rain = config.getProp(Properties.CLIENT_SIDE, "Should " + Archive.MOD_NAME + " turn off the rain sound for your client?", false);
+        
+        Properties.capeHD = config.getProp(Properties.CLIENT_SIDE, "Should capes be High Definition?", true);
     }
 }

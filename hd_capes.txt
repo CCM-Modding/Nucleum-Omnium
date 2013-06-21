@@ -1,8 +1,8 @@
-captain=http://i.imgur.com/i0r3WGh.png
+captain=http://i.imgur.com/FwfsU12.jpg
 captain=captain_shadows
 clay=http://i.imgur.com/GFQIJMe.png
 clay=claycorp
-kat=http://i.imgur.com/kIlNDpn.png
+kat=http://i.imgur.com/q4sIKl9.jpg
 kat=nerane
 morton=http://i.imgur.com/lBV7Ag4.png
 morton=morton00000
