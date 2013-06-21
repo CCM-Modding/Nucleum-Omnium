@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.tileentity.TileEntity;
-import ccm.nucleum_omnium.IMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TileHandler {
@@ -20,14 +19,19 @@ public class TileHandler {
         return TileHandler.instance;
     }
     
-    public void registerTileEntity(final IMod mod, final String tileID, final TileEntity te) {
-        final String fixedID = mod.getName() + tileID;
-        GameRegistry.registerTileEntity(te.getClass(), fixedID);
-        tileList.put(fixedID.hashCode(), te);
+    public void registerTileEntity(final String tileID, final TileEntity te) {
+        
+        GameRegistry.registerTileEntity(te.getClass(), hash(tileID));
+        
+        tileList.put(hash(tileID).hashCode(), te);
     }
     
-    public TileEntity getTileEntity(final IMod mod, final String tileID) {
+    public TileEntity getTileEntity(final String tileID) {
         
-        return tileList.get((mod.getName() + tileID).hashCode());
+        return tileList.get(hash(tileID));
+    }
+    
+    private static String hash(String name) {
+        return ("CCM.TILE.ENTITY." + name + "." + name.hashCode());
     }
 }

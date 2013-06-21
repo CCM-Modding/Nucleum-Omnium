@@ -9,7 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import ccm.nucleum_omnium.IMod;
+import ccm.nucleum_omnium.NucleumOmnium;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public final class GUIHandler implements IGuiHandler {
@@ -27,20 +27,17 @@ public final class GUIHandler implements IGuiHandler {
         return GUIHandler.instance;
     }
     
-    public static void registerGuiServer(final IMod mod, final String guiID, final Class<? extends Container> container) {
-        final String fixedID = guiID + mod.getName();
-        GUIHandler.containerList.put(fixedID.hashCode(), container);
+    public static void registerGuiServer(final String guiID, final Class<? extends Container> container) {
+        GUIHandler.containerList.put(hash(guiID), container);
     }
     
-    public static void registerGuiClient(final IMod mod, final String guiID, final Class<? extends GuiContainer> gui, final Class<? extends Container> container) {
-        final String fixedID = guiID + mod.getName();
-        GUIHandler.guiList.put(fixedID.hashCode(), gui);
-        GUIHandler.containerList.put(fixedID.hashCode(), container);
+    public static void registerGuiClient(final String guiID, final Class<? extends GuiContainer> gui, final Class<? extends Container> container) {
+        GUIHandler.guiList.put(hash(guiID), gui);
+        GUIHandler.containerList.put(hash(guiID), container);
     }
     
-    public static void openGui(final IMod mod, final String guiID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
-        final String fixedID = guiID + mod.getName();
-        player.openGui(mod, fixedID.hashCode(), world, x, y, z);
+    public static void openGui(final String guiID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
+        player.openGui(NucleumOmnium.instance, hash(guiID), world, x, y, z);
     }
     
     @Override
@@ -65,5 +62,9 @@ public final class GUIHandler implements IGuiHandler {
             e.printStackTrace();
         }
         return gui;
+    }
+    
+    private static int hash(String name) {
+        return ("CCM.GUI." + name + "." + name.hashCode()).hashCode();
     }
 }

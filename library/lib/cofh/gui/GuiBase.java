@@ -22,8 +22,8 @@ import org.lwjgl.opengl.GL11;
  */
 public abstract class GuiBase extends GuiContainer {
     
-    public static final String       PATH_ELEMENTS = "/mods/cofh/textures/gui/elements/";
-    public static final String       PATH_ICONS    = "/mods/cofh/textures/gui/icons/";
+    public static final String       PATH_ELEMENTS = "/mods/lib/textures/gui/elements/";
+    public static final String       PATH_ICONS    = "/mods/lib/textures/gui/icons/";
     
     protected int                    mouseX        = 0;
     protected int                    mouseY        = 0;

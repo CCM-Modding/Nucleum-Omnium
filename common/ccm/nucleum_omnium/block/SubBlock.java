@@ -20,6 +20,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import ccm.nucleum_omnium.handler.GUIHandler;
 import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.helper.enums.IBlockEnum;
 import ccm.nucleum_omnium.tileentity.BaseTE;
@@ -297,6 +298,15 @@ public class SubBlock {
         }
         if (player.isSneaking()) {
             return false;
+        }
+        if (hasTileEntity()) {
+            final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
+            if (te != null) {
+                GUIHandler.openGui(te.getUnlocalizedName(), player, world, x, y, z);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
@@ -316,26 +326,19 @@ public class SubBlock {
             switch (facing) {
                 case 0:
                     direction = ForgeDirection.NORTH.ordinal();
-                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
-                    world.markBlockForUpdate(x, y, z);
                     break;
                 case 1:
                     direction = ForgeDirection.EAST.ordinal();
-                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
-                    world.markBlockForUpdate(x, y, z);
                     break;
                 case 2:
                     direction = ForgeDirection.SOUTH.ordinal();
-                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
-                    world.markBlockForUpdate(x, y, z);
                     break;
                 case 3:
                     direction = ForgeDirection.WEST.ordinal();
-                    world.notifyBlockChange(x, y, z, mainBlock.blockID);
-                    world.markBlockForUpdate(x, y, z);
                     break;
             }
             
+            world.notifyBlockChange(x, y, z, mainBlock.blockID);
             world.markBlockForUpdate(x, y, z);
             
             if (itemStack.hasDisplayName()) {

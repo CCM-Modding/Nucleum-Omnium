@@ -1,5 +1,8 @@
 package ccm.nucleum_omnium.tileentity;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
@@ -9,23 +12,35 @@ import ccm.nucleum_network.packet.PacketTile;
 import ccm.nucleum_network.packet.Payload;
 import ccm.nucleum_network.packet.helpers.PacketUtils;
 import ccm.nucleum_network.packet.interfaces.ITilePacketHandler;
+import ccm.nucleum_omnium.handler.Handler;
+import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
 import ccm.nucleum_omnium.utils.lib.TileConstant;
 import cpw.mods.fml.relauncher.Side;
 
 public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
     
-    private ForgeDirection orientation;
+    private ForgeDirection                orientation;
     
-    private String         owner;
+    private String                        owner;
     
-    private String         customName;
+    private String                        customName;
     
-    private static int     descPacketId = PacketHandler.getAvailablePacketId();
+    private static int                    descPacketId = PacketHandler.getAvailablePacketId();
     
     /**
      * The {@link TileEntity}s Unlocalized name.
      */
-    protected final String tileUnloc;
+    protected final String                tileUnloc;
+    
+    /**
+     * The Source of the logic behind this TileEntity
+     */
+    protected Class<? extends ITileLogic> srclogic     = null;
+    
+    /**
+     * The logic behind this TileEntity
+     */
+    protected ITileLogic                  logic        = null;
     
     /**
      * Creates a new {@link BaseTE} Instance.
@@ -35,6 +50,15 @@ public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
         orientation = ForgeDirection.SOUTH;
         owner = "";
         customName = "";
+    }
+    
+    /**
+     * Gets the {@link TileEntity}'s Custom Name.
+     * 
+     * @return the {@link TileEntity}'s Custom Name.
+     */
+    public String getUnlocalizedName() {
+        return tileUnloc;
     }
     
     /**
@@ -65,6 +89,15 @@ public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
     }
     
     /**
+     * Gets the {@link TileEntity}'s {@link ITileLogic}
+     * 
+     * @return The {@link TileEntity}'s {@link ITileLogic}
+     */
+    public ITileLogic getTileLogic() {
+        return logic;
+    }
+    
+    /**
      * Checks if the {@link TileEntity} has a Custom Name.
      * 
      * @return true if the {@link TileEntity} has a Custom Name.
@@ -88,15 +121,17 @@ public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
      * @param customName
      *            A {@link String} with the {@link TileEntity}'s Custom Name.
      */
-    public void setCustomName(final String customName) {
+    public TileEntity setCustomName(final String customName) {
         this.customName = customName;
+        return this;
     }
     
     /**
      * Sets the {@link TileEntity}'s Orientation.
      */
-    public void setOrientation(final ForgeDirection orientation) {
+    public TileEntity setOrientation(final ForgeDirection orientation) {
         this.orientation = orientation;
+        return this;
     }
     
     /**
@@ -105,8 +140,9 @@ public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
      * @param orientation
      *            The {@link ForgeDirection} Orientation value.
      */
-    public void setOrientation(final int orientation) {
+    public TileEntity setOrientation(final int orientation) {
         this.orientation = ForgeDirection.getOrientation(orientation);
+        return this;
     }
     
     /**
@@ -115,12 +151,52 @@ public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
      * @param owner
      *            A {@link String} with the Owners Name.
      */
-    public void setOwner(final String owner) {
+    public TileEntity setOwner(final String owner) {
         this.owner = owner;
+        return this;
+    }
+    
+    /**
+     * Sets the {@link ITileLogic} of the {@link TileEntity}.
+     * 
+     * @param logic
+     *            A {@link String} with the Owners Name.
+     * @return
+     */
+    public TileEntity setLogic(final Class<? extends ITileLogic> logic) {
+        this.srclogic = logic;
+        return this;
     }
     
     @Override
     public void updateEntity() {
+        if (logic != null) {
+            logic.runLogic();
+        } else if (srclogic != null) {
+            Constructor<? extends ITileLogic> c;
+            try {
+                c = srclogic.getConstructor(TileEntity.class);
+                logic = c.newInstance(this);
+            } catch (NoSuchMethodException e) {
+                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
+                e.printStackTrace();
+            } catch (SecurityException e) {
+                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
+                e.printStackTrace();
+            }
+        }
         super.updateEntity();
     }
     
@@ -184,5 +260,15 @@ public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
         if (nbtTagCompound.hasKey(TileConstant.NBT_TE_Custom_Name)) {
             customName = nbtTagCompound.getString(TileConstant.NBT_TE_Custom_Name);
         }
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tile Entity: ");
+        sb.append(tileUnloc + "\n");
+        sb.append(String.format("At %s, %s, %s ", xCoord, yCoord, zCoord));
+        sb.append(String.format("In %s \n", worldObj.getWorldInfo() == null ? "????" : worldObj.getWorldInfo().getWorldName()));
+        return sb.toString();
     }
 }
