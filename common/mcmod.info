@@ -1,8 +1,8 @@
 [
 {
-  "modid": "nucleum_omnium",
-  "name": "Nucleum Omnium",
-  "description": "Main CCM Mod",
+  "modid": "OmniumCore",
+  "name": "CCM Core",
+  "description": "Core functionality for all CCM Mods",
   "credits": "Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
   "logoFile": "/mods/nucleum-omnium/textures/logo.png",
   "version": "@VERSION@",
@@ -18,9 +18,27 @@
   ]
 },
 {
+  "modid": "nucleum_omnium",
+  "name": "Nucleum Omnium",
+  "description": "Main CCM Mod",
+  "credits": "Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
+  "logoFile": "/mods/nucleum-omnium/textures/logo.png",
+  "version": "@VERSION@",
+  "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
+  "updateUrl": "http://driesgames.game-server.cc:8080/view/CCM/job/Nucleum-Omnium/",
+  "authors": [ "captain_shadows", 
+	       "claycorp", 
+	       "dries007", 
+               "morton00000" ],
+  "parent":"OmniumCore",
+  "dependencies": [
+     "required-after:nucleum_omnium"
+  ]
+},
+{
   "modid": "nucleum_world",
   "name": "Nucleum World",
-  "description": "World Gen (A CCM Mod)",
+  "description": "World Generation for all CCM Mods",
   "credits": "Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
   "logoFile": "/mods/nucleum-omnium/textures/logo.png",
   "version": "@VERSION@",
@@ -33,24 +51,6 @@
   "parent":"nucleum_omnium",
   "dependencies": [
      "required-after:nucleum_omnium"
-  ]
-},
-{
-  "modid": "nucleum_network",
-  "name": "Nucleum Network",
-  "description": "World Gen (A CCM Mod)",
-  "credits": "Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
-  "logoFile": "/mods/nucleum-omnium/textures/logo.png",
-  "version": "@VERSION@",
-  "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
-  "updateUrl": "http://driesgames.game-server.cc:8080/view/CCM/job/Nucleum-Omnium/",
-  "authors": [ "captain_shadows", 
-	       "claycorp", 
-	       "dries007", 
-               "morton00000" ],
-  "parent":"nucleum_omnium",
-  "dependencies": [
-     "required-after:nucleum_world"
   ]
 }
 ]
