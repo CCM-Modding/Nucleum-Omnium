@@ -1,58 +1,56 @@
 package ccm.nucleum_network.packet;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-import net.minecraft.network.packet.Packet;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import ccm.nucleum_omnium.NucleumOmnium;
-import cpw.mods.fml.common.network.PacketDispatcher;
+import net.minecraft.world.World;
+import ccm.nucleum_network.packet.interfaces.ICustomPacket;
+import ccm.nucleum_omnium.handler.Handler;
+import ccm.nucleum_omnium.utils.lib.Archive;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class BasePacket {
-    protected int     packetId;
-    protected boolean isChunkDataPacket = false;
-    protected String  channel           = "CCM";
+public abstract class BasePacket implements ICustomPacket {
     
-    public int getPacketId() {
-        return this.packetId;
-    }
+    public BasePacket() {}
     
-    public Packet getPacket() {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        DataOutputStream data = new DataOutputStream(bytes);
+    /**
+     * For reading packets off of the stream. Another constructor is usually good as well.
+     * 
+     * @param stream
+     */
+    public BasePacket(ObjectInputStream stream) throws IOException {}
+    
+    public Packet250CustomPayload getPayload() {
+        Packet250CustomPayload packet = new Packet250CustomPayload();
+        packet.channel = Archive.MOD_CHANNEL;
         try {
-            data.writeByte(getPacketId());
-            writeData(data);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            ByteArrayOutputStream array = new ByteArrayOutputStream();
+            ObjectOutputStream stream = new ObjectOutputStream(array);
+            stream.writeInt(getID());
+            writeToStream(stream);
+            stream.close();
+            array.close();
+            packet.data = array.toByteArray();
+            packet.length = packet.data.length;
+            
+        } catch (Throwable t) {
+            Handler.log("Error sending CCM packet! " + toString(), t);
         }
         
-        Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.channel = this.channel;
-        packet.data = bytes.toByteArray();
-        packet.length = packet.data.length;
-        packet.isChunkDataPacket = this.isChunkDataPacket;
         return packet;
     }
     
-    public Packet getTinyPacket() {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        DataOutputStream data = new DataOutputStream(bytes);
-        try {
-            writeData(data);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return PacketDispatcher.getTinyPacket(NucleumOmnium.instance, (short) this.packetId, bytes.toByteArray());
-    }
+    public abstract int getID();
     
-    public static Packet getTinyPacket(int packetId, ByteArrayOutputStream data) {
-        return PacketDispatcher.getTinyPacket(NucleumOmnium.instance, (short) packetId, data.toByteArray());
-    }
+    public abstract void writeToStream(ObjectOutputStream stream) throws IOException;
     
-    public abstract void readData(DataInputStream paramDataInputStream) throws IOException;
+    @SideOnly(Side.CLIENT)
+    public abstract void actionClient(World world, EntityPlayer player);
     
-    public abstract void writeData(DataOutputStream paramDataOutputStream) throws IOException;
+    public abstract void actionServer(World world, EntityPlayer player);
 }

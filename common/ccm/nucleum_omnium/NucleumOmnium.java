@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import lib.org.modstats.ModstatInfo;
 import net.minecraft.server.MinecraftServer;
 import ccm.nucleum_network.PacketHandler;
-import ccm.nucleum_network.TinyPacketHandler;
 import ccm.nucleum_omnium.configuration.AdvConfiguration;
 import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
@@ -39,8 +38,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 @NetworkMod(clientSideRequired = true,
             serverSideRequired = false,
             channels = Archive.MOD_CHANNEL,
-            packetHandler = PacketHandler.class,
-            tinyPacketHandler = TinyPacketHandler.class)
+            packetHandler = PacketHandler.class)
 @ModstatInfo(prefix = Archive.MOD_PREFIX)
 public class NucleumOmnium extends BaseMod implements IMod {
     

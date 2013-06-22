@@ -4,28 +4,22 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import ccm.nucleum_network.PacketHandler;
-import ccm.nucleum_network.packet.PacketTile;
-import ccm.nucleum_network.packet.Payload;
-import ccm.nucleum_network.packet.helpers.PacketUtils;
-import ccm.nucleum_network.packet.interfaces.ITilePacketHandler;
 import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
 import ccm.nucleum_omnium.utils.lib.TileConstant;
-import cpw.mods.fml.relauncher.Side;
 
-public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
+public abstract class BaseTE extends TileEntity {
     
     private ForgeDirection                orientation;
     
     private String                        owner;
     
     private String                        customName;
-    
-    private static int                    descPacketId = PacketHandler.getAvailablePacketId();
     
     /**
      * The {@link TileEntity}s Unlocalized name.
@@ -35,12 +29,12 @@ public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
     /**
      * The Source of the logic behind this TileEntity
      */
-    protected Class<? extends ITileLogic> srclogic     = null;
+    protected Class<? extends ITileLogic> srclogic = null;
     
     /**
      * The logic behind this TileEntity
      */
-    protected ITileLogic                  logic        = null;
+    protected ITileLogic                  logic    = null;
     
     /**
      * Creates a new {@link BaseTE} Instance.
@@ -200,40 +194,21 @@ public abstract class BaseTE extends TileEntity implements ITilePacketHandler {
         super.updateEntity();
     }
     
-    public void sendUpdatePacket(Side side) {
-        if (side == Side.CLIENT) {
-            PacketUtils.sendToPlayers(getDescriptionPacket(), this);
-            
-            this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
-        } else if (side == Side.SERVER) {
-            PacketUtils.sendToServer(getDescriptionPacket());
-        }
+    /*
+     * public void sendUpdatePacket(Side side) { if (side == Side.CLIENT) { PacketUtils.sendToPlayers(getDescriptionPacket(), this); this.worldObj.updateAllLightTypes(this.xCoord,
+     * this.yCoord, this.zCoord); } else if (side == Side.SERVER) { PacketUtils.sendToServer(getDescriptionPacket()); } }
+     */
+    
+    @Override
+    public final Packet getDescriptionPacket() {
+        NBTTagCompound var1 = new NBTTagCompound();
+        this.writeToNBT(var1);
+        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 2, var1);
     }
     
     @Override
-    public Packet getDescriptionPacket() {
-        Payload payload = new Payload(0, 1, 0, 0, 2);
-        
-        payload.bytePayload[0] = (byte) this.orientation.ordinal();
-        
-        payload.stringPayload[0] = this.owner;
-        payload.stringPayload[1] = this.customName;
-        
-        PacketTile packet = new PacketTile(descPacketId, this.xCoord, this.yCoord, this.zCoord, payload);
-        return packet.getPacket();
-    }
-    
-    @Override
-    public void handleTilePacket(PacketTile packet) {
-        
-        this.orientation = ForgeDirection.values()[packet.payload.bytePayload[0]];
-        
-        this.owner = packet.payload.stringPayload[0];
-        this.customName = packet.payload.stringPayload[1];
-        
-        this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-        this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
-        this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, getWorldObj().getBlockId(this.xCoord, this.yCoord, this.zCoord));
+    public final void onDataPacket(INetworkManager netManager, Packet132TileEntityData packet) {
+        this.readFromNBT(packet.customParam1);
     }
     
     @Override
