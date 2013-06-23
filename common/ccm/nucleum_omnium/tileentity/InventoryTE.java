@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.helper.InventoryHelper;
 import ccm.nucleum_omnium.utils.lib.TileConstant;
 
@@ -15,9 +16,14 @@ public class InventoryTE extends BaseTE implements IInventory {
      */
     protected ItemStack[] inventory;
     
-    public InventoryTE(final int invSize, final String name) {
-        super(name);
-        inventory = new ItemStack[invSize];
+    /**
+     * Set's the size of the Inventory
+     * 
+     * @return
+     */
+    public InventoryTE setInventorySize(final int size) {
+        inventory = new ItemStack[size];
+        return this;
     }
     
     /**
@@ -77,7 +83,7 @@ public class InventoryTE extends BaseTE implements IInventory {
     
     @Override
     public String getInvName() {
-        return hasCustomName() ? getCustomName() : tileUnloc;
+        return hasCustomName() ? getCustomName() : FunctionHelper.getTEName(worldObj, xCoord, yCoord, zCoord);
     }
     
     @Override

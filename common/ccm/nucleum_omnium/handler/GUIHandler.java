@@ -65,6 +65,6 @@ public final class GUIHandler implements IGuiHandler {
     }
     
     private static int hash(String name) {
-        return ("CCM.GUI." + name + "." + name.hashCode()).hashCode();
+        return ("ccm.gui." + name + "." + name.hashCode()).hashCode();
     }
 }

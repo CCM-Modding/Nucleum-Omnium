@@ -11,7 +11,7 @@ import ccm.nucleum_omnium.utils.lib.BlockFacings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SBActiveMachine extends SBMutlyTexture {
+public class SBActiveMachine extends SBWithTile {
     
     public SBActiveMachine(int id, int meta, String iconName, List<BlockFacings> goodSides) {
         super(id, meta, iconName, goodSides);

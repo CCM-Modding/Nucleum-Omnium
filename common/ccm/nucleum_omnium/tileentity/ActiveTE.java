@@ -9,8 +9,7 @@ public class ActiveTE extends InventoryTE {
     private boolean state;
     private boolean pastState;
     
-    public ActiveTE(int invSize, String name) {
-        super(invSize, name);
+    public ActiveTE() {
         state = false;
         pastState = false;
     }
@@ -36,7 +35,7 @@ public class ActiveTE extends InventoryTE {
         this.state = state;
     }
     
-   /**
+    /**
      * @param curActive
      *            The current state of the TileEntity
      */
@@ -47,16 +46,10 @@ public class ActiveTE extends InventoryTE {
         }
     }
     
-  /*@Override
-    public Packet getDescriptionPacket() {
-        
-        Payload payload = new Payload(1, 0, 0, 0, 0);
-        
-        payload.boolPayload[0] = this.state;
-        
-        TilePkt packet = new TilePkt(descPacketId, this.xCoord, this.yCoord, this.zCoord, payload);
-        return packet.getPacket();
-    }*/
+    /*
+     * @Override public Packet getDescriptionPacket() { Payload payload = new Payload(1, 0, 0, 0, 0); payload.boolPayload[0] = this.state; TilePkt packet = new
+     * TilePkt(descPacketId, this.xCoord, this.yCoord, this.zCoord, payload); return packet.getPacket(); }
+     */
     
     @Override
     public void writeToNBT(final NBTTagCompound nbtTagCompound) {

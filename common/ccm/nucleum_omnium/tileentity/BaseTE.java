@@ -13,18 +13,13 @@ import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
 import ccm.nucleum_omnium.utils.lib.TileConstant;
 
-public abstract class BaseTE extends TileEntity {
+public class BaseTE extends TileEntity {
     
     private ForgeDirection                orientation;
     
     private String                        owner;
     
     private String                        customName;
-    
-    /**
-     * The {@link TileEntity}s Unlocalized name.
-     */
-    protected final String                tileUnloc;
     
     /**
      * The Source of the logic behind this TileEntity
@@ -39,20 +34,10 @@ public abstract class BaseTE extends TileEntity {
     /**
      * Creates a new {@link BaseTE} Instance.
      */
-    public BaseTE(final String name) {
-        tileUnloc = name;
+    public BaseTE() {
         orientation = ForgeDirection.SOUTH;
         owner = "";
         customName = "";
-    }
-    
-    /**
-     * Gets the {@link TileEntity}'s Custom Name.
-     * 
-     * @return the {@link TileEntity}'s Custom Name.
-     */
-    public String getUnlocalizedName() {
-        return tileUnloc;
     }
     
     /**
@@ -92,6 +77,15 @@ public abstract class BaseTE extends TileEntity {
     }
     
     /**
+     * Gets the {@link TileEntity}'s {@code Class<? extends ITileLogic>}
+     * 
+     * @return The {@link TileEntity}'s {@code Class<? extends ITileLogic>}
+     */
+    public Class<? extends ITileLogic> getSrcLogic() {
+        return srclogic;
+    }
+    
+    /**
      * Checks if the {@link TileEntity} has a Custom Name.
      * 
      * @return true if the {@link TileEntity} has a Custom Name.
@@ -115,7 +109,7 @@ public abstract class BaseTE extends TileEntity {
      * @param customName
      *            A {@link String} with the {@link TileEntity}'s Custom Name.
      */
-    public TileEntity setCustomName(final String customName) {
+    public BaseTE setCustomName(final String customName) {
         this.customName = customName;
         return this;
     }
@@ -123,7 +117,7 @@ public abstract class BaseTE extends TileEntity {
     /**
      * Sets the {@link TileEntity}'s Orientation.
      */
-    public TileEntity setOrientation(final ForgeDirection orientation) {
+    public BaseTE setOrientation(final ForgeDirection orientation) {
         this.orientation = orientation;
         return this;
     }
@@ -134,7 +128,7 @@ public abstract class BaseTE extends TileEntity {
      * @param orientation
      *            The {@link ForgeDirection} Orientation value.
      */
-    public TileEntity setOrientation(final int orientation) {
+    public BaseTE setOrientation(final int orientation) {
         this.orientation = ForgeDirection.getOrientation(orientation);
         return this;
     }
@@ -145,7 +139,7 @@ public abstract class BaseTE extends TileEntity {
      * @param owner
      *            A {@link String} with the Owners Name.
      */
-    public TileEntity setOwner(final String owner) {
+    public BaseTE setOwner(final String owner) {
         this.owner = owner;
         return this;
     }
@@ -166,30 +160,24 @@ public abstract class BaseTE extends TileEntity {
     public void updateEntity() {
         if (logic != null) {
             logic.runLogic();
+            Handler.log("Logic was ran ... \n");
         } else if (srclogic != null) {
-            Constructor<? extends ITileLogic> c;
+            Handler.log("Logic was NULL Instanciating ... \n");
+            Constructor<? extends ITileLogic> c = null;
+            
             try {
                 c = srclogic.getConstructor(TileEntity.class);
+            } catch (NoSuchMethodException | SecurityException e) {
+                e.printStackTrace();
+                Handler.log(String.format("Loading the logic for: \n %s has failed to get the Constructor \n %s", toString(), e.toString()));
+            }
+            try {
                 logic = c.newInstance(this);
-            } catch (NoSuchMethodException e) {
-                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
-                e.printStackTrace();
-            } catch (SecurityException e) {
-                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                Handler.log(String.format("Loading the logic for: \n %s has failed (%s)", toString(), e.toString()));
+            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                Handler.log(String.format("Loading the logic for: \n %s has failed to create a new Instance \n %s", toString(), e.toString()));
                 e.printStackTrace();
             }
+            
         }
         super.updateEntity();
     }
@@ -241,7 +229,7 @@ public abstract class BaseTE extends TileEntity {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Tile Entity: ");
-        sb.append(tileUnloc + "\n");
+        sb.append(this.getClass() + "\n");
         // sb.append(String.format("At %s, %s, %s ", xCoord, yCoord, zCoord));
         // sb.append(String.format("In %s \n", worldObj.getWorldInfo() == null ? "????" : worldObj.getWorldInfo().getWorldName()));
         return sb.toString();

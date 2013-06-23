@@ -18,10 +18,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import ccm.nucleum_omnium.block.sub.SubBlock;
-import ccm.nucleum_omnium.handler.GUIHandler;
-import ccm.nucleum_omnium.handler.Handler;
 import ccm.nucleum_omnium.item.block.MainItemBlock;
-import ccm.nucleum_omnium.tileentity.BaseTE;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -287,23 +284,7 @@ public class MainBlock extends Block {
                                     final float clockZ) {
         final int meta = world.getBlockMetadata(x, y, z);
         if (subBlocks[meta] != null) {
-            if (subBlocks[meta].hasTileEntity()) {
-                Handler.log(subBlocks[meta].hasTileEntity());
-                final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
-                Handler.log(te);
-                Handler.log(subBlocks[meta].getTE());
-                if (te != null) {
-                    System.out.println(player.getEntityName());
-                    System.out.println(te.getUnlocalizedName());
-                    GUIHandler.openGui(te.getUnlocalizedName(), player, world, x, y, z);
-                    return true;
-                } else {
-                    return false;
-                }
-                // return subBlocks[meta].onBlockActivated(world, x, y, z, player, wut, clickX, clickY, clockZ);
-            } else {
-                return false;
-            }
+            return subBlocks[meta].onBlockActivated(world, x, y, z, player, wut, clickX, clickY, clockZ);
         } else {
             return false;
         }

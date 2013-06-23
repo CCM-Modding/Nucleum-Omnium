@@ -1,12 +1,11 @@
 package ccm.nucleum_omnium.item.block;
 
-import ccm.nucleum_omnium.block.MainBlock;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import net.minecraft.util.StringTranslate;
+import ccm.nucleum_omnium.helper.BlockHelper;
+import ccm.nucleum_omnium.helper.LanguageHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -19,12 +18,12 @@ public class MainItemBlock extends ItemBlock {
     
     @Override
     public CreativeTabs[] getCreativeTabs() {
-        return ((MainBlock) Block.blocksList[getBlockID()]).getCreativeTabArray();
+        return BlockHelper.getBlock(getBlockID()).getCreativeTabArray();
     }
     
     @Override
     public String getItemDisplayName(final ItemStack itemStack) {
-        return StringTranslate.getInstance().translateNamedKey(this.getUnlocalizedName(itemStack));
+        return LanguageHelper.getLocalizedString(getUnlocalizedName(itemStack));
     }
     
     @Override
@@ -37,12 +36,11 @@ public class MainItemBlock extends ItemBlock {
      */
     @SideOnly(Side.CLIENT)
     public Icon getIconFromDamage(int meta) {
-        return Block.blocksList[getBlockID()].getIcon(0, meta);
+        return BlockHelper.getBlock(getBlockID()).getIcon(0, meta);
     }
     
     @Override
     public String getUnlocalizedName(final ItemStack itemstack) {
-        
-        return ((MainBlock) Block.blocksList[getBlockID()]).getSubBlocks()[itemstack.getItemDamage()].getUnlocalizedName();
+        return BlockHelper.getSubBlock(getBlockID(), itemstack).getUnlocalizedName();
     }
 }

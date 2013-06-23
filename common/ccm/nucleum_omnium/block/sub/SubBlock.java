@@ -11,23 +11,17 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 import ccm.nucleum_omnium.block.ICollisionListener;
 import ccm.nucleum_omnium.block.IDisplayListener;
 import ccm.nucleum_omnium.block.MainBlock;
-import ccm.nucleum_omnium.handler.GUIHandler;
-import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.helper.TextureHelper;
 import ccm.nucleum_omnium.helper.enums.IBlockEnum;
-import ccm.nucleum_omnium.tileentity.BaseTE;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -50,9 +44,6 @@ public class SubBlock {
     private boolean                 collisionEffect;
     
     private String                  unlocName;
-    
-    private TileEntity              te            = null;
-    private boolean                 hasTE         = false;
     
     public List<IDisplayListener>   displayList   = new ArrayList<IDisplayListener>();
     public List<ICollisionListener> collisionList = new ArrayList<ICollisionListener>();
@@ -109,10 +100,6 @@ public class SubBlock {
         
         this.meta = meta;
         this.iconName = iconName;
-    }
-    
-    public TileEntity getTE() {
-        return te;
     }
     
     /*
@@ -199,14 +186,6 @@ public class SubBlock {
         return this;
     }
     
-    public SubBlock setTileEntity(final TileEntity te) {
-        if (te != null) {
-            this.te = te;
-            hasTE = true;
-        }
-        return this;
-    }
-    
     /*
      * Block Redirect Methods
      */
@@ -285,20 +264,10 @@ public class SubBlock {
     }
     
     public TileEntity createTileEntity(final World world, final int meta) {
-        return te;
+        return null;
     }
     
-    public boolean hasTileEntity() {
-        return hasTE;
-    }
-    
-    public void breakBlock(final World world, final int x, final int y, final int z, final int id, final int meta) {
-        if (hasTileEntity()) {
-            if (te instanceof IInventory) {
-                FunctionHelper.dropInventory(world, x, y, z);
-            }
-        }
-    }
+    public void breakBlock(final World world, final int x, final int y, final int z, final int id, final int meta) {}
     
     public boolean onBlockActivated(final World world,
                                     final int x,
@@ -309,59 +278,13 @@ public class SubBlock {
                                     final float clickX,
                                     final float clickY,
                                     final float clockZ) {
-        /*
-         * if (world.isRemote) { return true; } if (player.isSneaking()) { return false; }
-         */
-        final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
-        if (te != null) {
-            System.out.println(te.getUnlocalizedName());
-            System.out.println(player.getEntityName());
-            System.out.println(x);
-            System.out.println(y);
-            System.out.println(z);
-            GUIHandler.openGui(te.getUnlocalizedName(), player, world, x, y, z);
-            return true;
-        } else {
-            return false;
-        }
+        
+        return false;
     }
     
     public void onBlockAdded(final World world, final int x, final int y, final int z) {}
     
-    public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLiving living, final ItemStack itemStack) {
-        
-        if (hasTileEntity() && te != null) {
-            
-            BaseTE temp = (BaseTE) world.getBlockTileEntity(x, y, z);
-            
-            int direction = 0;
-            final int facing = MathHelper.floor_double(((living.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
-            
-            switch (facing) {
-                case 0:
-                    direction = ForgeDirection.NORTH.ordinal();
-                    break;
-                case 1:
-                    direction = ForgeDirection.EAST.ordinal();
-                    break;
-                case 2:
-                    direction = ForgeDirection.SOUTH.ordinal();
-                    break;
-                case 3:
-                    direction = ForgeDirection.WEST.ordinal();
-                    break;
-            }
-            
-            world.notifyBlockChange(x, y, z, mainBlock.blockID);
-            world.markBlockForUpdate(x, y, z);
-            
-            if (itemStack.hasDisplayName()) {
-                temp.setCustomName(itemStack.getDisplayName());
-            }
-            // temp.setOwner(living.getEntityName());
-            // temp.setOrientation(direction);
-        }
-    }
+    public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLiving living, final ItemStack itemStack) {}
     
     /*
      * Object Redirect Methods

@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenDesert;
 import ccm.nucleum_omnium.BaseNIClass;
 import ccm.nucleum_omnium.NucleumOmnium;
+import ccm.nucleum_omnium.block.MainBlock;
 
 public final class FunctionHelper extends BaseNIClass {
     
@@ -111,5 +112,16 @@ public final class FunctionHelper extends BaseNIClass {
                 }
             }
         }
+    }
+    
+    /**
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    public static String getTEName(World world, int x, int y, int z) {
+        return "container." + ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x, y, z)].getUnlocalizedName();
     }
 }
