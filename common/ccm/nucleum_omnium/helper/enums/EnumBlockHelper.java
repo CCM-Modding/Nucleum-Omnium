@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import ccm.nucleum_omnium.BaseNIClass;
 import ccm.nucleum_omnium.block.MainBlock;
-import ccm.nucleum_omnium.block.SubBlock;
+import ccm.nucleum_omnium.block.sub.SubBlock;
 import ccm.nucleum_omnium.helper.TextureHelper;
 
 public final class EnumBlockHelper extends BaseNIClass {

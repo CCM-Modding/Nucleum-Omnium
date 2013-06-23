@@ -1,4 +1,4 @@
-package ccm.nucleum_network.packet.interfaces;
+package ccm.nucleum_network;
 
 import net.minecraft.network.packet.Packet250CustomPayload;
 

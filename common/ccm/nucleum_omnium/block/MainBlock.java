@@ -17,6 +17,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import ccm.nucleum_omnium.block.sub.SubBlock;
+import ccm.nucleum_omnium.handler.GUIHandler;
+import ccm.nucleum_omnium.handler.Handler;
+import ccm.nucleum_omnium.item.block.MainItemBlock;
+import ccm.nucleum_omnium.tileentity.BaseTE;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -139,6 +144,16 @@ public class MainBlock extends Block {
     
     @Override
     @SideOnly(Side.CLIENT)
+    public Icon getIcon(int side, int meta) {
+        if (subBlocks[meta] != null) {
+            return subBlocks[meta].getIcon(side, meta);
+        } else {
+            return super.getIcon(side, meta);
+        }
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
     public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side) {
         final int meta = blockAccess.getBlockMetadata(x, y, z);
         
@@ -156,18 +171,6 @@ public class MainBlock extends Block {
             if (subBlocks[i] != null) {
                 subBlocks[i].registerIcons(iconRegister);
             }
-        }
-    }
-    
-    /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
-    @Override
-    public Icon getIcon(final int par1, final int par2) {
-        if (subBlocks[par2] != null) {
-            return subBlocks[par2].getBlockTextureFromSide(par1);
-        } else {
-            return null;
         }
     }
     
@@ -285,7 +288,19 @@ public class MainBlock extends Block {
         final int meta = world.getBlockMetadata(x, y, z);
         if (subBlocks[meta] != null) {
             if (subBlocks[meta].hasTileEntity()) {
-                return subBlocks[meta].onBlockActivated(world, x, y, z, player, wut, clickX, clickY, clockZ);
+                Handler.log(subBlocks[meta].hasTileEntity());
+                final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
+                Handler.log(te);
+                Handler.log(subBlocks[meta].getTE());
+                if (te != null) {
+                    System.out.println(player.getEntityName());
+                    System.out.println(te.getUnlocalizedName());
+                    GUIHandler.openGui(te.getUnlocalizedName(), player, world, x, y, z);
+                    return true;
+                } else {
+                    return false;
+                }
+                // return subBlocks[meta].onBlockActivated(world, x, y, z, player, wut, clickX, clickY, clockZ);
             } else {
                 return false;
             }

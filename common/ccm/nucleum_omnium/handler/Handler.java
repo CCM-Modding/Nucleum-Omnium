@@ -12,8 +12,7 @@ import cpw.mods.fml.common.FMLLog;
 public final class Handler extends BaseNIClass {
     
     /*
-     * *******************************************************************
-     * Log Stuff *******************************************************************
+     * Log Stuff
      */
     private static HashMap<IMod, Logger> modsLogged = new HashMap<IMod, Logger>();
     
@@ -89,8 +88,7 @@ public final class Handler extends BaseNIClass {
     }
     
     /*
-     * *******************************************************************
-     * Mod State Check *******************************************************************
+     * Mod State Check
      */
     private static HashMap<IMod, Boolean> modsLoaded = new HashMap<IMod, Boolean>();
     

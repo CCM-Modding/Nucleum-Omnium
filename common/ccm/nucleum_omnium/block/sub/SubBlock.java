@@ -1,4 +1,4 @@
-package ccm.nucleum_omnium.block;
+package ccm.nucleum_omnium.block.sub;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import ccm.nucleum_omnium.block.ICollisionListener;
+import ccm.nucleum_omnium.block.IDisplayListener;
+import ccm.nucleum_omnium.block.MainBlock;
 import ccm.nucleum_omnium.handler.GUIHandler;
 import ccm.nucleum_omnium.helper.FunctionHelper;
+import ccm.nucleum_omnium.helper.TextureHelper;
 import ccm.nucleum_omnium.helper.enums.IBlockEnum;
 import ccm.nucleum_omnium.tileentity.BaseTE;
 import cpw.mods.fml.relauncher.Side;
@@ -105,6 +109,10 @@ public class SubBlock {
         
         this.meta = meta;
         this.iconName = iconName;
+    }
+    
+    public TileEntity getTE() {
+        return te;
     }
     
     /*
@@ -192,16 +200,24 @@ public class SubBlock {
     }
     
     public SubBlock setTileEntity(final TileEntity te) {
-        this.te = te;
-        hasTE = true;
+        if (te != null) {
+            this.te = te;
+            hasTE = true;
+        }
         return this;
     }
     
     /*
      * Block Redirect Methods
      */
-    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side) {
-        return icon;
+    @SideOnly(Side.CLIENT)
+    public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
+        return this.getIcon(side, blockAccess.getBlockMetadata(x, y, z));
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public Icon getIcon(int side, int meta) {
+        return this.icon;
     }
     
     @SideOnly(Side.CLIENT)
@@ -277,7 +293,7 @@ public class SubBlock {
     }
     
     public void breakBlock(final World world, final int x, final int y, final int z, final int id, final int meta) {
-        if (hasTE == true) {
+        if (hasTileEntity()) {
             if (te instanceof IInventory) {
                 FunctionHelper.dropInventory(world, x, y, z);
             }
@@ -293,20 +309,18 @@ public class SubBlock {
                                     final float clickX,
                                     final float clickY,
                                     final float clockZ) {
-        if (world.isRemote) {
+        /*
+         * if (world.isRemote) { return true; } if (player.isSneaking()) { return false; }
+         */
+        final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
+        if (te != null) {
+            System.out.println(te.getUnlocalizedName());
+            System.out.println(player.getEntityName());
+            System.out.println(x);
+            System.out.println(y);
+            System.out.println(z);
+            GUIHandler.openGui(te.getUnlocalizedName(), player, world, x, y, z);
             return true;
-        }
-        if (player.isSneaking()) {
-            return false;
-        }
-        if (hasTileEntity()) {
-            final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
-            if (te != null) {
-                GUIHandler.openGui(te.getUnlocalizedName(), player, world, x, y, z);
-                return true;
-            } else {
-                return false;
-            }
         } else {
             return false;
         }
@@ -316,7 +330,7 @@ public class SubBlock {
     
     public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLiving living, final ItemStack itemStack) {
         
-        if (hasTE == true && te != null) {
+        if (hasTileEntity() && te != null) {
             
             BaseTE temp = (BaseTE) world.getBlockTileEntity(x, y, z);
             
@@ -344,8 +358,8 @@ public class SubBlock {
             if (itemStack.hasDisplayName()) {
                 temp.setCustomName(itemStack.getDisplayName());
             }
-            temp.setOwner(living.getEntityName());
-            temp.setOrientation(direction);
+            // temp.setOwner(living.getEntityName());
+            // temp.setOrientation(direction);
         }
     }
     
@@ -373,6 +387,6 @@ public class SubBlock {
     
     public static SubBlock createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc) {
         
-        return setUp(blockEnum, new SubBlock(id, blockEnum.ordinal(), textureLoc).setUnlocalizedName(blockEnum.name()));
+        return setUp(blockEnum, new SubBlock(id, blockEnum.ordinal(), TextureHelper.getTextureFromName(blockEnum.name(), textureLoc)).setUnlocalizedName(blockEnum.name()));
     }
 }

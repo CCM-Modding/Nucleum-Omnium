@@ -157,7 +157,7 @@ public abstract class BaseTE extends TileEntity {
      *            A {@link String} with the Owners Name.
      * @return
      */
-    public TileEntity setLogic(final Class<? extends ITileLogic> logic) {
+    public BaseTE setLogic(final Class<? extends ITileLogic> logic) {
         this.srclogic = logic;
         return this;
     }
@@ -201,9 +201,9 @@ public abstract class BaseTE extends TileEntity {
     
     @Override
     public final Packet getDescriptionPacket() {
-        NBTTagCompound var1 = new NBTTagCompound();
-        this.writeToNBT(var1);
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 2, var1);
+        NBTTagCompound nbt = new NBTTagCompound();
+        this.writeToNBT(nbt);
+        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 2, nbt);
     }
     
     @Override
@@ -242,8 +242,8 @@ public abstract class BaseTE extends TileEntity {
         StringBuilder sb = new StringBuilder();
         sb.append("Tile Entity: ");
         sb.append(tileUnloc + "\n");
-        sb.append(String.format("At %s, %s, %s ", xCoord, yCoord, zCoord));
-        sb.append(String.format("In %s \n", worldObj.getWorldInfo() == null ? "????" : worldObj.getWorldInfo().getWorldName()));
+        // sb.append(String.format("At %s, %s, %s ", xCoord, yCoord, zCoord));
+        // sb.append(String.format("In %s \n", worldObj.getWorldInfo() == null ? "????" : worldObj.getWorldInfo().getWorldName()));
         return sb.toString();
     }
 }

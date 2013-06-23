@@ -27,8 +27,7 @@ public class TileHandler {
     }
     
     public TileEntity getTileEntity(final String tileID) {
-        
-        return tileList.get(hash(tileID));
+        return tileList.get(hash(tileID).hashCode());
     }
     
     private static String hash(String name) {
