@@ -50,14 +50,14 @@ public class SBWithTile extends SBMutlyTexture {
         if (logic != null) {
             try {
                 return ((BaseTE) te.newInstance()).setLogic(logic);
-            } catch (InstantiationException | IllegalAccessException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
         } else {
             try {
                 return ((BaseTE) te.newInstance());
-            } catch (InstantiationException | IllegalAccessException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }

@@ -10,6 +10,7 @@ import lib.cofh.world.feature.WorldGenMinableCluster;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ConfigCategory;
+import ccm.nucleum_omnium.configuration.AdvConfiguration;
 import ccm.nucleum_world.generator.WorldGenHandler;
 
 public class WorldGenerator {
@@ -57,17 +58,18 @@ public class WorldGenerator {
                                     final boolean enable,
                                     final Block blockToReplace) {
         modName = modName + "." + StringHelper.titleCase(oreName);
-        final ConfigCategory cat = NucleumWorld.config.getCategory(modName);
+        AdvConfiguration config = NucleumWorld.instance.getConfigFile();
+        final ConfigCategory cat = config.getCategory(modName);
         
-        clusterSize = NucleumWorld.config.get(modName, "ClusterSize", clusterSize).getInt();
-        numClusters = NucleumWorld.config.get(modName, "NumClusters", numClusters).getInt();
-        minY = NucleumWorld.config.get(modName, "MinHeight", minY).getInt();
-        maxY = NucleumWorld.config.get(modName, "MaxHeight", maxY).getInt();
-        final boolean regen = NucleumWorld.config.get(modName, "RetroGen", enable).getBoolean(enable);
+        clusterSize = config.get(modName, "ClusterSize", clusterSize).getInt();
+        numClusters = config.get(modName, "NumClusters", numClusters).getInt();
+        minY = config.get(modName, "MinHeight", minY).getInt();
+        maxY = config.get(modName, "MaxHeight", maxY).getInt();
+        final boolean regen = config.get(modName, "RetroGen", enable).getBoolean(enable);
         
         cat.setComment("Configurations for " + StringHelper.titleCase(oreName));
         
-        NucleumWorld.config.save();
+        config.save();
         
         if (!enable) {
             return;

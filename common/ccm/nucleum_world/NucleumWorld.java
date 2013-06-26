@@ -31,7 +31,7 @@ public class NucleumWorld extends BaseMod implements IMod {
     @Instance(Archive.MOD_ID)
     public static NucleumWorld     instance;
     
-    public static AdvConfiguration config;
+    private static AdvConfiguration config;
     
     @PreInit
     public void preInit(final FMLPreInitializationEvent evt) {

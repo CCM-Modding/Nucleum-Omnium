@@ -11,9 +11,7 @@ import net.minecraft.client.gui.FontRenderer;
  */
 public final class StringHelper {
     
-    private StringHelper() {
-        
-    }
+    private StringHelper() {}
     
     public static int getSplitStringHeight(final FontRenderer fontRenderer, final String input, final int width) {
         
@@ -30,5 +28,4 @@ public final class StringHelper {
         
         return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
-    
 }
