@@ -51,6 +51,7 @@ public class SBWithTile extends SBMutlyTexture {
             try {
                 return ((BaseTE) te.newInstance()).setLogic(logic);
             } catch (Exception e) {
+            	Handler.log("TileEntity Instance with logic could not be created during createTileEntity \n");
                 e.printStackTrace();
                 return null;
             }
@@ -58,6 +59,7 @@ public class SBWithTile extends SBMutlyTexture {
             try {
                 return ((BaseTE) te.newInstance());
             } catch (Exception e) {
+            	Handler.log("TileEntity Instance could not be created during createTileEntity \n");
                 e.printStackTrace();
                 return null;
             }
@@ -75,7 +77,8 @@ public class SBWithTile extends SBMutlyTexture {
                 if (te.newInstance() instanceof IInventory) {
                     FunctionHelper.dropInventory(world, x, y, z);
                 }
-            } catch (InstantiationException | IllegalAccessException e) {
+            } catch (Exception e) {
+            	Handler.log("TileEntity Instance could not be created during breakBlock \n");
                 e.printStackTrace();
             }
         }
