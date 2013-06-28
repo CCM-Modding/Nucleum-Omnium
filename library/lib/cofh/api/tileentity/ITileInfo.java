@@ -10,9 +10,9 @@ import net.minecraft.entity.player.EntityPlayer;
  * @author Zeldo Kavira
  */
 public interface ITileInfo {
-    
-    public List<String> getTileInfo();
-    
-    public void sendTileInfoToPlayer(EntityPlayer player);
-    
+
+	public List<String> getTileInfo();
+
+	public void sendTileInfoToPlayer(EntityPlayer player);
+
 }

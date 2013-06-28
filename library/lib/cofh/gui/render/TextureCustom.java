@@ -14,24 +14,33 @@ import net.minecraft.client.texturepacks.ITexturePack;
  * @author King Lemming
  */
 public class TextureCustom extends TextureStitched {
-    
-    protected TextureCustom(final String name) {
-        
-        super(name);
-    }
-    
-    @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public boolean loadTexture(final TextureManager manager,
-                               final ITexturePack texturepack,
-                               final String name,
-                               final String fileName,
-                               final BufferedImage image,
-                               final ArrayList textures) {
-        
-        final Texture texture = manager.makeTexture(name, 2, image.getWidth(), image.getHeight(), 10496, 6408, 9728, 9728, false, image);
-        textures.add(texture);
-        return true;
-    }
-    
+
+	protected TextureCustom(final String name) {
+
+		super(name);
+	}
+
+	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public boolean loadTexture(	final TextureManager manager,
+								final ITexturePack texturepack,
+								final String name,
+								final String fileName,
+								final BufferedImage image,
+								final ArrayList textures) {
+
+		final Texture texture = manager.makeTexture(name,
+													2,
+													image.getWidth(),
+													image.getHeight(),
+													10496,
+													6408,
+													9728,
+													9728,
+													false,
+													image);
+		textures.add(texture);
+		return true;
+	}
+
 }

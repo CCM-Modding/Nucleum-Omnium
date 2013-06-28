@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
  * @author King Lemming
  */
 public interface ISpecialEnchantability {
-    
-    public int getItemEnchantability(ItemStack stack);
-    
+
+	public int getItemEnchantability(ItemStack stack);
+
 }

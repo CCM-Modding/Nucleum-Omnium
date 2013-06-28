@@ -13,42 +13,44 @@ import ccm.nucleum_omnium.block.sub.SubBlock;
  * @author Captain_Shadows
  */
 public class BlockHelper extends BaseNIClass {
-    /**
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
-    public static MainBlock getBlock(World world, int x, int y, int z) {
-        return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]);
-    }
-    
-    /**
-     * @param blockID
-     * @return
-     */
-    public static MainBlock getBlock(int blockID) {
-        return ((MainBlock) Block.blocksList[blockID]);
-    }
-    
-    /**
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
-    public static SubBlock getSubBlock(World world, int x, int y, int z) {
-        return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x, y, z)];
-    }
-    
-    /**
-     * @param blockID
-     * @param item
-     * @return
-     */
-    public static SubBlock getSubBlock(int blockID, ItemStack item) {
-        return ((MainBlock) Block.blocksList[blockID]).getSubBlocks()[item.getItemDamage()];
-    }
+	/**
+	 * @param world
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return
+	 */
+	public static MainBlock getBlock(final World world, final int x, final int y, final int z) {
+		return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]);
+	}
+
+	/**
+	 * @param blockID
+	 * @return
+	 */
+	public static MainBlock getBlock(final int blockID) {
+		return ((MainBlock) Block.blocksList[blockID]);
+	}
+
+	/**
+	 * @param world
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return
+	 */
+	public static SubBlock getSubBlock(final World world, final int x, final int y, final int z) {
+		return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(	x,
+																												y,
+																												z)];
+	}
+
+	/**
+	 * @param blockID
+	 * @param item
+	 * @return
+	 */
+	public static SubBlock getSubBlock(final int blockID, final ItemStack item) {
+		return ((MainBlock) Block.blocksList[blockID]).getSubBlocks()[item.getItemDamage()];
+	}
 }

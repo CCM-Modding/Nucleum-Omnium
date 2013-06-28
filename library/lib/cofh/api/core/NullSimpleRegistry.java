@@ -6,11 +6,11 @@ package lib.cofh.api.core;
  * @author Zeldo Kavira
  */
 public class NullSimpleRegistry implements ISimpleRegistry {
-    
-    @Override
-    public boolean register(final String playerName, final String URL) {
-        
-        return false;
-    }
-    
+
+	@Override
+	public boolean register(final String playerName, final String URL) {
+
+		return false;
+	}
+
 }

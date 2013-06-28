@@ -8,12 +8,13 @@ import ccm.nucleum_network.PacketHandler;
 import ccm.nucleum_omnium.configuration.AdvConfiguration;
 import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
-import ccm.nucleum_omnium.handler.Handler;
+import ccm.nucleum_omnium.handler.LoggerHandler;
+import ccm.nucleum_omnium.handler.ModLoadingHandler;
 import ccm.nucleum_omnium.handler.mods.ModHandler;
 import ccm.nucleum_omnium.handler.mods.MystcraftHandler;
 import ccm.nucleum_omnium.helper.DataHelper;
 import ccm.nucleum_omnium.proxy.CommonProxy;
-import ccm.nucleum_omnium.utils.language.OmniumLanguagePack;
+import ccm.nucleum_omnium.utils.language.OmniumLP;
 import ccm.nucleum_omnium.utils.lib.Archive;
 import ccm.nucleum_omnium.utils.lib.Locations;
 import cpw.mods.fml.common.Mod;
@@ -31,79 +32,82 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid = Archive.MOD_ID,
-     name = Archive.MOD_NAME,
-     certificateFingerprint = Archive.MOD_FIGERPRINT,
-     useMetadata = true)
+@Mod(	modid = Archive.MOD_ID,
+		name = Archive.MOD_NAME,
+		certificateFingerprint = Archive.MOD_FIGERPRINT,
+		useMetadata = true)
 @NetworkMod(clientSideRequired = true,
-            serverSideRequired = false,
-            channels = Archive.MOD_CHANNEL,
-            packetHandler = PacketHandler.class)
+			serverSideRequired = false,
+			channels = Archive.MOD_CHANNEL,
+			packetHandler = PacketHandler.class)
 @ModstatInfo(prefix = Archive.MOD_PREFIX)
 public class NucleumOmnium extends BaseMod implements IMod {
-    
-    @Instance(Archive.MOD_ID)
-    public static NucleumOmnium    instance;
-    
-    @SidedProxy(serverSide = Locations.SERVER_PROXY,
-                clientSide = Locations.CLIENT_PROXY)
-    public static CommonProxy      proxy;
-    
-    public static AdvConfiguration config;
-    
-    public static MinecraftServer  server;
-    
-    @ServerStarting
-    public void serverStarting(final FMLServerStartingEvent event) {
-        // Initialize the custom commands
-        CommandHandler.initCommands(event);
-        
-        NucleumOmnium.server = event.getServer();
-        
-        DataHelper.init();
-    }
-    
-    @PreInit
-    public void preInit(final FMLPreInitializationEvent evt) {
-        if (!Handler.isModLoaded(this)) {
-            Handler.initLog(this);
-            
-            config = initializeConfig(evt);
-            
-            Config.init(config);
-        }
-    }
-    
-    @Init
-    public void init(final FMLInitializationEvent event) {
-        NucleumOmnium.proxy.initCapes();
-        
-        NucleumOmnium.proxy.initEventHandling();
-        
-        NucleumOmnium.proxy.initModelHandlers();
-        
-        ModHandler.instance().addModToHandle(new MystcraftHandler());
-        
-        new OmniumLanguagePack().loadLangs();
-    }
-    
-    @PostInit
-    public void PostInit(final FMLPostInitializationEvent event) {
-        ModHandler.instance().init();
-        
-        Handler.loadMod(this);
-    }
-    
-    @FingerprintWarning
-    public void invalidFingerprint(final FMLFingerprintViolationEvent event) {
-        /*
-         * Report (log) to the user that the version of Nucleum Omnium they are using has been changed/tampered with
-         */
-        Handler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
-    }
-    
-    @Override
-    public AdvConfiguration getConfigFile() {
-        return config;
-    }
+
+	@Instance(Archive.MOD_ID)
+	public static NucleumOmnium		instance;
+
+	@SidedProxy(serverSide = Locations.SERVER_PROXY,
+				clientSide = Locations.CLIENT_PROXY)
+	public static CommonProxy		proxy;
+
+	public static AdvConfiguration	config;
+
+	public static MinecraftServer	server;
+
+	@FingerprintWarning
+	public void invalidFingerprint(final FMLFingerprintViolationEvent event) {
+		/*
+		 * Report (log) to the user that the version of Nucleum Omnium they are using has been
+		 * changed/tampered with
+		 */
+		LoggerHandler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
+	}
+
+	@PreInit
+	public void preInit(final FMLPreInitializationEvent evt) {
+		if (!ModLoadingHandler.isModLoaded(this)) {
+			LoggerHandler.initLog(this);
+
+			config = initializeConfig(evt);
+
+			Config.init(config);
+		}
+	}
+
+	@Init
+	public void init(final FMLInitializationEvent event) {
+
+		proxy.initCapes();
+
+		proxy.initEventHandling();
+
+		proxy.initModelHandlers();
+
+		ModHandler.addMod(new MystcraftHandler());
+
+		OmniumLP.init();
+	}
+
+	@PostInit
+	public void PostInit(final FMLPostInitializationEvent event) {
+
+		ModHandler.init();
+
+		ModLoadingHandler.loadMod(this);
+	}
+
+	@ServerStarting
+	public void serverStarting(final FMLServerStartingEvent event) {
+		// Initialize the custom commands
+		CommandHandler.initCommands(event);
+
+		server = event.getServer();
+
+		DataHelper.init();
+	}
+
+	@Override
+	public AdvConfiguration getConfigFile() {
+		return config;
+	}
 }

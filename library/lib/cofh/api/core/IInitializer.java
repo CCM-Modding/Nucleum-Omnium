@@ -6,11 +6,11 @@ package lib.cofh.api.core;
  * @author King Lemming
  */
 public interface IInitializer {
-    
-    public boolean preInit();
-    
-    public boolean initialize();
-    
-    public boolean postInit();
-    
+
+	public boolean preInit();
+
+	public boolean initialize();
+
+	public boolean postInit();
+
 }

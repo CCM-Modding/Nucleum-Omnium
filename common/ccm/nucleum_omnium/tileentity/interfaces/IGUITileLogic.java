@@ -9,18 +9,26 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @author Captain_Shadows
  */
 public interface IGUITileLogic extends ITileLogic {
-    
-    /**
-     * This method gets called by the GUI when deciding the progress bar
-     * 
-     * @param scale
-     *            The scale
-     * @return the process, AKA % done
-     */
-    @SideOnly(Side.CLIENT)
-    public int getProgressScaled(final int scale);
-    
-    public int getTimeLeft();
-    
-    public void setTimeLeft(final int time);
+
+	/**
+	 * This method gets called by the GUI when deciding the progress bar
+	 * 
+	 * @param scale
+	 *            The scale
+	 * @return the process, AKA % done
+	 */
+	@SideOnly(Side.CLIENT)
+	public int getProgressScaled(final int scale);
+
+	/**
+	 * @return The amount of time left for the current process
+	 */
+	public int getTimeLeft();
+
+	/**
+	 * Sets the amount of time left in the current process
+	 * 
+	 * @param time
+	 */
+	public void setTimeLeft(final int time);
 }
