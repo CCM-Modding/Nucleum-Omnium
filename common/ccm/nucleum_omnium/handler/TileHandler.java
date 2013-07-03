@@ -4,29 +4,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.tileentity.TileEntity;
+import ccm.nucleum_omnium.helper.enums.EnumHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TileHandler {
 
-	private static Map<Integer, Class<? extends TileEntity>>	tileList	= new HashMap<Integer, Class<? extends TileEntity>>();
+	private static Map<Integer, TileEntity>	tileList	= new HashMap<Integer, TileEntity>();
 
-	private static TileHandler									instance;
+	private static final TileHandler		instance	= new TileHandler();
 
 	public static TileHandler instance() {
-		if (TileHandler.instance == null) {
-			TileHandler.instance = new TileHandler();
-		}
-		return TileHandler.instance;
+		return instance;
 	}
 
-	public void registerTileEntity(final String tileID, final Class<? extends TileEntity> te) {
+	public void registerTileEntity(final String tileID, final TileEntity te) {
 
-		GameRegistry.registerTileEntity(te, hash(tileID));
+		GameRegistry.registerTileEntity(te.getClass(), hash(tileID));
 
 		tileList.put(hash(tileID).hashCode(), te);
 	}
 
-	public Class<? extends TileEntity> getTileEntity(final String tileID) {
+	public TileEntity getEnumTE(final Enum<?> enu) {
+		return getTileEntity(EnumHelper.getTileID(enu));
+	}
+
+	public TileEntity getTileEntity(final String tileID) {
 		return tileList.get(hash(tileID).hashCode());
 	}
 

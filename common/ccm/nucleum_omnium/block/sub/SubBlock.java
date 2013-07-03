@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import ccm.nucleum_omnium.block.ICollisionListener;
 import ccm.nucleum_omnium.block.IDisplayListener;
 import ccm.nucleum_omnium.block.MainBlock;
+import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.helper.TextureHelper;
 import ccm.nucleum_omnium.helper.enums.IBlockEnum;
 import cpw.mods.fml.relauncher.Side;
@@ -171,6 +172,12 @@ public class SubBlock {
 		return this;
 	}
 
+	public SubBlock setUnlocalizedName(final Enum<?> string) {
+		unlocName = string.name();
+		mainBlock.setUnlocalizedName(unlocName);
+		return this;
+	}
+
 	public SubBlock setBlockDrops(final ItemStack item, final int min, final int max) {
 		drop = item.copy();
 		dropMin = min;
@@ -279,7 +286,12 @@ public class SubBlock {
 		return meta;
 	}
 
+	public boolean hasTileEntity(final int meta) {
+		return false;
+	}
+
 	public TileEntity createTileEntity(final World world, final int meta) {
+		LogHandler.log("Using Default createTileEntity");
 		return null;
 	}
 
@@ -341,6 +353,6 @@ public class SubBlock {
 		return setUp(	blockEnum,
 						new SubBlock(	id,
 										blockEnum.ordinal(),
-										TextureHelper.getTextureFromName(blockEnum.name(), textureLoc)).setUnlocalizedName(blockEnum.name()));
+										TextureHelper.getTextureFromName(blockEnum.name(), textureLoc)).setUnlocalizedName(blockEnum));
 	}
 }

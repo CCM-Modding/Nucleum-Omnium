@@ -12,9 +12,14 @@ import ccm.nucleum_omnium.utils.lib.TileConstant;
 public class InventoryTE extends BaseTE implements IInventory {
 
 	/**
-	 * The ItemStacks that hold the items currently being used in the Tile Entity.
+	 * The ItemStacks that hold the items currently being used in the Tile Entity
 	 */
 	protected ItemStack[]	inventory;
+
+	/**
+	 * Size of the Inventory
+	 */
+	private int				size	= 0;
 
 	/**
 	 * Set's the size of the Inventory
@@ -23,23 +28,24 @@ public class InventoryTE extends BaseTE implements IInventory {
 	 */
 	public InventoryTE setInventorySize(final int size) {
 		inventory = new ItemStack[size];
+		this.size = size;
 		return this;
 	}
 
 	/**
-	 * Getter Method for the {@link TileEntity}'s Inventory.
+	 * Getter Method for the {@link TileEntity}'s Inventory
 	 * 
-	 * @return a Inventory ItemStack[].
+	 * @return a Inventory ItemStack[]
 	 */
 	public ItemStack[] getInventory() {
 		return inventory;
 	}
 
 	/**
-	 * Setter Method for the {@link TileEntity}'s Inventory.
+	 * Setter Method for the {@link TileEntity}'s Inventory
 	 * 
 	 * @param inventory
-	 *            The ItemStack[] for the Inventory.
+	 *            The ItemStack[] for the Inventory
 	 */
 	public void setInventory(final ItemStack[] inventory) {
 		this.inventory = inventory;
@@ -47,7 +53,7 @@ public class InventoryTE extends BaseTE implements IInventory {
 
 	@Override
 	public int getSizeInventory() {
-		return inventory.length;
+		return size;
 	}
 
 	@Override
@@ -97,11 +103,11 @@ public class InventoryTE extends BaseTE implements IInventory {
 	}
 
 	/**
-	 * Checks if the {@link TileEntity} is Usable By a Player.
+	 * Checks if the {@link TileEntity} is Usable By a Player
 	 * 
 	 * @param player
-	 *            The player that is using the {@link TileEntity}.
-	 * @return true if the player is within 10 blocks.
+	 *            The player that is using the {@link TileEntity}
+	 * @return true if the player is within 10 blocks
 	 */
 	@Override
 	public boolean isUseableByPlayer(final EntityPlayer player) {
@@ -115,7 +121,7 @@ public class InventoryTE extends BaseTE implements IInventory {
 	public void closeChest() {}// Useless
 
 	/**
-	 * Reads a tile entity from NBT.
+	 * Reads a tile entity from NBT
 	 */
 	@Override
 	public void readFromNBT(final NBTTagCompound nbt) {
@@ -125,7 +131,7 @@ public class InventoryTE extends BaseTE implements IInventory {
 	}
 
 	/**
-	 * Writes a tile entity to NBT.
+	 * Writes a tile entity to NBT
 	 */
 	@Override
 	public void writeToNBT(final NBTTagCompound nbt) {

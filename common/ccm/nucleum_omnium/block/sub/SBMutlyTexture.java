@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeDirection;
-import ccm.nucleum_omnium.handler.LoggerHandler;
+import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.tileentity.BaseTE;
 import ccm.nucleum_omnium.utils.lib.BlockFacings;
 import cpw.mods.fml.relauncher.Side;
@@ -40,7 +40,7 @@ public class SBMutlyTexture extends SubBlock {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(final IconRegister iconRegister) {
 		for (final BlockFacings direction : goodSides) {
-			LoggerHandler.log(iconName + direction.name());
+			LogHandler.log(iconName + direction.name());
 			icons[direction.ordinal()] = iconRegister.registerIcon(iconName + direction.name());
 		}
 	}

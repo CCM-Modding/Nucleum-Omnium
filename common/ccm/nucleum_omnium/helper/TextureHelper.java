@@ -14,6 +14,10 @@ public class TextureHelper extends BaseNIClass {
 		return texturePath + name;
 	}
 
+	public static String getTextureFromName(final Enum<?> name, final String texturePath) {
+		return texturePath + name.name();
+	}
+
 	/**
 	 * @return The texture.
 	 */

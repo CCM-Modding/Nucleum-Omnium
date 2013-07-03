@@ -9,7 +9,7 @@ import ccm.nucleum_omnium.IMod;
 import ccm.nucleum_omnium.utils.exeptions.DupeExeption;
 import cpw.mods.fml.common.FMLLog;
 
-public class LoggerHandler extends BaseNIClass {
+public class LogHandler extends BaseNIClass {
 
 	private static HashMap<IMod, Logger>	modsLogged	= new HashMap<IMod, Logger>();
 

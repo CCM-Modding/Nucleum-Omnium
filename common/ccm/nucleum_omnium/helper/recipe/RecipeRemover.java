@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import ccm.nucleum_omnium.BaseNIClass;
-import ccm.nucleum_omnium.handler.LoggerHandler;
+import ccm.nucleum_omnium.handler.LogHandler;
 
 public final class RecipeRemover extends BaseNIClass {
 
@@ -65,10 +65,10 @@ public final class RecipeRemover extends BaseNIClass {
 					 */
 					if ((result.itemID == removedItem.itemID) && ((removedItem.getItemDamage() == -1) || (result.getItemDamage() == removedItem.getItemDamage()))) {
 						minecraftRecipes.remove(i);
-						LoggerHandler.log("Recipes removed for " + removedItem.getDisplayName()
-											+ " @"
-											+ removedItem.itemID
-											+ "\n");
+						LogHandler.log("Recipes removed for " + removedItem.getDisplayName()
+										+ " @"
+										+ removedItem.itemID
+										+ "\n");
 						--i;
 					}
 				}

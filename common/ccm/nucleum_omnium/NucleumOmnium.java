@@ -8,7 +8,7 @@ import ccm.nucleum_network.PacketHandler;
 import ccm.nucleum_omnium.configuration.AdvConfiguration;
 import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
-import ccm.nucleum_omnium.handler.LoggerHandler;
+import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.handler.ModLoadingHandler;
 import ccm.nucleum_omnium.handler.mods.ModHandler;
 import ccm.nucleum_omnium.handler.mods.MystcraftHandler;
@@ -60,13 +60,13 @@ public class NucleumOmnium extends BaseMod implements IMod {
 		 * Report (log) to the user that the version of Nucleum Omnium they are using has been
 		 * changed/tampered with
 		 */
-		LoggerHandler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
+		LogHandler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
 	}
 
 	@PreInit
 	public void preInit(final FMLPreInitializationEvent evt) {
 		if (!ModLoadingHandler.isModLoaded(this)) {
-			LoggerHandler.initLog(this);
+			LogHandler.initLog(this);
 
 			config = initializeConfig(evt);
 

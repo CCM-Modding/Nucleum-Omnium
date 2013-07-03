@@ -3,7 +3,7 @@ package ccm.nucleum_omnium.handler.mods;
 import java.util.ArrayList;
 import java.util.List;
 
-import ccm.nucleum_omnium.handler.LoggerHandler;
+import ccm.nucleum_omnium.handler.LogHandler;
 import cpw.mods.fml.common.Loader;
 
 /**
@@ -48,7 +48,7 @@ public final class ModHandler {
 			try {
 				handler.init();
 			} catch (final Exception e) {
-				LoggerHandler.log(handler);
+				LogHandler.log(handler);
 				e.printStackTrace();
 			}
 		}

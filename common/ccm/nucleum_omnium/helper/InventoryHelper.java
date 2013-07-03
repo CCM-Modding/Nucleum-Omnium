@@ -44,11 +44,9 @@ public class InventoryHelper extends BaseNIClass {
 	public static ItemStack[] readInventoryFromNBT(final NBTTagList list, final int size) {
 		final ItemStack[] stacks = new ItemStack[size];
 		NBTTagCompound compound;
-		int index;
 		for (int i = 0; i < list.tagCount(); i++) {
 			compound = (NBTTagCompound) list.tagAt(i);
-			index = compound.getInteger(InventoryHelper.slot);
-			stacks[index] = ItemStack.loadItemStackFromNBT(compound);
+			stacks[compound.getInteger(slot)] = ItemStack.loadItemStackFromNBT(compound);
 		}
 		return stacks;
 	}

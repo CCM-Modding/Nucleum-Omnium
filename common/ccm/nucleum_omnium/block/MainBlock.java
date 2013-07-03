@@ -288,6 +288,15 @@ public class MainBlock extends Block {
 	}
 
 	@Override
+	public boolean hasTileEntity(final int meta) {
+		if (subBlocks[meta] != null) {
+			return subBlocks[meta].hasTileEntity(meta);
+		} else {
+			return false;
+		}
+	}
+
+	@Override
 	public TileEntity createTileEntity(final World world, final int meta) {
 		if (subBlocks[meta] != null) {
 			return subBlocks[meta].createTileEntity(world, meta);

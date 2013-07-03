@@ -8,7 +8,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import ccm.nucleum_omnium.handler.LoggerHandler;
+import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
 import ccm.nucleum_omnium.utils.lib.TileConstant;
 
@@ -19,6 +19,8 @@ public class BaseTE extends TileEntity {
 	private String							owner;
 
 	private String							customName;
+
+	private boolean							hasLogic	= false;
 
 	/**
 	 * The Source of the logic behind this TileEntity
@@ -102,6 +104,10 @@ public class BaseTE extends TileEntity {
 		return (owner != null) && (owner.length() > 0);
 	}
 
+	public boolean hasLogic() {
+		return hasLogic;
+	}
+
 	/**
 	 * Sets the {@link TileEntity}'s Custom Name.
 	 * 
@@ -151,6 +157,7 @@ public class BaseTE extends TileEntity {
 	 * @return
 	 */
 	public BaseTE setLogic(final Class<? extends ITileLogic> logic) {
+		hasLogic = true;
 		srclogic = logic;
 		return this;
 	}
@@ -159,23 +166,23 @@ public class BaseTE extends TileEntity {
 	public void updateEntity() {
 		if (logic != null) {
 			logic.runLogic();
-			LoggerHandler.log("Logic was ran ... \n");
+			//LogHandler.log("Logic was ran ... \n");
 		} else if (srclogic != null) {
-			LoggerHandler.log("Logic was NULL Instanciating ... \n");
+			LogHandler.log("Logic was NULL Instanciating ... \n");
 			Constructor<? extends ITileLogic> c = null;
 
 			try {
 				c = srclogic.getConstructor(TileEntity.class);
 			} catch (final Exception e) {
 				e.printStackTrace();
-				LoggerHandler.log(String.format("Loading the logic for: \n %s has failed to get the Constructor \n %s",
+				LogHandler.log(String.format(	"Loading the logic for: \n %s has failed to get the Constructor \n %s",
 												toString(),
 												e.toString()));
 			}
 			try {
 				logic = c.newInstance(this);
 			} catch (final Exception e) {
-				LoggerHandler.log(String.format("Loading the logic for: \n %s has failed to create a new Instance \n %s",
+				LogHandler.log(String.format(	"Loading the logic for: \n %s has failed to create a new Instance \n %s",
 												toString(),
 												e.toString()));
 				e.printStackTrace();

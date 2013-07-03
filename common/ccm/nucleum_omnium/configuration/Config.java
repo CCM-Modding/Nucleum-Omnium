@@ -3,7 +3,7 @@ package ccm.nucleum_omnium.configuration;
 import java.util.logging.Level;
 
 import ccm.nucleum_omnium.NucleumOmnium;
-import ccm.nucleum_omnium.handler.LoggerHandler;
+import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.utils.lib.Archive;
 import ccm.nucleum_omnium.utils.lib.Properties;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -12,7 +12,7 @@ public final class Config {
 
 	public static void init(final AdvConfiguration config) {
 		try {
-			LoggerHandler.log(NucleumOmnium.instance, "Loading configuration");
+			LogHandler.log(NucleumOmnium.instance, "Loading configuration");
 			// Loads a pre-existing Configuration file.
 			config.load();
 			if (FMLCommonHandler.instance().getSide().isServer()) {
@@ -21,9 +21,9 @@ public final class Config {
 				Config.initClientConfigs(config);
 			}
 		} catch (final Exception e) {
-			LoggerHandler.log(	NucleumOmnium.instance,
-								Level.SEVERE,
-								Archive.MOD_NAME + " has had a problem loading its configuration\n");
+			LogHandler.log(	NucleumOmnium.instance,
+							Level.SEVERE,
+							Archive.MOD_NAME + " has had a problem loading its configuration\n");
 			e.printStackTrace();
 		} finally {
 			config.save();

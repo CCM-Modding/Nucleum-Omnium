@@ -13,5 +13,6 @@ public class OmniumLP extends BaseNIClass {
 		pack.setPath(Locations.LANGUAGE_FILE);
 		pack.addSuport("en_US");
 		pack.addSuport("es_ES");
+		pack.loadLangs();
 	}
 }

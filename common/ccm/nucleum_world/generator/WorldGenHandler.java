@@ -16,7 +16,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.ChunkDataEvent.Load;
 import net.minecraftforge.event.world.ChunkDataEvent.Save;
 import ccm.nucleum_omnium.NucleumOmnium;
-import ccm.nucleum_omnium.handler.LoggerHandler;
+import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_world.utils.TickHandlerWorld;
 import ccm.nucleum_world.utils.lib.Properties;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -67,13 +67,13 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler {
 			regen = true;
 		}
 		if (bedrock) {
-			LoggerHandler.log(	NucleumOmnium.instance,
-								"Regenerating flat bedrock for the chunk at " + cCoord.toString() + ".");
+			LogHandler.log(	NucleumOmnium.instance,
+							"Regenerating flat bedrock for the chunk at " + cCoord.toString() + ".");
 			regen = true;
 		}
 		if (ores) {
-			LoggerHandler.log(	NucleumOmnium.instance,
-								"Regenerating ores for the chunk at " + cCoord.toString() + ".");
+			LogHandler.log(NucleumOmnium.instance, "Regenerating ores for the chunk at " + cCoord.toString()
+													+ ".");
 			regen = true;
 		}
 		if (regen) {
