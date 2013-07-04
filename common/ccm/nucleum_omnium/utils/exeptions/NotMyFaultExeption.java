@@ -9,11 +9,11 @@ import ccm.nucleum_omnium.IMod;
  */
 public class NotMyFaultExeption extends RuntimeException {
 
-	private static final long	serialVersionUID	= -4392997358096412890L;
+	private static final long		serialVersionUID	= -501876681172804351L;
 
-	private final IMod			mod;
+	protected final IMod			mod;
 
-	protected StringBuilder		errorSB				= new StringBuilder();
+	protected final StringBuilder	errorSB				= new StringBuilder();
 
 	public NotMyFaultExeption(final IMod mod) {
 		this.mod = mod;

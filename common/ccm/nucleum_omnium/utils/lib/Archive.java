@@ -1,8 +1,8 @@
 package ccm.nucleum_omnium.utils.lib;
 
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 
-public final class Archive extends BaseNIClass {
+public final class Archive extends BaseNIC {
 
 	public static final String	MOD_ID					= "nucleum_omnium";
 

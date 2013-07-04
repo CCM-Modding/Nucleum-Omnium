@@ -1,9 +1,9 @@
 package ccm.nucleum_omnium.helper;
 
 import net.minecraft.item.Item;
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 
-public class TextureHelper extends BaseNIClass {
+public class TextureHelper extends BaseNIC {
 
 	/**
 	 * @param name

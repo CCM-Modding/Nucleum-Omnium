@@ -16,14 +16,26 @@ public final class ModHandler {
 	/**
 	 * List of all {@link IModHandler}s that this "Registry" needs to handle
 	 */
-	private static List<IModHandler>	modsHandling	= new ArrayList<IModHandler>();
+	private final List<IModHandler>	modsHandling;
+
+	/**
+	 * Private single instance
+	 */
+	private static final ModHandler	INSTANCE	= new ModHandler();
+
+	/**
+	 * Private constructor
+	 */
+	private ModHandler() {
+		modsHandling = new ArrayList<IModHandler>();
+	}
 
 	/**
 	 * @param handler
 	 *            The {@link IModHandler} to add to the List
 	 */
 	public static void addMod(final IModHandler handler) {
-		modsHandling.add(handler);
+		INSTANCE.modsHandling.add(handler);
 	}
 
 	/**
@@ -32,7 +44,7 @@ public final class ModHandler {
 	 * Except NucleumOmnium.java
 	 */
 	public static void init() {
-		for (final IModHandler handler : modsHandling) {
+		for (final IModHandler handler : INSTANCE.modsHandling) {
 			handleMod(handler);
 		}
 	}
@@ -48,7 +60,7 @@ public final class ModHandler {
 			try {
 				handler.init();
 			} catch (final Exception e) {
-				LogHandler.log(handler);
+				LogHandler.log(handler.getMod(), handler);
 				e.printStackTrace();
 			}
 		}

@@ -1,8 +1,8 @@
 package ccm.nucleum_omnium.helper;
 
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 
-public class MathHelper extends BaseNIClass {
+public class MathHelper extends BaseNIC {
 
 	/**
 	 * Checks if the value is within the specified parameters
@@ -38,9 +38,9 @@ public class MathHelper extends BaseNIClass {
 	 */
 	public static int getRandomInt(final int maxValue, final boolean zero) {
 		if (zero) {
-			return BaseNIClass.rand.nextInt(maxValue);
+			return BaseNIC.rand.nextInt(maxValue);
 		} else {
-			return MathHelper.clampInt(BaseNIClass.rand.nextInt(maxValue), 1, maxValue);
+			return MathHelper.clampInt(BaseNIC.rand.nextInt(maxValue), 1, maxValue);
 		}
 	}
 
@@ -55,6 +55,6 @@ public class MathHelper extends BaseNIClass {
 	 */
 	public static int getRandomInt(final int minValue, final int maxValue) {
 
-		return MathHelper.clampInt(BaseNIClass.rand.nextInt(maxValue), minValue, maxValue);
+		return MathHelper.clampInt(BaseNIC.rand.nextInt(maxValue), minValue, maxValue);
 	}
 }

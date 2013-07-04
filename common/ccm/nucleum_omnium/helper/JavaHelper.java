@@ -3,9 +3,9 @@ package ccm.nucleum_omnium.helper;
 import java.util.ArrayList;
 import java.util.List;
 
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 
-public final class JavaHelper extends BaseNIClass {
+public final class JavaHelper extends BaseNIC {
 
 	/**
 	 * @param str

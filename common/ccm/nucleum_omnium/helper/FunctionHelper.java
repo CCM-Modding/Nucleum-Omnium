@@ -11,11 +11,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenDesert;
-import ccm.nucleum_omnium.BaseNIClass;
 import ccm.nucleum_omnium.NucleumOmnium;
+import ccm.nucleum_omnium.base.BaseNIC;
 import ccm.nucleum_omnium.block.MainBlock;
 
-public final class FunctionHelper extends BaseNIClass {
+public final class FunctionHelper extends BaseNIC {
 
 	/**
 	 * Checks if the sun is visible

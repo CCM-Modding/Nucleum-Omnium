@@ -2,9 +2,9 @@ package ccm.nucleum_omnium.helper;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 
-public class ItemHelper extends BaseNIClass {
+public class ItemHelper extends BaseNIC {
 
 	/**
 	 * Damages a Item inside of a inventory.
@@ -18,7 +18,7 @@ public class ItemHelper extends BaseNIClass {
 	 */
 	public static void damageItem(final ItemStack[] inventory, final int slot, final int damage) {
 		if (inventory[slot] != null) {
-			if (inventory[slot].attemptDamageItem(MathHelper.getRandomInt(damage, false), BaseNIClass.rand)) {
+			if (inventory[slot].attemptDamageItem(MathHelper.getRandomInt(damage, false), BaseNIC.rand)) {
 				inventory[slot] = null;
 			}
 		}

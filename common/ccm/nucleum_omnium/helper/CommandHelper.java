@@ -7,11 +7,11 @@ import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import ccm.nucleum_omnium.BaseNIClass;
 import ccm.nucleum_omnium.NucleumOmnium;
+import ccm.nucleum_omnium.base.BaseNIC;
 import ccm.nucleum_omnium.utils.exeptions.WTFExeption;
 
-public final class CommandHelper extends BaseNIClass {
+public final class CommandHelper extends BaseNIC {
 
 	/**
 	 * Gets a player

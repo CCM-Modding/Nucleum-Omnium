@@ -1,15 +1,14 @@
 package ccm.nucleum_omnium;
 
-import java.util.logging.Level;
-
 import lib.org.modstats.ModstatInfo;
 import net.minecraft.server.MinecraftServer;
 import ccm.nucleum_network.PacketHandler;
 import ccm.nucleum_omnium.configuration.AdvConfiguration;
-import ccm.nucleum_omnium.configuration.Config;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.handler.ModLoadingHandler;
+import ccm.nucleum_omnium.handler.config.ConfigurationHandler;
+import ccm.nucleum_omnium.handler.config.NOConfig;
 import ccm.nucleum_omnium.handler.mods.ModHandler;
 import ccm.nucleum_omnium.handler.mods.MystcraftHandler;
 import ccm.nucleum_omnium.helper.DataHelper;
@@ -53,6 +52,11 @@ public class NucleumOmnium extends BaseMod implements IMod {
 	public static AdvConfiguration	config;
 
 	public static MinecraftServer	server;
+	
+	@Override
+	public AdvConfiguration getConfigFile() {
+		return config;
+	}
 
 	@FingerprintWarning
 	public void invalidFingerprint(final FMLFingerprintViolationEvent event) {
@@ -60,9 +64,9 @@ public class NucleumOmnium extends BaseMod implements IMod {
 		 * Report (log) to the user that the version of Nucleum Omnium they are using has been
 		 * changed/tampered with
 		 */
-		LogHandler.log(this, Level.SEVERE, Archive.INVALID_FINGERPRINT_MSG);
+		LogHandler.log(Archive.INVALID_FINGERPRINT_MSG);
 	}
-
+	
 	@PreInit
 	public void preInit(final FMLPreInitializationEvent evt) {
 		if (!ModLoadingHandler.isModLoaded(this)) {
@@ -70,10 +74,10 @@ public class NucleumOmnium extends BaseMod implements IMod {
 
 			config = initializeConfig(evt);
 
-			Config.init(config);
+			ConfigurationHandler.init(this, NOConfig.class);
 		}
 	}
-
+	
 	@Init
 	public void init(final FMLInitializationEvent event) {
 
@@ -104,10 +108,5 @@ public class NucleumOmnium extends BaseMod implements IMod {
 		server = event.getServer();
 
 		DataHelper.init();
-	}
-
-	@Override
-	public AdvConfiguration getConfigFile() {
-		return config;
 	}
 }

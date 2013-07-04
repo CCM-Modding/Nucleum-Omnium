@@ -1,7 +1,7 @@
 package ccm.nucleum_omnium.helper.enums;
 
 import net.minecraft.item.ItemStack;
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 
 /**
  * This is The class used to get a new {@link ItemStack} instance from any {@link Enum} implementing
@@ -9,7 +9,7 @@ import ccm.nucleum_omnium.BaseNIClass;
  * 
  * @author Captain_Shadows
  */
-public final class EnumToItemStack extends BaseNIClass {
+public final class EnumToItemStack extends BaseNIC {
 
 	/**
 	 * @param itemEnum

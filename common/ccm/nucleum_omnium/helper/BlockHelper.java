@@ -3,7 +3,7 @@ package ccm.nucleum_omnium.helper;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 import ccm.nucleum_omnium.block.MainBlock;
 import ccm.nucleum_omnium.block.sub.SubBlock;
 
@@ -12,7 +12,7 @@ import ccm.nucleum_omnium.block.sub.SubBlock;
  * 
  * @author Captain_Shadows
  */
-public class BlockHelper extends BaseNIClass {
+public class BlockHelper extends BaseNIC {
 	/**
 	 * @param world
 	 * @param x

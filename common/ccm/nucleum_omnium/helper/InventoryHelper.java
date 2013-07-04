@@ -4,9 +4,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 
-public class InventoryHelper extends BaseNIClass {
+public class InventoryHelper extends BaseNIC {
 
 	private static final String	slot	= "slot";
 

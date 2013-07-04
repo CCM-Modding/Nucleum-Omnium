@@ -7,31 +7,71 @@ import net.minecraft.tileentity.TileEntity;
 import ccm.nucleum_omnium.helper.enums.EnumHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class TileHandler {
+public final class TileHandler {
 
-	private static Map<Integer, TileEntity>	tileList	= new HashMap<Integer, TileEntity>();
+	/**
+	 * Map of all the TileEntitys
+	 */
+	private final Map<Integer, TileEntity>	tileList;
 
-	private static final TileHandler		instance	= new TileHandler();
+	/**
+	 * Private single instance
+	 */
+	private static final TileHandler		INSTANCE	= new TileHandler();
 
-	public static TileHandler instance() {
-		return instance;
+	/**
+	 * Private constructor
+	 */
+	private TileHandler() {
+		tileList = new HashMap<Integer, TileEntity>();
+	}
+	
+	/**
+	 * Registers a TileEntity into the game and stores the instance for later use
+	 * 
+	 * @param tileID
+	 *            The name of the TileEntity
+	 * @param te
+	 *            The TileEntity's instance
+	 */
+	public static void registerTileEntity(final String tileID, final TileEntity te) {
+
+		String id = hash(tileID);
+
+		GameRegistry.registerTileEntity(te.getClass(), id);
+
+		INSTANCE.tileList.put(id.hashCode(), te);
 	}
 
-	public void registerTileEntity(final String tileID, final TileEntity te) {
+	/**
+	 * @param tileID
+	 *            The name of the TileEntity that you wish to get
+	 * @return The TileEntity's instance
+	 */
+	public static TileEntity getTileEntity(final String tileID) {
+		int id = hash(tileID).hashCode();
 
-		GameRegistry.registerTileEntity(te.getClass(), hash(tileID));
-
-		tileList.put(hash(tileID).hashCode(), te);
+		if (INSTANCE.tileList.containsKey(id)) {
+			return INSTANCE.tileList.get(hash(tileID).hashCode());
+		} else {
+			throw new RuntimeException(String.format("Tring to retrive: %s but it didn't exist", tileID));
+		}
 	}
 
-	public TileEntity getEnumTE(final Enum<?> enu) {
+	/**
+	 * @param enu
+	 *            The enum constant associated with the TileEntity
+	 * @return The TileEntity's instance
+	 */
+	public static TileEntity getEnumTE(final Enum<?> enu) {
 		return getTileEntity(EnumHelper.getTileID(enu));
 	}
 
-	public TileEntity getTileEntity(final String tileID) {
-		return tileList.get(hash(tileID).hashCode());
-	}
-
+	/**
+	 * @param name
+	 *            The name of the Tile Entity
+	 * @return The "unique" hash code of the Block's name
+	 */
 	private static String hash(final String name) {
 		return ("ccm.tile." + name + "." + name.hashCode());
 	}

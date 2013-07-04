@@ -1,8 +1,8 @@
 package ccm.nucleum_omnium.utils.lib;
 
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 
-public final class Locations extends BaseNIClass {
+public final class Locations extends BaseNIC {
 
 	public static final String	LANGUAGE_FILE	= "/mods/" + Archive.MOD_ID + "/lang/";
 

@@ -1,5 +1,7 @@
 package ccm.nucleum_omnium.handler.mods;
 
+import ccm.nucleum_omnium.IMod;
+
 /**
  * Abstract class extended by all classes that contain code to add support for other mods.
  * <p>
@@ -9,6 +11,8 @@ package ccm.nucleum_omnium.handler.mods;
  */
 public abstract class IModHandler {
 
+	public abstract IMod getMod();
+	
 	/**
 	 * @return The Name of the mod that it is supporting. Ex: Harvestry
 	 */

@@ -5,14 +5,14 @@ import java.io.File;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.DimensionManager;
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 
 /**
  * Use this class to save per-server data.
  * 
  * @author Dries007
  */
-public final class DataHelper extends BaseNIClass {
+public final class DataHelper extends BaseNIC {
 	private static File	root;
 
 	/**

@@ -1,6 +1,6 @@
 package ccm.nucleum_omnium.helper.enums;
 
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 import ccm.nucleum_omnium.utils.lib.TileConstant;
 
 /**
@@ -8,7 +8,7 @@ import ccm.nucleum_omnium.utils.lib.TileConstant;
  * 
  * @author Captain_Shadows
  */
-public class EnumHelper extends BaseNIClass {
+public class EnumHelper extends BaseNIC {
 
 	/**
 	 * @param enu

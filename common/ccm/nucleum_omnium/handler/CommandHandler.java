@@ -1,6 +1,6 @@
 package ccm.nucleum_omnium.handler;
 
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 import ccm.nucleum_omnium.command.CommandKill;
 import ccm.nucleum_omnium.command.CommandNO;
 import ccm.nucleum_omnium.command.CommandTPS;
@@ -8,7 +8,7 @@ import ccm.nucleum_omnium.command.CommandTPX;
 import ccm.nucleum_omnium.utils.lib.Properties;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-public final class CommandHandler extends BaseNIClass {
+public final class CommandHandler extends BaseNIC {
 
 	public static void initCommands(final FMLServerStartingEvent event) {
 

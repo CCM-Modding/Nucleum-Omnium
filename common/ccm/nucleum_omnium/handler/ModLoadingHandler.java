@@ -2,11 +2,11 @@ package ccm.nucleum_omnium.handler;
 
 import java.util.HashMap;
 
-import ccm.nucleum_omnium.BaseNIClass;
 import ccm.nucleum_omnium.IMod;
+import ccm.nucleum_omnium.base.BaseNIC;
 import ccm.nucleum_omnium.utils.exeptions.DupeExeption;
 
-public final class ModLoadingHandler extends BaseNIClass {
+public final class ModLoadingHandler extends BaseNIC {
 
 	private static HashMap<IMod, Boolean>	modsLoaded	= new HashMap<IMod, Boolean>();
 

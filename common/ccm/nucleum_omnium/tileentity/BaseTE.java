@@ -166,7 +166,7 @@ public class BaseTE extends TileEntity {
 	public void updateEntity() {
 		if (logic != null) {
 			logic.runLogic();
-			//LogHandler.log("Logic was ran ... \n");
+			LogHandler.log("Logic was ran ... \n");
 		} else if (srclogic != null) {
 			LogHandler.log("Logic was NULL Instanciating ... \n");
 			Constructor<? extends ITileLogic> c = null;

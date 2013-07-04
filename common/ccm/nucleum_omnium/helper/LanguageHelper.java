@@ -1,9 +1,9 @@
 package ccm.nucleum_omnium.helper;
 
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-public final class LanguageHelper extends BaseNIClass {
+public final class LanguageHelper extends BaseNIC {
 
 	/***
 	 * Returns the locale from the file name.

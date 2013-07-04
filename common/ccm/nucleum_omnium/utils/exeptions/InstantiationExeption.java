@@ -8,7 +8,7 @@ import ccm.nucleum_omnium.IMod;
  */
 public class InstantiationExeption extends NotMyFaultExeption {
 
-	private static final long	serialVersionUID	= -8965983875808595830L;
+	private static final long	serialVersionUID	= -4924662681925538498L;
 
 	private final StringBuilder	tmpErrorSB			= new StringBuilder();
 

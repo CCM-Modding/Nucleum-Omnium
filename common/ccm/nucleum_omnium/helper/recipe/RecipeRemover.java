@@ -6,10 +6,10 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import ccm.nucleum_omnium.BaseNIClass;
+import ccm.nucleum_omnium.base.BaseNIC;
 import ccm.nucleum_omnium.handler.LogHandler;
 
-public final class RecipeRemover extends BaseNIClass {
+public final class RecipeRemover extends BaseNIC {
 
 	private static List<ItemStack>	items	= new ArrayList<ItemStack>();
 

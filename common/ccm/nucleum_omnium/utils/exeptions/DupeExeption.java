@@ -7,15 +7,12 @@ import ccm.nucleum_omnium.IMod;
  */
 public class DupeExeption extends NotMyFaultExeption {
 
-	private static final long	serialVersionUID	= -6762134744912730876L;
-
-	private final IMod			mod;
+	private static final long	serialVersionUID	= -2394035866442734958L;
 
 	private final StringBuilder	tmpErrorSB			= new StringBuilder();
 
 	public DupeExeption(final IMod mod) {
 		super(mod);
-		this.mod = mod;
 		addString();
 		crashMC();
 	}
