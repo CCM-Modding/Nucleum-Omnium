@@ -68,7 +68,7 @@ public class InventoryTE extends BaseTE implements IInventory {
 
 	@Override
 	public ItemStack decrStackSize(final int slot, final int amount) {
-		return InventoryHelper.decrStackSize(slot, amount, inventory, this);
+		return InventoryHelper.decrStackSize(slot, amount, this);
 	}
 
 	@Override

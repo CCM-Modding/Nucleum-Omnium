@@ -64,21 +64,18 @@ public class InventoryHelper extends BaseNIC {
 	 *            The inventory (A class implementing {@link IInventory})
 	 * @return The new {@link ItemStack}.
 	 */
-	public static ItemStack decrStackSize(	final int slot,
-											final int amount,
-											final ItemStack[] stacks,
-											final IInventory inventory) {
-		if (stacks[slot] != null) {
+	public static ItemStack decrStackSize(final int slot, final int amount, final IInventory inventory) {
+		if (inventory.getStackInSlot(slot) != null) {
 			ItemStack itemstack;
-			if (stacks[slot].stackSize <= amount) {
-				itemstack = stacks[slot];
-				stacks[slot] = null;
+			if (inventory.getStackInSlot(slot).stackSize <= amount) {
+				itemstack = inventory.getStackInSlot(slot);
+				setEmty(inventory, slot);
 				inventory.onInventoryChanged();
 				return itemstack;
 			} else {
-				itemstack = stacks[slot].splitStack(amount);
-				if (stacks[slot].stackSize == 0) {
-					stacks[slot] = null;
+				itemstack = inventory.getStackInSlot(slot).splitStack(amount);
+				if (inventory.getStackInSlot(slot).stackSize == 0) {
+					setEmty(inventory, slot);
 				}
 				inventory.onInventoryChanged();
 				return itemstack;
@@ -86,6 +83,16 @@ public class InventoryHelper extends BaseNIC {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * Sets a slot in the inventory to be empty
+	 * 
+	 * @param inventory
+	 * @param slot
+	 */
+	public static void setEmty(IInventory inventory, int slot) {
+		inventory.setInventorySlotContents(slot, ItemHelper.getEmty(inventory.getStackInSlot(slot)));
 	}
 
 	/**
@@ -101,22 +108,21 @@ public class InventoryHelper extends BaseNIC {
 	 *            The output
 	 * @return The Slot number
 	 */
-	public static int getBestInventory(	final ItemStack[] inventory,
-										final int startSlot,
-										final ItemStack output) {
+	public static int
+			getBestInventory(final IInventory inventory, final int startSlot, final ItemStack output) {
 
-		if (inventory[startSlot].isItemEqual(output)) {
+		if (inventory.getStackInSlot(startSlot).isItemEqual(output)) {
 			return startSlot;
-		} else if (inventory[startSlot] == null) {
+		} else if (inventory.getStackInSlot(startSlot) == null) {
 			return startSlot;
 		} else {
 			int bestSlot = startSlot;
 
-			for (int slot = startSlot; slot < inventory.length; slot++) {
-				if (inventory[slot].isItemEqual(output)) {
+			for (int slot = startSlot; slot < inventory.getSizeInventory(); slot++) {
+				if (inventory.getStackInSlot(slot).isItemEqual(output)) {
 					bestSlot = slot;
 					break;
-				} else if (inventory[slot] == null) {
+				} else if (inventory.getStackInSlot(slot) == null) {
 					bestSlot = slot;
 					break;
 				}
