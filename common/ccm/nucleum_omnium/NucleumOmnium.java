@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import ccm.nucleum_network.PacketHandler;
 import ccm.nucleum_omnium.configuration.AdvConfiguration;
 import ccm.nucleum_omnium.handler.CommandHandler;
+import ccm.nucleum_omnium.handler.GUIHandler;
 import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.handler.ModLoadingHandler;
 import ccm.nucleum_omnium.handler.config.ConfigurationHandler;
@@ -30,6 +31,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(	modid = Archive.MOD_ID,
 		name = Archive.MOD_NAME,
@@ -52,7 +54,7 @@ public class NucleumOmnium extends BaseMod implements IMod {
 	public static AdvConfiguration	config;
 
 	public static MinecraftServer	server;
-	
+
 	@Override
 	public AdvConfiguration getConfigFile() {
 		return config;
@@ -66,7 +68,7 @@ public class NucleumOmnium extends BaseMod implements IMod {
 		 */
 		LogHandler.log(Archive.INVALID_FINGERPRINT_MSG);
 	}
-	
+
 	@PreInit
 	public void preInit(final FMLPreInitializationEvent evt) {
 		if (!ModLoadingHandler.isModLoaded(this)) {
@@ -77,7 +79,7 @@ public class NucleumOmnium extends BaseMod implements IMod {
 			ConfigurationHandler.init(this, NOConfig.class);
 		}
 	}
-	
+
 	@Init
 	public void init(final FMLInitializationEvent event) {
 
@@ -88,6 +90,9 @@ public class NucleumOmnium extends BaseMod implements IMod {
 		proxy.initModelHandlers();
 
 		ModHandler.addMod(new MystcraftHandler());
+
+		// Registers the GUI Handler
+		NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GUIHandler.instance());
 
 		OmniumLP.init();
 	}

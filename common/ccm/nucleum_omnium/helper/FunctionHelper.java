@@ -14,6 +14,7 @@ import net.minecraft.world.biome.BiomeGenDesert;
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.base.BaseNIC;
 import ccm.nucleum_omnium.block.MainBlock;
+import ccm.nucleum_omnium.handler.LogHandler;
 
 public final class FunctionHelper extends BaseNIC {
 
@@ -91,6 +92,7 @@ public final class FunctionHelper extends BaseNIC {
 		final TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 		if (tileEntity != null) {
 			if (!(tileEntity instanceof IInventory)) {
+				LogHandler.log("Tile %s was not an instance of IInventory, and called dropInventory!!", tileEntity);
 				return;
 			}
 			final IInventory inventory = (IInventory) tileEntity;

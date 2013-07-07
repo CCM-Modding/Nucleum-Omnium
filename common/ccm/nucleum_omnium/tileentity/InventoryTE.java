@@ -89,17 +89,17 @@ public class InventoryTE extends BaseTE implements IInventory {
 
 	@Override
 	public String getInvName() {
-		return hasCustomName() ? getCustomName() : FunctionHelper.getTEName(worldObj, xCoord, yCoord, zCoord);
+		return getData().hasCustomName() ? getData().getCustomName() : FunctionHelper.getTEName(worldObj, xCoord, yCoord, zCoord);
 	}
 
 	@Override
 	public boolean isInvNameLocalized() {
-		return hasCustomName();
+		return getData().hasCustomName();
 	}
 
 	@Override
-	public boolean isStackValidForSlot(final int i, final ItemStack itemstack) {
-		return true;
+	public boolean isStackValidForSlot(final int slot, final ItemStack itemstack) {
+		return getData().getTileLogic().isStackValidForSlot(slot, itemstack);
 	}
 
 	/**
@@ -126,6 +126,9 @@ public class InventoryTE extends BaseTE implements IInventory {
 	@Override
 	public void readFromNBT(final NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		if(nbt.hasKey(TileConstant.NBT_TE_INVENTORY_SIZE)){
+			setInventorySize(nbt.getInteger(TileConstant.NBT_TE_INVENTORY_SIZE));
+		}
 		setInventory(InventoryHelper.readInventoryFromNBT(	nbt.getTagList(TileConstant.INVENTORY),
 															getSizeInventory()));
 	}
@@ -136,6 +139,7 @@ public class InventoryTE extends BaseTE implements IInventory {
 	@Override
 	public void writeToNBT(final NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
+		nbt.setInteger(TileConstant.NBT_TE_INVENTORY_SIZE, getSizeInventory());
 		nbt.setTag(TileConstant.INVENTORY, InventoryHelper.writeInventoryToNBT(getInventory()));
 	}
 }

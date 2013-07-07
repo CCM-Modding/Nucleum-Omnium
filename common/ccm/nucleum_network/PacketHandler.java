@@ -27,5 +27,4 @@ public class PacketHandler implements IPacketHandler {
 
 		packetBase.execute(manager, player);
 	}
-
 }

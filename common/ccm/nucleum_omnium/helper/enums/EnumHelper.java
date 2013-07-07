@@ -16,6 +16,6 @@ public class EnumHelper extends BaseNIC {
 	 * @return a modified version of the constants name()
 	 */
 	public static String getTileID(final Enum<?> enu) {
-		return TileConstant.CONTAINER + enu.name();
+		return TileConstant.CONTAINER + enu.name() + ".name";
 	}
 }

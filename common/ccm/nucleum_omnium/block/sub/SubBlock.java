@@ -167,15 +167,13 @@ public class SubBlock {
 	}
 
 	public SubBlock setUnlocalizedName(final String string) {
-		unlocName = string;
+		unlocName = string + ".name";
 		mainBlock.setUnlocalizedName(unlocName);
 		return this;
 	}
 
-	public SubBlock setUnlocalizedName(final Enum<?> string) {
-		unlocName = string.name();
-		mainBlock.setUnlocalizedName(unlocName);
-		return this;
+	public SubBlock setUnlocalizedName(final Enum<?> enu) {
+		return setUnlocalizedName(enu.name());
 	}
 
 	public SubBlock setBlockDrops(final ItemStack item, final int min, final int max) {

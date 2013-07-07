@@ -55,7 +55,7 @@ public class SBMutlyTexture extends SubBlock {
 		final BaseTE te = (BaseTE) blockAccess.getBlockTileEntity(x, y, z);
 
 		if (te != null) {
-			if (goodSides.contains(BlockFacings.Front) && (side == te.getOrientation().ordinal())) {
+			if (goodSides.contains(BlockFacings.Front) && (side == te.getOrientationOrdinal())) {
 				return icons[BlockFacings.Front.ordinal()];
 			}
 		}

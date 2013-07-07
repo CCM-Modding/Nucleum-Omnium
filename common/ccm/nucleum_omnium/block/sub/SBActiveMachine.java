@@ -51,7 +51,7 @@ public class SBActiveMachine extends SBWithTile {
 		final ActiveTE te = (ActiveTE) blockAccess.getBlockTileEntity(x, y, z);
 
 		if (te != null) {
-			if (goodSides.contains(BlockFacings.Front) && (side == te.getOrientation().ordinal())) {
+			if (goodSides.contains(BlockFacings.Front) && (side == te.getOrientationOrdinal())) {
 				if (te.getState()) {
 					return icons[7];
 				} else {

@@ -36,11 +36,11 @@ public final class GUIHandler implements IGuiHandler {
 		guiList = new HashMap<Integer, Class<? extends GuiContainer>>();
 		containerList = new HashMap<Integer, Class<? extends Container>>();
 	}
-	
+
 	/**
 	 * @return The GUIHandler's Instance
 	 */
-	public static GUIHandler instance(){
+	public static GUIHandler instance() {
 		return INSTANCE;
 	}
 
@@ -95,7 +95,15 @@ public final class GUIHandler implements IGuiHandler {
 								final int x,
 								final int y,
 								final int z) {
-		player.openGui(NucleumOmnium.instance, hash(guiID), world, x, y, z);
+		int fix = hash(guiID);
+		if (instance().containerList.containsKey(fix)) {
+			player.openGui(NucleumOmnium.instance, fix, world, x, y, z);
+		} else {
+			LogHandler.log(	NucleumOmnium.instance,
+							String.format(	"Player: %s, tried to open %s but it is not registered!! \n",
+											player.username,
+											guiID));
+		}
 	}
 
 	/**
@@ -108,7 +116,7 @@ public final class GUIHandler implements IGuiHandler {
 		LogHandler.log(fix);
 		return fix.hashCode();
 	}
-	
+
 	@Override
 	public Object getServerGuiElement(	final int ID,
 										final EntityPlayer player,
@@ -123,6 +131,7 @@ public final class GUIHandler implements IGuiHandler {
 												.getConstructor(InventoryPlayer.class, TileEntity.class)
 												.newInstance(player.inventory, te);
 		} catch (final Exception e) {
+			e.getCause();
 			e.printStackTrace();
 		}
 		return container;
@@ -142,6 +151,7 @@ public final class GUIHandler implements IGuiHandler {
 									.getConstructor(InventoryPlayer.class, TileEntity.class)
 									.newInstance(player.inventory, te);
 		} catch (final Exception e) {
+			e.getCause();
 			e.printStackTrace();
 		}
 		return gui;

@@ -46,28 +46,21 @@ public class ActiveTE extends InventoryTE {
 		}
 	}
 
-	/*
-	 * @Override public Packet getDescriptionPacket() { Payload payload = new Payload(1, 0, 0, 0,
-	 * 0); payload.boolPayload[0] = this.state; TilePkt packet = new
-	 * TilePkt(descPacketId, this.xCoord, this.yCoord, this.zCoord, payload); return
-	 * packet.getPacket(); }
-	 */
-
 	@Override
 	public void writeToNBT(final NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-		nbtTagCompound.setBoolean(TileConstant.NBT_TE_PAST_State, pastState);
-		nbtTagCompound.setBoolean(TileConstant.NBT_TE_State, state);
+		nbtTagCompound.setBoolean(TileConstant.NBT_TE_PAST_STATE, pastState);
+		nbtTagCompound.setBoolean(TileConstant.NBT_TE_STATE, state);
 	}
 
 	@Override
 	public void readFromNBT(final NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
-		if (nbtTagCompound.hasKey(TileConstant.NBT_TE_PAST_State)) {
-			pastState = nbtTagCompound.getBoolean(TileConstant.NBT_TE_PAST_State);
+		if (nbtTagCompound.hasKey(TileConstant.NBT_TE_PAST_STATE)) {
+			pastState = nbtTagCompound.getBoolean(TileConstant.NBT_TE_PAST_STATE);
 		}
-		if (nbtTagCompound.hasKey(TileConstant.NBT_TE_State)) {
-			state = nbtTagCompound.getBoolean(TileConstant.NBT_TE_State);
+		if (nbtTagCompound.hasKey(TileConstant.NBT_TE_STATE)) {
+			state = nbtTagCompound.getBoolean(TileConstant.NBT_TE_STATE);
 		}
 	}
 }

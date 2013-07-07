@@ -18,6 +18,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import ccm.nucleum_omnium.block.sub.SubBlock;
+import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.item.block.MainItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -312,10 +313,11 @@ public class MainBlock extends Block {
 							final int z,
 							final int id,
 							final int meta) {
-		super.breakBlock(world, x, y, z, id, meta);
+		FunctionHelper.dropInventory(world, x, y, z);
 		if (subBlocks[meta] != null) {
 			subBlocks[meta].breakBlock(world, x, y, z, id, meta);
 		}
+		super.breakBlock(world, x, y, z, id, meta);
 	}
 
 	@Override

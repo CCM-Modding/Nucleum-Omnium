@@ -8,7 +8,7 @@ import ccm.nucleum_omnium.base.BaseNIC;
 
 public class InventoryHelper extends BaseNIC {
 
-	private static final String	slot	= "slot";
+	private static final String	slot	= "CCM.SLOT";
 
 	/**
 	 * Writes a inventory to a NBTTagList.
@@ -18,16 +18,16 @@ public class InventoryHelper extends BaseNIC {
 	 * @return The NBTTagList associated to the inventory.
 	 */
 	public static NBTTagList writeInventoryToNBT(final ItemStack[] stacks) {
-		NBTTagCompound stackNBT;
+		NBTTagCompound nbt;
 		final NBTTagList list = new NBTTagList();
 		for (int i = 0; i < stacks.length; i++) {
 			if (stacks[i] == null) {
 				continue;
 			}
-			stackNBT = new NBTTagCompound();
-			stackNBT.setInteger(InventoryHelper.slot, i);
-			stacks[i].writeToNBT(stackNBT);
-			list.appendTag(stackNBT);
+			nbt = new NBTTagCompound();
+			nbt.setInteger(slot, i);
+			stacks[i].writeToNBT(nbt);
+			list.appendTag(nbt);
 		}
 		return list;
 	}
@@ -43,10 +43,10 @@ public class InventoryHelper extends BaseNIC {
 	 */
 	public static ItemStack[] readInventoryFromNBT(final NBTTagList list, final int size) {
 		final ItemStack[] stacks = new ItemStack[size];
-		NBTTagCompound compound;
+		NBTTagCompound nbt;
 		for (int i = 0; i < list.tagCount(); i++) {
-			compound = (NBTTagCompound) list.tagAt(i);
-			stacks[compound.getInteger(slot)] = ItemStack.loadItemStackFromNBT(compound);
+			nbt = (NBTTagCompound) list.tagAt(i);
+			stacks[nbt.getInteger(slot)] = ItemStack.loadItemStackFromNBT(nbt);
 		}
 		return stacks;
 	}
