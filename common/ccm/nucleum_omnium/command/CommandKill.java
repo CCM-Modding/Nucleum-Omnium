@@ -35,12 +35,12 @@ public class CommandKill extends CommandBase {
 		if (args.length == 1) {
 			final EntityPlayerMP playerDead = CommandHelper.getPlayer(sender, args[0]);
 			playerDead.attackEntityFrom(DamageSource.outOfWorld, Integer.MAX_VALUE);
-			playerDead.sendChatToPlayer("Ouch. That looks like it hurt.");
+			playerDead.sendChatToPlayer("You were killed!");
 		} else {
 			final EntityPlayerMP playerDead = CommandHelper.getPlayer(sender);
 			if (args.length == 0) {
 				playerDead.attackEntityFrom(DamageSource.outOfWorld, Integer.MAX_VALUE);
-				playerDead.sendChatToPlayer("Ouch. That looks like it hurt.");
+				playerDead.sendChatToPlayer("You were killed!");
 			} else {
 				playerDead.sendChatToPlayer(getCommandUsage(sender));
 			}
