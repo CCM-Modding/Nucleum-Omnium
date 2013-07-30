@@ -5,14 +5,14 @@ import ccm.nucleum_omnium.utils.lib.Locations;
 
 public class OmniumLP extends BaseNIC {
 
-	/**
-	 * Adds all the supported Languages
-	 */
-	public static void init() {
-		final LanguagePack pack = new LanguagePack();
-		pack.setPath(Locations.LANGUAGE_FILE);
-		pack.addSuport("en_US");
-		pack.addSuport("es_ES");
-		pack.loadLangs();
-	}
+    /**
+     * Adds all the supported Languages
+     */
+    public static void init() {
+        final LanguagePack pack = new LanguagePack();
+        pack.setPath(Locations.LANGUAGE_FILE);
+        pack.addSuport("en_US");
+        pack.addSuport("es_ES");
+        pack.loadLangs();
+    }
 }

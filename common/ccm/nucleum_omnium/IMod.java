@@ -11,18 +11,18 @@ import ccm.nucleum_omnium.configuration.AdvConfiguration;
  */
 public interface IMod {
 
-	/**
-	 * @return The Mod's ID
-	 */
-	public String getModId();
+    /**
+     * @return The Mod's ID
+     */
+    public String getModId();
 
-	/**
-	 * @return The Mod's Name
-	 */
-	public String getName();
+    /**
+     * @return The Mod's Name
+     */
+    public String getName();
 
-	/**
-	 * @return The AdvConfiguration file that belongs to the mod
-	 */
-	public AdvConfiguration getConfigFile();
+    /**
+     * @return The AdvConfiguration file that belongs to the mod
+     */
+    public AdvConfiguration getConfigFile();
 }

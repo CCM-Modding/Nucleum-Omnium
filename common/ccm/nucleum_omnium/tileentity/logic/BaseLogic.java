@@ -1,6 +1,7 @@
 package ccm.nucleum_omnium.tileentity.logic;
 
 import net.minecraft.nbt.NBTTagCompound;
+
 import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
 
 /**
@@ -11,9 +12,9 @@ import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
  */
 public abstract class BaseLogic implements ITileLogic {
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {}
+    @Override
+    public void readFromNBT(final NBTTagCompound nbt) {}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {}
+    @Override
+    public void writeToNBT(final NBTTagCompound nbt) {}
 }

@@ -8,19 +8,19 @@ import ccm.nucleum_omnium.IMod;
  */
 public class InstantiationExeption extends NotMyFaultExeption {
 
-	private static final long	serialVersionUID	= -4924662681925538498L;
+    private static final long   serialVersionUID = -4924662681925538498L;
 
-	private final StringBuilder	tmpErrorSB			= new StringBuilder();
+    private final StringBuilder tmpErrorSB       = new StringBuilder();
 
-	public InstantiationExeption(final IMod mod) {
-		super(mod);
-		addString();
-		crashMC();
-	}
+    public InstantiationExeption(final IMod mod) {
+        super(mod);
+        addString();
+        crashMC();
+    }
 
-	private void addString() {
-		tmpErrorSB.append("Why did the Hex did you try to Instantiate my Helper???\n");
-		tmpErrorSB.append("You ... Better stop tring to, you will nevar get the instance!!\n");
-		errorSB.replace(errorSB.lastIndexOf("|"), errorSB.lastIndexOf("|") + 1, tmpErrorSB.toString());
-	}
+    private void addString() {
+        tmpErrorSB.append("Why did the Hex did you try to Instantiate my Helper???\n");
+        tmpErrorSB.append("You ... Better stop tring to, you will nevar get the instance!!\n");
+        errorSB.replace(errorSB.lastIndexOf("|"), errorSB.lastIndexOf("|") + 1, tmpErrorSB.toString());
+    }
 }

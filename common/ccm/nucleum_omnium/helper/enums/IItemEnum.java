@@ -11,11 +11,11 @@ import net.minecraft.util.Icon;
  */
 public interface IItemEnum {
 
-	/**
-	 * @return A new {@link Item} instance, the instance should be the registered and instantiated
-	 *         Item that contains all of these sub Items
-	 */
-	public Item getBaseItem();
+    /**
+     * @return A new {@link Item} instance, the instance should be the registered and instantiated
+     *         Item that contains all of these sub Items
+     */
+    public Item getBaseItem();
 
-	Icon getIcon();
+    Icon getIcon();
 }

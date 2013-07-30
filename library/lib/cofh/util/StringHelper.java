@@ -11,23 +11,26 @@ import net.minecraft.client.gui.FontRenderer;
  */
 public final class StringHelper {
 
-	private StringHelper() {}
+    private StringHelper() {
 
-	public static int getSplitStringHeight(	final FontRenderer fontRenderer,
-											final String input,
-											final int width) {
+    }
 
-		final List<?> stringRows = fontRenderer.listFormattedStringToWidth(input, width);
-		return stringRows.size() * fontRenderer.FONT_HEIGHT;
-	}
+    public static int getSplitStringHeight(final FontRenderer fontRenderer,
+                                           final String input,
+                                           final int width) {
 
-	public static String camelCase(final String input) {
+        final List stringRows = fontRenderer.listFormattedStringToWidth(input, width);
+        return stringRows.size() * fontRenderer.FONT_HEIGHT;
+    }
 
-		return input.substring(0, 1).toLowerCase() + input.substring(1);
-	}
+    public static String camelCase(final String input) {
 
-	public static String titleCase(final String input) {
+        return input.substring(0, 1).toLowerCase() + input.substring(1);
+    }
 
-		return input.substring(0, 1).toUpperCase() + input.substring(1);
-	}
+    public static String titleCase(final String input) {
+
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
+
 }

@@ -6,51 +6,51 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEnergyHandler extends TileEntity implements IEnergyHandler {
 
-	protected EnergyStorage	storage	= new EnergyStorage(32000);
+    protected EnergyStorage storage = new EnergyStorage(32000);
 
-	@Override
-	public void readFromNBT(final NBTTagCompound nbt) {
+    @Override
+    public void readFromNBT(final NBTTagCompound nbt) {
 
-		super.readFromNBT(nbt);
-		storage.writeToNBT(nbt);
-	}
+        super.readFromNBT(nbt);
+        storage.writeToNBT(nbt);
+    }
 
-	@Override
-	public void writeToNBT(final NBTTagCompound nbt) {
+    @Override
+    public void writeToNBT(final NBTTagCompound nbt) {
 
-		super.writeToNBT(nbt);
-		storage.readFromNBT(nbt);
-	}
+        super.writeToNBT(nbt);
+        storage.readFromNBT(nbt);
+    }
 
-	/* IEnergyHandler */
-	@Override
-	public int receiveEnergy(final ForgeDirection from, final int maxReceive, final boolean doReceive) {
+    /* IEnergyHandler */
+    @Override
+    public int receiveEnergy(final ForgeDirection from, final int maxReceive, final boolean doReceive) {
 
-		return storage.receiveEnergy(maxReceive, doReceive);
-	}
+        return storage.receiveEnergy(maxReceive, doReceive);
+    }
 
-	@Override
-	public boolean canReceiveEnergy(final ForgeDirection from) {
+    @Override
+    public boolean canReceiveEnergy(final ForgeDirection from) {
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public boolean canSendEnergy(final ForgeDirection from) {
+    @Override
+    public boolean canSendEnergy(final ForgeDirection from) {
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public int getEnergyStored(final ForgeDirection from) {
+    @Override
+    public int getEnergyStored(final ForgeDirection from) {
 
-		return storage.getEnergyStored();
-	}
+        return storage.getEnergyStored();
+    }
 
-	@Override
-	public int getMaxEnergyStored(final ForgeDirection from) {
+    @Override
+    public int getMaxEnergyStored(final ForgeDirection from) {
 
-		return storage.getMaxEnergyStored();
-	}
+        return storage.getMaxEnergyStored();
+    }
 
 }

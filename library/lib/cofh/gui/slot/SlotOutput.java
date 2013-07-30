@@ -6,15 +6,15 @@ import net.minecraft.item.ItemStack;
 
 public class SlotOutput extends Slot {
 
-	public SlotOutput(final IInventory inventory, final int x, final int y, final int z) {
+    public SlotOutput(final IInventory inventory, final int x, final int y, final int z) {
 
-		super(inventory, x, y, z);
-	}
+        super(inventory, x, y, z);
+    }
 
-	@Override
-	public boolean isItemValid(final ItemStack stack) {
+    @Override
+    public boolean isItemValid(final ItemStack stack) {
 
-		return false;
-	}
+        return false;
+    }
 
 }

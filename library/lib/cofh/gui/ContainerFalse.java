@@ -5,10 +5,10 @@ import net.minecraft.inventory.Container;
 
 public final class ContainerFalse extends Container {
 
-	@Override
-	public boolean canInteractWith(final EntityPlayer player) {
+    @Override
+    public boolean canInteractWith(final EntityPlayer player) {
 
-		return false;
-	}
+        return false;
+    }
 
 }

@@ -7,8 +7,8 @@ import net.minecraft.network.packet.Packet250CustomPayload;
  */
 public interface ICustomPacket {
 
-	/**
-	 * @return the Packet250CustomPayload
-	 */
-	public abstract Packet250CustomPayload getPayload();
+    /**
+     * @return the Packet250CustomPayload
+     */
+    public abstract Packet250CustomPayload getPayload();
 }

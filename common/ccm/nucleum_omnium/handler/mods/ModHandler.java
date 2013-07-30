@@ -3,8 +3,9 @@ package ccm.nucleum_omnium.handler.mods;
 import java.util.ArrayList;
 import java.util.List;
 
-import ccm.nucleum_omnium.handler.LogHandler;
 import cpw.mods.fml.common.Loader;
+
+import ccm.nucleum_omnium.handler.LogHandler;
 
 /**
  * Registry for all mod compatibility classes inside of any of the CCM Mods
@@ -13,56 +14,56 @@ import cpw.mods.fml.common.Loader;
  */
 public final class ModHandler {
 
-	/**
-	 * List of all {@link IModHandler}s that this "Registry" needs to handle
-	 */
-	private final List<IModHandler>	modsHandling;
+    /**
+     * List of all {@link IModHandler}s that this "Registry" needs to handle
+     */
+    private final List<IModHandler> modsHandling;
 
-	/**
-	 * Private single instance
-	 */
-	private static final ModHandler	INSTANCE	= new ModHandler();
+    /**
+     * Private single instance
+     */
+    private static final ModHandler INSTANCE = new ModHandler();
 
-	/**
-	 * Private constructor
-	 */
-	private ModHandler() {
-		modsHandling = new ArrayList<IModHandler>();
-	}
+    /**
+     * Private constructor
+     */
+    private ModHandler() {
+        modsHandling = new ArrayList<IModHandler>();
+    }
 
-	/**
-	 * @param handler
-	 *            The {@link IModHandler} to add to the List
-	 */
-	public static void addMod(final IModHandler handler) {
-		INSTANCE.modsHandling.add(handler);
-	}
+    /**
+     * @param handler
+     *            The {@link IModHandler} to add to the List
+     */
+    public static void addMod(final IModHandler handler) {
+        INSTANCE.modsHandling.add(handler);
+    }
 
-	/**
-	 * THIS METHOD SHOULD NEVER BE CALLED BY ANY CLASS.
-	 * <p>
-	 * Except NucleumOmnium.java
-	 */
-	public static void init() {
-		for (final IModHandler handler : INSTANCE.modsHandling) {
-			handleMod(handler);
-		}
-	}
+    /**
+     * THIS METHOD SHOULD NEVER BE CALLED BY ANY CLASS.
+     * <p>
+     * Except NucleumOmnium.java
+     */
+    public static void init() {
+        for (final IModHandler handler : INSTANCE.modsHandling) {
+            handleMod(handler);
+        }
+    }
 
-	/**
-	 * Private method that initializes the IModHandler
-	 * 
-	 * @param handler
-	 *            The handler to init
-	 */
-	private static void handleMod(final IModHandler handler) {
-		if (Loader.isModLoaded(handler.getModName())) {
-			try {
-				handler.init();
-			} catch (final Exception e) {
-				LogHandler.log(handler.getMod(), handler);
-				e.printStackTrace();
-			}
-		}
-	}
+    /**
+     * Private method that initializes the IModHandler
+     * 
+     * @param handler
+     *            The handler to init
+     */
+    private static void handleMod(final IModHandler handler) {
+        if (Loader.isModLoaded(handler.getModName())) {
+            try {
+                handler.init();
+            } catch (final Exception e) {
+                LogHandler.severe(handler.getMod(), handler.toString());
+                e.printStackTrace();
+            }
+        }
+    }
 }

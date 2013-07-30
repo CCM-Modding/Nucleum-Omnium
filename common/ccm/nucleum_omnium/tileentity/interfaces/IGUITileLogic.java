@@ -1,5 +1,7 @@
 package ccm.nucleum_omnium.tileentity.interfaces;
 
+import net.minecraft.item.ItemStack;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -10,25 +12,32 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public interface IGUITileLogic extends ITileLogic {
 
-	/**
-	 * This method gets called by the GUI when deciding the progress bar
-	 * 
-	 * @param scale
-	 *            The scale
-	 * @return the process, AKA % done
-	 */
-	@SideOnly(Side.CLIENT)
-	public int getProgressScaled(final int scale);
+    /**
+     * This method gets called by the GUI when deciding the progress bar
+     * 
+     * @param scale
+     *            The scale
+     * @return the process, AKA % done
+     */
+    @SideOnly(Side.CLIENT)
+    public int getProgressScaled(final int scale);
 
-	/**
-	 * @return The amount of time left for the current process
-	 */
-	public int getTimeLeft();
+    /**
+     * @return The amount of time left for the current process
+     */
+    public int getTimeLeft();
 
-	/**
-	 * Sets the amount of time left in the current process
-	 * 
-	 * @param time
-	 */
-	public void setTimeLeft(final int time);
+    /**
+     * Sets the amount of time left in the current process
+     * 
+     * @param time
+     */
+    public void setTimeLeft(final int time);
+
+    /**
+     * @param item
+     *            The item in the input slot
+     * @return The maximum amount of time that the item can be "cooked" for
+     */
+    public int getMaxTime(final ItemStack item);
 }

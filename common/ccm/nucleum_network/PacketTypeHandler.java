@@ -7,67 +7,68 @@ import java.util.Map;
 
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
+
 import ccm.nucleum_network.packet.PacketBase;
 import ccm.nucleum_omnium.utils.lib.Archive;
 
 public final class PacketTypeHandler {
 
-	private static Map<Integer, Class<? extends PacketBase>>	types		= new HashMap<Integer, Class<? extends PacketBase>>();
+    private static Map<Integer, Class<? extends PacketBase>> types    = new HashMap<Integer, Class<? extends PacketBase>>();
 
-	private static final PacketTypeHandler						INSTANCE	= new PacketTypeHandler();
+    private static final PacketTypeHandler                   INSTANCE = new PacketTypeHandler();
 
-	public static PacketTypeHandler instance() {
-		return INSTANCE;
-	}
+    public static PacketTypeHandler instance() {
+        return INSTANCE;
+    }
 
-	public static void registerPacket(final int id, final Class<? extends PacketBase> packet) {
-		if (!types.containsKey(Integer.valueOf(id))) {
-			types.put(Integer.valueOf(id), packet);
-		}
-	}
+    public static void registerPacket(final int id, final Class<? extends PacketBase> packet) {
+        if (!types.containsKey(Integer.valueOf(id))) {
+            types.put(Integer.valueOf(id), packet);
+        }
+    }
 
-	public static PacketBase buildPacket(final byte[] data) {
+    public static PacketBase buildPacket(final byte[] data) {
 
-		final ByteArrayInputStream bis = new ByteArrayInputStream(data);
-		final int selector = bis.read();
-		final DataInputStream dis = new DataInputStream(bis);
+        final ByteArrayInputStream bytArray = new ByteArrayInputStream(data);
+        final int selector = bytArray.read();
+        final DataInputStream dataStream = new DataInputStream(bytArray);
 
-		PacketBase packet = null;
+        PacketBase packet = null;
 
-		try {
-			packet = types.get(selector).newInstance();
-		} catch (final Exception e) {
-			e.printStackTrace(System.err);
-		}
+        try {
+            packet = types.get(selector).newInstance();
+        } catch (final Exception e) {
+            e.printStackTrace(System.err);
+        }
 
-		packet.readPopulate(dis);
+        packet.readPopulate(dataStream);
 
-		return packet;
-	}
+        return packet;
+    }
 
-	public static PacketBase buildPacket(final int id) {
+    public static PacketBase buildPacket(final int id) {
 
-		PacketBase packet = null;
+        PacketBase packet = null;
 
-		try {
-			packet = types.get(id).newInstance();
-		} catch (final Exception e) {
-			e.printStackTrace(System.err);
-		}
+        try {
+            packet = types.get(id).newInstance();
+        } catch (final Exception e) {
+            e.printStackTrace(System.err);
+        }
 
-		return packet;
-	}
+        return packet;
+    }
 
-	public static Packet populatePacket(final PacketBase packetBase) {
+    public static Packet populatePacket(final PacketBase packetBase) {
 
-		final byte[] data = packetBase.populate();
+        final byte[] data = packetBase.populate();
 
-		final Packet250CustomPayload packet250 = new Packet250CustomPayload();
-		packet250.channel = Archive.MOD_CHANNEL;
-		packet250.data = data;
-		packet250.length = data.length;
-		packet250.isChunkDataPacket = packetBase.isChunkDataPacket;
+        final Packet250CustomPayload packet250 = new Packet250CustomPayload();
+        packet250.channel = Archive.MOD_CHANNEL;
+        packet250.data = data;
+        packet250.length = data.length;
+        packet250.isChunkDataPacket = packetBase.isChunkDataPacket;
 
-		return packet250;
-	}
+        return packet250;
+    }
 }

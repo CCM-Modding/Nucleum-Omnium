@@ -1,9 +1,29 @@
 package ccm.nucleum_omnium;
 
-import lib.org.modstats.ModstatInfo;
+import static ccm.nucleum_omnium.utils.lib.Archive.INVALID_FINGERPRINT_MSG;
+import static ccm.nucleum_omnium.utils.lib.Archive.MOD_CHANNEL;
+import static ccm.nucleum_omnium.utils.lib.Archive.MOD_FIGERPRINT;
+import static ccm.nucleum_omnium.utils.lib.Archive.MOD_ID;
+import static ccm.nucleum_omnium.utils.lib.Archive.MOD_NAME;
+import static ccm.nucleum_omnium.utils.lib.Archive.MOD_PREFIX;
+import static ccm.nucleum_omnium.utils.lib.Locations.CLIENT_PROXY;
+import static ccm.nucleum_omnium.utils.lib.Locations.SERVER_PROXY;
+
 import net.minecraft.server.MinecraftServer;
+
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
+
 import ccm.nucleum_network.PacketHandler;
-import ccm.nucleum_omnium.configuration.AdvConfiguration;
 import ccm.nucleum_omnium.handler.CommandHandler;
 import ccm.nucleum_omnium.handler.GUIHandler;
 import ccm.nucleum_omnium.handler.LogHandler;
@@ -15,103 +35,79 @@ import ccm.nucleum_omnium.handler.mods.MystcraftHandler;
 import ccm.nucleum_omnium.helper.DataHelper;
 import ccm.nucleum_omnium.proxy.CommonProxy;
 import ccm.nucleum_omnium.utils.language.OmniumLP;
-import ccm.nucleum_omnium.utils.lib.Archive;
-import ccm.nucleum_omnium.utils.lib.Locations;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.FingerprintWarning;
-import cpw.mods.fml.common.Mod.Init;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Mod.ServerStarting;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod(	modid = Archive.MOD_ID,
-		name = Archive.MOD_NAME,
-		certificateFingerprint = Archive.MOD_FIGERPRINT,
-		useMetadata = true)
+import lib.org.modstats.ModstatInfo;
+
+@Mod(modid = MOD_ID,
+     name = MOD_NAME,
+     certificateFingerprint = MOD_FIGERPRINT,
+     useMetadata = true)
 @NetworkMod(clientSideRequired = true,
-			serverSideRequired = false,
-			channels = Archive.MOD_CHANNEL,
-			packetHandler = PacketHandler.class)
-@ModstatInfo(prefix = Archive.MOD_PREFIX)
+            serverSideRequired = false,
+            channels = MOD_CHANNEL,
+            packetHandler = PacketHandler.class)
+@ModstatInfo(prefix = MOD_PREFIX)
 public class NucleumOmnium extends BaseMod implements IMod {
 
-	@Instance(Archive.MOD_ID)
-	public static NucleumOmnium		instance;
+    @Instance(MOD_ID)
+    public static NucleumOmnium   instance;
 
-	@SidedProxy(serverSide = Locations.SERVER_PROXY,
-				clientSide = Locations.CLIENT_PROXY)
-	public static CommonProxy		proxy;
+    @SidedProxy(serverSide = SERVER_PROXY,
+                clientSide = CLIENT_PROXY)
+    public static CommonProxy     proxy;
 
-	public static AdvConfiguration	config;
+    public static MinecraftServer server;
 
-	public static MinecraftServer	server;
+    @EventHandler
+    public void invalidFingerprint(final FMLFingerprintViolationEvent event) {
+        /*
+         * Report (log) to the user that the version of Nucleum Omnium they are using has been
+         * changed/tampered with
+         */
+        LogHandler.invalidFP(this, INVALID_FINGERPRINT_MSG);
+    }
 
-	@Override
-	public AdvConfiguration getConfigFile() {
-		return config;
-	}
+    @EventHandler
+    public void preInit(final FMLPreInitializationEvent event) {
+        if (!ModLoadingHandler.isModLoaded(this)) {
+            LogHandler.initLog(this);
 
-	@FingerprintWarning
-	public void invalidFingerprint(final FMLFingerprintViolationEvent event) {
-		/*
-		 * Report (log) to the user that the version of Nucleum Omnium they are using has been
-		 * changed/tampered with
-		 */
-		LogHandler.log(Archive.INVALID_FINGERPRINT_MSG);
-	}
+            config = initializeConfig(event);
 
-	@PreInit
-	public void preInit(final FMLPreInitializationEvent evt) {
-		if (!ModLoadingHandler.isModLoaded(this)) {
-			LogHandler.initLog(this);
+            ConfigurationHandler.init(this, NOConfig.class);
+        }
+    }
 
-			config = initializeConfig(evt);
+    @EventHandler
+    public void init(final FMLInitializationEvent event) {
 
-			ConfigurationHandler.init(this, NOConfig.class);
-		}
-	}
+        proxy.initCapes();
 
-	@Init
-	public void init(final FMLInitializationEvent event) {
+        proxy.initEventHandling();
 
-		proxy.initCapes();
+        ModHandler.addMod(new MystcraftHandler());
 
-		proxy.initEventHandling();
+        // Registers the GUI Handler
+        NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GUIHandler.instance());
 
-		proxy.initModelHandlers();
+        OmniumLP.init();
+    }
 
-		ModHandler.addMod(new MystcraftHandler());
+    @EventHandler
+    public void PostInit(final FMLPostInitializationEvent event) {
 
-		// Registers the GUI Handler
-		NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GUIHandler.instance());
+        ModHandler.init();
 
-		OmniumLP.init();
-	}
+        ModLoadingHandler.loadMod(this);
+    }
 
-	@PostInit
-	public void PostInit(final FMLPostInitializationEvent event) {
+    @EventHandler
+    public void serverStarting(final FMLServerStartingEvent event) {
+        // Initialize the custom commands
+        CommandHandler.initCommands(event);
 
-		ModHandler.init();
+        server = event.getServer();
 
-		ModLoadingHandler.loadMod(this);
-	}
-
-	@ServerStarting
-	public void serverStarting(final FMLServerStartingEvent event) {
-		// Initialize the custom commands
-		CommandHandler.initCommands(event);
-
-		server = event.getServer();
-
-		DataHelper.init();
-	}
+        DataHelper.init();
+    }
 }

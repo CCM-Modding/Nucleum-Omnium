@@ -25,48 +25,48 @@ import cpw.mods.fml.common.FMLLog;
 
 public class Modstats {
 
-	private static final Modstats	INSTANCE		= new Modstats();
+    private static final Modstats   INSTANCE       = new Modstats();
 
-	private static final String		CLASS_TEMPLATE	= "lib.org.modstats.reporter.v%d.Reporter";
+    private static final String     CLASS_TEMPLATE = "lib.org.modstats.reporter.v%d.Reporter";
 
-	private final IModstatsReporter	reporter;
+    private final IModstatsReporter reporter;
 
-	private Modstats() {
-		reporter = locateReporter();
-	}
+    private Modstats() {
+        reporter = locateReporter();
+    }
 
-	public IModstatsReporter getReporter() {
-		return reporter;
-	}
+    public IModstatsReporter getReporter() {
+        return reporter;
+    }
 
-	private IModstatsReporter locateReporter() {
-		int i = 1;
-		Class<?> latest = null;
-		while (i < 100) {
-			try {
-				final Class<?> candidate = Class.forName(String.format(Modstats.CLASS_TEMPLATE, i));
-				if (IModstatsReporter.class.isAssignableFrom(candidate)) {
-					latest = candidate;
-				}
-			} catch (final Exception e) {
-				break;
-			}
-			i++;
-		}
-		if (latest == null) {
-			FMLLog.warning("Modstats reporter class not found.");
-		} else {
-			try {
-				return (IModstatsReporter) latest.newInstance();
-			} catch (final Exception e) {
-				FMLLog.warning("Modstats reporter class can't be instantiated.");
-			}
-		}
-		return null;
-	}
+    private IModstatsReporter locateReporter() {
+        int i = 1;
+        Class<?> latest = null;
+        while (i < 100) {
+            try {
+                final Class<?> candidate = Class.forName(String.format(Modstats.CLASS_TEMPLATE, i));
+                if (IModstatsReporter.class.isAssignableFrom(candidate)) {
+                    latest = candidate;
+                }
+            } catch (final Exception e) {
+                break;
+            }
+            i++;
+        }
+        if (latest == null) {
+            FMLLog.warning("Modstats reporter class not found.");
+        } else {
+            try {
+                return (IModstatsReporter) latest.newInstance();
+            } catch (final Exception e) {
+                FMLLog.warning("Modstats reporter class can't be instantiated.");
+            }
+        }
+        return null;
+    }
 
-	public static Modstats instance() {
-		return Modstats.INSTANCE;
-	}
+    public static Modstats instance() {
+        return Modstats.INSTANCE;
+    }
 
 }

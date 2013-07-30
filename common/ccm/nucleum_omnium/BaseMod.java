@@ -2,9 +2,10 @@ package ccm.nucleum_omnium;
 
 import java.io.File;
 
-import ccm.nucleum_omnium.configuration.AdvConfiguration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
+import ccm.nucleum_omnium.configuration.AdvConfiguration;
 
 /**
  * This class should be the super class of any CCM Mod, as it not only offers a few nice
@@ -15,58 +16,65 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
  */
 public abstract class BaseMod implements IMod {
 
-	private File	config_Folder;
+    private File                   config_Folder;
 
-	/**
-	 * @param folder
-	 *            The Folder in which to store all files in
-	 */
-	protected void setConfigFolderBase(final File folder) {
-		config_Folder = new File(folder.getAbsolutePath() + "/" + getConfigFolder() + "/");
-	}
+    public static AdvConfiguration config;
 
-	/**
-	 * @return A new {@link File}
-	 */
-	protected File getConfigurationFile() {
-		return new File(config_Folder.getAbsolutePath() + "/" + getName() + ".cfg");
-	}
+    /**
+     * @param folder
+     *            The Folder in which to store all files in
+     */
+    protected void setConfigFolderBase(final File folder) {
+        config_Folder = new File(folder.getAbsolutePath() + "/" + getConfigFolder() + "/");
+    }
 
-	/**
-	 * @return A new instance of {@link AdvConfiguration}
-	 */
-	protected AdvConfiguration getAdvConfigFile() {
-		return new AdvConfiguration(getConfigurationFile(), true);
-	}
+    /**
+     * @return A new {@link File}
+     */
+    protected File getConfigurationFile() {
+        return new File(config_Folder.getAbsolutePath() + "/" + getName() + ".cfg");
+    }
 
-	/**
-	 * @return The name of the Config Folder to put all configs in. Defaults to "CCM-Modding"
-	 */
-	protected String getConfigFolder() {
-		return "CCM-Modding";
-	}
+    /**
+     * @return A new instance of {@link AdvConfiguration}
+     */
+    protected AdvConfiguration getAdvConfigFile() {
+        return new AdvConfiguration(getConfigurationFile(), true);
+    }
 
-	/**
-	 * This is a shorter way of creating a new Configuration File
-	 * 
-	 * @param evt
-	 *            A FMLPreInitializationEvent
-	 * @return A new instance of {@link AdvConfiguration}
-	 */
-	protected AdvConfiguration initializeConfig(final FMLPreInitializationEvent evt) {
+    /**
+     * @return The name of the Config Folder to put all configs in. Defaults to "CCM-Modding"
+     */
+    protected String getConfigFolder() {
+        return "CCM-Modding";
+    }
 
-		setConfigFolderBase(evt.getModConfigurationDirectory());
+    /**
+     * This is a shorter way of creating a new Configuration File
+     * 
+     * @param evt
+     *            A FMLPreInitializationEvent
+     * @return A new instance of {@link AdvConfiguration}
+     */
+    protected AdvConfiguration initializeConfig(final FMLPreInitializationEvent evt) {
 
-		return getAdvConfigFile();
-	}
+        setConfigFolderBase(evt.getModConfigurationDirectory());
 
-	@Override
-	public String getModId() {
-		return this.getClass().getAnnotation(Mod.class).modid();
-	}
+        return getAdvConfigFile();
+    }
 
-	@Override
-	public String getName() {
-		return this.getClass().getAnnotation(Mod.class).name();
-	}
+    @Override
+    public String getModId() {
+        return this.getClass().getAnnotation(Mod.class).modid();
+    }
+
+    @Override
+    public String getName() {
+        return this.getClass().getAnnotation(Mod.class).name();
+    }
+
+    @Override
+    public AdvConfiguration getConfigFile() {
+        return config;
+    }
 }

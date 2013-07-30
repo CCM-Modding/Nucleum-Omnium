@@ -12,99 +12,99 @@ import net.minecraft.world.chunk.Chunk;
  */
 public final class ChunkCoord implements Comparable<ChunkCoord>, Serializable {
 
-	/**
-     * 
-     */
-	private static final long	serialVersionUID	= -624987597053791872L;
-	public int					chunkX;
-	public int					chunkZ;
+    /**
+	 * 
+	 */
+    private static final long serialVersionUID = -1483033546339863533L;
+    public int                chunkX;
+    public int                chunkZ;
 
-	public ChunkCoord(final Chunk chunk) {
+    public ChunkCoord(final Chunk chunk) {
 
-		chunkX = chunk.xPosition;
-		chunkZ = chunk.zPosition;
-	}
+        chunkX = chunk.xPosition;
+        chunkZ = chunk.zPosition;
+    }
 
-	public ChunkCoord(final BlockCoord c) {
+    public ChunkCoord(final BlockCoord c) {
 
-		this(c.x >> 4, c.z >> 4);
-	}
+        this(c.x >> 4, c.z >> 4);
+    }
 
-	public ChunkCoord(final int x, final int z) {
+    public ChunkCoord(final int x, final int z) {
 
-		chunkX = x;
-		chunkZ = z;
-	}
+        chunkX = x;
+        chunkZ = z;
+    }
 
-	public int getCenterX() {
+    public int getCenterX() {
 
-		return (chunkX << 4) + 8;
-	}
+        return (chunkX << 4) + 8;
+    }
 
-	public int getCenterZ() {
+    public int getCenterZ() {
 
-		return (chunkZ << 4) + 8;
-	}
+        return (chunkZ << 4) + 8;
+    }
 
-	public void step(final int dir) {
+    public void step(final int dir) {
 
-		chunkX = BlockHelper.SIDE_COORD_MOD[dir][0];
-		chunkZ = BlockHelper.SIDE_COORD_MOD[dir][2];
-	}
+        chunkX = BlockHelper.SIDE_COORD_MOD[dir][0];
+        chunkZ = BlockHelper.SIDE_COORD_MOD[dir][2];
+    }
 
-	public void step(final int dir, final int dist) {
+    public void step(final int dir, final int dist) {
 
-		switch (dir) {
-			case 2:
-				chunkZ -= dist;
-				break;
-			case 3:
-				chunkZ += dist;
-				break;
-			case 4:
-				chunkX -= dist;
-				break;
-			case 5:
-				chunkX += dist;
-				break;
-			default:
-		}
-	}
+        switch (dir) {
+            case 2:
+                chunkZ -= dist;
+                break;
+            case 3:
+                chunkZ += dist;
+                break;
+            case 4:
+                chunkX -= dist;
+                break;
+            case 5:
+                chunkX += dist;
+                break;
+            default:
+        }
+    }
 
-	public ChunkCoord copy() {
+    public ChunkCoord copy() {
 
-		return new ChunkCoord(chunkX, chunkZ);
-	}
+        return new ChunkCoord(chunkX, chunkZ);
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
 
-		if (!(obj instanceof ChunkCoord)) {
-			return false;
-		}
-		final ChunkCoord other = (ChunkCoord) obj;
-		return (chunkX == other.chunkX) && (chunkZ == other.chunkZ);
-	}
+        if (!(obj instanceof ChunkCoord)) {
+            return false;
+        }
+        final ChunkCoord other = (ChunkCoord) obj;
+        return (chunkX == other.chunkX) && (chunkZ == other.chunkZ);
+    }
 
-	@Override
-	public int hashCode() {
+    @Override
+    public int hashCode() {
 
-		int hash = chunkX;
-		hash *= 31 + chunkZ;
-		return hash;
-	}
+        int hash = chunkX;
+        hash *= 31 + chunkZ;
+        return hash;
+    }
 
-	@Override
-	public String toString() {
+    @Override
+    public String toString() {
 
-		return "[" + chunkX + ", " + chunkZ + "]";
-	}
+        return "[" + chunkX + ", " + chunkZ + "]";
+    }
 
-	/* Comparable */
-	@Override
-	public int compareTo(final ChunkCoord other) {
+    /* Comparable */
+    @Override
+    public int compareTo(final ChunkCoord other) {
 
-		return chunkX == other.chunkX ? chunkZ - other.chunkZ : chunkX - other.chunkX;
-	}
+        return chunkX == other.chunkX ? chunkZ - other.chunkZ : chunkX - other.chunkX;
+    }
 
 }

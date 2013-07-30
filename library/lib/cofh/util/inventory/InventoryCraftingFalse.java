@@ -10,38 +10,38 @@ import net.minecraft.item.ItemStack;
  */
 public final class InventoryCraftingFalse extends InventoryCrafting {
 
-	public InventoryCraftingFalse(final int width, final int height) {
+    public InventoryCraftingFalse(final int width, final int height) {
 
-		super(null, width, height);
-	}
+        super(null, width, height);
+    }
 
-	@Override
-	public ItemStack decrStackSize(final int slot, final int amount) {
+    @Override
+    public ItemStack decrStackSize(final int slot, final int amount) {
 
-		if (stackList[slot] != null) {
-			ItemStack stack;
+        if (getStackInSlot(slot) != null) {
+            ItemStack stack;
 
-			if (stackList[slot].stackSize <= amount) {
-				stack = stackList[slot];
-				stackList[slot] = null;
-				return stack;
-			} else {
-				stack = stackList[slot].splitStack(amount);
+            if (getStackInSlot(slot).stackSize <= amount) {
+                stack = getStackInSlot(slot);
+                setInventorySlotContents(slot, null);
+                return stack;
+            } else {
+                stack = getStackInSlot(slot).splitStack(amount);
 
-				if (stackList[slot].stackSize == 0) {
-					stackList[slot] = null;
-				}
-				return stack;
-			}
-		} else {
-			return null;
-		}
-	}
+                if (getStackInSlot(slot).stackSize == 0) {
+                    setInventorySlotContents(slot, null);
+                }
+                return stack;
+            }
+        } else {
+            return null;
+        }
+    }
 
-	@Override
-	public void setInventorySlotContents(final int slot, final ItemStack stack) {
+    @Override
+    public void setInventorySlotContents(final int slot, final ItemStack stack) {
 
-		stackList[slot] = stack;
-	}
+        super.setInventorySlotContents(slot, stack);
+    }
 
 }

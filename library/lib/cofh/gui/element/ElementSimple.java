@@ -1,7 +1,7 @@
 package lib.cofh.gui.element;
 
 import lib.cofh.gui.GuiBase;
-import lib.cofh.gui.render.RenderHelper;
+import lib.cofh.render.RenderHelper;
 
 /**
  * Basic element which can render an arbitrary texture.
@@ -10,35 +10,35 @@ import lib.cofh.gui.render.RenderHelper;
  */
 public class ElementSimple extends ElementBase {
 
-	int	texU	= 0;
-	int	texV	= 0;
+    int texU = 0;
+    int texV = 0;
 
-	public ElementSimple(final GuiBase gui, final int posX, final int posY) {
+    public ElementSimple(final GuiBase gui, final int posX, final int posY) {
 
-		super(gui, posX, posY);
-	}
+        super(gui, posX, posY);
+    }
 
-	public ElementSimple setTextureOffsets(final int u, final int v) {
+    public ElementSimple setTextureOffsets(final int u, final int v) {
 
-		texU = u;
-		texV = v;
-		return this;
-	}
+        texU = u;
+        texV = v;
+        return this;
+    }
 
-	@Override
-	public void draw() {
+    @Override
+    public void draw() {
 
-		if (!visible) {
-			return;
-		}
-		RenderHelper.bindTexture(texture);
-		drawTexturedModalRect(posX, posY, texU, texV, sizeX, sizeY);
-	}
+        if (!visible) {
+            return;
+        }
+        RenderHelper.bindTexture(texture);
+        drawTexturedModalRect(posX, posY, texU, texV, sizeX, sizeY);
+    }
 
-	@Override
-	public String getTooltip() {
+    @Override
+    public String getTooltip() {
 
-		return null;
-	}
+        return null;
+    }
 
 }

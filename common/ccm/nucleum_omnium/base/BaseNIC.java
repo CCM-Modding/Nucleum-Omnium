@@ -15,18 +15,18 @@ import ccm.nucleum_omnium.utils.exeptions.InstantiationExeption;
  */
 public class BaseNIC {
 
-	/**
-	 * A {@link Random} accessible by any subclass
-	 */
-	protected static final Random	rand	= new Random();
-	
-	/**
-	 * Base constructor
-	 * 
-	 * @throws InstantiationExeption
-	 *             if you try to instantiate it or any of it's subclasses
-	 */
-	protected BaseNIC() {
-		throw new InstantiationExeption(NucleumOmnium.instance);
-	}
+    /**
+     * A {@link Random} accessible by any subclass
+     */
+    protected static final Random rand = new Random();
+
+    /**
+     * Base constructor
+     * 
+     * @throws InstantiationExeption
+     *             if you try to instantiate it or any of it's subclasses
+     */
+    protected BaseNIC() {
+        throw new InstantiationExeption(NucleumOmnium.instance);
+    }
 }
