@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.inventory.container;
 
 import java.lang.reflect.Constructor;
@@ -11,22 +14,20 @@ import net.minecraft.inventory.Slot;
 
 import ccm.nucleum_omnium.inventory.slot.OutputSlot;
 
-public abstract class BaseContainer extends Container {
+public abstract class BaseContainer extends Container
+{
 
     protected final IInventory inventory;
 
-    public BaseContainer(final IInventory inventory) {
+    public BaseContainer(final IInventory inventory)
+    {
         this.inventory = inventory;
     }
 
-    public BaseContainer(final IInventory inventory, final InventoryPlayer player, final int x, final int y) {
+    public BaseContainer(final IInventory inventory, final InventoryPlayer player, final int x, final int y)
+    {
         this(inventory);
         drawPlayerFullInv(player, x, y);
-    }
-
-    @Override
-    public boolean canInteractWith(final EntityPlayer player) {
-        return inventory.isUseableByPlayer(player);
     }
 
     private void createSlot(final IInventory inventory,
@@ -35,26 +36,41 @@ public abstract class BaseContainer extends Container {
                             final int x,
                             final int y,
                             final int row,
-                            final int column) {
+                            final int column)
+    {
         Constructor<? extends Slot> c = null;
-        try {
+        try
+        {
             c = slot.getConstructor(IInventory.class, int.class, int.class, int.class);
-        } catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e)
+        {
             e.printStackTrace();
-        } catch (final SecurityException e) {
+        } catch (final SecurityException e)
+        {
             e.printStackTrace();
         }
-        try {
+        try
+        {
             addSlotToContainer(c.newInstance(inventory, index, x + (column * 18), y + (row * 18)));
-        } catch (final InstantiationException e) {
+        } catch (final InstantiationException e)
+        {
             e.printStackTrace();
-        } catch (final IllegalAccessException e) {
+        } catch (final IllegalAccessException e)
+        {
             e.printStackTrace();
-        } catch (final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e)
+        {
             e.printStackTrace();
-        } catch (final InvocationTargetException e) {
+        } catch (final InvocationTargetException e)
+        {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean canInteractWith(final EntityPlayer player)
+    {
+        return inventory.isUseableByPlayer(player);
     }
 
     /**
@@ -82,19 +98,26 @@ public abstract class BaseContainer extends Container {
                                 final int x,
                                 final int y,
                                 final int rowSize,
-                                final int columnSize) {
-        for (int row = 0; row < rowSize; ++row) {
-            for (int column = 0; column < columnSize; ++column) {
-                if (slot != Slot.class) {
-                    if (slot != OutputSlot.class) {
+                                final int columnSize)
+    {
+        for (int row = 0; row < rowSize; ++row)
+        {
+            for (int column = 0; column < columnSize; ++column)
+            {
+                if (slot != Slot.class)
+                {
+                    if (slot != OutputSlot.class)
+                    {
                         createSlot(inventory, slot, index++, x, y, row, column);
-                    } else {
+                    } else
+                    {
                         addSlotToContainer(new OutputSlot(inventory,
                                                           index++,
                                                           x + (column * 18),
                                                           y + (row * 18)));
                     }
-                } else {
+                } else
+                {
                     addSlotToContainer(new Slot(inventory, index++, x + (column * 18), y + (row * 18)));
                 }
             }
@@ -107,7 +130,8 @@ public abstract class BaseContainer extends Container {
                                 final int x,
                                 final int y,
                                 final int rowSize,
-                                final int columnSize) {
+                                final int columnSize)
+    {
         return drawBoxInventory(inventory, Slot.class, index, x, y, rowSize, columnSize);
     }
 
@@ -116,19 +140,23 @@ public abstract class BaseContainer extends Container {
                                    final int x,
                                    final int y,
                                    final int rowSize,
-                                   final int columnSize) {
+                                   final int columnSize)
+    {
         return drawBoxInventory(inventory, OutputSlot.class, index, x, y, rowSize, columnSize);
     }
 
-    public int drawPlayerInventory(final InventoryPlayer player, final int index, final int x, final int y) {
-        return drawBoxInventory(player, index, x, y, 3, 9);
+    public int drawPlayerFullInv(final InventoryPlayer player, final int x, final int y)
+    {
+        return drawPlayerInventory(player, drawPlayerHotBar(player, 0, x, y + 58), x, y);
     }
 
-    public int drawPlayerHotBar(final InventoryPlayer player, final int index, final int x, final int y) {
+    public int drawPlayerHotBar(final InventoryPlayer player, final int index, final int x, final int y)
+    {
         return drawBoxInventory(player, index, x, y, 1, 9);
     }
 
-    public int drawPlayerFullInv(final InventoryPlayer player, final int x, final int y) {
-        return drawPlayerInventory(player, drawPlayerHotBar(player, 0, x, y + 58), x, y);
+    public int drawPlayerInventory(final InventoryPlayer player, final int index, final int x, final int y)
+    {
+        return drawBoxInventory(player, index, x, y, 3, 9);
     }
 }

@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.handler.mods;
 
 import java.util.ArrayList;
@@ -12,7 +15,8 @@ import ccm.nucleum_omnium.handler.LogHandler;
  * 
  * @author Captain_Shadows
  */
-public final class ModHandler {
+public final class ModHandler
+{
 
     /**
      * List of all {@link IModHandler}s that this "Registry" needs to handle
@@ -25,17 +29,32 @@ public final class ModHandler {
     private static final ModHandler INSTANCE = new ModHandler();
 
     /**
-     * Private constructor
+     * Private method that initializes the IModHandler
+     * 
+     * @param handler
+     *            The handler to init
      */
-    private ModHandler() {
-        modsHandling = new ArrayList<IModHandler>();
+    private static void handleMod(final IModHandler handler)
+    {
+        if (Loader.isModLoaded(handler.getModName()))
+        {
+            try
+            {
+                handler.init();
+            } catch (final Exception e)
+            {
+                LogHandler.severe(handler.getMod(), handler.toString());
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
      * @param handler
      *            The {@link IModHandler} to add to the List
      */
-    public static void addMod(final IModHandler handler) {
+    public static void addMod(final IModHandler handler)
+    {
         INSTANCE.modsHandling.add(handler);
     }
 
@@ -44,26 +63,19 @@ public final class ModHandler {
      * <p>
      * Except NucleumOmnium.java
      */
-    public static void init() {
-        for (final IModHandler handler : INSTANCE.modsHandling) {
+    public static void init()
+    {
+        for (final IModHandler handler : INSTANCE.modsHandling)
+        {
             handleMod(handler);
         }
     }
 
     /**
-     * Private method that initializes the IModHandler
-     * 
-     * @param handler
-     *            The handler to init
+     * Private constructor
      */
-    private static void handleMod(final IModHandler handler) {
-        if (Loader.isModLoaded(handler.getModName())) {
-            try {
-                handler.init();
-            } catch (final Exception e) {
-                LogHandler.severe(handler.getMod(), handler.toString());
-                e.printStackTrace();
-            }
-        }
+    private ModHandler()
+    {
+        modsHandling = new ArrayList<IModHandler>();
     }
 }

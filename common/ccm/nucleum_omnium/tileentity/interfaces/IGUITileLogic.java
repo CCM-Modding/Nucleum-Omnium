@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.tileentity.interfaces;
 
 import net.minecraft.item.ItemStack;
@@ -10,7 +13,15 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  * @author Captain_Shadows
  */
-public interface IGUITileLogic extends ITileLogic {
+public interface IGUITileLogic extends ITileLogic
+{
+
+    /**
+     * @param item
+     *            The item in the input slot
+     * @return The maximum amount of time that the item can be "cooked" for
+     */
+    public int getMaxTime(final ItemStack item);
 
     /**
      * This method gets called by the GUI when deciding the progress bar
@@ -33,11 +44,4 @@ public interface IGUITileLogic extends ITileLogic {
      * @param time
      */
     public void setTimeLeft(final int time);
-
-    /**
-     * @param item
-     *            The item in the input slot
-     * @return The maximum amount of time that the item can be "cooked" for
-     */
-    public int getMaxTime(final ItemStack item);
 }

@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_world;
 
 import static ccm.nucleum_world.utils.lib.Archive.MOD_ID;
@@ -8,7 +11,6 @@ import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -25,15 +27,23 @@ import ccm.nucleum_world.utils.lib.Properties;
 @Mod(modid = MOD_ID,
      name = MOD_NAME,
      useMetadata = true)
-public class NucleumWorld extends BaseMod implements IMod {
+public class NucleumWorld extends BaseMod implements IMod
+{
 
     @Instance(MOD_ID)
     public static NucleumWorld instance;
 
     private AdvConfiguration   config;
 
+    @Override
+    public AdvConfiguration getConfigFile()
+    {
+        return config;
+    }
+
     @EventHandler
-    public void preInit(final FMLPreInitializationEvent evt) {
+    public void preInit(final FMLPreInitializationEvent evt)
+    {
         config = initializeConfig(evt);
 
         GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
@@ -44,17 +54,11 @@ public class NucleumWorld extends BaseMod implements IMod {
     }
 
     @EventHandler
-    public void initialize(final FMLInitializationEvent event) {}
-
-    @EventHandler
-    public void modsLoaded(final FMLPostInitializationEvent event) {
-        if (Properties.retroOreGen) {
+    public void modsLoaded(final FMLPostInitializationEvent event)
+    {
+        if (Properties.retroOreGen)
+        {
             TickRegistry.registerTickHandler(TickHandlerWorld.instance, Side.SERVER);
         }
-    }
-
-    @Override
-    public AdvConfiguration getConfigFile() {
-        return config;
     }
 }

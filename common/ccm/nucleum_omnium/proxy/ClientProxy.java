@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.proxy;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -8,21 +11,26 @@ import ccm.nucleum_omnium.utils.lib.Properties;
 
 import lib.com.jadarstudios.developercapes.DevCapesUtil;
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends CommonProxy
+{
 
     @Override
-    public void initCapes() {
-        if (Properties.capeHD) {
+    public void initCapes()
+    {
+        if (Properties.capeHD)
+        {
             // Link for the file that makes the capes work (High Def Version)
             DevCapesUtil.getInstance().addFileUrl(Locations.HD_CAPES);
-        } else {
+        } else
+        {
             // Link for the file that makes the capes work (Normal Version)
             DevCapesUtil.getInstance().addFileUrl(Locations.CAPES);
         }
     }
 
     @Override
-    public void initEventHandling() {
+    public void initEventHandling()
+    {
         MinecraftForge.EVENT_BUS.register(new EventRain());
     }
 }

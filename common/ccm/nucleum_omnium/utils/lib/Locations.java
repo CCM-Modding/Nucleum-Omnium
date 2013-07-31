@@ -1,10 +1,14 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.utils.lib;
 
 import static ccm.nucleum_omnium.utils.lib.Archive.MOD_ID;
 
 import ccm.nucleum_omnium.base.BaseNIC;
 
-public final class Locations extends BaseNIC {
+public final class Locations extends BaseNIC
+{
 
     public static final String LANGUAGE_FILE = "/assets/" + MOD_ID + "/lang/";
 
@@ -20,5 +24,7 @@ public final class Locations extends BaseNIC {
 
     public static final String GUI           = "textures/guis/gui%s.png";
 
-    public static final String MODEL         = "textures/models/model%s.png";
+    public static final String MODEL         = "models/%s.obj";
+
+    public static final String MODEL_TEXTURE = "textures/models/model%s.png";
 }

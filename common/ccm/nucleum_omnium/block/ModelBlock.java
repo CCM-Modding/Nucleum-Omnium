@@ -1,32 +1,45 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.block;
 
 import net.minecraft.block.material.Material;
 
-public class ModelBlock extends MainBlock {
+/**
+ * ModelBlock
+ * <p>
+ * Modeled version of MainBlock
+ * 
+ * @author Captain_Shadows
+ */
+public class ModelBlock extends MainBlock
+{
 
-    public ModelBlock(final int id, final Material material) {
-        super(id, material);
-    }
-
-    public ModelBlock(final int id) {
+    public ModelBlock(final int id)
+    {
         this(id, Material.rock);
     }
 
-    @Override
-    public boolean renderAsNormalBlock() {
-
-        return false;
+    public ModelBlock(final int id, final Material material)
+    {
+        super(id, material);
     }
 
     @Override
-    public boolean isOpaqueCube() {
-
-        return false;
-    }
-
-    @Override
-    public int getRenderType() {
-
+    public int getRenderType()
+    {
         return -1;
+    }
+
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
     }
 }

@@ -1,8 +1,19 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.api.fuels;
 
 import net.minecraft.item.ItemStack;
 
-public interface IFuelRegistry {
+/**
+ * IFuelRegistry
+ * <p>
+ * An Interface for any class that wishes to be a Fuel Registry, Most likely also a part of the mod's API
+ * 
+ * @author Captain_Shadows
+ */
+public interface IFuelRegistry
+{
 
     /**
      * Checks if a item is a Fuel

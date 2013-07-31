@@ -1,8 +1,12 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.utils.lib;
 
 import ccm.nucleum_omnium.base.BaseNIC;
 
-public final class Commands extends BaseNIC {
+public final class Commands extends BaseNIC
+{
 
     public static final String COMMAND_NO   = "no";
 

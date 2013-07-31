@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_network;
 
 import net.minecraft.network.INetworkManager;
@@ -8,7 +11,8 @@ import cpw.mods.fml.common.network.Player;
 
 import ccm.nucleum_network.packet.PacketBase;
 
-public class PacketHandler implements IPacketHandler {
+public class PacketHandler implements IPacketHandler
+{
 
     /***
      * Handles Packet250CustomPayload packets
@@ -23,7 +27,8 @@ public class PacketHandler implements IPacketHandler {
     @Override
     public void onPacketData(final INetworkManager manager,
                              final Packet250CustomPayload packet,
-                             final Player player) {
+                             final Player player)
+    {
 
         final PacketBase packetBase = PacketTypeHandler.buildPacket(packet.data);
 

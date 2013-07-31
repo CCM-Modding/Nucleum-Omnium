@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +13,15 @@ import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.helper.InventoryHelper;
 import ccm.nucleum_omnium.utils.lib.TileConstants;
 
-public class InventoryTE extends BaseTE implements IInventory {
+/**
+ * InventoryTE
+ * <p>
+ * Default Implementation for a Tile Entity with an Inventory
+ * 
+ * @author Captain_Shadows
+ */
+public class InventoryTE extends BaseTE implements IInventory
+{
 
     /**
      * The ItemStacks that hold the items currently being used in the Tile Entity
@@ -22,15 +33,14 @@ public class InventoryTE extends BaseTE implements IInventory {
      */
     private int           size = 0;
 
-    /**
-     * Set's the size of the Inventory
-     * 
-     * @return
-     */
-    public InventoryTE setInventorySize(final int size) {
-        inventory = new ItemStack[size];
-        this.size = size;
-        return this;
+    @Override
+    public void closeChest()
+    {}// Useless
+
+    @Override
+    public ItemStack decrStackSize(final int slot, final int amount)
+    {
+        return InventoryHelper.decrStackSize(slot, amount, this);
     }
 
     /**
@@ -38,58 +48,20 @@ public class InventoryTE extends BaseTE implements IInventory {
      * 
      * @return a Inventory ItemStack[]
      */
-    public ItemStack[] getInventory() {
+    public ItemStack[] getInventory()
+    {
         return inventory;
     }
 
-    /**
-     * Setter Method for the {@link TileEntity}'s Inventory
-     * 
-     * @param inventory
-     *            The ItemStack[] for the Inventory
-     */
-    public void setInventory(final ItemStack[] inventory) {
-        this.inventory = inventory;
-    }
-
     @Override
-    public int getSizeInventory() {
-        return size;
-    }
-
-    @Override
-    public ItemStack getStackInSlot(final int slot) {
-        return inventory[slot];
-    }
-
-    @Override
-    public void setInventorySlotContents(final int slot, final ItemStack itemstack) {
-        inventory[slot] = itemstack;
-    }
-
-    @Override
-    public ItemStack decrStackSize(final int slot, final int amount) {
-        return InventoryHelper.decrStackSize(slot, amount, this);
-    }
-
-    @Override
-    public int getInventoryStackLimit() {
+    public int getInventoryStackLimit()
+    {
         return 64;
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(final int slot) {
-        if (inventory[slot] != null) {
-            final ItemStack itemStack = inventory[slot];
-            inventory[slot] = null;
-            return itemStack;
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public String getInvName() {
+    public String getInvName()
+    {
         return getData().hasCustomName() ? getData().getCustomName() : FunctionHelper.getTEName(worldObj,
                                                                                                 xCoord,
                                                                                                 yCoord,
@@ -97,12 +69,40 @@ public class InventoryTE extends BaseTE implements IInventory {
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public int getSizeInventory()
+    {
+        return size;
+    }
+
+    @Override
+    public ItemStack getStackInSlot(final int slot)
+    {
+        return inventory[slot];
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(final int slot)
+    {
+        if (inventory[slot] != null)
+        {
+            final ItemStack itemStack = inventory[slot];
+            inventory[slot] = null;
+            return itemStack;
+        } else
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean isInvNameLocalized()
+    {
         return getData().hasCustomName();
     }
 
     @Override
-    public boolean isItemValidForSlot(final int slot, final ItemStack itemstack) {
+    public boolean isItemValidForSlot(final int slot, final ItemStack itemstack)
+    {
         return false;
     }
 
@@ -114,36 +114,62 @@ public class InventoryTE extends BaseTE implements IInventory {
      * @return true if the player is within 10 blocks
      */
     @Override
-    public boolean isUseableByPlayer(final EntityPlayer player) {
+    public boolean isUseableByPlayer(final EntityPlayer player)
+    {
         return player.getDistance(xCoord, yCoord, zCoord) <= 10;
     }
 
     @Override
-    public void openChest() {}// Useless
+    public void openChest()
+    {}// Useless
 
     @Override
-    public void closeChest() {}// Useless
-
-    /**
-     * Reads a tile entity from NBT
-     */
-    @Override
-    public void readFromNBT(final NBTTagCompound nbt) {
+    public void readFromNBT(final NBTTagCompound nbt)
+    {
         super.readFromNBT(nbt);
-        if (nbt.hasKey(TileConstants.NBT_TE_INVENTORY_SIZE)) {
+        if (nbt.hasKey(TileConstants.NBT_TE_INVENTORY_SIZE))
+        {
             setInventorySize(nbt.getInteger(TileConstants.NBT_TE_INVENTORY_SIZE));
         }
-        if (nbt.hasKey(TileConstants.INVENTORY)) {
+        if (nbt.hasKey(TileConstants.INVENTORY))
+        {
             setInventory(InventoryHelper.readInventoryFromNBT(nbt.getTagList(TileConstants.INVENTORY),
                                                               getSizeInventory()));
         }
     }
 
     /**
-     * Writes a tile entity to NBT
+     * Setter Method for the {@link TileEntity}'s Inventory
+     * 
+     * @param inventory
+     *            The ItemStack[] for the Inventory
      */
+    public void setInventory(final ItemStack[] inventory)
+    {
+        this.inventory = inventory;
+    }
+
+    /**
+     * Set's the size of the Inventory
+     * 
+     * @return
+     */
+    public InventoryTE setInventorySize(final int size)
+    {
+        inventory = new ItemStack[size];
+        this.size = size;
+        return this;
+    }
+
     @Override
-    public void writeToNBT(final NBTTagCompound nbt) {
+    public void setInventorySlotContents(final int slot, final ItemStack itemstack)
+    {
+        inventory[slot] = itemstack;
+    }
+
+    @Override
+    public void writeToNBT(final NBTTagCompound nbt)
+    {
         super.writeToNBT(nbt);
         nbt.setInteger(TileConstants.NBT_TE_INVENTORY_SIZE, getSizeInventory());
         nbt.setTag(TileConstants.INVENTORY, InventoryHelper.writeInventoryToNBT(getInventory()));

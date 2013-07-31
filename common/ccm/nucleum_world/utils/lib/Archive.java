@@ -1,6 +1,10 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_world.utils.lib;
 
-public final class Archive {
+public final class Archive
+{
 
     /**
      * ID of the Mod

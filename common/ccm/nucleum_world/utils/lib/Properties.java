@@ -1,6 +1,10 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_world.utils.lib;
 
-public final class Properties {
+public final class Properties
+{
 
     public static boolean retroOreGen           = false;
 

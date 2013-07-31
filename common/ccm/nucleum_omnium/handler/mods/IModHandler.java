@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.handler.mods;
 
 import ccm.nucleum_omnium.IMod;
@@ -9,7 +12,8 @@ import ccm.nucleum_omnium.IMod;
  * 
  * @author Captain_Shadows
  */
-public abstract class IModHandler {
+public abstract class IModHandler
+{
 
     public abstract IMod getMod();
 
@@ -24,7 +28,8 @@ public abstract class IModHandler {
     public abstract void init();
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return String.format("A CCM Mod has failed to load it's compatibility with %s, pleace inform the CCM Team",
                              getModName());
     }

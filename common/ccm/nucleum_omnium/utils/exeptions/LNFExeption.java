@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.utils.exeptions;
 
 import ccm.nucleum_omnium.IMod;
@@ -9,18 +12,21 @@ import ccm.nucleum_omnium.IMod;
  * 
  * @author Captain_Shadows
  */
-public class LNFExeption extends NotMyFaultExeption {
+public class LNFExeption extends NotMyFaultExeption
+{
 
     private static final long   serialVersionUID = 1080172170005877086L;
 
     private final StringBuilder tmpErrorSB       = new StringBuilder();
 
-    public LNFExeption(final IMod mod) {
+    public LNFExeption(final IMod mod)
+    {
         super(mod);
         addString();
     }
 
-    private void addString() {
+    private void addString()
+    {
         tmpErrorSB.append(mod.getName());
         tmpErrorSB.append(" Forgot to register it's Logger before using it! \n");
         tmpErrorSB.append("Please go tell the creator to fix it!! \n");

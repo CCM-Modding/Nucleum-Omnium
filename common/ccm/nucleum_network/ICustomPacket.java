@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_network;
 
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -5,7 +8,8 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 /**
  * A interface that declares a Packet250CustomPayload
  */
-public interface ICustomPacket {
+public interface ICustomPacket
+{
 
     /**
      * @return the Packet250CustomPayload

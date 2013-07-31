@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.handler;
 
 import java.util.HashMap;
@@ -14,7 +17,8 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 import ccm.nucleum_omnium.NucleumOmnium;
 
-public final class GUIHandler implements IGuiHandler {
+public final class GUIHandler implements IGuiHandler
+{
 
     /**
      * List of all the GUI Containers
@@ -32,47 +36,22 @@ public final class GUIHandler implements IGuiHandler {
     private static final GUIHandler                           INSTANCE = new GUIHandler();
 
     /**
-     * Private constructor
+     * @param name
+     *            The name of the Block
+     * @return The "unique" hash code of the Block's name
      */
-    private GUIHandler() {
-        guiList = new HashMap<Integer, Class<? extends GuiContainer>>();
-        containerList = new HashMap<Integer, Class<? extends Container>>();
+    private static int hash(final String name)
+    {
+        final String fix = "ccm.gui." + name + "." + name.hashCode();
+        return fix.hashCode();
     }
 
     /**
      * @return The GUIHandler's Instance
      */
-    public static GUIHandler instance() {
+    public static GUIHandler instance()
+    {
         return INSTANCE;
-    }
-
-    /**
-     * Registers a Container on the server
-     * 
-     * @param guiID
-     *            The name of the Block that this Container is associated to
-     * @param container
-     *            The container class
-     */
-    public static void registerGuiServer(final String guiID, final Class<? extends Container> container) {
-        instance().containerList.put(hash(guiID), container);
-    }
-
-    /**
-     * Registers a GUI, and a Container on the client
-     * 
-     * @param guiID
-     *            The name of the Block that this GUI and Container are associated to
-     * @param gui
-     *            The GUI class
-     * @param container
-     *            The Container class
-     */
-    public static void registerGuiClient(final String guiID,
-                                         final Class<? extends GuiContainer> gui,
-                                         final Class<? extends Container> container) {
-        instance().guiList.put(hash(guiID), gui);
-        instance().containerList.put(hash(guiID), container);
     }
 
     /**
@@ -96,11 +75,14 @@ public final class GUIHandler implements IGuiHandler {
                                final World world,
                                final int x,
                                final int y,
-                               final int z) {
+                               final int z)
+    {
         final int fix = hash(guiID);
-        if (instance().containerList.containsKey(fix)) {
+        if (instance().containerList.containsKey(fix))
+        {
             player.openGui(NucleumOmnium.instance, fix, world, x, y, z);
-        } else {
+        } else
+        {
             LogHandler.severe(NucleumOmnium.instance,
                               "Player: %s, tried to open %s but it is not registered!! \n",
                               player.username,
@@ -109,33 +91,43 @@ public final class GUIHandler implements IGuiHandler {
     }
 
     /**
-     * @param name
-     *            The name of the Block
-     * @return The "unique" hash code of the Block's name
+     * Registers a GUI, and a Container on the client
+     * 
+     * @param guiID
+     *            The name of the Block that this GUI and Container are associated to
+     * @param gui
+     *            The GUI class
+     * @param container
+     *            The Container class
      */
-    private static int hash(final String name) {
-        final String fix = "ccm.gui." + name + "." + name.hashCode();
-        return fix.hashCode();
+    public static void registerGuiClient(final String guiID,
+                                         final Class<? extends GuiContainer> gui,
+                                         final Class<? extends Container> container)
+    {
+        instance().guiList.put(hash(guiID), gui);
+        instance().containerList.put(hash(guiID), container);
     }
 
-    @Override
-    public Object getServerGuiElement(final int ID,
-                                      final EntityPlayer player,
-                                      final World world,
-                                      final int x,
-                                      final int y,
-                                      final int z) {
-        final TileEntity te = world.getBlockTileEntity(x, y, z);
-        Container container = null;
-        try {
-            container = instance().containerList.get(ID)
-                                                .getConstructor(InventoryPlayer.class, TileEntity.class)
-                                                .newInstance(player.inventory, te);
-        } catch (final Exception e) {
-            e.getCause();
-            e.printStackTrace();
-        }
-        return container;
+    /**
+     * Registers a Container on the server
+     * 
+     * @param guiID
+     *            The name of the Block that this Container is associated to
+     * @param container
+     *            The container class
+     */
+    public static void registerGuiServer(final String guiID, final Class<? extends Container> container)
+    {
+        instance().containerList.put(hash(guiID), container);
+    }
+
+    /**
+     * Private constructor
+     */
+    private GUIHandler()
+    {
+        guiList = new HashMap<Integer, Class<? extends GuiContainer>>();
+        containerList = new HashMap<Integer, Class<? extends Container>>();
     }
 
     @Override
@@ -144,17 +136,43 @@ public final class GUIHandler implements IGuiHandler {
                                       final World world,
                                       final int x,
                                       final int y,
-                                      final int z) {
+                                      final int z)
+    {
         final TileEntity te = world.getBlockTileEntity(x, y, z);
         GuiContainer gui = null;
-        try {
+        try
+        {
             gui = instance().guiList.get(ID)
                                     .getConstructor(InventoryPlayer.class, TileEntity.class)
                                     .newInstance(player.inventory, te);
-        } catch (final Exception e) {
+        } catch (final Exception e)
+        {
             e.getCause();
             e.printStackTrace();
         }
         return gui;
+    }
+
+    @Override
+    public Object getServerGuiElement(final int ID,
+                                      final EntityPlayer player,
+                                      final World world,
+                                      final int x,
+                                      final int y,
+                                      final int z)
+    {
+        final TileEntity te = world.getBlockTileEntity(x, y, z);
+        Container container = null;
+        try
+        {
+            container = instance().containerList.get(ID)
+                                                .getConstructor(InventoryPlayer.class, TileEntity.class)
+                                                .newInstance(player.inventory, te);
+        } catch (final Exception e)
+        {
+            e.getCause();
+            e.printStackTrace();
+        }
+        return container;
     }
 }

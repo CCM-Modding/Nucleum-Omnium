@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.base;
 
 import java.util.Random;
@@ -8,12 +11,13 @@ import ccm.nucleum_omnium.utils.exeptions.InstantiationExeption;
 /**
  * Base Non Instance able Class
  * <p>
- * This class SHOULD ONLY be extended when and ONLY when you want your class not to be instantiated
- * using the default Java Constructor
+ * This class SHOULD ONLY be extended when and ONLY when you want your class not to be instantiated using the
+ * default Java Constructor
  * 
  * @author Captain_Shadows
  */
-public class BaseNIC {
+public class BaseNIC
+{
 
     /**
      * A {@link Random} accessible by any subclass
@@ -26,7 +30,8 @@ public class BaseNIC {
      * @throws InstantiationExeption
      *             if you try to instantiate it or any of it's subclasses
      */
-    protected BaseNIC() {
+    protected BaseNIC()
+    {
         throw new InstantiationExeption(NucleumOmnium.instance);
     }
 }

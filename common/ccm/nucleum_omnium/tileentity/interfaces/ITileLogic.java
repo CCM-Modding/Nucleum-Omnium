@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.tileentity.interfaces;
 
 import net.minecraft.item.ItemStack;
@@ -9,12 +12,8 @@ import net.minecraft.nbt.NBTTagCompound;
  * 
  * @author Captain_Shadows
  */
-public interface ITileLogic {
-
-    /**
-     * This method gets called by updateEntity() inside of the TileEntity
-     */
-    public void runLogic();
+public interface ITileLogic
+{
 
     /**
      * Checks if the the TE Logic is allowed to process the Item
@@ -22,29 +21,6 @@ public interface ITileLogic {
      * @return true if it can
      */
     public boolean canRun();
-
-    /**
-     * Processes the Item
-     */
-    public void run();
-
-    /**
-     * Called when the tile is reading it's state from NBT
-     * <p>
-     * Time to restore the Invariants
-     * 
-     * @param nbt
-     */
-    public void readFromNBT(final NBTTagCompound nbt);
-
-    /**
-     * Called when the tile is writing it's state to NBT
-     * <p>
-     * Time to store the Invariants
-     * 
-     * @param nbt
-     */
-    public void writeToNBT(final NBTTagCompound nbt);
 
     /**
      * @param slot
@@ -55,4 +31,32 @@ public interface ITileLogic {
      *         the given slot
      */
     public boolean isStackValidForSlot(final int slot, final ItemStack itemstack);
+
+    /**
+     * Called when the tile is reading it's state from NBT
+     * <p>
+     * Time to restore the Variables
+     * 
+     * @param nbt
+     */
+    public void readFromNBT(final NBTTagCompound nbt);
+
+    /**
+     * Processes the Item
+     */
+    public void run();
+
+    /**
+     * This method gets called by updateEntity() inside of the TileEntity
+     */
+    public void runLogic();
+
+    /**
+     * Called when the tile is writing it's state to NBT
+     * <p>
+     * Time to store the Variables
+     * 
+     * @param nbt
+     */
+    public void writeToNBT(final NBTTagCompound nbt);
 }

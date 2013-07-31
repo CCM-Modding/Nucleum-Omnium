@@ -1,20 +1,33 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.tileentity.logic;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
 
 /**
  * Simple Abstract implementation of ITileLogic that allows the user to not have to implement read
- * or write if not needed, AKA if the logic has no invariants to save
+ * or write if not needed, AKA if the logic has no variables to save
  * 
  * @author Captain_Shadows
  */
-public abstract class BaseLogic implements ITileLogic {
+public abstract class BaseLogic implements ITileLogic
+{
 
     @Override
-    public void readFromNBT(final NBTTagCompound nbt) {}
+    public boolean isStackValidForSlot(final int slot, final ItemStack itemstack)
+    {
+        return false;
+    }
 
     @Override
-    public void writeToNBT(final NBTTagCompound nbt) {}
+    public void readFromNBT(final NBTTagCompound nbt)
+    {}
+
+    @Override
+    public void writeToNBT(final NBTTagCompound nbt)
+    {}
 }

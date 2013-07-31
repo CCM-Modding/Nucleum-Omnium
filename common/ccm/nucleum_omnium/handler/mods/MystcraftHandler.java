@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.handler.mods;
 
 import ccm.nucleum_omnium.IMod;
@@ -9,20 +12,24 @@ import ccm.nucleum_omnium.utils.lib.Properties;
  * 
  * @author Captain_Shadows
  */
-public final class MystcraftHandler extends IModHandler {
+public final class MystcraftHandler extends IModHandler
+{
 
     @Override
-    public IMod getMod() {
+    public IMod getMod()
+    {
         return NucleumOmnium.instance;
     }
 
     @Override
-    public String getModName() {
+    public String getModName()
+    {
         return "Mystcraft";
     }
 
     @Override
-    public void init() {
+    public void init()
+    {
         Properties.mystLoaded = true;
     }
 }

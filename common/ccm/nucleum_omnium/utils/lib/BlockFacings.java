@@ -1,6 +1,17 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.utils.lib;
 
-public enum BlockFacings {
+/**
+ * BlockFacings
+ * <p>
+ * A list of all of the blocks "faces"
+ * 
+ * @author Captain_Shadows
+ */
+public enum BlockFacings
+{
 
     /**
      * Top of the Block
@@ -18,17 +29,23 @@ public enum BlockFacings {
     Front,
 
     /**
-     * DO NOT USE! Back of the Block
+     * DO NOT USE!
+     * <p>
+     * Back of the Block
      */
     Back,
 
     /**
-     * DO NOT USE! Right of the Block, from the Front view
+     * DO NOT USE!
+     * <p>
+     * Right of the Block, from the Front view
      */
     Right,
 
     /**
-     * DO NOT USE! Left of the Block, from the Front view
+     * DO NOT USE!
+     * <p>
+     * Left of the Block, from the Front view
      */
     Left,
 

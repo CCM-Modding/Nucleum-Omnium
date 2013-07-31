@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.command;
 
 import java.text.DecimalFormat;
@@ -12,44 +15,68 @@ import ccm.nucleum_omnium.helper.CommandHelper;
 import ccm.nucleum_omnium.helper.JavaHelper;
 import ccm.nucleum_omnium.utils.lib.Commands;
 
-public class CommandTPS extends CommandBase {
+public class CommandTPS extends CommandBase
+{
 
     public static CommandTPS     instance = new CommandTPS();
 
     private static DecimalFormat floatfmt = new DecimalFormat("##0.00");
 
-    private double getTickTimeSum(final long[] times) {
+    private double getTickMs(final World world)
+    {
+        return getTickTimeSum(world == null ? NucleumOmnium.server.tickTimeArray
+                                           : (long[]) NucleumOmnium.server.worldTickTimes.get(Integer.valueOf(world.provider.dimensionId))) * 1.0E-006D;
+    }
+
+    private double getTickTimeSum(final long[] times)
+    {
         long timesum = 0L;
-        if (times == null) {
+        if (times == null)
+        {
             return 0.0D;
         }
-        for (final long time : times) {
+        for (final long time : times)
+        {
             timesum += time;
         }
 
         return timesum / times.length;
     }
 
-    private double getTickMs(final World world) {
-        return getTickTimeSum(world == null ? NucleumOmnium.server.tickTimeArray
-                                           : (long[]) NucleumOmnium.server.worldTickTimes.get(Integer.valueOf(world.provider.dimensionId))) * 1.0E-006D;
-    }
-
-    private double getTps(final World world) {
+    private double getTps(final World world)
+    {
         final double tps = 1000.0D / getTickMs(world);
         return tps > 20.0D ? 20.0D : tps;
     }
 
+    /**
+     * Makes sure anyone can use it
+     */
     @Override
-    public String getCommandName() {
+    public boolean canCommandSenderUseCommand(final ICommandSender sender)
+    {
+        return true;
+    }
+
+    @Override
+    public String getCommandName()
+    {
         return Commands.COMMAND_TPS;
     }
 
     @Override
-    public void processCommand(final ICommandSender sender, final String[] args) {
+    public String getCommandUsage(final ICommandSender icommandsender)
+    {
+        return null;
+    }
+
+    @Override
+    public void processCommand(final ICommandSender sender, final String[] args)
+    {
         String tmp;
         final StringBuilder b = new StringBuilder();
-        if (args.length < 1) {
+        if (args.length < 1)
+        {
 
             double tps = getTps(null);
             double tickms = getTickMs(null);
@@ -64,7 +91,8 @@ public class CommandTPS extends CommandBase {
 
             CommandHelper.sendChatToPlayer(sender);
 
-            for (final World world : NucleumOmnium.server.worldServers) {
+            for (final World world : NucleumOmnium.server.worldServers)
+            {
 
                 tps = getTps(world);
                 tickms = getTickMs(world);
@@ -80,7 +108,8 @@ public class CommandTPS extends CommandBase {
 
             CommandHelper.sendChatToPlayer(sender, "--------------------------------------------------");
 
-        } else if (args[0].toLowerCase().charAt(0) == 'o') {
+        } else if (args[0].toLowerCase().charAt(0) == 'o')
+        {
 
             final double tickms = getTickMs(null);
             final double tps = getTps(null);
@@ -99,7 +128,8 @@ public class CommandTPS extends CommandBase {
 
             CommandHelper.sendChatToPlayer(sender, b.toString());
 
-        } else if (args[0].toLowerCase().charAt(0) == 'a') {
+        } else if (args[0].toLowerCase().charAt(0) == 'a')
+        {
 
             final double tickms = getTickMs(null);
             final double tps = getTps(null);
@@ -119,7 +149,8 @@ public class CommandTPS extends CommandBase {
             int entities = 0;
             int te = 0;
             int worlds = 0;
-            for (final World world : NucleumOmnium.server.worldServers) {
+            for (final World world : NucleumOmnium.server.worldServers)
+            {
                 loadedChunks += world.getChunkProvider().getLoadedChunkCount();
                 entities += world.loadedEntityList.size();
                 te += world.loadedTileEntityList.size();
@@ -133,12 +164,14 @@ public class CommandTPS extends CommandBase {
             b.append("--------------------------------------------------");
 
             CommandHelper.sendChatToPlayer(sender, b.toString());
-        } else if (JavaHelper.isNumeric(args[0])) {
+        } else if (JavaHelper.isNumeric(args[0]))
+        {
 
             final int dim = Integer.parseInt(args[0]);
 
             final World world = NucleumOmnium.server.worldServerForDimension(dim);
-            if (world == null) {
+            if (world == null)
+            {
                 throw new PlayerNotFoundException("World not found", new Object[0]);
             }
 
@@ -168,18 +201,5 @@ public class CommandTPS extends CommandBase {
 
             CommandHelper.sendChatToPlayer(sender, b.toString());
         }
-    }
-
-    /**
-     * Makes sure anyone can use it
-     */
-    @Override
-    public boolean canCommandSenderUseCommand(final ICommandSender sender) {
-        return true;
-    }
-
-    @Override
-    public String getCommandUsage(final ICommandSender icommandsender) {
-        return null;
     }
 }

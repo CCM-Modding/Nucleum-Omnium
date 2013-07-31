@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.item.block;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -11,26 +14,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ccm.nucleum_omnium.helper.BlockHelper;
 import ccm.nucleum_omnium.helper.LanguageHelper;
 
-public class MainItemBlock extends ItemBlock {
+public class MainItemBlock extends ItemBlock
+{
 
-    public MainItemBlock(final int id) {
+    public MainItemBlock(final int id)
+    {
         super(id);
         setHasSubtypes(true);
     }
 
     @Override
-    public CreativeTabs[] getCreativeTabs() {
+    public CreativeTabs[] getCreativeTabs()
+    {
         return BlockHelper.getBlock(getBlockID()).getCreativeTabArray();
-    }
-
-    @Override
-    public String getItemDisplayName(final ItemStack itemStack) {
-        return LanguageHelper.getLocalizedString(getUnlocalizedName(itemStack));
-    }
-
-    @Override
-    public int getMetadata(final int metadata) {
-        return metadata;
     }
 
     /**
@@ -38,12 +34,26 @@ public class MainItemBlock extends ItemBlock {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(final int meta) {
+    public Icon getIconFromDamage(final int meta)
+    {
         return BlockHelper.getBlock(getBlockID()).getIcon(0, meta);
     }
 
     @Override
-    public String getUnlocalizedName(final ItemStack itemstack) {
+    public String getItemDisplayName(final ItemStack itemStack)
+    {
+        return LanguageHelper.getLocalizedString(getUnlocalizedName(itemStack));
+    }
+
+    @Override
+    public int getMetadata(final int metadata)
+    {
+        return metadata;
+    }
+
+    @Override
+    public String getUnlocalizedName(final ItemStack itemstack)
+    {
         return BlockHelper.getSubBlock(getBlockID(), itemstack).getUnlocalizedName();
     }
 }

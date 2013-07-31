@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.helper;
 
 import net.minecraft.block.Block;
@@ -14,23 +17,14 @@ import ccm.nucleum_omnium.block.sub.SubBlock;
  * 
  * @author Captain_Shadows
  */
-public class BlockHelper extends BaseNIC {
-    /**
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
-    public static MainBlock getBlock(final World world, final int x, final int y, final int z) {
-        return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]);
-    }
-
+public class BlockHelper extends BaseNIC
+{
     /**
      * @param blockID
      * @return
      */
-    public static MainBlock getBlock(final int blockID) {
+    public static MainBlock getBlock(final int blockID)
+    {
         return ((MainBlock) Block.blocksList[blockID]);
     }
 
@@ -41,10 +35,9 @@ public class BlockHelper extends BaseNIC {
      * @param z
      * @return
      */
-    public static SubBlock getSubBlock(final World world, final int x, final int y, final int z) {
-        return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x,
-                                                                                                               y,
-                                                                                                               z)];
+    public static MainBlock getBlock(final World world, final int x, final int y, final int z)
+    {
+        return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]);
     }
 
     /**
@@ -52,8 +45,23 @@ public class BlockHelper extends BaseNIC {
      * @param item
      * @return
      */
-    public static SubBlock getSubBlock(final int blockID, final ItemStack item) {
+    public static SubBlock getSubBlock(final int blockID, final ItemStack item)
+    {
         return ((MainBlock) Block.blocksList[blockID]).getSubBlocks()[item.getItemDamage()];
+    }
+
+    /**
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    public static SubBlock getSubBlock(final World world, final int x, final int y, final int z)
+    {
+        return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x,
+                                                                                                               y,
+                                                                                                               z)];
     }
 
     /**
@@ -77,35 +85,44 @@ public class BlockHelper extends BaseNIC {
                                          final int x,
                                          final int y,
                                          final int z,
-                                         final int flag) {
-        if ((x >= -30000000) && (z >= -30000000) && (x < 30000000) && (z < 30000000)) {
-            if (y < 0) {
+                                         final int flag)
+    {
+        if ((x >= -30000000) && (z >= -30000000) && (x < 30000000) && (z < 30000000))
+        {
+            if (y < 0)
+            {
                 return false;
-            } else if (y >= 256) {
+            } else if (y >= 256)
+            {
                 return false;
-            } else {
+            } else
+            {
                 final Chunk chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
                 final int x1 = x & 15;
                 final int z1 = z & 15;
 
                 final int blockID = chunk.getBlockID(x1, y, z1);
 
-                if (((flag & 2) != 0) && (!world.isRemote || ((flag & 4) == 0))) {
+                if (((flag & 2) != 0) && (!world.isRemote || ((flag & 4) == 0)))
+                {
                     world.markBlockForUpdate(x, y, z);
                 }
 
-                if (!world.isRemote && ((flag & 1) != 0)) {
+                if (!world.isRemote && ((flag & 1) != 0))
+                {
                     world.notifyBlockChange(x, y, z, blockID);
                     final Block block = Block.blocksList[blockID];
 
-                    if ((block != null) && block.hasComparatorInputOverride()) {
+                    if ((block != null) && block.hasComparatorInputOverride())
+                    {
                         world.func_96440_m(x, y, z, blockID);
                     }
                 }
 
                 return true;
             }
-        } else {
+        } else
+        {
             return false;
         }
     }

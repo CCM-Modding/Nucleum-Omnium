@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.helper;
 
 import java.util.Arrays;
@@ -7,9 +10,11 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import ccm.nucleum_omnium.base.BaseNIC;
 
-public class OreDictionaryHelper extends BaseNIC {
+public class OreDictionaryHelper extends BaseNIC
+{
 
-    public static boolean containsOre(final String oreName) {
+    public static boolean containsOre(final String oreName)
+    {
 
         final List<String> ores = Arrays.asList(OreDictionary.getOreNames());
 

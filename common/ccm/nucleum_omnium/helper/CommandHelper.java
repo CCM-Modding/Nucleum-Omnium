@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.helper;
 
 import net.minecraft.command.CommandBase;
@@ -13,7 +16,69 @@ import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.base.BaseNIC;
 import ccm.nucleum_omnium.utils.exeptions.WTFExeption;
 
-public final class CommandHelper extends BaseNIC {
+public final class CommandHelper extends BaseNIC
+{
+
+    public static double
+            checkPosition(final ICommandSender sender, final double postion, final String argPos)
+    {
+        return CommandHelper.checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
+    }
+
+    public static double checkPositionWithBounds(final ICommandSender sender,
+                                                 final double postion,
+                                                 String argPos,
+                                                 final int min,
+                                                 final int max)
+    {
+        final boolean flag = argPos.startsWith("~");
+        double d1 = flag ? postion : 0.0D;
+
+        if (!flag || (argPos.length() > 1))
+        {
+            final boolean flag1 = argPos.contains(".");
+
+            if (flag)
+            {
+                argPos = argPos.substring(1);
+            }
+
+            d1 += CommandBase.parseDouble(sender, argPos);
+
+            if (!flag1 && !flag)
+            {
+                d1 += 0.5D;
+            }
+        }
+
+        if ((min != 0) || (max != 0))
+        {
+            if (d1 < min)
+            {
+                if ((d1 < -30000000) && (d1 >= -300000000))
+                {
+                    throw new NumberInvalidException("commands.generic.double.tooSmall",
+                                                     new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
+                } else if ((d1 < -300000000) && (d1 >= Integer.MIN_VALUE))
+                {
+                    throw new WTFExeption(NucleumOmnium.instance);
+                }
+            }
+            if (d1 > max)
+            {
+                if ((d1 > 30000000) && (d1 <= 300000000))
+                {
+                    throw new NumberInvalidException("commands.generic.double.tooBig",
+                                                     new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
+                } else if ((d1 > 300000000) && (d1 <= Integer.MAX_VALUE))
+                {
+                    throw new WTFExeption(NucleumOmnium.instance);
+                }
+            }
+        }
+
+        return d1;
+    }
 
     /**
      * Gets a player
@@ -21,7 +86,8 @@ public final class CommandHelper extends BaseNIC {
      * @param sender
      * @return The EntityPlayerMP corresponding to who send it
      */
-    public static EntityPlayerMP getPlayer(final ICommandSender sender) {
+    public static EntityPlayerMP getPlayer(final ICommandSender sender)
+    {
         return CommandBase.getCommandSenderAsPlayer(sender);
     }
 
@@ -33,17 +99,25 @@ public final class CommandHelper extends BaseNIC {
      * @param sender
      * @return The EntityPlayerMP corresponding to the name
      */
-    public static EntityPlayerMP getPlayer(final ICommandSender sender, final String name) {
+    public static EntityPlayerMP getPlayer(final ICommandSender sender, final String name)
+    {
         final EntityPlayerMP player = CommandBase.func_82359_c(sender, name);
 
-        if (player == null) {
+        if (player == null)
+        {
             throw new PlayerNotFoundException();
         }
         return player;
     }
 
-    public static void tellAdmins(final ICommandSender sender, final String message, final Object... objects) {
-        CommandBase.notifyAdmins(sender, message, objects);
+    public static void sendChatToPlayer(final ICommandSender sender)
+    {
+        sendChatToPlayer(sender, "");
+    }
+
+    public static void sendChatToPlayer(final ICommandSender sender, final String msg)
+    {
+        sender.sendChatToPlayer(ChatMessageComponent.func_111077_e(msg));
     }
 
     /**
@@ -56,9 +130,11 @@ public final class CommandHelper extends BaseNIC {
      */
     public static void teleportPlayer(final ICommandSender sender,
                                       final EntityPlayerMP player,
-                                      final EntityPlayerMP player1) {
+                                      final EntityPlayerMP player1)
+    {
         player.mountEntity((Entity) null);
-        if (player.dimension != player1.dimension) {
+        if (player.dimension != player1.dimension)
+        {
             MinecraftServer.getServer()
                            .getConfigurationManager()
                            .transferPlayerToDimension(player, player1.dimension);
@@ -95,9 +171,11 @@ public final class CommandHelper extends BaseNIC {
                                       final int dimension,
                                       final double x,
                                       final double y,
-                                      final double z) {
+                                      final double z)
+    {
         player.mountEntity((Entity) null);
-        if (player.dimension != dimension) {
+        if (player.dimension != dimension)
+        {
             MinecraftServer.getServer()
                            .getConfigurationManager()
                            .transferPlayerToDimension(player, dimension);
@@ -115,60 +193,8 @@ public final class CommandHelper extends BaseNIC {
                            Double.valueOf(z) });
     }
 
-    public static double
-            checkPosition(final ICommandSender sender, final double postion, final String argPos) {
-        return CommandHelper.checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
-    }
-
-    public static double checkPositionWithBounds(final ICommandSender sender,
-                                                 final double postion,
-                                                 String argPos,
-                                                 final int min,
-                                                 final int max) {
-        final boolean flag = argPos.startsWith("~");
-        double d1 = flag ? postion : 0.0D;
-
-        if (!flag || (argPos.length() > 1)) {
-            final boolean flag1 = argPos.contains(".");
-
-            if (flag) {
-                argPos = argPos.substring(1);
-            }
-
-            d1 += CommandBase.parseDouble(sender, argPos);
-
-            if (!flag1 && !flag) {
-                d1 += 0.5D;
-            }
-        }
-
-        if ((min != 0) || (max != 0)) {
-            if (d1 < min) {
-                if ((d1 < -30000000) && (d1 >= -300000000)) {
-                    throw new NumberInvalidException("commands.generic.double.tooSmall",
-                                                     new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
-                } else if ((d1 < -300000000) && (d1 >= Integer.MIN_VALUE)) {
-                    throw new WTFExeption(NucleumOmnium.instance);
-                }
-            }
-            if (d1 > max) {
-                if ((d1 > 30000000) && (d1 <= 300000000)) {
-                    throw new NumberInvalidException("commands.generic.double.tooBig",
-                                                     new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
-                } else if ((d1 > 300000000) && (d1 <= Integer.MAX_VALUE)) {
-                    throw new WTFExeption(NucleumOmnium.instance);
-                }
-            }
-        }
-
-        return d1;
-    }
-
-    public static void sendChatToPlayer(final ICommandSender sender, final String msg) {
-        sender.sendChatToPlayer(ChatMessageComponent.func_111077_e(msg));
-    }
-
-    public static void sendChatToPlayer(final ICommandSender sender) {
-        sendChatToPlayer(sender, "");
+    public static void tellAdmins(final ICommandSender sender, final String message, final Object... objects)
+    {
+        CommandBase.notifyAdmins(sender, message, objects);
     }
 }

@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.utils.exeptions;
 
 import ccm.nucleum_omnium.IMod;
@@ -5,18 +8,21 @@ import ccm.nucleum_omnium.IMod;
 /**
  * The User tried to use the TPX command with coordinates
  */
-public class WTFExeption extends NotMyFaultExeption {
+public class WTFExeption extends NotMyFaultExeption
+{
 
     private static final long   serialVersionUID = 6333535650002729746L;
 
     private final StringBuilder tmpErrorSB       = new StringBuilder();
 
-    public WTFExeption(final IMod mod) {
+    public WTFExeption(final IMod mod)
+    {
         super(mod);
         addString();
     }
 
-    private void addString() {
+    private void addString()
+    {
         tmpErrorSB.append("What the Hax are you tring to do???\n");
         tmpErrorSB.append("DO NOT TRY TO GO TO THE FAR LANDS!!\n");
         tmpErrorSB.append("Herobrine Lives there... \n");

@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.configuration;
 
 import java.io.File;
@@ -7,7 +10,8 @@ import net.minecraftforge.common.Configuration;
 /**
  * This class offers advanced configurations capabilities, to "Enhance" normal Forge Configurations.
  */
-public class AdvConfiguration extends Configuration {
+public class AdvConfiguration extends Configuration
+{
 
     /**
      * Creates a configuration file for the file given in parameter.
@@ -15,7 +19,8 @@ public class AdvConfiguration extends Configuration {
      * @param file
      *            The File to make a Configuration File out of
      */
-    public AdvConfiguration(final File file) {
+    public AdvConfiguration(final File file)
+    {
         super(file);
     }
 
@@ -28,7 +33,8 @@ public class AdvConfiguration extends Configuration {
      * @param caseSensitiveCustomCategories
      *            True if you want your custom categories to be case sensitive, False otherwise
      */
-    public AdvConfiguration(final File file, final boolean caseSensitiveCustomCategories) {
+    public AdvConfiguration(final File file, final boolean caseSensitiveCustomCategories)
+    {
         super(file, caseSensitiveCustomCategories);
     }
 
@@ -38,18 +44,8 @@ public class AdvConfiguration extends Configuration {
      * @param defaultValue
      * @return
      */
-    public int getProp(final String category, final String key, final int defaultValue) {
-
-        return super.get(category, key, defaultValue).getInt();
-    }
-
-    /**
-     * @param category
-     * @param key
-     * @param defaultValue
-     * @return
-     */
-    public boolean getProp(final String category, final String key, final boolean defaultValue) {
+    public boolean getProp(final String category, final String key, final boolean defaultValue)
+    {
 
         return super.get(category, key, defaultValue).getBoolean(defaultValue);
     }
@@ -60,7 +56,20 @@ public class AdvConfiguration extends Configuration {
      * @param defaultValue
      * @return
      */
-    public String getProp(final String category, final String key, final String defaultValue) {
+    public int getProp(final String category, final String key, final int defaultValue)
+    {
+
+        return super.get(category, key, defaultValue).getInt();
+    }
+
+    /**
+     * @param category
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public String getProp(final String category, final String key, final String defaultValue)
+    {
 
         return super.get(category, key, defaultValue).getString();
     }
@@ -71,8 +80,10 @@ public class AdvConfiguration extends Configuration {
      * anything
      */
     @Override
-    public void save() {
-        if (hasChanged()) {
+    public void save()
+    {
+        if (hasChanged())
+        {
             super.save();
         }
     }

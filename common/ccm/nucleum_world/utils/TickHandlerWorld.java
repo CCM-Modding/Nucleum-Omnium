@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_world.utils;
 
 import java.util.ArrayList;
@@ -14,24 +17,29 @@ import ccm.nucleum_world.generator.WorldGenHandler;
 
 import lib.cofh.util.ChunkCoord;
 
-public class TickHandlerWorld implements ITickHandler {
+public class TickHandlerWorld implements ITickHandler
+{
 
     public static TickHandlerWorld               instance    = new TickHandlerWorld();
 
     public static HashMap<Integer, ArrayList<?>> chunksToGen = new HashMap<Integer, ArrayList<?>>();
 
     @Override
-    @SuppressWarnings("rawtypes")
-    public void tickStart(final EnumSet type, final Object... tickData) {}
+    public String getLabel()
+    {
+        return "nucleum_world.tick";
+    }
 
     @Override
     @SuppressWarnings("rawtypes")
-    public void tickEnd(final EnumSet type, final Object... tickData) {
+    public void tickEnd(final EnumSet type, final Object... tickData)
+    {
         final World world = (World) tickData[0];
         final int dim = world.provider.dimensionId;
         final ArrayList<?> chunks = chunksToGen.get(Integer.valueOf(dim));
 
-        if ((chunks != null) && (chunks.size() > 0)) {
+        if ((chunks != null) && (chunks.size() > 0))
+        {
             final ChunkCoord c = (ChunkCoord) chunks.get(0);
             final long worldSeed = world.getSeed();
             final Random rand = new Random(worldSeed);
@@ -45,12 +53,13 @@ public class TickHandlerWorld implements ITickHandler {
     }
 
     @Override
-    public EnumSet<TickType> ticks() {
+    public EnumSet<TickType> ticks()
+    {
         return EnumSet.of(TickType.WORLD);
     }
 
     @Override
-    public String getLabel() {
-        return "nucleum_world.tick";
-    }
+    @SuppressWarnings("rawtypes")
+    public void tickStart(final EnumSet type, final Object... tickData)
+    {}
 }

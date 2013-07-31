@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.block.tile;
 
 import net.minecraft.tileentity.TileEntity;
@@ -9,40 +12,51 @@ import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.tileentity.LogicTE;
 import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
 
-public class TileLogic extends TileInventory implements ITileHelper {
+public class TileLogic extends TileInventory implements ITileHelper
+{
 
     protected Class<? extends ITileLogic> logic = null;
 
     @Override
-    public void setTileEntity(final TileEntity tile) {
-
-        super.setTileEntity(tile);
-
-        if (tile instanceof LogicTE) {
-            if (((LogicTE) tile).hasLogic()) {
-                logic = ((LogicTE) tile).getSrcLogic();
-            }
-        }
-    }
-
-    @Override
-    public TileEntity createTileEntity(final World world, final int meta) {
-        if (logic != null) {
-            try {
-                if (hasInventory()) {
+    public TileEntity createTileEntity(final World world, final int meta)
+    {
+        if (logic != null)
+        {
+            try
+            {
+                if (hasInventory())
+                {
                     return ((LogicTE) te.newInstance()).setLogic(logic).setInventorySize(size);
-                } else {
+                } else
+                {
                     return ((LogicTE) te.newInstance()).setLogic(logic);
                 }
-            } catch (final Exception e) {
+            } catch (final Exception e)
+            {
                 LogHandler.severe(NucleumOmnium.instance,
                                   "TileEntity Instance with logic could not be created during createTileEntity \n");
                 e.getCause();
                 e.printStackTrace();
                 return null;
             }
-        } else {
+        } else
+        {
             return super.createTileEntity(world, meta);
+        }
+    }
+
+    @Override
+    public void setTileEntity(final TileEntity tile)
+    {
+
+        super.setTileEntity(tile);
+
+        if (tile instanceof LogicTE)
+        {
+            if (((LogicTE) tile).hasLogic())
+            {
+                logic = ((LogicTE) tile).getSrcLogic();
+            }
         }
     }
 }

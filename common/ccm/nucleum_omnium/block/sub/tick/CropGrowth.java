@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.block.sub.tick;
 
 import java.util.Random;
@@ -9,17 +12,21 @@ import ccm.nucleum_omnium.block.MainBlock;
 import ccm.nucleum_omnium.block.interfaces.IDisplayListener;
 import ccm.nucleum_omnium.block.sub.SubCrop;
 
-public class CropGrowth implements IDisplayListener {
+public class CropGrowth implements IDisplayListener
+{
 
     @Override
     public void
-            randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand) {
+            randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand)
+    {
 
         final SubCrop block = (SubCrop) ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x,
                                                                                                                                         y,
                                                                                                                                         z)];
-        if (world.getBlockLightValue(x, y, z) >= 9) {
-            if (rand.nextInt((int) (25.0F / block.getGrowthRate()) + 1) == 0) {
+        if (world.getBlockLightValue(x, y, z) >= 9)
+        {
+            if (rand.nextInt((int) (25.0F / block.getGrowthRate()) + 1) == 0)
+            {
                 block.grow();
             }
         }

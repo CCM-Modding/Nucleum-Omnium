@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.helper;
 
 import java.io.File;
@@ -14,15 +17,32 @@ import ccm.nucleum_omnium.base.BaseNIC;
  * 
  * @author Dries007
  */
-public final class DataHelper extends BaseNIC {
+public final class DataHelper extends BaseNIC
+{
     private static File root;
 
     /**
-     * To be called on server start.
+     * Remove a data file.
+     * 
+     * @param mod
+     *            The mod in "control" of the file
+     * @param fileName
+     *            Do not add an extension
+     * @return true if
      */
-    public static void init() {
-        DataHelper.root = new File(DimensionManager.getCurrentSaveRootDirectory(), "CCM-Modding");
-        DataHelper.root.mkdirs();
+    public static boolean deleteFile(final IMod mod, final String fileName)
+    {
+        try
+        {
+            final File folder = DataHelper.getModFolder(mod);
+            final File file = new File(folder, fileName.trim() + ".dat");
+
+            return file.delete();
+        } catch (final Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
@@ -31,10 +51,52 @@ public final class DataHelper extends BaseNIC {
      * @param modID
      * @return File instance of the folder. It exists.
      */
-    public static File getModFolder(final IMod mod) {
+    public static File getModFolder(final IMod mod)
+    {
         final File folder = new File(DataHelper.root, mod.getModId());
         folder.mkdirs();
         return folder;
+    }
+
+    /**
+     * To be called on server start.
+     */
+    public static void init()
+    {
+        DataHelper.root = new File(DimensionManager.getCurrentSaveRootDirectory(), "CCM-Modding");
+        DataHelper.root.mkdirs();
+    }
+
+    /**
+     * Use this before you save data...
+     * 
+     * @param modID
+     *            for the folder
+     * @param fileName
+     *            , don't add an extension.
+     * @return data stored or new NBTTagCompound if file didn't exist.
+     */
+    public static NBTTagCompound readData(final IMod mod, final String fileName)
+    {
+        try
+        {
+            final File folder = DataHelper.getModFolder(mod);
+
+            final File file = new File(folder, fileName.trim() + ".dat");
+
+            if (!file.exists())
+            {
+                return new NBTTagCompound();
+            } else
+            {
+                return CompressedStreamTools.read(file);
+            }
+
+        } catch (final Exception e)
+        {
+            e.printStackTrace();
+            return new NBTTagCompound();
+        }
     }
 
     /**
@@ -48,8 +110,10 @@ public final class DataHelper extends BaseNIC {
      *            in NBT format.
      * @return true if success.
      */
-    public static boolean saveData(final IMod mod, final String fileName, final NBTTagCompound data) {
-        try {
+    public static boolean saveData(final IMod mod, final String fileName, final NBTTagCompound data)
+    {
+        try
+        {
             final File folder = DataHelper.getModFolder(mod);
 
             final File tempFile = new File(folder, fileName.trim() + "_tmp.dat");
@@ -57,62 +121,16 @@ public final class DataHelper extends BaseNIC {
 
             CompressedStreamTools.write(data, tempFile);
 
-            if (realFile.exists()) {
+            if (realFile.exists())
+            {
                 realFile.delete();
             }
 
             tempFile.renameTo(realFile);
 
             return true;
-        } catch (final Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * Use this before you save data...
-     * 
-     * @param modID
-     *            for the folder
-     * @param fileName
-     *            , don't add an extension.
-     * @return data stored or new NBTTagCompound if file didn't exist.
-     */
-    public static NBTTagCompound readData(final IMod mod, final String fileName) {
-        try {
-            final File folder = DataHelper.getModFolder(mod);
-
-            final File file = new File(folder, fileName.trim() + ".dat");
-
-            if (!file.exists()) {
-                return new NBTTagCompound();
-            } else {
-                return CompressedStreamTools.read(file);
-            }
-
-        } catch (final Exception e) {
-            e.printStackTrace();
-            return new NBTTagCompound();
-        }
-    }
-
-    /**
-     * Remove a data file.
-     * 
-     * @param mod
-     *            The mod in "control" of the file
-     * @param fileName
-     *            Do not add an extension
-     * @return true if
-     */
-    public static boolean deleteFile(final IMod mod, final String fileName) {
-        try {
-            final File folder = DataHelper.getModFolder(mod);
-            final File file = new File(folder, fileName.trim() + ".dat");
-
-            return file.delete();
-        } catch (final Exception e) {
+        } catch (final Exception e)
+        {
             e.printStackTrace();
             return false;
         }

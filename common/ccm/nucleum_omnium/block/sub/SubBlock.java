@@ -1,3 +1,6 @@
+/**
+ * CCM Modding, Nucleum Omnium
+ */
 package ccm.nucleum_omnium.block.sub;
 
 import java.lang.reflect.Constructor;
@@ -32,6 +35,7 @@ import ccm.nucleum_omnium.block.interfaces.IDisplayListener;
 import ccm.nucleum_omnium.block.interfaces.ITextureHelper;
 import ccm.nucleum_omnium.block.interfaces.ITileHelper;
 import ccm.nucleum_omnium.block.texture.BasicTexture;
+import ccm.nucleum_omnium.block.tile.NoTile;
 import ccm.nucleum_omnium.handler.GUIHandler;
 import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.handler.TextureHandler;
@@ -40,33 +44,67 @@ import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.helper.enums.IBlockEnum;
 import ccm.nucleum_omnium.tileentity.BaseTE;
 
-public class SubBlock {
+public class SubBlock
+{
+
+    public static SubBlock createAndSetUp(final Enum<? extends IBlockEnum> blockEnum,
+                                          final int id,
+                                          final String textureLoc)
+    {
+
+        final String texture = TextureHandler.getTextureFromName(blockEnum.name(), textureLoc);
+        return setUp(blockEnum, new SubBlock(id, blockEnum.ordinal(), texture).setUnlocalizedName(blockEnum));
+    }
+
+    /*
+     * Static Factory's
+     */
+    public static SubBlock setUp(final Enum<? extends IBlockEnum> blockEnum, final SubBlock instance)
+    {
+
+        final MainBlock block = (MainBlock) instance.getBlock();
+
+        ((IBlockEnum) blockEnum).setBaseBlock(block);
+
+        MainBlock.registerID(block.blockID);
+
+        return instance;
+    }
 
     /*
      * DATA
      */
-    private final int               meta;
+    private MainBlock                     mainBlock;
 
-    private MainBlock               mainBlock;
-    private CreativeTabs            tab;
+    private final int                     meta;
+    private CreativeTabs                  tab;
 
-    private ItemStack               drop;
-    private int                     dropMin;
-    private int                     dropMax;
+    private final ITileHelper             tile;
+    private final ITextureHelper          texture;
+    private ItemStack                     drop;
 
-    private float                   hardness;
-    private float                   blockResistance;
+    private int                           dropMin;
+    private int                           dropMax;
 
-    private boolean                 collisionEffect;
-    private boolean                 tileSet;
+    private float                         hardness;
 
-    private String                  unlocName;
+    private float                         blockResistance;
 
-    private ITileHelper             tile;
-    private ITextureHelper          texture;
+    private boolean                       collisionEffect;
+    private String                        unlocName;
 
-    public List<IDisplayListener>   displayList   = new ArrayList<IDisplayListener>();
-    public List<ICollisionListener> collisionList = new ArrayList<ICollisionListener>();
+    public final List<IDisplayListener>   displayList   = new ArrayList<IDisplayListener>();
+
+    public final List<ICollisionListener> collisionList = new ArrayList<ICollisionListener>();
+
+    public SubBlock(final Class<? extends MainBlock> block,
+                    final int id,
+                    final int meta,
+                    final ITextureHelper texture,
+                    final ITileHelper tile)
+    {
+        this(block, id, meta, Material.rock, texture, tile);
+    }
 
     /*
      * Constructors
@@ -88,51 +126,83 @@ public class SubBlock {
                     final int id,
                     final int meta,
                     final Material material,
-                    final ITextureHelper texture) {
-        if (Block.blocksList[id] == null) {
+                    final ITextureHelper texture,
+                    final ITileHelper tile)
+    {
+        if (Block.blocksList[id] == null)
+        {
             Constructor<? extends MainBlock> c = null;
-            try {
+            try
+            {
                 c = block.getConstructor(int.class, Material.class);
-            } catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e)
+            {
                 e.printStackTrace();
-            } catch (final SecurityException e) {
+            } catch (final SecurityException e)
+            {
                 e.printStackTrace();
             }
-            try {
+            try
+            {
                 mainBlock = c.newInstance(id, material);
-            } catch (final InstantiationException e) {
+            } catch (final InstantiationException e)
+            {
                 e.printStackTrace();
-            } catch (final IllegalAccessException e) {
+            } catch (final IllegalAccessException e)
+            {
                 e.printStackTrace();
-            } catch (final IllegalArgumentException e) {
+            } catch (final IllegalArgumentException e)
+            {
                 e.printStackTrace();
-            } catch (final InvocationTargetException e) {
+            } catch (final InvocationTargetException e)
+            {
                 e.printStackTrace();
             }
             mainBlock.addSubBlock(this, meta);
-        } else {
+        } else
+        {
             mainBlock = (MainBlock) Block.blocksList[id];
             mainBlock.addSubBlock(this, meta);
         }
 
         this.meta = meta;
         this.texture = texture;
+        this.tile = tile;
     }
 
-    public SubBlock(final Class<? extends MainBlock> block,
-                    final int id,
+    public SubBlock(final int id, final int meta, final ITextureHelper texture, final ITileHelper tile)
+    {
+        this(id, meta, Material.rock, texture, tile);
+    }
+
+    public SubBlock(final int id,
                     final int meta,
-                    final String iconName,
-                    final ITextureHelper texture) {
-        this(block, id, meta, Material.rock, texture);
+                    final Material material,
+                    final ITextureHelper texture,
+                    final ITileHelper tile)
+    {
+        this(MainBlock.class, id, meta, material, texture, tile);
     }
 
-    public SubBlock(final int id, final int meta, final Material material, final String iconName) {
-        this(MainBlock.class, id, meta, material, new BasicTexture(iconName));
+    public SubBlock(final int id, final int meta, final Material material, final String iconName)
+    {
+        this(id, meta, material, new BasicTexture(iconName), new NoTile());
     }
 
-    public SubBlock(final int id, final int meta, final String iconName) {
-        this(MainBlock.class, id, meta, iconName, new BasicTexture(iconName));
+    public SubBlock(final int id, final int meta, final String iconName)
+    {
+        this(id, meta, Material.rock, iconName);
+    }
+
+    /**
+     * @param collisionL
+     *            the {@link ICollisionListener} who's collide method will be called for this
+     *            instance
+     */
+    public void addCollisionListener(final ICollisionListener collisionL)
+    {
+        collisionEffect = true;
+        collisionList.add(collisionL);
     }
 
     /*
@@ -143,134 +213,44 @@ public class SubBlock {
      *            the {@link IDisplayListener} who's randomDisplayTick method will be called for
      *            this instance
      */
-    public void addDisplayListener(final IDisplayListener displayL) {
+    public void addDisplayListener(final IDisplayListener displayL)
+    {
         mainBlock.setTickRandomly(meta);
         displayList.add(displayL);
     }
 
-    /**
-     * @param collisionL
-     *            the {@link ICollisionListener} who's collide method will be called for this
-     *            instance
-     */
-    public void addCollisionListener(final ICollisionListener collisionL) {
-        collisionEffect = true;
-        collisionList.add(collisionL);
+    public void breakBlock(final World world,
+                           final int x,
+                           final int y,
+                           final int z,
+                           final int id,
+                           final int meta)
+    {}
+
+    public TileEntity createTileEntity(final World world, final int meta)
+    {
+        return tile.createTileEntity(world, meta);
     }
 
-    public void
-            randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand) {
-        for (final IDisplayListener dl : displayList) {
-            dl.randomDisplayTick(world, x, y, z, rand);
+    public int damageDropped(final int meta)
+    {
+        if (idDropped(new Random(), meta) == mainBlock.blockID)
+        {
+            return meta;
+        } else
+        {
+            return 0;
         }
     }
 
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world,
-                                                         final int x,
-                                                         final int y,
-                                                         final int z) {
-        if (collisionEffect) {
-            final float var5 = 0.025F;
-            return AxisAlignedBB.getAABBPool().getAABB(x, y, z, (x + 1), ((y + 1.0F) - var5), (z + 1));
-        }
-
-        return null;
+    public Block getBlock()
+    {
+        return mainBlock;
     }
 
-    public void onEntityCollidedWithBlock(final World world,
-                                          final int x,
-                                          final int y,
-                                          final int z,
-                                          final Entity par5Entity) {
-        for (final ICollisionListener cl : collisionList) {
-            cl.collide(world, x, y, z, par5Entity, meta);
-        }
-    }
-
-    /*
-     * Instance Modifiers
-     */
-    public SubBlock setCreativeTab(final CreativeTabs tab) {
-        mainBlock.setCreativeTab(tab);
-        this.tab = tab;
-        return this;
-    }
-
-    public SubBlock setUnlocalizedName(final String string) {
-        unlocName = string + ".name";
-        mainBlock.setUnlocalizedName(unlocName);
-        return this;
-    }
-
-    public SubBlock setUnlocalizedName(final Enum<?> enu) {
-        return setUnlocalizedName(enu.name());
-    }
-
-    public SubBlock setBlockDrops(final ItemStack item, final int min, final int max) {
-        drop = item.copy();
-        dropMin = min;
-        dropMax = max;
-        return this;
-    }
-
-    public SubBlock setHardness(final float hardness) {
-        this.hardness = hardness;
-
-        if (blockResistance < (hardness * 5.0F)) {
-            blockResistance = hardness * 5.0F;
-        }
-
-        return this;
-    }
-
-    public SubBlock setResistance(final float ressistance) {
-        blockResistance = ressistance * 3;
-        return this;
-    }
-
-    public SubBlock setSlipperiness(final float slipperiness) {
-        mainBlock.slipperiness = slipperiness;
-        return this;
-    }
-
-    public SubBlock setTileEntity(final TileEntity tile) {
-        if (tileSet) {
-            this.tile.setTileEntity(tile);
-        }
-        return this;
-    }
-
-    /**
-     * @param tile
-     *            the tile to set
-     */
-    public SubBlock setTile(final ITileHelper tile) {
-        this.tile = tile;
-        tileSet = true;
-        return this;
-    }
-
-    /**
-     * @param texture
-     *            the texture to set
-     */
-    public SubBlock setTexture(final ITextureHelper texture) {
-        this.texture = texture;
-        return this;
-    }
-
-    /**
-     * @return the tile
-     */
-    public ITileHelper getTile() {
-        return tile;
-    }
-
-    /**
-     * @return the texture
-     */
-    public ITextureHelper getTexture() {
-        return texture;
+    public float getBlockHardness()
+    {
+        return hardness;
     }
 
     /*
@@ -281,54 +261,38 @@ public class SubBlock {
                                 final int x,
                                 final int y,
                                 final int z,
-                                final int side) {
+                                final int side)
+    {
         return texture.getBlockTexture(blockAccess, x, y, z, side);
     }
 
-    @SideOnly(Side.CLIENT)
-    public Icon getIcon(final int side, final int meta) {
+    public Icon getBlockTextureFromSide(final int side)
+    {
         return texture.getIcon(side, meta);
     }
 
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(final IconRegister register) {
-        texture.registerIcons(register);
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world,
+                                                         final int x,
+                                                         final int y,
+                                                         final int z)
+    {
+        if (collisionEffect)
+        {
+            final float var5 = 0.025F;
+            return AxisAlignedBB.getAABBPool().getAABB(x, y, z, (x + 1), ((y + 1.0F) - var5), (z + 1));
+        }
+
+        return null;
     }
 
-    public Icon getBlockTextureFromSide(final int side) {
-        return texture.getIcon(side, meta);
-    }
-
-    public CreativeTabs getCreativeTab() {
+    public CreativeTabs getCreativeTab()
+    {
         return tab;
     }
 
-    public String getUnlocalizedName() {
-        return unlocName;
-    }
-
-    public Block getBlock() {
-        return mainBlock;
-    }
-
-    public int quantityDroppedWithBonus(final int fortune, final Random rand) {
-        if ((drop != null) && (dropMax > 1)) {
-            return dropMin + rand.nextInt(dropMax + fortune) + fortune;
-        } else {
-            return 1;
-        }
-    }
-
-    public int idDropped(final Random rand, final int par3) {
-        if (drop != null) {
-            return drop.itemID;
-        } else {
-            return mainBlock.blockID;
-        }
-    }
-
-    public float getBlockHardness() {
-        return hardness;
+    public int getDamageValue(final World world, final int x, final int y, final int z)
+    {
+        return meta;
     }
 
     public float getExplosionResistance(final Entity entity,
@@ -338,42 +302,53 @@ public class SubBlock {
                                         final int z,
                                         final double explosionX,
                                         final double explosionY,
-                                        final double explosionZ) {
+                                        final double explosionZ)
+    {
         return blockResistance / 5.0F;
     }
 
-    public int damageDropped(final int meta) {
-        if (idDropped(new Random(), meta) == mainBlock.blockID) {
-            return meta;
-        } else {
-            return 0;
+    @SideOnly(Side.CLIENT)
+    public Icon getIcon(final int side, final int meta)
+    {
+        return texture.getIcon(side, meta);
+    }
+
+    /**
+     * @return the texture
+     */
+    public ITextureHelper getTextureHelper()
+    {
+        return texture;
+    }
+
+    /**
+     * @return the tile
+     */
+    public ITileHelper getTileHelper()
+    {
+        return tile;
+    }
+
+    public String getUnlocalizedName()
+    {
+        return unlocName;
+    }
+
+    public boolean hasTileEntity(final int meta)
+    {
+        return tile.hasTileEntity(meta);
+    }
+
+    public int idDropped(final Random rand, final int par3)
+    {
+        if (drop != null)
+        {
+            return drop.itemID;
+        } else
+        {
+            return mainBlock.blockID;
         }
     }
-
-    public int getDamageValue(final World world, final int x, final int y, final int z) {
-        return meta;
-    }
-
-    public boolean hasTileEntity(final int meta) {
-        if (tileSet) {
-            return tile.hasTileEntity(meta);
-        }
-        return false;
-    }
-
-    public TileEntity createTileEntity(final World world, final int meta) {
-        if (tileSet) {
-            return tile.createTileEntity(world, meta);
-        }
-        return null;
-    }
-
-    public void breakBlock(final World world,
-                           final int x,
-                           final int y,
-                           final int z,
-                           final int id,
-                           final int meta) {}
 
     public boolean onBlockActivated(final World world,
                                     final int x,
@@ -383,40 +358,50 @@ public class SubBlock {
                                     final int wut,
                                     final float clickX,
                                     final float clickY,
-                                    final float clockZ) {
-        if (world.isRemote) {
+                                    final float clockZ)
+    {
+        if (world.isRemote)
+        {
             return true;
         }
-        if (player.isSneaking()) {
+        if (player.isSneaking())
+        {
             return false;
         }
-        if (hasTileEntity(world.getBlockMetadata(x, y, z))) {
+        if (hasTileEntity(world.getBlockMetadata(x, y, z)))
+        {
             final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
-            if (te != null) {
+            if (te != null)
+            {
                 GUIHandler.openGui(FunctionHelper.getTEName(world, x, y, z), player, world, x, y, z);
                 return true;
-            } else {
+            } else
+            {
                 LogHandler.warning(NucleumOmnium.instance, "TileEntity at %s, %s, %s, was null", x, y, z);
             }
         }
         return false;
     }
 
-    public void onBlockAdded(final World world, final int x, final int y, final int z) {}
+    public void onBlockAdded(final World world, final int x, final int y, final int z)
+    {}
 
     public void onBlockPlacedBy(final World world,
                                 final int x,
                                 final int y,
                                 final int z,
                                 final EntityLivingBase living,
-                                final ItemStack itemStack) {
-        if (hasTileEntity(world.getBlockMetadata(x, y, z))) {
+                                final ItemStack itemStack)
+    {
+        if (hasTileEntity(world.getBlockMetadata(x, y, z)))
+        {
 
             final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
             final int direction;
             final int facing = MathHelper.floor_double(((living.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
 
-            switch (facing) {
+            switch (facing)
+            {
                 case 0:
                     direction = ForgeDirection.NORTH.ordinal();
                     break;
@@ -436,7 +421,8 @@ public class SubBlock {
 
             BlockHelper.updateAdjacent(world, x, y, z, 3);
 
-            if (itemStack.hasDisplayName()) {
+            if (itemStack.hasDisplayName())
+            {
                 te.setCustomName(itemStack.getDisplayName());
             }
             te.setOwner(living.getEntityName());
@@ -444,33 +430,110 @@ public class SubBlock {
         }
     }
 
+    public void onEntityCollidedWithBlock(final World world,
+                                          final int x,
+                                          final int y,
+                                          final int z,
+                                          final Entity par5Entity)
+    {
+        for (final ICollisionListener cl : collisionList)
+        {
+            cl.collide(world, x, y, z, par5Entity, meta);
+        }
+    }
+
+    public int quantityDroppedWithBonus(final int fortune, final Random rand)
+    {
+        if ((drop != null) && (dropMax > 1))
+        {
+            return dropMin + rand.nextInt(dropMax + fortune) + fortune;
+        } else
+        {
+            return 1;
+        }
+    }
+
+    public void
+            randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand)
+    {
+        for (final IDisplayListener dl : displayList)
+        {
+            dl.randomDisplayTick(world, x, y, z, rand);
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(final IconRegister register)
+    {
+        texture.registerIcons(register);
+    }
+
+    public SubBlock setBlockDrops(final ItemStack item, final int min, final int max)
+    {
+        drop = item.copy();
+        dropMin = min;
+        dropMax = max;
+        return this;
+    }
+
+    /*
+     * Instance Modifiers
+     */
+    public SubBlock setCreativeTab(final CreativeTabs tab)
+    {
+        mainBlock.setCreativeTab(tab);
+        this.tab = tab;
+        return this;
+    }
+
+    public SubBlock setHardness(final float hardness)
+    {
+        this.hardness = hardness;
+
+        if (blockResistance < (hardness * 5.0F))
+        {
+            blockResistance = hardness * 5.0F;
+        }
+
+        return this;
+    }
+
+    public SubBlock setResistance(final float ressistance)
+    {
+        blockResistance = ressistance * 3;
+        return this;
+    }
+
+    public SubBlock setSlipperiness(final float slipperiness)
+    {
+        mainBlock.slipperiness = slipperiness;
+        return this;
+    }
+
+    public SubBlock setTileEntity(final TileEntity tile)
+    {
+        this.tile.setTileEntity(tile);
+        return this;
+    }
+
+    public SubBlock setUnlocalizedName(final Enum<?> enu)
+    {
+        return setUnlocalizedName(enu.name());
+    }
+
+    public SubBlock setUnlocalizedName(final String string)
+    {
+        unlocName = string + ".name";
+        mainBlock.setUnlocalizedName(unlocName);
+        return this;
+    }
+
     /*
      * Object Redirect Methods
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
         return super.toString() + mainBlock.getUnlocalizedName();
-    }
-
-    /*
-     * Static Factory's
-     */
-    public static SubBlock setUp(final Enum<? extends IBlockEnum> blockEnum, final SubBlock instance) {
-
-        final MainBlock block = (MainBlock) instance.getBlock();
-
-        ((IBlockEnum) blockEnum).setBaseBlock(block);
-
-        MainBlock.registerID(block.blockID);
-
-        return instance;
-    }
-
-    public static SubBlock createAndSetUp(final Enum<? extends IBlockEnum> blockEnum,
-                                          final int id,
-                                          final String textureLoc) {
-
-        final String texture = TextureHandler.getTextureFromName(blockEnum.name(), textureLoc);
-        return setUp(blockEnum, new SubBlock(id, blockEnum.ordinal(), texture).setUnlocalizedName(blockEnum));
     }
 }
