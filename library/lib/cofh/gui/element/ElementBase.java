@@ -13,7 +13,8 @@ import lib.cofh.gui.GuiBase;
  * 
  * @author King Lemming
  */
-public abstract class ElementBase {
+public abstract class ElementBase
+{
 
     public static final SoundManager elementSoundManager = FMLClientHandler.instance().getClient().sndManager;
     public static final FontRenderer elementFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
@@ -32,14 +33,16 @@ public abstract class ElementBase {
 
     protected boolean                visible             = true;
 
-    public ElementBase(final GuiBase gui, final int posX, final int posY) {
+    public ElementBase(final GuiBase gui, final int posX, final int posY)
+    {
 
         this.gui = gui;
-        this.posX = gui.guiLeft + posX;
-        this.posY = gui.guiTop + posY;
+        this.posX = gui.getLeft() + posX;
+        this.posY = gui.getTop() + posY;
     }
 
-    public ElementBase setTexture(final String texture, final int texW, final int texH) {
+    public ElementBase setTexture(final String texture, final int texW, final int texH)
+    {
 
         this.texture = texture;
         this.texW = texW;
@@ -47,38 +50,44 @@ public abstract class ElementBase {
         return this;
     }
 
-    public ElementBase setPosition(final int posX, final int posY) {
+    public ElementBase setPosition(final int posX, final int posY)
+    {
 
-        this.posX = gui.guiLeft + posX;
-        this.posY = gui.guiTop + posY;
+        this.posX = gui.getLeft() + posX;
+        this.posY = gui.getTop() + posY;
         return this;
     }
 
-    public ElementBase setSize(final int sizeX, final int sizeY) {
+    public ElementBase setSize(final int sizeX, final int sizeY)
+    {
 
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         return this;
     }
 
-    public ElementBase setVisible(final boolean visible) {
+    public ElementBase setVisible(final boolean visible)
+    {
 
         this.visible = visible;
         return this;
     }
 
-    public boolean isVisible() {
+    public boolean isVisible()
+    {
 
         return visible;
     }
 
-    public void update() {
+    public void update()
+    {
 
     }
 
     public abstract void draw();
 
-    public void draw(final int x, final int y) {
+    public void draw(final int x, final int y)
+    {
 
         posX = x;
         posY = y;
@@ -87,18 +96,21 @@ public abstract class ElementBase {
 
     public abstract String getTooltip();
 
-    public boolean intersectsWith(int mouseX, int mouseY) {
+    public boolean intersectsWith(int mouseX, int mouseY)
+    {
 
-        mouseX += gui.guiLeft;
-        mouseY += gui.guiTop;
+        mouseX += gui.getLeft();
+        mouseY += gui.getTop();
 
-        if ((mouseX >= posX) && (mouseX <= (posX + sizeX)) && (mouseY >= posY) && (mouseY <= (posY + sizeY))) {
+        if ((mouseX >= posX) && (mouseX <= (posX + sizeX)) && (mouseY >= posY) && (mouseY <= (posY + sizeY)))
+        {
             return true;
         }
         return false;
     }
 
-    public boolean handleMouseClicked(final int x, final int y, final int mouseButton) {
+    public boolean handleMouseClicked(final int x, final int y, final int mouseButton)
+    {
 
         return false;
     }
@@ -108,7 +120,8 @@ public abstract class ElementBase {
                                       final int u,
                                       final int v,
                                       final int width,
-                                      final int height) {
+                                      final int height)
+    {
 
         gui.drawSizedTexturedModalRect(x, y, u, v, width, height, texW, texH);
     }

@@ -5,7 +5,8 @@ package lib.cofh.api.core;
  * 
  * @author Zeldo Kavira
  */
-public interface ISimpleRegistry {
+public interface ISimpleRegistry
+{
 
     /**
      * Register a new entry.

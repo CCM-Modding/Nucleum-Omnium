@@ -5,14 +5,16 @@ import net.minecraftforge.fluids.FluidTank;
 import lib.cofh.gui.GuiBase;
 import lib.cofh.render.RenderHelper;
 
-public class ElementFluidTank extends ElementBase {
+public class ElementFluidTank extends ElementBase
+{
 
     protected FluidTank tank;
     protected int       gaugeType;
 
     public int          scale = 60;
 
-    public ElementFluidTank(final GuiBase gui, final int posX, final int posY, final FluidTank tank) {
+    public ElementFluidTank(final GuiBase gui, final int posX, final int posY, final FluidTank tank)
+    {
 
         super(gui, posX, posY);
         this.tank = tank;
@@ -29,7 +31,8 @@ public class ElementFluidTank extends ElementBase {
                             final int posX,
                             final int posY,
                             final FluidTank tank,
-                            final String texture) {
+                            final String texture)
+    {
 
         super(gui, posX, posY);
         this.tank = tank;
@@ -42,16 +45,19 @@ public class ElementFluidTank extends ElementBase {
         sizeY = scale;
     }
 
-    public ElementFluidTank setGauge(final int gaugeType) {
+    public ElementFluidTank setGauge(final int gaugeType)
+    {
 
         this.gaugeType = gaugeType;
         return this;
     }
 
     @Override
-    public void draw() {
+    public void draw()
+    {
 
-        if (!visible) {
+        if (!visible)
+        {
             return;
         }
         final int amount = getScaled();
@@ -61,18 +67,21 @@ public class ElementFluidTank extends ElementBase {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip()
+    {
 
         return "" + tank.getFluidAmount() + " / " + tank.getCapacity() + " mB";
     }
 
     @Override
-    public boolean handleMouseClicked(final int x, final int y, final int mouseButton) {
+    public boolean handleMouseClicked(final int x, final int y, final int mouseButton)
+    {
 
         return false;
     }
 
-    int getScaled() {
+    int getScaled()
+    {
 
         return (tank.getFluidAmount() * sizeY) / tank.getCapacity();
     }

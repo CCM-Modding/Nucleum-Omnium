@@ -19,12 +19,13 @@ import lib.cofh.render.RenderHelper;
 import lib.cofh.util.MathHelper;
 
 /**
- * Base class for a modular GUIs. Works with Elements {@link ElementBase} and Tabs {@link TabBase}
- * which are both modular elements.
+ * Base class for a modular GUIs. Works with Elements {@link ElementBase} and Tabs {@link TabBase} which are
+ * both modular elements.
  * 
  * @author King Lemming
  */
-public abstract class GuiBase extends GuiContainer {
+public abstract class GuiBase extends GuiContainer
+{
 
     public static final String       PATH_ELEMENTS = "/assets/lib/textures/gui/elements/";
     public static final String       PATH_ICONS    = "/assets/lib/textures/gui/icons/";
@@ -37,19 +38,22 @@ public abstract class GuiBase extends GuiContainer {
     protected ArrayList<TabBase>     tabs          = new ArrayList<TabBase>();
     protected ArrayList<ElementBase> elements      = new ArrayList<ElementBase>();
 
-    public GuiBase(final Container container) {
+    public GuiBase(final Container container)
+    {
 
         super(container);
     }
 
-    public GuiBase(final Container container, final String texture) {
+    public GuiBase(final Container container, final String texture)
+    {
 
         super(container);
         this.texture = texture;
     }
 
     @Override
-    public void initGui() {
+    public void initGui()
+    {
 
         super.initGui();
         tabs.clear();
@@ -57,7 +61,8 @@ public abstract class GuiBase extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(final int x, final int y) {
+    protected void drawGuiContainerForegroundLayer(final int x, final int y)
+    {
 
         GL11.glDisable(GL11.GL_LIGHTING);
         drawTooltips();
@@ -65,7 +70,8 @@ public abstract class GuiBase extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(final float f, final int x, final int y) {
+    protected void drawGuiContainerBackgroundLayer(final float f, final int x, final int y)
+    {
 
         updateElements();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -77,15 +83,19 @@ public abstract class GuiBase extends GuiContainer {
     }
 
     @Override
-    protected void mouseClicked(final int x, final int y, final int mouseButton) {
+    protected void mouseClicked(final int x, final int y, final int mouseButton)
+    {
 
         super.mouseClicked(x, y, mouseButton);
 
         final TabBase tab = getTabAtPosition(mouseX, mouseY);
 
-        if ((tab != null) && !tab.handleMouseClicked(mouseX, mouseY, mouseButton)) {
-            for (final TabBase other : tabs) {
-                if ((other != tab) && other.open && (other.side == tab.side)) {
+        if ((tab != null) && !tab.handleMouseClicked(mouseX, mouseY, mouseButton))
+        {
+            for (final TabBase other : tabs)
+            {
+                if ((other != tab) && other.open && (other.side == tab.side))
+                {
                     other.toggleOpen();
                 }
             }
@@ -94,7 +104,8 @@ public abstract class GuiBase extends GuiContainer {
     }
 
     @Override
-    public void handleMouseInput() {
+    public void handleMouseInput()
+    {
 
         final int x = (Mouse.getEventX() * width) / mc.displayWidth;
         final int y = height - ((Mouse.getEventY() * height) / mc.displayHeight) - 1;
@@ -108,9 +119,11 @@ public abstract class GuiBase extends GuiContainer {
     /**
      * Draws the elements for this GUI.
      */
-    protected void drawElements() {
+    protected void drawElements()
+    {
 
-        for (final ElementBase element : elements) {
+        for (final ElementBase element : elements)
+        {
             element.draw();
         }
     }
@@ -118,83 +131,102 @@ public abstract class GuiBase extends GuiContainer {
     /**
      * Draws the tabs for this GUI. Handles Tab open/close animation.
      */
-    protected void drawTabs() {
+    protected void drawTabs()
+    {
 
         int yPosRight = 4;
         int yPosLeft = 4;
 
-        for (final TabBase tab : tabs) {
+        for (final TabBase tab : tabs)
+        {
             tab.update();
-            if (!tab.isVisible()) {
+            if (!tab.isVisible())
+            {
                 continue;
             }
-            if (tab.side == 0) {
+            if (tab.side == 0)
+            {
                 tab.draw(guiLeft, guiTop + yPosLeft);
                 yPosLeft += tab.currentHeight;
-            } else {
+            } else
+            {
                 tab.draw(guiLeft + xSize, guiTop + yPosRight);
                 yPosRight += tab.currentHeight;
             }
         }
     }
 
-    protected void drawTooltips() {
+    protected void drawTooltips()
+    {
 
         final TabBase tab = getTabAtPosition(mouseX, mouseY);
 
-        if (tab != null) {
+        if (tab != null)
+        {
             drawTooltip(tab.getTooltip());
             return;
         }
         final ElementBase element = getElementAtPosition(mouseX, mouseY);
 
-        if (element != null) {
+        if (element != null)
+        {
             drawTooltip(element.getTooltip());
             return;
         }
     }
 
     /* ELEMENTS */
-    public ElementBase addElement(final ElementBase element) {
+    public ElementBase addElement(final ElementBase element)
+    {
 
         elements.add(element);
         return element;
     }
 
-    public TabBase addTab(final TabBase tab) {
+    public TabBase addTab(final TabBase tab)
+    {
 
         tabs.add(tab);
-        if ((TabTracker.getOpenedLeftTab() != null) && tab.getClass().equals(TabTracker.getOpenedLeftTab())) {
+        if ((TabTracker.getOpenedLeftTab() != null) && tab.getClass().equals(TabTracker.getOpenedLeftTab()))
+        {
             tab.setFullyOpen();
         } else if ((TabTracker.getOpenedRightTab() != null) && tab.getClass()
-                                                                  .equals(TabTracker.getOpenedRightTab())) {
+                                                                  .equals(TabTracker.getOpenedRightTab()))
+        {
             tab.setFullyOpen();
         }
         return tab;
     }
 
-    protected ElementBase getElementAtPosition(final int mX, final int mY) {
+    protected ElementBase getElementAtPosition(final int mX, final int mY)
+    {
 
-        for (final ElementBase element : elements) {
-            if (element.intersectsWith(mX, mY)) {
+        for (final ElementBase element : elements)
+        {
+            if (element.intersectsWith(mX, mY))
+            {
                 return element;
             }
         }
         return null;
     }
 
-    protected TabBase getTabAtPosition(final int mX, final int mY) {
+    protected TabBase getTabAtPosition(final int mX, final int mY)
+    {
 
         int xShift = 0;
         int yShift = 4;
 
-        for (final TabBase tab : tabs) {
-            if (!tab.isVisible() || (tab.side == 1)) {
+        for (final TabBase tab : tabs)
+        {
+            if (!tab.isVisible() || (tab.side == 1))
+            {
                 continue;
             }
             tab.currentShiftX = xShift;
             tab.currentShiftY = yShift;
-            if (tab.intersectsWith(mX, mY, xShift, yShift)) {
+            if (tab.intersectsWith(mX, mY, xShift, yShift))
+            {
                 return tab;
             }
             yShift += tab.currentHeight;
@@ -203,13 +235,16 @@ public abstract class GuiBase extends GuiContainer {
         xShift = xSize;
         yShift = 4;
 
-        for (final TabBase tab : tabs) {
-            if (!tab.isVisible() || (tab.side == 0)) {
+        for (final TabBase tab : tabs)
+        {
+            if (!tab.isVisible() || (tab.side == 0))
+            {
                 continue;
             }
             tab.currentShiftX = xShift;
             tab.currentShiftY = yShift;
-            if (tab.intersectsWith(mX, mY, xShift, yShift)) {
+            if (tab.intersectsWith(mX, mY, xShift, yShift))
+            {
                 return tab;
             }
             yShift += tab.currentHeight;
@@ -217,7 +252,8 @@ public abstract class GuiBase extends GuiContainer {
         return null;
     }
 
-    protected void updateElements() {
+    protected void updateElements()
+    {
 
     }
 
@@ -225,7 +261,8 @@ public abstract class GuiBase extends GuiContainer {
     /**
      * Essentially a placeholder method for tabs to use should they need to draw a button.
      */
-    public void drawButton(final Icon icon, final int x, final int y, final int spriteSheet, final int mode) {
+    public void drawButton(final Icon icon, final int x, final int y, final int spriteSheet, final int mode)
+    {
 
         drawIcon(icon, x, y, spriteSheet);
     }
@@ -234,7 +271,8 @@ public abstract class GuiBase extends GuiContainer {
                            final int x,
                            final int y,
                            final int spriteSheet,
-                           final int mode) {
+                           final int mode)
+    {
 
         drawButton(IconRegistry.getIcon(iconName), x, y, spriteSheet, mode);
     }
@@ -243,9 +281,11 @@ public abstract class GuiBase extends GuiContainer {
      * Simple method used to draw a fluid of arbitrary size.
      */
     public void
-            drawFluid(final int x, final int y, final FluidStack fluid, final int width, final int height) {
+            drawFluid(final int x, final int y, final FluidStack fluid, final int width, final int height)
+    {
 
-        if ((fluid == null) || (fluid.getFluid() == null)) {
+        if ((fluid == null) || (fluid.getFluid() == null))
+        {
             return;
         }
         RenderHelper.setBlockTextureSheet();
@@ -253,7 +293,8 @@ public abstract class GuiBase extends GuiContainer {
     }
 
     public void
-            drawTiledTexture(final int x, final int y, final Icon icon, final int width, final int height) {
+            drawTiledTexture(final int x, final int y, final Icon icon, final int width, final int height)
+    {
 
         int i = 0;
         int j = 0;
@@ -261,8 +302,10 @@ public abstract class GuiBase extends GuiContainer {
         int drawHeight = 0;
         int drawWidth = 0;
 
-        for (i = 0; i < width; i += 16) {
-            for (j = 0; j < height; j += 16) {
+        for (i = 0; i < width; i += 16)
+        {
+            for (j = 0; j < height; j += 16)
+            {
                 drawWidth = MathHelper.minI(width - i, 16);
                 drawHeight = MathHelper.minI(height - j, 16);
                 drawScaledTexturedModelRectFromIcon(x + i, y + j, icon, drawWidth, drawHeight);
@@ -271,18 +314,22 @@ public abstract class GuiBase extends GuiContainer {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
     }
 
-    public void drawIcon(final Icon icon, final int x, final int y, final int spriteSheet) {
+    public void drawIcon(final Icon icon, final int x, final int y, final int spriteSheet)
+    {
 
-        if (spriteSheet == 0) {
+        if (spriteSheet == 0)
+        {
             RenderHelper.setBlockTextureSheet();
-        } else {
+        } else
+        {
             RenderHelper.setItemTextureSheet();
         }
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
         drawTexturedModelRectFromIcon(x, y, icon, 16, 16);
     }
 
-    public void drawIcon(final String iconName, final int x, final int y, final int spriteSheet) {
+    public void drawIcon(final String iconName, final int x, final int y, final int spriteSheet)
+    {
 
         drawIcon(IconRegistry.getIcon(iconName), x, y, spriteSheet);
     }
@@ -294,7 +341,8 @@ public abstract class GuiBase extends GuiContainer {
                                            final int width,
                                            final int height,
                                            final float texW,
-                                           final float texH) {
+                                           final float texH)
+    {
 
         final float texU = 1 / texW;
         final float texV = 1 / texH;
@@ -311,9 +359,11 @@ public abstract class GuiBase extends GuiContainer {
                                                     final int y,
                                                     final Icon icon,
                                                     final int width,
-                                                    final int height) {
+                                                    final int height)
+    {
 
-        if (icon == null) {
+        if (icon == null)
+        {
             return;
         }
         final double minU = icon.getMinU();
@@ -334,9 +384,11 @@ public abstract class GuiBase extends GuiContainer {
         tessellator.draw();
     }
 
-    public void drawTooltip(final String tooltip) {
+    public void drawTooltip(final String tooltip)
+    {
 
-        if ((tooltip == null) || tooltip.equals("")) {
+        if ((tooltip == null) || tooltip.equals(""))
+        {
             return;
         }
         drawCreativeTabHoveringText(tooltip, mouseX, mouseY);
@@ -345,19 +397,32 @@ public abstract class GuiBase extends GuiContainer {
     /**
      * Passthrough method for tab use.
      */
-    public void mouseClicked(final int mouseButton) {
+    public void mouseClicked(final int mouseButton)
+    {
 
         super.mouseClicked(guiLeft + mouseX, guiTop + mouseY, mouseButton);
     }
 
-    protected int getCenteredOffset(final String string) {
+    protected int getCenteredOffset(final String string)
+    {
 
         return this.getCenteredOffset(string, xSize);
     }
 
-    protected int getCenteredOffset(final String string, final int xWidth) {
+    protected int getCenteredOffset(final String string, final int xWidth)
+    {
 
         return (xWidth - fontRenderer.getStringWidth(string)) / 2;
+    }
+
+    public int getTop()
+    {
+        return guiTop;
+    }
+
+    public int getLeft()
+    {
+        return guiLeft;
     }
 
 }

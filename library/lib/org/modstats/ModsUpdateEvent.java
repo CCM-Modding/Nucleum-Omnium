@@ -30,23 +30,29 @@ import net.minecraftforge.event.Event;
 import cpw.mods.fml.common.FMLLog;
 
 @Cancelable
-public class ModsUpdateEvent extends Event {
+public class ModsUpdateEvent extends Event
+{
 
     private final List<ModVersionData> updatedMods;
 
-    public ModsUpdateEvent() {
+    public ModsUpdateEvent()
+    {
         updatedMods = new LinkedList<ModVersionData>();
     }
 
-    public void add(final ModVersionData data) {
-        if (!updatedMods.contains(data)) {
+    public void add(final ModVersionData data)
+    {
+        if (!updatedMods.contains(data))
+        {
             updatedMods.add(data);
-        } else {
+        } else
+        {
             FMLLog.info("ModsUpdateEvent shouldn't have same mods data", data);
         }
     }
 
-    public List<ModVersionData> getUpdatedMods() {
+    public List<ModVersionData> getUpdatedMods()
+    {
         return updatedMods;
     }
 }

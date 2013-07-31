@@ -15,13 +15,15 @@ import net.minecraftforge.fluids.FluidStack;
  * 
  * @author King Lemming
  */
-public final class RenderHelper {
+public final class RenderHelper
+{
 
     public static final double RENDER_OFFSET  = 1.0D / 1024.0D;
     public static final String MC_BLOCK_SHEET = "/terrain.png";
     public static final String MC_ITEM_SHEET  = "/gui/items.png";
 
-    private RenderHelper() {
+    private RenderHelper()
+    {
 
     }
 
@@ -30,7 +32,8 @@ public final class RenderHelper {
     // return Minecraft.getMinecraft().renderEngine;
     // }
 
-    public static final Tessellator tessellator() {
+    public static final Tessellator tessellator()
+    {
 
         return Tessellator.instance;
     }
@@ -39,13 +42,15 @@ public final class RenderHelper {
                                          final ItemStack item,
                                          final double translateX,
                                          final double translateY,
-                                         final double translateZ) {
+                                         final double translateZ)
+    {
 
         final Tessellator tessellator = tessellator();
         final Block block = Block.stone;
         final Icon texture = item.getIconIndex();
 
-        if (texture == null) {
+        if (texture == null)
+        {
             return;
         }
         renderer.setRenderBoundsFromBlock(block);
@@ -73,41 +78,49 @@ public final class RenderHelper {
         tessellator.draw();
     }
 
-    public static final Icon getFluidTexture(final FluidStack fluid) {
+    public static final Icon getFluidTexture(final FluidStack fluid)
+    {
 
-        if ((fluid == null) || (fluid.getFluid() == null)) {
+        if ((fluid == null) || (fluid.getFluid() == null))
+        {
             return FluidRegistry.LAVA.getIcon();
         }
         return fluid.getFluid().getIcon(fluid);
     }
 
-    public static final void bindItemTexture(final ItemStack stack) {
+    public static final void bindItemTexture(final ItemStack stack)
+    {
 
         // engine().bindTexture(stack.getItemSpriteNumber() == 0 ?
         // MC_BLOCK_SHEET : MC_ITEM_SHEET);
     }
 
-    public static final void bindTexture(final String string) {
+    public static final void bindTexture(final String string)
+    {
 
         // engine().bindTexture(string);
     }
 
-    public static final void setBlockTextureSheet() {
+    public static final void setBlockTextureSheet()
+    {
 
         bindTexture(MC_BLOCK_SHEET);
     }
 
-    public static final void setItemTextureSheet() {
+    public static final void setItemTextureSheet()
+    {
 
         bindTexture(MC_ITEM_SHEET);
     }
 
-    public static final void setDefaultFontTextureSheet() {
+    public static final void setDefaultFontTextureSheet()
+    {
 
         bindTexture("/font/default.png");
     }
 
-    public static final void setSGAFontTextureSheet() {
+    public static final void setSGAFontTextureSheet()
+    {
 
         bindTexture("/font/alternate.png");
     }

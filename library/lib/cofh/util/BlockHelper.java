@@ -19,9 +19,11 @@ import net.minecraftforge.common.ForgeDirection;
  * 
  * @author King Lemming
  */
-public final class BlockHelper {
+public final class BlockHelper
+{
 
-    private BlockHelper() {
+    private BlockHelper()
+    {
 
     }
 
@@ -38,7 +40,8 @@ public final class BlockHelper {
     public static final int[]   SIDE_ABOVE     = { 2, 3, 1, 1, 1, 1 };
     public static final int[]   SIDE_BELOW     = { 3, 2, 0, 0, 0, 0 };
 
-    public static final class RotationType {
+    public static final class RotationType
+    {
 
         public static final int FOUR_WAY = 1;
         public static final int SIX_WAY  = 2;
@@ -53,7 +56,8 @@ public final class BlockHelper {
         public static final int SIGN     = 11;
     }
 
-    static {
+    static
+    {
         rotateType[Block.wood.blockID] = RotationType.LOG;
         rotateType[Block.dispenser.blockID] = RotationType.SIX_WAY;
         rotateType[Block.railPowered.blockID] = RotationType.RAIL;
@@ -88,7 +92,8 @@ public final class BlockHelper {
         rotateType[Block.dropper.blockID] = RotationType.SIX_WAY;
     }
 
-    public static int getCurrentMousedOverSide(final World world, final EntityPlayer player) {
+    public static int getCurrentMousedOverSide(final World world, final EntityPlayer player)
+    {
 
         final double distance = player.capabilities.isCreativeMode ? 5.0F : 4.5F;
         final Vec3 posVec = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
@@ -109,7 +114,8 @@ public final class BlockHelper {
                                                    final int x,
                                                    final int y,
                                                    final int z,
-                                                   final ForgeDirection dir) {
+                                                   final ForgeDirection dir)
+    {
 
         return world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
     }
@@ -118,17 +124,20 @@ public final class BlockHelper {
                                                    final int x,
                                                    final int y,
                                                    final int z,
-                                                   final int side) {
+                                                   final int side)
+    {
 
         return getAdjacentTileEntity(world, x, y, z, ForgeDirection.values()[side]);
     }
 
-    public static TileEntity getAdjacentTileEntity(final TileEntity refTile, final ForgeDirection dir) {
+    public static TileEntity getAdjacentTileEntity(final TileEntity refTile, final ForgeDirection dir)
+    {
 
         return getAdjacentTileEntity(refTile.worldObj, refTile.xCoord, refTile.yCoord, refTile.zCoord, dir);
     }
 
-    public static TileEntity getAdjacentTileEntity(final TileEntity refTile, final int side) {
+    public static TileEntity getAdjacentTileEntity(final TileEntity refTile, final int side)
+    {
 
         return getAdjacentTileEntity(refTile.worldObj,
                                      refTile.xCoord,
@@ -138,47 +147,55 @@ public final class BlockHelper {
     }
 
     /* COORDINATE TRANSFORM */
-    public static int[] getAdjacentCoordinatesForSide(final int x, final int y, final int z, final int side) {
+    public static int[] getAdjacentCoordinatesForSide(final int x, final int y, final int z, final int side)
+    {
 
         return new int[] { x + SIDE_COORD_MOD[side][0],
                 y + SIDE_COORD_MOD[side][1],
                 z + SIDE_COORD_MOD[side][2] };
     }
 
-    public static int[] getAdjacentCoordinatesForSide(final TileEntity tile, final int side) {
+    public static int[] getAdjacentCoordinatesForSide(final TileEntity tile, final int side)
+    {
 
         return new int[] { tile.xCoord + SIDE_COORD_MOD[side][0],
                 tile.yCoord + SIDE_COORD_MOD[side][1],
                 tile.zCoord + SIDE_COORD_MOD[side][2] };
     }
 
-    public static int getLeftSide(final int side) {
+    public static int getLeftSide(final int side)
+    {
 
         return SIDE_LEFT[side];
     }
 
-    public static int getRightSide(final int side) {
+    public static int getRightSide(final int side)
+    {
 
         return SIDE_RIGHT[side];
     }
 
-    public static int getOppositeSide(final int side) {
+    public static int getOppositeSide(final int side)
+    {
 
         return SIDE_OPPOSITE[side];
     }
 
-    public static int getAboveSide(final int side) {
+    public static int getAboveSide(final int side)
+    {
 
         return SIDE_ABOVE[side];
     }
 
-    public static int getBelowSide(final int side) {
+    public static int getBelowSide(final int side)
+    {
 
         return SIDE_BELOW[side];
     }
 
     /* BLOCK ROTATION */
-    public static boolean canRotate(final int blockId) {
+    public static boolean canRotate(final int blockId)
+    {
 
         return rotateType[blockId] != 0;
     }
@@ -188,18 +205,22 @@ public final class BlockHelper {
                                          int bMeta,
                                          final int x,
                                          final int y,
-                                         final int z) {
+                                         final int z)
+    {
 
-        switch (rotateType[bId]) {
+        switch (rotateType[bId])
+        {
             case RotationType.FOUR_WAY:
                 return SIDE_LEFT[bMeta];
             case RotationType.SIX_WAY:
-                if (bMeta < 6) {
+                if (bMeta < 6)
+                {
                     return ++bMeta % 6;
                 }
                 return bMeta;
             case RotationType.RAIL:
-                if (bMeta < 2) {
+                if (bMeta < 2)
+                {
                     return ++bMeta % 2;
                 }
                 return bMeta;
@@ -217,9 +238,11 @@ public final class BlockHelper {
                 return (bMeta + 8) % 16;
             case RotationType.CHEST:
                 int coords[] = new int[3];
-                for (int i = 2; i < 6; ++i) {
+                for (int i = 2; i < 6; ++i)
+                {
                     coords = getAdjacentCoordinatesForSide(x, y, z, i);
-                    if (world.getBlockId(coords[0], coords[1], coords[2]) == Block.chest.blockID) {
+                    if (world.getBlockId(coords[0], coords[1], coords[2]) == Block.chest.blockID)
+                    {
                         world.setBlockMetadataWithNotify(coords[0],
                                                          coords[1],
                                                          coords[2],
@@ -231,17 +254,22 @@ public final class BlockHelper {
                 return SIDE_LEFT[bMeta];
             case RotationType.LEVER:
                 int shift = 0;
-                if (bMeta > 7) {
+                if (bMeta > 7)
+                {
                     bMeta -= 8;
                     shift = 8;
                 }
-                if (bMeta == 5) {
+                if (bMeta == 5)
+                {
                     return 6 + shift;
-                } else if (bMeta == 6) {
+                } else if (bMeta == 6)
+                {
                     return 5 + shift;
-                } else if (bMeta == 7) {
+                } else if (bMeta == 7)
+                {
                     return 0 + shift;
-                } else if (bMeta == 0) {
+                } else if (bMeta == 0)
+                {
                     return 7 + shift;
                 }
                 return bMeta + shift;
@@ -257,18 +285,22 @@ public final class BlockHelper {
                                             int bMeta,
                                             final int x,
                                             final int y,
-                                            final int z) {
+                                            final int z)
+    {
 
-        switch (rotateType[bId]) {
+        switch (rotateType[bId])
+        {
             case RotationType.FOUR_WAY:
                 return SIDE_RIGHT[bMeta];
             case RotationType.SIX_WAY:
-                if (bMeta < 6) {
+                if (bMeta < 6)
+                {
                     return (bMeta + 5) % 6;
                 }
                 return bMeta;
             case RotationType.RAIL:
-                if (bMeta < 2) {
+                if (bMeta < 2)
+                {
                     return ++bMeta % 2;
                 }
                 return bMeta;
@@ -286,9 +318,11 @@ public final class BlockHelper {
                 return (bMeta + 8) % 16;
             case RotationType.CHEST:
                 int coords[] = new int[3];
-                for (int i = 2; i < 6; ++i) {
+                for (int i = 2; i < 6; ++i)
+                {
                     coords = getAdjacentCoordinatesForSide(x, y, z, i);
-                    if (world.getBlockId(coords[0], coords[1], coords[2]) == Block.chest.blockID) {
+                    if (world.getBlockId(coords[0], coords[1], coords[2]) == Block.chest.blockID)
+                    {
                         world.setBlockMetadataWithNotify(coords[0],
                                                          coords[1],
                                                          coords[2],
@@ -300,17 +334,22 @@ public final class BlockHelper {
                 return SIDE_RIGHT[bMeta];
             case RotationType.LEVER:
                 int shift = 0;
-                if (bMeta > 7) {
+                if (bMeta > 7)
+                {
                     bMeta -= 8;
                     shift = 8;
                 }
-                if (bMeta == 5) {
+                if (bMeta == 5)
+                {
                     return 6 + shift;
-                } else if (bMeta == 6) {
+                } else if (bMeta == 6)
+                {
                     return 5 + shift;
-                } else if (bMeta == 7) {
+                } else if (bMeta == 7)
+                {
                     return 0 + shift;
-                } else if (bMeta == 0) {
+                } else if (bMeta == 0)
+                {
                     return 7 + shift;
                 }
             case RotationType.SIGN:
@@ -320,7 +359,8 @@ public final class BlockHelper {
         }
     }
 
-    public static boolean isBlock(final int bId) {
+    public static boolean isBlock(final int bId)
+    {
 
         return (bId < 0) || (bId >= Block.blocksList.length) ? null : Block.blocksList[bId] != null;
     }
@@ -331,9 +371,11 @@ public final class BlockHelper {
                                              final int z,
                                              final int blockId,
                                              final int fortune,
-                                             final boolean doBreak) {
+                                             final boolean doBreak)
+    {
 
-        if (Block.blocksList[blockId].getBlockHardness(worldObj, x, y, z) == -1) {
+        if (Block.blocksList[blockId].getBlockHardness(worldObj, x, y, z) == -1)
+        {
             return new LinkedList<ItemStack>();
         }
         final int meta = worldObj.getBlockMetadata(x, y, z);
@@ -344,7 +386,8 @@ public final class BlockHelper {
                                                                                  meta,
                                                                                  fortune);
 
-        if (!doBreak) {
+        if (!doBreak)
+        {
             return stacks;
         }
         worldObj.playAuxSFXAtEntity(null, 2001, x, y, z, blockId + (meta << 12));
@@ -357,10 +400,13 @@ public final class BlockHelper {
                                                                                         x + 3,
                                                                                         y + 3,
                                                                                         z + 3));
-        for (int i = 0; i < result.size(); i++) {
-            if (result.get(i) instanceof EntityItem) {
+        for (int i = 0; i < result.size(); i++)
+        {
+            if (result.get(i) instanceof EntityItem)
+            {
                 final EntityItem entity = (EntityItem) result.get(i);
-                if (entity.isDead || (entity.getEntityItem().stackSize <= 0)) {
+                if (entity.isDead || (entity.getEntityItem().stackSize <= 0))
+                {
                     continue;
                 }
                 stacks.add(entity.getEntityItem());

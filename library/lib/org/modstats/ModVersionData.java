@@ -24,7 +24,8 @@ package lib.org.modstats;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModVersionData {
+public class ModVersionData
+{
 
     public String              prefix;
 
@@ -38,11 +39,13 @@ public class ModVersionData {
 
     public Map<String, String> extraFields;
 
-    public ModVersionData() {
+    public ModVersionData()
+    {
         extraFields = new HashMap<String, String>();
     }
 
-    public ModVersionData(final String prefix, final String name, final String version) {
+    public ModVersionData(final String prefix, final String name, final String version)
+    {
         this.prefix = prefix;
         this.name = name;
         this.version = version;
@@ -50,7 +53,8 @@ public class ModVersionData {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         final int prime = 31;
         int result = 1;
         result = (prime * result) + (changeLogUrl == null ? 0 : changeLogUrl.hashCode());
@@ -62,50 +66,69 @@ public class ModVersionData {
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+        {
             return true;
         }
-        if (obj == null) {
+        if (obj == null)
+        {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
+        if (this.getClass() != obj.getClass())
+        {
             return false;
         }
         final ModVersionData other = (ModVersionData) obj;
-        if (changeLogUrl == null) {
-            if (other.changeLogUrl != null) {
+        if (changeLogUrl == null)
+        {
+            if (other.changeLogUrl != null)
+            {
                 return false;
             }
-        } else if (!changeLogUrl.equals(other.changeLogUrl)) {
+        } else if (!changeLogUrl.equals(other.changeLogUrl))
+        {
             return false;
         }
-        if (downloadUrl == null) {
-            if (other.downloadUrl != null) {
+        if (downloadUrl == null)
+        {
+            if (other.downloadUrl != null)
+            {
                 return false;
             }
-        } else if (!downloadUrl.equals(other.downloadUrl)) {
+        } else if (!downloadUrl.equals(other.downloadUrl))
+        {
             return false;
         }
-        if (name == null) {
-            if (other.name != null) {
+        if (name == null)
+        {
+            if (other.name != null)
+            {
                 return false;
             }
-        } else if (!name.equals(other.name)) {
+        } else if (!name.equals(other.name))
+        {
             return false;
         }
-        if (prefix == null) {
-            if (other.prefix != null) {
+        if (prefix == null)
+        {
+            if (other.prefix != null)
+            {
                 return false;
             }
-        } else if (!prefix.equals(other.prefix)) {
+        } else if (!prefix.equals(other.prefix))
+        {
             return false;
         }
-        if (version == null) {
-            if (other.version != null) {
+        if (version == null)
+        {
+            if (other.version != null)
+            {
                 return false;
             }
-        } else if (!version.equals(other.version)) {
+        } else if (!version.equals(other.version))
+        {
             return false;
         }
         return true;

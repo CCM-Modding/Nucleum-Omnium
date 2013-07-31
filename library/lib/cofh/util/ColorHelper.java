@@ -5,9 +5,11 @@ package lib.cofh.util;
  * 
  * @author King Lemming
  */
-public final class ColorHelper {
+public final class ColorHelper
+{
 
-    private ColorHelper() {
+    private ColorHelper()
+    {
 
     }
 
@@ -63,7 +65,8 @@ public final class ColorHelper {
             DYE_ORANGE,
             DYE_WHITE                        };
 
-    public static int getDyeColor(final int color) {
+    public static int getDyeColor(final int color)
+    {
 
         return (color < 0) || (color > 15) ? 0xFFFFFF : DYE_COLORS[color];
     }

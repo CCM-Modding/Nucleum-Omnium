@@ -13,54 +13,64 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 
 import lib.cofh.util.ItemHelper;
 
-public class BucketHandler {
+public class BucketHandler
+{
 
     public static BucketHandler            instance = new BucketHandler();
 
     private static BiMap<Integer, Integer> buckets  = HashBiMap.create();
 
-    private BucketHandler() {
+    private BucketHandler()
+    {
 
     }
 
     @ForgeSubscribe
-    public void onBucketFill(final FillBucketEvent event) {
+    public void onBucketFill(final FillBucketEvent event)
+    {
 
-        if (!event.current.getItem().equals(Item.bucketEmpty)) {
+        if (!event.current.getItem().equals(Item.bucketEmpty))
+        {
             return;
         }
         final ItemStack bucket = fillBucket(event.world, event.target);
 
-        if (bucket == null) {
+        if (bucket == null)
+        {
             return;
         }
         event.result = bucket;
         event.setResult(Result.ALLOW);
     }
 
-    public static boolean registerBucket(final int blockId, final int blockMeta, final ItemStack bucket) {
+    public static boolean registerBucket(final int blockId, final int blockMeta, final ItemStack bucket)
+    {
 
         if ((blockId <= 0) || (blockMeta < 0)
             || (bucket == null)
             || buckets.containsKey(ItemHelper.getHashCode(blockId, blockMeta))
-            || buckets.inverse().containsKey(ItemHelper.getHashCode(bucket))) {
+            || buckets.inverse().containsKey(ItemHelper.getHashCode(bucket)))
+        {
             return false;
         }
         buckets.put(ItemHelper.getHashCode(blockId, blockMeta), ItemHelper.getHashCode(bucket));
         return true;
     }
 
-    public static ItemStack fillBucket(final World world, final MovingObjectPosition pos) {
+    public static ItemStack fillBucket(final World world, final MovingObjectPosition pos)
+    {
 
         return fillBucket(world, pos.blockX, pos.blockY, pos.blockZ);
     }
 
-    public static ItemStack fillBucket(final World world, final int x, final int y, final int z) {
+    public static ItemStack fillBucket(final World world, final int x, final int y, final int z)
+    {
 
         final int blockId = world.getBlockId(x, y, z);
         final int blockMeta = world.getBlockMetadata(x, y, z);
 
-        if (!buckets.containsKey(ItemHelper.getHashCode(blockId, blockMeta))) {
+        if (!buckets.containsKey(ItemHelper.getHashCode(blockId, blockMeta)))
+        {
             return null;
         }
         world.setBlock(x, y, z, 0);
@@ -74,9 +84,11 @@ public class BucketHandler {
                                       final int x,
                                       final int y,
                                       final int z,
-                                      final ItemStack bucket) {
+                                      final ItemStack bucket)
+    {
 
-        if (!buckets.inverse().containsKey(ItemHelper.getHashCode(bucket))) {
+        if (!buckets.inverse().containsKey(ItemHelper.getHashCode(bucket)))
+        {
             return false;
         }
         final int hashCode = buckets.inverse().get(ItemHelper.getHashCode(bucket));

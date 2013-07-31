@@ -6,7 +6,8 @@ package lib.cofh.api.world;
  * 
  * @author King Lemming
  */
-public interface IFeatureHandler {
+public interface IFeatureHandler
+{
 
     /**
      * Register a feature with an IFeatureHandler.

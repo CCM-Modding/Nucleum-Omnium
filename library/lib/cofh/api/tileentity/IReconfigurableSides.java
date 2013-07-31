@@ -6,7 +6,8 @@ package lib.cofh.api.tileentity;
  * 
  * @author King Lemming
  */
-public interface IReconfigurableSides {
+public interface IReconfigurableSides
+{
 
     /**
      * Decrement the config for a given side.

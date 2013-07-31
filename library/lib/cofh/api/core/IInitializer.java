@@ -5,7 +5,8 @@ package lib.cofh.api.core;
  * 
  * @author King Lemming
  */
-public interface IInitializer {
+public interface IInitializer
+{
 
     public boolean preInit();
 

@@ -10,7 +10,8 @@ import net.minecraft.tileentity.TileEntity;
  * 
  * @author King Lemming
  */
-public final class BlockCoord implements Comparable<BlockCoord>, Serializable {
+public final class BlockCoord implements Comparable<BlockCoord>, Serializable
+{
 
     /**
 	 * 
@@ -20,30 +21,35 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable {
     public int                y;
     public int                z;
 
-    public BlockCoord(final int x, final int y, final int z) {
+    public BlockCoord(final int x, final int y, final int z)
+    {
 
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public BlockCoord(final TileEntity tile) {
+    public BlockCoord(final TileEntity tile)
+    {
 
         x = tile.xCoord;
         y = tile.yCoord;
         z = tile.zCoord;
     }
 
-    public void step(final int dir) {
+    public void step(final int dir)
+    {
 
         x += BlockHelper.SIDE_COORD_MOD[dir][0];
         y += BlockHelper.SIDE_COORD_MOD[dir][1];
         z += BlockHelper.SIDE_COORD_MOD[dir][2];
     }
 
-    public void step(final int dir, final int dist) {
+    public void step(final int dir, final int dist)
+    {
 
-        switch (dir) {
+        switch (dir)
+        {
             case 0:
                 y -= dist;
                 break;
@@ -66,15 +72,18 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable {
         }
     }
 
-    public BlockCoord copy() {
+    public BlockCoord copy()
+    {
 
         return new BlockCoord(x, y, z);
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(final Object obj)
+    {
 
-        if (!(obj instanceof BlockCoord)) {
+        if (!(obj instanceof BlockCoord))
+        {
             return false;
         }
         final BlockCoord other = (BlockCoord) obj;
@@ -82,7 +91,8 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
 
         int hash = x;
         hash *= 31 + y;
@@ -91,14 +101,16 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
 
         return "[" + x + ", " + y + ", " + z + "]";
     }
 
     /* Comparable */
     @Override
-    public int compareTo(final BlockCoord other) {
+    public int compareTo(final BlockCoord other)
+    {
 
         return x == other.x ? y == other.y ? z - other.z : y - other.y : x - other.x;
     }

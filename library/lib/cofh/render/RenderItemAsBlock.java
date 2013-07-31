@@ -11,12 +11,14 @@ import net.minecraftforge.client.IItemRenderer;
  * 
  * @author King Lemming
  */
-public class RenderItemAsBlock implements IItemRenderer {
+public class RenderItemAsBlock implements IItemRenderer
+{
 
     public static RenderItemAsBlock instance = new RenderItemAsBlock();
 
     @Override
-    public boolean handleRenderType(final ItemStack item, final ItemRenderType type) {
+    public boolean handleRenderType(final ItemStack item, final ItemRenderType type)
+    {
 
         return true;
     }
@@ -24,18 +26,22 @@ public class RenderItemAsBlock implements IItemRenderer {
     @Override
     public boolean shouldUseRenderHelper(final ItemRenderType type,
                                          final ItemStack item,
-                                         final ItemRendererHelper helper) {
+                                         final ItemRendererHelper helper)
+    {
 
         return true;
     }
 
     @Override
-    public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data) {
+    public void renderItem(final ItemRenderType type, final ItemStack item, final Object... data)
+    {
 
         double offset = -0.5;
-        if ((type == ItemRenderType.EQUIPPED) || (type == ItemRenderType.EQUIPPED_FIRST_PERSON)) {
+        if ((type == ItemRenderType.EQUIPPED) || (type == ItemRenderType.EQUIPPED_FIRST_PERSON))
+        {
             offset = 0;
-        } else if (type == ItemRenderType.ENTITY) {
+        } else if (type == ItemRenderType.ENTITY)
+        {
             GL11.glScalef(0.5F, 0.5F, 0.5F);
         }
         RenderHelper.renderItemAsBlock((RenderBlocks) data[0], item, offset, offset, offset);

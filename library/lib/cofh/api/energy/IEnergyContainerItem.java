@@ -9,7 +9,8 @@ import net.minecraft.item.ItemStack;
  * 
  * @author King Lemming
  */
-public interface IEnergyContainerItem {
+public interface IEnergyContainerItem
+{
 
     /**
      * Adds energy to an item. Returns the quantity of energy that was accepted. This should always

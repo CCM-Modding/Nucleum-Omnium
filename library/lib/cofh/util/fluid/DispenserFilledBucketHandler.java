@@ -8,7 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public final class DispenserFilledBucketHandler extends BehaviorDefaultDispenseItem {
+public final class DispenserFilledBucketHandler extends BehaviorDefaultDispenseItem
+{
 
     private final BehaviorDefaultDispenseItem defaultDispenserItemBehavior = new BehaviorDefaultDispenseItem();
 
@@ -16,7 +17,8 @@ public final class DispenserFilledBucketHandler extends BehaviorDefaultDispenseI
      * Dispense the specified stack, play the dispense sound and spawn particles.
      */
     @Override
-    public ItemStack dispenseStack(final IBlockSource blockSource, final ItemStack stackBucket) {
+    public ItemStack dispenseStack(final IBlockSource blockSource, final ItemStack stackBucket)
+    {
 
         final EnumFacing facing = BlockDispenser.getFacing(blockSource.getBlockMetadata());
         final World world = blockSource.getWorld();
@@ -25,10 +27,12 @@ public final class DispenserFilledBucketHandler extends BehaviorDefaultDispenseI
         final int y = blockSource.getYInt() + facing.getFrontOffsetY();
         final int z = blockSource.getZInt() + facing.getFrontOffsetZ();
 
-        if (!world.isAirBlock(x, y, z) && world.getBlockMaterial(x, y, z).isSolid()) {
+        if (!world.isAirBlock(x, y, z) && world.getBlockMaterial(x, y, z).isSolid())
+        {
             return stackBucket;
         }
-        if (BucketHandler.emptyBucket(blockSource.getWorld(), x, y, z, stackBucket)) {
+        if (BucketHandler.emptyBucket(blockSource.getWorld(), x, y, z, stackBucket))
+        {
             return new ItemStack(Item.bucketEmpty);
         }
         return defaultDispenserItemBehavior.dispense(blockSource, stackBucket);

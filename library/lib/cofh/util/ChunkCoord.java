@@ -10,7 +10,8 @@ import net.minecraft.world.chunk.Chunk;
  * 
  * @author King Lemming
  */
-public final class ChunkCoord implements Comparable<ChunkCoord>, Serializable {
+public final class ChunkCoord implements Comparable<ChunkCoord>, Serializable
+{
 
     /**
 	 * 
@@ -19,42 +20,50 @@ public final class ChunkCoord implements Comparable<ChunkCoord>, Serializable {
     public int                chunkX;
     public int                chunkZ;
 
-    public ChunkCoord(final Chunk chunk) {
+    public ChunkCoord(final Chunk chunk)
+    {
 
         chunkX = chunk.xPosition;
         chunkZ = chunk.zPosition;
     }
 
-    public ChunkCoord(final BlockCoord c) {
+    public ChunkCoord(final BlockCoord c)
+    {
 
         this(c.x >> 4, c.z >> 4);
     }
 
-    public ChunkCoord(final int x, final int z) {
+    public ChunkCoord(final int x, final int z)
+    {
 
         chunkX = x;
         chunkZ = z;
     }
 
-    public int getCenterX() {
+    public int getCenterX()
+    {
 
         return (chunkX << 4) + 8;
     }
 
-    public int getCenterZ() {
+    public int getCenterZ()
+    {
 
         return (chunkZ << 4) + 8;
     }
 
-    public void step(final int dir) {
+    public void step(final int dir)
+    {
 
         chunkX = BlockHelper.SIDE_COORD_MOD[dir][0];
         chunkZ = BlockHelper.SIDE_COORD_MOD[dir][2];
     }
 
-    public void step(final int dir, final int dist) {
+    public void step(final int dir, final int dist)
+    {
 
-        switch (dir) {
+        switch (dir)
+        {
             case 2:
                 chunkZ -= dist;
                 break;
@@ -71,15 +80,18 @@ public final class ChunkCoord implements Comparable<ChunkCoord>, Serializable {
         }
     }
 
-    public ChunkCoord copy() {
+    public ChunkCoord copy()
+    {
 
         return new ChunkCoord(chunkX, chunkZ);
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(final Object obj)
+    {
 
-        if (!(obj instanceof ChunkCoord)) {
+        if (!(obj instanceof ChunkCoord))
+        {
             return false;
         }
         final ChunkCoord other = (ChunkCoord) obj;
@@ -87,7 +99,8 @@ public final class ChunkCoord implements Comparable<ChunkCoord>, Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
 
         int hash = chunkX;
         hash *= 31 + chunkZ;
@@ -95,14 +108,16 @@ public final class ChunkCoord implements Comparable<ChunkCoord>, Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
 
         return "[" + chunkX + ", " + chunkZ + "]";
     }
 
     /* Comparable */
     @Override
-    public int compareTo(final ChunkCoord other) {
+    public int compareTo(final ChunkCoord other)
+    {
 
         return chunkX == other.chunkX ? chunkZ - other.chunkZ : chunkX - other.chunkX;
     }

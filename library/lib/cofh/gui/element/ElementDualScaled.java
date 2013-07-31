@@ -3,47 +3,56 @@ package lib.cofh.gui.element;
 import lib.cofh.gui.GuiBase;
 import lib.cofh.render.RenderHelper;
 
-public class ElementDualScaled extends ElementBase {
+public class ElementDualScaled extends ElementBase
+{
 
     public int     quantity;
     public int     mode;
     public boolean background = true;
 
-    public ElementDualScaled(final GuiBase gui, final int posX, final int posY) {
+    public ElementDualScaled(final GuiBase gui, final int posX, final int posY)
+    {
 
         super(gui, posX, posY);
     }
 
-    public ElementDualScaled setMode(final int mode) {
+    public ElementDualScaled setMode(final int mode)
+    {
 
         this.mode = mode;
         return this;
     }
 
-    public ElementDualScaled setQuantity(final int quantity) {
+    public ElementDualScaled setQuantity(final int quantity)
+    {
 
         this.quantity = quantity;
         return this;
     }
 
-    public ElementDualScaled setBackground(final boolean background) {
+    public ElementDualScaled setBackground(final boolean background)
+    {
 
         this.background = background;
         return this;
     }
 
     @Override
-    public void draw() {
+    public void draw()
+    {
 
-        if (!visible) {
+        if (!visible)
+        {
             return;
         }
         RenderHelper.bindTexture(texture);
 
-        if (background) {
+        if (background)
+        {
             drawTexturedModalRect(posX, posY, 0, 0, sizeX, sizeY);
         }
-        switch (mode) {
+        switch (mode)
+        {
             case 0:
                 // vertical bottom -> top
                 drawTexturedModalRect(posX,
@@ -70,7 +79,8 @@ public class ElementDualScaled extends ElementBase {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip()
+    {
 
         return null;
     }

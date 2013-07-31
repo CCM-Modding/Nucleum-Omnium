@@ -8,17 +8,20 @@ import lib.cofh.render.RenderHelper;
  * 
  * @author King Lemming
  */
-public class ElementSimple extends ElementBase {
+public class ElementSimple extends ElementBase
+{
 
     int texU = 0;
     int texV = 0;
 
-    public ElementSimple(final GuiBase gui, final int posX, final int posY) {
+    public ElementSimple(final GuiBase gui, final int posX, final int posY)
+    {
 
         super(gui, posX, posY);
     }
 
-    public ElementSimple setTextureOffsets(final int u, final int v) {
+    public ElementSimple setTextureOffsets(final int u, final int v)
+    {
 
         texU = u;
         texV = v;
@@ -26,9 +29,11 @@ public class ElementSimple extends ElementBase {
     }
 
     @Override
-    public void draw() {
+    public void draw()
+    {
 
-        if (!visible) {
+        if (!visible)
+        {
             return;
         }
         RenderHelper.bindTexture(texture);
@@ -36,7 +41,8 @@ public class ElementSimple extends ElementBase {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip()
+    {
 
         return null;
     }

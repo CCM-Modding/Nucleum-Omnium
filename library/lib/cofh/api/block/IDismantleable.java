@@ -9,7 +9,8 @@ import net.minecraft.world.World;
  * 
  * @author King Lemming
  */
-public interface IDismantleable {
+public interface IDismantleable
+{
 
     /**
      * Dismantles the block. If returnBlock is true, the drop(s) should be placed into the player's

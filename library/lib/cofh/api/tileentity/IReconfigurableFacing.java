@@ -6,7 +6,8 @@ package lib.cofh.api.tileentity;
  * 
  * @author King Lemming
  */
-public interface IReconfigurableFacing {
+public interface IReconfigurableFacing
+{
 
     /**
      * Returns the current facing of the block.

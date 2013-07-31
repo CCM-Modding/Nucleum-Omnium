@@ -9,7 +9,8 @@ import net.minecraftforge.common.ForgeDirection;
  * 
  * @author King Lemming
  */
-public interface IEnergyHandler {
+public interface IEnergyHandler
+{
 
     /**
      * Add energy to an IEnergyHandler, internal distribution is left entirely to the

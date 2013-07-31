@@ -29,7 +29,8 @@ import net.minecraftforge.common.Property;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 
-public class Config {
+public class Config
+{
 
     private static final String CONFIG_NAME = "modstats.cfg";
 
@@ -41,7 +42,8 @@ public class Config {
 
     public boolean              logOnly;
 
-    public Config() {
+    public Config()
+    {
         final File configLocation = new File(Loader.instance().getConfigDir(), Config.CONFIG_NAME);
         final Configuration configuration = new Configuration(configLocation);
         configuration.load();

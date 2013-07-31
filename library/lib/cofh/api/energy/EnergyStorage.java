@@ -9,99 +9,116 @@ import lib.cofh.util.MathHelper;
  * 
  * @author King Lemming
  */
-public class EnergyStorage implements IEnergyStorage {
+public class EnergyStorage implements IEnergyStorage
+{
 
     protected int energy;
     protected int capacity;
     protected int maxReceive;
     protected int maxExtract;
 
-    public EnergyStorage(final int capacity) {
+    public EnergyStorage(final int capacity)
+    {
 
         this(capacity, capacity, capacity);
     }
 
-    public EnergyStorage(final int capacity, final int maxTransfer) {
+    public EnergyStorage(final int capacity, final int maxTransfer)
+    {
 
         this(capacity, maxTransfer, maxTransfer);
     }
 
-    public EnergyStorage(final int capacity, final int maxReceive, final int maxExtract) {
+    public EnergyStorage(final int capacity, final int maxReceive, final int maxExtract)
+    {
 
         this.capacity = capacity;
         this.maxReceive = maxReceive;
         this.maxExtract = maxExtract;
     }
 
-    public EnergyStorage readFromNBT(final NBTTagCompound nbt) {
+    public EnergyStorage readFromNBT(final NBTTagCompound nbt)
+    {
 
         energy = nbt.getInteger("Energy");
         return this;
     }
 
-    public NBTTagCompound writeToNBT(final NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(final NBTTagCompound nbt)
+    {
 
         nbt.setInteger("Energy", energy);
         return nbt;
     }
 
-    public void setCapacity(final int capacity) {
+    public void setCapacity(final int capacity)
+    {
 
         this.capacity = capacity;
 
-        if (energy > capacity) {
+        if (energy > capacity)
+        {
             energy = capacity;
         }
     }
 
-    public void setMaxTransfer(final int maxTransfer) {
+    public void setMaxTransfer(final int maxTransfer)
+    {
 
         setMaxReceive(maxTransfer);
         setMaxExtract(maxTransfer);
     }
 
-    public void setMaxReceive(final int maxReceive) {
+    public void setMaxReceive(final int maxReceive)
+    {
 
         this.maxReceive = maxReceive;
     }
 
-    public void setMaxExtract(final int maxExtract) {
+    public void setMaxExtract(final int maxExtract)
+    {
 
         this.maxExtract = maxExtract;
     }
 
     /* IEnergyStorage */
     @Override
-    public int receiveEnergy(final int maxReceive, final boolean doReceive) {
+    public int receiveEnergy(final int maxReceive, final boolean doReceive)
+    {
 
         final int energyReceived = MathHelper.minI(capacity - energy,
                                                    MathHelper.minI(this.maxReceive, maxReceive));
 
-        if (doReceive) {
+        if (doReceive)
+        {
             energy += energyReceived;
         }
         return energyReceived;
     }
 
     @Override
-    public int extractEnergy(final int maxExtract, final boolean doExtract) {
+    public int extractEnergy(final int maxExtract, final boolean doExtract)
+    {
 
         final int energyExtracted = MathHelper.minI(energy, MathHelper.minI(this.maxExtract, maxExtract));
 
-        if (doExtract) {
+        if (doExtract)
+        {
             energy -= energyExtracted;
         }
         return energyExtracted;
     }
 
     @Override
-    public int getEnergyStored() {
+    public int getEnergyStored()
+    {
 
         return energy;
     }
 
     @Override
-    public int getMaxEnergyStored() {
+    public int getMaxEnergyStored()
+    {
 
         return capacity;
     }

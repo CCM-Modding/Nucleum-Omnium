@@ -24,7 +24,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class DevCapesUtil {
+public class DevCapesUtil
+{
 
     private static DevCapesUtil                            instance;
     public static final double                             version   = 2.0;
@@ -39,7 +40,8 @@ public class DevCapesUtil {
     /**
      * Object constructor.
      */
-    private DevCapesUtil() {
+    private DevCapesUtil()
+    {
         users = new HashMap<String, String>();
         capeResources = new HashMap<String, ResourceLocation>();
         downloadThreads = new HashMap<String, ThreadDownloadImageData>();
@@ -52,8 +54,10 @@ public class DevCapesUtil {
      * Get's the current DeveloperCapesAPI instance, or creates a new one if
      * necessary.
      */
-    public static DevCapesUtil getInstance() {
-        if (instance == null) {
+    public static DevCapesUtil getInstance()
+    {
+        if (instance == null)
+        {
             instance = new DevCapesUtil();
         }
         return instance;
@@ -67,12 +71,15 @@ public class DevCapesUtil {
      *            The URL of the .txt file containing the groups, members of
      *            said groups, and the group's cape URL.
      */
-    public void addFileUrl(final String parTxtUrl) {
-        if (FMLCommonHandler.instance().getSide() != Side.CLIENT) {
+    public void addFileUrl(final String parTxtUrl)
+    {
+        if (FMLCommonHandler.instance().getSide() != Side.CLIENT)
+        {
             return;
         }
 
-        try {
+        try
+        {
             final URL url = new URL(parTxtUrl);
             final BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
@@ -81,18 +88,23 @@ public class DevCapesUtil {
             String group = "";
             String capeUrl = "";
 
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null)
+            {
 
                 // excludes commented lines
-                if (!line.startsWith("#")) {
+                if (!line.startsWith("#"))
+                {
                     // loops through characters.
-                    for (int i = 0; i < line.length(); i++) {
+                    for (int i = 0; i < line.length(); i++)
+                    {
                         // when char : is found do stuff.
-                        if (line.charAt(i) == '=') {
+                        if (line.charAt(i) == '=')
+                        {
                             group = line.substring(0, i);
                             final String subLine = line.substring(i + 1);
 
-                            if (subLine.startsWith("http")) {
+                            if (subLine.startsWith("http"))
+                            {
                                 capeUrl = subLine;
 
                                 final ResourceLocation r = new ResourceLocation("DevCapes/" + group);
@@ -105,7 +117,8 @@ public class DevCapesUtil {
                                 addDownloadThread(group, t);
 
                                 continue;
-                            } else {
+                            } else
+                            {
                                 username = subLine.toLowerCase();
                                 addUser(username, group);
                             }
@@ -113,12 +126,14 @@ public class DevCapesUtil {
                     }
                 }
             }
-        } catch (final IOException e) {
+        } catch (final IOException e)
+        {
             e.printStackTrace();
         }
 
         // Makes sure to set up only one tick handler.
-        if (!instance.tickSetUp) {
+        if (!instance.tickSetUp)
+        {
             // Sets up the tick handler for capes.
             TickRegistry.registerTickHandler(new DevCapesTickHandler(), Side.CLIENT);
             instance.tickSetUp = true;
@@ -126,7 +141,8 @@ public class DevCapesUtil {
 
     }
 
-    public void checkForUpdates() {
+    public void checkForUpdates()
+    {
 
     }
 
@@ -138,8 +154,10 @@ public class DevCapesUtil {
      * @param parGroup
      *            The group to add that Username to.
      */
-    public void addUser(final String parUsername, final String parGroup) {
-        if (getUserGroup(parUsername) == null) {
+    public void addUser(final String parUsername, final String parGroup)
+    {
+        if (getUserGroup(parUsername) == null)
+        {
             users.put(parUsername, parGroup);
 
         }
@@ -152,7 +170,8 @@ public class DevCapesUtil {
      *            The Username to get from the users HashMap.
      * @return The Username found in the users HashMap.
      */
-    public String getUserGroup(final String parUsername) {
+    public String getUserGroup(final String parUsername)
+    {
         return users.get(parUsername.toLowerCase());
     }
 
@@ -162,8 +181,10 @@ public class DevCapesUtil {
      * @param parGroup
      * @param parResource
      */
-    public void addCapeResource(final String parGroup, final ResourceLocation parResource) {
-        if (getCapeResource(parGroup) == null) {
+    public void addCapeResource(final String parGroup, final ResourceLocation parResource)
+    {
+        if (getCapeResource(parGroup) == null)
+        {
             capeResources.put(parGroup, parResource);
         }
     }
@@ -174,7 +195,8 @@ public class DevCapesUtil {
      * @param parGroup
      * @return
      */
-    public ResourceLocation getCapeResource(final String parGroup) {
+    public ResourceLocation getCapeResource(final String parGroup)
+    {
         return capeResources.get(parGroup);
     }
 
@@ -184,8 +206,10 @@ public class DevCapesUtil {
      * @param parGroup
      * @param parResource
      */
-    public void addDownloadThread(final String parGroup, final ThreadDownloadImageData parResource) {
-        if (getDownloadThread(parGroup) == null) {
+    public void addDownloadThread(final String parGroup, final ThreadDownloadImageData parResource)
+    {
+        if (getDownloadThread(parGroup) == null)
+        {
             downloadThreads.put(parGroup, parResource);
         }
     }
@@ -196,7 +220,8 @@ public class DevCapesUtil {
      * @param parGroup
      * @return
      */
-    public ThreadDownloadImageData getDownloadThread(final String parGroup) {
+    public ThreadDownloadImageData getDownloadThread(final String parGroup)
+    {
         return downloadThreads.get(parGroup);
     }
 
@@ -213,7 +238,8 @@ public class DevCapesUtil {
     public static ThreadDownloadImageData makeDownloadThread(final ResourceLocation par0ResourceLocation,
                                                              final String par1Str,
                                                              final ResourceLocation par2ResourceLocation,
-                                                             final IImageBuffer par3IImageBuffer) {
+                                                             final IImageBuffer par3IImageBuffer)
+    {
         final TextureManager texturemanager = Minecraft.getMinecraft().func_110434_K();
 
         final TextureObject object = new ThreadDownloadImageData(par1Str,

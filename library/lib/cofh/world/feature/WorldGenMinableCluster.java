@@ -13,33 +13,38 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import lib.cofh.api.world.WeightedRandomBlock;
 
-public class WorldGenMinableCluster extends WorldGenerator {
+public class WorldGenMinableCluster extends WorldGenerator
+{
 
     private final List<WeightedRandomBlock> cluster;
     private final int                       genClusterSize;
     private int                             genBlockID = Block.stone.blockID;
 
-    public WorldGenMinableCluster(final ItemStack ore, final int clusterSize) {
+    public WorldGenMinableCluster(final ItemStack ore, final int clusterSize)
+    {
 
         cluster = new ArrayList<WeightedRandomBlock>();
         cluster.add(new WeightedRandomBlock(ore));
         genClusterSize = clusterSize;
     }
 
-    public WorldGenMinableCluster(final WeightedRandomBlock resource, final int clusterSize) {
+    public WorldGenMinableCluster(final WeightedRandomBlock resource, final int clusterSize)
+    {
 
         cluster = new ArrayList<WeightedRandomBlock>();
         cluster.add(resource);
         genClusterSize = clusterSize;
     }
 
-    public WorldGenMinableCluster(final List<WeightedRandomBlock> resource, final int clusterSize) {
+    public WorldGenMinableCluster(final List<WeightedRandomBlock> resource, final int clusterSize)
+    {
 
         cluster = resource;
         genClusterSize = clusterSize;
     }
 
-    public WorldGenMinableCluster(final ItemStack ore, final int clusterSize, final int blockID) {
+    public WorldGenMinableCluster(final ItemStack ore, final int clusterSize, final int blockID)
+    {
 
         cluster = new ArrayList<WeightedRandomBlock>();
         cluster.add(new WeightedRandomBlock(ore, 1));
@@ -47,7 +52,8 @@ public class WorldGenMinableCluster extends WorldGenerator {
         genBlockID = blockID;
     }
 
-    public WorldGenMinableCluster(final WeightedRandomBlock resource, final int clusterSize, final int blockID) {
+    public WorldGenMinableCluster(final WeightedRandomBlock resource, final int clusterSize, final int blockID)
+    {
 
         cluster = new ArrayList<WeightedRandomBlock>();
         cluster.add(resource);
@@ -57,7 +63,8 @@ public class WorldGenMinableCluster extends WorldGenerator {
 
     public WorldGenMinableCluster(final List<WeightedRandomBlock> resource,
                                   final int clusterSize,
-                                  final int blockID) {
+                                  final int blockID)
+    {
 
         cluster = resource;
         genClusterSize = clusterSize;
@@ -65,7 +72,8 @@ public class WorldGenMinableCluster extends WorldGenerator {
     }
 
     @Override
-    public boolean generate(final World world, final Random rand, final int x, final int y, final int z) {
+    public boolean generate(final World world, final Random rand, final int x, final int y, final int z)
+    {
 
         final float f = rand.nextFloat() * (float) Math.PI;
         final double d0 = x + 8 + ((MathHelper.sin(f) * genClusterSize) / 8.0F);
@@ -75,7 +83,8 @@ public class WorldGenMinableCluster extends WorldGenerator {
         final double d4 = (y + rand.nextInt(3)) - 2;
         final double d5 = (y + rand.nextInt(3)) - 2;
 
-        for (int l = 0; l <= genClusterSize; ++l) {
+        for (int l = 0; l <= genClusterSize; ++l)
+        {
             final double d6 = d0 + (((d1 - d0) * l) / genClusterSize);
             final double d7 = d4 + (((d5 - d4) * l) / genClusterSize);
             final double d8 = d2 + (((d3 - d2) * l) / genClusterSize);
@@ -89,20 +98,26 @@ public class WorldGenMinableCluster extends WorldGenerator {
             final int i2 = MathHelper.floor_double(d7 + (d11 / 2.0D));
             final int j2 = MathHelper.floor_double(d8 + (d10 / 2.0D));
 
-            for (int k2 = i1; k2 <= l1; ++k2) {
+            for (int k2 = i1; k2 <= l1; ++k2)
+            {
                 final double d12 = ((k2 + 0.5D) - d6) / (d10 / 2.0D);
 
-                if ((d12 * d12) < 1.0D) {
-                    for (int l2 = j1; l2 <= i2; ++l2) {
+                if ((d12 * d12) < 1.0D)
+                {
+                    for (int l2 = j1; l2 <= i2; ++l2)
+                    {
                         final double d13 = ((l2 + 0.5D) - d7) / (d11 / 2.0D);
 
-                        if (((d12 * d12) + (d13 * d13)) < 1.0D) {
-                            for (int i3 = k1; i3 <= j2; ++i3) {
+                        if (((d12 * d12) + (d13 * d13)) < 1.0D)
+                        {
+                            for (int i3 = k1; i3 <= j2; ++i3)
+                            {
                                 final double d14 = ((i3 + 0.5D) - d8) / (d10 / 2.0D);
 
                                 final Block block = Block.blocksList[world.getBlockId(k2, l2, i3)];
                                 if ((((d12 * d12) + (d13 * d13) + (d14 * d14)) < 1.0D) && (block != null)
-                                    && block.isGenMineableReplaceable(world, k2, l2, i3, genBlockID)) {
+                                    && block.isGenMineableReplaceable(world, k2, l2, i3, genBlockID))
+                                {
 
                                     final WeightedRandomBlock ore = (WeightedRandomBlock) WeightedRandom.getRandomItem(world.rand,
                                                                                                                        cluster);

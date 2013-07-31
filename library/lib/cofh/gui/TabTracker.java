@@ -7,27 +7,32 @@ import lib.cofh.gui.element.TabBase;
  * 
  * @author King Lemming
  */
-public class TabTracker {
+public class TabTracker
+{
 
     private static Class<? extends TabBase> openedLeftTab;
     private static Class<? extends TabBase> openedRightTab;
 
-    public static Class<? extends TabBase> getOpenedLeftTab() {
+    public static Class<? extends TabBase> getOpenedLeftTab()
+    {
 
         return openedLeftTab;
     }
 
-    public static Class<? extends TabBase> getOpenedRightTab() {
+    public static Class<? extends TabBase> getOpenedRightTab()
+    {
 
         return openedRightTab;
     }
 
-    public static void setOpenedLeftTab(final Class<? extends TabBase> tabClass) {
+    public static void setOpenedLeftTab(final Class<? extends TabBase> tabClass)
+    {
 
         openedLeftTab = tabClass;
     }
 
-    public static void setOpenedRightTab(final Class<? extends TabBase> tabClass) {
+    public static void setOpenedRightTab(final Class<? extends TabBase> tabClass)
+    {
 
         openedRightTab = tabClass;
     }

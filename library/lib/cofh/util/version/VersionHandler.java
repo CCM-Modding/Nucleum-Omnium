@@ -15,7 +15,8 @@ import cpw.mods.fml.common.FMLLog;
  * 
  * @author King Lemming
  */
-public class VersionHandler {
+public class VersionHandler
+{
 
     public static final String MC_VERSION      = "1.5.2";
 
@@ -33,59 +34,73 @@ public class VersionHandler {
     String                     releaseURL;
     Logger                     modLogger       = FMLLog.getLogger();
 
-    public static boolean beforeTargetVersion(final String version, final String target) {
+    public static boolean beforeTargetVersion(final String version, final String target)
+    {
 
-        try {
+        try
+        {
             final String[] versionTokens = version.trim().split("\\.");
             final String[] targetTokens = target.trim().split("\\.");
 
-            for (int i = 0; i < versionTokens.length; ++i) {
-                if (versionTokens[i].startsWith("a")) {
+            for (int i = 0; i < versionTokens.length; ++i)
+            {
+                if (versionTokens[i].startsWith("a"))
+                {
                     // alpha builds ignore updates unless behind by a lot
                     return false;
                 }
-                if (versionTokens[i].startsWith("b")) {
+                if (versionTokens[i].startsWith("b"))
+                {
 
-                    if (targetTokens[i].startsWith("b")) {
+                    if (targetTokens[i].startsWith("b"))
+                    {
                         versionTokens[i] = versionTokens[i].substring(1);
                         targetTokens[i] = targetTokens[i].substring(1);
-                    } else {
+                    } else
+                    {
                         // if this is a beta and target is not
                         return true;
                     }
                 }
-                if (targetTokens[i].startsWith("a") || targetTokens[i].startsWith("b")) {
+                if (targetTokens[i].startsWith("a") || targetTokens[i].startsWith("b"))
+                {
                     // if target is alpha or beta and this is not
                     return false;
                 }
                 final int v = Integer.valueOf(versionTokens[i]).intValue();
                 final int t = Integer.valueOf(targetTokens[i]).intValue();
 
-                if (v < t) {
+                if (v < t)
+                {
                     return true;
-                } else if (v > t) {
+                } else if (v > t)
+                {
                     return false;
                 }
             }
-        } catch (final Throwable t) {
+        } catch (final Throwable t)
+        {
             // pokemon!
         }
         return false;
     }
 
-    public static boolean afterTargetVersion(final String version, final String target) {
+    public static boolean afterTargetVersion(final String version, final String target)
+    {
 
         return beforeTargetVersion(target, version);
     }
 
-    public VersionHandler(final String name, final String version, final String url) {
+    public VersionHandler(final String name, final String version, final String url)
+    {
 
         modName = name;
         modVersion = latestModVersion = version;
         releaseURL = url;
     }
 
-    public VersionHandler(final String name, final String version, final String url, final Logger logger) {
+    public VersionHandler(final String name, final String version, final String url, final Logger logger)
+    {
 
         modName = name;
         modVersion = latestModVersion = version;
@@ -93,58 +108,70 @@ public class VersionHandler {
         modLogger = logger;
     }
 
-    public void checkForNewVersion() {
+    public void checkForNewVersion()
+    {
 
         final Thread versionCheckThread = new VersionCheckThread();
         versionCheckThread.start();
     }
 
-    public String getCurrentVersion() {
+    public String getCurrentVersion()
+    {
 
         return modVersion;
     }
 
-    public String getLatestVersion() {
+    public String getLatestVersion()
+    {
 
         return latestModVersion;
     }
 
-    public String getLatestMCVersion() {
+    public String getLatestMCVersion()
+    {
 
         return latestMCVersion;
     }
 
-    public String getVersionDescription() {
+    public String getVersionDescription()
+    {
 
         return description;
     }
 
-    public boolean isCriticalUpdate() {
+    public boolean isCriticalUpdate()
+    {
 
         return criticalUpdate;
     }
 
-    public boolean isNewVersionAvailable() {
+    public boolean isNewVersionAvailable()
+    {
 
         return newVersion;
     }
 
-    public boolean isMinecraftOutdated() {
+    public boolean isMinecraftOutdated()
+    {
 
         return newMinecraftVersion;
     }
 
-    public boolean isVersionCheckComplete() {
+    public boolean isVersionCheckComplete()
+    {
 
         return versionCheckComplete;
     }
 
-    private class VersionCheckThread extends Thread {
+    private class VersionCheckThread extends Thread
+    {
 
         @Override
-        public void run() {
+        public void run()
+        {
 
-            try {
+            try
+            {
                 final URL versionFile = new URL(releaseURL);
                 final BufferedReader reader = new BufferedReader(new InputStreamReader(versionFile.openStream()));
                 latestModVersion = reader.readLine();
@@ -153,23 +180,27 @@ public class VersionHandler {
                 latestMCVersion = reader.readLine();
                 reader.close();
 
-                if (beforeTargetVersion(modVersion, latestModVersion)) {
+                if (beforeTargetVersion(modVersion, latestModVersion))
+                {
                     modLogger.log(Level.INFO, "An updated version of " + modName
                                               + " is available: "
                                               + latestModVersion
                                               + ".");
                     newVersion = true;
 
-                    if (criticalUpdate) {
+                    if (criticalUpdate)
+                    {
                         modLogger.log(Level.INFO,
                                       "This update has been marked as CRITICAL and will ignore notification suppression.");
                     }
-                    if (beforeTargetVersion(MC_VERSION, latestMCVersion)) {
+                    if (beforeTargetVersion(MC_VERSION, latestMCVersion))
+                    {
                         newMinecraftVersion = true;
                         modLogger.log(Level.INFO, "This update is for Minecraft " + latestMCVersion + ".");
                     }
                 }
-            } catch (final Exception e) {
+            } catch (final Exception e)
+            {
                 modLogger.log(Level.WARNING, "Version Check Failed: " + e.getMessage());
             }
             versionCheckComplete = true;

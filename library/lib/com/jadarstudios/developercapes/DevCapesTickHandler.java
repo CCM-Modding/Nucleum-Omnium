@@ -18,7 +18,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class DevCapesTickHandler implements ITickHandler {
+public class DevCapesTickHandler implements ITickHandler
+{
 
     private static final Minecraft    mc       = Minecraft.getMinecraft();
     private static final DevCapesUtil instance = DevCapesUtil.getInstance();
@@ -30,34 +31,41 @@ public class DevCapesTickHandler implements ITickHandler {
     private boolean                   notified = false;
 
     @Override
-    public void tickStart(final EnumSet<TickType> type, final Object... tickData) {
+    public void tickStart(final EnumSet<TickType> type, final Object... tickData)
+    {
 
         // Will not run if there is no world, and if there are no player entities
         // in the playerEntities list.
-        if ((mc.theWorld != null) && (mc.theWorld.playerEntities.size() > 0)) {
+        if ((mc.theWorld != null) && (mc.theWorld.playerEntities.size() > 0))
+        {
             // List of players.
             @SuppressWarnings("unchecked")
             final List<AbstractClientPlayer> players = mc.theWorld.playerEntities;
 
             // resets the counter if it is too high.
-            if (counter >= players.size()) {
+            if (counter >= players.size())
+            {
                 counter = 0;
             }
 
             final AbstractClientPlayer p = players.get(counter);
-            if (p != null) {
+            if (p != null)
+            {
 
                 final String lowerUsername = p.username.toLowerCase();
 
-                if (instance.getUserGroup(lowerUsername) != null) {
+                if (instance.getUserGroup(lowerUsername) != null)
+                {
                     // If the player had no cape before, (or is some cases
                     // has a cape from another mod,) then it will be true.
                     // This statement checks for false. Will not replace any
                     // capes.
-                    if (!p.field_110315_c.func_110557_a()) {
+                    if (!p.field_110315_c.func_110557_a())
+                    {
                         final String userGroup = instance.getUserGroup(lowerUsername);
 
-                        if (debug) {
+                        if (debug)
+                        {
                             System.out.println("Changing the cape of: " + p.username);
                         }
                         // Sets the cape URL.
@@ -66,9 +74,12 @@ public class DevCapesTickHandler implements ITickHandler {
                     }
 
                     // notifies qualified user that developer capes is outdated.
-                    if (!notified) {
-                        if (FMLClientHandler.instance().getClient().currentScreen == null) {
-                            if (instance.versionChecker.getResult() == 1) {
+                    if (!notified)
+                    {
+                        if (FMLClientHandler.instance().getClient().currentScreen == null)
+                        {
+                            if (instance.versionChecker.getResult() == 1)
+                            {
 
                                 notified = true;
 
@@ -88,15 +99,18 @@ public class DevCapesTickHandler implements ITickHandler {
      * Not used, stub method.
      */
     @Override
-    public void tickEnd(final EnumSet<TickType> type, final Object... tickData) {}
+    public void tickEnd(final EnumSet<TickType> type, final Object... tickData)
+    {}
 
     @Override
-    public EnumSet<TickType> ticks() {
+    public EnumSet<TickType> ticks()
+    {
         return EnumSet.of(TickType.CLIENT);
     }
 
     @Override
-    public String getLabel() {
+    public String getLabel()
+    {
         return "DeveloperCapesTickHandler";
     }
 }

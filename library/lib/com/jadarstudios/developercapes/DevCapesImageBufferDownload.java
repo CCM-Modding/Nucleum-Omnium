@@ -15,16 +15,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class DevCapesImageBufferDownload implements IImageBuffer {
+public class DevCapesImageBufferDownload implements IImageBuffer
+{
 
     private int imageWidth;
     private int imageHeight;
 
     @Override
-    public BufferedImage parseUserSkin(final BufferedImage par1BufferedImage) {
-        if (par1BufferedImage == null) {
+    public BufferedImage parseUserSkin(final BufferedImage par1BufferedImage)
+    {
+        if (par1BufferedImage == null)
+        {
             return null;
-        } else {
+        } else
+        {
             imageWidth = (par1BufferedImage.getWidth((ImageObserver) null) <= 64) ? 64
                                                                                  : (par1BufferedImage.getWidth((ImageObserver) null));
             imageHeight = (par1BufferedImage.getHeight((ImageObserver) null) <= 32) ? 32

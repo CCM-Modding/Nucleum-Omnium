@@ -12,7 +12,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
  * 
  * @author King Lemming
  */
-public interface IFeatureGenerator {
+public interface IFeatureGenerator
+{
 
     /**
      * Returns the name of the feature, used for displaying in the World.cfg file.

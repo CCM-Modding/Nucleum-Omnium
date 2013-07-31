@@ -8,21 +8,24 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import lib.cofh.api.world.IFeatureGenerator;
 
-public abstract class FeatureBase implements IFeatureGenerator {
+public abstract class FeatureBase implements IFeatureGenerator
+{
 
     final String  name;
     final byte    type;
     final boolean regen;
     final HashSet biomes = new HashSet<String>();
 
-    public FeatureBase(final String name, final boolean regen) {
+    public FeatureBase(final String name, final boolean regen)
+    {
 
         this.name = name;
         type = 0;
         this.regen = regen;
     }
 
-    public FeatureBase(final String name, final WorldGenerator worldGen, final byte type, final boolean regen) {
+    public FeatureBase(final String name, final WorldGenerator worldGen, final byte type, final boolean regen)
+    {
 
         this.name = name;
         this.type = type;
@@ -31,7 +34,8 @@ public abstract class FeatureBase implements IFeatureGenerator {
 
     /* IFeatureGenerator */
     @Override
-    public final String getFeatureName() {
+    public final String getFeatureName()
+    {
 
         return name;
     }

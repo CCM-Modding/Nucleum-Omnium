@@ -1,6 +1,7 @@
 package lib.cofh.api.tileentity;
 
-public interface ISecureTile {
+public interface ISecureTile
+{
 
     public static final int PUBLIC     = 0;
     public static final int RESTRICTED = 1;

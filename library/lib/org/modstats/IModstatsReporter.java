@@ -21,7 +21,8 @@
 
 package lib.org.modstats;
 
-public interface IModstatsReporter {
+public interface IModstatsReporter
+{
 
     public void registerMod(Object mod);
 
