@@ -67,11 +67,11 @@ public class DevCapesUtil
      * Set up capes. All cape URLs are in the txt file passed in.
      * https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt
      * 
-     * @param parTxtUrl
+     * @param txtURL
      *            The URL of the .txt file containing the groups, members of
      *            said groups, and the group's cape URL.
      */
-    public void addFileUrl(final String parTxtUrl)
+    public void addFileUrl(final String txtURL)
     {
         if (FMLCommonHandler.instance().getSide() != Side.CLIENT)
         {
@@ -80,7 +80,7 @@ public class DevCapesUtil
 
         try
         {
-            final URL url = new URL(parTxtUrl);
+            final URL url = new URL(txtURL);
             final BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
 
@@ -142,9 +142,7 @@ public class DevCapesUtil
     }
 
     public void checkForUpdates()
-    {
-
-    }
+    {}
 
     /**
      * Used to add user to users HashMap.

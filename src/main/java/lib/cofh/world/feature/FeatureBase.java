@@ -11,10 +11,10 @@ import lib.cofh.api.world.IFeatureGenerator;
 public abstract class FeatureBase implements IFeatureGenerator
 {
 
-    final String  name;
-    final byte    type;
-    final boolean regen;
-    final HashSet biomes = new HashSet<String>();
+    final String          name;
+    final byte            type;
+    final boolean         regen;
+    final HashSet<String> biomes = new HashSet<String>();
 
     public FeatureBase(final String name, final boolean regen)
     {
