@@ -13,9 +13,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
-import ccm.nucleum_omnium.helper.CommandHelper;
-import ccm.nucleum_omnium.helper.FunctionHelper;
-import ccm.nucleum_omnium.helper.JavaHelper;
+import ccm.nucleum_omnium.utils.helper.CommandHelper;
+import ccm.nucleum_omnium.utils.helper.FunctionHelper;
+import ccm.nucleum_omnium.utils.helper.JavaHelper;
 import ccm.nucleum_omnium.utils.lib.Commands;
 
 public class CommandTPX extends CommandBase

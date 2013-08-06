@@ -12,7 +12,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.DamageSource;
 
-import ccm.nucleum_omnium.helper.CommandHelper;
+import ccm.nucleum_omnium.utils.helper.CommandHelper;
 import ccm.nucleum_omnium.utils.lib.Commands;
 
 public class CommandKill extends CommandBase

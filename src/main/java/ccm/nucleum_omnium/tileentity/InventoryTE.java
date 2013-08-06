@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import ccm.nucleum_omnium.helper.FunctionHelper;
-import ccm.nucleum_omnium.helper.InventoryHelper;
+import ccm.nucleum_omnium.utils.helper.FunctionHelper;
+import ccm.nucleum_omnium.utils.helper.InventoryHelper;
 import ccm.nucleum_omnium.utils.lib.TileConstants;
 
 /**

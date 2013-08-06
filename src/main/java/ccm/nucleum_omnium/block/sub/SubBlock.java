@@ -36,13 +36,13 @@ import ccm.nucleum_omnium.block.interfaces.ITextureHelper;
 import ccm.nucleum_omnium.block.interfaces.ITileHelper;
 import ccm.nucleum_omnium.block.texture.BasicTexture;
 import ccm.nucleum_omnium.block.tile.NoTile;
-import ccm.nucleum_omnium.handler.GUIHandler;
-import ccm.nucleum_omnium.handler.LogHandler;
-import ccm.nucleum_omnium.handler.TextureHandler;
-import ccm.nucleum_omnium.helper.BlockHelper;
-import ccm.nucleum_omnium.helper.FunctionHelper;
-import ccm.nucleum_omnium.helper.enums.IBlockEnum;
 import ccm.nucleum_omnium.tileentity.BaseTE;
+import ccm.nucleum_omnium.utils.handler.GUIHandler;
+import ccm.nucleum_omnium.utils.handler.LogHandler;
+import ccm.nucleum_omnium.utils.handler.TextureHandler;
+import ccm.nucleum_omnium.utils.helper.BlockHelper;
+import ccm.nucleum_omnium.utils.helper.FunctionHelper;
+import ccm.nucleum_omnium.utils.helper.enums.IBlockEnum;
 
 public class SubBlock
 {

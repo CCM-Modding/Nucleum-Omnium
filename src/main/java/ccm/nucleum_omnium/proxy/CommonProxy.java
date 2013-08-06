@@ -5,7 +5,7 @@ package ccm.nucleum_omnium.proxy;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import ccm.nucleum_omnium.handler.events.EventBoneMeal;
+import ccm.nucleum_omnium.utils.handler.events.EventBoneMeal;
 
 public class CommonProxy
 {

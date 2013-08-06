@@ -8,8 +8,8 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-import ccm.nucleum_omnium.handler.LogHandler;
-import ccm.nucleum_omnium.handler.TextureHandler;
+import ccm.nucleum_omnium.utils.handler.LogHandler;
+import ccm.nucleum_omnium.utils.handler.TextureHandler;
 
 /**
  * Advanced Base Model, to use with the Advanced Model Loader, Pending internal minor fix...

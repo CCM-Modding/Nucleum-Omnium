@@ -13,8 +13,8 @@ import ccm.nucleum_omnium.block.interfaces.ITextureHelper;
 import ccm.nucleum_omnium.block.sub.tick.CropGrowth;
 import ccm.nucleum_omnium.block.texture.CropTexture;
 import ccm.nucleum_omnium.block.tile.NoTile;
-import ccm.nucleum_omnium.handler.TextureHandler;
-import ccm.nucleum_omnium.helper.enums.IBlockEnum;
+import ccm.nucleum_omnium.utils.handler.TextureHandler;
+import ccm.nucleum_omnium.utils.helper.enums.IBlockEnum;
 
 public class SubCrop extends SubBlock implements IPlantable
 {

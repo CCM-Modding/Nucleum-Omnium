@@ -8,9 +8,9 @@ import net.minecraft.world.World;
 
 import ccm.nucleum_omnium.NucleumOmnium;
 import ccm.nucleum_omnium.block.interfaces.ITileHelper;
-import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.tileentity.LogicTE;
 import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
+import ccm.nucleum_omnium.utils.handler.LogHandler;
 
 public class TileLogic extends TileInventory implements ITileHelper
 {

@@ -5,7 +5,7 @@ package ccm.nucleum_omnium.proxy;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import ccm.nucleum_omnium.handler.events.EventRain;
+import ccm.nucleum_omnium.utils.handler.events.EventRain;
 import ccm.nucleum_omnium.utils.lib.Locations;
 import ccm.nucleum_omnium.utils.lib.Properties;
 

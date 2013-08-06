@@ -18,7 +18,7 @@ import net.minecraftforge.event.world.ChunkDataEvent.Save;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
-import ccm.nucleum_omnium.handler.LogHandler;
+import ccm.nucleum_omnium.utils.handler.LogHandler;
 import ccm.nucleum_world.NucleumWorld;
 import ccm.nucleum_world.utils.TickHandlerWorld;
 import ccm.nucleum_world.utils.lib.Properties;

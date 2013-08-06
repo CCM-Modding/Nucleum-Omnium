@@ -9,8 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 import ccm.nucleum_omnium.NucleumOmnium;
-import ccm.nucleum_omnium.handler.LogHandler;
 import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
+import ccm.nucleum_omnium.utils.handler.LogHandler;
 import ccm.nucleum_omnium.utils.lib.TileConstants;
 
 /**

@@ -26,8 +26,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import ccm.nucleum_omnium.block.sub.SubBlock;
-import ccm.nucleum_omnium.helper.FunctionHelper;
 import ccm.nucleum_omnium.item.block.MainItemBlock;
+import ccm.nucleum_omnium.utils.helper.FunctionHelper;
 
 /**
  * MainBlock

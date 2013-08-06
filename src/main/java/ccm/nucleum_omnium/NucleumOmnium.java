@@ -27,16 +27,16 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 import ccm.nucleum_network.PacketHandler;
-import ccm.nucleum_omnium.handler.CommandHandler;
-import ccm.nucleum_omnium.handler.GUIHandler;
-import ccm.nucleum_omnium.handler.LogHandler;
-import ccm.nucleum_omnium.handler.ModLoadingHandler;
-import ccm.nucleum_omnium.handler.config.ConfigurationHandler;
-import ccm.nucleum_omnium.handler.config.NOConfig;
-import ccm.nucleum_omnium.handler.mods.ModHandler;
-import ccm.nucleum_omnium.handler.mods.MystcraftHandler;
-import ccm.nucleum_omnium.helper.DataHelper;
 import ccm.nucleum_omnium.proxy.CommonProxy;
+import ccm.nucleum_omnium.utils.handler.CommandHandler;
+import ccm.nucleum_omnium.utils.handler.GUIHandler;
+import ccm.nucleum_omnium.utils.handler.LogHandler;
+import ccm.nucleum_omnium.utils.handler.ModLoadingHandler;
+import ccm.nucleum_omnium.utils.handler.config.ConfigurationHandler;
+import ccm.nucleum_omnium.utils.handler.config.NOConfig;
+import ccm.nucleum_omnium.utils.handler.mods.ModHandler;
+import ccm.nucleum_omnium.utils.handler.mods.MystcraftHandler;
+import ccm.nucleum_omnium.utils.helper.DataHelper;
 import ccm.nucleum_omnium.utils.language.OmniumLP;
 
 import lib.org.modstats.ModstatInfo;

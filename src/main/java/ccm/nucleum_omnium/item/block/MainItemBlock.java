@@ -11,8 +11,8 @@ import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import ccm.nucleum_omnium.helper.BlockHelper;
-import ccm.nucleum_omnium.helper.LanguageHelper;
+import ccm.nucleum_omnium.utils.helper.BlockHelper;
+import ccm.nucleum_omnium.utils.helper.LanguageHelper;
 
 public class MainItemBlock extends ItemBlock
 {

@@ -8,7 +8,7 @@ import java.util.List;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-import ccm.nucleum_omnium.helper.LanguageHelper;
+import ccm.nucleum_omnium.utils.helper.LanguageHelper;
 
 /**
  * The Super Class of ANY Language Pack within all the CCM Mods
