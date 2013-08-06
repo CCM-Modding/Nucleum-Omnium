@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum_omnium.utils.handler;
+package ccm.nucleum_omnium.utils.handler.gui;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 import ccm.nucleum_omnium.NucleumOmnium;
+import ccm.nucleum_omnium.utils.handler.LogHandler;
 
 public final class GUIHandler implements IGuiHandler
 {

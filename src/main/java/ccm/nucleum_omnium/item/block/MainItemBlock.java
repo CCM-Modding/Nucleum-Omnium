@@ -7,12 +7,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.StatCollector;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import ccm.nucleum_omnium.utils.helper.BlockHelper;
-import ccm.nucleum_omnium.utils.helper.LanguageHelper;
 
 public class MainItemBlock extends ItemBlock
 {
@@ -42,7 +42,7 @@ public class MainItemBlock extends ItemBlock
     @Override
     public String getItemDisplayName(final ItemStack itemStack)
     {
-        return LanguageHelper.getLocalizedString(getUnlocalizedName(itemStack));
+        return StatCollector.translateToLocal(getUnlocalizedName(itemStack));
     }
 
     @Override

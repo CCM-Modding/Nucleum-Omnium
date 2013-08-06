@@ -18,10 +18,14 @@ import ccm.nucleum_omnium.utils.lib.BlockFacings;
  */
 public class ActiveTexture extends MultyTexture implements ITextureHelper
 {
+    BlockFacings active;
 
-    public ActiveTexture(final String iconName, final List<BlockFacings> goodSides)
+    public ActiveTexture(final String iconName,
+                         final BlockFacings activeSide,
+                         final List<BlockFacings> goodSides)
     {
         super(iconName, goodSides);
+        active = activeSide;
     }
 
     @Override
@@ -36,14 +40,15 @@ public class ActiveTexture extends MultyTexture implements ITextureHelper
 
         if (te != null)
         {
-            if (goodSides.contains(BlockFacings.Front) && (side == te.getOrientationOrdinal()))
+            if (goodSides.contains(active) && (side == te.getOrientationOrdinal()))
             {
                 if (te.getState())
                 {
                     return icons[7];
-                } else
+                }
+                else
                 {
-                    return icons[BlockFacings.Front.ordinal()];
+                    return icons[active.ordinal()];
                 }
             }
         }
@@ -55,11 +60,12 @@ public class ActiveTexture extends MultyTexture implements ITextureHelper
     {
         for (final BlockFacings direction : goodSides)
         {
-            if (direction == BlockFacings.Front)
+            if (direction == active)
             {
                 icons[direction.ordinal()] = register.registerIcon(iconName + direction.name());
                 icons[7] = register.registerIcon(iconName + direction.name() + "On");
-            } else
+            }
+            else
             {
                 icons[direction.ordinal()] = register.registerIcon(iconName + direction.name());
             }

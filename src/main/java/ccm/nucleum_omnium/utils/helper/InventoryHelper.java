@@ -13,7 +13,7 @@ import ccm.nucleum_omnium.base.BaseNIC;
 public class InventoryHelper extends BaseNIC
 {
 
-    private static final String slot = "CCM.SLOT";
+    private static final String SLOT = "CCM.SLOT";
 
     /**
      * Decreases the {@link ItemStack} size in a slot.
@@ -28,7 +28,7 @@ public class InventoryHelper extends BaseNIC
      *            The inventory (A class implementing {@link IInventory})
      * @return The new {@link ItemStack}.
      */
-    public static ItemStack decrStackSize(final int slot, final int amount, final IInventory inventory)
+    public static ItemStack decrStackSize(final IInventory inventory, final int slot, final int amount)
     {
         if (inventory.getStackInSlot(slot) != null)
         {
@@ -37,7 +37,8 @@ public class InventoryHelper extends BaseNIC
             {
                 itemstack = inventory.getStackInSlot(slot);
                 setEmty(inventory, slot);
-            } else
+            }
+            else
             {
                 itemstack = inventory.getStackInSlot(slot).splitStack(amount);
                 if (inventory.getStackInSlot(slot).stackSize == 0)
@@ -71,27 +72,32 @@ public class InventoryHelper extends BaseNIC
         if (inventory.getStackInSlot(startSlot) == null)
         {
             return startSlot;
-        } else if (ItemHelper.equals(inventory.getStackInSlot(startSlot), output))
-        {
-            return startSlot;
-        } else
-        {
-            int bestSlot = startSlot;
-
-            for (int slot = startSlot; slot < inventory.getSizeInventory(); slot++)
-            {
-                if (inventory.getStackInSlot(slot) == null)
-                {
-                    bestSlot = slot;
-                    break;
-                } else if (ItemHelper.equals(inventory.getStackInSlot(slot), output))
-                {
-                    bestSlot = slot;
-                    break;
-                }
-            }
-            return bestSlot;
         }
+        else
+            if (ItemHelper.equals(inventory.getStackInSlot(startSlot), output))
+            {
+                return startSlot;
+            }
+            else
+            {
+                int bestSlot = startSlot;
+
+                for (int slot = startSlot; slot < inventory.getSizeInventory(); slot++)
+                {
+                    if (inventory.getStackInSlot(slot) == null)
+                    {
+                        bestSlot = slot;
+                        break;
+                    }
+                    else
+                        if (ItemHelper.equals(inventory.getStackInSlot(slot), output))
+                        {
+                            bestSlot = slot;
+                            break;
+                        }
+                }
+                return bestSlot;
+            }
     }
 
     public static int getBestSlot(final IInventory inventory,
@@ -103,27 +109,32 @@ public class InventoryHelper extends BaseNIC
         if (inventory.getStackInSlot(startSlot) == null)
         {
             return startSlot;
-        } else if (ItemHelper.equals(inventory.getStackInSlot(startSlot), output))
-        {
-            return startSlot;
-        } else
-        {
-            int bestSlot = startSlot;
-
-            for (int slot = startSlot; slot < endSlot; slot++)
-            {
-                if (inventory.getStackInSlot(slot) == null)
-                {
-                    bestSlot = slot;
-                    break;
-                } else if (ItemHelper.equals(inventory.getStackInSlot(slot), output))
-                {
-                    bestSlot = slot;
-                    break;
-                }
-            }
-            return bestSlot;
         }
+        else
+            if (ItemHelper.equals(inventory.getStackInSlot(startSlot), output))
+            {
+                return startSlot;
+            }
+            else
+            {
+                int bestSlot = startSlot;
+
+                for (int slot = startSlot; slot < endSlot; slot++)
+                {
+                    if (inventory.getStackInSlot(slot) == null)
+                    {
+                        bestSlot = slot;
+                        break;
+                    }
+                    else
+                        if (ItemHelper.equals(inventory.getStackInSlot(slot), output))
+                        {
+                            bestSlot = slot;
+                            break;
+                        }
+                }
+                return bestSlot;
+            }
     }
 
     /**
@@ -142,7 +153,7 @@ public class InventoryHelper extends BaseNIC
         for (int i = 0; i < list.tagCount(); i++)
         {
             nbt = (NBTTagCompound) list.tagAt(i);
-            stacks[nbt.getInteger(slot)] = ItemStack.loadItemStackFromNBT(nbt);
+            stacks[nbt.getInteger(SLOT)] = ItemStack.loadItemStackFromNBT(nbt);
         }
         return stacks;
     }
@@ -176,7 +187,7 @@ public class InventoryHelper extends BaseNIC
                 continue;
             }
             nbt = new NBTTagCompound();
-            nbt.setInteger(slot, i);
+            nbt.setInteger(SLOT, i);
             stacks[i].writeToNBT(nbt);
             list.appendTag(nbt);
         }

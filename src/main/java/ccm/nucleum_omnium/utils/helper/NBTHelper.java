@@ -21,7 +21,7 @@ public final class NBTHelper extends BaseNIC
      *            The item for which its NBT Tag Compound is being checked
      *            for initialization
      */
-    private static void initNBTTagCompound(final ItemStack item)
+    public static void initCompound(final ItemStack item)
     {
 
         if (item.getTagCompound() == null)
@@ -54,7 +54,7 @@ public final class NBTHelper extends BaseNIC
     public static String getString(final ItemStack item, final String keyName)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         if (!item.getTagCompound().hasKey(keyName))
         {
@@ -67,7 +67,7 @@ public final class NBTHelper extends BaseNIC
     public static void setString(final ItemStack item, final String keyName, final String keyValue)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         item.getTagCompound().setString(keyName, keyValue);
     }
@@ -76,7 +76,7 @@ public final class NBTHelper extends BaseNIC
     public static boolean getBoolean(final ItemStack item, final String keyName)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         if (!item.getTagCompound().hasKey(keyName))
         {
@@ -89,7 +89,7 @@ public final class NBTHelper extends BaseNIC
     public static void setBoolean(final ItemStack item, final String keyName, final boolean keyValue)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         item.getTagCompound().setBoolean(keyName, keyValue);
     }
@@ -98,7 +98,7 @@ public final class NBTHelper extends BaseNIC
     public static byte getByte(final ItemStack item, final String keyName)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         if (!item.getTagCompound().hasKey(keyName))
         {
@@ -111,7 +111,7 @@ public final class NBTHelper extends BaseNIC
     public static void setByte(final ItemStack item, final String keyName, final byte keyValue)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         item.getTagCompound().setByte(keyName, keyValue);
     }
@@ -120,7 +120,7 @@ public final class NBTHelper extends BaseNIC
     public static short getShort(final ItemStack item, final String keyName)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         if (!item.getTagCompound().hasKey(keyName))
         {
@@ -133,7 +133,7 @@ public final class NBTHelper extends BaseNIC
     public static void setShort(final ItemStack item, final String keyName, final short keyValue)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         item.getTagCompound().setShort(keyName, keyValue);
     }
@@ -142,7 +142,7 @@ public final class NBTHelper extends BaseNIC
     public static int getInt(final ItemStack item, final String keyName)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         if (!item.getTagCompound().hasKey(keyName))
         {
@@ -155,7 +155,7 @@ public final class NBTHelper extends BaseNIC
     public static void setInteger(final ItemStack item, final String keyName, final int keyValue)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         item.getTagCompound().setInteger(keyName, keyValue);
     }
@@ -164,7 +164,7 @@ public final class NBTHelper extends BaseNIC
     public static long getLong(final ItemStack item, final String keyName)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         if (!item.getTagCompound().hasKey(keyName))
         {
@@ -177,7 +177,7 @@ public final class NBTHelper extends BaseNIC
     public static void setLong(final ItemStack item, final String keyName, final long keyValue)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         item.getTagCompound().setLong(keyName, keyValue);
     }
@@ -186,7 +186,7 @@ public final class NBTHelper extends BaseNIC
     public static float getFloat(final ItemStack item, final String keyName)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         if (!item.getTagCompound().hasKey(keyName))
         {
@@ -199,7 +199,7 @@ public final class NBTHelper extends BaseNIC
     public static void setFloat(final ItemStack item, final String keyName, final float keyValue)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         item.getTagCompound().setFloat(keyName, keyValue);
     }
@@ -208,7 +208,7 @@ public final class NBTHelper extends BaseNIC
     public static double getDouble(final ItemStack item, final String keyName)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         if (!item.getTagCompound().hasKey(keyName))
         {
@@ -221,7 +221,7 @@ public final class NBTHelper extends BaseNIC
     public static void setDouble(final ItemStack item, final String keyName, final double keyValue)
     {
 
-        initNBTTagCompound(item);
+        initCompound(item);
 
         item.getTagCompound().setDouble(keyName, keyValue);
     }
