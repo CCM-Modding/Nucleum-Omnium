@@ -24,17 +24,17 @@ public final class GUIHandler implements IGuiHandler
     /**
      * List of all the GUI Containers
      */
-    private final Map<Integer, Class<? extends GuiContainer>> guiList;
+    private final Map<Integer, GuiHandling> guiList;
 
     /**
      * List of all the Containers
      */
-    private final Map<Integer, Class<? extends Container>>    containerList;
+    private final Map<Integer, GuiHandling> containerList;
 
     /**
      * Private single instance
      */
-    private static final GUIHandler                           INSTANCE = new GUIHandler();
+    private static final GUIHandler         INSTANCE = new GUIHandler();
 
     /**
      * @param name
@@ -82,7 +82,8 @@ public final class GUIHandler implements IGuiHandler
         if (instance().containerList.containsKey(fix))
         {
             player.openGui(NucleumOmnium.instance, fix, world, x, y, z);
-        } else
+        }
+        else
         {
             LogHandler.severe(NucleumOmnium.instance,
                               "Player: %s, tried to open %s but it is not registered!! \n",
@@ -127,8 +128,8 @@ public final class GUIHandler implements IGuiHandler
      */
     private GUIHandler()
     {
-        guiList = new HashMap<Integer, Class<? extends GuiContainer>>();
-        containerList = new HashMap<Integer, Class<? extends Container>>();
+        guiList = new HashMap<Integer, GuiHandling>();
+        containerList = new HashMap<Integer, GuiHandling>();
     }
 
     @Override
