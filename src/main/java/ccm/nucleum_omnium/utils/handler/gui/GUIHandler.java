@@ -37,14 +37,12 @@ public final class GUIHandler implements IGuiHandler
     private static final GUIHandler         INSTANCE = new GUIHandler();
 
     /**
-     * @param name
-     *            The name of the Block
-     * @return The "unique" hash code of the Block's name
+     * Private constructor
      */
-    private static int hash(final String name)
+    private GUIHandler()
     {
-        final String fix = "ccm.gui." + name + "." + name.hashCode();
-        return fix.hashCode();
+        guiList = new HashMap<Integer, GuiHandling>();
+        containerList = new HashMap<Integer, GuiHandling>();
     }
 
     /**
@@ -53,43 +51,6 @@ public final class GUIHandler implements IGuiHandler
     public static GUIHandler instance()
     {
         return INSTANCE;
-    }
-
-    /**
-     * Opens the desired GUI for the Player
-     * 
-     * @param guiID
-     *            The name of the machine
-     * @param player
-     *            The player trying to open it
-     * @param world
-     *            The world that the player and machine are in
-     * @param x
-     *            The x coordinate of the Block
-     * @param y
-     *            The y coordinate of the Block
-     * @param z
-     *            The z coordinate of the Block
-     */
-    public static void openGui(final String guiID,
-                               final EntityPlayer player,
-                               final World world,
-                               final int x,
-                               final int y,
-                               final int z)
-    {
-        final int fix = hash(guiID);
-        if (instance().containerList.containsKey(fix))
-        {
-            player.openGui(NucleumOmnium.instance, fix, world, x, y, z);
-        }
-        else
-        {
-            LogHandler.severe(NucleumOmnium.instance,
-                              "Player: %s, tried to open %s but it is not registered!! \n",
-                              player.username,
-                              guiID);
-        }
     }
 
     /**
@@ -120,16 +81,18 @@ public final class GUIHandler implements IGuiHandler
      */
     public static void registerGuiServer(final String guiID, final Class<? extends Container> container)
     {
-        instance().containerList.put(hash(guiID), container);
+        instance().containerList.put(hash(guiID), new GuiHandling<container>(container, null));
     }
 
     /**
-     * Private constructor
+     * @param name
+     *            The name of the Block
+     * @return The "unique" hash code of the Block's name
      */
-    private GUIHandler()
+    private static int hash(final String name)
     {
-        guiList = new HashMap<Integer, GuiHandling>();
-        containerList = new HashMap<Integer, GuiHandling>();
+        final String fix = "ccm.gui." + name + "." + name.hashCode();
+        return fix.hashCode();
     }
 
     @Override
@@ -176,5 +139,42 @@ public final class GUIHandler implements IGuiHandler
             e.printStackTrace();
         }
         return container;
+    }
+
+    /**
+     * Opens the desired GUI for the Player
+     * 
+     * @param guiID
+     *            The name of the machine
+     * @param player
+     *            The player trying to open it
+     * @param world
+     *            The world that the player and machine are in
+     * @param x
+     *            The x coordinate of the Block
+     * @param y
+     *            The y coordinate of the Block
+     * @param z
+     *            The z coordinate of the Block
+     */
+    public static void openGui(final String guiID,
+                               final EntityPlayer player,
+                               final World world,
+                               final int x,
+                               final int y,
+                               final int z)
+    {
+        final int fix = hash(guiID);
+        if (instance().containerList.containsKey(fix))
+        {
+            player.openGui(NucleumOmnium.instance, fix, world, x, y, z);
+        }
+        else
+        {
+            LogHandler.severe(NucleumOmnium.instance,
+                              "Player: %s, tried to open %s but it is not registered!! \n",
+                              player.username,
+                              guiID);
+        }
     }
 }
