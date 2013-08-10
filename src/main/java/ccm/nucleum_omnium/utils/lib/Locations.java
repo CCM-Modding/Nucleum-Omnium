@@ -9,9 +9,6 @@ import ccm.nucleum_omnium.base.BaseNIC;
 
 public final class Locations extends BaseNIC
 {
-
-    public static final String LANGUAGE_FILE = "/assets/" + MOD_ID + "/lang/";
-
     public static final String PROXY         = "ccm." + MOD_ID + ".proxy.";
 
     public static final String CLIENT_PROXY  = PROXY + "ClientProxy";

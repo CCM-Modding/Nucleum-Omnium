@@ -33,7 +33,7 @@ import ccm.nucleum_omnium.utils.handler.LogHandler;
 import ccm.nucleum_omnium.utils.handler.ModLoadingHandler;
 import ccm.nucleum_omnium.utils.handler.config.ConfigurationHandler;
 import ccm.nucleum_omnium.utils.handler.config.NOConfig;
-import ccm.nucleum_omnium.utils.handler.gui.GUIHandler;
+import ccm.nucleum_omnium.utils.handler.gui.GuiHandler;
 import ccm.nucleum_omnium.utils.handler.mods.ModHandler;
 import ccm.nucleum_omnium.utils.handler.mods.MystcraftHandler;
 import ccm.nucleum_omnium.utils.helper.DataHelper;
@@ -96,7 +96,7 @@ public class NucleumOmnium extends BaseMod implements IMod
         ModHandler.addMod(new MystcraftHandler());
 
         // Registers the GUI Handler
-        NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GUIHandler.instance());
+        NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GuiHandler.instance());
     }
 
     @EventHandler

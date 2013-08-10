@@ -6,24 +6,27 @@ package ccm.nucleum_omnium.utils.handler.gui;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+
 /**
  * GuiHandling
  * <p>
  * 
  * @author Captain_Shadows
  */
-public class GuiHandling<T>
+public class GuiHandling
 {
-    private final Class<T>   clazz;
+    private final Class<?>   clazz;
     private final Class<?>[] classes;
 
-    public GuiHandling(final Class<T> clazz, final Class<?>... classes)
+    public GuiHandling(final Class<?> clazz, final Class<?>... classes)
     {
         this.clazz = clazz;
         this.classes = classes;
     }
 
-    public T createNew(final Object... objects)
+    public Object createNew(final Object... objects)
     {
         boolean canContinue = true;
         for (int i = 0; i < objects.length; i++)
@@ -36,7 +39,7 @@ public class GuiHandling<T>
         }
         if (canContinue)
         {
-            T instance = null;
+            Object instance = null;
             Constructor<?> c = null;
             try
             {
@@ -51,7 +54,7 @@ public class GuiHandling<T>
 
             try
             {
-                instance = (T) c.newInstance(objects);
+                instance = c.newInstance(objects);
             } catch (final InstantiationException e)
             {
                 e.printStackTrace();
@@ -71,5 +74,41 @@ public class GuiHandling<T>
         {
             return null;
         }
+    }
+
+    /**
+     * @param player
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    public Object getServerGuiElement(final EntityPlayer player,
+                                      final World world,
+                                      final int x,
+                                      final int y,
+                                      final int z)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * @param player
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    public Object getClientGuiElement(final EntityPlayer player,
+                                      final World world,
+                                      final int x,
+                                      final int y,
+                                      final int z)
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

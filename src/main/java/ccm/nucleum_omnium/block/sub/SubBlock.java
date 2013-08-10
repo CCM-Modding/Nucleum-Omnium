@@ -39,7 +39,7 @@ import ccm.nucleum_omnium.block.tile.NoTile;
 import ccm.nucleum_omnium.tileentity.BaseTE;
 import ccm.nucleum_omnium.utils.handler.LogHandler;
 import ccm.nucleum_omnium.utils.handler.TextureHandler;
-import ccm.nucleum_omnium.utils.handler.gui.GUIHandler;
+import ccm.nucleum_omnium.utils.handler.gui.GuiHandler;
 import ccm.nucleum_omnium.utils.helper.BlockHelper;
 import ccm.nucleum_omnium.utils.helper.FunctionHelper;
 import ccm.nucleum_omnium.utils.helper.enums.IBlockEnum;
@@ -373,7 +373,7 @@ public class SubBlock
             final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
             if (te != null)
             {
-                GUIHandler.openGui(FunctionHelper.getTEName(world, x, y, z), player, world, x, y, z);
+                GuiHandler.openGui(FunctionHelper.getTEName(world, x, y, z), player, world, x, y, z);
                 return true;
             } else
             {
