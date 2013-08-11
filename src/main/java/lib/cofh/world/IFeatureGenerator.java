@@ -1,4 +1,4 @@
-package lib.cofh.api.world;
+package lib.cofh.world;
 
 import java.util.Random;
 

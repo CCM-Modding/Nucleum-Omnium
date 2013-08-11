@@ -78,7 +78,8 @@ public class LogicTE extends InventoryTE
                 }
                 e.printStackTrace();
             }
-        } else
+        }
+        else
         {
             throw new RuntimeException("\nsrclogic WAS NULL!!!! \n");
         }
@@ -138,12 +139,14 @@ public class LogicTE extends InventoryTE
             if (logic != null)
             {
                 logic.readFromNBT(nbt);
-            } else
+            }
+            else
             {
                 loadLogic();
                 logic.readFromNBT(nbt);
             }
-        } else
+        }
+        else
         {
             LogHandler.severe(NucleumOmnium.instance, "Dosn't have logic!");
             LogHandler.debug(nbt.toString());
@@ -184,7 +187,8 @@ public class LogicTE extends InventoryTE
             {
                 nbt.setString(TileConstants.NBT_TE_SRC_LOGIC, srclogic.getName());
                 LogHandler.debug(srclogic.getName());
-            } else
+            }
+            else
             {
                 LogHandler.severe(NucleumOmnium.instance,
                                   "%sSource Logic was null when tring to save to NBT!",

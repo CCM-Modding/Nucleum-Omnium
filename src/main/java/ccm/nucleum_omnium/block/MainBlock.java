@@ -85,7 +85,8 @@ public class MainBlock extends Block
         if (subBlocks[meta] == null)
         {
             subBlocks[meta] = block;
-        } else
+        }
+        else
         {
             throw new IllegalArgumentException(String.format("Block %s with id: %d and metadata: %d is already occupied by %s when adding  %s",
                                                              this,
@@ -118,7 +119,8 @@ public class MainBlock extends Block
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].createTileEntity(world, meta);
-        } else
+        }
+        else
         {
             return null;
         }
@@ -184,7 +186,8 @@ public class MainBlock extends Block
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].getBlockTexture(blockAccess, x, y, z, side);
-        } else
+        }
+        else
         {
             return super.getBlockTexture(blockAccess, x, y, z, side);
         }
@@ -207,7 +210,8 @@ public class MainBlock extends Block
         if (ret != null)
         {
             return ret;
-        } else
+        }
+        else
         {
             return super.getCollisionBoundingBoxFromPool(world, x, y, z);
         }
@@ -267,7 +271,8 @@ public class MainBlock extends Block
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].getIcon(side, meta);
-        } else
+        }
+        else
         {
             return super.getIcon(side, meta);
         }
@@ -297,7 +302,8 @@ public class MainBlock extends Block
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].hasTileEntity(meta);
-        } else
+        }
+        else
         {
             return false;
         }
@@ -324,7 +330,8 @@ public class MainBlock extends Block
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].onBlockActivated(world, x, y, z, player, wut, clickX, clickY, clockZ);
-        } else
+        }
+        else
         {
             return false;
         }
@@ -392,7 +399,8 @@ public class MainBlock extends Block
         if (subBlocks[meta] != null)
         {
             subBlocks[meta].randomDisplayTick(world, x, y, z, rand);
-        } else
+        }
+        else
         {
             super.randomDisplayTick(world, x, y, z, rand);
         }

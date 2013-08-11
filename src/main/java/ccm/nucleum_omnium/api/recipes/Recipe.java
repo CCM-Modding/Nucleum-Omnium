@@ -64,30 +64,36 @@ public class Recipe
             {
                 return false;
             }
-        } else if (!input.equals(other.input))
-        {
-            return false;
         }
+        else
+            if (!input.equals(other.input))
+            {
+                return false;
+            }
         if (output == null)
         {
             if (other.output != null)
             {
                 return false;
             }
-        } else if (!output.equals(other.output))
-        {
-            return false;
         }
+        else
+            if (!output.equals(other.output))
+            {
+                return false;
+            }
         if (output2 == null)
         {
             if (other.output2 != null)
             {
                 return false;
             }
-        } else if (!output2.equals(other.output2))
-        {
-            return false;
         }
+        else
+            if (!output2.equals(other.output2))
+            {
+                return false;
+            }
         return true;
     }
 

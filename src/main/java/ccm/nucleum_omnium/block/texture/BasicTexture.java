@@ -40,7 +40,5 @@ public class BasicTexture implements ITextureHelper
     public void registerIcons(final IconRegister register)
     {
         icon = register.registerIcon(iconName);
-
     }
-
 }

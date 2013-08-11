@@ -59,7 +59,8 @@ public abstract class ProgressContainer extends BaseContainer
                 }
             }
             lastCookTime = guiLogic.getTimeLeft();
-        } else
+        }
+        else
         {
             lastCookTime = 0;
         }

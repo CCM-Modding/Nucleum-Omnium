@@ -26,7 +26,8 @@ public class TileInventory extends TileBase implements ITileHelper
             if (hasInventory())
             {
                 return ((InventoryTE) te.newInstance()).setInventorySize(size);
-            } else
+            }
+            else
             {
                 return super.createTileEntity(world, meta);
             }

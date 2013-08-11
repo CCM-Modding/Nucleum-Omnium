@@ -6,7 +6,7 @@ import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import lib.cofh.api.world.IFeatureGenerator;
+import lib.cofh.world.IFeatureGenerator;
 
 public abstract class FeatureBase implements IFeatureGenerator
 {

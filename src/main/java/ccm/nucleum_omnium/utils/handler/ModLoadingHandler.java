@@ -26,7 +26,8 @@ public final class ModLoadingHandler extends BaseNIC
         if (!modsLoaded.containsKey(mod))
         {
             modsLoaded.put(mod, false);
-        } else
+        }
+        else
         {
             throw new DupeExeption(mod);
         }
@@ -42,7 +43,8 @@ public final class ModLoadingHandler extends BaseNIC
         {
             modsLoaded.remove(mod);
             modsLoaded.put(mod, true);
-        } else
+        }
+        else
         {
             throw new DupeExeption(mod);
         }

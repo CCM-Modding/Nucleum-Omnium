@@ -49,16 +49,21 @@ public class MultyTexture extends BasicTexture
         if (goodSides.contains(BlockFacings.Top) && (side == ForgeDirection.UP.ordinal()))
         {
             return icons[BlockFacings.Top.ordinal()];
-        } else if (goodSides.contains(BlockFacings.Bottom) && (side == ForgeDirection.DOWN.ordinal()))
-        {
-            return icons[BlockFacings.Bottom.ordinal()];
-        } else if (goodSides.contains(BlockFacings.Sides))
-        {
-            return icons[BlockFacings.Sides.ordinal()];
-        } else
-        {
-            throw new RuntimeException("A CCM Member has derped, To the member: DO NOT FORGET TO ADD THINGS TO THE goodSides ARRAY!!!");
         }
+        else
+            if (goodSides.contains(BlockFacings.Bottom) && (side == ForgeDirection.DOWN.ordinal()))
+            {
+                return icons[BlockFacings.Bottom.ordinal()];
+            }
+            else
+                if (goodSides.contains(BlockFacings.Sides))
+                {
+                    return icons[BlockFacings.Sides.ordinal()];
+                }
+                else
+                {
+                    throw new RuntimeException("A CCM Member has derped, To the member: DO NOT FORGET TO ADD THINGS TO THE goodSides ARRAY!!!");
+                }
     }
 
     @Override
@@ -67,19 +72,26 @@ public class MultyTexture extends BasicTexture
         if (goodSides.contains(BlockFacings.Front) && (side == ForgeDirection.SOUTH.ordinal()))
         {
             return icons[BlockFacings.Front.ordinal()];
-        } else if (goodSides.contains(BlockFacings.Top) && (side == ForgeDirection.UP.ordinal()))
-        {
-            return icons[BlockFacings.Top.ordinal()];
-        } else if (goodSides.contains(BlockFacings.Bottom) && (side == ForgeDirection.DOWN.ordinal()))
-        {
-            return icons[BlockFacings.Bottom.ordinal()];
-        } else if (goodSides.contains(BlockFacings.Sides))
-        {
-            return icons[BlockFacings.Sides.ordinal()];
-        } else
-        {
-            throw new RuntimeException("A CCM Member has derped, To the member: DO NOT FORGET TO ADD THINGS TO THE goodSides ARRAY!!!");
         }
+        else
+            if (goodSides.contains(BlockFacings.Top) && (side == ForgeDirection.UP.ordinal()))
+            {
+                return icons[BlockFacings.Top.ordinal()];
+            }
+            else
+                if (goodSides.contains(BlockFacings.Bottom) && (side == ForgeDirection.DOWN.ordinal()))
+                {
+                    return icons[BlockFacings.Bottom.ordinal()];
+                }
+                else
+                    if (goodSides.contains(BlockFacings.Sides))
+                    {
+                        return icons[BlockFacings.Sides.ordinal()];
+                    }
+                    else
+                    {
+                        throw new RuntimeException("A CCM Member has derped, To the member: DO NOT FORGET TO ADD THINGS TO THE goodSides ARRAY!!!");
+                    }
     }
 
     @Override

@@ -6,7 +6,9 @@ package ccm.nucleum_omnium.utils.handler.gui;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -16,23 +18,28 @@ import ccm.nucleum_omnium.utils.handler.LogHandler;
 
 public final class GuiHandler implements IGuiHandler
 {
-
+    /*
+     * Data Fields
+     */
     /**
      * List of all the GUI Handlers
      */
-    private final Map<Integer, GuiHandling> handlerList;
+    private final Map<Integer, AbstractGuiHandler> handlerList;
 
     /**
      * Private single instance
      */
-    private static final GuiHandler         INSTANCE = new GuiHandler();
+    private static final GuiHandler                INSTANCE = new GuiHandler();
 
+    /*
+     * Initialization Related Things
+     */
     /**
      * Private constructor
      */
     private GuiHandler()
     {
-        handlerList = new HashMap<Integer, GuiHandling>();
+        handlerList = new HashMap<Integer, AbstractGuiHandler>();
     }
 
     /**
@@ -43,45 +50,9 @@ public final class GuiHandler implements IGuiHandler
         return INSTANCE;
     }
 
-    /**
-     * Registers a GUI, and a Container on the client
-     * 
-     * @param guiID
-     *            The name of the Block that this GUI and Container are associated to
-     * @param gui
-     *            The GUI class
-     * @param container
-     *            The Container class
+    /*
+     * Overrides
      */
-    public static void registerGuiClient(final String guiID, final GuiHandling handler)
-    {
-        instance().handlerList.put(hash(guiID), handler);
-    }
-
-    /**
-     * Registers a Container on the server
-     * 
-     * @param guiID
-     *            The name of the Block that this Container is associated to
-     * @param container
-     *            The container class
-     */
-    public static void registerGuiServer(final String guiID, final GuiHandling handler)
-    {
-        instance().handlerList.put(hash(guiID), handler);
-    }
-
-    /**
-     * @param name
-     *            The name of the Block
-     * @return The "unique" hash code of the Block's name
-     */
-    private static int hash(final String name)
-    {
-        final String fix = "CCM.GUI." + name.toUpperCase() + "." + name.hashCode();
-        return fix.hashCode();
-    }
-
     @Override
     public Object getClientGuiElement(final int ID,
                                       final EntityPlayer player,
@@ -102,6 +73,70 @@ public final class GuiHandler implements IGuiHandler
                                       final int z)
     {
         return instance().handlerList.get(ID).getServerGuiElement(player, world, x, y, z);
+    }
+
+    /*
+     * Data Registers
+     */
+    /**
+     * Registers a GuiHandler on the client
+     * 
+     * @param guiID
+     *            The name of the Block that this GUI and Container are associated to
+     */
+    public static void registerGuiClient(final String guiID, final AbstractGuiHandler handler)
+    {
+        instance().handlerList.put(hash(guiID), handler);
+    }
+
+    /**
+     * Registers a GuiHandler on the server
+     * 
+     * @param guiID
+     *            The name of the Block that this GUI and Container are associated to
+     */
+    public static void registerGuiServer(final String guiID, final AbstractGuiHandler handler)
+    {
+        instance().handlerList.put(hash(guiID), handler);
+    }
+
+    /*
+     * Easier Data Registers
+     */
+
+    /**
+     * Registers a GuiHandler on the client
+     * 
+     * @param guiID
+     *            The name of the Block that this GUI and Container are associated to
+     */
+    public static void registerGuiClient(final String guiID,
+                                         final Class<? extends GuiContainer> gui,
+                                         final Class<? extends Container> container)
+    {
+        instance().handlerList.put(hash(guiID), new TileGuiHandler(gui, container));
+    }
+
+    /**
+     * Registers a GuiHandler on the server
+     */
+    public static void registerGuiServer(final String guiID, final Class<? extends Container> container)
+    {
+        instance().handlerList.put(hash(guiID), new TileGuiHandler(container));
+    }
+
+    /*
+     * Helpers
+     */
+    /**
+     * @param name
+     *            The name of the Block
+     * @return The "unique" hash code of the Block's name
+     */
+    private static int hash(final String name)
+    {
+        final String fix = "CCM.GUI." + name.toUpperCase() + "." + name.hashCode();
+        return fix.hashCode();
     }
 
     /**

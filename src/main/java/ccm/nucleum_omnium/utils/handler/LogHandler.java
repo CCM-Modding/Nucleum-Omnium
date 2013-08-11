@@ -66,7 +66,8 @@ public final class LogHandler extends BaseNIC
         if (modsLogged.containsKey(mod))
         {
             return modsLogged.get(mod);
-        } else
+        }
+        else
         {
             throw new LNFExeption(mod);
         }
@@ -88,7 +89,8 @@ public final class LogHandler extends BaseNIC
             final Logger tmp = Logger.getLogger(mod.getModId());
             tmp.setParent(FMLLog.getLogger());
             modsLogged.put(mod, tmp);
-        } else
+        }
+        else
         {
             throw new DupeExeption(mod);
         }

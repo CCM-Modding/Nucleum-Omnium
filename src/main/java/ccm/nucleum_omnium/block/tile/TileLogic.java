@@ -27,7 +27,8 @@ public class TileLogic extends TileInventory implements ITileHelper
                 if (hasInventory())
                 {
                     return ((LogicTE) te.newInstance()).setLogic(logic).setInventorySize(size);
-                } else
+                }
+                else
                 {
                     return ((LogicTE) te.newInstance()).setLogic(logic);
                 }
@@ -39,7 +40,8 @@ public class TileLogic extends TileInventory implements ITileHelper
                 e.printStackTrace();
                 return null;
             }
-        } else
+        }
+        else
         {
             return super.createTileEntity(world, meta);
         }

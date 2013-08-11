@@ -64,7 +64,8 @@ public class Modstats
         if (latest == null)
         {
             FMLLog.warning("Modstats reporter class not found.");
-        } else
+        }
+        else
         {
             try
             {

@@ -35,7 +35,8 @@ public class ItemHelper extends BaseNIC
             if (tmp.getItemDamage() > tmp.getMaxDamage())
             {
                 inventory.setInventorySlotContents(slot, null);
-            } else
+            }
+            else
             {
                 inventory.setInventorySlotContents(slot, tmp);
             }
@@ -94,7 +95,8 @@ public class ItemHelper extends BaseNIC
                         return true;
                     }
                 }
-            } else
+            }
+            else
             {
                 return true;
             }
@@ -128,7 +130,8 @@ public class ItemHelper extends BaseNIC
         if (size > item.getMaxStackSize())
         {
             return new ItemStack(item.itemID, item.getMaxStackSize(), item.getItemDamage());
-        } else
+        }
+        else
         {
             return new ItemStack(item.itemID, size, item.getItemDamage());
         }

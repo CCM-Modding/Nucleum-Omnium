@@ -1,4 +1,4 @@
-package lib.cofh.util;
+package lib.cofh.world.util;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -262,16 +262,22 @@ public final class BlockHelper
                 if (bMeta == 5)
                 {
                     return 6 + shift;
-                } else if (bMeta == 6)
-                {
-                    return 5 + shift;
-                } else if (bMeta == 7)
-                {
-                    return 0 + shift;
-                } else if (bMeta == 0)
-                {
-                    return 7 + shift;
                 }
+                else
+                    if (bMeta == 6)
+                    {
+                        return 5 + shift;
+                    }
+                    else
+                        if (bMeta == 7)
+                        {
+                            return 0 + shift;
+                        }
+                        else
+                            if (bMeta == 0)
+                            {
+                                return 7 + shift;
+                            }
                 return bMeta + shift;
             case RotationType.SIGN:
                 return ++bMeta % 16;
@@ -342,16 +348,22 @@ public final class BlockHelper
                 if (bMeta == 5)
                 {
                     return 6 + shift;
-                } else if (bMeta == 6)
-                {
-                    return 5 + shift;
-                } else if (bMeta == 7)
-                {
-                    return 0 + shift;
-                } else if (bMeta == 0)
-                {
-                    return 7 + shift;
                 }
+                else
+                    if (bMeta == 6)
+                    {
+                        return 5 + shift;
+                    }
+                    else
+                        if (bMeta == 7)
+                        {
+                            return 0 + shift;
+                        }
+                        else
+                            if (bMeta == 0)
+                            {
+                                return 7 + shift;
+                            }
             case RotationType.SIGN:
                 return ++bMeta % 16;
             default:
@@ -393,13 +405,13 @@ public final class BlockHelper
         worldObj.playAuxSFXAtEntity(null, 2001, x, y, z, blockId + (meta << 12));
         worldObj.setBlock(x, y, z, 0);
 
-        final List result = worldObj.getEntitiesWithinAABB(EntityItem.class,
-                                                           AxisAlignedBB.getBoundingBox(x - 2,
-                                                                                        y - 2,
-                                                                                        z - 2,
-                                                                                        x + 3,
-                                                                                        y + 3,
-                                                                                        z + 3));
+        final List<?> result = worldObj.getEntitiesWithinAABB(EntityItem.class,
+                                                              AxisAlignedBB.getBoundingBox(x - 2,
+                                                                                           y - 2,
+                                                                                           z - 2,
+                                                                                           x + 3,
+                                                                                           y + 3,
+                                                                                           z + 3));
         for (int i = 0; i < result.size(); i++)
         {
             if (result.get(i) instanceof EntityItem)

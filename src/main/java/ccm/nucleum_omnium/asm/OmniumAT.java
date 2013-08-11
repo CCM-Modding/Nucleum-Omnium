@@ -22,7 +22,8 @@ public class OmniumAT extends AccessTransformer
         if (OmniumAT.instance == null)
         {
             OmniumAT.mapFileList.add(mapFile);
-        } else
+        }
+        else
         {
             OmniumAT.instance.readMapFile(mapFile);
         }

@@ -70,14 +70,16 @@ public class CommandKill extends CommandBase
             final EntityPlayerMP playerDead = CommandHelper.getPlayer(sender, args[0]);
             playerDead.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE);
             playerDead.sendChatToPlayer(ChatMessageComponent.func_111077_e("commands.kill.success"));
-        } else
+        }
+        else
         {
             final EntityPlayerMP playerDead = CommandHelper.getPlayer(sender);
             if (args.length == 0)
             {
                 playerDead.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE);
                 playerDead.sendChatToPlayer(ChatMessageComponent.func_111077_e("commands.kill.success"));
-            } else
+            }
+            else
             {
                 playerDead.sendChatToPlayer(ChatMessageComponent.func_111077_e(getCommandUsage(sender)));
             }

@@ -45,7 +45,8 @@ public class ModsUpdateEvent extends Event
         if (!updatedMods.contains(data))
         {
             updatedMods.add(data);
-        } else
+        }
+        else
         {
             FMLLog.info("ModsUpdateEvent shouldn't have same mods data", data);
         }

@@ -16,14 +16,14 @@ import net.minecraft.world.World;
  * 
  * @author Captain_Shadows
  */
-public class TileHandler extends GuiHandling
+public class TileGuiHandler extends AbstractGuiHandler
 {
-    public TileHandler(final Class<? extends Container> container)
+    public TileGuiHandler(final Class<? extends Container> container)
     {
         super(container);
     }
 
-    public TileHandler(final Class<? extends GuiContainer> gui, final Class<? extends Container> container)
+    public TileGuiHandler(final Class<? extends GuiContainer> gui, final Class<? extends Container> container)
     {
         super(gui, container);
     }

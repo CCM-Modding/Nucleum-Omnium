@@ -70,10 +70,12 @@ public final class BaseTEData
             {
                 return false;
             }
-        } else if (!customName.equals(other.customName))
-        {
-            return false;
         }
+        else
+            if (!customName.equals(other.customName))
+            {
+                return false;
+            }
         if (orientation != other.orientation)
         {
             return false;
@@ -84,20 +86,24 @@ public final class BaseTEData
             {
                 return false;
             }
-        } else if (!owner.equals(other.owner))
-        {
-            return false;
         }
+        else
+            if (!owner.equals(other.owner))
+            {
+                return false;
+            }
         if (tile == null)
         {
             if (other.tile != null)
             {
                 return false;
             }
-        } else if (!tile.equals(other.tile))
-        {
-            return false;
         }
+        else
+            if (!tile.equals(other.tile))
+            {
+                return false;
+            }
         return true;
     }
 

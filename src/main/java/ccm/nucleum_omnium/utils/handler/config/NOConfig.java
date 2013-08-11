@@ -59,7 +59,8 @@ public final class NOConfig implements IConfig
         if (FMLCommonHandler.instance().getSide().isServer())
         {
             initServerConfigs(config);
-        } else
+        }
+        else
         {
             initClientConfigs(config);
         }

@@ -36,13 +36,16 @@ public class DevCapesVersionChecker implements Runnable
             if (version > DevCapesUtil.version)
             {
                 result = OLD;
-            } else if (version == DevCapesUtil.version)
-            {
-                result = CURRENT;
-            } else
-            {
-                result = ERROR;
             }
+            else
+                if (version == DevCapesUtil.version)
+                {
+                    result = CURRENT;
+                }
+                else
+                {
+                    result = ERROR;
+                }
         } catch (final Exception e)
         {
             e.printStackTrace();

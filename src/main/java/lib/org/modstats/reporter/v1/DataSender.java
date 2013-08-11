@@ -214,13 +214,16 @@ class DataSender extends Thread
                         if (fieldName.equals("chlog"))
                         {
                             data.changeLogUrl = value;
-                        } else if (fieldName.equals("link"))
-                        {
-                            data.downloadUrl = value;
-                        } else
-                        {
-                            data.extraFields.put(fieldName, value);
                         }
+                        else
+                            if (fieldName.equals("link"))
+                            {
+                                data.downloadUrl = value;
+                            }
+                            else
+                            {
+                                data.extraFields.put(fieldName, value);
+                            }
                     }
                     event.add(data);
                 }

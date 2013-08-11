@@ -11,7 +11,7 @@ import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import lib.cofh.api.world.WeightedRandomBlock;
+import lib.cofh.world.WeightedRandomBlock;
 
 public class WorldGenMinableCluster extends WorldGenerator
 {

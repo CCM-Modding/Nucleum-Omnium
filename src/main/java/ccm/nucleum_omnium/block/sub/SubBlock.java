@@ -159,7 +159,8 @@ public class SubBlock
                 e.printStackTrace();
             }
             mainBlock.addSubBlock(this, meta);
-        } else
+        }
+        else
         {
             mainBlock = (MainBlock) Block.blocksList[id];
             mainBlock.addSubBlock(this, meta);
@@ -237,7 +238,8 @@ public class SubBlock
         if (idDropped(new Random(), meta) == mainBlock.blockID)
         {
             return meta;
-        } else
+        }
+        else
         {
             return 0;
         }
@@ -344,7 +346,8 @@ public class SubBlock
         if (drop != null)
         {
             return drop.itemID;
-        } else
+        }
+        else
         {
             return mainBlock.blockID;
         }
@@ -375,7 +378,8 @@ public class SubBlock
             {
                 GuiHandler.openGui(FunctionHelper.getTEName(world, x, y, z), player, world, x, y, z);
                 return true;
-            } else
+            }
+            else
             {
                 LogHandler.warning(NucleumOmnium.instance, "TileEntity at %s, %s, %s, was null", x, y, z);
             }
@@ -447,7 +451,8 @@ public class SubBlock
         if ((drop != null) && (dropMax > 1))
         {
             return dropMin + rand.nextInt(dropMax + fortune) + fortune;
-        } else
+        }
+        else
         {
             return 1;
         }

@@ -1,4 +1,4 @@
-package lib.cofh.api.world;
+package lib.cofh.world;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomItem;

@@ -128,13 +128,16 @@ public final class FunctionHelper extends BaseNIC
         if (block.blockMaterial == Material.fire)
         {
             return true;
-        } else if (block.blockMaterial == Material.lava)
-        {
-            return true;
-        } else
-        {
-            return false;
         }
+        else
+            if (block.blockMaterial == Material.lava)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
     }
 
     /**

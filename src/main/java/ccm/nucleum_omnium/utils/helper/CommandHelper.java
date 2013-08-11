@@ -59,10 +59,12 @@ public final class CommandHelper extends BaseNIC
                 {
                     throw new NumberInvalidException("commands.generic.double.tooSmall",
                                                      new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
-                } else if ((d1 < -300000000) && (d1 >= Integer.MIN_VALUE))
-                {
-                    throw new WTFExeption(NucleumOmnium.instance);
                 }
+                else
+                    if ((d1 < -300000000) && (d1 >= Integer.MIN_VALUE))
+                    {
+                        throw new WTFExeption(NucleumOmnium.instance);
+                    }
             }
             if (d1 > max)
             {
@@ -70,10 +72,12 @@ public final class CommandHelper extends BaseNIC
                 {
                     throw new NumberInvalidException("commands.generic.double.tooBig",
                                                      new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
-                } else if ((d1 > 300000000) && (d1 <= Integer.MAX_VALUE))
-                {
-                    throw new WTFExeption(NucleumOmnium.instance);
                 }
+                else
+                    if ((d1 > 300000000) && (d1 <= Integer.MAX_VALUE))
+                    {
+                        throw new WTFExeption(NucleumOmnium.instance);
+                    }
             }
         }
 

@@ -109,14 +109,16 @@ public abstract class BaseContainer extends Container
                     if (slot != OutputSlot.class)
                     {
                         createSlot(inventory, slot, index++, x, y, row, column);
-                    } else
+                    }
+                    else
                     {
                         addSlotToContainer(new OutputSlot(inventory,
                                                           index++,
                                                           x + (column * 18),
                                                           y + (row * 18)));
                     }
-                } else
+                }
+                else
                 {
                     addSlotToContainer(new Slot(inventory, index++, x + (column * 18), y + (row * 18)));
                 }

@@ -1,4 +1,4 @@
-package lib.cofh.util;
+package lib.cofh.world.util;
 
 import java.io.Serializable;
 

@@ -4,6 +4,7 @@
 package ccm.nucleum_omnium.utils.helper;
 
 import ccm.nucleum_omnium.base.BaseNIC;
+import ccm.nucleum_omnium.utils.handler.LogHandler;
 
 public final class JavaHelper extends BaseNIC
 {
@@ -27,11 +28,9 @@ public final class JavaHelper extends BaseNIC
     }
 
     /**
-     * @param input
-     *            String to Title Case
-     * @return the same string but Titled
+     * Title Cases The String
      */
-    public static String tileCase(final String input)
+    public static String titleCase(final String input)
     {
         if (input.contains(" "))
         {
@@ -41,12 +40,36 @@ public final class JavaHelper extends BaseNIC
             {
                 sb.append(s.substring(0, 1).toUpperCase() + s.substring(1));
                 sb.append(" ");
-                System.out.println(sb.toString());
+                LogHandler.debug(sb);
             }
             return sb.toString();
-        } else
+        }
+        else
         {
             return input.substring(0, 1).toUpperCase() + input.substring(1);
+        }
+    }
+
+    /**
+     * camel cases the string
+     */
+    public static String camelCase(final String input)
+    {
+        if (input.contains(" "))
+        {
+            final String[] strings = input.split(" ");
+            final StringBuilder sb = new StringBuilder();
+            for (final String s : strings)
+            {
+                sb.append(s.substring(0, 1).toLowerCase() + s.substring(1));
+                sb.append(" ");
+                LogHandler.debug(sb);
+            }
+            return sb.toString();
+        }
+        else
+        {
+            return input.substring(0, 1).toLowerCase() + input.substring(1);
         }
     }
 }

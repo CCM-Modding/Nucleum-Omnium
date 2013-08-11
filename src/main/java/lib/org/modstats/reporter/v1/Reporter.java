@@ -133,7 +133,8 @@ public class Reporter implements IModstatsReporter
                 return;
             }
             data = new ModVersionData(info.prefix(), info.name(), info.version());
-        } else
+        }
+        else
         {
             data = new ModVersionData(info.prefix(), modData.name(), modData.version());
         }

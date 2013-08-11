@@ -46,7 +46,8 @@ public class TileBase implements ITileHelper
         {
             te = tile.getClass();
             hasTE = true;
-        } else
+        }
+        else
         {
             LogHandler.warning(NucleumOmnium.instance,
                                "TileEntity was NULL!! during setTileEntity @ SBTile \n");

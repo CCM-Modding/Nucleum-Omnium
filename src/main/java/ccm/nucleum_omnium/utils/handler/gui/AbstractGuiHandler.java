@@ -9,22 +9,23 @@ import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
 
 /**
- * GuiHandling
+ * AbstractGuiHandler
  * <p>
  * 
  * @author Captain_Shadows
  */
-public abstract class GuiHandling
+public abstract class AbstractGuiHandler
 {
     protected final Class<? extends Container> container;
     protected Class<? extends GuiContainer>    gui;
 
-    public GuiHandling(final Class<? extends Container> container)
+    public AbstractGuiHandler(final Class<? extends Container> container)
     {
         this.container = container;
     }
 
-    public GuiHandling(final Class<? extends GuiContainer> gui, final Class<? extends Container> container)
+    public AbstractGuiHandler(final Class<? extends GuiContainer> gui,
+                              final Class<? extends Container> container)
     {
         this(container);
         this.gui = gui;

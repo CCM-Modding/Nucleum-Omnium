@@ -14,14 +14,14 @@ import net.minecraft.world.World;
  * 
  * @author Captain_Shadows
  */
-public class ItemHandler extends GuiHandling
+public class ItemGuiHandler extends AbstractGuiHandler
 {
-    public ItemHandler(final Class<? extends Container> container)
+    public ItemGuiHandler(final Class<? extends Container> container)
     {
         super(container);
     }
 
-    public ItemHandler(final Class<? extends GuiContainer> gui, final Class<? extends Container> container)
+    public ItemGuiHandler(final Class<? extends GuiContainer> gui, final Class<? extends Container> container)
     {
         super(gui, container);
     }

@@ -27,7 +27,8 @@ public class DevCapesImageBufferDownload implements IImageBuffer
         if (par1BufferedImage == null)
         {
             return null;
-        } else
+        }
+        else
         {
             imageWidth = (par1BufferedImage.getWidth((ImageObserver) null) <= 64) ? 64
                                                                                  : (par1BufferedImage.getWidth((ImageObserver) null));

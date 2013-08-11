@@ -15,8 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 import ccm.nucleum_omnium.IMod;
 import ccm.nucleum_omnium.utils.helper.ItemHelper;
-
-import lib.cofh.util.StringHelper;
+import ccm.nucleum_omnium.utils.helper.JavaHelper;
 
 public final class TextureHandler
 {
@@ -32,7 +31,7 @@ public final class TextureHandler
      */
     private static String fixGUILocation(final String id)
     {
-        return String.format(GUI, StringHelper.titleCase(id));
+        return String.format(GUI, JavaHelper.titleCase(id));
     }
 
     /**
@@ -42,7 +41,7 @@ public final class TextureHandler
      */
     private static String fixModelLocation(final String id)
     {
-        return String.format(MODEL, StringHelper.titleCase(id));
+        return String.format(MODEL, JavaHelper.titleCase(id));
     }
 
     /**
@@ -52,7 +51,7 @@ public final class TextureHandler
      */
     private static String fixModelTextureLocation(final String id)
     {
-        return String.format(MODEL_TEXTURE, StringHelper.titleCase(id));
+        return String.format(MODEL_TEXTURE, JavaHelper.titleCase(id));
     }
 
     /**

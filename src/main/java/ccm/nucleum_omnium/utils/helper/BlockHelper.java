@@ -92,36 +92,40 @@ public class BlockHelper extends BaseNIC
             if (y < 0)
             {
                 return false;
-            } else if (y >= 256)
-            {
-                return false;
-            } else
-            {
-                final Chunk chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
-                final int x1 = x & 15;
-                final int z1 = z & 15;
-
-                final int blockID = chunk.getBlockID(x1, y, z1);
-
-                if (((flag & 2) != 0) && (!world.isRemote || ((flag & 4) == 0)))
-                {
-                    world.markBlockForUpdate(x, y, z);
-                }
-
-                if (!world.isRemote && ((flag & 1) != 0))
-                {
-                    world.notifyBlockChange(x, y, z, blockID);
-                    final Block block = Block.blocksList[blockID];
-
-                    if ((block != null) && block.hasComparatorInputOverride())
-                    {
-                        world.func_96440_m(x, y, z, blockID);
-                    }
-                }
-
-                return true;
             }
-        } else
+            else
+                if (y >= 256)
+                {
+                    return false;
+                }
+                else
+                {
+                    final Chunk chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
+                    final int x1 = x & 15;
+                    final int z1 = z & 15;
+
+                    final int blockID = chunk.getBlockID(x1, y, z1);
+
+                    if (((flag & 2) != 0) && (!world.isRemote || ((flag & 4) == 0)))
+                    {
+                        world.markBlockForUpdate(x, y, z);
+                    }
+
+                    if (!world.isRemote && ((flag & 1) != 0))
+                    {
+                        world.notifyBlockChange(x, y, z, blockID);
+                        final Block block = Block.blocksList[blockID];
+
+                        if ((block != null) && block.hasComparatorInputOverride())
+                        {
+                            world.func_96440_m(x, y, z, blockID);
+                        }
+                    }
+
+                    return true;
+                }
+        }
+        else
         {
             return false;
         }
