@@ -6,9 +6,7 @@ package ccm.nucleum_omnium.utils.handler.gui;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -55,11 +53,9 @@ public final class GuiHandler implements IGuiHandler
      * @param container
      *            The Container class
      */
-    public static void registerGuiClient(final String guiID,
-                                         final Class<? extends GuiContainer> gui,
-                                         final Class<? extends Container> container)
+    public static void registerGuiClient(final String guiID, final GuiHandling handler)
     {
-        instance().handlerList.put(hash(guiID), new GuiHandling(container, gui));
+        instance().handlerList.put(hash(guiID), handler);
     }
 
     /**
@@ -70,9 +66,9 @@ public final class GuiHandler implements IGuiHandler
      * @param container
      *            The container class
      */
-    public static void registerGuiServer(final String guiID, final Class<? extends Container> container)
+    public static void registerGuiServer(final String guiID, final GuiHandling handler)
     {
-        instance().handlerList.put(hash(guiID), new GuiHandling(container));
+        instance().handlerList.put(hash(guiID), handler);
     }
 
     /**
