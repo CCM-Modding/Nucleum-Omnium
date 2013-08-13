@@ -33,12 +33,12 @@ public class OmniumModContainer implements ModContainer
     {
         md.modId = "OmniumCore";
         md.name = "CCM Core";
-        md.version = "@VERSION@";
-        md.authorList = Arrays.asList("Captain_Shadows");
+        md.version = "${version}";
+        md.authorList = Arrays.asList("captain_shadows");
         md.url = "https://github.com/CCM-Modding/Nucleum-Omnium";
         md.updateUrl = "http://driesgames.game-server.cc:8080/view/CCM/job/Nucleum-Omnium/";
         md.credits = "Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible";
-        md.logoFile = "/mods/nucleum-omnium/textures/logo.png";
+        md.logoFile = "/assets/nucleum-omnium/textures/logo.png";
         md.description = "Core functionality for all CCM Mods";
     }
 

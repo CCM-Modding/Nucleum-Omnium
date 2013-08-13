@@ -1,0 +1,7 @@
+﻿#Commands
+commands.tpx.success=Teleported %s to %s
+commands.tpx.success.coordinates=Teleported %s to %s, %.2f, %.2f, %.2f
+commands.tpx.usage=/tpx [target player] {destination player} OR /tp [target player] {Dimension ID} {x} {y} {z}
+#Errors
+error.invalid.fingerPrint=The version of Nucleum-Ominium that you are currently using has being tampered with!!!!!
+error.invalid.dim=%s tried to teleport into a Dimension that doesn't exist (Dimension ID: %s)

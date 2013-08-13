@@ -9,6 +9,7 @@ import static ccm.nucleum_omnium.utils.lib.Archive.MOD_FIGERPRINT;
 import static ccm.nucleum_omnium.utils.lib.Archive.MOD_ID;
 import static ccm.nucleum_omnium.utils.lib.Archive.MOD_NAME;
 import static ccm.nucleum_omnium.utils.lib.Archive.MOD_PREFIX;
+import static ccm.nucleum_omnium.utils.lib.Archive.MOD_VERSION;
 import static ccm.nucleum_omnium.utils.lib.Locations.CLIENT_PROXY;
 import static ccm.nucleum_omnium.utils.lib.Locations.SERVER_PROXY;
 
@@ -42,6 +43,7 @@ import lib.org.modstats.ModstatInfo;
 
 @Mod(modid = MOD_ID,
      name = MOD_NAME,
+     version = MOD_VERSION,
      certificateFingerprint = MOD_FIGERPRINT,
      useMetadata = true)
 @NetworkMod(clientSideRequired = true,

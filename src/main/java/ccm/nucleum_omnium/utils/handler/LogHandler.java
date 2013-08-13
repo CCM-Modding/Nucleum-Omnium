@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.minecraft.util.StatCollector;
+
 import cpw.mods.fml.common.FMLLog;
 
 import ccm.nucleum_omnium.IMod;
@@ -98,7 +100,12 @@ public final class LogHandler extends BaseNIC
 
     public static void invalidFP(final IMod mod, final Object message)
     {
-        System.err.println("[" + Level.SEVERE + "] " + "[" + mod.getName() + "] " + message);
+        System.err.println("[" + Level.SEVERE
+                           + "] "
+                           + "["
+                           + mod.getName()
+                           + "] "
+                           + StatCollector.translateToLocal(message.toString()));
     }
 
     public static void log(final IMod mod, final Level level, final Object message, final Object... data)

@@ -12,7 +12,9 @@ public final class Archive extends BaseNIC
 
     public static final String MOD_NAME                = "Nucleum Omnium";
 
-    public static final String MOD_FIGERPRINT          = "@FINGERPRINT@";
+    public static final String MOD_VERSION             = "${version}";
+
+    public static final String MOD_FIGERPRINT          = "${fingerprint}";
 
     public static final String MOD_PREFIX              = "nucleum";
 
