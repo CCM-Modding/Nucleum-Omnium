@@ -7,7 +7,6 @@ import ccm.nucleum_omnium.base.BaseNIC;
 
 public final class Properties extends BaseNIC
 {
-
     public static boolean mystLoaded = false;
 
     public static boolean rain       = false;

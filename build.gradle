@@ -1,0 +1,51 @@
+// CCM Modding, Nucleum Omnium 
+
+buildscript {
+    repositories { mavenCentral() }
+    dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.7.3' }
+}
+
+apply plugin: "gmcp"
+
+group = 'ccm.nucleum_omnium'
+version = "1.0.0.${System.env.BUILD_NUMBER}"
+archivesBaseName = 'Nucleum-Omnium'
+
+minecraft { 
+	minecraftVersion = '1.6.2'
+	accessTransformers += 'src/main/resources/ccm_at.cfg'
+}
+
+processResources{
+
+	// Iterate through files to expand version on things not PNGs, or OBJs
+	eachFile { file ->
+		if (!(file.getPath().endsWith('png') || file.getPath().endsWith('obj'))){
+			expand version: version, mcversion: minecraft.minecraftVersion
+		}
+	}
+}
+
+jar { 
+	appendix = 'universal'
+	manifest { 	
+		attributes 'MCVersion' : project.minecraft.minecraftVersion
+		attributes 'FMLCorePlugin' : 'ccm.nucleum_omnium.asm.OmniumLoader'
+		attributes 'Version' : project.version 
+	}
+}
+
+task sourceJar(type: Jar) {
+	from sourceSets.main.allSource
+	appendix = 'src'
+}
+
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//	appendix = 'javadoc'
+//	from 'build/docs/javadoc'
+//}
+
+artifacts {
+	archives sourceJar
+  //archives javadocJar
+}

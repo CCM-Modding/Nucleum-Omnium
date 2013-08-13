@@ -3,13 +3,10 @@
  */
 package ccm.nucleum_omnium;
 
-import static ccm.nucleum_omnium.utils.lib.Archive.INVALID_FINGERPRINT_MSG;
 import static ccm.nucleum_omnium.utils.lib.Archive.MOD_CHANNEL;
-import static ccm.nucleum_omnium.utils.lib.Archive.MOD_FIGERPRINT;
 import static ccm.nucleum_omnium.utils.lib.Archive.MOD_ID;
 import static ccm.nucleum_omnium.utils.lib.Archive.MOD_NAME;
 import static ccm.nucleum_omnium.utils.lib.Archive.MOD_PREFIX;
-import static ccm.nucleum_omnium.utils.lib.Archive.MOD_VERSION;
 import static ccm.nucleum_omnium.utils.lib.Locations.CLIENT_PROXY;
 import static ccm.nucleum_omnium.utils.lib.Locations.SERVER_PROXY;
 
@@ -19,7 +16,6 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -43,8 +39,6 @@ import lib.org.modstats.ModstatInfo;
 
 @Mod(modid = MOD_ID,
      name = MOD_NAME,
-     version = MOD_VERSION,
-     certificateFingerprint = MOD_FIGERPRINT,
      useMetadata = true)
 @NetworkMod(clientSideRequired = true,
             serverSideRequired = false,
@@ -65,16 +59,6 @@ public class NucleumOmnium extends BaseMod implements IMod
      * The current MC Server Instance
      */
     public static MinecraftServer server;
-
-    @EventHandler
-    public void invalidFingerprint(final FMLFingerprintViolationEvent event)
-    {
-        /*
-         * Report (log) to the user that the version of Nucleum Omnium they are using has been
-         * changed/tampered with
-         */
-        LogHandler.invalidFP(this, INVALID_FINGERPRINT_MSG);
-    }
 
     @EventHandler
     public void preInit(final FMLPreInitializationEvent event)

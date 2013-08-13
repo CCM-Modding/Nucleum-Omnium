@@ -6,12 +6,10 @@ package ccm.nucleum_omnium.asm;
 import java.util.Map;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
-import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.Name;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
 @Name("OmniumCore")
-@MCVersion(value = "1.6.2")
 @TransformerExclusions(value = "ccm.nucleum_omnium.asm")
 public class OmniumLoader implements IFMLLoadingPlugin
 {
