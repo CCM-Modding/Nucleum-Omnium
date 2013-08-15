@@ -60,12 +60,12 @@ public abstract class BaseMod implements IMod
      *            A FMLPreInitializationEvent
      * @return A new instance of {@link AdvConfiguration}
      */
-    protected AdvConfiguration initializeConfig(final FMLPreInitializationEvent evt)
+    protected void initializeConfig(final FMLPreInitializationEvent evt)
     {
 
         setConfigFolderBase(evt.getModConfigurationDirectory());
 
-        return getAdvConfigFile();
+        setConfigFile(getAdvConfigFile());
     }
 
     /**
@@ -81,6 +81,12 @@ public abstract class BaseMod implements IMod
     public AdvConfiguration getConfigFile()
     {
         return config;
+    }
+
+    @Override
+    public void setConfigFile(final AdvConfiguration conf)
+    {
+        config = conf;
     }
 
     @Override

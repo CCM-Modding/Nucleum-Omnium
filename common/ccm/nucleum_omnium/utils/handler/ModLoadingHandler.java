@@ -3,8 +3,8 @@
  */
 package ccm.nucleum_omnium.utils.handler;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import ccm.nucleum_omnium.IMod;
 import ccm.nucleum_omnium.base.BaseNIC;
@@ -13,7 +13,7 @@ import ccm.nucleum_omnium.utils.exeptions.DupeExeption;
 public final class ModLoadingHandler extends BaseNIC
 {
 
-    private static Map<IMod, Boolean> modsLoaded = new HashMap<IMod, Boolean>();
+    private static List<IMod> modsLoaded = new ArrayList<IMod>();
 
     /**
      * Checks if the Mod has being loaded before and throws a exception. The default response is false. Other wise you should get a Exception.
@@ -22,14 +22,13 @@ public final class ModLoadingHandler extends BaseNIC
      */
     public static boolean isModLoaded(final IMod mod)
     {
-        if (!modsLoaded.containsKey(mod))
+        if (modsLoaded.contains(mod))
         {
-            modsLoaded.put(mod, false);
+            return true;
         } else
         {
-            throw new DupeExeption(mod);
+            return false;
         }
-        return modsLoaded.get(mod);
     }
 
     /**
@@ -37,10 +36,10 @@ public final class ModLoadingHandler extends BaseNIC
      */
     public static void loadMod(final IMod mod)
     {
-        if (!modsLoaded.get(mod))
+        if (!isModLoaded(mod))
         {
-            modsLoaded.remove(mod);
-            modsLoaded.put(mod, true);
+            LogHandler.initLog(mod);
+
         } else
         {
             throw new DupeExeption(mod);
@@ -52,10 +51,9 @@ public final class ModLoadingHandler extends BaseNIC
      */
     public static void unLoadMod(final IMod mod)
     {
-        if (modsLoaded.containsKey(mod))
+        if (modsLoaded.contains(mod))
         {
             modsLoaded.remove(mod);
-            modsLoaded.put(mod, false);
         }
     }
 }

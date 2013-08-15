@@ -26,7 +26,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import ccm.nucleum_network.PacketHandler;
 import ccm.nucleum_omnium.proxy.CommonProxy;
 import ccm.nucleum_omnium.utils.handler.CommandHandler;
-import ccm.nucleum_omnium.utils.handler.LogHandler;
 import ccm.nucleum_omnium.utils.handler.ModLoadingHandler;
 import ccm.nucleum_omnium.utils.handler.config.ConfigurationHandler;
 import ccm.nucleum_omnium.utils.handler.config.NOConfig;
@@ -57,19 +56,15 @@ public class NucleumOmnium extends BaseMod implements IMod
     @EventHandler
     public void preInit(final FMLPreInitializationEvent event)
     {
-        if (!ModLoadingHandler.isModLoaded(this))
-        {
-            LogHandler.initLog(this);
+        ModLoadingHandler.loadMod(this);
 
-            config = initializeConfig(event);
-            ConfigurationHandler.init(this, NOConfig.class);
-        }
+        initializeConfig(event);
+        ConfigurationHandler.init(this, NOConfig.class);
     }
 
     @EventHandler
     public void init(final FMLInitializationEvent event)
     {
-
         proxy.initCapes();
         proxy.initEventHandling();
 
@@ -82,10 +77,7 @@ public class NucleumOmnium extends BaseMod implements IMod
     @EventHandler
     public void PostInit(final FMLPostInitializationEvent event)
     {
-
         ModHandler.init();
-
-        ModLoadingHandler.loadMod(this);
     }
 
     @EventHandler
