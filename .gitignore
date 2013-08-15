@@ -1,6 +1,4 @@
 *.class
-key.properties
-build.properties
 
 .Trashes
 .classpath
@@ -14,7 +12,9 @@ build.properties
 .project
 .metadata
 bin/
+build/
 tmp/
+minecraft/
 *.tmp
 *.bak
 *.swp
@@ -22,6 +22,8 @@ tmp/
 local.properties
 .classpath
 .settings/
+.gradle/
+.git/
 .loadpath
 
 # External tool builders
@@ -54,3 +56,5 @@ $RECYCLE.BIN/
 .DS_Store
 .DS_Store*
 .Spotlight-V100
+/build
+/modules
