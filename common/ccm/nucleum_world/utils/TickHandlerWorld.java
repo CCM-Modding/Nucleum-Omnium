@@ -20,7 +20,7 @@ import lib.cofh.world.util.ChunkCoord;
 public class TickHandlerWorld implements ITickHandler
 {
 
-    public static TickHandlerWorld               instance    = new TickHandlerWorld();
+    public static TickHandlerWorld instance = new TickHandlerWorld();
 
     public static HashMap<Integer, ArrayList<?>> chunksToGen = new HashMap<Integer, ArrayList<?>>();
 

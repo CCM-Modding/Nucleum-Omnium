@@ -19,11 +19,7 @@ public class UseSlot extends Slot
         super(inventory, index, x, y);
     }
 
-    public UseSlot(final IInventory inventory,
-                   final int index,
-                   final int x,
-                   final int y,
-                   final IFuelRegistry fuel)
+    public UseSlot(final IInventory inventory, final int index, final int x, final int y, final IFuelRegistry fuel)
     {
         super(inventory, index, x, y);
         setFuel(fuel);

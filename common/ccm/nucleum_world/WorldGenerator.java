@@ -42,24 +42,10 @@ public final class WorldGenerator
      * @param enable
      *            is the ore enabled?
      */
-    public static void addEndGen(final IMod mod,
-                                 final ItemStack stack,
-                                 final String oreName,
-                                 final int clusterSize,
-                                 final int numClusters,
-                                 final int minY,
-                                 final int maxY,
-                                 final boolean enable)
+    public static void addEndGen(final IMod mod, final ItemStack stack, final String oreName, final int clusterSize, final int numClusters, final int minY, final int maxY,
+            final boolean enable)
     {
-        WorldGenerator.addWorldGen(mod,
-                                   stack,
-                                   oreName,
-                                   clusterSize,
-                                   numClusters,
-                                   minY,
-                                   maxY,
-                                   enable,
-                                   Block.whiteStone);
+        WorldGenerator.addWorldGen(mod, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.whiteStone);
     }
 
     /**
@@ -80,24 +66,10 @@ public final class WorldGenerator
      * @param enable
      *            is the ore enabled?
      */
-    public static void addNetherGen(final IMod mod,
-                                    final ItemStack stack,
-                                    final String oreName,
-                                    final int clusterSize,
-                                    final int numClusters,
-                                    final int minY,
-                                    final int maxY,
-                                    final boolean enable)
+    public static void addNetherGen(final IMod mod, final ItemStack stack, final String oreName, final int clusterSize, final int numClusters, final int minY, final int maxY,
+            final boolean enable)
     {
-        WorldGenerator.addWorldGen(mod,
-                                   stack,
-                                   oreName,
-                                   clusterSize,
-                                   numClusters,
-                                   minY,
-                                   maxY,
-                                   enable,
-                                   Block.netherrack);
+        WorldGenerator.addWorldGen(mod, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.netherrack);
     }
 
     /**
@@ -118,35 +90,14 @@ public final class WorldGenerator
      * @param enable
      *            is the ore enabled?
      */
-    public static void addOverworldGen(final IMod mod,
-                                       final ItemStack stack,
-                                       final String oreName,
-                                       final int clusterSize,
-                                       final int numClusters,
-                                       final int minY,
-                                       final int maxY,
-                                       final boolean enable)
+    public static void addOverworldGen(final IMod mod, final ItemStack stack, final String oreName, final int clusterSize, final int numClusters, final int minY, final int maxY,
+            final boolean enable)
     {
-        WorldGenerator.addWorldGen(mod,
-                                   stack,
-                                   oreName,
-                                   clusterSize,
-                                   numClusters,
-                                   minY,
-                                   maxY,
-                                   enable,
-                                   Block.stone);
+        WorldGenerator.addWorldGen(mod, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.stone);
     }
 
-    public static void addWorldGen(final IMod mod,
-                                   final ItemStack stack,
-                                   final String oreName,
-                                   int clusterSize,
-                                   int numClusters,
-                                   int minY,
-                                   int maxY,
-                                   final boolean enable,
-                                   final Block blockToReplace)
+    public static void addWorldGen(final IMod mod, final ItemStack stack, final String oreName, int clusterSize, int numClusters, int minY, int maxY, final boolean enable,
+            final Block blockToReplace)
     {
         final String ore = mod.getName() + "." + JavaHelper.titleCase(oreName);
         final AdvConfiguration config = NucleumWorld.instance.getConfigFile();
@@ -169,13 +120,6 @@ public final class WorldGenerator
 
         final List<WeightedRandomBlock> resList = new ArrayList<WeightedRandomBlock>();
         resList.add(new WeightedRandomBlock(stack));
-        WorldGenHandler.addOre(new FeatureOreGenUniform(oreName,
-                                                        new WorldGenMinableCluster(resList,
-                                                                                   clusterSize,
-                                                                                   blockToReplace.blockID),
-                                                        numClusters,
-                                                        minY,
-                                                        maxY,
-                                                        regen));
+        WorldGenHandler.addOre(new FeatureOreGenUniform(oreName, new WorldGenMinableCluster(resList, clusterSize, blockToReplace.blockID), numClusters, minY, maxY, regen));
     }
 }

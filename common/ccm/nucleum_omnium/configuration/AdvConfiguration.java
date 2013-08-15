@@ -25,8 +25,7 @@ public class AdvConfiguration extends Configuration
     }
 
     /**
-     * Creates a configuration file for the file given in parameter. And makes sure that the
-     * categories are case sensitive
+     * Creates a configuration file for the file given in parameter. And makes sure that the categories are case sensitive
      * 
      * @param file
      *            The File to make a Configuration File out of
@@ -75,8 +74,7 @@ public class AdvConfiguration extends Configuration
     }
 
     /**
-     * If a pre-existing Configuration file didn't exist it creates a new one. If there were changes
-     * to the existing Configuration file, It saves them. Otherwise it doesn't do
+     * If a pre-existing Configuration file didn't exist it creates a new one. If there were changes to the existing Configuration file, It saves them. Otherwise it doesn't do
      * anything
      */
     @Override

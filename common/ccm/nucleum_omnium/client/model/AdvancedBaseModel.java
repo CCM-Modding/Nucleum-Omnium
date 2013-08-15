@@ -20,7 +20,7 @@ public class AdvancedBaseModel
 {
 
     protected IModelCustom model;
-    protected String       name;
+    protected String name;
 
     public AdvancedBaseModel(final Enum<?> resourceName)
     {

@@ -15,7 +15,7 @@ import cpw.mods.fml.common.network.Player;
 public class PacketBase
 {
 
-    public int     packetType;
+    public int packetType;
     public boolean isChunkDataPacket;
 
     public PacketBase(final int packetType, final boolean isChunkDataPacket)

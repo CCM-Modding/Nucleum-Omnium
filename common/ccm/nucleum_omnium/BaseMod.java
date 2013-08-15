@@ -11,8 +11,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import ccm.nucleum_omnium.configuration.AdvConfiguration;
 
 /**
- * This class should be the super class of any CCM Mod, as it not only offers a few nice
- * Configuration helpers, but it also keeps from having to implement some of the methods
+ * This class should be the super class of any CCM Mod, as it not only offers a few nice Configuration helpers, but it also keeps from having to implement some of the methods
  * inside of {@link IMod}
  * 
  * @author Captain_Shadows
@@ -23,7 +22,7 @@ public abstract class BaseMod implements IMod
     /**
      * Configuration Folder
      */
-    private File                   config_Folder;
+    private File config_Folder;
 
     /**
      * Current Configuration File

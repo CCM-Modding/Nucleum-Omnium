@@ -35,13 +35,13 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         return WorldGenHandler.instance.registerFeature(Ore);
     }
 
-    private final List<IFeatureGenerator> ores               = new ArrayList<IFeatureGenerator>();
+    private final List<IFeatureGenerator> ores = new ArrayList<IFeatureGenerator>();
 
-    private final HashSet<String>         oreNames           = new HashSet<String>();
+    private final HashSet<String> oreNames = new HashSet<String>();
 
-    private final HashSet<Integer>        dimensionBlacklist = new HashSet<Integer>();
+    private final HashSet<Integer> dimensionBlacklist = new HashSet<Integer>();
 
-    public static WorldGenHandler         instance           = new WorldGenHandler();
+    public static WorldGenHandler instance = new WorldGenHandler();
 
     private void replaceBR(final int chunkX, final int chunkZ, final World world, final Block block)
     {
@@ -53,12 +53,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
                 {
                     if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID)
                     {
-                        world.setBlock((chunkX * 16) + blockX,
-                                       blockY,
-                                       (chunkZ * 16) + blockZ,
-                                       block.blockID,
-                                       0,
-                                       2);
+                        world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, block.blockID, 0, 2);
                     }
                 }
             }
@@ -66,21 +61,12 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     }
 
     @Override
-    public void generate(final Random random,
-                         final int chunkX,
-                         final int chunkZ,
-                         final World world,
-                         final IChunkProvider chunkGenerator,
-                         final IChunkProvider chunkProvider)
+    public void generate(final Random random, final int chunkX, final int chunkZ, final World world, final IChunkProvider chunkGenerator, final IChunkProvider chunkProvider)
     {
         generateWorld(random, chunkX, chunkZ, world, true);
     }
 
-    public void generateWorld(final Random random,
-                              final int chunkX,
-                              final int chunkZ,
-                              final World world,
-                              final boolean newGen)
+    public void generateWorld(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
         replaceBedrock(random, chunkX, chunkZ, world, newGen);
 
@@ -99,7 +85,8 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     }
 
     @ForgeSubscribe
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings(
+    { "unchecked", "rawtypes" })
     public void handleChunkLoadEvent(final Load event)
     {
         final int dim = event.world.provider.dimensionId;
@@ -126,16 +113,12 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         }
         if (bedrock)
         {
-            LogHandler.finest(NucleumWorld.instance,
-                              "Regenerating flat bedrock for the chunk at %s",
-                              cCoord.toString());
+            LogHandler.finest(NucleumWorld.instance, "Regenerating flat bedrock for the chunk at %s", cCoord.toString());
             regen = true;
         }
         if (ores)
         {
-            LogHandler.finest(NucleumWorld.instance,
-                              "Regenerating ores for the chunk at %s",
-                              cCoord.toString());
+            LogHandler.finest(NucleumWorld.instance, "Regenerating ores for the chunk at %s", cCoord.toString());
             regen = true;
         }
         if (regen)
@@ -183,11 +166,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         return true;
     }
 
-    public void replaceBedrock(final Random random,
-                               final int chunkX,
-                               final int chunkZ,
-                               final World world,
-                               final boolean newGen)
+    public void replaceBedrock(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
         if (!Properties.genFlatBedrock || (!newGen && !Properties.retroFlatBedrock))
         {
@@ -207,18 +186,12 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
                     {
                         if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID)
                         {
-                            world.setBlock((chunkX * 16) + blockX,
-                                           blockY,
-                                           (chunkZ * 16) + blockZ,
-                                           Block.netherrack.blockID,
-                                           0,
-                                           2);
+                            world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, Block.netherrack.blockID, 0, 2);
                         }
                     }
                 }
             }
-        }
-        else
+        } else
         {
             replaceBR(chunkX, chunkZ, world, Block.stone);
         }

@@ -29,7 +29,7 @@ public final class GuiHandler implements IGuiHandler
     /**
      * Private single instance
      */
-    private static final GuiHandler                INSTANCE = new GuiHandler();
+    private static final GuiHandler INSTANCE = new GuiHandler();
 
     /*
      * Initialization Related Things
@@ -54,23 +54,13 @@ public final class GuiHandler implements IGuiHandler
      * Overrides
      */
     @Override
-    public Object getClientGuiElement(final int ID,
-                                      final EntityPlayer player,
-                                      final World world,
-                                      final int x,
-                                      final int y,
-                                      final int z)
+    public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z)
     {
         return instance().handlerList.get(ID).getClientGuiElement(player, world, x, y, z);
     }
 
     @Override
-    public Object getServerGuiElement(final int ID,
-                                      final EntityPlayer player,
-                                      final World world,
-                                      final int x,
-                                      final int y,
-                                      final int z)
+    public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z)
     {
         return instance().handlerList.get(ID).getServerGuiElement(player, world, x, y, z);
     }
@@ -110,9 +100,7 @@ public final class GuiHandler implements IGuiHandler
      * @param guiID
      *            The name of the Block that this GUI and Container are associated to
      */
-    public static void registerGuiClient(final String guiID,
-                                         final Class<? extends GuiContainer> gui,
-                                         final Class<? extends Container> container)
+    public static void registerGuiClient(final String guiID, final Class<? extends GuiContainer> gui, final Class<? extends Container> container)
     {
         instance().handlerList.put(hash(guiID), new TileGuiHandler(gui, container));
     }
@@ -142,24 +130,15 @@ public final class GuiHandler implements IGuiHandler
     /**
      * Opens the desired GUI for the Player
      */
-    public static void openGui(final String guiID,
-                               final EntityPlayer player,
-                               final World world,
-                               final int x,
-                               final int y,
-                               final int z)
+    public static void openGui(final String guiID, final EntityPlayer player, final World world, final int x, final int y, final int z)
     {
         final int fix = hash(guiID);
         if (instance().handlerList.containsKey(fix))
         {
             player.openGui(NucleumOmnium.instance, fix, world, x, y, z);
-        }
-        else
+        } else
         {
-            LogHandler.severe(NucleumOmnium.instance,
-                              "Player: %s, tried to open %s but it is not registered!! \n",
-                              player.username,
-                              guiID);
+            LogHandler.severe(NucleumOmnium.instance, "Player: %s, tried to open %s but it is not registered!! \n", player.username, guiID);
         }
     }
 }

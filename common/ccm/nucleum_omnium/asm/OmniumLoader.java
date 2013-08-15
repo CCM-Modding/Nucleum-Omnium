@@ -17,7 +17,8 @@ public class OmniumLoader implements IFMLLoadingPlugin
     @Override
     public String[] getASMTransformerClass()
     {
-        return new String[] { "ccm.nucleum_omnium.asm.OmniumAT" };
+        return new String[]
+        { "ccm.nucleum_omnium.asm.OmniumAT" };
     }
 
     @Override

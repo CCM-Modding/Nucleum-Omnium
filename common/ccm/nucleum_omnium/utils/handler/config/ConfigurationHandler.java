@@ -26,9 +26,7 @@ public final class ConfigurationHandler extends BaseNIC
             init(mod, iConf.newInstance().setConfiguration(mod.getConfigFile()));
         } catch (final Exception e)
         {
-            LogHandler.severe(mod,
-                              "%s has had a problem creating an instance of its configuration",
-                              mod.getName());
+            LogHandler.severe(mod, "%s has had a problem creating an instance of its configuration", mod.getName());
             e.printStackTrace();
         }
     }
@@ -51,9 +49,7 @@ public final class ConfigurationHandler extends BaseNIC
 
         } catch (final Exception e)
         {
-            LogHandler.log(mod,
-                           Level.SEVERE,
-                           mod.getName() + " has had a problem loading its configuration\n");
+            LogHandler.log(mod, Level.SEVERE, mod.getName() + " has had a problem loading its configuration\n");
             e.printStackTrace();
         } finally
         {

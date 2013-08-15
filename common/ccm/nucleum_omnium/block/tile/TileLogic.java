@@ -27,21 +27,18 @@ public class TileLogic extends TileInventory implements ITileHelper
                 if (hasInventory())
                 {
                     return ((LogicTE) te.newInstance()).setLogic(logic).setInventorySize(size);
-                }
-                else
+                } else
                 {
                     return ((LogicTE) te.newInstance()).setLogic(logic);
                 }
             } catch (final Exception e)
             {
-                LogHandler.severe(NucleumOmnium.instance,
-                                  "TileEntity Instance with logic could not be created during createTileEntity \n");
+                LogHandler.severe(NucleumOmnium.instance, "TileEntity Instance with logic could not be created during createTileEntity \n");
                 e.getCause();
                 e.printStackTrace();
                 return null;
             }
-        }
-        else
+        } else
         {
             return super.createTileEntity(world, meta);
         }

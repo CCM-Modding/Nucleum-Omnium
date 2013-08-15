@@ -47,9 +47,7 @@ import ccm.nucleum_omnium.utils.helper.enums.IBlockEnum;
 public class SubBlock
 {
 
-    public static SubBlock createAndSetUp(final Enum<? extends IBlockEnum> blockEnum,
-                                          final int id,
-                                          final String textureLoc)
+    public static SubBlock createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc)
     {
 
         final String texture = TextureHandler.getTextureFromName(blockEnum.name(), textureLoc);
@@ -74,34 +72,30 @@ public class SubBlock
     /*
      * DATA
      */
-    private MainBlock                     mainBlock;
+    private MainBlock mainBlock;
 
-    private final int                     meta;
-    private CreativeTabs                  tab;
+    private final int meta;
+    private CreativeTabs tab;
 
-    private final ITileHelper             tile;
-    private final ITextureHelper          texture;
-    private ItemStack                     drop;
+    private final ITileHelper tile;
+    private final ITextureHelper texture;
+    private ItemStack drop;
 
-    private int                           dropMin;
-    private int                           dropMax;
+    private int dropMin;
+    private int dropMax;
 
-    private float                         hardness;
+    private float hardness;
 
-    private float                         blockResistance;
+    private float blockResistance;
 
-    private boolean                       collisionEffect;
-    private String                        unlocName;
+    private boolean collisionEffect;
+    private String unlocName;
 
-    public final List<IDisplayListener>   displayList   = new ArrayList<IDisplayListener>();
+    public final List<IDisplayListener> displayList = new ArrayList<IDisplayListener>();
 
     public final List<ICollisionListener> collisionList = new ArrayList<ICollisionListener>();
 
-    public SubBlock(final Class<? extends MainBlock> block,
-                    final int id,
-                    final int meta,
-                    final ITextureHelper texture,
-                    final ITileHelper tile)
+    public SubBlock(final Class<? extends MainBlock> block, final int id, final int meta, final ITextureHelper texture, final ITileHelper tile)
     {
         this(block, id, meta, Material.rock, texture, tile);
     }
@@ -113,8 +107,7 @@ public class SubBlock
      * Creates a new SubBlock instance
      * 
      * @param id
-     *            The ID of the MainBlock to use (Put the same for multiple instances if you want
-     *            them to all correspond to the same block ID)
+     *            The ID of the MainBlock to use (Put the same for multiple instances if you want them to all correspond to the same block ID)
      * @param meta
      *            The metadata to use (Typically the enum.ordinal())
      * @param material
@@ -122,12 +115,7 @@ public class SubBlock
      * @param iconName
      *            The full path of the Icon, ex: harvestry:coal
      */
-    public SubBlock(final Class<? extends MainBlock> block,
-                    final int id,
-                    final int meta,
-                    final Material material,
-                    final ITextureHelper texture,
-                    final ITileHelper tile)
+    public SubBlock(final Class<? extends MainBlock> block, final int id, final int meta, final Material material, final ITextureHelper texture, final ITileHelper tile)
     {
         if (Block.blocksList[id] == null)
         {
@@ -159,8 +147,7 @@ public class SubBlock
                 e.printStackTrace();
             }
             mainBlock.addSubBlock(this, meta);
-        }
-        else
+        } else
         {
             mainBlock = (MainBlock) Block.blocksList[id];
             mainBlock.addSubBlock(this, meta);
@@ -176,11 +163,7 @@ public class SubBlock
         this(id, meta, Material.rock, texture, tile);
     }
 
-    public SubBlock(final int id,
-                    final int meta,
-                    final Material material,
-                    final ITextureHelper texture,
-                    final ITileHelper tile)
+    public SubBlock(final int id, final int meta, final Material material, final ITextureHelper texture, final ITileHelper tile)
     {
         this(MainBlock.class, id, meta, material, texture, tile);
     }
@@ -197,8 +180,7 @@ public class SubBlock
 
     /**
      * @param collisionL
-     *            the {@link ICollisionListener} who's collide method will be called for this
-     *            instance
+     *            the {@link ICollisionListener} who's collide method will be called for this instance
      */
     public void addCollisionListener(final ICollisionListener collisionL)
     {
@@ -211,8 +193,7 @@ public class SubBlock
      */
     /**
      * @param displayL
-     *            the {@link IDisplayListener} who's randomDisplayTick method will be called for
-     *            this instance
+     *            the {@link IDisplayListener} who's randomDisplayTick method will be called for this instance
      */
     public void addDisplayListener(final IDisplayListener displayL)
     {
@@ -220,12 +201,7 @@ public class SubBlock
         displayList.add(displayL);
     }
 
-    public void breakBlock(final World world,
-                           final int x,
-                           final int y,
-                           final int z,
-                           final int id,
-                           final int meta)
+    public void breakBlock(final World world, final int x, final int y, final int z, final int id, final int meta)
     {}
 
     public TileEntity createTileEntity(final World world, final int meta)
@@ -238,8 +214,7 @@ public class SubBlock
         if (idDropped(new Random(), meta) == mainBlock.blockID)
         {
             return meta;
-        }
-        else
+        } else
         {
             return 0;
         }
@@ -259,11 +234,7 @@ public class SubBlock
      * Block Redirect Methods
      */
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(final IBlockAccess blockAccess,
-                                final int x,
-                                final int y,
-                                final int z,
-                                final int side)
+    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side)
     {
         return texture.getBlockTexture(blockAccess, x, y, z, side);
     }
@@ -273,10 +244,7 @@ public class SubBlock
         return texture.getIcon(side, meta);
     }
 
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world,
-                                                         final int x,
-                                                         final int y,
-                                                         final int z)
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world, final int x, final int y, final int z)
     {
         if (collisionEffect)
         {
@@ -297,14 +265,8 @@ public class SubBlock
         return meta;
     }
 
-    public float getExplosionResistance(final Entity entity,
-                                        final World world,
-                                        final int x,
-                                        final int y,
-                                        final int z,
-                                        final double explosionX,
-                                        final double explosionY,
-                                        final double explosionZ)
+    public float getExplosionResistance(final Entity entity, final World world, final int x, final int y, final int z, final double explosionX, final double explosionY,
+            final double explosionZ)
     {
         return blockResistance / 5.0F;
     }
@@ -346,22 +308,14 @@ public class SubBlock
         if (drop != null)
         {
             return drop.itemID;
-        }
-        else
+        } else
         {
             return mainBlock.blockID;
         }
     }
 
-    public boolean onBlockActivated(final World world,
-                                    final int x,
-                                    final int y,
-                                    final int z,
-                                    final EntityPlayer player,
-                                    final int wut,
-                                    final float clickX,
-                                    final float clickY,
-                                    final float clockZ)
+    public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int wut, final float clickX, final float clickY,
+            final float clockZ)
     {
         if (world.isRemote)
         {
@@ -378,8 +332,7 @@ public class SubBlock
             {
                 GuiHandler.openGui(FunctionHelper.getTEName(world, x, y, z), player, world, x, y, z);
                 return true;
-            }
-            else
+            } else
             {
                 LogHandler.warning(NucleumOmnium.instance, "TileEntity at %s, %s, %s, was null", x, y, z);
             }
@@ -390,12 +343,7 @@ public class SubBlock
     public void onBlockAdded(final World world, final int x, final int y, final int z)
     {}
 
-    public void onBlockPlacedBy(final World world,
-                                final int x,
-                                final int y,
-                                final int z,
-                                final EntityLivingBase living,
-                                final ItemStack itemStack)
+    public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLivingBase living, final ItemStack itemStack)
     {
         if (hasTileEntity(world.getBlockMetadata(x, y, z)))
         {
@@ -434,11 +382,7 @@ public class SubBlock
         }
     }
 
-    public void onEntityCollidedWithBlock(final World world,
-                                          final int x,
-                                          final int y,
-                                          final int z,
-                                          final Entity par5Entity)
+    public void onEntityCollidedWithBlock(final World world, final int x, final int y, final int z, final Entity par5Entity)
     {
         for (final ICollisionListener cl : collisionList)
         {
@@ -451,15 +395,13 @@ public class SubBlock
         if ((drop != null) && (dropMax > 1))
         {
             return dropMin + rand.nextInt(dropMax + fortune) + fortune;
-        }
-        else
+        } else
         {
             return 1;
         }
     }
 
-    public void
-            randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand)
+    public void randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand)
     {
         for (final IDisplayListener dl : displayList)
         {

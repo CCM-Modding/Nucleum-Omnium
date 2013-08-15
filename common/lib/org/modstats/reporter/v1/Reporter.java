@@ -41,14 +41,14 @@ public class Reporter implements IModstatsReporter
 
     public Map<String, ModVersionData> registeredMods;
 
-    private DataSender                 sender;
+    private DataSender sender;
 
-    public Config                      config;
+    public Config config;
 
     /**
      * At least one auto check was completed successfully
      */
-    private final boolean              checkedAuto;
+    private final boolean checkedAuto;
 
     public Reporter()
     {
@@ -133,8 +133,7 @@ public class Reporter implements IModstatsReporter
                 return;
             }
             data = new ModVersionData(info.prefix(), info.name(), info.version());
-        }
-        else
+        } else
         {
             data = new ModVersionData(info.prefix(), modData.name(), modData.version());
         }

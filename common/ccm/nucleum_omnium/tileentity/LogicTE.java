@@ -26,7 +26,7 @@ public class LogicTE extends InventoryTE
     /**
      * Weather the {@link TileEntity} has logic or not
      */
-    private boolean                     hasLogic = false;
+    private boolean hasLogic = false;
 
     /**
      * The Source of the logic behind the {@link TileEntity}
@@ -36,7 +36,7 @@ public class LogicTE extends InventoryTE
     /**
      * The logic behind the {@link TileEntity}
      */
-    private ITileLogic                  logic    = null;
+    private ITileLogic logic = null;
 
     /**
      * Gets the {@link TileEntity}'s {@link ITileLogic}
@@ -78,8 +78,7 @@ public class LogicTE extends InventoryTE
                 }
                 e.printStackTrace();
             }
-        }
-        else
+        } else
         {
             throw new RuntimeException("\nsrclogic WAS NULL!!!! \n");
         }
@@ -103,8 +102,7 @@ public class LogicTE extends InventoryTE
         if (logic == null)
         {
             loadLogic();
-            LogHandler.severe(NucleumOmnium.instance,
-                              "Somthing went wrong while seting the Tile Entity's Logic!!!\n It was reloaded");
+            LogHandler.severe(NucleumOmnium.instance, "Somthing went wrong while seting the Tile Entity's Logic!!!\n It was reloaded");
         }
         return logic;
     }
@@ -139,14 +137,12 @@ public class LogicTE extends InventoryTE
             if (logic != null)
             {
                 logic.readFromNBT(nbt);
-            }
-            else
+            } else
             {
                 loadLogic();
                 logic.readFromNBT(nbt);
             }
-        }
-        else
+        } else
         {
             LogHandler.severe(NucleumOmnium.instance, "Dosn't have logic!");
             LogHandler.debug(nbt.toString());
@@ -187,12 +183,9 @@ public class LogicTE extends InventoryTE
             {
                 nbt.setString(TileConstants.NBT_TE_SRC_LOGIC, srclogic.getName());
                 LogHandler.debug(srclogic.getName());
-            }
-            else
+            } else
             {
-                LogHandler.severe(NucleumOmnium.instance,
-                                  "%sSource Logic was null when tring to save to NBT!",
-                                  this);
+                LogHandler.severe(NucleumOmnium.instance, "%sSource Logic was null when tring to save to NBT!", this);
             }
             if (logic != null)
             {

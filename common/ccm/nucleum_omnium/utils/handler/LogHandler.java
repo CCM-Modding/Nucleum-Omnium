@@ -21,7 +21,7 @@ public final class LogHandler extends BaseNIC
 
     private static final HashMap<IMod, Logger> modsLogged = new HashMap<IMod, Logger>();
 
-    public final static Debug                  DEBUG      = new Debug();
+    public final static Debug DEBUG = new Debug();
 
     public static void config(final IMod mod, final Object message, final Object... data)
     {
@@ -66,8 +66,7 @@ public final class LogHandler extends BaseNIC
         if (modsLogged.containsKey(mod))
         {
             return modsLogged.get(mod);
-        }
-        else
+        } else
         {
             throw new LNFExeption(mod);
         }
@@ -89,8 +88,7 @@ public final class LogHandler extends BaseNIC
             final Logger tmp = Logger.getLogger(mod.getModId());
             tmp.setParent(FMLLog.getLogger());
             modsLogged.put(mod, tmp);
-        }
-        else
+        } else
         {
             throw new DupeExeption(mod);
         }

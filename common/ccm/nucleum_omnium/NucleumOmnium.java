@@ -37,23 +37,17 @@ import ccm.nucleum_omnium.utils.helper.DataHelper;
 
 import lib.org.modstats.ModstatInfo;
 
-@Mod(modid = MOD_ID,
-     name = MOD_NAME,
-     useMetadata = true)
-@NetworkMod(clientSideRequired = true,
-            serverSideRequired = false,
-            channels = MOD_CHANNEL,
-            packetHandler = PacketHandler.class)
+@Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = MOD_CHANNEL, packetHandler = PacketHandler.class)
 @ModstatInfo(prefix = MOD_PREFIX)
 public class NucleumOmnium extends BaseMod implements IMod
 {
 
     @Instance(MOD_ID)
-    public static NucleumOmnium   instance;
+    public static NucleumOmnium instance;
 
-    @SidedProxy(serverSide = SERVER_PROXY,
-                clientSide = CLIENT_PROXY)
-    public static CommonProxy     proxy;
+    @SidedProxy(serverSide = SERVER_PROXY, clientSide = CLIENT_PROXY)
+    public static CommonProxy proxy;
 
     /**
      * The current MC Server Instance

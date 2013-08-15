@@ -26,9 +26,9 @@ import cpw.mods.fml.common.FMLLog;
 public class Modstats
 {
 
-    private static final Modstats   INSTANCE       = new Modstats();
+    private static final Modstats INSTANCE = new Modstats();
 
-    private static final String     CLASS_TEMPLATE = "lib.org.modstats.reporter.v%d.Reporter";
+    private static final String CLASS_TEMPLATE = "lib.org.modstats.reporter.v%d.Reporter";
 
     private final IModstatsReporter reporter;
 
@@ -64,8 +64,7 @@ public class Modstats
         if (latest == null)
         {
             FMLLog.warning("Modstats reporter class not found.");
-        }
-        else
+        } else
         {
             try
             {

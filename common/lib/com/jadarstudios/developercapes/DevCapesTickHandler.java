@@ -21,14 +21,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class DevCapesTickHandler implements ITickHandler
 {
 
-    private static final Minecraft    mc       = Minecraft.getMinecraft();
+    private static final Minecraft mc = Minecraft.getMinecraft();
     private static final DevCapesUtil instance = DevCapesUtil.getInstance();
 
     // Keep at false when packaging..
-    private final boolean             debug    = false;
+    private final boolean debug = false;
 
-    private int                       counter  = 0;
-    private boolean                   notified = false;
+    private int counter = 0;
+    private boolean notified = false;
 
     @Override
     public void tickStart(final EnumSet<TickType> type, final Object... tickData)
@@ -83,8 +83,7 @@ public class DevCapesTickHandler implements ITickHandler
 
                                 notified = true;
 
-                                FMLClientHandler.instance().getClient().ingameGUI.getChatGUI()
-                                                                                 .printChatMessage("§6[DevCapes]: §fDevCapes is outdated.");
+                                FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage("§6[DevCapes]: §fDevCapes is outdated.");
                             }
                         }
                     }

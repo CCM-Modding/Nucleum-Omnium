@@ -59,9 +59,7 @@ public class BlockHelper extends BaseNIC
      */
     public static SubBlock getSubBlock(final World world, final int x, final int y, final int z)
     {
-        return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x,
-                                                                                                               y,
-                                                                                                               z)];
+        return ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x, y, z)];
     }
 
     /**
@@ -76,56 +74,47 @@ public class BlockHelper extends BaseNIC
      * @param z
      *            The Z coordinate of the block
      * @param flag
-     *            1 will cause a block update. 2 will send the change to clients (you almost always
-     *            want this). 4 prevents the block from being re-rendered, if this is a client
+     *            1 will cause a block update. 2 will send the change to clients (you almost always want this). 4 prevents the block from being re-rendered, if this is a client
      *            world. Flags can be added together
      * @return true if it succeeded false otherwise
      */
-    public static boolean updateAdjacent(final World world,
-                                         final int x,
-                                         final int y,
-                                         final int z,
-                                         final int flag)
+    public static boolean updateAdjacent(final World world, final int x, final int y, final int z, final int flag)
     {
         if ((x >= -30000000) && (z >= -30000000) && (x < 30000000) && (z < 30000000))
         {
             if (y < 0)
             {
                 return false;
+            } else if (y >= 256)
+            {
+                return false;
+            } else
+            {
+                final Chunk chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
+                final int x1 = x & 15;
+                final int z1 = z & 15;
+
+                final int blockID = chunk.getBlockID(x1, y, z1);
+
+                if (((flag & 2) != 0) && (!world.isRemote || ((flag & 4) == 0)))
+                {
+                    world.markBlockForUpdate(x, y, z);
+                }
+
+                if (!world.isRemote && ((flag & 1) != 0))
+                {
+                    world.notifyBlockChange(x, y, z, blockID);
+                    final Block block = Block.blocksList[blockID];
+
+                    if ((block != null) && block.hasComparatorInputOverride())
+                    {
+                        world.func_96440_m(x, y, z, blockID);
+                    }
+                }
+
+                return true;
             }
-            else
-                if (y >= 256)
-                {
-                    return false;
-                }
-                else
-                {
-                    final Chunk chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
-                    final int x1 = x & 15;
-                    final int z1 = z & 15;
-
-                    final int blockID = chunk.getBlockID(x1, y, z1);
-
-                    if (((flag & 2) != 0) && (!world.isRemote || ((flag & 4) == 0)))
-                    {
-                        world.markBlockForUpdate(x, y, z);
-                    }
-
-                    if (!world.isRemote && ((flag & 1) != 0))
-                    {
-                        world.notifyBlockChange(x, y, z, blockID);
-                        final Block block = Block.blocksList[blockID];
-
-                        if ((block != null) && block.hasComparatorInputOverride())
-                        {
-                            world.func_96440_m(x, y, z, blockID);
-                        }
-                    }
-
-                    return true;
-                }
-        }
-        else
+        } else
         {
             return false;
         }

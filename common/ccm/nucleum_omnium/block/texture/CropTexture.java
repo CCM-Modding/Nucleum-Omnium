@@ -15,7 +15,7 @@ public class CropTexture extends BasicTexture
 {
 
     private final Icon[] icons;
-    private final int    stages;
+    private final int stages;
 
     /**
      * @param stages
@@ -29,15 +29,9 @@ public class CropTexture extends BasicTexture
     }
 
     @Override
-    public Icon getBlockTexture(final IBlockAccess world,
-                                final int x,
-                                final int y,
-                                final int z,
-                                final int side)
+    public Icon getBlockTexture(final IBlockAccess world, final int x, final int y, final int z, final int side)
     {
-        final SubCrop block = (SubCrop) ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x,
-                                                                                                                                        y,
-                                                                                                                                        z)];
+        final SubCrop block = (SubCrop) ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x, y, z)];
         return icons[block.getCurrentStage()];
     }
 

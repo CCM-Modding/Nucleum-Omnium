@@ -27,11 +27,7 @@ public class ItemGuiHandler extends AbstractGuiHandler
     }
 
     @Override
-    public Object getServerGuiElement(final EntityPlayer player,
-                                      final World world,
-                                      final int x,
-                                      final int y,
-                                      final int z)
+    public Object getServerGuiElement(final EntityPlayer player, final World world, final int x, final int y, final int z)
     {
         Container tmp = null;
         try
@@ -46,11 +42,7 @@ public class ItemGuiHandler extends AbstractGuiHandler
     }
 
     @Override
-    public Object getClientGuiElement(final EntityPlayer player,
-                                      final World world,
-                                      final int x,
-                                      final int y,
-                                      final int z)
+    public Object getClientGuiElement(final EntityPlayer player, final World world, final int x, final int y, final int z)
     {
         GuiContainer tmp = null;
         try

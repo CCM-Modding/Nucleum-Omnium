@@ -23,11 +23,7 @@ public interface ITextureHelper
     /**
      * @return The block's Icon
      */
-    public Icon getBlockTexture(final IBlockAccess world,
-                                final int x,
-                                final int y,
-                                final int z,
-                                final int side);
+    public Icon getBlockTexture(final IBlockAccess world, final int x, final int y, final int z, final int side);
 
     /**
      * @return The block's Icon

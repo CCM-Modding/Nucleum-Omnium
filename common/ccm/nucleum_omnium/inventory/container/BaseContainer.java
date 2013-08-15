@@ -30,13 +30,7 @@ public abstract class BaseContainer extends Container
         drawPlayerFullInv(player, x, y);
     }
 
-    private void createSlot(final IInventory inventory,
-                            final Class<? extends Slot> slot,
-                            final int index,
-                            final int x,
-                            final int y,
-                            final int row,
-                            final int column)
+    private void createSlot(final IInventory inventory, final Class<? extends Slot> slot, final int index, final int x, final int y, final int row, final int column)
     {
         Constructor<? extends Slot> c = null;
         try
@@ -92,13 +86,7 @@ public abstract class BaseContainer extends Container
      *            The Amount of Columns
      * @return The last index + 1
      */
-    public int drawBoxInventory(final IInventory inventory,
-                                final Class<? extends Slot> slot,
-                                int index,
-                                final int x,
-                                final int y,
-                                final int rowSize,
-                                final int columnSize)
+    public int drawBoxInventory(final IInventory inventory, final Class<? extends Slot> slot, int index, final int x, final int y, final int rowSize, final int columnSize)
     {
         for (int row = 0; row < rowSize; ++row)
         {
@@ -109,16 +97,11 @@ public abstract class BaseContainer extends Container
                     if (slot != OutputSlot.class)
                     {
                         createSlot(inventory, slot, index++, x, y, row, column);
-                    }
-                    else
+                    } else
                     {
-                        addSlotToContainer(new OutputSlot(inventory,
-                                                          index++,
-                                                          x + (column * 18),
-                                                          y + (row * 18)));
+                        addSlotToContainer(new OutputSlot(inventory, index++, x + (column * 18), y + (row * 18)));
                     }
-                }
-                else
+                } else
                 {
                     addSlotToContainer(new Slot(inventory, index++, x + (column * 18), y + (row * 18)));
                 }
@@ -127,22 +110,12 @@ public abstract class BaseContainer extends Container
         return index;
     }
 
-    public int drawBoxInventory(final IInventory inventory,
-                                final int index,
-                                final int x,
-                                final int y,
-                                final int rowSize,
-                                final int columnSize)
+    public int drawBoxInventory(final IInventory inventory, final int index, final int x, final int y, final int rowSize, final int columnSize)
     {
         return drawBoxInventory(inventory, Slot.class, index, x, y, rowSize, columnSize);
     }
 
-    public int drawOutBoxInventory(final IInventory inventory,
-                                   final int index,
-                                   final int x,
-                                   final int y,
-                                   final int rowSize,
-                                   final int columnSize)
+    public int drawOutBoxInventory(final IInventory inventory, final int index, final int x, final int y, final int rowSize, final int columnSize)
     {
         return drawBoxInventory(inventory, OutputSlot.class, index, x, y, rowSize, columnSize);
     }

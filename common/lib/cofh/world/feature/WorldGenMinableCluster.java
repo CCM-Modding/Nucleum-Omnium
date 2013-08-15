@@ -17,8 +17,8 @@ public class WorldGenMinableCluster extends WorldGenerator
 {
 
     private final List<WeightedRandomBlock> cluster;
-    private final int                       genClusterSize;
-    private int                             genBlockID = Block.stone.blockID;
+    private final int genClusterSize;
+    private int genBlockID = Block.stone.blockID;
 
     public WorldGenMinableCluster(final ItemStack ore, final int clusterSize)
     {
@@ -61,9 +61,7 @@ public class WorldGenMinableCluster extends WorldGenerator
         genBlockID = blockID;
     }
 
-    public WorldGenMinableCluster(final List<WeightedRandomBlock> resource,
-                                  final int clusterSize,
-                                  final int blockID)
+    public WorldGenMinableCluster(final List<WeightedRandomBlock> resource, final int clusterSize, final int blockID)
     {
 
         cluster = resource;
@@ -115,12 +113,10 @@ public class WorldGenMinableCluster extends WorldGenerator
                                 final double d14 = ((i3 + 0.5D) - d8) / (d10 / 2.0D);
 
                                 final Block block = Block.blocksList[world.getBlockId(k2, l2, i3)];
-                                if ((((d12 * d12) + (d13 * d13) + (d14 * d14)) < 1.0D) && (block != null)
-                                    && block.isGenMineableReplaceable(world, k2, l2, i3, genBlockID))
+                                if ((((d12 * d12) + (d13 * d13) + (d14 * d14)) < 1.0D) && (block != null) && block.isGenMineableReplaceable(world, k2, l2, i3, genBlockID))
                                 {
 
-                                    final WeightedRandomBlock ore = (WeightedRandomBlock) WeightedRandom.getRandomItem(world.rand,
-                                                                                                                       cluster);
+                                    final WeightedRandomBlock ore = (WeightedRandomBlock) WeightedRandom.getRandomItem(world.rand, cluster);
                                     world.setBlock(k2, l2, i3, ore.blockId, ore.metadata, 1);
                                 }
                             }

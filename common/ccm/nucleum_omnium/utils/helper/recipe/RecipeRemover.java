@@ -19,8 +19,7 @@ public final class RecipeRemover extends BaseNIC
     private static List<ItemStack> items = new ArrayList<ItemStack>();
 
     /*
-     * Iterate over recipe list, and remove a recipe when its output matches one of our
-     * ItemStacks.
+     * Iterate over recipe list, and remove a recipe when its output matches one of our ItemStacks.
      */
     private static void deleteRecipes()
     {
@@ -35,16 +34,12 @@ public final class RecipeRemover extends BaseNIC
                 for (final ItemStack removedItem : items)
                 {
                     /*
-                     * Remove the item if the ID & meta match, OR if the IDs match, and banned meta
-                     * is -1.
+                     * Remove the item if the ID & meta match, OR if the IDs match, and banned meta is -1.
                      */
                     if ((result.itemID == removedItem.itemID) && ((removedItem.getItemDamage() == -1) || (result.getItemDamage() == removedItem.getItemDamage())))
                     {
                         minecraftRecipes.remove(i);
-                        LogHandler.debug("Recipes removed for " + removedItem.getDisplayName()
-                                         + " @"
-                                         + removedItem.itemID
-                                         + "\n");
+                        LogHandler.debug("Recipes removed for " + removedItem.getDisplayName() + " @" + removedItem.itemID + "\n");
                         --i;
                     }
                 }

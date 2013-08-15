@@ -30,11 +30,9 @@ public class CommandTPX extends CommandBase
         if ((args.length != 1) && (args.length != 2))
         {
             return null;
-        }
-        else
+        } else
         {
-            return CommandBase.getListOfStringsMatchingLastWord(args, MinecraftServer.getServer()
-                                                                                     .getAllUsernames());
+            return CommandBase.getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames());
         }
     }
 
@@ -75,104 +73,66 @@ public class CommandTPX extends CommandBase
         {
             if (JavaHelper.isNumeric(args[args.length - 1]))
             {
-                final World dimension = FunctionHelper.getDimensions()
-                                                      .get(Integer.parseInt(args[args.length - 1]));
+                final World dimension = FunctionHelper.getDimensions().get(Integer.parseInt(args[args.length - 1]));
                 if (dimension != null)
                 {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();
-                    CommandHelper.teleportPlayer(sender,
-                                                 CommandHelper.getPlayer(sender),
-                                                 dimension.provider.dimensionId,
-                                                 spawn.posX,
-                                                 spawn.posY,
-                                                 spawn.posZ);
-                }
-                else
+                    CommandHelper.teleportPlayer(sender, CommandHelper.getPlayer(sender), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
+                } else
                 {
-                    CommandBase.notifyAdmins(sender,
-                                             "error.invalid.dim",
-                                             new Object[] { sender.getCommandSenderName(),
-                                                     args[args.length - 1] });
+                    CommandBase.notifyAdmins(sender, "error.invalid.dim", new Object[]
+                    { sender.getCommandSenderName(), args[args.length - 1] });
                 }
-            }
-            else
+            } else
             {
-                CommandHelper.teleportPlayer(sender,
-                                             CommandHelper.getPlayer(sender),
-                                             CommandHelper.getPlayer(sender, args[args.length - 1]));
+                CommandHelper.teleportPlayer(sender, CommandHelper.getPlayer(sender), CommandHelper.getPlayer(sender, args[args.length - 1]));
             }
+        } else if (args.length == 2)
+        {
+            if (JavaHelper.isNumeric(args[args.length - 1]))
+            {
+                final World dimension = FunctionHelper.getDimensions().get(Integer.parseInt(args[args.length - 1]));
+                if (dimension != null)
+                {
+                    final ChunkCoordinates spawn = dimension.getSpawnPoint();
+                    CommandHelper
+                            .teleportPlayer(sender, CommandHelper.getPlayer(sender, args[args.length - 2]), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
+                } else
+                {
+                    CommandBase.notifyAdmins(sender, "error.invalid.dim", new Object[]
+                    { sender.getCommandSenderName(), args[args.length - 1] });
+                }
+            } else
+            {
+                CommandHelper.teleportPlayer(sender, CommandHelper.getPlayer(sender, args[args.length - 2]), CommandHelper.getPlayer(sender, args[args.length - 1]));
+            }
+        } else if (args.length == 4)
+        {
+            final EntityPlayerMP player = CommandHelper.getPlayer(sender);
+            if (player.worldObj != null)
+            {
+                int i = args.length - 4;
+                final int dimension = CommandBase.parseInt(sender, args[i++]);
+                final double x = CommandHelper.checkPosition(sender, player.posX, args[i++]);
+                final double y = CommandHelper.checkPositionWithBounds(sender, player.posY, args[i++], 0, 0);
+                final double z = CommandHelper.checkPosition(sender, player.posZ, args[i++]);
+                CommandHelper.teleportPlayer(sender, player, dimension, x, y, z);
+            }
+        } else if (args.length == 5)
+        {
+            final EntityPlayerMP player = CommandHelper.getPlayer(sender, args[args.length - 5]);
+            if (player.worldObj != null)
+            {
+                int i = args.length - 4;
+                final int dimension = CommandBase.parseInt(sender, args[i++]);
+                final double x = CommandHelper.checkPosition(sender, player.posX, args[i++]);
+                final double y = CommandHelper.checkPositionWithBounds(sender, player.posY, args[i++], 0, 0);
+                final double z = CommandHelper.checkPosition(sender, player.posZ, args[i++]);
+                CommandHelper.teleportPlayer(sender, player, dimension, x, y, z);
+            }
+        } else
+        {
+            throw new WrongUsageException("commands.tpx.usage", new Object[0]);
         }
-        else
-            if (args.length == 2)
-            {
-                if (JavaHelper.isNumeric(args[args.length - 1]))
-                {
-                    final World dimension = FunctionHelper.getDimensions()
-                                                          .get(Integer.parseInt(args[args.length - 1]));
-                    if (dimension != null)
-                    {
-                        final ChunkCoordinates spawn = dimension.getSpawnPoint();
-                        CommandHelper.teleportPlayer(sender,
-                                                     CommandHelper.getPlayer(sender, args[args.length - 2]),
-                                                     dimension.provider.dimensionId,
-                                                     spawn.posX,
-                                                     spawn.posY,
-                                                     spawn.posZ);
-                    }
-                    else
-                    {
-                        CommandBase.notifyAdmins(sender,
-                                                 "error.invalid.dim",
-                                                 new Object[] { sender.getCommandSenderName(),
-                                                         args[args.length - 1] });
-                    }
-                }
-                else
-                {
-                    CommandHelper.teleportPlayer(sender,
-                                                 CommandHelper.getPlayer(sender, args[args.length - 2]),
-                                                 CommandHelper.getPlayer(sender, args[args.length - 1]));
-                }
-            }
-            else
-                if (args.length == 4)
-                {
-                    final EntityPlayerMP player = CommandHelper.getPlayer(sender);
-                    if (player.worldObj != null)
-                    {
-                        int i = args.length - 4;
-                        final int dimension = CommandBase.parseInt(sender, args[i++]);
-                        final double x = CommandHelper.checkPosition(sender, player.posX, args[i++]);
-                        final double y = CommandHelper.checkPositionWithBounds(sender,
-                                                                               player.posY,
-                                                                               args[i++],
-                                                                               0,
-                                                                               0);
-                        final double z = CommandHelper.checkPosition(sender, player.posZ, args[i++]);
-                        CommandHelper.teleportPlayer(sender, player, dimension, x, y, z);
-                    }
-                }
-                else
-                    if (args.length == 5)
-                    {
-                        final EntityPlayerMP player = CommandHelper.getPlayer(sender, args[args.length - 5]);
-                        if (player.worldObj != null)
-                        {
-                            int i = args.length - 4;
-                            final int dimension = CommandBase.parseInt(sender, args[i++]);
-                            final double x = CommandHelper.checkPosition(sender, player.posX, args[i++]);
-                            final double y = CommandHelper.checkPositionWithBounds(sender,
-                                                                                   player.posY,
-                                                                                   args[i++],
-                                                                                   0,
-                                                                                   0);
-                            final double z = CommandHelper.checkPosition(sender, player.posZ, args[i++]);
-                            CommandHelper.teleportPlayer(sender, player, dimension, x, y, z);
-                        }
-                    }
-                    else
-                    {
-                        throw new WrongUsageException("commands.tpx.usage", new Object[0]);
-                    }
     }
 }

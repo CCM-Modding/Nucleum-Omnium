@@ -24,16 +24,14 @@ import ccm.nucleum_world.generator.WorldGenHandler;
 import ccm.nucleum_world.utils.TickHandlerWorld;
 import ccm.nucleum_world.utils.lib.Properties;
 
-@Mod(modid = MOD_ID,
-     name = MOD_NAME,
-     useMetadata = true)
+@Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true)
 public class NucleumWorld extends BaseMod implements IMod
 {
 
     @Instance(MOD_ID)
     public static NucleumWorld instance;
 
-    private AdvConfiguration   config;
+    private AdvConfiguration config;
 
     @Override
     public AdvConfiguration getConfigFile()

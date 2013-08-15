@@ -42,9 +42,7 @@ public final class FunctionHelper extends BaseNIC
         {
             if (!(tileEntity instanceof IInventory))
             {
-                LogHandler.warning(NucleumOmnium.instance,
-                                   "Tile %s was not an instance of IInventory, and called dropInventory!!",
-                                   tileEntity);
+                LogHandler.warning(NucleumOmnium.instance, "Tile %s was not an instance of IInventory, and called dropInventory!!", tileEntity);
                 return;
             }
             final IInventory inventory = (IInventory) tileEntity;
@@ -56,17 +54,10 @@ public final class FunctionHelper extends BaseNIC
                     final float dX = (rand.nextFloat() * 0.8F) + 0.1F;
                     final float dY = (rand.nextFloat() * 0.8F) + 0.1F;
                     final float dZ = (rand.nextFloat() * 0.8F) + 0.1F;
-                    final EntityItem entityItem = new EntityItem(world,
-                                                                 x + dX,
-                                                                 y + dY,
-                                                                 z + dZ,
-                                                                 new ItemStack(itemStack.itemID,
-                                                                               itemStack.stackSize,
-                                                                               itemStack.getItemDamage()));
+                    final EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.itemID, itemStack.stackSize, itemStack.getItemDamage()));
                     if (itemStack.hasTagCompound())
                     {
-                        entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound()
-                                                                                            .copy());
+                        entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
                     }
                     final float factor = 0.05F;
                     entityItem.motionX = rand.nextGaussian() * factor;
@@ -103,9 +94,7 @@ public final class FunctionHelper extends BaseNIC
      */
     public static String getTEName(final World world, final int x, final int y, final int z)
     {
-        return "container." + ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x,
-                                                                                                                              y,
-                                                                                                                              z)].getUnlocalizedName();
+        return "container." + ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x, y, z)].getUnlocalizedName();
     }
 
     /**
@@ -121,23 +110,19 @@ public final class FunctionHelper extends BaseNIC
      *            The Z coordinate to check in
      * @return true if there is Fire or Lava below. Otherwise false
      */
-    public static boolean
-            isFireBelow(final World world, final int xCoord, final int yCoord, final int zCoord)
+    public static boolean isFireBelow(final World world, final int xCoord, final int yCoord, final int zCoord)
     {
         final Block block = Block.blocksList[world.getBlockId(xCoord, yCoord, zCoord)];
         if (block.blockMaterial == Material.fire)
         {
             return true;
+        } else if (block.blockMaterial == Material.lava)
+        {
+            return true;
+        } else
+        {
+            return false;
         }
-        else
-            if (block.blockMaterial == Material.lava)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
     }
 
     /**
@@ -153,11 +138,9 @@ public final class FunctionHelper extends BaseNIC
      *            The Z coordinate to check in
      * @return true if the sun is visible. Otherwise false
      */
-    public static boolean
-            isSunVisible(final World world, final int xCoord, final int yCoord, final int zCoord)
+    public static boolean isSunVisible(final World world, final int xCoord, final int yCoord, final int zCoord)
     {
-        return world.isDaytime() && !world.provider.hasNoSky
-               && world.canBlockSeeTheSky(xCoord, yCoord, zCoord)
-               && ((world.getWorldChunkManager().getBiomeGenAt(xCoord, yCoord) instanceof BiomeGenDesert) || (!world.isRaining() && !world.isThundering()));
+        return world.isDaytime() && !world.provider.hasNoSky && world.canBlockSeeTheSky(xCoord, yCoord, zCoord)
+                && ((world.getWorldChunkManager().getBiomeGenAt(xCoord, yCoord) instanceof BiomeGenDesert) || (!world.isRaining() && !world.isThundering()));
     }
 }

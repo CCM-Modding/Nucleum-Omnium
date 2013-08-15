@@ -16,7 +16,7 @@ public abstract class ProgressContainer extends BaseContainer
 {
 
     protected final IGUITileLogic guiLogic;
-    protected int                 lastCookTime;
+    protected int lastCookTime;
 
     public ProgressContainer(final IInventory inventory, final IGUITileLogic guiLogic)
     {
@@ -24,11 +24,7 @@ public abstract class ProgressContainer extends BaseContainer
         this.guiLogic = guiLogic;
     }
 
-    public ProgressContainer(final IInventory inventory,
-                             final IGUITileLogic guiLogic,
-                             final InventoryPlayer player,
-                             final int x,
-                             final int y)
+    public ProgressContainer(final IInventory inventory, final IGUITileLogic guiLogic, final InventoryPlayer player, final int x, final int y)
     {
         this(inventory, guiLogic);
         drawPlayerFullInv(player, x, y);
@@ -59,8 +55,7 @@ public abstract class ProgressContainer extends BaseContainer
                 }
             }
             lastCookTime = guiLogic.getTimeLeft();
-        }
-        else
+        } else
         {
             lastCookTime = 0;
         }

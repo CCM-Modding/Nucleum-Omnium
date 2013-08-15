@@ -20,20 +20,14 @@ public class ActiveTexture extends MultyTexture implements ITextureHelper
 {
     BlockFacings active;
 
-    public ActiveTexture(final String iconName,
-                         final BlockFacings activeSide,
-                         final List<BlockFacings> goodSides)
+    public ActiveTexture(final String iconName, final BlockFacings activeSide, final List<BlockFacings> goodSides)
     {
         super(iconName, goodSides);
         active = activeSide;
     }
 
     @Override
-    public Icon getBlockTexture(final IBlockAccess blockAccess,
-                                final int x,
-                                final int y,
-                                final int z,
-                                final int side)
+    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side)
     {
 
         final ActiveTE te = (ActiveTE) blockAccess.getBlockTileEntity(x, y, z);
@@ -45,8 +39,7 @@ public class ActiveTexture extends MultyTexture implements ITextureHelper
                 if (te.getState())
                 {
                     return icons[7];
-                }
-                else
+                } else
                 {
                     return icons[active.ordinal()];
                 }
@@ -64,8 +57,7 @@ public class ActiveTexture extends MultyTexture implements ITextureHelper
             {
                 icons[direction.ordinal()] = register.registerIcon(iconName + direction.name());
                 icons[7] = register.registerIcon(iconName + direction.name() + "On");
-            }
-            else
+            } else
             {
                 icons[direction.ordinal()] = register.registerIcon(iconName + direction.name());
             }

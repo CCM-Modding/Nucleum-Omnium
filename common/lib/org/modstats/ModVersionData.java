@@ -27,15 +27,15 @@ import java.util.Map;
 public class ModVersionData
 {
 
-    public String              prefix;
+    public String prefix;
 
-    public String              name;
+    public String name;
 
-    public String              version;
+    public String version;
 
-    public String              downloadUrl;
+    public String downloadUrl;
 
-    public String              changeLogUrl;
+    public String changeLogUrl;
 
     public Map<String, String> extraFields;
 
@@ -87,60 +87,50 @@ public class ModVersionData
             {
                 return false;
             }
+        } else if (!changeLogUrl.equals(other.changeLogUrl))
+        {
+            return false;
         }
-        else
-            if (!changeLogUrl.equals(other.changeLogUrl))
-            {
-                return false;
-            }
         if (downloadUrl == null)
         {
             if (other.downloadUrl != null)
             {
                 return false;
             }
+        } else if (!downloadUrl.equals(other.downloadUrl))
+        {
+            return false;
         }
-        else
-            if (!downloadUrl.equals(other.downloadUrl))
-            {
-                return false;
-            }
         if (name == null)
         {
             if (other.name != null)
             {
                 return false;
             }
+        } else if (!name.equals(other.name))
+        {
+            return false;
         }
-        else
-            if (!name.equals(other.name))
-            {
-                return false;
-            }
         if (prefix == null)
         {
             if (other.prefix != null)
             {
                 return false;
             }
+        } else if (!prefix.equals(other.prefix))
+        {
+            return false;
         }
-        else
-            if (!prefix.equals(other.prefix))
-            {
-                return false;
-            }
         if (version == null)
         {
             if (other.version != null)
             {
                 return false;
             }
+        } else if (!version.equals(other.version))
+        {
+            return false;
         }
-        else
-            if (!version.equals(other.version))
-            {
-                return false;
-            }
         return true;
     }
 

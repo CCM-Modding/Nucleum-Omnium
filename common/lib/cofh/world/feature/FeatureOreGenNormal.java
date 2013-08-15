@@ -9,16 +9,11 @@ public class FeatureOreGenNormal extends FeatureBase
 {
 
     final WorldGenerator worldGen;
-    final int            count;
-    final int            meanY;
-    final int            maxVar;
+    final int count;
+    final int meanY;
+    final int maxVar;
 
-    public FeatureOreGenNormal(final String name,
-                               final WorldGenerator worldGen,
-                               final int count,
-                               final int meanY,
-                               final int maxVar,
-                               final boolean regen)
+    public FeatureOreGenNormal(final String name, final WorldGenerator worldGen, final int count, final int meanY, final int maxVar, final boolean regen)
     {
 
         super(name, regen);
@@ -30,11 +25,7 @@ public class FeatureOreGenNormal extends FeatureBase
 
     /* IFeatureGenerator */
     @Override
-    public boolean generateFeature(final Random random,
-                                   final int chunkX,
-                                   final int chunkZ,
-                                   final World world,
-                                   final boolean newGen)
+    public boolean generateFeature(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
 
         if (!newGen && !regen)

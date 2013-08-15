@@ -30,7 +30,6 @@ public abstract class IModHandler
     @Override
     public String toString()
     {
-        return String.format("A CCM Mod has failed to load it's compatibility with %s, pleace inform the CCM Team",
-                             getModName());
+        return String.format("A CCM Mod has failed to load it's compatibility with %s, pleace inform the CCM Team", getModName());
     }
 }

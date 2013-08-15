@@ -21,14 +21,14 @@ public final class BaseTEData
     /**
      * The owner of the {@link TileEntity}
      */
-    private String         owner;
+    private String owner;
 
     /**
      * The custom name of the {@link TileEntity}
      */
-    private String         customName;
+    private String customName;
 
-    private final BaseTE   tile;
+    private final BaseTE tile;
 
     public BaseTEData(final BaseTE tile)
     {
@@ -70,12 +70,10 @@ public final class BaseTEData
             {
                 return false;
             }
+        } else if (!customName.equals(other.customName))
+        {
+            return false;
         }
-        else
-            if (!customName.equals(other.customName))
-            {
-                return false;
-            }
         if (orientation != other.orientation)
         {
             return false;
@@ -86,24 +84,20 @@ public final class BaseTEData
             {
                 return false;
             }
+        } else if (!owner.equals(other.owner))
+        {
+            return false;
         }
-        else
-            if (!owner.equals(other.owner))
-            {
-                return false;
-            }
         if (tile == null)
         {
             if (other.tile != null)
             {
                 return false;
             }
+        } else if (!tile.equals(other.tile))
+        {
+            return false;
         }
-        else
-            if (!tile.equals(other.tile))
-            {
-                return false;
-            }
         return true;
     }
 

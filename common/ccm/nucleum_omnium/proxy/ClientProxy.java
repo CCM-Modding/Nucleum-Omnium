@@ -21,8 +21,7 @@ public class ClientProxy extends CommonProxy
         {
             // Link for the file that makes the capes work (High Def Version)
             DevCapesUtil.getInstance().addFileUrl(Locations.HD_CAPES);
-        }
-        else
+        } else
         {
             // Link for the file that makes the capes work (Normal Version)
             DevCapesUtil.getInstance().addFileUrl(Locations.CAPES);

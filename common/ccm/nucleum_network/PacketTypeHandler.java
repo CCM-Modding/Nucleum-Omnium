@@ -17,9 +17,9 @@ import ccm.nucleum_omnium.utils.lib.Archive;
 public final class PacketTypeHandler
 {
 
-    private static Map<Integer, Class<? extends PacketBase>> types    = new HashMap<Integer, Class<? extends PacketBase>>();
+    private static Map<Integer, Class<? extends PacketBase>> types = new HashMap<Integer, Class<? extends PacketBase>>();
 
-    private static final PacketTypeHandler                   INSTANCE = new PacketTypeHandler();
+    private static final PacketTypeHandler INSTANCE = new PacketTypeHandler();
 
     public static PacketBase buildPacket(final byte[] data)
     {

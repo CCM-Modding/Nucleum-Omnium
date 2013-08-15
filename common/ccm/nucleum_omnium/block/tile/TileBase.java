@@ -13,9 +13,9 @@ import ccm.nucleum_omnium.utils.handler.LogHandler;
 public class TileBase implements ITileHelper
 {
 
-    protected Class<? extends TileEntity> te    = null;
+    protected Class<? extends TileEntity> te = null;
 
-    protected boolean                     hasTE = false;
+    protected boolean hasTE = false;
 
     @Override
     public TileEntity createTileEntity(final World world, final int meta)
@@ -25,8 +25,7 @@ public class TileBase implements ITileHelper
             return te.newInstance();
         } catch (final Exception e)
         {
-            LogHandler.severe(NucleumOmnium.instance,
-                              "TileEntity Instance could not be created during createTileEntity \n");
+            LogHandler.severe(NucleumOmnium.instance, "TileEntity Instance could not be created during createTileEntity \n");
             e.getCause();
             e.printStackTrace();
             return null;
@@ -46,11 +45,9 @@ public class TileBase implements ITileHelper
         {
             te = tile.getClass();
             hasTE = true;
-        }
-        else
+        } else
         {
-            LogHandler.warning(NucleumOmnium.instance,
-                               "TileEntity was NULL!! during setTileEntity @ SBTile \n");
+            LogHandler.warning(NucleumOmnium.instance, "TileEntity was NULL!! during setTileEntity @ SBTile \n");
         }
     }
 }

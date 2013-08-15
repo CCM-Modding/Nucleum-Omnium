@@ -29,19 +29,13 @@ public abstract class ItemRenderer implements IItemRenderer
         return true;
     }
 
-    public abstract void render(final float x,
-                                final float y,
-                                final float z,
-                                final float scale,
-                                final float angle);
+    public abstract void render(final float x, final float y, final float z, final float scale, final float angle);
 
     @Override
     public abstract void renderItem(final ItemRenderType type, final ItemStack item, final Object... data);
 
     @Override
-    public boolean shouldUseRenderHelper(final ItemRenderType type,
-                                         final ItemStack item,
-                                         final ItemRendererHelper helper)
+    public boolean shouldUseRenderHelper(final ItemRenderType type, final ItemStack item, final ItemRendererHelper helper)
     {
         return true;
     }

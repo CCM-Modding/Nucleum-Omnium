@@ -15,22 +15,12 @@ import ccm.nucleum_omnium.block.tile.NoTile;
 public class SubModelled extends SubBlock
 {
 
-    public SubModelled(final Class<? extends MainBlock> block,
-                       final int id,
-                       final int meta,
-                       final Material material,
-                       final ITextureHelper texture,
-                       final ITileHelper tile)
+    public SubModelled(final Class<? extends MainBlock> block, final int id, final int meta, final Material material, final ITextureHelper texture, final ITileHelper tile)
     {
         super(block, id, meta, material, texture, tile);
     }
 
-    public SubModelled(final Class<? extends MainBlock> block,
-                       final int id,
-                       final int meta,
-                       final String iconName,
-                       final ITextureHelper texture,
-                       final ITileHelper tile)
+    public SubModelled(final Class<? extends MainBlock> block, final int id, final int meta, final String iconName, final ITextureHelper texture, final ITileHelper tile)
     {
         this(block, id, meta, Material.rock, texture, tile);
     }
@@ -55,11 +45,7 @@ public class SubModelled extends SubBlock
         this(id, meta, material, new NoTile());
     }
 
-    public SubModelled(final int id,
-                       final int meta,
-                       final Material material,
-                       final ITextureHelper texture,
-                       final ITileHelper tile)
+    public SubModelled(final int id, final int meta, final Material material, final ITextureHelper texture, final ITileHelper tile)
     {
         this(ModelBlock.class, id, meta, material, texture, tile);
     }

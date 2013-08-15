@@ -16,11 +16,11 @@ public class DevCapesVersionChecker implements Runnable
 
     private static final String versionFileURL = "https://dl.dropboxusercontent.com/u/22865035/version.json"; // "http://raw.github.com/Jadar/DeveloperCapesAPI/master/version";
 
-    private byte                result         = 0;
+    private byte result = 0;
 
-    private static final byte   ERROR          = 0;
-    private static final byte   OLD            = 1;
-    private static final byte   CURRENT        = 2;
+    private static final byte ERROR = 0;
+    private static final byte OLD = 1;
+    private static final byte CURRENT = 2;
 
     @Override
     public void run()
@@ -36,16 +36,13 @@ public class DevCapesVersionChecker implements Runnable
             if (version > DevCapesUtil.version)
             {
                 result = OLD;
+            } else if (version == DevCapesUtil.version)
+            {
+                result = CURRENT;
+            } else
+            {
+                result = ERROR;
             }
-            else
-                if (version == DevCapesUtil.version)
-                {
-                    result = CURRENT;
-                }
-                else
-                {
-                    result = ERROR;
-                }
         } catch (final Exception e)
         {
             e.printStackTrace();

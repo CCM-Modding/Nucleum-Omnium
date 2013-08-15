@@ -34,13 +34,13 @@ public class Config
 
     private static final String CONFIG_NAME = "modstats.cfg";
 
-    public boolean              allowUpdates;
+    public boolean allowUpdates;
 
-    public boolean              betaNotifications;
+    public boolean betaNotifications;
 
-    public boolean              forCurrentMinecraftVersion;
+    public boolean forCurrentMinecraftVersion;
 
-    public boolean              logOnly;
+    public boolean logOnly;
 
     public Config()
     {
@@ -66,10 +66,7 @@ public class Config
 
         configuration.save();
 
-        FMLLog.info("[Modstats] Config loaded. allowUpdates: %b,  betaNotification: %b, strict: %b",
-                    allowUpdates,
-                    betaNotifications,
-                    forCurrentMinecraftVersion);
+        FMLLog.info("[Modstats] Config loaded. allowUpdates: %b,  betaNotification: %b, strict: %b", allowUpdates, betaNotifications, forCurrentMinecraftVersion);
     }
 
 }

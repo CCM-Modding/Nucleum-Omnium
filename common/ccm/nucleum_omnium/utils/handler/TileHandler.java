@@ -23,7 +23,7 @@ public final class TileHandler
     /**
      * Private single instance
      */
-    private static final TileHandler       INSTANCE = new TileHandler();
+    private static final TileHandler INSTANCE = new TileHandler();
 
     /**
      * @param name
@@ -57,8 +57,7 @@ public final class TileHandler
         if (INSTANCE.tileList.containsKey(id))
         {
             return INSTANCE.tileList.get(hash(tileID).hashCode());
-        }
-        else
+        } else
         {
             throw new RuntimeException(String.format("Tring to retrive: %s but it didn't exist", tileID));
         }

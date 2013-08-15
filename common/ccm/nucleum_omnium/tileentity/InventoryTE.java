@@ -31,7 +31,7 @@ public class InventoryTE extends BaseTE implements IInventory
     /**
      * Size of the Inventory
      */
-    private int           size = 0;
+    private int size = 0;
 
     @Override
     public void closeChest()
@@ -62,10 +62,7 @@ public class InventoryTE extends BaseTE implements IInventory
     @Override
     public String getInvName()
     {
-        return getData().hasCustomName() ? getData().getCustomName() : FunctionHelper.getTEName(worldObj,
-                                                                                                xCoord,
-                                                                                                yCoord,
-                                                                                                zCoord);
+        return getData().hasCustomName() ? getData().getCustomName() : FunctionHelper.getTEName(worldObj, xCoord, yCoord, zCoord);
     }
 
     @Override
@@ -88,8 +85,7 @@ public class InventoryTE extends BaseTE implements IInventory
             final ItemStack itemStack = inventory[slot];
             inventory[slot] = null;
             return itemStack;
-        }
-        else
+        } else
         {
             return null;
         }
@@ -134,8 +130,7 @@ public class InventoryTE extends BaseTE implements IInventory
         }
         if (nbt.hasKey(TileConstants.INVENTORY))
         {
-            setInventory(InventoryHelper.readInventoryFromNBT(nbt.getTagList(TileConstants.INVENTORY),
-                                                              getSizeInventory()));
+            setInventory(InventoryHelper.readInventoryFromNBT(nbt.getTagList(TileConstants.INVENTORY), getSizeInventory()));
         }
     }
 

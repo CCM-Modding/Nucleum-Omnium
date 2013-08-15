@@ -18,16 +18,13 @@ public final class EventBoneMeal
     @ForgeSubscribe
     public void fertilize(final BonemealEvent event)
     {
-        final SubBlock tmp = ((MainBlock) Block.blocksList[event.world.getBlockId(event.X, event.Y, event.Z)]).getSubBlocks()[event.world.getBlockMetadata(event.X,
-                                                                                                                                                           event.Y,
-                                                                                                                                                           event.Z)];
+        final SubBlock tmp = ((MainBlock) Block.blocksList[event.world.getBlockId(event.X, event.Y, event.Z)]).getSubBlocks()[event.world.getBlockMetadata(event.X, event.Y,
+                event.Z)];
         if (tmp instanceof SubCrop)
         {
             final SubCrop block = (SubCrop) tmp;
 
-            int growth = block.getCurrentStage() + MathHelper.clampInt(2,
-                                                                       block.getTotalStages(),
-                                                                       event.world.rand.nextInt(block.getTotalStages()));
+            int growth = block.getCurrentStage() + MathHelper.clampInt(2, block.getTotalStages(), event.world.rand.nextInt(block.getTotalStages()));
 
             if (growth > block.getTotalStages())
             {

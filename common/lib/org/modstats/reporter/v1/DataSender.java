@@ -61,13 +61,13 @@ import lib.org.modstats.ModsUpdateEvent;
 class DataSender extends Thread
 {
 
-    private static final String urlAutoTemplate   = "http://modstats.org/api/v1/report?mc=%s&user=%s&data=%s&sign=%s&beta=%b&strict=%b";
+    private static final String urlAutoTemplate = "http://modstats.org/api/v1/report?mc=%s&user=%s&data=%s&sign=%s&beta=%b&strict=%b";
 
     private static final String urlManualTemplate = "http://modstats.org/api/v1/check?mc=%s&user=%s&data=%s&sign=%s&beta=%b&strict=%b";
 
-    private final Reporter      reporter;
+    private final Reporter reporter;
 
-    public final boolean        manual;
+    public final boolean manual;
 
     public DataSender(final Reporter reporter, final boolean manual)
     {
@@ -77,22 +77,8 @@ class DataSender extends Thread
 
     private String toHexString(final byte[] bytes)
     {
-        final char[] hexArray = { '0',
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
-                '6',
-                '7',
-                '8',
-                '9',
-                'a',
-                'b',
-                'c',
-                'd',
-                'e',
-                'f' };
+        final char[] hexArray =
+        { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
         final char[] hexChars = new char[bytes.length * 2];
         int v;
         for (int j = 0; j < bytes.length; j++)
@@ -193,9 +179,7 @@ class DataSender extends Thread
                 }
                 if (checkIsNewer(reporter.registeredMods.get(prefix).version, version))
                 {
-                    final ModVersionData data = new ModVersionData(prefix,
-                                                                   reporter.registeredMods.get(prefix).name,
-                                                                   version);
+                    final ModVersionData data = new ModVersionData(prefix, reporter.registeredMods.get(prefix).name, version);
                     final Map<JsonStringNode, JsonNode> fields = modObject.getFields();
                     for (final Map.Entry<JsonStringNode, JsonNode> entry : fields.entrySet())
                     {
@@ -206,24 +190,20 @@ class DataSender extends Thread
                         }
                         if (!(entry.getValue() instanceof JsonStringNode))
                         {
-                            FMLLog.warning(String.format("[Modstats] Too complex data in response for field '%s'.",
-                                                         fieldName));
+                            FMLLog.warning(String.format("[Modstats] Too complex data in response for field '%s'.", fieldName));
                             continue;
                         }
                         final String value = ((JsonStringNode) entry.getValue()).getText();
                         if (fieldName.equals("chlog"))
                         {
                             data.changeLogUrl = value;
+                        } else if (fieldName.equals("link"))
+                        {
+                            data.downloadUrl = value;
+                        } else
+                        {
+                            data.extraFields.put(fieldName, value);
                         }
-                        else
-                            if (fieldName.equals("link"))
-                            {
-                                data.downloadUrl = value;
-                            }
-                            else
-                            {
-                                data.extraFields.put(fieldName, value);
-                            }
                     }
                     event.add(data);
                 }
@@ -241,11 +221,7 @@ class DataSender extends Thread
                 while (iterator.hasNext())
                 {
                     final ModVersionData modVersionData = iterator.next();
-                    builder.append(modVersionData.name)
-                           .append(" (")
-                           .append(modVersionData.version)
-                           .append(")")
-                           .append(iterator.hasNext() ? "," : ".");
+                    builder.append(modVersionData.name).append(" (").append(modVersionData.version).append(")").append(iterator.hasNext() ? "," : ".");
                 }
                 FMLLog.info("[Modstats] %s", builder.toString());
                 if (!reporter.config.logOnly && FMLCommonHandler.instance().getSide().isClient())
@@ -284,13 +260,7 @@ class DataSender extends Thread
             final String hash = getSignature(playerId + "!" + data);
             final String template = manual ? DataSender.urlManualTemplate : DataSender.urlAutoTemplate;
             final String mcVersion = new CallableMinecraftVersion(null).minecraftVersion();
-            final URL url = new URL(String.format(template,
-                                                  mcVersion,
-                                                  playerId,
-                                                  data,
-                                                  hash,
-                                                  reporter.config.betaNotifications,
-                                                  reporter.config.forCurrentMinecraftVersion));
+            final URL url = new URL(String.format(template, mcVersion, playerId, data, hash, reporter.config.betaNotifications, reporter.config.forCurrentMinecraftVersion));
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);

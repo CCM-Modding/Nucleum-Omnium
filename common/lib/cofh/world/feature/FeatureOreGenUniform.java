@@ -10,16 +10,11 @@ public class FeatureOreGenUniform extends FeatureBase
 {
 
     final WorldGenerator worldGen;
-    final int            count;
-    final int            minY;
-    final int            maxY;
+    final int count;
+    final int minY;
+    final int maxY;
 
-    public FeatureOreGenUniform(final String name,
-                                final WorldGenerator worldGen,
-                                final int count,
-                                final int minY,
-                                final int maxY,
-                                final boolean regen)
+    public FeatureOreGenUniform(final String name, final WorldGenerator worldGen, final int count, final int minY, final int maxY, final boolean regen)
     {
 
         super(name, regen);
@@ -31,11 +26,7 @@ public class FeatureOreGenUniform extends FeatureBase
 
     /* IFeatureGenerator */
     @Override
-    public boolean generateFeature(final Random random,
-                                   final int chunkX,
-                                   final int chunkZ,
-                                   final World world,
-                                   final boolean newGen)
+    public boolean generateFeature(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
 
         if (!newGen && !regen)

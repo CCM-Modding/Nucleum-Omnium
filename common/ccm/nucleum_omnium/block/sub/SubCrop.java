@@ -22,20 +22,12 @@ public class SubCrop extends SubBlock implements IPlantable
     /*
      * Static Factory's
      */
-    public static SubCrop createAndSetUp(final Enum<? extends IBlockEnum> blockEnum,
-                                         final int id,
-                                         final String textureLoc,
-                                         final int stages,
-                                         final float growthRate)
+    public static SubCrop createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc, final int stages, final float growthRate)
     {
 
         final String texture = TextureHandler.getTextureFromName(blockEnum.name(), textureLoc);
 
-        final SubBlock block = setUp(blockEnum, new SubCrop(id,
-                                                            blockEnum.ordinal(),
-                                                            texture,
-                                                            stages,
-                                                            growthRate).setUnlocalizedName(blockEnum));
+        final SubBlock block = setUp(blockEnum, new SubCrop(id, blockEnum.ordinal(), texture, stages, growthRate).setUnlocalizedName(blockEnum));
         block.addDisplayListener(new CropGrowth());
         return (SubCrop) block;
     }
@@ -43,18 +35,13 @@ public class SubCrop extends SubBlock implements IPlantable
     /*
      * DATA
      */
-    private int         stage;
+    private int stage;
 
-    private final int   stages;
+    private final int stages;
 
     private final float growthRate;
 
-    public SubCrop(final Class<? extends MainBlock> block,
-                   final int id,
-                   final int meta,
-                   final ITextureHelper texture,
-                   final int stages,
-                   final float growthRate)
+    public SubCrop(final Class<? extends MainBlock> block, final int id, final int meta, final ITextureHelper texture, final int stages, final float growthRate)
     {
         this(block, id, meta, Material.plants, texture, stages, growthRate);
     }
@@ -66,53 +53,30 @@ public class SubCrop extends SubBlock implements IPlantable
      * @param stages
      *            Amount of stages that this crop should have
      */
-    public SubCrop(final Class<? extends MainBlock> block,
-                   final int id,
-                   final int meta,
-                   final Material material,
-                   final ITextureHelper texture,
-                   final int stages,
-                   final float growthRate)
+    public SubCrop(final Class<? extends MainBlock> block, final int id, final int meta, final Material material, final ITextureHelper texture, final int stages,
+            final float growthRate)
     {
         super(block, id, meta, material, texture, new NoTile());
         this.stages = stages;
         this.growthRate = growthRate;
     }
 
-    public SubCrop(final int id,
-                   final int meta,
-                   final ITextureHelper texture,
-                   final int stages,
-                   final float growthRate)
+    public SubCrop(final int id, final int meta, final ITextureHelper texture, final int stages, final float growthRate)
     {
         this(id, meta, Material.plants, texture, stages, growthRate);
     }
 
-    public SubCrop(final int id,
-                   final int meta,
-                   final Material material,
-                   final ITextureHelper texture,
-                   final int stages,
-                   final float growthRate)
+    public SubCrop(final int id, final int meta, final Material material, final ITextureHelper texture, final int stages, final float growthRate)
     {
         this(MainBlock.class, id, meta, material, texture, stages, growthRate);
     }
 
-    public SubCrop(final int id,
-                   final int meta,
-                   final Material material,
-                   final String iconName,
-                   final int stages,
-                   final float growthRate)
+    public SubCrop(final int id, final int meta, final Material material, final String iconName, final int stages, final float growthRate)
     {
         this(id, meta, material, new CropTexture(iconName, stages), stages, growthRate);
     }
 
-    public SubCrop(final int id,
-                   final int meta,
-                   final String iconName,
-                   final int stages,
-                   final float growthRate)
+    public SubCrop(final int id, final int meta, final String iconName, final int stages, final float growthRate)
     {
         this(id, meta, Material.plants, iconName, stages, growthRate);
     }

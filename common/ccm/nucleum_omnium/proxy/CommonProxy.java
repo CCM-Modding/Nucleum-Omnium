@@ -11,8 +11,7 @@ public class CommonProxy
 {
 
     /**
-     * Initializes the Capes Client Side Only. Original code that adds capes is found in this Github
-     * repository: {@link http://www.github.com/jadar/DeveloperCapesAPI}
+     * Initializes the Capes Client Side Only. Original code that adds capes is found in this Github repository: {@link http://www.github.com/jadar/DeveloperCapesAPI}
      */
     public void initCapes()
     {}

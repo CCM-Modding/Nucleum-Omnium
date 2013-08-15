@@ -27,15 +27,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class DevCapesUtil
 {
 
-    private static DevCapesUtil                            instance;
-    public static final double                             version   = 2.0;
+    private static DevCapesUtil instance;
+    public static final double version = 2.0;
 
-    public DevCapesVersionChecker                          versionChecker;
-    private final HashMap<String, String>                  users;
-    private final HashMap<String, ResourceLocation>        capeResources;
+    public DevCapesVersionChecker versionChecker;
+    private final HashMap<String, String> users;
+    private final HashMap<String, ResourceLocation> capeResources;
     private final HashMap<String, ThreadDownloadImageData> downloadThreads;
 
-    public boolean                                         tickSetUp = false;
+    public boolean tickSetUp = false;
 
     /**
      * Object constructor.
@@ -51,8 +51,7 @@ public class DevCapesUtil
     }
 
     /**
-     * Get's the current DeveloperCapesAPI instance, or creates a new one if
-     * necessary.
+     * Get's the current DeveloperCapesAPI instance, or creates a new one if necessary.
      */
     public static DevCapesUtil getInstance()
     {
@@ -64,12 +63,10 @@ public class DevCapesUtil
     }
 
     /**
-     * Set up capes. All cape URLs are in the txt file passed in.
-     * https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt
+     * Set up capes. All cape URLs are in the txt file passed in. https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt
      * 
      * @param txtURL
-     *            The URL of the .txt file containing the groups, members of
-     *            said groups, and the group's cape URL.
+     *            The URL of the .txt file containing the groups, members of said groups, and the group's cape URL.
      */
     public void addFileUrl(final String txtURL)
     {
@@ -108,17 +105,13 @@ public class DevCapesUtil
                                 capeUrl = subLine;
 
                                 final ResourceLocation r = new ResourceLocation("DevCapes/" + group);
-                                final ThreadDownloadImageData t = makeDownloadThread(r,
-                                                                                     capeUrl,
-                                                                                     null,
-                                                                                     new DevCapesImageBufferDownload());
+                                final ThreadDownloadImageData t = makeDownloadThread(r, capeUrl, null, new DevCapesImageBufferDownload());
 
                                 addCapeResource(group, r);
                                 addDownloadThread(group, t);
 
                                 continue;
-                            }
-                            else
+                            } else
                             {
                                 username = subLine.toLowerCase();
                                 addUser(username, group);
@@ -225,8 +218,7 @@ public class DevCapesUtil
     }
 
     /**
-     * Used to download images. Copied from AbstractClientPlayer to remove
-     * a conditional.
+     * Used to download images. Copied from AbstractClientPlayer to remove a conditional.
      * 
      * @param par0ResourceLocation
      * @param par1Str
@@ -234,16 +226,12 @@ public class DevCapesUtil
      * @param par3IImageBuffer
      * @return
      */
-    public static ThreadDownloadImageData makeDownloadThread(final ResourceLocation par0ResourceLocation,
-                                                             final String par1Str,
-                                                             final ResourceLocation par2ResourceLocation,
-                                                             final IImageBuffer par3IImageBuffer)
+    public static ThreadDownloadImageData makeDownloadThread(final ResourceLocation par0ResourceLocation, final String par1Str, final ResourceLocation par2ResourceLocation,
+            final IImageBuffer par3IImageBuffer)
     {
         final TextureManager texturemanager = Minecraft.getMinecraft().func_110434_K();
 
-        final TextureObject object = new ThreadDownloadImageData(par1Str,
-                                                                 par2ResourceLocation,
-                                                                 par3IImageBuffer);
+        final TextureObject object = new ThreadDownloadImageData(par1Str, par2ResourceLocation, par3IImageBuffer);
         // Binds ResourceLocation to this.
         texturemanager.func_110579_a(par0ResourceLocation, object);
 

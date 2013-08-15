@@ -9,8 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import ccm.nucleum_omnium.tileentity.interfaces.ITileLogic;
 
 /**
- * Simple Abstract implementation of ITileLogic that allows the user to not have to implement read
- * or write if not needed, AKA if the logic has no variables to save
+ * Simple Abstract implementation of ITileLogic that allows the user to not have to implement read or write if not needed, AKA if the logic has no variables to save
  * 
  * @author Captain_Shadows
  */

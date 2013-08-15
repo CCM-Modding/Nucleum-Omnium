@@ -16,7 +16,7 @@ public class TileInventory extends TileBase implements ITileHelper
 
     protected boolean hasInv = false;
 
-    protected int     size;
+    protected int size;
 
     @Override
     public TileEntity createTileEntity(final World world, final int meta)
@@ -26,15 +26,13 @@ public class TileInventory extends TileBase implements ITileHelper
             if (hasInventory())
             {
                 return ((InventoryTE) te.newInstance()).setInventorySize(size);
-            }
-            else
+            } else
             {
                 return super.createTileEntity(world, meta);
             }
         } catch (final Exception e)
         {
-            LogHandler.severe(NucleumOmnium.instance,
-                              "TileEntity Instance could not be created during createTileEntity \n");
+            LogHandler.severe(NucleumOmnium.instance, "TileEntity Instance could not be created during createTileEntity \n");
             e.getCause();
             e.printStackTrace();
             return null;

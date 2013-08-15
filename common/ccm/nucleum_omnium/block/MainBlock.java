@@ -34,15 +34,14 @@ import ccm.nucleum_omnium.utils.helper.FunctionHelper;
  * <p>
  * A Block that redirects all of it's data to a specific meta data value
  * <p>
- * This class SHOULD NOT be extended unless it is something Block wide in which case one MUST Check that there
- * is NO meta data way of doing the action
+ * This class SHOULD NOT be extended unless it is something Block wide in which case one MUST Check that there is NO meta data way of doing the action
  */
 public class MainBlock extends Block
 {
 
-    SubBlock[]                  subBlocks;
-    List<Integer>               tickList;
-    ArrayList<CreativeTabs>     tabs;
+    SubBlock[] subBlocks;
+    List<Integer> tickList;
+    ArrayList<CreativeTabs> tabs;
 
     public static List<Integer> registeredIDs;
 
@@ -85,25 +84,15 @@ public class MainBlock extends Block
         if (subBlocks[meta] == null)
         {
             subBlocks[meta] = block;
-        }
-        else
+        } else
         {
-            throw new IllegalArgumentException(String.format("Block %s with id: %d and metadata: %d is already occupied by %s when adding  %s",
-                                                             this,
-                                                             blockID,
-                                                             meta,
-                                                             subBlocks[meta],
-                                                             block));
+            throw new IllegalArgumentException(String.format("Block %s with id: %d and metadata: %d is already occupied by %s when adding  %s", this, blockID, meta,
+                    subBlocks[meta], block));
         }
     }
 
     @Override
-    public void breakBlock(final World world,
-                           final int x,
-                           final int y,
-                           final int z,
-                           final int id,
-                           final int meta)
+    public void breakBlock(final World world, final int x, final int y, final int z, final int id, final int meta)
     {
         FunctionHelper.dropInventory(world, x, y, z);
         if (subBlocks[meta] != null)
@@ -119,8 +108,7 @@ public class MainBlock extends Block
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].createTileEntity(world, meta);
-        }
-        else
+        } else
         {
             return null;
         }
@@ -137,12 +125,7 @@ public class MainBlock extends Block
     }
 
     @Override
-    public ArrayList<ItemStack> getBlockDropped(final World world,
-                                                final int x,
-                                                final int y,
-                                                final int z,
-                                                final int meta,
-                                                final int fortune)
+    public ArrayList<ItemStack> getBlockDropped(final World world, final int x, final int y, final int z, final int meta, final int fortune)
     {
         final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
@@ -175,29 +158,21 @@ public class MainBlock extends Block
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(final IBlockAccess blockAccess,
-                                final int x,
-                                final int y,
-                                final int z,
-                                final int side)
+    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side)
     {
         final int meta = blockAccess.getBlockMetadata(x, y, z);
 
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].getBlockTexture(blockAccess, x, y, z, side);
-        }
-        else
+        } else
         {
             return super.getBlockTexture(blockAccess, x, y, z, side);
         }
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world,
-                                                         final int x,
-                                                         final int y,
-                                                         final int z)
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world, final int x, final int y, final int z)
     {
         final int meta = world.getBlockMetadata(x, y, z);
 
@@ -210,8 +185,7 @@ public class MainBlock extends Block
         if (ret != null)
         {
             return ret;
-        }
-        else
+        } else
         {
             return super.getCollisionBoundingBoxFromPool(world, x, y, z);
         }
@@ -240,26 +214,13 @@ public class MainBlock extends Block
     }
 
     @Override
-    public float getExplosionResistance(final Entity entity,
-                                        final World world,
-                                        final int x,
-                                        final int y,
-                                        final int z,
-                                        final double explosionX,
-                                        final double explosionY,
-                                        final double explosionZ)
+    public float getExplosionResistance(final Entity entity, final World world, final int x, final int y, final int z, final double explosionX, final double explosionY,
+            final double explosionZ)
     {
         final int meta = world.getBlockMetadata(x, y, z);
         if (subBlocks[meta] != null)
         {
-            return subBlocks[meta].getExplosionResistance(entity,
-                                                          world,
-                                                          x,
-                                                          y,
-                                                          z,
-                                                          explosionX,
-                                                          explosionY,
-                                                          explosionZ);
+            return subBlocks[meta].getExplosionResistance(entity, world, x, y, z, explosionX, explosionY, explosionZ);
         }
         return 0;
     }
@@ -271,8 +232,7 @@ public class MainBlock extends Block
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].getIcon(side, meta);
-        }
-        else
+        } else
         {
             return super.getIcon(side, meta);
         }
@@ -302,8 +262,7 @@ public class MainBlock extends Block
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].hasTileEntity(meta);
-        }
-        else
+        } else
         {
             return false;
         }
@@ -316,22 +275,14 @@ public class MainBlock extends Block
     }
 
     @Override
-    public boolean onBlockActivated(final World world,
-                                    final int x,
-                                    final int y,
-                                    final int z,
-                                    final EntityPlayer player,
-                                    final int wut,
-                                    final float clickX,
-                                    final float clickY,
-                                    final float clockZ)
+    public boolean onBlockActivated(final World world, final int x, final int y, final int z, final EntityPlayer player, final int wut, final float clickX, final float clickY,
+            final float clockZ)
     {
         final int meta = world.getBlockMetadata(x, y, z);
         if (subBlocks[meta] != null)
         {
             return subBlocks[meta].onBlockActivated(world, x, y, z, player, wut, clickX, clickY, clockZ);
-        }
-        else
+        } else
         {
             return false;
         }
@@ -354,12 +305,7 @@ public class MainBlock extends Block
      * Sets the direction of the block when placed
      */
     @Override
-    public void onBlockPlacedBy(final World world,
-                                final int x,
-                                final int y,
-                                final int z,
-                                final EntityLivingBase living,
-                                final ItemStack itemStack)
+    public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLivingBase living, final ItemStack itemStack)
     {
 
         final int meta = world.getBlockMetadata(x, y, z);
@@ -371,11 +317,7 @@ public class MainBlock extends Block
     }
 
     @Override
-    public void onEntityCollidedWithBlock(final World world,
-                                          final int x,
-                                          final int y,
-                                          final int z,
-                                          final Entity entity)
+    public void onEntityCollidedWithBlock(final World world, final int x, final int y, final int z, final Entity entity)
     {
         final int meta = world.getBlockMetadata(x, y, z);
         if (subBlocks[meta] != null)
@@ -391,16 +333,14 @@ public class MainBlock extends Block
     }
 
     @Override
-    public void
-            randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand)
+    public void randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand)
     {
         final int meta = world.getBlockMetadata(x, y, z);
 
         if (subBlocks[meta] != null)
         {
             subBlocks[meta].randomDisplayTick(world, x, y, z, rand);
-        }
-        else
+        } else
         {
             super.randomDisplayTick(world, x, y, z, rand);
         }

@@ -16,13 +16,10 @@ public class CropGrowth implements IDisplayListener
 {
 
     @Override
-    public void
-            randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand)
+    public void randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand)
     {
 
-        final SubCrop block = (SubCrop) ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x,
-                                                                                                                                        y,
-                                                                                                                                        z)];
+        final SubCrop block = (SubCrop) ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x, y, z)];
         if (world.getBlockLightValue(x, y, z) >= 9)
         {
             if (rand.nextInt((int) (25.0F / block.getGrowthRate()) + 1) == 0)

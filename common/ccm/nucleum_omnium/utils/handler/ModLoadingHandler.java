@@ -16,8 +16,7 @@ public final class ModLoadingHandler extends BaseNIC
     private static Map<IMod, Boolean> modsLoaded = new HashMap<IMod, Boolean>();
 
     /**
-     * Checks if the Mod has being loaded before and throws a exception. The default response is
-     * false. Other wise you should get a Exception.
+     * Checks if the Mod has being loaded before and throws a exception. The default response is false. Other wise you should get a Exception.
      * 
      * @return false if the Mod has not being loaded yet.
      */
@@ -26,8 +25,7 @@ public final class ModLoadingHandler extends BaseNIC
         if (!modsLoaded.containsKey(mod))
         {
             modsLoaded.put(mod, false);
-        }
-        else
+        } else
         {
             throw new DupeExeption(mod);
         }
@@ -43,8 +41,7 @@ public final class ModLoadingHandler extends BaseNIC
         {
             modsLoaded.remove(mod);
             modsLoaded.put(mod, true);
-        }
-        else
+        } else
         {
             throw new DupeExeption(mod);
         }

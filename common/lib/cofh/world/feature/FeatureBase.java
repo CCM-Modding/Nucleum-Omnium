@@ -11,9 +11,9 @@ import lib.cofh.world.IFeatureGenerator;
 public abstract class FeatureBase implements IFeatureGenerator
 {
 
-    final String          name;
-    final byte            type;
-    final boolean         regen;
+    final String name;
+    final byte type;
+    final boolean regen;
     final HashSet<String> biomes = new HashSet<String>();
 
     public FeatureBase(final String name, final boolean regen)
@@ -41,7 +41,6 @@ public abstract class FeatureBase implements IFeatureGenerator
     }
 
     @Override
-    public abstract boolean
-            generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGen);
+    public abstract boolean generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGen);
 
 }

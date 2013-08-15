@@ -22,7 +22,7 @@ public final class TextureHandler
 
     private final Map<Integer, ResourceLocation> textures;
 
-    private static final TextureHandler          INSTANCE = new TextureHandler();
+    private static final TextureHandler INSTANCE = new TextureHandler();
 
     /**
      * @param id
@@ -106,8 +106,7 @@ public final class TextureHandler
 
     public static void addModelTexture(final IMod mod, final String id)
     {
-        INSTANCE.textures.put(hashModelTexture(id), new ResourceLocation(mod.getModId(),
-                                                                         fixModelTextureLocation(id)));
+        INSTANCE.textures.put(hashModelTexture(id), new ResourceLocation(mod.getModId(), fixModelTextureLocation(id)));
     }
 
     public static ResourceLocation getGUI(final String id)

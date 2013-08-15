@@ -14,7 +14,7 @@ import ccm.nucleum_omnium.api.recipes.IRecipeContainer;
 public abstract class IRecipeRegistry
 {
 
-    protected IFuelRegistry    fuels;
+    protected IFuelRegistry fuels;
     protected IRecipeContainer recipes;
 
     public void register()

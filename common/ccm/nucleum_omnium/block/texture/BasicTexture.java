@@ -13,7 +13,7 @@ public class BasicTexture implements ITextureHelper
 {
 
     protected String iconName;
-    protected Icon   icon;
+    protected Icon icon;
 
     public BasicTexture(final String iconName)
     {
@@ -21,11 +21,7 @@ public class BasicTexture implements ITextureHelper
     }
 
     @Override
-    public Icon getBlockTexture(final IBlockAccess blockAccess,
-                                final int x,
-                                final int y,
-                                final int z,
-                                final int side)
+    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side)
     {
         return icon;
     }

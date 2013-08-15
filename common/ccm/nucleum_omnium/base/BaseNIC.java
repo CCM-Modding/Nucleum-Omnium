@@ -11,8 +11,7 @@ import ccm.nucleum_omnium.utils.exeptions.InstantiationExeption;
 /**
  * Base Non Instance able Class
  * <p>
- * This class SHOULD ONLY be extended when and ONLY when you want your class not to be instantiated using the
- * default Java Constructor
+ * This class SHOULD ONLY be extended when and ONLY when you want your class not to be instantiated using the default Java Constructor
  * 
  * @author Captain_Shadows
  */

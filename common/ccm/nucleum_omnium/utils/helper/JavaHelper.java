@@ -43,8 +43,7 @@ public final class JavaHelper extends BaseNIC
                 LogHandler.debug(sb);
             }
             return sb.toString();
-        }
-        else
+        } else
         {
             return input.substring(0, 1).toUpperCase() + input.substring(1);
         }
@@ -66,8 +65,7 @@ public final class JavaHelper extends BaseNIC
                 LogHandler.debug(sb);
             }
             return sb.toString();
-        }
-        else
+        } else
         {
             return input.substring(0, 1).toLowerCase() + input.substring(1);
         }

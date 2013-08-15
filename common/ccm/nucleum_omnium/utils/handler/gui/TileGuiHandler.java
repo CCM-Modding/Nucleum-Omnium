@@ -29,18 +29,13 @@ public class TileGuiHandler extends AbstractGuiHandler
     }
 
     @Override
-    public Object getServerGuiElement(final EntityPlayer player,
-                                      final World world,
-                                      final int x,
-                                      final int y,
-                                      final int z)
+    public Object getServerGuiElement(final EntityPlayer player, final World world, final int x, final int y, final int z)
     {
         final TileEntity te = world.getBlockTileEntity(x, y, z);
         Container tmp = null;
         try
         {
-            tmp = container.getConstructor(InventoryPlayer.class, TileEntity.class)
-                           .newInstance(player.inventory, te);
+            tmp = container.getConstructor(InventoryPlayer.class, TileEntity.class).newInstance(player.inventory, te);
         } catch (final Exception e)
         {
             e.getCause();
@@ -50,18 +45,13 @@ public class TileGuiHandler extends AbstractGuiHandler
     }
 
     @Override
-    public Object getClientGuiElement(final EntityPlayer player,
-                                      final World world,
-                                      final int x,
-                                      final int y,
-                                      final int z)
+    public Object getClientGuiElement(final EntityPlayer player, final World world, final int x, final int y, final int z)
     {
         final TileEntity te = world.getBlockTileEntity(x, y, z);
         GuiContainer tmp = null;
         try
         {
-            tmp = gui.getConstructor(InventoryPlayer.class, TileEntity.class).newInstance(player.inventory,
-                                                                                          te);
+            tmp = gui.getConstructor(InventoryPlayer.class, TileEntity.class).newInstance(player.inventory, te);
         } catch (final Exception e)
         {
             e.getCause();

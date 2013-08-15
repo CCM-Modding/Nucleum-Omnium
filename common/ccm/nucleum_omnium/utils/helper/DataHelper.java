@@ -87,8 +87,7 @@ public final class DataHelper extends BaseNIC
             if (!file.exists())
             {
                 return new NBTTagCompound();
-            }
-            else
+            } else
             {
                 return CompressedStreamTools.read(file);
             }

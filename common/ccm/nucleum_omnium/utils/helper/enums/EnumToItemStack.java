@@ -8,8 +8,7 @@ import net.minecraft.item.ItemStack;
 import ccm.nucleum_omnium.base.BaseNIC;
 
 /**
- * This is The class used to get a new {@link ItemStack} instance from any {@link Enum} implementing
- * {@link IItemEnum} or {@link IBlockEnum}
+ * This is The class used to get a new {@link ItemStack} instance from any {@link Enum} implementing {@link IItemEnum} or {@link IBlockEnum}
  * 
  * @author Captain_Shadows
  */

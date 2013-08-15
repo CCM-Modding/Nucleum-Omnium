@@ -18,8 +18,7 @@ public final class NBTHelper extends BaseNIC
      * Initializes the NBT Tag Compound for the given item if it is null
      * 
      * @param item
-     *            The item for which its NBT Tag Compound is being checked
-     *            for initialization
+     *            The item for which its NBT Tag Compound is being checked for initialization
      */
     public static void initCompound(final ItemStack item)
     {

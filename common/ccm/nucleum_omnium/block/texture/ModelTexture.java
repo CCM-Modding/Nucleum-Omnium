@@ -13,11 +13,7 @@ public class ModelTexture implements ITextureHelper
 {
 
     @Override
-    public Icon getBlockTexture(final IBlockAccess blockAccess,
-                                final int x,
-                                final int y,
-                                final int z,
-                                final int side)
+    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side)
     {
         return null;
     }

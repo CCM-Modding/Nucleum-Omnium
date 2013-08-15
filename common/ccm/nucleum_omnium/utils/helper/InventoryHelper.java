@@ -37,8 +37,7 @@ public class InventoryHelper extends BaseNIC
             {
                 itemstack = inventory.getStackInSlot(slot);
                 setEmty(inventory, slot);
-            }
-            else
+            } else
             {
                 itemstack = inventory.getStackInSlot(slot).splitStack(amount);
                 if (inventory.getStackInSlot(slot).stackSize == 0)
@@ -53,8 +52,7 @@ public class InventoryHelper extends BaseNIC
     }
 
     /**
-     * Checks the Inventory Array for either a empty slot or one that contains the output Item
-     * Example: {@code inventory[getBestInventory(this.inventory, 3, itemstack)]} That
+     * Checks the Inventory Array for either a empty slot or one that contains the output Item Example: {@code inventory[getBestInventory(this.inventory, 3, itemstack)]} That
      * should work in the Counter
      * 
      * @param inventory
@@ -65,76 +63,62 @@ public class InventoryHelper extends BaseNIC
      *            The output
      * @return The Slot number
      */
-    public static int
-            getBestInventory(final IInventory inventory, final int startSlot, final ItemStack output)
+    public static int getBestInventory(final IInventory inventory, final int startSlot, final ItemStack output)
     {
 
         if (inventory.getStackInSlot(startSlot) == null)
         {
             return startSlot;
-        }
-        else
-            if (ItemHelper.equals(inventory.getStackInSlot(startSlot), output))
-            {
-                return startSlot;
-            }
-            else
-            {
-                int bestSlot = startSlot;
+        } else if (ItemHelper.equals(inventory.getStackInSlot(startSlot), output))
+        {
+            return startSlot;
+        } else
+        {
+            int bestSlot = startSlot;
 
-                for (int slot = startSlot; slot < inventory.getSizeInventory(); slot++)
+            for (int slot = startSlot; slot < inventory.getSizeInventory(); slot++)
+            {
+                if (inventory.getStackInSlot(slot) == null)
                 {
-                    if (inventory.getStackInSlot(slot) == null)
-                    {
-                        bestSlot = slot;
-                        break;
-                    }
-                    else
-                        if (ItemHelper.equals(inventory.getStackInSlot(slot), output))
-                        {
-                            bestSlot = slot;
-                            break;
-                        }
+                    bestSlot = slot;
+                    break;
+                } else if (ItemHelper.equals(inventory.getStackInSlot(slot), output))
+                {
+                    bestSlot = slot;
+                    break;
                 }
-                return bestSlot;
             }
+            return bestSlot;
+        }
     }
 
-    public static int getBestSlot(final IInventory inventory,
-                                  final int startSlot,
-                                  final int endSlot,
-                                  final ItemStack output)
+    public static int getBestSlot(final IInventory inventory, final int startSlot, final int endSlot, final ItemStack output)
     {
 
         if (inventory.getStackInSlot(startSlot) == null)
         {
             return startSlot;
-        }
-        else
-            if (ItemHelper.equals(inventory.getStackInSlot(startSlot), output))
-            {
-                return startSlot;
-            }
-            else
-            {
-                int bestSlot = startSlot;
+        } else if (ItemHelper.equals(inventory.getStackInSlot(startSlot), output))
+        {
+            return startSlot;
+        } else
+        {
+            int bestSlot = startSlot;
 
-                for (int slot = startSlot; slot < endSlot; slot++)
+            for (int slot = startSlot; slot < endSlot; slot++)
+            {
+                if (inventory.getStackInSlot(slot) == null)
                 {
-                    if (inventory.getStackInSlot(slot) == null)
-                    {
-                        bestSlot = slot;
-                        break;
-                    }
-                    else
-                        if (ItemHelper.equals(inventory.getStackInSlot(slot), output))
-                        {
-                            bestSlot = slot;
-                            break;
-                        }
+                    bestSlot = slot;
+                    break;
+                } else if (ItemHelper.equals(inventory.getStackInSlot(slot), output))
+                {
+                    bestSlot = slot;
+                    break;
                 }
-                return bestSlot;
             }
+            return bestSlot;
+        }
     }
 
     /**

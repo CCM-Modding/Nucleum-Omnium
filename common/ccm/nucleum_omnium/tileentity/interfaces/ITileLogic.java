@@ -7,8 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * This Interface is used to create custom logic for TileEntitys without having to create a Custom
- * TileEntity
+ * This Interface is used to create custom logic for TileEntitys without having to create a Custom TileEntity
  * 
  * @author Captain_Shadows
  */
@@ -27,8 +26,7 @@ public interface ITileLogic
      *            The slot trying to insert into
      * @param itemstack
      *            The stack trying to put
-     * @return true if automation is allowed to insert the given stack into
-     *         the given slot
+     * @return true if automation is allowed to insert the given stack into the given slot
      */
     public boolean isStackValidForSlot(final int slot, final ItemStack itemstack);
 

@@ -25,9 +25,7 @@ public class PacketHandler implements IPacketHandler
      *            The Player associated with the packet
      */
     @Override
-    public void onPacketData(final INetworkManager manager,
-                             final Packet250CustomPayload packet,
-                             final Player player)
+    public void onPacketData(final INetworkManager manager, final Packet250CustomPayload packet, final Player player)
     {
 
         final PacketBase packetBase = PacketTypeHandler.buildPacket(packet.data);

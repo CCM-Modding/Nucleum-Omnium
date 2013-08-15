@@ -24,9 +24,9 @@ import cpw.mods.fml.common.versioning.VersionRange;
 public class OmniumModContainer implements ModContainer
 {
 
-    private ModMetadata     md    = new ModMetadata();
+    private ModMetadata md = new ModMetadata();
     private ArtifactVersion processedVersion;
-    private final String    label = "OmniumCore";
+    private final String label = "OmniumCore";
 
     public OmniumModContainer()
     {

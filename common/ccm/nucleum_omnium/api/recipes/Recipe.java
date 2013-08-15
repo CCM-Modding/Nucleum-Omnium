@@ -19,9 +19,9 @@ public class Recipe
 
     private final ItemStack output;
 
-    private ItemStack       output2;
+    private ItemStack output2;
 
-    private final boolean   hasSecondOutput;
+    private final boolean hasSecondOutput;
 
     public Recipe(final ItemStack input, final ItemStack output)
     {
@@ -64,36 +64,30 @@ public class Recipe
             {
                 return false;
             }
+        } else if (!input.equals(other.input))
+        {
+            return false;
         }
-        else
-            if (!input.equals(other.input))
-            {
-                return false;
-            }
         if (output == null)
         {
             if (other.output != null)
             {
                 return false;
             }
+        } else if (!output.equals(other.output))
+        {
+            return false;
         }
-        else
-            if (!output.equals(other.output))
-            {
-                return false;
-            }
         if (output2 == null)
         {
             if (other.output2 != null)
             {
                 return false;
             }
+        } else if (!output2.equals(other.output2))
+        {
+            return false;
         }
-        else
-            if (!output2.equals(other.output2))
-            {
-                return false;
-            }
         return true;
     }
 
@@ -151,13 +145,7 @@ public class Recipe
         {
             builder.append("output2=").append(output2).append(", ");
         }
-        builder.append("hasSecondOutput=")
-               .append(hasSecondOutput)
-               .append(", ")
-               .append(", hashCode()=")
-               .append(hashCode())
-               .append(", ")
-               .append("]");
+        builder.append("hasSecondOutput=").append(hasSecondOutput).append(", ").append(", hashCode()=").append(hashCode()).append(", ").append("]");
         return builder.toString();
     }
 }
