@@ -1,6 +1,6 @@
 /**
- * Developer Capes by Jadar
- * License: Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * DeveloperCapes by Jadar
+ * License: MIT License (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
  * version 2.0
  */
 package lib.com.jadarstudios.developercapes;
@@ -31,9 +31,9 @@ public class DevCapesUtil
     public static final double version = 2.0;
 
     public DevCapesVersionChecker versionChecker;
-    private final HashMap<String, String> users;
-    private final HashMap<String, ResourceLocation> capeResources;
-    private final HashMap<String, ThreadDownloadImageData> downloadThreads;
+    private HashMap<String, String> users;
+    private HashMap<String, ResourceLocation> capeResources;
+    private HashMap<String, ThreadDownloadImageData> downloadThreads;
 
     public boolean tickSetUp = false;
 
@@ -65,10 +65,10 @@ public class DevCapesUtil
     /**
      * Set up capes. All cape URLs are in the txt file passed in. https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt
      * 
-     * @param txtURL
+     * @param parTxtUrl
      *            The URL of the .txt file containing the groups, members of said groups, and the group's cape URL.
      */
-    public void addFileUrl(final String txtURL)
+    public void addFileUrl(String parTxtUrl)
     {
         if (FMLCommonHandler.instance().getSide() != Side.CLIENT)
         {
@@ -77,8 +77,8 @@ public class DevCapesUtil
 
         try
         {
-            final URL url = new URL(txtURL);
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            URL url = new URL(parTxtUrl);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
 
             String username = "";
@@ -98,14 +98,14 @@ public class DevCapesUtil
                         if (line.charAt(i) == '=')
                         {
                             group = line.substring(0, i);
-                            final String subLine = line.substring(i + 1);
+                            String subLine = line.substring(i + 1);
 
                             if (subLine.startsWith("http"))
                             {
                                 capeUrl = subLine;
 
-                                final ResourceLocation r = new ResourceLocation("DevCapes/" + group);
-                                final ThreadDownloadImageData t = makeDownloadThread(r, capeUrl, null, new DevCapesImageBufferDownload());
+                                ResourceLocation r = new ResourceLocation("DevCapes/" + group);
+                                ThreadDownloadImageData t = makeDownloadThread(r, capeUrl, null, new DevCapesImageBufferDownload());
 
                                 addCapeResource(group, r);
                                 addDownloadThread(group, t);
@@ -120,7 +120,7 @@ public class DevCapesUtil
                     }
                 }
             }
-        } catch (final IOException e)
+        } catch (IOException e)
         {
             e.printStackTrace();
         }
@@ -136,7 +136,9 @@ public class DevCapesUtil
     }
 
     public void checkForUpdates()
-    {}
+    {
+
+    }
 
     /**
      * Used to add user to users HashMap.
@@ -146,7 +148,7 @@ public class DevCapesUtil
      * @param parGroup
      *            The group to add that Username to.
      */
-    public void addUser(final String parUsername, final String parGroup)
+    public void addUser(String parUsername, String parGroup)
     {
         if (getUserGroup(parUsername) == null)
         {
@@ -162,7 +164,7 @@ public class DevCapesUtil
      *            The Username to get from the users HashMap.
      * @return The Username found in the users HashMap.
      */
-    public String getUserGroup(final String parUsername)
+    public String getUserGroup(String parUsername)
     {
         return users.get(parUsername.toLowerCase());
     }
@@ -173,7 +175,7 @@ public class DevCapesUtil
      * @param parGroup
      * @param parResource
      */
-    public void addCapeResource(final String parGroup, final ResourceLocation parResource)
+    public void addCapeResource(String parGroup, ResourceLocation parResource)
     {
         if (getCapeResource(parGroup) == null)
         {
@@ -187,7 +189,7 @@ public class DevCapesUtil
      * @param parGroup
      * @return
      */
-    public ResourceLocation getCapeResource(final String parGroup)
+    public ResourceLocation getCapeResource(String parGroup)
     {
         return capeResources.get(parGroup);
     }
@@ -198,7 +200,7 @@ public class DevCapesUtil
      * @param parGroup
      * @param parResource
      */
-    public void addDownloadThread(final String parGroup, final ThreadDownloadImageData parResource)
+    public void addDownloadThread(String parGroup, ThreadDownloadImageData parResource)
     {
         if (getDownloadThread(parGroup) == null)
         {
@@ -212,7 +214,7 @@ public class DevCapesUtil
      * @param parGroup
      * @return
      */
-    public ThreadDownloadImageData getDownloadThread(final String parGroup)
+    public ThreadDownloadImageData getDownloadThread(String parGroup)
     {
         return downloadThreads.get(parGroup);
     }
@@ -226,12 +228,12 @@ public class DevCapesUtil
      * @param par3IImageBuffer
      * @return
      */
-    public static ThreadDownloadImageData makeDownloadThread(final ResourceLocation par0ResourceLocation, final String par1Str, final ResourceLocation par2ResourceLocation,
-            final IImageBuffer par3IImageBuffer)
+    public static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation, String par1Str, ResourceLocation par2ResourceLocation,
+            IImageBuffer par3IImageBuffer)
     {
-        final TextureManager texturemanager = Minecraft.getMinecraft().func_110434_K();
+        TextureManager texturemanager = Minecraft.getMinecraft().func_110434_K();
 
-        final TextureObject object = new ThreadDownloadImageData(par1Str, par2ResourceLocation, par3IImageBuffer);
+        TextureObject object = new ThreadDownloadImageData(par1Str, par2ResourceLocation, par3IImageBuffer);
         // Binds ResourceLocation to this.
         texturemanager.func_110579_a(par0ResourceLocation, object);
 

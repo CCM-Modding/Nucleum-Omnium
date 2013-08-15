@@ -1,6 +1,6 @@
 /**
- * Developer Capes by Jadar
- * License: Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * DeveloperCapes by Jadar
+ * License: MIT License (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
  * version 2.0
  */
 package lib.com.jadarstudios.developercapes;
@@ -22,7 +22,7 @@ public class DevCapesImageBufferDownload implements IImageBuffer
     private int imageHeight;
 
     @Override
-    public BufferedImage parseUserSkin(final BufferedImage par1BufferedImage)
+    public BufferedImage parseUserSkin(BufferedImage par1BufferedImage)
     {
         if (par1BufferedImage == null)
         {
@@ -32,9 +32,9 @@ public class DevCapesImageBufferDownload implements IImageBuffer
             imageWidth = (par1BufferedImage.getWidth((ImageObserver) null) <= 64) ? 64 : (par1BufferedImage.getWidth((ImageObserver) null));
             imageHeight = (par1BufferedImage.getHeight((ImageObserver) null) <= 32) ? 32 : (par1BufferedImage.getHeight((ImageObserver) null));
 
-            final BufferedImage capeImage = new BufferedImage(imageWidth, imageHeight, 2);
+            BufferedImage capeImage = new BufferedImage(imageWidth, imageHeight, 2);
 
-            final Graphics graphics = capeImage.getGraphics();
+            Graphics graphics = capeImage.getGraphics();
             graphics.drawImage(par1BufferedImage, 0, 0, (ImageObserver) null);
             graphics.dispose();
 

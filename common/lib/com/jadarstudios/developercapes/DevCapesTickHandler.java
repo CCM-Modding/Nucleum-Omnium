@@ -1,6 +1,6 @@
 /**
- * Developer Capes by Jadar
- * License: Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * DeveloperCapes by Jadar
+ * License: MIT License (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
  * version 2.0
  */
 package lib.com.jadarstudios.developercapes;
@@ -25,13 +25,13 @@ public class DevCapesTickHandler implements ITickHandler
     private static final DevCapesUtil instance = DevCapesUtil.getInstance();
 
     // Keep at false when packaging..
-    private final boolean debug = false;
+    private boolean debug = false;
 
     private int counter = 0;
     private boolean notified = false;
 
     @Override
-    public void tickStart(final EnumSet<TickType> type, final Object... tickData)
+    public void tickStart(EnumSet<TickType> type, Object... tickData)
     {
 
         // Will not run if there is no world, and if there are no player entities
@@ -40,7 +40,7 @@ public class DevCapesTickHandler implements ITickHandler
         {
             // List of players.
             @SuppressWarnings("unchecked")
-            final List<AbstractClientPlayer> players = mc.theWorld.playerEntities;
+            List<AbstractClientPlayer> players = mc.theWorld.playerEntities;
 
             // resets the counter if it is too high.
             if (counter >= players.size())
@@ -48,11 +48,11 @@ public class DevCapesTickHandler implements ITickHandler
                 counter = 0;
             }
 
-            final AbstractClientPlayer p = players.get(counter);
+            AbstractClientPlayer p = players.get(counter);
             if (p != null)
             {
 
-                final String lowerUsername = p.username.toLowerCase();
+                String lowerUsername = p.username.toLowerCase();
 
                 if (instance.getUserGroup(lowerUsername) != null)
                 {
@@ -62,7 +62,7 @@ public class DevCapesTickHandler implements ITickHandler
                     // capes.
                     if (!p.field_110315_c.func_110557_a())
                     {
-                        final String userGroup = instance.getUserGroup(lowerUsername);
+                        String userGroup = instance.getUserGroup(lowerUsername);
 
                         if (debug)
                         {
@@ -98,7 +98,7 @@ public class DevCapesTickHandler implements ITickHandler
      * Not used, stub method.
      */
     @Override
-    public void tickEnd(final EnumSet<TickType> type, final Object... tickData)
+    public void tickEnd(EnumSet<TickType> type, Object... tickData)
     {}
 
     @Override
