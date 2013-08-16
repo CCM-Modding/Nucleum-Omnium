@@ -117,7 +117,7 @@ public class SubBlock
      */
     public SubBlock(final Class<? extends MainBlock> block, final int id, final int meta, final Material material, final ITextureHelper texture, final ITileHelper tile)
     {
-        if (Block.blocksList[id] == null)
+        if (!(Block.blocksList[id] instanceof MainBlock))
         {
             Constructor<? extends MainBlock> c = null;
             try
