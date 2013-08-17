@@ -3,6 +3,7 @@
  */
 package ccm.nucleum.omnium.utils.helper;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -74,8 +75,26 @@ public final class JavaHelper extends BaseNIC
         }
     }
 
-    public static Date getDate(final TimeUnit minutes, final int time)
+    public static Date getDate(final TimeUnit unit, final int offset)
     {
+        // Get the default representation of "now".
+        Calendar when = Calendar.getInstance();
 
+        // Scale the offset according to its unit.
+        // Note that this defines a day as exactly 60*60*24 seconds,
+        // and ignores things like Daylight Savings Time.
+        long seconds = unit.toSeconds(offset);
+
+        // We do not support time increments longer than 24 millenia.
+        if (seconds > Integer.MAX_VALUE) {
+            seconds = Integer.MAX_VALUE;
+        } else if (seconds < Integer.MIN_VALUE) {
+            seconds = Integer.MIN_VALUE;
+        }
+
+        when.add(Calendar.SECOND, (int) seconds);
+
+        // Convert to a Date object.
+        return when.getTime();
     }
 }
