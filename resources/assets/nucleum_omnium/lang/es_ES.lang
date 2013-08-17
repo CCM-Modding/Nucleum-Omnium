@@ -1,6 +1,13 @@
-﻿#Commands
+###########
+#Commands
+###########
 commands.tpx.success=Teleportando %s a %s
 commands.tpx.success.coordinates=Teleportando %s a %s, %.2f, %.2f, %.2f
-commands.tpx.usage=/tpx [jugador teleportado] {objectivo de teleportacion} OR /tp [jugador teleportado] {ID de la Dimension} {x} {y} {z}
+commands.tpx.usage=/tpx <jugador teleportado> <objectivo de teleportacion> O /tp <jugador teleportado> {ID de la Dimension} {x} {y} {z}
+#Commands Vanilla Fixes
+commands.kill.fix.usage=/kill O /kill <jugador>
+commands.ban.fix.usage=/ban <nombre> [razón ...] [scala de tiempo] {tiempo}
+###########
 #Errors
+###########
 error.invalid.dim=%s ah intentado teleportarse ah una dimension que no existe (Dimension ID: %s)

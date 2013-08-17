@@ -6,7 +6,7 @@ package ccm.nucleum.omnium.utils.handler;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 import ccm.nucleum.omnium.base.BaseNIC;
-import ccm.nucleum.omnium.command.CommandKill;
+import ccm.nucleum.omnium.command.CommandKillFix;
 import ccm.nucleum.omnium.command.CommandNO;
 import ccm.nucleum.omnium.command.CommandTPS;
 import ccm.nucleum.omnium.command.CommandTPX;
@@ -22,7 +22,7 @@ public final class CommandHandler extends BaseNIC
 
         event.registerServerCommand(new CommandTPS());
 
-        event.registerServerCommand(new CommandKill());
+        event.registerServerCommand(new CommandKillFix());
 
         if (!Properties.mystLoaded)
         {

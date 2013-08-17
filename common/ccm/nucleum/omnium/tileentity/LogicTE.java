@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.tileentity.interfaces.ITileLogic;
 import ccm.nucleum.omnium.utils.handler.LogHandler;
-import ccm.nucleum.omnium.utils.lib.TileConstants;
+import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 /**
  * LogicTE
@@ -118,9 +118,9 @@ public class LogicTE extends InventoryTE
     @Override
     public void readFromNBT(final NBTTagCompound nbt)
     {
-        if (nbt.hasKey(TileConstants.NBT_TE_SRC_LOGIC))
+        if (nbt.hasKey(NBTConstants.NBT_TE_SRC_LOGIC))
         {
-            final String tmp = nbt.getString(TileConstants.NBT_TE_SRC_LOGIC);
+            final String tmp = nbt.getString(NBTConstants.NBT_TE_SRC_LOGIC);
             LogHandler.debug(tmp);
             try
             {
@@ -181,7 +181,7 @@ public class LogicTE extends InventoryTE
         {
             if (srclogic != null)
             {
-                nbt.setString(TileConstants.NBT_TE_SRC_LOGIC, srclogic.getName());
+                nbt.setString(NBTConstants.NBT_TE_SRC_LOGIC, srclogic.getName());
                 LogHandler.debug(srclogic.getName());
             } else
             {

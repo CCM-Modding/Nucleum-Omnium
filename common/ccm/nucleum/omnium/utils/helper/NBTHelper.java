@@ -1,228 +1,106 @@
 /**
- * CCM Modding, Nucleum Omnium
+ * CCM Modding, Nucleum-Omnium
  */
 package ccm.nucleum.omnium.utils.helper;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import ccm.nucleum.omnium.base.BaseNIC;
 
 /**
  * NBTHelper
+ * <p>
+ * 
+ * @author Captain_Shadows
  */
-public final class NBTHelper extends BaseNIC
+public class NBTHelper extends BaseNIC
 {
 
-    /**
-     * Initializes the NBT Tag Compound for the given item if it is null
-     * 
-     * @param item
-     *            The item for which its NBT Tag Compound is being checked for initialization
-     */
-    public static void initCompound(final ItemStack item)
-    {
-
-        if (item.getTagCompound() == null)
-        {
-            item.setTagCompound(new NBTTagCompound());
-        }
-    }
-
-    public static boolean hasTag(final ItemStack item, final String keyName)
-    {
-
-        if (item.getTagCompound() != null)
-        {
-            return item.getTagCompound().hasKey(keyName);
-        }
-
-        return false;
-    }
-
-    public static void removeTag(final ItemStack item, final String keyName)
-    {
-
-        if (item.getTagCompound() != null)
-        {
-            item.getTagCompound().removeTag(keyName);
-        }
-    }
-
     // String
-    public static String getString(final ItemStack item, final String keyName)
+    public static String getString(final NBTTagCompound nbt, final String keyName)
     {
-
-        initCompound(item);
-
-        if (!item.getTagCompound().hasKey(keyName))
+        if (!nbt.hasKey(keyName))
         {
-            setString(item, keyName, "");
+            nbt.setString(keyName, "");
         }
 
-        return item.getTagCompound().getString(keyName);
-    }
-
-    public static void setString(final ItemStack item, final String keyName, final String keyValue)
-    {
-
-        initCompound(item);
-
-        item.getTagCompound().setString(keyName, keyValue);
+        return nbt.getString(keyName);
     }
 
     // boolean
-    public static boolean getBoolean(final ItemStack item, final String keyName)
+    public static boolean getBoolean(final NBTTagCompound nbt, final String keyName)
     {
-
-        initCompound(item);
-
-        if (!item.getTagCompound().hasKey(keyName))
+        if (!nbt.hasKey(keyName))
         {
-            setBoolean(item, keyName, false);
+            nbt.setBoolean(keyName, false);
         }
 
-        return item.getTagCompound().getBoolean(keyName);
-    }
-
-    public static void setBoolean(final ItemStack item, final String keyName, final boolean keyValue)
-    {
-
-        initCompound(item);
-
-        item.getTagCompound().setBoolean(keyName, keyValue);
+        return nbt.getBoolean(keyName);
     }
 
     // byte
-    public static byte getByte(final ItemStack item, final String keyName)
+    public static byte getByte(final NBTTagCompound nbt, final String keyName)
     {
-
-        initCompound(item);
-
-        if (!item.getTagCompound().hasKey(keyName))
+        if (!nbt.hasKey(keyName))
         {
-            setByte(item, keyName, (byte) 0);
+            nbt.setByte(keyName, (byte) 0);
         }
 
-        return item.getTagCompound().getByte(keyName);
-    }
-
-    public static void setByte(final ItemStack item, final String keyName, final byte keyValue)
-    {
-
-        initCompound(item);
-
-        item.getTagCompound().setByte(keyName, keyValue);
+        return nbt.getByte(keyName);
     }
 
     // short
-    public static short getShort(final ItemStack item, final String keyName)
+    public static short getShort(final NBTTagCompound nbt, final String keyName)
     {
-
-        initCompound(item);
-
-        if (!item.getTagCompound().hasKey(keyName))
+        if (!nbt.hasKey(keyName))
         {
-            setShort(item, keyName, (short) 0);
+            nbt.setShort(keyName, (short) 0);
         }
 
-        return item.getTagCompound().getShort(keyName);
-    }
-
-    public static void setShort(final ItemStack item, final String keyName, final short keyValue)
-    {
-
-        initCompound(item);
-
-        item.getTagCompound().setShort(keyName, keyValue);
+        return nbt.getShort(keyName);
     }
 
     // int
-    public static int getInt(final ItemStack item, final String keyName)
+    public static int getInt(final NBTTagCompound nbt, final String keyName)
     {
-
-        initCompound(item);
-
-        if (!item.getTagCompound().hasKey(keyName))
+        if (!nbt.hasKey(keyName))
         {
-            setInteger(item, keyName, 0);
+            nbt.setInteger(keyName, 0);
         }
 
-        return item.getTagCompound().getInteger(keyName);
-    }
-
-    public static void setInteger(final ItemStack item, final String keyName, final int keyValue)
-    {
-
-        initCompound(item);
-
-        item.getTagCompound().setInteger(keyName, keyValue);
+        return nbt.getInteger(keyName);
     }
 
     // long
-    public static long getLong(final ItemStack item, final String keyName)
+    public static long getLong(final NBTTagCompound nbt, final String keyName)
     {
-
-        initCompound(item);
-
-        if (!item.getTagCompound().hasKey(keyName))
+        if (!nbt.hasKey(keyName))
         {
-            setLong(item, keyName, 0);
+            nbt.setLong(keyName, 0);
         }
 
-        return item.getTagCompound().getLong(keyName);
-    }
-
-    public static void setLong(final ItemStack item, final String keyName, final long keyValue)
-    {
-
-        initCompound(item);
-
-        item.getTagCompound().setLong(keyName, keyValue);
+        return nbt.getLong(keyName);
     }
 
     // float
-    public static float getFloat(final ItemStack item, final String keyName)
+    public static float getFloat(final NBTTagCompound nbt, final String keyName)
     {
-
-        initCompound(item);
-
-        if (!item.getTagCompound().hasKey(keyName))
+        if (!nbt.hasKey(keyName))
         {
-            setFloat(item, keyName, 0);
+            nbt.setFloat(keyName, 0);
         }
 
-        return item.getTagCompound().getFloat(keyName);
-    }
-
-    public static void setFloat(final ItemStack item, final String keyName, final float keyValue)
-    {
-
-        initCompound(item);
-
-        item.getTagCompound().setFloat(keyName, keyValue);
+        return nbt.getFloat(keyName);
     }
 
     // double
-    public static double getDouble(final ItemStack item, final String keyName)
+    public static double getDouble(final NBTTagCompound nbt, final String keyName)
     {
-
-        initCompound(item);
-
-        if (!item.getTagCompound().hasKey(keyName))
+        if (!nbt.hasKey(keyName))
         {
-            setDouble(item, keyName, 0);
+            nbt.setDouble(keyName, 0);
         }
 
-        return item.getTagCompound().getDouble(keyName);
+        return nbt.getDouble(keyName);
     }
-
-    public static void setDouble(final ItemStack item, final String keyName, final double keyValue)
-    {
-
-        initCompound(item);
-
-        item.getTagCompound().setDouble(keyName, keyValue);
-    }
-
 }

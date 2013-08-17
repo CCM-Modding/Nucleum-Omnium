@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import ccm.nucleum.omnium.tileentity.interfaces.IGUITileLogic;
-import ccm.nucleum.omnium.utils.lib.TileConstants;
+import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 /**
  * GUILogic
@@ -43,9 +43,9 @@ public abstract class GUILogic extends BaseLogic implements IGUITileLogic
     @Override
     public void readFromNBT(final NBTTagCompound nbt)
     {
-        if (nbt.hasKey(TileConstants.NBT_TE_PROGRESS))
+        if (nbt.hasKey(NBTConstants.NBT_TE_PROGRESS))
         {
-            progress = nbt.getInteger(TileConstants.NBT_TE_PROGRESS);
+            progress = nbt.getInteger(NBTConstants.NBT_TE_PROGRESS);
         }
     }
 
@@ -58,6 +58,6 @@ public abstract class GUILogic extends BaseLogic implements IGUITileLogic
     @Override
     public void writeToNBT(final NBTTagCompound nbt)
     {
-        nbt.setInteger(TileConstants.NBT_TE_PROGRESS, progress);
+        nbt.setInteger(NBTConstants.NBT_TE_PROGRESS, progress);
     }
 }

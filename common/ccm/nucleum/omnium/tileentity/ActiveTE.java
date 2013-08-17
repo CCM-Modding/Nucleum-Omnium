@@ -6,7 +6,7 @@ package ccm.nucleum.omnium.tileentity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import ccm.nucleum.omnium.utils.lib.TileConstants;
+import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 /**
  * ActiveTE
@@ -38,9 +38,9 @@ public class ActiveTE extends LogicTE
     {
         super.readFromNBT(nbtTagCompound);
 
-        if (nbtTagCompound.hasKey(TileConstants.NBT_TE_STATE))
+        if (nbtTagCompound.hasKey(NBTConstants.NBT_TE_STATE))
         {
-            state = nbtTagCompound.getBoolean(TileConstants.NBT_TE_STATE);
+            state = nbtTagCompound.getBoolean(NBTConstants.NBT_TE_STATE);
         }
     }
 
@@ -60,6 +60,6 @@ public class ActiveTE extends LogicTE
     public void writeToNBT(final NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
-        nbtTagCompound.setBoolean(TileConstants.NBT_TE_STATE, state);
+        nbtTagCompound.setBoolean(NBTConstants.NBT_TE_STATE, state);
     }
 }

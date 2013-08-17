@@ -16,4 +16,5 @@ public final class Commands extends BaseNIC
 
     public static final String COMMAND_KILL = "kill";
 
+    public static final String COMMAND_BAN = "ban";
 }

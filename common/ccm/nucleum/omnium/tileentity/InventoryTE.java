@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import ccm.nucleum.omnium.utils.helper.FunctionHelper;
 import ccm.nucleum.omnium.utils.helper.InventoryHelper;
-import ccm.nucleum.omnium.utils.lib.TileConstants;
+import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 /**
  * InventoryTE
@@ -124,13 +124,13 @@ public class InventoryTE extends BaseTE implements IInventory
     public void readFromNBT(final NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        if (nbt.hasKey(TileConstants.NBT_TE_INVENTORY_SIZE))
+        if (nbt.hasKey(NBTConstants.NBT_TE_INVENTORY_SIZE))
         {
-            setInventorySize(nbt.getInteger(TileConstants.NBT_TE_INVENTORY_SIZE));
+            setInventorySize(nbt.getInteger(NBTConstants.NBT_TE_INVENTORY_SIZE));
         }
-        if (nbt.hasKey(TileConstants.INVENTORY))
+        if (nbt.hasKey(NBTConstants.INVENTORY))
         {
-            setInventory(InventoryHelper.readInventoryFromNBT(nbt.getTagList(TileConstants.INVENTORY), getSizeInventory()));
+            setInventory(InventoryHelper.readInventoryFromNBT(nbt.getTagList(NBTConstants.INVENTORY), getSizeInventory()));
         }
     }
 
@@ -167,7 +167,7 @@ public class InventoryTE extends BaseTE implements IInventory
     public void writeToNBT(final NBTTagCompound nbt)
     {
         super.writeToNBT(nbt);
-        nbt.setInteger(TileConstants.NBT_TE_INVENTORY_SIZE, getSizeInventory());
-        nbt.setTag(TileConstants.INVENTORY, InventoryHelper.writeInventoryToNBT(getInventory()));
+        nbt.setInteger(NBTConstants.NBT_TE_INVENTORY_SIZE, getSizeInventory());
+        nbt.setTag(NBTConstants.INVENTORY, InventoryHelper.writeInventoryToNBT(getInventory()));
     }
 }

@@ -3,58 +3,20 @@
  */
 package ccm.nucleum.omnium.command;
 
-import java.util.List;
-
-import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandKill;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.DamageSource;
 
 import ccm.nucleum.omnium.utils.helper.CommandHelper;
-import ccm.nucleum.omnium.utils.lib.Commands;
 
-public class CommandKill extends CommandBase
+public class CommandKillFix extends CommandKill
 {
-
-    /**
-     * Adds the strings available in this command to the given list of tab completion options.
-     */
-    @Override
-    public List addTabCompletionOptions(final ICommandSender sender, final String[] args)
-    {
-        return (args.length != 1) && (args.length != 2) ? null : CommandBase.getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames());
-    }
-
-    @Override
-    public String getCommandName()
-    {
-        return Commands.COMMAND_KILL;
-    }
-
     @Override
     public String getCommandUsage(final ICommandSender sender)
     {
-        return "commands.kill.usage";
-    }
-
-    /**
-     * Return the required permission level for this command.
-     */
-    @Override
-    public int getRequiredPermissionLevel()
-    {
-        return 2;
-    }
-
-    /**
-     * Return whether the specified command parameter index is a username parameter.
-     */
-    @Override
-    public boolean isUsernameIndex(final String[] args, final int userIndex)
-    {
-        return userIndex == 0;
+        return "commands.kill.fix.usage";
     }
 
     @Override

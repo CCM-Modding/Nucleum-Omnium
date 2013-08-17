@@ -3,6 +3,9 @@
  */
 package ccm.nucleum.omnium.utils.helper;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import ccm.nucleum.omnium.base.BaseNIC;
 import ccm.nucleum.omnium.utils.handler.LogHandler;
 
@@ -69,5 +72,10 @@ public final class JavaHelper extends BaseNIC
         {
             return input.substring(0, 1).toLowerCase() + input.substring(1);
         }
+    }
+
+    public static Date getDate(final TimeUnit minutes, final int time)
+    {
+
     }
 }

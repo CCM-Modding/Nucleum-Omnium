@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 import ccm.nucleum.omnium.tileentity.BaseTE;
-import ccm.nucleum.omnium.utils.lib.TileConstants;
+import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 public final class BaseTEData
 {
@@ -168,17 +168,17 @@ public final class BaseTEData
      */
     public void readFromNBT(final NBTTagCompound nbt)
     {
-        if (nbt.hasKey(TileConstants.NBT_TE_DIRECTION))
+        if (nbt.hasKey(NBTConstants.NBT_TE_DIRECTION))
         {
-            orientation = ForgeDirection.getOrientation(nbt.getByte(TileConstants.NBT_TE_DIRECTION));
+            orientation = ForgeDirection.getOrientation(nbt.getByte(NBTConstants.NBT_TE_DIRECTION));
         }
-        if (nbt.hasKey(TileConstants.NBT_TE_OWNER))
+        if (nbt.hasKey(NBTConstants.NBT_TE_OWNER))
         {
-            owner = nbt.getString(TileConstants.NBT_TE_OWNER);
+            owner = nbt.getString(NBTConstants.NBT_TE_OWNER);
         }
-        if (nbt.hasKey(TileConstants.NBT_TE_CUSTOM_NAME))
+        if (nbt.hasKey(NBTConstants.NBT_TE_CUSTOM_NAME))
         {
-            customName = nbt.getString(TileConstants.NBT_TE_CUSTOM_NAME);
+            customName = nbt.getString(NBTConstants.NBT_TE_CUSTOM_NAME);
         }
     }
 
@@ -228,14 +228,14 @@ public final class BaseTEData
      */
     public void writeToNBT(final NBTTagCompound nbt)
     {
-        nbt.setByte(TileConstants.NBT_TE_DIRECTION, (byte) orientation.ordinal());
+        nbt.setByte(NBTConstants.NBT_TE_DIRECTION, (byte) orientation.ordinal());
         if (hasOwner())
         {
-            nbt.setString(TileConstants.NBT_TE_OWNER, owner);
+            nbt.setString(NBTConstants.NBT_TE_OWNER, owner);
         }
         if (hasCustomName())
         {
-            nbt.setString(TileConstants.NBT_TE_CUSTOM_NAME, customName);
+            nbt.setString(NBTConstants.NBT_TE_CUSTOM_NAME, customName);
         }
     }
 }

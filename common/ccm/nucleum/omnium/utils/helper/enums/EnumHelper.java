@@ -4,7 +4,7 @@
 package ccm.nucleum.omnium.utils.helper.enums;
 
 import ccm.nucleum.omnium.base.BaseNIC;
-import ccm.nucleum.omnium.utils.lib.TileConstants;
+import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 /**
  * EnumHelper
@@ -21,6 +21,6 @@ public class EnumHelper extends BaseNIC
      */
     public static String getTileID(final Enum<?> enu)
     {
-        return TileConstants.CONTAINER + enu.name() + ".name";
+        return NBTConstants.CONTAINER + enu.name() + ".name";
     }
 }
