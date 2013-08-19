@@ -3,13 +3,13 @@
  */
 package ccm.nucleum.omnium.command;
 
+import static ccm.nucleum.omnium.utils.helper.CommandHelper.getPlayer;
+import static ccm.nucleum.omnium.utils.helper.CommandHelper.sendChat;
+
 import net.minecraft.command.CommandKill;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.DamageSource;
-
-import ccm.nucleum.omnium.utils.helper.CommandHelper;
 
 public class CommandKillFix extends CommandKill
 {
@@ -24,19 +24,19 @@ public class CommandKillFix extends CommandKill
     {
         if (args.length == 1)
         {
-            final EntityPlayerMP playerDead = CommandHelper.getPlayer(sender, args[0]);
+            final EntityPlayerMP playerDead = getPlayer(sender, args[0]);
             playerDead.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE);
-            playerDead.sendChatToPlayer(ChatMessageComponent.func_111077_e("commands.kill.success"));
+            sendChat(playerDead, "commands.kill.success");
         } else
         {
-            final EntityPlayerMP playerDead = CommandHelper.getPlayer(sender);
+            final EntityPlayerMP playerDead = getPlayer(sender);
             if (args.length == 0)
             {
                 playerDead.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE);
-                playerDead.sendChatToPlayer(ChatMessageComponent.func_111077_e("commands.kill.success"));
+                sendChat(playerDead, "commands.kill.success");
             } else
             {
-                playerDead.sendChatToPlayer(ChatMessageComponent.func_111077_e(getCommandUsage(sender)));
+                sendChat(playerDead, getCommandUsage(sender));
             }
         }
     }

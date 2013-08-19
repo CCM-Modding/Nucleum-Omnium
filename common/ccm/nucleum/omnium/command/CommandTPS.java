@@ -3,6 +3,8 @@
  */
 package ccm.nucleum.omnium.command;
 
+import static ccm.nucleum.omnium.utils.helper.CommandHelper.sendChat;
+
 import java.text.DecimalFormat;
 
 import net.minecraft.command.CommandBase;
@@ -11,7 +13,6 @@ import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.world.World;
 
 import ccm.nucleum.omnium.NucleumOmnium;
-import ccm.nucleum.omnium.utils.helper.CommandHelper;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
 import ccm.nucleum.omnium.utils.lib.Commands;
 
@@ -72,20 +73,17 @@ public class CommandTPS extends CommandBase
     @Override
     public void processCommand(final ICommandSender sender, final String[] args)
     {
-        String tmp;
-        final StringBuilder b = new StringBuilder();
         if (args.length < 1)
         {
 
             double tps = getTps(null);
             double tickms = getTickMs(null);
 
-            CommandHelper.sendChatToPlayer(sender, "--------------------------------------------------");
+            sendChat(sender, "--------------------------------------------------");
 
-            tmp = String.format("Overall: %s TPS/%sMS (%s%%)", floatfmt.format(tps), floatfmt.format(tickms), ((int) ((tps / 20.0D) * 100.0D)));
-            CommandHelper.sendChatToPlayer(sender, tmp);
+            sendChat(sender, "Overall: %s TPS/%sMS (%s%%)", floatfmt.format(tps), floatfmt.format(tickms), ((int) ((tps / 20.0D) * 100.0D)));
 
-            CommandHelper.sendChatToPlayer(sender);
+            sendChat(sender);
 
             for (final World world : NucleumOmnium.server.worldServers)
             {
@@ -93,12 +91,11 @@ public class CommandTPS extends CommandBase
                 tps = getTps(world);
                 tickms = getTickMs(world);
 
-                tmp = String.format("%s [%s]: TPS/%sMS (%s%%)", world.provider.getDimensionName(), world.provider.dimensionId, floatfmt.format(tps), floatfmt.format(tickms),
+                sendChat(sender, "%s [%s]: TPS/%sMS (%s%%)", world.provider.getDimensionName(), world.provider.dimensionId, floatfmt.format(tps), floatfmt.format(tickms),
                         ((int) ((tps / 20.0D) * 100.0D)));
-                CommandHelper.sendChatToPlayer(sender, tmp);
             }
 
-            CommandHelper.sendChatToPlayer(sender, "--------------------------------------------------");
+            sendChat(sender, "--------------------------------------------------");
 
         } else if (args[0].toLowerCase().charAt(0) == 'o')
         {
@@ -106,16 +103,13 @@ public class CommandTPS extends CommandBase
             final double tickms = getTickMs(null);
             final double tps = getTps(null);
 
-            CommandHelper.sendChatToPlayer(sender, "--------------------------------------------------");
-            CommandHelper.sendChatToPlayer(sender, "Overall server tick:");
-            CommandHelper.sendChatToPlayer(sender);
-            b.append(String.format("TPS: %s TPS of %s TPS (%s%%)\n", floatfmt.format(tps), floatfmt.format(20L), ((int) ((tps / 20.0D) * 100.0D))));
-
-            b.append(String.format("Tick Time: %s ms of %s ms", floatfmt.format(tickms), floatfmt.format(50L)));
-
-            CommandHelper.sendChatToPlayer(sender, "--------------------------------------------------");
-
-            CommandHelper.sendChatToPlayer(sender, b.toString());
+            sendChat(sender, "--------------------------------------------------");
+            sendChat(sender, "Overall server tick:");
+            sendChat(sender);
+            sendChat(sender, "TPS: %s TPS of %s TPS (%s%%)\n", floatfmt.format(tps), floatfmt.format(20L), ((int) ((tps / 20.0D) * 100.0D)));
+            sendChat(sender);
+            sendChat(sender, "Tick Time: %s ms of %s ms", floatfmt.format(tickms), floatfmt.format(50L));
+            sendChat(sender, "--------------------------------------------------");
 
         } else if (args[0].toLowerCase().charAt(0) == 'a')
         {
@@ -123,14 +117,13 @@ public class CommandTPS extends CommandBase
             final double tickms = getTickMs(null);
             final double tps = getTps(null);
 
-            b.append("--------------------------------------------------");
-            CommandHelper.sendChatToPlayer(sender);
-            b.append("Overall server tick:");
-            CommandHelper.sendChatToPlayer(sender);
-            b.append(String.format("TPS: %s TPS of %s TPS (%s%%)\n", floatfmt.format(tps), floatfmt.format(20L), ((int) ((tps / 20.0D) * 100.0D))));
-
-            b.append(String.format("Tick Time: %s ms of %s ms", floatfmt.format(tickms), floatfmt.format(50L)));
-            CommandHelper.sendChatToPlayer(sender);
+            sendChat(sender, "--------------------------------------------------");
+            sendChat(sender, "Overall server tick:");
+            sendChat(sender);
+            sendChat(sender, "TPS: %s TPS of %s TPS (%s%%)\n", floatfmt.format(tps), floatfmt.format(20L), ((int) ((tps / 20.0D) * 100.0D)));
+            sendChat(sender);
+            sendChat(sender, "Tick Time: %s ms of %s ms", floatfmt.format(tickms), floatfmt.format(50L));
+            sendChat(sender);
             int loadedChunks = 0;
             int entities = 0;
             int te = 0;
@@ -143,13 +136,11 @@ public class CommandTPS extends CommandBase
                 worlds++;
             }
 
-            b.append(String.format("Total Loaded Worlds/Chunks: %s/%s", worlds, loadedChunks));
-            CommandHelper.sendChatToPlayer(sender);
-            b.append(String.format("Total Entities/TileEntities: %s/%s", entities, te));
-            CommandHelper.sendChatToPlayer(sender);
-            b.append("--------------------------------------------------");
+            sendChat(sender, String.format("Total Loaded Worlds/Chunks: %s/%s", worlds, loadedChunks));
+            sendChat(sender);
+            sendChat(sender, String.format("Total Entities/TileEntities: %s/%s", entities, te));
+            sendChat(sender, "--------------------------------------------------");
 
-            CommandHelper.sendChatToPlayer(sender, b.toString());
         } else if (JavaHelper.isNumeric(args[0]))
         {
 
@@ -164,23 +155,21 @@ public class CommandTPS extends CommandBase
             final double tickms = getTickMs(world);
             final double tps = getTps(world);
 
-            b.append("--------------------------------------------------\n");
+            sendChat(sender, "--------------------------------------------------\n");
 
-            b.append(String.format("%s [%s]\n", world.provider.getDimensionName(), world.provider.dimensionId));
+            sendChat(sender, "%s [%s]\n", world.provider.getDimensionName(), world.provider.dimensionId);
 
-            b.append(String.format("Loaded chunks: %s\n", world.getChunkProvider().getLoadedChunkCount()));
+            sendChat(sender, "Loaded chunks: %s\n", world.getChunkProvider().getLoadedChunkCount());
 
-            b.append(String.format("TPS: %s/%s TPS (%s%%)\n", floatfmt.format(tps), floatfmt.format(20L), ((int) ((tps / 20.0D) * 100.0D))));
+            sendChat(sender, "TPS: %s/%s TPS (%s%%)\n", floatfmt.format(tps), floatfmt.format(20L), ((int) ((tps / 20.0D) * 100.0D)));
 
-            b.append(String.format("Tick Time: %s ms of %s ms\n", floatfmt.format(tickms), floatfmt.format(50L)));
+            sendChat(sender, "Tick Time: %s ms of %s ms\n", floatfmt.format(tickms), floatfmt.format(50L));
 
-            b.append(String.format("Entities: %s\n", world.loadedEntityList.size()));
+            sendChat(sender, "Entities: %s\n", world.loadedEntityList.size());
 
-            b.append(String.format("Tile entities: %s\n", world.loadedTileEntityList.size()));
+            sendChat(sender, "Tile entities: %s\n", world.loadedTileEntityList.size());
 
-            b.append("--------------------------------------------------");
-
-            CommandHelper.sendChatToPlayer(sender, b.toString());
+            sendChat(sender, "--------------------------------------------------");
         }
     }
 }

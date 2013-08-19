@@ -3,6 +3,8 @@
  */
 package ccm.nucleum.omnium.command;
 
+import static ccm.nucleum.omnium.utils.helper.CommandHelper.getPlayer;
+
 import java.util.List;
 
 import net.minecraft.command.CommandBase;
@@ -13,9 +15,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
-import ccm.nucleum.omnium.utils.helper.CommandHelper;
 import ccm.nucleum.omnium.utils.helper.FunctionHelper;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
+import ccm.nucleum.omnium.utils.helper.TeleportHelper;
 import ccm.nucleum.omnium.utils.lib.Commands;
 
 public class CommandTPX extends CommandBase
@@ -77,7 +79,7 @@ public class CommandTPX extends CommandBase
                 if (dimension != null)
                 {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();
-                    CommandHelper.teleportPlayer(sender, CommandHelper.getPlayer(sender), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
+                    TeleportHelper.teleportPlayer(sender, getPlayer(sender), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
                 } else
                 {
                     CommandBase.notifyAdmins(sender, "error.invalid.dim", new Object[]
@@ -85,7 +87,7 @@ public class CommandTPX extends CommandBase
                 }
             } else
             {
-                CommandHelper.teleportPlayer(sender, CommandHelper.getPlayer(sender), CommandHelper.getPlayer(sender, args[args.length - 1]));
+                TeleportHelper.teleportPlayer(sender, getPlayer(sender), getPlayer(sender, args[args.length - 1]));
             }
         } else if (args.length == 2)
         {
@@ -95,8 +97,7 @@ public class CommandTPX extends CommandBase
                 if (dimension != null)
                 {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();
-                    CommandHelper
-                            .teleportPlayer(sender, CommandHelper.getPlayer(sender, args[args.length - 2]), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
+                    TeleportHelper.teleportPlayer(sender, getPlayer(sender, args[args.length - 2]), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
                 } else
                 {
                     CommandBase.notifyAdmins(sender, "error.invalid.dim", new Object[]
@@ -104,31 +105,31 @@ public class CommandTPX extends CommandBase
                 }
             } else
             {
-                CommandHelper.teleportPlayer(sender, CommandHelper.getPlayer(sender, args[args.length - 2]), CommandHelper.getPlayer(sender, args[args.length - 1]));
+                TeleportHelper.teleportPlayer(sender, getPlayer(sender, args[args.length - 2]), getPlayer(sender, args[args.length - 1]));
             }
         } else if (args.length == 4)
         {
-            final EntityPlayerMP player = CommandHelper.getPlayer(sender);
+            final EntityPlayerMP player = getPlayer(sender);
             if (player.worldObj != null)
             {
                 int i = args.length - 4;
                 final int dimension = CommandBase.parseInt(sender, args[i++]);
-                final double x = CommandHelper.checkPosition(sender, player.posX, args[i++]);
-                final double y = CommandHelper.checkPositionWithBounds(sender, player.posY, args[i++], 0, 0);
-                final double z = CommandHelper.checkPosition(sender, player.posZ, args[i++]);
-                CommandHelper.teleportPlayer(sender, player, dimension, x, y, z);
+                final double x = TeleportHelper.checkPosition(sender, player.posX, args[i++]);
+                final double y = TeleportHelper.checkPositionWithBounds(sender, player.posY, args[i++], 0, 0);
+                final double z = TeleportHelper.checkPosition(sender, player.posZ, args[i++]);
+                TeleportHelper.teleportPlayer(sender, player, dimension, x, y, z);
             }
         } else if (args.length == 5)
         {
-            final EntityPlayerMP player = CommandHelper.getPlayer(sender, args[args.length - 5]);
+            final EntityPlayerMP player = getPlayer(sender, args[args.length - 5]);
             if (player.worldObj != null)
             {
                 int i = args.length - 4;
                 final int dimension = CommandBase.parseInt(sender, args[i++]);
-                final double x = CommandHelper.checkPosition(sender, player.posX, args[i++]);
-                final double y = CommandHelper.checkPositionWithBounds(sender, player.posY, args[i++], 0, 0);
-                final double z = CommandHelper.checkPosition(sender, player.posZ, args[i++]);
-                CommandHelper.teleportPlayer(sender, player, dimension, x, y, z);
+                final double x = TeleportHelper.checkPosition(sender, player.posX, args[i++]);
+                final double y = TeleportHelper.checkPositionWithBounds(sender, player.posY, args[i++], 0, 0);
+                final double z = TeleportHelper.checkPosition(sender, player.posZ, args[i++]);
+                TeleportHelper.teleportPlayer(sender, player, dimension, x, y, z);
             }
         } else
         {
