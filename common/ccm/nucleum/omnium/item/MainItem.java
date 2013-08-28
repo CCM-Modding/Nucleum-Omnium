@@ -32,6 +32,9 @@ import ccm.nucleum.omnium.utils.helper.MathHelper;
 /**
  * MainItem
  * <p>
+ * A Item that redirects all of it's data to a specific meta data value
+ * <p>
+ * This class SHOULD NOT be extended unless it is something Item wide in which case one MUST Check that there is NO meta data way of doing the action
  * 
  * @author Captain_Shadows
  */
