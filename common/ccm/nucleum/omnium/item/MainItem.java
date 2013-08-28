@@ -520,6 +520,7 @@ public class MainItem extends Item
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getArmorTexture(final ItemStack stack, final Entity entity, final int slot, final String type)
     {
         final int damage = stack.getItemDamage();
@@ -652,6 +653,7 @@ public class MainItem extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
+    @SuppressWarnings("deprecation")
     public boolean hasEffect(final ItemStack stack, final int pass)
     {
         final int meta = stack.getItemDamage();
