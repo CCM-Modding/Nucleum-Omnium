@@ -36,6 +36,8 @@ public class CommandBanFix extends CommandServerBan
             final EntityPlayerMP entityplayermp = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(args[0]);
             final BanEntry banentry = new BanEntry(args[0]);
             banentry.setBannedBy(sender.getCommandSenderName());
+            final StringBuilder sb = new StringBuilder();
+            sb.append("You have been banned from the server for ");
 
             if (args.length >= 2)
             {
@@ -44,25 +46,13 @@ public class CommandBanFix extends CommandServerBan
 
             if (args.length >= 4)
             {
-                if (JavaHelper.isNumeric(args[3]))
+                if (JavaHelper.isNumeric(args[2]))
                 {
-                    final String scale = args[2];
-                    if (scale.equals("S") || scale.equalsIgnoreCase("Seconds"))
-                    {
-                        banentry.setBanEndDate(JavaHelper.getDate(TimeUnit.SECONDS, Integer.parseInt(args[3])));
-                    }
-                    if (scale.equals("M") || scale.equalsIgnoreCase("Minutes"))
-                    {
-                        banentry.setBanEndDate(JavaHelper.getDate(TimeUnit.MINUTES, Integer.parseInt(args[3])));
-                    }
-                    if (scale.equals("H") || scale.equalsIgnoreCase("Hours"))
-                    {
-                        banentry.setBanEndDate(JavaHelper.getDate(TimeUnit.HOURS, Integer.parseInt(args[3])));
-                    }
-                    if (scale.equals("D") || scale.equalsIgnoreCase("Days"))
-                    {
-                        banentry.setBanEndDate(JavaHelper.getDate(TimeUnit.DAYS, Integer.parseInt(args[3])));
-                    }
+                    final TimeUnit scale = getUnit(args[3]);
+                    banentry.setBanEndDate(JavaHelper.getDate(scale, Integer.parseInt(args[3])));
+                    sb.append(args[3]);
+                    sb.append(" ");
+                    sb.append(scale.name());
                 }
             }
 
@@ -70,7 +60,7 @@ public class CommandBanFix extends CommandServerBan
 
             if (entityplayermp != null)
             {
-                entityplayermp.playerNetServerHandler.kickPlayerFromServer("You are banned from this server.");
+                entityplayermp.playerNetServerHandler.kickPlayerFromServer(sb.toString());
             }
 
             notifyAdmins(sender, "commands.ban.success", new Object[]
@@ -78,6 +68,26 @@ public class CommandBanFix extends CommandServerBan
         } else
         {
             throw new WrongUsageException("commands.ban.usage", new Object[0]);
+        }
+    }
+
+    TimeUnit getUnit(final String name)
+    {
+        if (name.equals("S") || name.equalsIgnoreCase("Seconds"))
+        {
+            return TimeUnit.DAYS;
+        } else if (name.equals("M") || name.equalsIgnoreCase("Minutes"))
+        {
+            return TimeUnit.DAYS;
+        } else if (name.equals("H") || name.equalsIgnoreCase("Hours"))
+        {
+            return TimeUnit.DAYS;
+        } else if (name.equals("D") || name.equalsIgnoreCase("Days"))
+        {
+            return TimeUnit.DAYS;
+        } else
+        {
+            return null;
         }
     }
 }
