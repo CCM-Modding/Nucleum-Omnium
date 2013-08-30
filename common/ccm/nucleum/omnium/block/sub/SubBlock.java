@@ -330,7 +330,7 @@ public class SubBlock
             final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
             if (te != null)
             {
-                GuiHandler.openGui(FunctionHelper.getTEName(world, x, y, z), player, world, x, y, z);
+                GuiHandler.openGui(FunctionHelper.getTEName(world, x, y, z), player, x, y, z);
                 return true;
             } else
             {

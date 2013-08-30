@@ -130,12 +130,12 @@ public final class GuiHandler implements IGuiHandler
     /**
      * Opens the desired GUI for the Player
      */
-    public static void openGui(final String guiID, final EntityPlayer player, final World world, final int x, final int y, final int z)
+    public static void openGui(final String guiID, final EntityPlayer player, final int x, final int y, final int z)
     {
         final int fix = hash(guiID);
         if (instance().handlerList.containsKey(fix))
         {
-            player.openGui(NucleumOmnium.instance, fix, world, x, y, z);
+            player.openGui(NucleumOmnium.instance, fix, player.worldObj, x, y, z);
         } else
         {
             LogHandler.severe(NucleumOmnium.instance, "Player: %s, tried to open %s but it is not registered!! \n", player.username, guiID);

@@ -28,7 +28,7 @@ public class ItemHelper extends BaseNIC
         {
             final ItemStack tmp = inventory.getStackInSlot(slot);
 
-            final int dmg = MathHelper.getRandomInt(damage);
+            final int dmg = MathHelper.getRandInt(damage);
 
             tmp.setItemDamage(tmp.getItemDamage() + dmg);
 

@@ -22,28 +22,22 @@ public class CommandNO extends CommandBase
     @Override
     public boolean canCommandSenderUseCommand(final ICommandSender commandSender)
     {
-
         return true;
     }
 
     @Override
     public String getCommandName()
     {
-
         return Commands.COMMAND_NO;
     }
 
     @Override
     public String getCommandUsage(final ICommandSender icommandsender)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void processCommand(final ICommandSender icommandsender, final String[] astring)
-    {
-        // TODO Auto-generated method stub
-
-    }
+    {}
 }
