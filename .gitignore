@@ -1,20 +1,23 @@
+############
+# Java
+############
 *.class
-
-.Trashes
-.classpath
 *.ks
 
-#################
-## Eclipse
-#################
+# Package Files #
+*.jar
+*.war
+*.ear
 
+############
+# Eclipse
+############
 *.pydevproject
 .project
 .metadata
-bin/
-build/
-tmp/
-minecraft/
+bin/**
+tmp/**
+tmp/**/*
 *.tmp
 *.bak
 *.swp
@@ -22,8 +25,6 @@ minecraft/
 local.properties
 .classpath
 .settings/
-.gradle/
-.git/
 .loadpath
 
 # External tool builders
@@ -38,9 +39,9 @@ local.properties
 # PDT-specific
 .buildpath
 
-#############
-## Windows detritus
-#############
+############
+# Windows
+############
 
 # Windows image file caches
 Thumbs.db
@@ -52,9 +53,37 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-# Mac crap
+############
+# Mac
+############
 .DS_Store
-.DS_Store*
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
 .Spotlight-V100
-/build
-/modules
+.Trashes
+
+############
+# IntelliJ
+############
+*.iml
+*.ipr
+*.iws
+.idea/
+
+############
+# Minecraft
+############
+minecraft/
+build/**
+build/**/*
+
+############
+# Gradle
+############
+.gradle/
