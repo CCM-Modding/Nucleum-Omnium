@@ -68,7 +68,7 @@ public class NucleumOmnium extends BaseMod implements IMod
         proxy.initCapes();
         proxy.initEventHandling();
 
-        ModHandler.addMod(new MystcraftHandler());
+        ModHandler.addMod(MystcraftHandler.class);
 
         // Registers the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GuiHandler.instance());

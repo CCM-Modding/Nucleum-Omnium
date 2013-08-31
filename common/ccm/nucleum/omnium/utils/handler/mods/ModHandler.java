@@ -59,6 +59,26 @@ public final class ModHandler
     }
 
     /**
+     * ONLY USE IF IT HAS A NO PARAMETER CONSTRUCTOR
+     * 
+     * @param handler
+     *            The {@link IModHandler} to add to the List
+     */
+    public static void addMod(final Class<? extends IModHandler> handler)
+    {
+        try
+        {
+            INSTANCE.modsHandling.add(handler.newInstance());
+        } catch (final InstantiationException e)
+        {
+            e.printStackTrace();
+        } catch (final IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * THIS METHOD SHOULD NEVER BE CALLED BY ANY CLASS.
      * <p>
      * Except NucleumOmnium.java
