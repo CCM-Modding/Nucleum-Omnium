@@ -32,14 +32,13 @@ public final class ModLoadingHandler extends BaseNIC
     }
 
     /**
-     * "Loads" the Mod. In respect to {@link isModLoaded()}
+     * "Loads" the Mod
      */
     public static void loadMod(final IMod mod)
     {
         if (!isModLoaded(mod))
         {
             LogHandler.initLog(mod);
-
         } else
         {
             throw new DupeExeption(mod);
@@ -47,7 +46,7 @@ public final class ModLoadingHandler extends BaseNIC
     }
 
     /**
-     * "UnLoads" the Mod. In respect to {@link isModLoaded()}
+     * "UnLoads" the Mod
      */
     public static void unLoadMod(final IMod mod)
     {

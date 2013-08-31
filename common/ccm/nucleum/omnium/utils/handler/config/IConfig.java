@@ -9,7 +9,7 @@ public interface IConfig
 {
     public AdvConfiguration getConfiguration();
 
-    public void init();
-
     public IConfig setConfiguration(final AdvConfiguration config);
+
+    public void init();
 }
