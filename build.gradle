@@ -31,8 +31,7 @@ minecraft {
 	accessTransformers += 'resources/ccm_at.cfg'
 }
 
-processResources{
-
+processResources {
 	// Iterate through files to expand version on things not PNGs, or OBJs
 	eachFile { file ->
 		if (!(file.getPath().endsWith('png') || file.getPath().endsWith('obj'))){
@@ -45,8 +44,9 @@ jar {
 	appendix = 'universal'
 	manifest { 	
 		attributes 'MCVersion' : project.minecraft.minecraftVersion
-		attributes 'FMLCorePlugin' : 'ccm.nucleum_omnium.asm.OmniumLoader'
 		attributes 'Version' : project.version 
+		attributes 'FMLCorePlugin' : 'ccm.nucleum_omnium.asm.OmniumLoader'
+		attributes 'FMLCorePluginContainsFMLMod' : 'true'
 	}
 }
 
