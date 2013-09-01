@@ -46,32 +46,9 @@ import ccm.nucleum.omnium.utils.helper.enums.IBlockEnum;
 
 public class SubBlock
 {
-
-    public static SubBlock createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc)
-    {
-
-        final String texture = TextureHelper.getTexture(blockEnum.name(), textureLoc);
-        return setUp(blockEnum, new SubBlock(id, blockEnum.ordinal(), texture).setUnlocalizedName(blockEnum));
-    }
-
-    /*
-     * Static Factory's
-     */
-    public static SubBlock setUp(final Enum<? extends IBlockEnum> blockEnum, final SubBlock instance)
-    {
-
-        final MainBlock block = (MainBlock) instance.getBlock();
-
-        ((IBlockEnum) blockEnum).setBaseBlock(block);
-
-        MainBlock.registerID(block.blockID);
-
-        return instance;
-    }
-
-    /*
-     * DATA
-     */
+    // /////////////////////////////
+    // DATA
+    // /////////////////////////////
     private MainBlock mainBlock;
 
     private final int meta;
@@ -95,14 +72,9 @@ public class SubBlock
 
     public final List<ICollisionListener> collisionList = new ArrayList<ICollisionListener>();
 
-    public SubBlock(final Class<? extends MainBlock> block, final int id, final int meta, final ITextureHelper texture, final ITileHelper tile)
-    {
-        this(block, id, meta, Material.rock, texture, tile);
-    }
-
-    /*
-     * Constructors
-     */
+    // /////////////////////////////
+    // Constructors
+    // /////////////////////////////
     /**
      * Creates a new SubBlock instance
      * 
@@ -158,14 +130,19 @@ public class SubBlock
         this.tile = tile;
     }
 
-    public SubBlock(final int id, final int meta, final ITextureHelper texture, final ITileHelper tile)
+    public SubBlock(final Class<? extends MainBlock> block, final int id, final int meta, final ITextureHelper texture, final ITileHelper tile)
     {
-        this(id, meta, Material.rock, texture, tile);
+        this(block, id, meta, Material.rock, texture, tile);
     }
 
     public SubBlock(final int id, final int meta, final Material material, final ITextureHelper texture, final ITileHelper tile)
     {
         this(MainBlock.class, id, meta, material, texture, tile);
+    }
+
+    public SubBlock(final int id, final int meta, final ITextureHelper texture, final ITileHelper tile)
+    {
+        this(id, meta, Material.rock, texture, tile);
     }
 
     public SubBlock(final int id, final int meta, final Material material, final String iconName)
@@ -178,6 +155,9 @@ public class SubBlock
         this(id, meta, Material.rock, iconName);
     }
 
+    // /////////////////////////////
+    // Listeners
+    // /////////////////////////////
     /**
      * @param collisionL
      *            the {@link ICollisionListener} who's collide method will be called for this instance
@@ -188,9 +168,6 @@ public class SubBlock
         collisionList.add(collisionL);
     }
 
-    /*
-     * Listeners
-     */
     /**
      * @param displayL
      *            the {@link IDisplayListener} who's randomDisplayTick method will be called for this instance
@@ -201,6 +178,9 @@ public class SubBlock
         displayList.add(displayL);
     }
 
+    // /////////////////////////////
+    // Block Redirect Methods
+    // /////////////////////////////
     public void breakBlock(final World world, final int x, final int y, final int z, final int id, final int meta)
     {}
 
@@ -230,9 +210,6 @@ public class SubBlock
         return hardness;
     }
 
-    /*
-     * Block Redirect Methods
-     */
     @SideOnly(Side.CLIENT)
     public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side)
     {
@@ -415,6 +392,9 @@ public class SubBlock
         texture.registerIcons(register);
     }
 
+    // /////////////////////////////
+    // Instance Modifiers
+    // /////////////////////////////
     public SubBlock setBlockDrops(final ItemStack item, final int min, final int max)
     {
         drop = item.copy();
@@ -423,9 +403,6 @@ public class SubBlock
         return this;
     }
 
-    /*
-     * Instance Modifiers
-     */
     public SubBlock setCreativeTab(final CreativeTabs tab)
     {
         mainBlock.setCreativeTab(tab);
@@ -475,12 +452,179 @@ public class SubBlock
         return this;
     }
 
-    /*
-     * Object Redirect Methods
-     */
+    // /////////////////////////////
+    // Object Redirect Methods
+    // /////////////////////////////
     @Override
     public String toString()
     {
         return super.toString() + mainBlock.getUnlocalizedName();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = (prime * result) + Float.floatToIntBits(blockResistance);
+        result = (prime * result) + (collisionEffect ? 1231 : 1237);
+        result = (prime * result) + ((collisionList == null) ? 0 : collisionList.hashCode());
+        result = (prime * result) + ((displayList == null) ? 0 : displayList.hashCode());
+        result = (prime * result) + ((drop == null) ? 0 : drop.hashCode());
+        result = (prime * result) + dropMax;
+        result = (prime * result) + dropMin;
+        result = (prime * result) + Float.floatToIntBits(hardness);
+        result = (prime * result) + ((mainBlock == null) ? 0 : mainBlock.hashCode());
+        result = (prime * result) + meta;
+        result = (prime * result) + ((tab == null) ? 0 : tab.hashCode());
+        result = (prime * result) + ((texture == null) ? 0 : texture.hashCode());
+        result = (prime * result) + ((tile == null) ? 0 : tile.hashCode());
+        result = (prime * result) + ((unlocName == null) ? 0 : unlocName.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (!(obj instanceof SubBlock))
+        {
+            return false;
+        }
+        final SubBlock other = (SubBlock) obj;
+        if (Float.floatToIntBits(blockResistance) != Float.floatToIntBits(other.blockResistance))
+        {
+            return false;
+        }
+        if (collisionEffect != other.collisionEffect)
+        {
+            return false;
+        }
+        if (collisionList == null)
+        {
+            if (other.collisionList != null)
+            {
+                return false;
+            }
+        } else if (!collisionList.equals(other.collisionList))
+        {
+            return false;
+        }
+        if (displayList == null)
+        {
+            if (other.displayList != null)
+            {
+                return false;
+            }
+        } else if (!displayList.equals(other.displayList))
+        {
+            return false;
+        }
+        if (drop == null)
+        {
+            if (other.drop != null)
+            {
+                return false;
+            }
+        } else if (!drop.equals(other.drop))
+        {
+            return false;
+        }
+        if (dropMax != other.dropMax)
+        {
+            return false;
+        }
+        if (dropMin != other.dropMin)
+        {
+            return false;
+        }
+        if (Float.floatToIntBits(hardness) != Float.floatToIntBits(other.hardness))
+        {
+            return false;
+        }
+        if (mainBlock == null)
+        {
+            if (other.mainBlock != null)
+            {
+                return false;
+            }
+        } else if (!mainBlock.equals(other.mainBlock))
+        {
+            return false;
+        }
+        if (meta != other.meta)
+        {
+            return false;
+        }
+        if (tab == null)
+        {
+            if (other.tab != null)
+            {
+                return false;
+            }
+        } else if (!tab.equals(other.tab))
+        {
+            return false;
+        }
+        if (texture == null)
+        {
+            if (other.texture != null)
+            {
+                return false;
+            }
+        } else if (!texture.equals(other.texture))
+        {
+            return false;
+        }
+        if (tile == null)
+        {
+            if (other.tile != null)
+            {
+                return false;
+            }
+        } else if (!tile.equals(other.tile))
+        {
+            return false;
+        }
+        if (unlocName == null)
+        {
+            if (other.unlocName != null)
+            {
+                return false;
+            }
+        } else if (!unlocName.equals(other.unlocName))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    // /////////////////////////////
+    // Static Factory's
+    // /////////////////////////////
+    public static SubBlock createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc)
+    {
+
+        final String texture = TextureHelper.getTexture(blockEnum.name(), textureLoc);
+        return setUp(blockEnum, new SubBlock(id, blockEnum.ordinal(), texture).setUnlocalizedName(blockEnum));
+    }
+
+    public static SubBlock setUp(final Enum<? extends IBlockEnum> blockEnum, final SubBlock instance)
+    {
+
+        final MainBlock block = (MainBlock) instance.getBlock();
+
+        ((IBlockEnum) blockEnum).setBaseBlock(block);
+
+        MainBlock.registerID(block.blockID);
+
+        return instance;
     }
 }
