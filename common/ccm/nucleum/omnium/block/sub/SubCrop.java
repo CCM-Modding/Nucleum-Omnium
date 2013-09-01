@@ -18,37 +18,18 @@ import ccm.nucleum.omnium.utils.helper.enums.IBlockEnum;
 
 public class SubCrop extends SubBlock implements IPlantable
 {
-
-    /*
-     * Static Factory's
-     */
-    public static SubCrop createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc, final int stages, final float growthRate)
-    {
-
-        final String texture = TextureHelper.getTexture(blockEnum.name(), textureLoc);
-
-        final SubBlock block = setUp(blockEnum, new SubCrop(id, blockEnum.ordinal(), texture, stages, growthRate).setUnlocalizedName(blockEnum));
-        block.addDisplayListener(new CropGrowth());
-        return (SubCrop) block;
-    }
-
-    /*
-     * DATA
-     */
+    // /////////////////////////////
+    // DATA
+    // /////////////////////////////
     private int stage;
 
     private final int stages;
 
     private final float growthRate;
 
-    public SubCrop(final Class<? extends MainBlock> block, final int id, final int meta, final ITextureHelper texture, final int stages, final float growthRate)
-    {
-        this(block, id, meta, Material.plants, texture, stages, growthRate);
-    }
-
-    /*
-     * Constructors
-     */
+    // /////////////////////////////
+    // Constructors
+    // /////////////////////////////
     /**
      * @param stages
      *            Amount of stages that this crop should have
@@ -59,6 +40,11 @@ public class SubCrop extends SubBlock implements IPlantable
         super(block, id, meta, material, texture, new NoTile());
         this.stages = stages;
         this.growthRate = growthRate;
+    }
+
+    public SubCrop(final Class<? extends MainBlock> block, final int id, final int meta, final ITextureHelper texture, final int stages, final float growthRate)
+    {
+        this(block, id, meta, Material.plants, texture, stages, growthRate);
     }
 
     public SubCrop(final int id, final int meta, final ITextureHelper texture, final int stages, final float growthRate)
@@ -81,9 +67,9 @@ public class SubCrop extends SubBlock implements IPlantable
         this(id, meta, Material.plants, iconName, stages, growthRate);
     }
 
-    /*
-     * Methods
-     */
+    // /////////////////////////////
+    // Methods
+    // /////////////////////////////
     public int getCurrentStage()
     {
         return stage;
@@ -106,9 +92,9 @@ public class SubCrop extends SubBlock implements IPlantable
         return getDamageValue(world, x, y, z);
     }
 
-    /*
-     * IPlantable
-     */
+    // /////////////////////////////
+    // IPlantable
+    // /////////////////////////////
     @Override
     public EnumPlantType getPlantType(final World world, final int x, final int y, final int z)
     {
@@ -137,5 +123,18 @@ public class SubCrop extends SubBlock implements IPlantable
                 this.stage = stage;
             }
         }
+    }
+
+    // /////////////////////////////
+    // Static Factory's
+    // /////////////////////////////
+    public static SubCrop createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc, final int stages, final float growthRate)
+    {
+
+        final String texture = TextureHelper.getTexture(blockEnum.name(), textureLoc);
+
+        final SubBlock block = setUp(blockEnum, new SubCrop(id, blockEnum.ordinal(), texture, stages, growthRate).setUnlocalizedName(blockEnum));
+        block.addDisplayListener(new CropGrowth());
+        return (SubCrop) block;
     }
 }

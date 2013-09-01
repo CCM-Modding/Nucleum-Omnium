@@ -17,12 +17,7 @@ import ccm.nucleum.omnium.utils.lib.Commands;
 public class CommandCCM extends CommandBase
 {
     /** All the stored commands */
-    private static List<CommandBase> commands;
-
-    public CommandCCM()
-    {
-        commands = new ArrayList<CommandBase>();
-    }
+    private static List<CommandBase> commands = new ArrayList<CommandBase>();
 
     @Override
     public String getCommandName()
@@ -48,7 +43,7 @@ public class CommandCCM extends CommandBase
         if (args.length == 0)
         {
             throw new WrongUsageException(Commands.COMMAND_CCM_USAGE);
-        } else if ("help".equals(args[0]))
+        } else if ("help".equalsIgnoreCase(args[0]))
         {
             throw new WrongUsageException(Commands.COMMAND_CCM_USAGE);
         } else
@@ -74,7 +69,10 @@ public class CommandCCM extends CommandBase
     {
         if (cmd != null)
         {
-            commands.add(cmd);
+            if (!commands.contains(cmd))
+            {
+                commands.add(cmd);
+            }
         }
     }
 }

@@ -19,7 +19,9 @@ public final class ResourceHandler
     /** Single instance of this class */
     private static final ResourceHandler INSTANCE = new ResourceHandler();
 
+    // /////////////////////////////
     // Instance Stuff
+    // /////////////////////////////
     /** All the stored resources */
     private final Map<Integer, ResourceLocation> resources;
 
@@ -38,7 +40,9 @@ public final class ResourceHandler
         return instance().resources;
     }
 
+    // /////////////////////////////
     // Getters and "Setters"
+    // /////////////////////////////
     /** Adds a GUI texture */
     public static void addGUI(final IMod mod, final String name)
     {
@@ -69,7 +73,9 @@ public final class ResourceHandler
         return resources().get(hashModelTexture(name));
     }
 
+    // /////////////////////////////
     // Exterior Helpers
+    // /////////////////////////////
     /** Returns the file path to the Resource */
     public static String getModelLocation(final String name)
     {
@@ -89,7 +95,11 @@ public final class ResourceHandler
         return AdvancedModelLoader.loadModel(ResourceHandler.getModelLocation(name));
     }
 
+    // /////////////////////////////
     // Internal Helpers
+    // /////////////////////////////
+
+    // Hash Fixes
     /**
      * @param name
      *            The name of the GUI
@@ -120,6 +130,7 @@ public final class ResourceHandler
         return ("CCM.MODEL.TEXTURE." + name.toUpperCase() + "." + name.hashCode()).hashCode();
     }
 
+    // String Fixes
     /**
      * @param name
      *            The name of the GUI
