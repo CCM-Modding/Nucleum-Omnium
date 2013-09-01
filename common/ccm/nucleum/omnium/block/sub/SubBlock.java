@@ -38,10 +38,10 @@ import ccm.nucleum.omnium.block.texture.BasicTexture;
 import ccm.nucleum.omnium.block.tile.NoTile;
 import ccm.nucleum.omnium.tileentity.BaseTE;
 import ccm.nucleum.omnium.utils.handler.LogHandler;
-import ccm.nucleum.omnium.utils.handler.TextureHandler;
 import ccm.nucleum.omnium.utils.handler.gui.GuiHandler;
 import ccm.nucleum.omnium.utils.helper.BlockHelper;
 import ccm.nucleum.omnium.utils.helper.FunctionHelper;
+import ccm.nucleum.omnium.utils.helper.TextureHelper;
 import ccm.nucleum.omnium.utils.helper.enums.IBlockEnum;
 
 public class SubBlock
@@ -50,7 +50,7 @@ public class SubBlock
     public static SubBlock createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc)
     {
 
-        final String texture = TextureHandler.getTextureFromName(blockEnum.name(), textureLoc);
+        final String texture = TextureHelper.getTexture(blockEnum.name(), textureLoc);
         return setUp(blockEnum, new SubBlock(id, blockEnum.ordinal(), texture).setUnlocalizedName(blockEnum));
     }
 

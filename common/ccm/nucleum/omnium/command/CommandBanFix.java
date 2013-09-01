@@ -13,6 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.BanEntry;
 
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
+import ccm.nucleum.omnium.utils.lib.Commands;
 
 /**
  * CommandTmpBan
@@ -25,7 +26,7 @@ public class CommandBanFix extends CommandServerBan
     @Override
     public String getCommandUsage(final ICommandSender sender)
     {
-        return "commands.ban.fix.usage";
+        return Commands.COMMAND_BAN_USAGE;
     }
 
     @Override

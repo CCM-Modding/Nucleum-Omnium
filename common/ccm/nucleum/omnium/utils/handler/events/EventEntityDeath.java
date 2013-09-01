@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum-Omnium
  */
-package ccm.nucleum.omnium.utils.handler;
+package ccm.nucleum.omnium.utils.handler.events;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -16,7 +16,7 @@ import ccm.nucleum.omnium.utils.handler.entity.drop.EntityDropHandler;
  * 
  * @author Captain_Shadows
  */
-public final class EntityDeathHandler
+public final class EventEntityDeath
 {
     @ForgeSubscribe
     public void onEntityLivingDeath(final LivingDeathEvent event)

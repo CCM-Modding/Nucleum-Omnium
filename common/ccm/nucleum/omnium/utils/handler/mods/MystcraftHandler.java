@@ -30,6 +30,6 @@ public final class MystcraftHandler extends IModHandler
     @Override
     public void init()
     {
-        Properties.mystLoaded = true;
+        Properties.MYSTCARFT_LOADED = true;
     }
 }

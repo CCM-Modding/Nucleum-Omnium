@@ -12,20 +12,13 @@ package ccm.nucleum.omnium.utils.lib;
  */
 public enum BlockFacings
 {
-
-    /**
-     * Top of the Block
-     */
+    /** Top of the Block */
     Top,
 
-    /**
-     * Bottom of the Block
-     */
+    /** Bottom of the Block */
     Bottom,
 
-    /**
-     * Front of the Block
-     */
+    /** Front of the Block */
     Front,
 
     /**
@@ -49,8 +42,6 @@ public enum BlockFacings
      */
     Left,
 
-    /**
-     * Sides of the Block (Used when no specific sides are given)
-     */
+    /** Sides of the Block (Used when no specific sides are given) */
     Sides;
 }

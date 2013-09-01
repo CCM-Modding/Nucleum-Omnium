@@ -13,7 +13,7 @@ import ccm.nucleum.omnium.block.interfaces.ITextureHelper;
 import ccm.nucleum.omnium.block.sub.tick.CropGrowth;
 import ccm.nucleum.omnium.block.texture.CropTexture;
 import ccm.nucleum.omnium.block.tile.NoTile;
-import ccm.nucleum.omnium.utils.handler.TextureHandler;
+import ccm.nucleum.omnium.utils.helper.TextureHelper;
 import ccm.nucleum.omnium.utils.helper.enums.IBlockEnum;
 
 public class SubCrop extends SubBlock implements IPlantable
@@ -25,7 +25,7 @@ public class SubCrop extends SubBlock implements IPlantable
     public static SubCrop createAndSetUp(final Enum<? extends IBlockEnum> blockEnum, final int id, final String textureLoc, final int stages, final float growthRate)
     {
 
-        final String texture = TextureHandler.getTextureFromName(blockEnum.name(), textureLoc);
+        final String texture = TextureHelper.getTexture(blockEnum.name(), textureLoc);
 
         final SubBlock block = setUp(blockEnum, new SubCrop(id, blockEnum.ordinal(), texture, stages, growthRate).setUnlocalizedName(blockEnum));
         block.addDisplayListener(new CropGrowth());

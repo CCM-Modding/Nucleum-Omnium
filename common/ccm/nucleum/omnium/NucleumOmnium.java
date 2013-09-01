@@ -39,7 +39,7 @@ import lib.org.modstats.ModstatInfo;
 @Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = MOD_CHANNEL, packetHandler = PacketHandler.class)
 @ModstatInfo(prefix = MOD_PREFIX)
-public class NucleumOmnium extends BaseMod implements IMod
+public class NucleumOmnium extends CCMMod implements IMod
 {
 
     @Instance(MOD_ID)
@@ -84,7 +84,7 @@ public class NucleumOmnium extends BaseMod implements IMod
     public void serverStarting(final FMLServerStartingEvent event)
     {
         // Initialize the custom commands
-        CommandHandler.initCommands(event);
+        CommandHandler.init(event);
 
         server = event.getServer();
 

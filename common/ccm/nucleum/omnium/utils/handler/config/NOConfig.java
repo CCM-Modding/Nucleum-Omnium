@@ -24,16 +24,16 @@ public final class NOConfig implements IConfig
     {
         config.addCustomCategoryComment(CLIENT_SIDE, "This Category only has client side options");
 
-        Properties.rain = config.getProp(CLIENT_SIDE, "Should " + Archive.MOD_NAME + " turn off the rain sound for your client?", false);
+        Properties.RAIN = config.getProp(CLIENT_SIDE, "Should " + Archive.MOD_NAME + " turn off the rain sound for your client?", false);
 
-        Properties.capeHD = config.getProp(CLIENT_SIDE, "Should capes be High Definition?", true);
+        Properties.CAPE_HD = config.getProp(CLIENT_SIDE, "Should capes be High Definition?", true);
     }
 
     private void initConfigs(final AdvConfiguration config)
     {
         config.addCustomCategoryComment(UNIVERSAL, "This Category has options that affect both Client and Server");
 
-        Properties.debug = config.getProp(UNIVERSAL, "Should debug information be displayed?", true);
+        Properties.DEBUG = config.getProp(UNIVERSAL, "Should debug information be displayed?", true);
     }
 
     private void initServerConfigs(final AdvConfiguration config)

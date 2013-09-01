@@ -38,7 +38,7 @@ public final class ModLoadingHandler extends BaseNIC
     {
         if (!isModLoaded(mod))
         {
-            LogHandler.initLog(mod);
+            LogHandler.init(mod);
         } else
         {
             throw new DupeExeption(mod);

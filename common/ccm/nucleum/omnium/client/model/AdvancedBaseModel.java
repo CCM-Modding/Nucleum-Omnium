@@ -3,13 +3,12 @@
  */
 package ccm.nucleum.omnium.client.model;
 
-import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
 import ccm.nucleum.omnium.utils.handler.LogHandler;
-import ccm.nucleum.omnium.utils.handler.TextureHandler;
+import ccm.nucleum.omnium.utils.handler.ResourceHandler;
 
 /**
  * Advanced Base Model, to use with the Advanced Model Loader, Pending internal minor fix...
@@ -31,15 +30,16 @@ public class AdvancedBaseModel
     {
         name = resourceName;
         LogHandler.debug(name);
-        LogHandler.debug(TextureHandler.getModelLoc(name));
-        model = AdvancedModelLoader.loadModel(TextureHandler.getModelLoc(name));
+        LogHandler.debug(ResourceHandler.getModelLocation(name));
+        model = ResourceHandler.loadModel(name);
     }
 
     public void bindTexture()
     {
-        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(TextureHandler.getModelTexture(name));
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(ResourceHandler.getModelTexture(name));
     }
 
+    /** When calling this method the texture doesn't need to be binded */
     public void render()
     {
         // Bind texture

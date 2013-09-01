@@ -32,6 +32,26 @@ public final class JavaHelper extends BaseNIC
     }
 
     /**
+     * @param str
+     *            The String to test
+     * @return true if it is true, or on. false otherwise
+     */
+    public static boolean toBoolean(final String str)
+    {
+        if (str != null)
+        {
+            if (str.equalsIgnoreCase("true"))
+            {
+                return true;
+            } else if (str.equalsIgnoreCase("on"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Title Cases The String
      */
     public static String titleCase(final String input)
@@ -78,7 +98,7 @@ public final class JavaHelper extends BaseNIC
     public static Date getDate(final TimeUnit unit, final int offset)
     {
         // Get the default representation of "now".
-        Calendar when = Calendar.getInstance();
+        final Calendar when = Calendar.getInstance();
 
         // Scale the offset according to its unit.
         // Note that this defines a day as exactly 60*60*24 seconds,
@@ -86,9 +106,11 @@ public final class JavaHelper extends BaseNIC
         long seconds = unit.toSeconds(offset);
 
         // We do not support time increments longer than 24 millenia.
-        if (seconds > Integer.MAX_VALUE) {
+        if (seconds > Integer.MAX_VALUE)
+        {
             seconds = Integer.MAX_VALUE;
-        } else if (seconds < Integer.MIN_VALUE) {
+        } else if (seconds < Integer.MIN_VALUE)
+        {
             seconds = Integer.MIN_VALUE;
         }
 

@@ -17,7 +17,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void initCapes()
     {
-        if (Properties.capeHD)
+        if (Properties.CAPE_HD)
         {
             // Link for the file that makes the capes work (High Def Version)
             DevCapesUtil.getInstance().addFileUrl(Locations.HD_CAPES);

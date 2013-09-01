@@ -16,17 +16,13 @@ import ccm.nucleum.omnium.configuration.AdvConfiguration;
  * 
  * @author Captain_Shadows
  */
-public abstract class BaseMod implements IMod
+public abstract class CCMMod implements IMod
 {
 
-    /**
-     * Configuration Folder
-     */
+    /** Configuration Folder */
     private File config_Folder;
 
-    /**
-     * Current Configuration File
-     */
+    /** Current Configuration File */
     public static AdvConfiguration config;
 
     /**

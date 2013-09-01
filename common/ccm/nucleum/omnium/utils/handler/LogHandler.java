@@ -31,9 +31,9 @@ public final class LogHandler extends BaseNIC
 
     public static void debug(final Object message, final Object... data)
     {
-        if (Properties.debug)
+        if (Properties.DEBUG)
         {
-            System.out.println("[CCM]" + " [" + DEBUG + "] " + String.format(message.toString(), data));
+            System.out.println("[CCM] [" + DEBUG + "] " + String.format(message.toString(), data));
         }
     }
 
@@ -55,12 +55,7 @@ public final class LogHandler extends BaseNIC
         log(mod, Level.FINEST, message, data);
     }
 
-    /**
-     * Returns the logger for that mod
-     * 
-     * @param mod
-     * @return
-     */
+    /** Returns the logger for that mod */
     public static Logger getLog(final IMod mod)
     {
         if (modsLogged.containsKey(mod))
@@ -81,7 +76,7 @@ public final class LogHandler extends BaseNIC
     /**
      * Initializes the Logger for this Mod
      */
-    public static void initLog(final IMod mod)
+    public static void init(final IMod mod)
     {
         if (!modsLogged.containsKey(mod))
         {

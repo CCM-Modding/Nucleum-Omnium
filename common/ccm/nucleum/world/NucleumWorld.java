@@ -17,14 +17,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-import ccm.nucleum.omnium.BaseMod;
+import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.IMod;
 import ccm.nucleum.world.generator.WorldGenHandler;
 import ccm.nucleum.world.utils.TickHandlerWorld;
 import ccm.nucleum.world.utils.lib.Properties;
 
 @Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true)
-public class NucleumWorld extends BaseMod implements IMod
+public class NucleumWorld extends CCMMod implements IMod
 {
 
     @Instance(MOD_ID)

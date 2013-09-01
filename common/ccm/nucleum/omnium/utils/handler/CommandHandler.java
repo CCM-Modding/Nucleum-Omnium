@@ -3,11 +3,15 @@
  */
 package ccm.nucleum.omnium.utils.handler;
 
+import net.minecraft.command.CommandBase;
+
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.command.CommandBanFix;
+import ccm.nucleum.omnium.command.CommandCCM;
 import ccm.nucleum.omnium.command.CommandKillFix;
-import ccm.nucleum.omnium.command.CommandNO;
+import ccm.nucleum.omnium.command.CommandRain;
 import ccm.nucleum.omnium.command.CommandTPS;
 import ccm.nucleum.omnium.command.CommandTPX;
 import ccm.nucleum.omnium.utils.lib.Properties;
@@ -15,18 +19,29 @@ import ccm.nucleum.omnium.utils.lib.Properties;
 public final class CommandHandler extends BaseNIC
 {
 
-    public static void initCommands(final FMLServerStartingEvent event)
+    public static void init(final FMLServerStartingEvent event)
     {
+        register(event, new CommandCCM());
 
-        event.registerServerCommand(new CommandNO());
+        register(event, new CommandTPS());
 
-        event.registerServerCommand(new CommandTPS());
+        register(event, new CommandKillFix());
 
-        event.registerServerCommand(new CommandKillFix());
+        register(event, new CommandBanFix());
 
-        if (!Properties.mystLoaded)
+        if (!Properties.MYSTCARFT_LOADED)
         {
-            event.registerServerCommand(new CommandTPX());
+            register(event, new CommandTPX());
+        } else
+        {
+            CommandCCM.registerSub(new CommandTPX());
         }
+
+        CommandCCM.registerSub(new CommandRain());
+    }
+
+    static void register(final FMLServerStartingEvent event, final CommandBase cmd)
+    {
+        event.registerServerCommand(cmd);
     }
 }
