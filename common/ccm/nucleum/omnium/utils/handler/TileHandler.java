@@ -15,7 +15,9 @@ public final class TileHandler
     /** Single instance of this class */
     private static final TileHandler INSTANCE = new TileHandler();
 
+    // /////////////////////////////
     // Instance Stuff
+    // /////////////////////////////
     /** Map of all the TileEntitys */
     private final Map<Integer, TileEntity> tiles;
 
@@ -34,7 +36,9 @@ public final class TileHandler
         return instance().tiles;
     }
 
+    // /////////////////////////////
     // Getters and "Setters"
+    // /////////////////////////////
     /**
      * @param name
      *            The name of the TileEntity that you wish to get
@@ -70,7 +74,9 @@ public final class TileHandler
         tiles().put(id.hashCode(), tile);
     }
 
+    // /////////////////////////////
     // Internal Helpers
+    // /////////////////////////////
     /**
      * @param name
      *            The name of the Tile Entity

@@ -12,25 +12,6 @@ import ccm.nucleum.omnium.utils.handler.LogHandler;
 
 public final class ConfigurationHandler extends BaseNIC
 {
-
-    /**
-     * @param mod
-     *            The Mod that owns this Configuration
-     * @param iConf
-     *            The Class that implements {@link IConfig}
-     */
-    public static void init(final IMod mod, final Class<? extends IConfig> iConf)
-    {
-        try
-        {
-            init(mod, iConf.newInstance().setConfiguration(mod.getConfigFile()));
-        } catch (final Exception e)
-        {
-            LogHandler.severe(mod, "%s has had a problem creating an instance of its configuration", mod.getName());
-            e.printStackTrace();
-        }
-    }
-
     /**
      * @param config
      *            The {@link IConfig} that needs to be run
@@ -54,6 +35,24 @@ public final class ConfigurationHandler extends BaseNIC
         } finally
         {
             temp.save();
+        }
+    }
+
+    /**
+     * @param mod
+     *            The Mod that owns this Configuration
+     * @param iConf
+     *            The Class that implements {@link IConfig}
+     */
+    public static void init(final IMod mod, final Class<? extends IConfig> iConf)
+    {
+        try
+        {
+            init(mod, iConf.newInstance().setConfiguration(mod.getConfigFile()));
+        } catch (final Exception e)
+        {
+            LogHandler.severe(mod, "%s has had a problem creating an instance of its configuration", mod.getName());
+            e.printStackTrace();
         }
     }
 }
