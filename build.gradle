@@ -10,7 +10,7 @@ buildscript {
 apply plugin: "gmcp"
 
 group = 'ccm.nucleum_omnium'
-version = "1.0.0.${System.env.BUILD_NUMBER}"
+version = "1.0.0.${System.env.BUILD_NUMBER}.ALPHA"
 archivesBaseName = 'Nucleum-Omnium'
 
 sourceSets {
