@@ -1,11 +1,9 @@
-// CCM Modding, Nucleum Omnium 
+// CCM Modding, Nucleum Omnium
 buildscript {
     repositories {
         mavenCentral()
-            maven {
-                url 'https://oss.sonatype.org/content/repositories/snapshots'
-            }
-     }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
     dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.7.4-SNAPSHOT' }
 }
 
@@ -17,42 +15,38 @@ archivesBaseName = 'Nucleum-Omnium'
 
 sourceSets {
     main {
-        java {
-            srcDir 'common'
-        }
-        resources {
-            srcDir 'resources'
+        java { srcDir 'common' }
+        resources { srcDir 'resources' }
+    }
+}
+
+minecraft {
+    minecraftVersion = '1.6.2'
+    accessTransformers += 'resources/ccm_at.cfg'
+}
+
+processResources {
+    // Iterate through files to expand version on things not PNGs, or OBJs
+    eachFile { file ->
+        if (!(file.getPath().endsWith('png') || file.getPath().endsWith('obj'))){
+            expand version: version, mcversion: minecraft.minecraftVersion
         }
     }
 }
 
-minecraft { 
-	minecraftVersion = '1.6.2'
-	accessTransformers += 'resources/ccm_at.cfg'
-}
-
-processResources {
-	// Iterate through files to expand version on things not PNGs, or OBJs
-	eachFile { file ->
-		if (!(file.getPath().endsWith('png') || file.getPath().endsWith('obj'))){
-			expand version: version, mcversion: minecraft.minecraftVersion
-		}
-	}
-}
-
-jar { 
-	appendix = 'universal'
-	manifest { 	
-		attributes 'MCVersion' : project.minecraft.minecraftVersion
-		attributes 'Version' : project.version 
-		attributes 'FMLCorePlugin' : 'ccm.nucleum_omnium.asm.OmniumLoader'
-		attributes 'FMLCorePluginContainsFMLMod' : 'true'
-	}
+jar {
+    appendix = 'universal'
+    manifest {
+        attributes 'MCVersion' : project.minecraft.minecraftVersion
+        attributes 'Version' : project.version
+        attributes 'FMLCorePlugin' : 'ccm.nucleum_omnium.asm.OmniumLoader'
+        attributes 'FMLCorePluginContainsFMLMod' : 'true'
+    }
 }
 
 task sourceJar(type: Jar) {
-	from sourceSets.main.allSource
-	appendix = 'src'
+    from sourceSets.main.allSource
+    appendix = 'src'
 }
 
 // Doesn't work for some odd reason
@@ -61,7 +55,6 @@ task sourceJar(type: Jar) {
 //	from 'build/docs/javadoc'
 //}
 
-artifacts {
-	archives sourceJar
-  //archives javadocJar
+//archives javadocJar
+artifacts {  archives sourceJar  }
 }
