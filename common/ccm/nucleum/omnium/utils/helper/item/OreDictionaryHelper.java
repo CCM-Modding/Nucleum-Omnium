@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.utils.helper;
+package ccm.nucleum.omnium.utils.helper.item;
 
 import java.util.Arrays;
 import java.util.List;

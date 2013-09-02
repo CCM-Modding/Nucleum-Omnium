@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.utils.helper;
+package ccm.nucleum.omnium.utils.helper.item;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -134,9 +134,7 @@ public class InventoryHelper extends BaseNIC
         return stacks;
     }
 
-    /**
-     * Sets a slot in the inventory to be empty
-     */
+    /** Sets a slot in the inventory to be empty */
     public static void setEmty(final IInventory inventory, final int slot)
     {
         inventory.setInventorySlotContents(slot, null);

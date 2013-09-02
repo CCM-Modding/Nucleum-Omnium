@@ -6,6 +6,7 @@ package ccm.nucleum.omnium.utils.helper;
 import net.minecraft.item.Item;
 
 import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.utils.helper.item.ItemHelper;
 
 /**
  * TextureHelper

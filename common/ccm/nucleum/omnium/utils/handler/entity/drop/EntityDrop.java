@@ -18,49 +18,35 @@ import ccm.nucleum.omnium.utils.helper.MathHelper;
  */
 public final class EntityDrop
 {
-    /**
-     * Name of the mod registering this coin
-     */
+    /** The mod registering this coin */
     private final IMod mod;
 
-    /**
-     * Item to drop
-     */
+    /** Item to drop */
     private final ItemStack item;
-    /**
-     * The drop rate of it
-     */
+
+    /** The drop rate of it */
     private final float dropRate;
-    /**
-     * The Maximum to drop
-     */
+
+    /** The Maximum to drop */
     private final int maxValue;
-    /**
-     * The Minimum to drop
-     */
+
+    /** The Minimum to drop */
     private final int minValue;
-    /**
-     * The entity that should drop it
-     */
+
+    /** The entity that should drop it */
     private final Class<? extends Entity> entity;
 
     /**
-     * @param modID
-     *            ID of the mod adding this drop
-     * @param item
-     *            The Item to drop
+     * @param mod
+     *            The mod adding this drop
      * @param dropRate
-     *            the Rate at which to drop it
-     * @param minValue
-     *            The Minimum to drop
-     * @param maxValue
-     *            The Maximum to drop
+     *            The Rate at which to drop it
      * @param entitys
-     *            the entity's that are allowed to drop it
+     *            The entity's that are allowed to drop it
      */
-    public EntityDrop(final IMod modID, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
+    public EntityDrop(final IMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
     {
-        mod = modID;
+        this.mod = mod;
         this.item = item;
         this.dropRate = dropRate;
         this.minValue = minValue;
@@ -69,7 +55,7 @@ public final class EntityDrop
     }
 
     /**
-     * @return The ID of the mod that registered this coin
+     * @return The mod that registered this coin
      */
     public IMod getMod()
     {

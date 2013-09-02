@@ -21,9 +21,7 @@ import ccm.nucleum.omnium.utils.handler.LogHandler;
 public final class FunctionHelper extends BaseNIC
 {
 
-    /**
-     * Drops the Inventory that is contained in the {@link TileEntity}
-     */
+    /** Drops the Inventory that is contained in the {@link TileEntity} */
     public static void dropInventory(final World world, final int x, final int y, final int z)
     {
         final TileEntity tileEntity = world.getBlockTileEntity(x, y, z);

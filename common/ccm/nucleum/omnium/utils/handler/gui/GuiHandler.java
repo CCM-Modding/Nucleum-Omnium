@@ -21,22 +21,16 @@ public final class GuiHandler implements IGuiHandler
     /*
      * Data Fields
      */
-    /**
-     * List of all the GUI Handlers
-     */
+    /** List of all the GUI Handlers */
     private final Map<Integer, AbstractGuiHandler> handlerList;
 
-    /**
-     * Private single instance
-     */
+    /** Private single instance */
     private static final GuiHandler INSTANCE = new GuiHandler();
 
     /*
      * Initialization Related Things
      */
-    /**
-     * Private constructor
-     */
+    /** Private constructor */
     private GuiHandler()
     {
         handlerList = new HashMap<Integer, AbstractGuiHandler>();
@@ -105,9 +99,7 @@ public final class GuiHandler implements IGuiHandler
         instance().handlerList.put(hash(guiID), new TileGuiHandler(gui, container));
     }
 
-    /**
-     * Registers a GuiHandler on the server
-     */
+    /** Registers a GuiHandler on the server */
     public static void registerGuiServer(final String guiID, final Class<? extends Container> container)
     {
         instance().handlerList.put(hash(guiID), new TileGuiHandler(container));
@@ -127,9 +119,7 @@ public final class GuiHandler implements IGuiHandler
         return fix.hashCode();
     }
 
-    /**
-     * Opens the desired GUI for the Player
-     */
+    /** Opens the desired GUI for the Player */
     public static void openGui(final String guiID, final EntityPlayer player, final int x, final int y, final int z)
     {
         final int fix = hash(guiID);

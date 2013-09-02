@@ -3,8 +3,10 @@
  */
 package ccm.nucleum.omnium.utils.helper;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import ccm.nucleum.omnium.base.BaseNIC;
@@ -12,11 +14,11 @@ import ccm.nucleum.omnium.utils.handler.LogHandler;
 
 public final class JavaHelper extends BaseNIC
 {
+    private static final List<String> trues = Arrays.asList(new String[]
+    { "true", "on", "active" });
 
     /**
-     * @param str
-     *            The String to test
-     * @return true if it is a Number. false otherwise
+     * @return <code>true</code> if it is a Number. <code>false</code> otherwise
      */
     public static boolean isNumeric(final String str)
     {
@@ -33,21 +35,13 @@ public final class JavaHelper extends BaseNIC
     }
 
     /**
-     * @param str
-     *            The String to test
-     * @return true if it is true, or on. false otherwise
+     * @return <code>true</code> if it is any common word for it. <code>false</code> otherwise {@code If it returns false on a string that shoud be true please make an issue}
      */
     public static boolean toBoolean(final String str)
     { // Make sure that the string is not null and then check common words for true
         if (str != null)
         {
-            if (str.equalsIgnoreCase("true"))
-            {
-                return true;
-            } else if (str.equalsIgnoreCase("on"))
-            {
-                return true;
-            } else if (str.equalsIgnoreCase("active"))
+            if (trues.contains(str))
             {
                 return true;
             }
@@ -57,7 +51,7 @@ public final class JavaHelper extends BaseNIC
     }
 
     /**
-     * Title Cases The String
+     * @return The date that results after appling the offset in the specified unit to the current date
      */
     public static String titleCase(final String input)
     {// if the input has a space the it conins more than 1 word and we have to split them
@@ -79,7 +73,7 @@ public final class JavaHelper extends BaseNIC
     }
 
     /**
-     * camel cases the string
+     * @return The date that results after appling the offset in the specified unit to the current date
      */
     public static String camelCase(final String input)
     {// if the input has a space the it conins more than 1 word and we have to split them
@@ -100,6 +94,9 @@ public final class JavaHelper extends BaseNIC
         }
     }
 
+    /**
+     * @return The date that results after appling the offset in the specified unit to the current date
+     */
     public static Date getDate(final TimeUnit unit, final int offset)
     {
         // Get the default representation of "now".

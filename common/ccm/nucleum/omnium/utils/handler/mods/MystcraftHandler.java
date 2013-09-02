@@ -14,7 +14,6 @@ import ccm.nucleum.omnium.utils.lib.Properties;
  */
 public final class MystcraftHandler extends IModHandler
 {
-
     @Override
     public IMod getMod()
     {

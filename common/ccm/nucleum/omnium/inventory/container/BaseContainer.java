@@ -70,16 +70,8 @@ public abstract class BaseContainer extends Container
     /**
      * Draws a Box made of slots inside the specified inventory
      * 
-     * @param inventory
-     *            The inventory
      * @param slot
      *            A class with the following constructor {@code IInventory, int, int, int}
-     * @param index
-     *            The index
-     * @param x
-     *            The X coordinate of the First Slot
-     * @param y
-     *            The Y coordinate of the First Slot
      * @param rowSize
      *            The Amount of Rows
      * @param columnSize

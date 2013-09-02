@@ -76,6 +76,13 @@ public final class ResourceHandler
     // /////////////////////////////
     // Exterior Helpers
     // /////////////////////////////
+
+    /** Binds a GUI texture to it's GUI */
+    public static void bindGUI(final Minecraft mc, final String name)
+    {
+        mc.func_110434_K().func_110577_a(getGUI(name));
+    }
+
     /** Returns the file path to the Resource */
     public static String getModelLocation(final String name)
     {
@@ -84,9 +91,9 @@ public final class ResourceHandler
     }
 
     /** Binds a GUI texture to it's GUI */
-    public static void bindGUI(final Minecraft mc, final String name)
+    public static void bindModel(final Minecraft mc, final String name)
     {
-        mc.func_110434_K().func_110577_a(getGUI(name));
+        mc.func_110434_K().func_110577_a(ResourceHandler.getModelTexture(name));
     }
 
     /** Loads a Model */

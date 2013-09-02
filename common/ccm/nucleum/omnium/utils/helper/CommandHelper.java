@@ -57,9 +57,7 @@ public class CommandHelper
         sender.sendChatToPlayer(ChatMessageComponent.func_111077_e(String.format(msg, objects)));
     }
 
-    /**
-     * OP detection
-     */
+    /** OP detection */
     public static boolean isPlayerOp(final String username)
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isClient())

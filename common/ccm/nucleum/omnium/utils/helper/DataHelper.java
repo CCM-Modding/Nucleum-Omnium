@@ -21,9 +21,7 @@ public final class DataHelper extends BaseNIC
 {
     private static File root;
 
-    /**
-     * To be called on server start
-     */
+    /** To be called on server start */
     public static void init()
     {
         DataHelper.root = new File(DimensionManager.getCurrentSaveRootDirectory(), "CCM-Modding");

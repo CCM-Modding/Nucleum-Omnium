@@ -10,7 +10,6 @@ import ccm.nucleum.omnium.utils.lib.Properties;
 
 public final class EventRain
 {
-
     @ForgeSubscribe
     public void rainStopper(final PlaySoundEvent event)
     {

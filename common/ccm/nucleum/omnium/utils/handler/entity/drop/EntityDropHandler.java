@@ -19,14 +19,10 @@ import ccm.nucleum.omnium.IMod;
  */
 public class EntityDropHandler
 {
-    /**
-     * All of the registered Drop Handlers
-     */
+    /** All of the registered Drop Handlers */
     private static final List<EntityDrop> drops = new ArrayList<EntityDrop>();
 
-    /**
-     * Registers a EntityDrop
-     */
+    /** Registers a EntityDrop */
     public static void registerDrop(final EntityDrop drop)
     {
         drops.add(drop);
@@ -37,10 +33,6 @@ public class EntityDropHandler
      *            The mod adding this drop
      * @param item
      *            The Item to drop
-     * @param dropRate
-     *            the Rate at which to drop it
-     * @param entitys
-     *            the entity's that are allowed to drop it
      */
     public static EntityDrop registerDrop(final IMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
     {
@@ -50,8 +42,6 @@ public class EntityDropHandler
     }
 
     /**
-     * @param entity
-     *            The entity that is dropping the Item
      * @return true if and ONLY if there is a DropHandler registered to that entity
      */
     public static boolean isEntityRegistered(final Entity entity)

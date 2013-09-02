@@ -38,9 +38,6 @@ public class AdvConfiguration extends Configuration
     }
 
     /**
-     * @param category
-     * @param key
-     * @param defaultValue
      * @return
      */
     public boolean getProp(final String category, final String key, final boolean defaultValue)
@@ -50,9 +47,6 @@ public class AdvConfiguration extends Configuration
     }
 
     /**
-     * @param category
-     * @param key
-     * @param defaultValue
      * @return
      */
     public int getProp(final String category, final String key, final int defaultValue)
@@ -62,9 +56,6 @@ public class AdvConfiguration extends Configuration
     }
 
     /**
-     * @param category
-     * @param key
-     * @param defaultValue
      * @return
      */
     public String getProp(final String category, final String key, final String defaultValue)

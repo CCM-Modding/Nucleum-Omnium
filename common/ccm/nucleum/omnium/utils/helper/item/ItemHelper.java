@@ -1,13 +1,14 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.utils.helper;
+package ccm.nucleum.omnium.utils.helper.item;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.utils.helper.MathHelper;
 
 public class ItemHelper extends BaseNIC
 {

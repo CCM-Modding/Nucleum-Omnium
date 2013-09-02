@@ -36,7 +36,7 @@ public class AdvancedBaseModel
 
     public void bindTexture()
     {
-        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(ResourceHandler.getModelTexture(name));
+        ResourceHandler.bindModel(FMLClientHandler.instance().getClient(), name);
     }
 
     /** When calling this method the texture doesn't need to be binded */

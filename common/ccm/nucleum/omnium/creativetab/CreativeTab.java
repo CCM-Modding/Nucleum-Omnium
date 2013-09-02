@@ -11,10 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class CreativeTab extends CreativeTabs
 {
-
-    /**
-     * The Tab's Icon
-     */
+    /** The Tab's Icon */
     private ItemStack tabIcon;
 
     /**

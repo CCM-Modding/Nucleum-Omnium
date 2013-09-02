@@ -22,9 +22,7 @@ public abstract class IModHandler
      */
     public abstract String getModName();
 
-    /**
-     * What to do if the Mod is found to be loaded
-     */
+    /** What to do if the Mod is found to be loaded */
     public abstract void init();
 
     @Override
