@@ -82,8 +82,7 @@ public class NucleumOmnium extends CCMMod implements IMod
 
     @EventHandler
     public void serverStarting(final FMLServerStartingEvent event)
-    {
-        // Initialize the custom commands
+    { // Initialize the custom commands
         CommandHandler.init(event);
 
         server = event.getServer();

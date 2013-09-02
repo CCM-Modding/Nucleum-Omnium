@@ -16,7 +16,7 @@ import ccm.nucleum.omnium.base.BaseNIC;
 public class TextureHelper extends BaseNIC
 {
     /**
-     * @return The texture.
+     * @return The texture
      */
     public static String getTexture(final Item item, final String texturePath)
     {

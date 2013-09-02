@@ -98,17 +98,6 @@ public final class TeleportHelper extends BaseNIC
 
     /**
      * Teleports a player to coordinates
-     * 
-     * @param player
-     *            Player to send
-     * @param dimension
-     *            The dimension to send the player to
-     * @param x
-     *            The X coordinate to send the player to
-     * @param y
-     *            The Y coordinate to send the player to
-     * @param z
-     *            The Z coordinate to send the player to
      */
     public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player, final int dimension, final double x, final double y, final double z)
     {

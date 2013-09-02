@@ -19,23 +19,11 @@ public interface IRecipeContainer
 
     /**
      * Adds a recipe
-     * 
-     * @param input
-     *            The input ItemStack
-     * @param output
-     *            The output ItemStack
      */
     public void addRecipe(final ItemStack input, final ItemStack output);
 
     /**
      * Adds a recipe
-     * 
-     * @param input
-     *            The input ItemStack
-     * @param output
-     *            The output ItemStack
-     * @param output2
-     *            The second output ItemStack
      */
     public void addRecipe(final ItemStack input, final ItemStack output, final ItemStack output2);
 

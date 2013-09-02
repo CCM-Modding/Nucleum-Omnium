@@ -15,7 +15,6 @@ public class OreDictionaryHelper extends BaseNIC
 
     public static boolean containsOre(final String oreName)
     {
-
         final List<String> ores = Arrays.asList(OreDictionary.getOreNames());
 
         return ores.contains(oreName);

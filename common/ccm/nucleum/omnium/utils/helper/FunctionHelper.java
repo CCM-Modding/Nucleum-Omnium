@@ -3,8 +3,6 @@
  */
 package ccm.nucleum.omnium.utils.helper;
 
-import java.util.HashMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -24,16 +22,7 @@ public final class FunctionHelper extends BaseNIC
 {
 
     /**
-     * Drops the Inventory that is contained in the {@link TileEntity}.
-     * 
-     * @param world
-     *            The world in witch to drop the Items in.
-     * @param x
-     *            The x location
-     * @param y
-     *            The y location.
-     * @param z
-     *            The z location.
+     * Drops the Inventory that is contained in the {@link TileEntity}
      */
     public static void dropInventory(final World world, final int x, final int y, final int z)
     {
@@ -70,44 +59,12 @@ public final class FunctionHelper extends BaseNIC
         }
     }
 
-    /**
-     * Gets all the Dimensions listed by their Dimension ID
-     * 
-     * @return A {@code HashMap<Integer, World>} containig all the Dimensions
-     */
-    public static HashMap<Integer, World> getDimensions()
-    {
-        final HashMap<Integer, World> dimensions = new HashMap<Integer, World>();
-        for (final World world : NucleumOmnium.server.worldServers)
-        {
-            dimensions.put(Integer.valueOf(world.provider.dimensionId), world);
-        }
-        return dimensions;
-    }
-
-    /**
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
     public static String getTEName(final World world, final int x, final int y, final int z)
     {
         return "container." + ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x, y, z)].getUnlocalizedName();
     }
 
     /**
-     * Checks if there is Lava or Fire below the block
-     * 
-     * @param world
-     *            The world to check in
-     * @param xCoord
-     *            The X coordinate to check in
-     * @param yCoord
-     *            The Y coordinate to check in - 1 so that the block doesn't interrupt the operation
-     * @param zCoord
-     *            The Z coordinate to check in
      * @return true if there is Fire or Lava below. Otherwise false
      */
     public static boolean isFireBelow(final World world, final int xCoord, final int yCoord, final int zCoord)
@@ -126,16 +83,6 @@ public final class FunctionHelper extends BaseNIC
     }
 
     /**
-     * Checks if the sun is visible
-     * 
-     * @param world
-     *            The world to check in
-     * @param xCoord
-     *            The X coordinate to check in
-     * @param yCoord
-     *            The Y coordinate to check in + 1 so that the block doesn't interrupt the operation
-     * @param zCoord
-     *            The Z coordinate to check in
      * @return true if the sun is visible. Otherwise false
      */
     public static boolean isSunVisible(final World world, final int xCoord, final int yCoord, final int zCoord)

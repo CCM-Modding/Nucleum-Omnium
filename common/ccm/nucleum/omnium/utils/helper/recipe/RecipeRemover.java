@@ -15,13 +15,22 @@ import ccm.nucleum.omnium.utils.handler.LogHandler;
 
 public final class RecipeRemover extends BaseNIC
 {
+    public static void delete(final List<String> noCraft)
+    {
+        final List<ItemStack> items = new ArrayList<ItemStack>();
 
-    private static List<ItemStack> items = new ArrayList<ItemStack>();
+        // Decompose list into StringItems
+        for (final String s : noCraft)
+        {
+            items.add(getItemStack(s));
+        }
+        deleteRecipes(items);
+    }
 
-    /*
+    /**
      * Iterate over recipe list, and remove a recipe when its output matches one of our ItemStacks.
      */
-    private static void deleteRecipes()
+    public static void deleteRecipes(final List<ItemStack> items)
     {
         final List<IRecipe> minecraftRecipes = CraftingManager.getInstance().getRecipeList();
         ItemStack result;
@@ -76,16 +85,5 @@ public final class RecipeRemover extends BaseNIC
             }
         }
         return new ItemStack(id, 1, meta);
-    }
-
-    public static void delete(final List<String> noCraft)
-    {
-        // Decompose list into StringItems
-        for (final String s : noCraft)
-        {
-            items.add(getItemStack(s));
-        }
-
-        deleteRecipes();
     }
 }

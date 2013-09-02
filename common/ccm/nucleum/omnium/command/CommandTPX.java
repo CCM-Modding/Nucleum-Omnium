@@ -14,8 +14,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 
-import ccm.nucleum.omnium.utils.helper.FunctionHelper;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
 import ccm.nucleum.omnium.utils.helper.TeleportHelper;
 import ccm.nucleum.omnium.utils.lib.Commands;
@@ -75,7 +75,7 @@ public class CommandTPX extends CommandBase
         {
             if (JavaHelper.isNumeric(args[args.length - 1]))
             {
-                final World dimension = FunctionHelper.getDimensions().get(Integer.parseInt(args[args.length - 1]));
+                final World dimension = DimensionManager.getWorld(Integer.parseInt(args[args.length - 1]));
                 if (dimension != null)
                 {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();
@@ -93,7 +93,7 @@ public class CommandTPX extends CommandBase
         {
             if (JavaHelper.isNumeric(args[args.length - 1]))
             {
-                final World dimension = FunctionHelper.getDimensions().get(Integer.parseInt(args[args.length - 1]));
+                final World dimension = DimensionManager.getWorld(Integer.parseInt(args[args.length - 1]));
                 if (dimension != null)
                 {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();

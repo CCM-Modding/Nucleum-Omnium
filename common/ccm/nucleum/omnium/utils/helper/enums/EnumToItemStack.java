@@ -22,7 +22,7 @@ public final class EnumToItemStack extends BaseNIC
      */
     public static ItemStack getBlockIS(final Enum<? extends IBlockEnum> blockEnum)
     {
-        return new ItemStack(((IBlockEnum) blockEnum).getBaseBlock(), 1, blockEnum.ordinal());
+        return getBlockIS(blockEnum, 1);
     }
 
     /**
@@ -44,7 +44,7 @@ public final class EnumToItemStack extends BaseNIC
      */
     public static ItemStack getItemIS(final Enum<? extends IItemEnum> itemEnum)
     {
-        return new ItemStack(((IItemEnum) itemEnum).getBaseItem(), 1, itemEnum.ordinal());
+        return getItemIS(itemEnum, 1);
     }
 
     /**

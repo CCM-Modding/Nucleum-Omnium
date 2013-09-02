@@ -16,17 +16,11 @@ public class InventoryHelper extends BaseNIC
     private static final String SLOT = "CCM.SLOT";
 
     /**
-     * Decreases the {@link ItemStack} size in a slot.
+     * Decreases the {@link ItemStack} size in a slot
      * 
-     * @param slot
-     *            The Slot where the {@link ItemStack} can be found.
      * @param amount
-     *            The amount to subtract.
-     * @param stacks
-     *            The {@link ItemStack} to subtract from.
-     * @param inventory
-     *            The inventory (A class implementing {@link IInventory})
-     * @return The new {@link ItemStack}.
+     *            The amount to subtract
+     * @return The new {@link ItemStack}
      */
     public static ItemStack decrStackSize(final IInventory inventory, final int slot, final int amount)
     {
@@ -55,8 +49,6 @@ public class InventoryHelper extends BaseNIC
      * Checks the Inventory Array for either a empty slot or one that contains the output Item Example: {@code inventory[getBestInventory(this.inventory, 3, itemstack)]} That
      * should work in the Counter
      * 
-     * @param inventory
-     *            The inventory to search
      * @param startSlot
      *            The starting Slot
      * @param output
@@ -122,13 +114,13 @@ public class InventoryHelper extends BaseNIC
     }
 
     /**
-     * Reads a Inventory from a NBTTagList.
+     * Reads a Inventory from a NBTTagList
      * 
      * @param list
-     *            The Name of the NBTTagList to read from.
+     *            The Name of the NBTTagList to read from
      * @param size
-     *            The size of the Inventory.
-     * @return The Items on the inventory.
+     *            The size of the Inventory
+     * @return The Items on the inventory
      */
     public static ItemStack[] readInventoryFromNBT(final NBTTagList list, final int size)
     {
@@ -144,9 +136,6 @@ public class InventoryHelper extends BaseNIC
 
     /**
      * Sets a slot in the inventory to be empty
-     * 
-     * @param inventory
-     * @param slot
      */
     public static void setEmty(final IInventory inventory, final int slot)
     {
@@ -154,11 +143,11 @@ public class InventoryHelper extends BaseNIC
     }
 
     /**
-     * Writes a inventory to a NBTTagList.
+     * Writes a inventory to a NBTTagList
      * 
      * @param stacks
-     *            The stacks in the current inventory to add to the NBTTagList.
-     * @return The NBTTagList associated to the inventory.
+     *            The stacks in the current inventory to add to the NBTTagList
+     * @return The NBTTagList associated to the inventory
      */
     public static NBTTagList writeInventoryToNBT(final ItemStack[] stacks)
     {

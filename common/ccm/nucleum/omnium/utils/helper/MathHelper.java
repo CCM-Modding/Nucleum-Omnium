@@ -11,12 +11,6 @@ public class MathHelper extends BaseNIC
 {
 
     /**
-     * @param value
-     *            The value to check
-     * @param min
-     *            The minimum posible value
-     * @param max
-     *            The maximum posible value
      * @return The value if it is more than the min and less than the max
      */
     public static int clampInt(final int min, final int max, final int value)
@@ -35,8 +29,6 @@ public class MathHelper extends BaseNIC
     }
 
     /**
-     * @param maxValue
-     *            The max value of the Integer
      * @return A random Integer
      */
     public static int getRandInt(final int maxValue)
@@ -45,10 +37,6 @@ public class MathHelper extends BaseNIC
     }
 
     /**
-     * @param minValue
-     *            The min value of the Integer
-     * @param maxValue
-     *            The max value of the Integer
      * @return A random Integer
      */
     public static int getRandInt(final int minValue, final int maxValue)

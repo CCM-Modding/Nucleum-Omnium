@@ -19,8 +19,6 @@ public class EnumHelper extends BaseNIC
 {
 
     /**
-     * @param enu
-     *            The enum constant
      * @return a modified version of the constants name()
      */
     public static String getTileID(final Enum<?> enu)
@@ -29,7 +27,6 @@ public class EnumHelper extends BaseNIC
     }
 
     /**
-     * @param machinegrill
      * @return
      */
     public static TileEntity getTile(final Enum<? extends IBlockEnum> enu)
@@ -38,8 +35,6 @@ public class EnumHelper extends BaseNIC
     }
 
     /**
-     * @param machinegrinder
-     * @param string
      * @return
      */
     public static String getTexture(final Enum<? extends IBlockEnum> enu, final String location)

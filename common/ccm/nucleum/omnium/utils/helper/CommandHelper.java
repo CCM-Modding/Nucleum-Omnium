@@ -24,7 +24,6 @@ public class CommandHelper
     /**
      * Gets a player
      * 
-     * @param sender
      * @return The EntityPlayerMP corresponding to who send it
      */
     public static EntityPlayerMP getPlayer(final ICommandSender sender)
@@ -35,9 +34,6 @@ public class CommandHelper
     /**
      * Gets a player name form a specified string
      * 
-     * @param name
-     *            The name of the User
-     * @param sender
      * @return The EntityPlayerMP corresponding to the name
      */
     public static EntityPlayerMP getPlayer(final ICommandSender sender, final String name)

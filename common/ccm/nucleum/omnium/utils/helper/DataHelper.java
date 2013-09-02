@@ -22,34 +22,20 @@ public final class DataHelper extends BaseNIC
     private static File root;
 
     /**
-     * Remove a data file.
-     * 
-     * @param mod
-     *            The mod in "control" of the file
-     * @param fileName
-     *            Do not add an extension
-     * @return true if
+     * To be called on server start
      */
-    public static boolean deleteFile(final IMod mod, final String fileName)
+    public static void init()
     {
-        try
-        {
-            final File folder = DataHelper.getModFolder(mod);
-            final File file = new File(folder, fileName.trim() + ".dat");
-
-            return file.delete();
-        } catch (final Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
+        DataHelper.root = new File(DimensionManager.getCurrentSaveRootDirectory(), "CCM-Modding");
+        DataHelper.root.mkdirs();
     }
 
     /**
-     * Use to get a (new) folder for your mod only.
+     * Use to get a (new) folder for your mod only
      * 
-     * @param modID
-     * @return File instance of the folder. It exists.
+     * @param mod
+     *            The mod in "control" of the file
+     * @return File instance of the folder. It exists
      */
     public static File getModFolder(final IMod mod)
     {
@@ -59,22 +45,13 @@ public final class DataHelper extends BaseNIC
     }
 
     /**
-     * To be called on server start.
-     */
-    public static void init()
-    {
-        DataHelper.root = new File(DimensionManager.getCurrentSaveRootDirectory(), "CCM-Modding");
-        DataHelper.root.mkdirs();
-    }
-
-    /**
      * Use this before you save data...
      * 
-     * @param modID
-     *            for the folder
+     * @param mod
+     *            The mod in "control" of the file
      * @param fileName
-     *            , don't add an extension.
-     * @return data stored or new NBTTagCompound if file didn't exist.
+     *            DO NOT add an extension
+     * @return data stored or new NBTTagCompound if file didn't exist
      */
     public static NBTTagCompound readData(final IMod mod, final String fileName)
     {
@@ -102,13 +79,13 @@ public final class DataHelper extends BaseNIC
     /**
      * Make sure you don't just override the old file. Read it, then manipulate, then save.
      * 
-     * @param modID
-     *            for the folder.
+     * @param mod
+     *            The mod in "control" of the file
      * @param fileName
-     *            , don't add an extension.
+     *            DO NOT add an extension
      * @param data
-     *            in NBT format.
-     * @return true if success.
+     *            in NBT format
+     * @return <code>true</code> if it succedes
      */
     public static boolean saveData(final IMod mod, final String fileName, final NBTTagCompound data)
     {
@@ -129,6 +106,30 @@ public final class DataHelper extends BaseNIC
             tempFile.renameTo(realFile);
 
             return true;
+        } catch (final Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Remove a data file.
+     * 
+     * @param mod
+     *            The mod in "control" of the file
+     * @param fileName
+     *            DO NOT add an extension
+     * @return <code>true</code> if and only if the file or directory is successfully deleted; <code>false</code> otherwise
+     */
+    public static boolean deleteFile(final IMod mod, final String fileName)
+    {
+        try
+        {
+            final File folder = DataHelper.getModFolder(mod);
+            final File file = new File(folder, fileName.trim() + ".dat");
+
+            return file.delete();
         } catch (final Exception e)
         {
             e.printStackTrace();
