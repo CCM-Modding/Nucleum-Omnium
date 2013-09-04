@@ -12,14 +12,7 @@ package ccm.nucleum.omnium.utils.lib;
  */
 public enum Arrows
 {
-    NORTH(8679),
-    NORHEAST(8663),
-    EAST(8680),
-    SOUTHEAST(8665),
-    SOUTH(8681),
-    SOUTHWEST(8664),
-    WEST(8678),
-    NOTHWEST(8662);
+    NORTH(8679), NORHEAST(8663), EAST(8680), SOUTHEAST(8665), SOUTH(8681), SOUTHWEST(8664), WEST(8678), NOTHWEST(8662);
 
     public static Arrows getArrowFromAngle(double angle)
     {

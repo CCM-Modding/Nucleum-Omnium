@@ -3,8 +3,6 @@
  */
 package ccm.nucleum.omnium.command;
 
-import static ccm.nucleum.omnium.utils.helper.CommandHelper.getPlayer;
-
 import java.util.List;
 
 import net.minecraft.command.CommandBase;
@@ -16,6 +14,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
+import ccm.nucleum.omnium.utils.helper.CommandHelper;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
 import ccm.nucleum.omnium.utils.helper.TeleportHelper;
 import ccm.nucleum.omnium.utils.lib.Commands;
@@ -79,7 +78,7 @@ public class CommandTPX extends CommandBase
                 if (dimension != null)
                 {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();
-                    TeleportHelper.teleportPlayer(sender, getPlayer(sender), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
+                    TeleportHelper.teleportPlayer(sender, CommandHelper.getPlayer(sender), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
                 } else
                 {
                     CommandBase.notifyAdmins(sender, "error.invalid.dim", new Object[]
@@ -87,7 +86,7 @@ public class CommandTPX extends CommandBase
                 }
             } else
             {
-                TeleportHelper.teleportPlayer(sender, getPlayer(sender), getPlayer(sender, args[args.length - 1]));
+                TeleportHelper.teleportPlayer(sender, CommandHelper.getPlayer(sender), getPlayer(sender, args[args.length - 1]));
             }
         } else if (args.length == 2)
         {
@@ -109,7 +108,7 @@ public class CommandTPX extends CommandBase
             }
         } else if (args.length == 4)
         {
-            final EntityPlayerMP player = getPlayer(sender);
+            final EntityPlayerMP player = CommandHelper.getPlayer(sender);
             if (player.worldObj != null)
             {
                 int i = args.length - 4;

@@ -80,20 +80,20 @@ public final class ResourceHandler
     /** Binds a GUI texture to it's GUI */
     public static void bindGUI(final Minecraft mc, final String name)
     {
-        mc.func_110434_K().func_110577_a(getGUI(name));
+        mc.getTextureManager().bindTexture(getGUI(name));
     }
 
     /** Returns the file path to the Resource */
     public static String getModelLocation(final String name)
     {
         // "/assets/Mod's Name/Location"
-        return ("/assets/" + getModel(name).func_110624_b() + "/" + getModel(name).func_110623_a());
+        return ("/assets/" + getModel(name).getResourceDomain() + "/" + getModel(name).getResourcePath());
     }
 
     /** Binds a GUI texture to it's GUI */
     public static void bindModel(final Minecraft mc, final String name)
     {
-        mc.func_110434_K().func_110577_a(ResourceHandler.getModelTexture(name));
+        mc.getTextureManager().bindTexture(ResourceHandler.getModelTexture(name));
     }
 
     /** Loads a Model */

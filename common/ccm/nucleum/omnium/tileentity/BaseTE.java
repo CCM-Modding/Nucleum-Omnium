@@ -59,7 +59,7 @@ public class BaseTE extends TileEntity
     @Override
     public final void onDataPacket(final INetworkManager netManager, final Packet132TileEntityData packet)
     {
-        readFromNBT(packet.customParam1);
+        readFromNBT(packet.data);
     }
 
     @Override

@@ -207,10 +207,7 @@ public class MainItem extends Item
     }
 
     @Override
-    /**
-     * itemInteractionForEntity
-     */
-    public boolean func_111207_a(final ItemStack stack, final EntityPlayer player, final EntityLivingBase entity)
+    public boolean itemInteractionForEntity(final ItemStack stack, final EntityPlayer player, final EntityLivingBase entity)
     {
         final int damage = stack.getItemDamage();
         if (damage < subItems.size())

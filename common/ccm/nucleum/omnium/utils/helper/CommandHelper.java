@@ -5,7 +5,6 @@ package ccm.nucleum.omnium.utils.helper;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.integrated.IntegratedServer;
@@ -31,30 +30,14 @@ public class CommandHelper
         return CommandBase.getCommandSenderAsPlayer(sender);
     }
 
-    /**
-     * Gets a player name form a specified string
-     * 
-     * @return The EntityPlayerMP corresponding to the name
-     */
-    public static EntityPlayerMP getPlayer(final ICommandSender sender, final String name)
-    {
-        final EntityPlayerMP player = CommandBase.func_82359_c(sender, name);
-
-        if (player == null)
-        {
-            throw new PlayerNotFoundException();
-        }
-        return player;
-    }
-
     public static void sendChat(final ICommandSender sender)
     {
-        sender.sendChatToPlayer(ChatMessageComponent.func_111077_e(""));
+        sender.sendChatToPlayer(ChatMessageComponent.createFromText(""));
     }
 
     public static void sendChat(final ICommandSender sender, final String msg, final Object... objects)
     {
-        sender.sendChatToPlayer(ChatMessageComponent.func_111077_e(String.format(msg, objects)));
+        sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(msg, objects));
     }
 
     /** OP detection */

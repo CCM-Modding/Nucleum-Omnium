@@ -15,7 +15,7 @@ public final class EventRain
     {
         if (Properties.RAIN)
         {
-            if ((event != null) && (event.source != null) && event.source.func_110458_a().startsWith("ambient/weather/rain"))
+            if ((event != null) && (event.source != null) && event.source.getSoundName().startsWith("ambient/weather/rain"))
             {
                 event.result = null;
             }
