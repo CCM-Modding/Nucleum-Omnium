@@ -8,6 +8,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import ccm.nucleum.omnium.api.fuels.IFuelRegistry;
+import ccm.nucleum.omnium.utils.helper.item.WrapperStack;
 
 public class UseSlot extends Slot
 {
@@ -31,7 +32,7 @@ public class UseSlot extends Slot
     @Override
     public boolean isItemValid(final ItemStack item)
     {
-        return fuel.isFuel(item);
+        return fuel.isFuel(new WrapperStack(item));
     }
 
     public void setFuel(final IFuelRegistry fuel)

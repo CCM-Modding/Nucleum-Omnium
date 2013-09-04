@@ -3,32 +3,32 @@
  */
 package ccm.nucleum.omnium.api.fuels;
 
-import net.minecraft.item.ItemStack;
+import java.util.HashSet;
+import java.util.Set;
+
+import ccm.nucleum.omnium.utils.helper.item.WrapperStack;
 
 /**
  * IFuelRegistry
  * <p>
- * An Interface for any class that wishes to be a Fuel Registry, Most likely also a part of the mod's API
+ * An Abstract Class for any class that wishes to be a Fuel Registry, Most likely also a part of the mod's API
  * 
  * @author Captain_Shadows
  */
-public interface IFuelRegistry
+public abstract class IFuelRegistry
 {
+    protected final Set<WrapperStack> fuels = new HashSet<WrapperStack>();
 
-    /**
-     * Checks if a item is a Fuel
-     * 
-     * @param stack
-     *            The stack to check if it is a Fuel
-     * @return true if it is found in the Fuel List
-     */
-    public boolean isFuel(final ItemStack stack);
+    public boolean isFuel(final WrapperStack stack)
+    {
+        return fuels.contains(stack);
+    }
 
-    /**
-     * Registers a new Fuel
-     * 
-     * @param stack
-     *            The Fuel to add
-     */
-    public void registerFuel(final ItemStack stack);
+    public void registerFuel(final WrapperStack stack)
+    {
+        if (stack != null)
+        {
+            fuels.add(stack);
+        }
+    }
 }

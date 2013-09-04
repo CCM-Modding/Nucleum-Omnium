@@ -4,6 +4,7 @@
 package ccm.nucleum.omnium.utils.helper.item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -16,7 +17,7 @@ import net.minecraftforge.oredict.OreDictionary;
  * 
  * @author pahimar
  */
-public final class WrapperStack
+public final class WrapperStack implements Comparable<WrapperStack>
 {
     public static final int ORE_DICTIONARY_NOT_FOUND = -1;
 
@@ -147,107 +148,73 @@ public final class WrapperStack
     /**
      * Returns the wrapped stack
      * 
-     * @return The wrapped ItemStack, OreStack, or EnergyStack, or null if something other than an ItemStack, OreStack, or EnergyStack was used to create this object
+     * @return The wrapped ItemStack, OreStack, or null if something other than an ItemStack, or OreStack, was used to create this object
      */
-    public Object getWrappedStack()
+    public ItemStack getWrappedStack()
     {
         if (itemStack != null)
         {
             return itemStack;
         } else if (oreStack != null)
         {
-            return oreStack;
+            return oreStack.toItemStack();
         }
         return null;
     }
-
+    
     public static boolean canBeWrapped(final Object object)
     {
         return ((object instanceof WrapperStack) || (object instanceof ItemStack) || (object instanceof OreStack) || (object instanceof Item) || (object instanceof Block));
     }
-
-    @Override
-    public int hashCode()
+    
+    public static List<WrapperStack> toWrapperList(List<Object> list)
     {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + ((itemStack == null) ? 0 : itemStack.hashCode());
-        result = (prime * result) + ((oreStack == null) ? 0 : oreStack.hashCode());
-        result = (prime * result) + stackSize;
-        return result;
+        List<WrapperStack> tmp = new ArrayList<WrapperStack>();
+        for (Object obj : list)
+        {
+            if (canBeWrapped(obj))
+            {
+                tmp.add(new WrapperStack(obj));
+            }
+        }
+        return tmp;
     }
 
     @Override
-    public String toString()
+    public int compareTo(WrapperStack o)
     {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("WrapperStack [ stackSize = ").append(stackSize).append(", ");
-        if (itemStack != null)
+        if (itemStack != null && o.itemStack != null)
         {
-            builder.append("itemStack = ").append(itemStack).append(", ");
-        }
-        if (oreStack != null)
+            if (ItemStack.areItemStacksEqual(itemStack, o.itemStack))
+            {
+                if (itemStack.hasTagCompound() && o.itemStack.hasTagCompound())
+                {
+                    if (!ItemStack.areItemStackTagsEqual(itemStack, o.itemStack))
+                    {
+                        return -1;
+                    }
+                }
+                if (itemStack.stackSize == o.itemStack.stackSize)
+                {
+                    return 0;
+                } else if (itemStack.stackSize > o.itemStack.stackSize)
+                {
+                    return 1;
+                }
+            }
+        } else if (oreStack != null && o.oreStack != null)
         {
-            builder.append("oreStack = ").append(oreStack).append(", ");
+
         }
-        builder.append("Stack Size = ").append(getStackSize()).append(", ");
-        if (getWrappedStack() != null)
-        {
-            builder.append("Wrapped Stack = ").append(getWrappedStack()).append(", ");
-        }
-        builder.append("hashCode = ").append(hashCode()).append(", ");
-        if (getClass() != null)
-        {
-            builder.append("Class = ").append(getClass()).append(", ");
-        }
-        if (super.toString() != null)
-        {
-            builder.append("super toString = ").append(super.toString());
-        }
-        builder.append(" ] \n");
-        return builder.toString();
+        return -1;
     }
 
-    @Override
-    public boolean equals(final Object obj)
+    public static int compare(Object o, Object o2)
     {
-        if (this == obj)
+        if (o != null && o2 != null)
         {
-            return true;
+            return new WrapperStack(o).compareTo(new WrapperStack(o2));
         }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (!(obj instanceof WrapperStack))
-        {
-            return false;
-        }
-        final WrapperStack other = (WrapperStack) obj;
-        if (itemStack == null)
-        {
-            if (other.itemStack != null)
-            {
-                return false;
-            }
-        } else if (!itemStack.equals(other.itemStack))
-        {
-            return false;
-        }
-        if (oreStack == null)
-        {
-            if (other.oreStack != null)
-            {
-                return false;
-            }
-        } else if (!oreStack.equals(other.oreStack))
-        {
-            return false;
-        }
-        if (stackSize != other.stackSize)
-        {
-            return false;
-        }
-        return true;
+        return -1;
     }
 }

@@ -3,149 +3,103 @@
  */
 package ccm.nucleum.omnium.api.recipes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
+
+import ccm.nucleum.omnium.utils.helper.item.WrapperStack;
 
 /**
  * Recipe
  * <p>
- * Simple Recipe class
+ * Recipe Class
  * 
  * @author Captain_Shadows
  */
 public class Recipe
 {
+    /** All the inputs */
+    private final List<WrapperStack> inputs;
+    
+    /** All the outputs */
+    private final List<WrapperStack> outputs;
+    
+    /** True if the call to inputs.size() returns > 1 */
+    private final boolean hasMultipleInputs;
+    
+    /** True if the call to outputs.size() returns > 1 */
+    private final boolean hasMultipleOutputs;
 
-    private final ItemStack input;
+    public Recipe(final List<WrapperStack> inputs, final List<WrapperStack> outputs)
+    {
+        if (inputs != null && outputs != null)
+        {
+            if (inputs.size() >= 1 && outputs.size() >= 1)
+            {
+                this.inputs = inputs;
+                this.outputs = outputs;
+            } else
+            {
+                throw new RuntimeException("The lists where less than 1 in size");
+            }
+        } else
+        {
+            throw new RuntimeException("The lists where null");
+        }
 
-    private final ItemStack output;
+        hasMultipleInputs = inputs.size() > 1 ? false : true;
+        hasMultipleOutputs = outputs.size() > 1 ? false : true;
+    }
 
-    private ItemStack output2;
-
-    private final boolean hasSecondOutput;
-
+    public Recipe(final WrapperStack input, final WrapperStack output)
+    {
+        this(Arrays.asList(input), Arrays.asList(output));
+    }
+    
     public Recipe(final ItemStack input, final ItemStack output)
     {
-        this.input = input;
-        this.output = output;
-        hasSecondOutput = false;
+        this(new WrapperStack(input), new WrapperStack(output));
     }
 
-    public Recipe(final ItemStack input, final ItemStack output, final ItemStack output2)
+    public List<WrapperStack> getInputs()
     {
-        this.input = input;
-        this.output = output;
-        this.output2 = output2;
-        hasSecondOutput = true;
+        return new ArrayList<WrapperStack>(inputs);
     }
 
-    @Override
-    public boolean equals(final Object obj)
+    public List<WrapperStack> getOutputs()
     {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (!(obj instanceof Recipe))
-        {
-            return false;
-        }
-        final Recipe other = (Recipe) obj;
-        if (hasSecondOutput != other.hasSecondOutput)
-        {
-            return false;
-        }
-        if (input == null)
-        {
-            if (other.input != null)
-            {
-                return false;
-            }
-        } else if (!input.equals(other.input))
-        {
-            return false;
-        }
-        if (output == null)
-        {
-            if (other.output != null)
-            {
-                return false;
-            }
-        } else if (!output.equals(other.output))
-        {
-            return false;
-        }
-        if (output2 == null)
-        {
-            if (other.output2 != null)
-            {
-                return false;
-            }
-        } else if (!output2.equals(other.output2))
-        {
-            return false;
-        }
-        return true;
+        return new ArrayList<WrapperStack>(outputs);
     }
 
-    public ItemStack getOutput()
+    public boolean hasMultipleInputs()
     {
-        return output.copy();
+        return hasMultipleInputs;
     }
 
-    public ItemStack getOutput2()
+    public boolean hasMultipleOutputs()
     {
-        return output2.copy();
+        return hasMultipleOutputs;
     }
 
-    @Override
-    public int hashCode()
+    public WrapperStack getInput()
     {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + (hasSecondOutput ? 1231 : 1237);
-        result = (prime * result) + ((input == null) ? 0 : input.hashCode());
-        result = (prime * result) + ((output == null) ? 0 : output.hashCode());
-        result = (prime * result) + ((output2 == null) ? 0 : output2.hashCode());
-        return result;
+        return inputs.get(0);
     }
 
-    public boolean hasSecondOutput()
+    public WrapperStack getOutput()
     {
-        return hasSecondOutput;
+        return outputs.get(0);
     }
 
-    public boolean isInput(final ItemStack stack)
+    public boolean isInput(WrapperStack item)
     {
-        return input.isItemEqual(stack);
+        return inputs.contains(item);
     }
-
-    public boolean isOutput(final ItemStack stack)
+    
+    public boolean isOutput(WrapperStack item)
     {
-        return ((output.isItemEqual(stack)) || (output2.isItemEqual(stack)));
-    }
-
-    @Override
-    public String toString()
-    {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Recipe [");
-        if (input != null)
-        {
-            builder.append("input=").append(input).append(", ");
-        }
-        if (output != null)
-        {
-            builder.append("output=").append(output).append(", ");
-        }
-        if (output2 != null)
-        {
-            builder.append("output2=").append(output2).append(", ");
-        }
-        builder.append("hasSecondOutput=").append(hasSecondOutput).append(", ").append(", hashCode()=").append(hashCode()).append(", ").append("]");
-        return builder.toString();
+        return outputs.contains(item);
     }
 }

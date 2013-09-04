@@ -84,6 +84,11 @@ public final class OreStack implements Comparator<OreStack>
     {
         return OreDictionary.getOreID(name);
     }
+    
+    public ItemStack toItemStack()
+    {
+        return getOres().get(0);
+    }
 
     @Override
     public int compare(final OreStack stack, final OreStack stack2)
@@ -106,75 +111,5 @@ public final class OreStack implements Comparator<OreStack>
     public boolean compare(final OreStack stack)
     {
         return compare(this, stack) == 0;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + amount;
-        result = (prime * result) + ((name == null) ? 0 : name.hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString()
-    {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("OreStack [ ");
-        if (name != null)
-        {
-            builder.append("name = ").append(name).append(", ");
-        }
-        builder.append("amount = ").append(amount).append(", is Ore = ").append(isOre()).append(", ");
-        if (getOres() != null)
-        {
-            builder.append("Ores = ").append(getOres()).append(", ");
-        }
-        builder.append("Ore ID = ").append(getOreID()).append(", hashCode = ").append(hashCode()).append(", ");
-        if (getClass() != null)
-        {
-            builder.append("Class = ").append(getClass()).append(", ");
-        }
-        if (super.toString() != null)
-        {
-            builder.append("super toString = ").append(super.toString());
-        }
-        builder.append(" ] \n");
-        return builder.toString();
-    }
-
-    @Override
-    public boolean equals(final Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (!(obj instanceof OreStack))
-        {
-            return false;
-        }
-        final OreStack other = (OreStack) obj;
-        if (amount != other.amount)
-        {
-            return false;
-        }
-        if (name == null)
-        {
-            if (other.name != null)
-            {
-                return false;
-            }
-        } else if (!name.equals(other.name))
-        {
-            return false;
-        }
-        return true;
     }
 }

@@ -49,34 +49,24 @@ public class LogicTE extends InventoryTE
         {
             Constructor<? extends ITileLogic> c = null;
 
-            final String failConst = "Logic loader has failed to get the Constructor for: \n %s With error: \n %s";
+            String fail = "Logic loader has failed to get the Constructor for: \n %s With error: \n %s";
 
             try
             {
                 c = srclogic.getConstructor(TileEntity.class);
             } catch (final Exception e)
             {
-                LogHandler.severe(NucleumOmnium.instance, failConst, toString(), e.toString());
-                if (e.getCause() != null)
-                {
-                    LogHandler.severe(NucleumOmnium.instance, "\nAnd Cause: %s", e.getCause());
-                }
-                e.printStackTrace();
+                LogHandler.printCatch(NucleumOmnium.instance, e, fail, toString(), e);
             }
 
-            final String failInst = "Logic loader has failed to create a new Instance of: \n %s With error: \n %s";
+            fail = "Logic loader has failed to create a new Instance of: \n %s With error: \n %s";
 
             try
             {
                 logic = c.newInstance(this);
             } catch (final Exception e)
             {
-                LogHandler.severe(NucleumOmnium.instance, failInst, toString(), e.toString());
-                if (e.getCause() != null)
-                {
-                    LogHandler.severe(NucleumOmnium.instance, "\nAnd Cause: %s", e.getCause());
-                }
-                e.printStackTrace();
+                LogHandler.printCatch(NucleumOmnium.instance, e, fail, toString(), e);
             }
         } else
         {
@@ -99,10 +89,10 @@ public class LogicTE extends InventoryTE
      */
     public ITileLogic getTileLogic()
     {
-        if (logic == null)
+        if (!hasLogic())
         {
             loadLogic();
-            LogHandler.severe(NucleumOmnium.instance, "Somthing went wrong while seting the Tile Entity's Logic!!!\n It was reloaded");
+            LogHandler.debug(NucleumOmnium.instance, "Somthing went wrong while seting the Tile Entity's Logic!!!\n It was reloaded");
         }
         return logic;
     }
@@ -127,9 +117,8 @@ public class LogicTE extends InventoryTE
                 setLogic((Class<? extends ITileLogic>) Class.forName(tmp));
             } catch (final ClassNotFoundException e)
             {
-                final String failNBT = "Logic loader has failed to find a class named: \n %s With error: \n %s";
-                LogHandler.severe(NucleumOmnium.instance, failNBT, tmp, e.toString());
-                e.printStackTrace();
+                final String fail = "Logic loader has failed to find a class named: \n %s With error: \n %s";
+                LogHandler.printCatch(NucleumOmnium.instance, e, fail, tmp, e);
             }
         }
         if (hasLogic())

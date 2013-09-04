@@ -15,7 +15,7 @@ import ccm.nucleum.omnium.utils.handler.LogHandler;
 public final class JavaHelper extends BaseNIC
 {
     private static final List<String> trues = Arrays.asList(new String[]
-    { "true", "on", "active" });
+    { "true", "on", "active", "yes", "right", "sure" });
 
     /**
      * @return <code>true</code> if it is a Number. <code>false</code> otherwise
@@ -37,13 +37,13 @@ public final class JavaHelper extends BaseNIC
     /**
      * @return <code>true</code> if it is any common word for it. <code>false</code> otherwise {@code If it returns false on a string that shoud be true please make an issue}
      */
-    public static boolean toBoolean(final String str)
+    public static boolean toBoolean(final String input)
     { // Make sure that the string is not null and then check common words for true
-        if (str != null)
+        if (input != null)
         {
-            if (trues.contains(str))
-            {
-                return true;
+            for (String s : trues)
+            {// Iterate through all the strings and match ignoring casing
+                return s.equalsIgnoreCase(input);
             }
         }
         // if any of the past don't work just return false

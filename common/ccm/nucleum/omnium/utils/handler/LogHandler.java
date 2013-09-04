@@ -97,4 +97,14 @@ public final class LogHandler extends BaseNIC
     {
         log(mod, Level.SEVERE, message, data);
     }
+    
+    public static void printCatch(final IMod mod, Exception e, final Object message, final Object... data)
+    {
+        LogHandler.severe(mod, message, data);
+        if (e.getCause() != null)
+        {
+            LogHandler.severe(mod, "\nAnd Cause: %s", e.getCause());
+        }
+        e.printStackTrace();
+    }
 }
