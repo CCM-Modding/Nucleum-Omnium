@@ -11,6 +11,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import ccm.nucleum.omnium.utils.helper.enums.EnumToItemStack;
+import ccm.nucleum.omnium.utils.helper.enums.IBlockEnum;
+import ccm.nucleum.omnium.utils.helper.enums.IItemEnum;
+
 /**
  * WrapperStack
  * <p>
@@ -36,84 +40,72 @@ public final class WrapperStack implements Comparable<WrapperStack>
     {
         if (canBeWrapped(object))
         {
+            create(object);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void create(Object object)
+    {
+        /*
+         * If we are given an Item or a Block, convert it to an ItemStack for further inspection
+         */
+        if (object instanceof Item)
+        {
+            object = new ItemStack((Item) object);
+        } else if (object instanceof Block)
+        {
+            object = new ItemStack((Block) object);
+        }
+        /*
+         * We are given an ItemStack to wrap
+         */
+        if (object instanceof ItemStack)
+        {
+            final ItemStack itemStack = (ItemStack) object;
             /*
-             * If we are given an Item or a Block, convert it to an ItemStack for further inspection
+             * If the ItemStack does not exist in the OreDictionary, wrap it as an ItemStack
              */
-            if (object instanceof Item)
+            if (OreDictionary.getOreID(itemStack) == ORE_DICTIONARY_NOT_FOUND)
             {
-                object = new ItemStack((Item) object);
-            } else if (object instanceof Block)
-            {
-                object = new ItemStack((Block) object);
+                this.itemStack = itemStack.copy();
+                oreStack = null;
+                stackSize = this.itemStack.stackSize;
             }
             /*
-             * We are given an ItemStack to wrap
+             * Else the ItemStack exists in the OreDictionary, so wrap it as an OreStack instead of an ItemStack
              */
-            if (object instanceof ItemStack)
+            else
             {
-                final ItemStack itemStack = (ItemStack) object;
-                /*
-                 * If the ItemStack does not exist in the OreDictionary, wrap it as an ItemStack
-                 */
-                if (OreDictionary.getOreID(itemStack) == ORE_DICTIONARY_NOT_FOUND)
-                {
-                    this.itemStack = itemStack.copy();
-                    oreStack = null;
-                    stackSize = this.itemStack.stackSize;
-                    this.itemStack.stackSize = 1;
-                }
-                /*
-                 * Else the ItemStack exists in the OreDictionary, so wrap it as an OreStack instead of an ItemStack
-                 */
-                else
-                {
-                    this.itemStack = null;
-                    oreStack = new OreStack(itemStack);
-                    stackSize = oreStack.size();
-                    oreStack.setSize(1);
-                }
-            }
-            /*
-             * Or we are given an OreStack to wrap
-             */
-            else if (object instanceof OreStack)
-            {
-                itemStack = null;
-                oreStack = (OreStack) object;
+                this.itemStack = null;
+                oreStack = new OreStack(itemStack);
                 stackSize = oreStack.size();
-                oreStack.setSize(1);
-            } else if (object instanceof ArrayList)
-            {
-                itemStack = null;
-
-                final ArrayList<?> objectList = (ArrayList<?>) object;
-
-                if (!objectList.isEmpty())
-                {
-                    for (final Object listElement : objectList)
-                    {
-                        if (listElement instanceof ItemStack)
-                        {
-                            final ItemStack stack = (ItemStack) listElement;
-
-                            if (OreDictionary.getOreID(stack) != ORE_DICTIONARY_NOT_FOUND)
-                            {
-                                oreStack = new OreStack(stack);
-                                stackSize = oreStack.size();
-                                oreStack.setSize(1);
-                                break;
-                            }
-                        }
-                    }
-                }
-            } else if (object instanceof WrapperStack)
-            {
-                final WrapperStack wrappedStack = (WrapperStack) object;
-
-                itemStack = wrappedStack.itemStack;
-                oreStack = wrappedStack.oreStack;
-                stackSize = wrappedStack.stackSize;
             }
+        }
+        /*
+         * Or we are given an OreStack to wrap
+         */
+        else if (object instanceof OreStack)
+        {
+            itemStack = null;
+            oreStack = (OreStack) object;
+            stackSize = oreStack.size();
+        } else if (object instanceof WrapperStack)
+        {
+            final WrapperStack wrappedStack = (WrapperStack) object;
+
+            itemStack = wrappedStack.itemStack;
+            oreStack = wrappedStack.oreStack;
+            stackSize = wrappedStack.stackSize;
+        } else if (object instanceof String)
+        {
+            create(new OreStack(object.toString()));
+        } else if (object instanceof IItemEnum)
+        {
+            create(EnumToItemStack.getItemIS((Enum<? extends IItemEnum>) object));
+        } else if (object instanceof IBlockEnum)
+        {
+            create(EnumToItemStack.getBlockIS((Enum<? extends IBlockEnum>) object));
         }
         /*
          * Else, we are given something we cannot wrap
@@ -140,9 +132,10 @@ public final class WrapperStack implements Comparable<WrapperStack>
      * @param stackSize
      *            The new size of the wrapped stack
      */
-    public void setStackSize(final int stackSize)
+    public WrapperStack setStackSize(final int stackSize)
     {
         this.stackSize = stackSize;
+        return this;
     }
 
     /**
@@ -161,12 +154,13 @@ public final class WrapperStack implements Comparable<WrapperStack>
         }
         return null;
     }
-    
+
     public static boolean canBeWrapped(final Object object)
     {
-        return ((object instanceof WrapperStack) || (object instanceof ItemStack) || (object instanceof OreStack) || (object instanceof Item) || (object instanceof Block));
+        return ((object instanceof WrapperStack) || (object instanceof ItemStack) || (object instanceof OreStack) || (object instanceof Item) || (object instanceof Block)
+                || (object instanceof String) || (object instanceof IItemEnum) || (object instanceof IBlockEnum));
     }
-    
+
     public static List<WrapperStack> toWrapperList(List<Object> list)
     {
         List<WrapperStack> tmp = new ArrayList<WrapperStack>();
@@ -204,7 +198,7 @@ public final class WrapperStack implements Comparable<WrapperStack>
             }
         } else if (oreStack != null && o.oreStack != null)
         {
-
+            return oreStack.compare(oreStack, o.oreStack);
         }
         return -1;
     }
@@ -216,5 +210,72 @@ public final class WrapperStack implements Comparable<WrapperStack>
             return new WrapperStack(o).compareTo(new WrapperStack(o2));
         }
         return -1;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((itemStack == null) ? 0 : itemStack.hashCode());
+        result = prime * result + ((oreStack == null) ? 0 : oreStack.hashCode());
+        result = prime * result + stackSize;
+        return result;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("WrapperStack [stackSize = ").append(stackSize).append(", ");
+        if (itemStack != null)
+        {
+            builder.append("itemStack = ").append(itemStack).append(", ");
+        }
+        if (oreStack != null)
+        {
+            builder.append("oreStack = ").append(oreStack);
+        }
+        builder.append("] \n");
+        return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (!(obj instanceof WrapperStack))
+        {
+            return false;
+        }
+        WrapperStack other = (WrapperStack) obj;
+        if (itemStack == null)
+        {
+            if (other.itemStack != null)
+            {
+                return false;
+            }
+        } else if (!itemStack.equals(other.itemStack))
+        {
+            return false;
+        }
+        if (oreStack == null)
+        {
+            if (other.oreStack != null)
+            {
+                return false;
+            }
+        } else if (!oreStack.equals(other.oreStack))
+        {
+            return false;
+        }
+        return true;
     }
 }

@@ -3,9 +3,12 @@
  */
 package ccm.nucleum.omnium.api.recipes;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import net.minecraft.item.ItemStack;
 
 import ccm.nucleum.omnium.utils.helper.item.WrapperStack;
 
@@ -47,6 +50,11 @@ public abstract class IRecipeContainer
             }
         }
     }
+    
+    public void addRecipe(final WrapperStack input, final WrapperStack... outputs)
+    {
+        recipes.add(new Recipe(Arrays.asList(input), Arrays.asList(outputs)));
+    }
 
     /**
      * @return The recipe that contains the Item as an input or null if none was found
@@ -65,6 +73,11 @@ public abstract class IRecipeContainer
             }
         }
         return null;
+    }
+    
+    public Recipe getResult(final ItemStack item)
+    {
+        return getResult(new WrapperStack(item));
     }
 
     /**

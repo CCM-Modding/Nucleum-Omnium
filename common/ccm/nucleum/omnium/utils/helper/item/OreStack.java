@@ -31,7 +31,7 @@ public final class OreStack implements Comparator<OreStack>
 
     public OreStack(final String name, final int stackSize)
     {
-        this.name = name;
+        this.name = name != null ? name : "Unknown";
         amount = stackSize;
     }
 
@@ -84,7 +84,7 @@ public final class OreStack implements Comparator<OreStack>
     {
         return OreDictionary.getOreID(name);
     }
-    
+
     public ItemStack toItemStack()
     {
         return getOres().get(0);
@@ -97,7 +97,13 @@ public final class OreStack implements Comparator<OreStack>
         {
             if (stack.name.equals(stack2.name))
             {
-                return 0;
+                if (stack.size() == stack2.size())
+                {
+                    return 0;
+                } else if (stack.size() > stack2.size())
+                {
+                    return 1;
+                }
             }
         }
         return -1;
@@ -110,6 +116,71 @@ public final class OreStack implements Comparator<OreStack>
 
     public boolean compare(final OreStack stack)
     {
-        return compare(this, stack) == 0;
+        return compare(this, stack) != -1;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + amount;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("OreStack [");
+        if (name != null)
+        {
+            builder.append("name = ").append(name).append(", ");
+        }
+        builder.append("size() = ").append(size()).append(", isOre() = ").append(isOre()).append(", ");
+        if (getOres() != null)
+        {
+            builder.append("getOres() = ").append(getOres()).append(", ");
+        }
+        builder.append("getOreID() = ").append(getOreID()).append(", ");
+        if (toItemStack() != null)
+        {
+            builder.append("toItemStack() = ").append(toItemStack()).append(", ");
+        }
+        builder.append("hashCode() = ").append(hashCode()).append(", ");
+        if (getClass() != null)
+        {
+            builder.append("getClass() = ").append(getClass()).append(", ");
+        }
+        if (super.toString() != null)
+        {
+            builder.append("super toString() = ").append(super.toString());
+        }
+        builder.append("] \n");
+        return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (!(obj instanceof OreStack))
+        {
+            return false;
+        }
+        OreStack other = (OreStack) obj;
+        if (!name.equals(other.name))
+        {
+            return false;
+        }
+        return true;
     }
 }
