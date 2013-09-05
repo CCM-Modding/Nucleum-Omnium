@@ -53,7 +53,7 @@ public class ActiveTexture extends MultyTexture implements ITextureHelper
     {
         for (final BlockFacings direction : goodSides)
         {
-            if (direction == active)
+            if (direction.equals(active))
             {
                 icons[direction.ordinal()] = register.registerIcon(iconName + direction.name());
                 icons[7] = register.registerIcon(iconName + direction.name() + "On");

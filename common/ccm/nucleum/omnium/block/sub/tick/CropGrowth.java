@@ -5,12 +5,12 @@ package ccm.nucleum.omnium.block.sub.tick;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import ccm.nucleum.omnium.block.MainBlock;
 import ccm.nucleum.omnium.block.interfaces.IDisplayListener;
-import ccm.nucleum.omnium.block.sub.SubCrop;
+import ccm.nucleum.omnium.tileentity.PlantTE;
+import ccm.nucleum.omnium.utils.helper.BlockHelper;
 
 public class CropGrowth implements IDisplayListener
 {
@@ -18,13 +18,18 @@ public class CropGrowth implements IDisplayListener
     @Override
     public void randomDisplayTick(final World world, final int x, final int y, final int z, final Random rand)
     {
-
-        final SubCrop block = (SubCrop) ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x, y, z)];
+        final TileEntity tile = world.getBlockTileEntity(x, y, z);
         if (world.getBlockLightValue(x, y, z) >= 9)
         {
-            if (rand.nextInt((int) (25.0F / block.getGrowthRate()) + 1) == 0)
+            if (tile instanceof PlantTE)
             {
-                block.grow();
+                PlantTE plant = (PlantTE) tile;
+                
+                if (rand.nextInt((int) (25.0F / plant.getGrowthRate()) + 1) == 0)
+                {
+                    plant.grow();
+                    BlockHelper.updateAdjacent(world, x, y, z, 3);
+                }
             }
         }
     }

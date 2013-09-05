@@ -14,9 +14,9 @@ public final class NBTConstants extends BaseNIC
 
     public static final String INVENTORY = CONTAINER + "inventory";
 
-    public static final String TE = "CCM.TILE_ENTITY.";
-
-    public static final String TIMER = "CCM.TIMER.";
+    public static final String TE = "CCM.ENTITY.TILE.";
+    
+    public static final String TE_PLANT = TE + "PLANT.";
 
     /*
      * NBT TE Stuff
@@ -34,11 +34,10 @@ public final class NBTConstants extends BaseNIC
     public static final String NBT_TE_PROGRESS = TE + "PROGRESS";
 
     public static final String NBT_TE_STATE = TE + "STATE";
-
-    /*
-     * NBT Timer Stuff
-     */
-    public static final String NBT_TIMER_START = TIMER + "START";
-
-    public static final String NBT_TIMER_END = TIMER + "END";
+    
+    public static final String NBT_PLANT_STAGE = TE_PLANT + "STAGE";
+    
+    public static final String NBT_PLANT_STAGES = TE_PLANT + "STAGES";
+    
+    public static final String NBT_PLANT_RATE = TE_PLANT + "RATE";
 }

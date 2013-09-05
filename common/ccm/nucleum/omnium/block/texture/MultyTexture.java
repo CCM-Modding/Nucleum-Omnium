@@ -30,10 +30,10 @@ public class MultyTexture extends BasicTexture
     }
 
     @Override
-    public Icon getBlockTexture(final IBlockAccess blockAccess, final int x, final int y, final int z, final int side)
+    public Icon getBlockTexture(final IBlockAccess world, final int x, final int y, final int z, final int side)
     {
 
-        final BaseTE te = (BaseTE) blockAccess.getBlockTileEntity(x, y, z);
+        final BaseTE te = (BaseTE) world.getBlockTileEntity(x, y, z);
 
         if (te != null)
         {

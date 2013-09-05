@@ -220,7 +220,7 @@ public final class BaseTEData
      */
     public void setOwner(final String owner)
     {
-        this.owner = owner;
+        this.owner = owner != null ? owner : "Unkown";
     }
 
     /**

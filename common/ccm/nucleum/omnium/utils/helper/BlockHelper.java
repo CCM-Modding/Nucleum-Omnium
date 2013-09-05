@@ -5,6 +5,7 @@ package ccm.nucleum.omnium.utils.helper;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
@@ -35,7 +36,7 @@ public class BlockHelper extends BaseNIC
     /**
      * @return a MainBlock in the world, x, y, z; if it is not and instance of MainBlock the the result is null
      */
-    public static MainBlock getBlock(final World world, final int x, final int y, final int z)
+    public static MainBlock getBlock(final IBlockAccess world, final int x, final int y, final int z)
     {
         return getBlock(world.getBlockId(x, y, z));
     }
@@ -49,9 +50,9 @@ public class BlockHelper extends BaseNIC
     }
 
     /**
-     * @return
+     * @return The Sub Block at that position
      */
-    public static SubBlock getSubBlock(final World world, final int x, final int y, final int z)
+    public static SubBlock getSubBlock(final IBlockAccess world, final int x, final int y, final int z)
     {
         return getBlock(world, x, y, z).getSubBlocks()[world.getBlockMetadata(x, y, z)];
     }
