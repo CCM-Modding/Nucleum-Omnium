@@ -11,7 +11,5 @@ public final class Archive extends BaseNIC
 
     public static final String MOD_NAME = "Nucleum Omnium";
 
-    public static final String MOD_PREFIX = "nucleum";
-
     public static final String MOD_CHANNEL = "CCM";
 }

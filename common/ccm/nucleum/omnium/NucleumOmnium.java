@@ -6,7 +6,6 @@ package ccm.nucleum.omnium;
 import static ccm.nucleum.omnium.utils.lib.Archive.MOD_CHANNEL;
 import static ccm.nucleum.omnium.utils.lib.Archive.MOD_ID;
 import static ccm.nucleum.omnium.utils.lib.Archive.MOD_NAME;
-import static ccm.nucleum.omnium.utils.lib.Archive.MOD_PREFIX;
 import static ccm.nucleum.omnium.utils.lib.Locations.CLIENT_PROXY;
 import static ccm.nucleum.omnium.utils.lib.Locations.SERVER_PROXY;
 
@@ -34,11 +33,8 @@ import ccm.nucleum.omnium.utils.handler.mods.ModHandler;
 import ccm.nucleum.omnium.utils.handler.mods.MystcraftHandler;
 import ccm.nucleum.omnium.utils.helper.DataHelper;
 
-import lib.org.modstats.ModstatInfo;
-
 @Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = MOD_CHANNEL, packetHandler = PacketHandler.class)
-@ModstatInfo(prefix = MOD_PREFIX)
 public class NucleumOmnium extends CCMMod implements IMod
 {
 

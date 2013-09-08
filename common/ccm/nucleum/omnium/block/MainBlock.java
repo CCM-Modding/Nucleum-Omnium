@@ -127,18 +127,24 @@ public class MainBlock extends Block
     @Override
     public ArrayList<ItemStack> getBlockDropped(final World world, final int x, final int y, final int z, final int meta, final int fortune)
     {
-        final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-
-        final int count = quantityDropped(meta, fortune, world.rand);
-        for (int i = 0; i < count; i++)
+        if (subBlocks[meta] != null)
         {
-            final int id = idDropped(meta, world.rand, fortune);
-            if (id > 0)
+            return subBlocks[meta].getBlockDropped(world, x, y, z, fortune);
+        } else
+        {
+            final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+
+            final int count = quantityDropped(meta, fortune, world.rand);
+            for (int i = 0; i < count; i++)
             {
-                ret.add(new ItemStack(id, 1, damageDropped(meta)));
+                final int id = idDropped(meta, world.rand, fortune);
+                if (id > 0)
+                {
+                    ret.add(new ItemStack(id, 1, damageDropped(meta)));
+                }
             }
+            return ret;
         }
-        return ret;
     }
 
     /**

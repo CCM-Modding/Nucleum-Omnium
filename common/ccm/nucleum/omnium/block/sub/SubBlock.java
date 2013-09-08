@@ -162,20 +162,22 @@ public class SubBlock
      * @param collisionL
      *            the {@link ICollisionListener} who's collide method will be called for this instance
      */
-    public void addCollisionListener(final ICollisionListener collisionL)
+    public SubBlock addCollisionListener(final ICollisionListener collisionL)
     {
         collisionEffect = true;
         collisionList.add(collisionL);
+        return this;
     }
 
     /**
      * @param displayL
      *            the {@link IDisplayListener} who's randomDisplayTick method will be called for this instance
      */
-    public void addDisplayListener(final IDisplayListener displayL)
+    public SubBlock addDisplayListener(final IDisplayListener displayL)
     {
-        mainBlock.setTickRandomly(meta);
+        mainBlock.setTickRandomly(getMeta());
         displayList.add(displayL);
+        return this;
     }
 
     // /////////////////////////////
@@ -218,7 +220,7 @@ public class SubBlock
 
     public Icon getBlockTextureFromSide(final int side)
     {
-        return texture.getIcon(side, meta);
+        return texture.getIcon(side, getMeta());
     }
 
     public AxisAlignedBB getCollisionBoundingBoxFromPool(final World world, final int x, final int y, final int z)
@@ -239,7 +241,7 @@ public class SubBlock
 
     public int getDamageValue(final World world, final int x, final int y, final int z)
     {
-        return meta;
+        return getMeta();
     }
 
     public float getExplosionResistance(final Entity entity, final World world, final int x, final int y, final int z, final double explosionX, final double explosionY,
@@ -363,13 +365,18 @@ public class SubBlock
     {
         for (final ICollisionListener cl : collisionList)
         {
-            cl.collide(world, x, y, z, par5Entity, meta);
+            cl.collide(world, x, y, z, par5Entity, getMeta());
         }
     }
 
     public int quantityDroppedWithBonus(final int fortune, final Random rand)
     {
-        if ((drop != null) && (dropMax > 1))
+        return quantityDroppedWithBonus(dropMin, dropMax, fortune, rand);
+    }
+
+    public int quantityDroppedWithBonus(int dropMin, int dropMax, final int fortune, final Random rand)
+    {
+        if (dropMax > 1)
         {
             return dropMin + rand.nextInt(dropMax + fortune) + fortune;
         } else
@@ -392,9 +399,31 @@ public class SubBlock
         texture.registerIcons(register);
     }
 
+    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int fortune)
+    {
+        final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+
+        final int count = quantityDroppedWithBonus(fortune, world.rand);
+        for (int i = 0; i < count; i++)
+        {
+            final int id = idDropped(world.rand, fortune);
+            if (id > 0)
+            {
+                ret.add(new ItemStack(id, 1, damageDropped(getMeta())));
+            }
+        }
+        return ret;
+    }
+
     // /////////////////////////////
     // Instance Modifiers
     // /////////////////////////////
+
+    public int getMeta()
+    {
+        return meta;
+    }
+
     public SubBlock setBlockDrops(final ItemStack item, final int min, final int max)
     {
         drop = item.copy();
@@ -475,7 +504,7 @@ public class SubBlock
         result = (prime * result) + dropMin;
         result = (prime * result) + Float.floatToIntBits(hardness);
         result = (prime * result) + ((mainBlock == null) ? 0 : mainBlock.hashCode());
-        result = (prime * result) + meta;
+        result = (prime * result) + getMeta();
         result = (prime * result) + ((tab == null) ? 0 : tab.hashCode());
         result = (prime * result) + ((texture == null) ? 0 : texture.hashCode());
         result = (prime * result) + ((tile == null) ? 0 : tile.hashCode());
@@ -559,7 +588,7 @@ public class SubBlock
         {
             return false;
         }
-        if (meta != other.meta)
+        if (getMeta() != other.getMeta())
         {
             return false;
         }
