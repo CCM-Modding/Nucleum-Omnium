@@ -11,7 +11,7 @@ import ccm.nucleum.omnium.utils.handler.LogHandler;
 import ccm.nucleum.omnium.utils.handler.ResourceHandler;
 
 /**
- * Advanced Base Model, to use with the Advanced Model Loader, Pending internal minor fix...
+ * Advanced Base Model, to use with the Advanced Model Loader
  * 
  * @author Captain_Shadows
  */
