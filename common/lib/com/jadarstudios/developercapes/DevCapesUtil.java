@@ -21,9 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class DevCapesUtil
 {
 
@@ -31,9 +29,9 @@ public class DevCapesUtil
     public static final double version = 2.0;
 
     public DevCapesVersionChecker versionChecker;
-    private HashMap<String, String> users;
-    private HashMap<String, ResourceLocation> capeResources;
-    private HashMap<String, ThreadDownloadImageData> downloadThreads;
+    private final HashMap<String, String> users;
+    private final HashMap<String, ResourceLocation> capeResources;
+    private final HashMap<String, ThreadDownloadImageData> downloadThreads;
 
     public boolean tickSetUp = false;
 
@@ -68,7 +66,7 @@ public class DevCapesUtil
      * @param parTxtUrl
      *            The URL of the .txt file containing the groups, members of said groups, and the group's cape URL.
      */
-    public void addFileUrl(String parTxtUrl)
+    public void addFileUrl(final String parTxtUrl)
     {
         if (FMLCommonHandler.instance().getSide() != Side.CLIENT)
         {
@@ -148,7 +146,7 @@ public class DevCapesUtil
      * @param parGroup
      *            The group to add that Username to.
      */
-    public void addUser(String parUsername, String parGroup)
+    public void addUser(final String parUsername, final String parGroup)
     {
         if (getUserGroup(parUsername) == null)
         {
@@ -164,7 +162,7 @@ public class DevCapesUtil
      *            The Username to get from the users HashMap.
      * @return The Username found in the users HashMap.
      */
-    public String getUserGroup(String parUsername)
+    public String getUserGroup(final String parUsername)
     {
         return users.get(parUsername.toLowerCase());
     }
@@ -175,7 +173,7 @@ public class DevCapesUtil
      * @param parGroup
      * @param parResource
      */
-    public void addCapeResource(String parGroup, ResourceLocation parResource)
+    public void addCapeResource(final String parGroup, final ResourceLocation parResource)
     {
         if (getCapeResource(parGroup) == null)
         {
@@ -189,7 +187,7 @@ public class DevCapesUtil
      * @param parGroup
      * @return
      */
-    public ResourceLocation getCapeResource(String parGroup)
+    public ResourceLocation getCapeResource(final String parGroup)
     {
         return capeResources.get(parGroup);
     }
@@ -200,7 +198,7 @@ public class DevCapesUtil
      * @param parGroup
      * @param parResource
      */
-    public void addDownloadThread(String parGroup, ThreadDownloadImageData parResource)
+    public void addDownloadThread(final String parGroup, final ThreadDownloadImageData parResource)
     {
         if (getDownloadThread(parGroup) == null)
         {
@@ -214,7 +212,7 @@ public class DevCapesUtil
      * @param parGroup
      * @return
      */
-    public ThreadDownloadImageData getDownloadThread(String parGroup)
+    public ThreadDownloadImageData getDownloadThread(final String parGroup)
     {
         return downloadThreads.get(parGroup);
     }
@@ -228,8 +226,8 @@ public class DevCapesUtil
      * @param par3IImageBuffer
      * @return
      */
-    public static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation, String par1Str, ResourceLocation par2ResourceLocation,
-            IImageBuffer par3IImageBuffer)
+    public static ThreadDownloadImageData makeDownloadThread(final ResourceLocation par0ResourceLocation, final String par1Str, final ResourceLocation par2ResourceLocation,
+            final IImageBuffer par3IImageBuffer)
     {
         TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
 
