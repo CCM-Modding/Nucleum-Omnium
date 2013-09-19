@@ -34,25 +34,10 @@ public final class ConfigurationHandler extends BaseNIC
             e.printStackTrace();
         } finally
         {
-            temp.save();
-        }
-    }
-
-    /**
-     * @param mod
-     *            The Mod that owns this Configuration
-     * @param iConf
-     *            The Class that implements {@link IConfig}
-     */
-    public static void init(final IMod mod, final Class<? extends IConfig> iConf)
-    {
-        try
-        {
-            init(mod, iConf.newInstance().setConfiguration(mod.getConfigFile()));
-        } catch (final Exception e)
-        {
-            LogHandler.severe(mod, "%s has had a problem creating an instance of its configuration", mod.getName());
-            e.printStackTrace();
+            if (temp.hasChanged())
+            {
+                temp.save();
+            }
         }
     }
 }

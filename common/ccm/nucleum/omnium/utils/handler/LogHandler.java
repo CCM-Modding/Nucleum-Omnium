@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import ccm.nucleum.omnium.IMod;
 import ccm.nucleum.omnium.base.BaseNIC;
@@ -25,13 +25,11 @@ public final class LogHandler extends BaseNIC
     /**
      * Initializes the Logger for this Mod
      */
-    public static void init(final IMod mod)
+    public static void init(final IMod mod, final FMLPreInitializationEvent evt)
     {
         if (!modsLogged.containsKey(mod))
         {
-            final Logger tmp = Logger.getLogger(mod.getModId());
-            tmp.setParent(FMLLog.getLogger());
-            modsLogged.put(mod, tmp);
+            modsLogged.put(mod, evt.getModLog());
         } else
         {
             throw new DupeExeption(mod);
@@ -97,8 +95,8 @@ public final class LogHandler extends BaseNIC
     {
         log(mod, Level.SEVERE, message, data);
     }
-    
-    public static void printCatch(final IMod mod, Exception e, final Object message, final Object... data)
+
+    public static void printCatch(final IMod mod, final Exception e, final Object message, final Object... data)
     {
         LogHandler.severe(mod, message, data);
         if (e.getCause() != null)

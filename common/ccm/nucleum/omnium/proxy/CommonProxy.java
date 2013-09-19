@@ -3,8 +3,9 @@
  */
 package ccm.nucleum.omnium.proxy;
 
-import net.minecraftforge.common.MinecraftForge;
+import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 
+import ccm.nucleum.omnium.utils.handler.IconHandler;
 import ccm.nucleum.omnium.utils.handler.events.EventBoneMeal;
 
 public class CommonProxy
@@ -21,6 +22,12 @@ public class CommonProxy
      */
     public void initEventHandling()
     {
-        MinecraftForge.EVENT_BUS.register(new EventBoneMeal());
+        registerEvent(new EventBoneMeal());
+        registerEvent(IconHandler.instance());
+    }
+
+    void registerEvent(final Object target)
+    {
+        EVENT_BUS.register(target);
     }
 }

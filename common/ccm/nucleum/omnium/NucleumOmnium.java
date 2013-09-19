@@ -26,7 +26,6 @@ import ccm.nucleum.network.PacketHandler;
 import ccm.nucleum.omnium.proxy.CommonProxy;
 import ccm.nucleum.omnium.utils.handler.CommandHandler;
 import ccm.nucleum.omnium.utils.handler.ModLoadingHandler;
-import ccm.nucleum.omnium.utils.handler.config.ConfigurationHandler;
 import ccm.nucleum.omnium.utils.handler.config.NOConfig;
 import ccm.nucleum.omnium.utils.handler.gui.GuiHandler;
 import ccm.nucleum.omnium.utils.handler.mods.ModHandler;
@@ -52,10 +51,7 @@ public class NucleumOmnium extends CCMMod implements IMod
     @EventHandler
     public void preInit(final FMLPreInitializationEvent event)
     {
-        ModLoadingHandler.loadMod(this);
-
-        initializeConfig(event);
-        ConfigurationHandler.init(this, NOConfig.class);
+        ModLoadingHandler.loadMod(this, event, new NOConfig());
     }
 
     @EventHandler

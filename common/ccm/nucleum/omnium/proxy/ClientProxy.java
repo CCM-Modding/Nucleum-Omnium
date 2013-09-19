@@ -3,8 +3,6 @@
  */
 package ccm.nucleum.omnium.proxy;
 
-import net.minecraftforge.common.MinecraftForge;
-
 import ccm.nucleum.omnium.utils.handler.events.EventRain;
 import ccm.nucleum.omnium.utils.lib.Locations;
 import ccm.nucleum.omnium.utils.lib.Properties;
@@ -31,6 +29,6 @@ public class ClientProxy extends CommonProxy
     @Override
     public void initEventHandling()
     {
-        MinecraftForge.EVENT_BUS.register(new EventRain());
+        registerEvent(new EventRain());
     }
 }

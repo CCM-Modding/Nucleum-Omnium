@@ -5,8 +5,8 @@ package ccm.nucleum.world;
 
 import static ccm.nucleum.world.utils.lib.Archive.MOD_ID;
 import static ccm.nucleum.world.utils.lib.Archive.MOD_NAME;
-
-import net.minecraftforge.common.MinecraftForge;
+import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
+import static net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -19,6 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 
 import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.utils.handler.ModLoadingHandler;
 import ccm.nucleum.world.generator.WorldGenHandler;
 import ccm.nucleum.world.utils.TickHandlerWorld;
 import ccm.nucleum.world.utils.lib.Properties;
@@ -33,13 +34,13 @@ public class NucleumWorld extends CCMMod implements IMod
     @EventHandler
     public void preInit(final FMLPreInitializationEvent evt)
     {
-        initializeConfig(evt);
+        ModLoadingHandler.loadMod(this, evt, null);
 
         GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
 
-        MinecraftForge.EVENT_BUS.register(WorldGenHandler.instance);
+        EVENT_BUS.register(WorldGenHandler.instance);
 
-        MinecraftForge.ORE_GEN_BUS.register(WorldGenHandler.instance);
+        ORE_GEN_BUS.register(WorldGenHandler.instance);
     }
 
     @EventHandler

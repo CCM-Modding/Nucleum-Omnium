@@ -18,7 +18,6 @@ import ccm.nucleum.omnium.configuration.AdvConfiguration;
  */
 public abstract class CCMMod implements IMod
 {
-
     /** Configuration Folder */
     private File config_Folder;
 
@@ -56,7 +55,8 @@ public abstract class CCMMod implements IMod
      *            A FMLPreInitializationEvent
      * @return A new instance of {@link AdvConfiguration}
      */
-    protected void initializeConfig(final FMLPreInitializationEvent evt)
+    @Override
+    public void initConfig(final FMLPreInitializationEvent evt)
     {
 
         setConfigFolderBase(evt.getModConfigurationDirectory());

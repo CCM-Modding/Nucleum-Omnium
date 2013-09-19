@@ -3,6 +3,8 @@
  */
 package ccm.nucleum.omnium;
 
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
 import ccm.nucleum.omnium.configuration.AdvConfiguration;
 
 /**
@@ -33,4 +35,7 @@ public interface IMod
      * @return The AdvConfiguration file that belongs to the mod
      */
     public void setConfigFile(AdvConfiguration conf);
+
+    /** Initializes the AdvConfiguration file that belongs to the mod */
+    public void initConfig(final FMLPreInitializationEvent evt);
 }

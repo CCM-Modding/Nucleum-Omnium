@@ -6,9 +6,13 @@ package ccm.nucleum.omnium.utils.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
 import ccm.nucleum.omnium.IMod;
 import ccm.nucleum.omnium.base.BaseNIC;
 import ccm.nucleum.omnium.utils.exeptions.DupeExeption;
+import ccm.nucleum.omnium.utils.handler.config.ConfigurationHandler;
+import ccm.nucleum.omnium.utils.handler.config.IConfig;
 
 public final class ModLoadingHandler extends BaseNIC
 {
@@ -32,13 +36,25 @@ public final class ModLoadingHandler extends BaseNIC
     }
 
     /**
-     * "Loads" the Mod
+     * Does all the default Pre-Initialization logic
+     * 
+     * @param mod
+     *            The mod that is Pre-Initializing
+     * @param evt
+     *            The {@link FMLPreInitializationEvent} that is passed to the method
+     * @param config
+     *            The configuration class for this mod
      */
-    public static void loadMod(final IMod mod)
+    public static void loadMod(final IMod mod, final FMLPreInitializationEvent evt, final IConfig config)
     {
         if (!isModLoaded(mod))
         {
-            LogHandler.init(mod);
+            LogHandler.init(mod, evt);
+            mod.initConfig(evt);
+            if (config != null)
+            {
+                ConfigurationHandler.init(mod, config.setConfiguration(mod.getConfigFile()));
+            }
         } else
         {
             throw new DupeExeption(mod);

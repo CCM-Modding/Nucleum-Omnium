@@ -21,8 +21,6 @@ public abstract class TileRenderer extends TileEntitySpecialRenderer
 
     protected AdvancedBaseModel model;
 
-    public abstract void render(final TileEntity tile, final double x, final double y, final double z, final float tick);
-
     @Override
     public void renderTileEntityAt(final TileEntity tile, final double x, final double y, final double z, final float tick)
     {
@@ -35,4 +33,5 @@ public abstract class TileRenderer extends TileEntitySpecialRenderer
         GL11.glPopMatrix();
     }
 
+    public abstract void render(final TileEntity tile, final double x, final double y, final double z, final float tick);
 }
