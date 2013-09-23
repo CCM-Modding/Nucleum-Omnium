@@ -8,7 +8,6 @@ import java.lang.reflect.Constructor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.tileentity.interfaces.ITileLogic;
 import ccm.nucleum.omnium.utils.handler.LogHandler;
 import ccm.nucleum.omnium.utils.lib.NBTConstants;
@@ -56,7 +55,7 @@ public class LogicTE extends InventoryTE
                 c = srclogic.getConstructor(TileEntity.class);
             } catch (final Exception e)
             {
-                LogHandler.printCatch(NucleumOmnium.instance, e, fail, toString(), e);
+                LogHandler.printCatch(e, fail, toString(), e);
             }
 
             fail = "Logic loader has failed to create a new Instance of: \n %s With error: \n %s";
@@ -66,11 +65,11 @@ public class LogicTE extends InventoryTE
                 logic = c.newInstance(this);
             } catch (final Exception e)
             {
-                LogHandler.printCatch(NucleumOmnium.instance, e, fail, toString(), e);
+                LogHandler.printCatch(e, fail, toString(), e);
             }
         } else
         {
-            throw new RuntimeException("\nsrclogic WAS NULL!!!! \n");
+            throw new RuntimeException("\n srclogic WAS NULL!!!! \n");
         }
     }
 
@@ -92,7 +91,7 @@ public class LogicTE extends InventoryTE
         if (!hasLogic())
         {
             loadLogic();
-            LogHandler.debug(NucleumOmnium.instance, "Somthing went wrong while seting the Tile Entity's Logic!!!\n It was reloaded");
+            LogHandler.debug("Somthing went wrong while seting the Tile Entity's Logic!!!\n It was reloaded");
         }
         return logic;
     }
@@ -118,7 +117,7 @@ public class LogicTE extends InventoryTE
             } catch (final ClassNotFoundException e)
             {
                 final String fail = "Logic loader has failed to find a class named: \n %s With error: \n %s";
-                LogHandler.printCatch(NucleumOmnium.instance, e, fail, tmp, e);
+                LogHandler.printCatch(e, fail, tmp, e);
             }
         }
         if (hasLogic())
@@ -133,7 +132,7 @@ public class LogicTE extends InventoryTE
             }
         } else
         {
-            LogHandler.severe(NucleumOmnium.instance, "Dosn't have logic!");
+            LogHandler.debug("%s DOES NOT HAVE LOGIC, BUT SUBCLASSED LogicTE!!", this);
             LogHandler.debug(nbt.toString());
         }
     }
@@ -174,7 +173,7 @@ public class LogicTE extends InventoryTE
                 LogHandler.debug(srclogic.getName());
             } else
             {
-                LogHandler.severe(NucleumOmnium.instance, "%sSource Logic was null when tring to save to NBT!", this);
+                LogHandler.severe("%s Source Logic was null when tring to save to NBT!", this);
             }
             if (logic != null)
             {

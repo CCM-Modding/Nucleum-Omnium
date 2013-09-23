@@ -49,7 +49,7 @@ public final class ModLoadingHandler extends BaseNIC
     {
         if (!isModLoaded(mod))
         {
-            LogHandler.init(mod, evt);
+            LogHandler.init(mod);
             mod.initConfig(evt);
             if (config != null)
             {

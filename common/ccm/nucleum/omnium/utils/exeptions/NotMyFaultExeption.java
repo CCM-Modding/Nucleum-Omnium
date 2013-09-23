@@ -3,15 +3,12 @@
  */
 package ccm.nucleum.omnium.utils.exeptions;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.crash.CrashReport;
-
 import ccm.nucleum.omnium.IMod;
 
 /**
  * This Exception, and All its sub-Classes are NOT my Fault
  */
-public class NotMyFaultExeption extends RuntimeException
+public class NotMyFaultExeption extends MainException
 {
 
     private static final long serialVersionUID = -501876681172804351L;
@@ -22,6 +19,7 @@ public class NotMyFaultExeption extends RuntimeException
 
     public NotMyFaultExeption(final IMod mod)
     {
+        super("THIS EXEPTION WAS NOT MY FAULT!");
         this.mod = mod;
         addString();
     }
@@ -36,10 +34,7 @@ public class NotMyFaultExeption extends RuntimeException
         errorSB.append("\nDO NOT COME TO ME WITH THIS. YOU CAUSED IT YOURSELF, AND I TOLD YOU HOW TO FIX IT!\n");
     }
 
-    protected void crashMC()
-    {
-        Minecraft.getMinecraft().crashed(CrashReport.makeCrashReport(this, toString()));
-    }
+
 
     @Override
     public String toString()

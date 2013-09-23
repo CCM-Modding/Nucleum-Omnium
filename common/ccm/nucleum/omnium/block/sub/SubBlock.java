@@ -4,7 +4,6 @@
 package ccm.nucleum.omnium.block.sub;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,7 +27,6 @@ import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.block.MainBlock;
 import ccm.nucleum.omnium.block.interfaces.ICollisionListener;
 import ccm.nucleum.omnium.block.interfaces.IDisplayListener;
@@ -95,28 +93,16 @@ public class SubBlock
             try
             {
                 c = block.getConstructor(int.class, Material.class);
-            } catch (final NoSuchMethodException e)
+            } catch (final Exception e)
             {
-                e.printStackTrace();
-            } catch (final SecurityException e)
-            {
-                e.printStackTrace();
+                LogHandler.printCatch(e, "FAILED TO GET CONSTRUCTOR FOR %s", block);
             }
             try
             {
                 mainBlock = c.newInstance(id, material);
-            } catch (final InstantiationException e)
+            } catch (final Exception e)
             {
-                e.printStackTrace();
-            } catch (final IllegalAccessException e)
-            {
-                e.printStackTrace();
-            } catch (final IllegalArgumentException e)
-            {
-                e.printStackTrace();
-            } catch (final InvocationTargetException e)
-            {
-                e.printStackTrace();
+                LogHandler.printCatch(e, "FAILED TO CREATE A NEW INSTANCE OF %s", block);
             }
             mainBlock.addSubBlock(this, meta);
         } else
@@ -313,7 +299,7 @@ public class SubBlock
                 return true;
             } else
             {
-                LogHandler.warning(NucleumOmnium.instance, "TileEntity at %s, %s, %s, was null", x, y, z);
+                LogHandler.debug("TileEntity at %s, %s, %s, was null", x, y, z);
             }
         }
         return false;

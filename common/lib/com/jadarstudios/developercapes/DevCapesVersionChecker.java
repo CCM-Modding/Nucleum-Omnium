@@ -1,7 +1,7 @@
 /**
  * DeveloperCapes by Jadar
  * License: MIT License (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
- * version 2.0
+ * version 2.1
  */
 package lib.com.jadarstudios.developercapes;
 
@@ -11,46 +11,38 @@ import java.net.URL;
 
 import argo.jdom.JdomParser;
 
-public class DevCapesVersionChecker implements Runnable
-{
+public class DevCapesVersionChecker implements Runnable {
 
-    private static final String versionFileURL = "https://dl.dropboxusercontent.com/u/22865035/version.json";// "http://raw.github.com/Jadar/DeveloperCapesAPI/master/version";
+	private static final String versionFileURL = "http://raw.github.com/Jadar/DeveloperCapesAPI/master/version";
 
-    private byte result = 0;
+	private byte result = 0;
+	
+	private static final byte ERROR = 0;
+	private static final byte OLD = 1;
+	private static final byte CURRENT = 2;
 
-    private static final byte ERROR = 0;
-    private static final byte OLD = 1;
-    private static final byte CURRENT = 2;
+	@Override
+	public void run() {
 
-    @Override
-    public void run()
-    {
+		try {
 
-        try
-        {
+			URL url = new URL(versionFileURL);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+			double version = Double.valueOf(new JdomParser().parse(reader).getStringValue("version"));
+			
+			if(version > DevCapes.version)
+				result = OLD;
+			else if(version == DevCapes.version)
+				result = CURRENT;
+			else
+				result = ERROR;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-            URL url = new URL(versionFileURL);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            double version = Double.valueOf(new JdomParser().parse(reader).getStringValue("version"));
-
-            if (version > DevCapesUtil.version)
-            {
-                result = OLD;
-            } else if (version == DevCapesUtil.version)
-            {
-                result = CURRENT;
-            } else
-            {
-                result = ERROR;
-            }
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public byte getResult()
-    {
-        return result;
-    }
+	public byte getResult() {
+		return result;
+	}
 }

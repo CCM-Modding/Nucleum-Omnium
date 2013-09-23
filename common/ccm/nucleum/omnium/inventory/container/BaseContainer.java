@@ -4,7 +4,6 @@
 package ccm.nucleum.omnium.inventory.container;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,6 +12,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
 import ccm.nucleum.omnium.inventory.slot.OutputSlot;
+import ccm.nucleum.omnium.utils.handler.LogHandler;
 
 public abstract class BaseContainer extends Container
 {
@@ -36,28 +36,16 @@ public abstract class BaseContainer extends Container
         try
         {
             c = slot.getConstructor(IInventory.class, int.class, int.class, int.class);
-        } catch (final NoSuchMethodException e)
+        } catch (final Exception e)
         {
-            e.printStackTrace();
-        } catch (final SecurityException e)
-        {
-            e.printStackTrace();
+            LogHandler.printCatch(e, "Failed @ createSlot during getConstructor with %s, %s, %s, %s", inventory, index, x, y);;
         }
         try
         {
             addSlotToContainer(c.newInstance(inventory, index, x + (column * 18), y + (row * 18)));
-        } catch (final InstantiationException e)
+        } catch (final Exception e)
         {
-            e.printStackTrace();
-        } catch (final IllegalAccessException e)
-        {
-            e.printStackTrace();
-        } catch (final IllegalArgumentException e)
-        {
-            e.printStackTrace();
-        } catch (final InvocationTargetException e)
-        {
-            e.printStackTrace();
+            LogHandler.printCatch(e, "Failed @ createSlot during newInstance with %s, %s, %s, %s, %s, %s, %s", inventory, slot, index, x, y, row, column);
         }
     }
 

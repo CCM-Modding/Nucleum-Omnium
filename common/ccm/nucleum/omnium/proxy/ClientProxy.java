@@ -17,12 +17,12 @@ public class ClientProxy extends CommonProxy
     {
         if (Properties.CAPE_HD)
         {
-            // Link for the file that makes the capes work (High Def Version)
-            DevCapesUtil.getInstance().addFileUrl(Locations.HD_CAPES);
+            // Link for the file that makes the capes work (High Definition Version)
+            DevCapesUtil.addFileUrl(Locations.HD_CAPES);
         } else
         {
             // Link for the file that makes the capes work (Normal Version)
-            DevCapesUtil.getInstance().addFileUrl(Locations.CAPES);
+            DevCapesUtil.addFileUrl(Locations.CAPES);
         }
     }
 

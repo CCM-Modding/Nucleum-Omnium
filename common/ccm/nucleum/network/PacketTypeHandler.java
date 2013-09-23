@@ -12,6 +12,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 
 import ccm.nucleum.network.packet.PacketBase;
+import ccm.nucleum.omnium.utils.handler.LogHandler;
 import ccm.nucleum.omnium.utils.lib.Archive;
 
 public final class PacketTypeHandler
@@ -33,12 +34,11 @@ public final class PacketTypeHandler
         try
         {
             packet = types.get(selector).newInstance();
+            packet.readPopulate(dataStream);
         } catch (final Exception e)
         {
-            e.printStackTrace(System.err);
+            LogHandler.printCatch(e, "FAILED TO CREATE A NEW INTANCE OF ", types.get(selector));
         }
-
-        packet.readPopulate(dataStream);
 
         return packet;
     }
@@ -53,7 +53,7 @@ public final class PacketTypeHandler
             packet = types.get(id).newInstance();
         } catch (final Exception e)
         {
-            e.printStackTrace(System.err);
+            LogHandler.printCatch(e, "FAILED TO CREATE A NEW INTANCE OF ", types.get(id));
         }
 
         return packet;
