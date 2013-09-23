@@ -19,16 +19,16 @@ public abstract class IFuelRegistry
 {
     protected final Set<WrapperStack> fuels = new HashSet<WrapperStack>();
 
-    public boolean isFuel(final WrapperStack stack)
+    public boolean isFuel(final Object stack)
     {
-        return fuels.contains(stack);
+        return fuels.contains(new WrapperStack(stack));
     }
 
-    public void registerFuel(final WrapperStack stack)
+    public void registerFuel(final Object stack)
     {
         if (stack != null)
         {
-            fuels.add(stack);
+            fuels.add(new WrapperStack(stack));
         }
     }
 }

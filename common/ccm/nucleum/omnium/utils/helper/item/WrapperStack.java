@@ -161,10 +161,10 @@ public final class WrapperStack implements Comparable<WrapperStack>
                 || (object instanceof String) || (object instanceof IItemEnum) || (object instanceof IBlockEnum));
     }
 
-    public static List<WrapperStack> toWrapperList(List<Object> list)
+    public static List<WrapperStack> toWrapperList(List<?> inputs)
     {
         List<WrapperStack> tmp = new ArrayList<WrapperStack>();
-        for (Object obj : list)
+        for (Object obj : inputs)
         {
             if (canBeWrapped(obj))
             {

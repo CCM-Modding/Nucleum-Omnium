@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.item.ItemStack;
-
 import ccm.nucleum.omnium.utils.helper.item.WrapperStack;
 
 /**
@@ -32,14 +30,14 @@ public class Recipe
     /** True if the call to outputs.size() returns > 1 */
     private final boolean hasMultipleOutputs;
 
-    public Recipe(final List<WrapperStack> inputs, final List<WrapperStack> outputs)
+    public Recipe(final List<?> inputs, final List<?> outputs)
     {
         if (inputs != null && outputs != null)
         {
             if (inputs.size() >= 1 && outputs.size() >= 1)
-            {
-                this.inputs = inputs;
-                this.outputs = outputs;
+            {                
+                this.inputs = WrapperStack.toWrapperList(inputs);
+                this.outputs = WrapperStack.toWrapperList(outputs);
             } else
             {
                 throw new RuntimeException("The lists where less than 1 in size");
@@ -49,18 +47,13 @@ public class Recipe
             throw new RuntimeException("The lists where null");
         }
 
-        hasMultipleInputs = inputs.size() > 1 ? false : true;
-        hasMultipleOutputs = outputs.size() > 1 ? false : true;
-    }
-
-    public Recipe(final WrapperStack input, final WrapperStack output)
-    {
-        this(Arrays.asList(input), Arrays.asList(output));
+        hasMultipleInputs = inputs.size() > 1 ? true : false;
+        hasMultipleOutputs = outputs.size() > 1 ? true : false;
     }
     
-    public Recipe(final ItemStack input, final ItemStack output)
+    public Recipe(final Object input, final Object output)
     {
-        this(new WrapperStack(input), new WrapperStack(output));
+        this(Arrays.asList(new WrapperStack(input)), Arrays.asList(new WrapperStack(output)));
     }
 
     public List<WrapperStack> getInputs()
@@ -93,13 +86,13 @@ public class Recipe
         return outputs.get(0);
     }
 
-    public boolean isInput(WrapperStack item)
+    public boolean isInput(Object item)
     {
-        return inputs.contains(item);
+        return inputs.contains(new WrapperStack(item));
     }
     
-    public boolean isOutput(WrapperStack item)
+    public boolean isOutput(Object item)
     {
-        return outputs.contains(item);
+        return outputs.contains(new WrapperStack(item));
     }
 }

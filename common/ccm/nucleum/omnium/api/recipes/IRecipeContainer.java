@@ -8,8 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.item.ItemStack;
-
 import ccm.nucleum.omnium.utils.helper.item.WrapperStack;
 
 /**
@@ -32,7 +30,7 @@ public abstract class IRecipeContainer
         }
     }
 
-    public void addRecipe(final WrapperStack input, final WrapperStack output)
+    public void addRecipe(final Object input, final Object output)
     {
         if (input != null && output != null)
         {
@@ -51,7 +49,7 @@ public abstract class IRecipeContainer
         }
     }
     
-    public void addRecipe(final WrapperStack input, final WrapperStack... outputs)
+    public void addRecipe(final Object input, final Object... outputs)
     {
         recipes.add(new Recipe(Arrays.asList(input), Arrays.asList(outputs)));
     }
@@ -75,7 +73,7 @@ public abstract class IRecipeContainer
         return null;
     }
     
-    public Recipe getResult(final ItemStack item)
+    public Recipe getResult(final Object item)
     {
         return getResult(new WrapperStack(item));
     }
