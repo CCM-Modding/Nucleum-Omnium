@@ -5,8 +5,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.ForgeSubscribe;
+
+import ccm.nucleum.omnium.IMod;
 
 public final class IconHandler
 {
@@ -17,11 +20,11 @@ public final class IconHandler
     // Instance Stuff
     // /////////////////////////////
     /** All the stored resources */
-    private final Map<String, Icon> icons;
+    private final Map<ResourceLocation, Icon> icons;
 
     private IconHandler()
     {
-        icons = new HashMap<String, Icon>();
+        icons = new HashMap<ResourceLocation, Icon>();
     }
 
     public static IconHandler instance()
@@ -29,22 +32,27 @@ public final class IconHandler
         return INSTANCE;
     }
 
-    private static Map<String, Icon> resources()
+    private static Map<ResourceLocation, Icon> resources()
     {
         return instance().icons;
     }
 
-    public static void addIcon(final String location)
+    public static void addIcon(final ResourceLocation resource, final Icon icon)
     {
-        resources().put(location, null);
+        resources().put(resource, icon);
     }
 
-    public static void addIcon(final String location, final Icon icon)
+    public static void addIcon(final IMod mod, final String location, final Icon icon)
     {
-        resources().put(location, icon);
+        addIcon(new ResourceLocation(mod.getModId(), location), icon);
     }
 
-    public static Icon getIcon(final String location)
+    public static void addIcon(final IMod mod, final String location)
+    {
+        addIcon(mod, location, (Icon) null);
+    }
+
+    public static Icon getIcon(final IMod mod, final String location)
     {
         return resources().get(location);
     }
@@ -52,9 +60,9 @@ public final class IconHandler
     @ForgeSubscribe
     public void loadIcons(final TextureStitchEvent.Pre evt)
     {
-        for (Entry<String, Icon> entry : resources().entrySet())
+        for (Entry<ResourceLocation, Icon> entry : resources().entrySet())
         {
-            entry.setValue(evt.map.registerIcon(entry.getKey()));
+            entry.setValue(evt.map.registerIcon(entry.getKey().toString()));
         }
     }
 }
