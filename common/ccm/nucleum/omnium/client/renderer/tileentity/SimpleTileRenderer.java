@@ -8,18 +8,19 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
-import ccm.nucleum.omnium.client.model.AdvancedBaseModel;
+import ccm.nucleum.omnium.client.model.SimpleModel;
 
 /**
  * TileRenderer
  * <p>
+ * Does all the GL_LIGHTING and Matrix things for you
  * 
  * @author Captain_Shadows
  */
-public abstract class TileRenderer extends TileEntitySpecialRenderer
+public abstract class SimpleTileRenderer extends TileEntitySpecialRenderer
 {
 
-    protected AdvancedBaseModel model;
+    protected SimpleModel model;
 
     @Override
     public void renderTileEntityAt(final TileEntity tile, final double x, final double y, final double z, final float tick)

@@ -15,57 +15,16 @@ import cpw.mods.fml.common.Loader;
  */
 public final class ModHandler
 {
-    /** Private single instance */
-    private static final ModHandler INSTANCE = new ModHandler();
-
     /** List of all {@link IModHandler}s that this "Registry" needs to handle */
-    private final List<IModHandler> modsHandling;
-
-    /**
-     * Private constructor
-     */
-    private ModHandler()
-    {
-        modsHandling = new ArrayList<IModHandler>();
-    }
-
-    public static ModHandler instance()
-    {
-        return INSTANCE;
-    }
-
-    public static List<IModHandler> mods()
-    {
-        return instance().modsHandling;
-    }
+    private static final List<IModHandler> modsHandling = new ArrayList<IModHandler>();
 
     /**
      * @param handler
      *            The {@link IModHandler} to add to the List
      */
-    public static void addMod(final IModHandler handler)
+    public static void addModHandler(final IModHandler handler)
     {
-        mods().add(handler);
-    }
-
-    /**
-     * ONLY USE IF IT HAS A NO PARAMETER CONSTRUCTOR
-     * 
-     * @param handler
-     *            The {@link IModHandler} to add to the List
-     */
-    public static void addMod(final Class<? extends IModHandler> handler)
-    {
-        try
-        {
-            addMod(handler.newInstance());
-        } catch (final InstantiationException e)
-        {
-            e.printStackTrace();
-        } catch (final IllegalAccessException e)
-        {
-            e.printStackTrace();
-        }
+        modsHandling.add(handler);
     }
 
     /**
@@ -75,7 +34,7 @@ public final class ModHandler
      */
     public static void init()
     {
-        for (final IModHandler handler : mods())
+        for (final IModHandler handler : modsHandling)
         {
             handleMod(handler);
         }

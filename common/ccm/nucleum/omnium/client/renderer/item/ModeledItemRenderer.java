@@ -8,19 +8,18 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import ccm.nucleum.omnium.client.model.AdvancedBaseModel;
+import ccm.nucleum.omnium.client.model.SimpleModel;
 
 /**
- * ItemRenderer
+ * ModeledItemRenderer
  * <p>
  * 
  * @author Captain_Shadows
  */
-@SideOnly(Side.CLIENT)
-public abstract class ModelItemRenderer extends BaseItemRenderer
+public abstract class ModeledItemRenderer extends BaseItemRenderer
 {
 
-    protected AdvancedBaseModel model;
+    protected SimpleModel model;
 
     public abstract void render(final float x, final float y, final float z, final float scale, final float angle);
 

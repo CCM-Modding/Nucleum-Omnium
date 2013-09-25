@@ -11,7 +11,7 @@ import ccm.nucleum.omnium.BaseNIC;
 /**
  * NBTHelper
  */
-public final class NBTItemHelper extends BaseNIC
+public final class ItemNBTHelper extends BaseNIC
 {
 
     /**

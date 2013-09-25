@@ -11,26 +11,21 @@ import ccm.nucleum.omnium.utils.handler.ResourceHandler;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 /**
- * Advanced Base Model, to use with the Advanced Model Loader
+ * SimpleModel, to use with the Advanced Model Loader. It loads and allows the user to render the loaded model
  * 
  * @author Captain_Shadows
  */
-public class AdvancedBaseModel
+public class SimpleModel
 {
 
     protected IModelCustom model;
     protected String name;
 
-    public AdvancedBaseModel(final Enum<?> resourceName)
+    public SimpleModel(final String resourceName)
     {
-        this(resourceName.name());
-    }
-
-    public AdvancedBaseModel(final String resourceName)
-    {
+        CCMLogger.DEFAULT_LOGGER.debug("RESOURCE NAME: " + resourceName + "\n");
+        CCMLogger.DEFAULT_LOGGER.debug("RESOURCE LOCATION: " + ResourceHandler.getModelLocation(resourceName) + "\n");
         name = resourceName;
-        CCMLogger.DEFAULT_LOGGER.debug(name);
-        CCMLogger.DEFAULT_LOGGER.debug(ResourceHandler.getModelLocation(name));
         model = ResourceHandler.loadModel(name);
     }
 

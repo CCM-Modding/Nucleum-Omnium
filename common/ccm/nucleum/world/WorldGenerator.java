@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ConfigCategory;
 
 import ccm.nucleum.omnium.IMod;
-import ccm.nucleum.omnium.configuration.AdvConfiguration;
+import ccm.nucleum.omnium.configuration.ConfigurationWrapper;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
 import ccm.nucleum.world.generator.WorldGenHandler;
 
@@ -100,7 +100,7 @@ public final class WorldGenerator
             final Block blockToReplace)
     {
         final String ore = mod.getName() + "." + JavaHelper.titleCase(oreName);
-        final AdvConfiguration config = NucleumWorld.instance.getConfiguration();
+        final ConfigurationWrapper config = NucleumWorld.instance.getConfiguration();
         final ConfigCategory cat = config.getCategory(ore);
 
         clusterSize = config.get(ore, "ClusterSize", clusterSize).getInt();

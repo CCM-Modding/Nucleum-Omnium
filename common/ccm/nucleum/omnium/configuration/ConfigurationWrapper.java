@@ -10,7 +10,7 @@ import net.minecraftforge.common.Configuration;
 /**
  * This class offers advanced configurations capabilities, to "Enhance" normal Forge Configurations.
  */
-public class AdvConfiguration extends Configuration
+public class ConfigurationWrapper extends Configuration
 {
 
     /**
@@ -19,7 +19,7 @@ public class AdvConfiguration extends Configuration
      * @param file
      *            The File to make a Configuration File out of
      */
-    public AdvConfiguration(final File file)
+    public ConfigurationWrapper(final File file)
     {
         super(file);
     }
@@ -32,13 +32,13 @@ public class AdvConfiguration extends Configuration
      * @param caseSensitiveCustomCategories
      *            True if you want your custom categories to be case sensitive, False otherwise
      */
-    public AdvConfiguration(final File file, final boolean caseSensitiveCustomCategories)
+    public ConfigurationWrapper(final File file, final boolean caseSensitiveCustomCategories)
     {
         super(file, caseSensitiveCustomCategories);
     }
 
     /**
-     * @return
+     * @return the boolean property
      */
     public boolean getProp(final String category, final String key, final boolean defaultValue)
     {
@@ -47,21 +47,30 @@ public class AdvConfiguration extends Configuration
     }
 
     /**
-     * @return
+     * @return the integer property
      */
     public int getProp(final String category, final String key, final int defaultValue)
     {
 
-        return super.get(category, key, defaultValue).getInt();
+        return super.get(category, key, defaultValue).getInt(defaultValue);
     }
 
     /**
-     * @return
+     * @return the string property
      */
     public String getProp(final String category, final String key, final String defaultValue)
     {
 
         return super.get(category, key, defaultValue).getString();
+    }
+    
+    /**
+     * @return the double property
+     */
+    public double getProp(final String category, final String key, final double defaultValue)
+    {
+
+        return super.get(category, key, defaultValue).getDouble(defaultValue);
     }
 
     /**

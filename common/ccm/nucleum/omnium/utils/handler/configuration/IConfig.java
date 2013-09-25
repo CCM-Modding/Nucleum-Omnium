@@ -1,24 +1,24 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.utils.handler.config;
+package ccm.nucleum.omnium.utils.handler.configuration;
 
-import ccm.nucleum.omnium.configuration.AdvConfiguration;
+import ccm.nucleum.omnium.configuration.ConfigurationWrapper;
 
 public abstract class IConfig
 {
-    protected AdvConfiguration config;
+    protected ConfigurationWrapper config;
 
     /**
      * @return The configuration file
      */
-    public AdvConfiguration getConfiguration()
+    public ConfigurationWrapper getConfiguration()
     {
         return config;
     }
 
     /** sets the configuration file */
-    public IConfig setConfiguration(final AdvConfiguration config)
+    public IConfig setConfiguration(final ConfigurationWrapper config)
     {
         this.config = config;
         return this;

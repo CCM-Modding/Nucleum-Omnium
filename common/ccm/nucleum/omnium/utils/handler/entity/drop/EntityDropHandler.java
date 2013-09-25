@@ -17,16 +17,10 @@ import ccm.nucleum.omnium.IMod;
  * 
  * @author Captain_Shadows
  */
-public class EntityDropHandler
+public final class EntityDropHandler
 {
     /** All of the registered Drop Handlers */
     private static final List<EntityDrop> drops = new ArrayList<EntityDrop>();
-
-    /** Registers a EntityDrop */
-    public static void registerDrop(final EntityDrop drop)
-    {
-        drops.add(drop);
-    }
 
     /**
      * @param mod
@@ -34,11 +28,9 @@ public class EntityDropHandler
      * @param item
      *            The Item to drop
      */
-    public static EntityDrop registerDrop(final IMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
+    public static void registerDrop(final IMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
     {
-        final EntityDrop tmp = new EntityDrop(mod, item, dropRate, minValue, maxValue, entity);
-        registerDrop(tmp);
-        return tmp;
+        drops.add(new EntityDrop(mod, item, dropRate, minValue, maxValue, entity));
     }
 
     /**
@@ -46,16 +38,14 @@ public class EntityDropHandler
      */
     public static boolean isEntityRegistered(final Entity entity)
     {
-        boolean registered = false;
         for (final EntityDrop drop : drops)
         {
             if (drop.shouldDrop(entity.getClass()))
             {
-                registered = true;
-                break;
+                return true;
             }
         }
-        return registered;
+        return false;
     }
 
     /**
@@ -71,13 +61,5 @@ public class EntityDropHandler
                 drop.dropItem(entity);
             }
         }
-    }
-
-    /**
-     * @return a copy of the all the {@link EntityDrop} registered
-     */
-    public static List<EntityDrop> getDrops()
-    {
-        return new ArrayList<EntityDrop>(drops);
     }
 }

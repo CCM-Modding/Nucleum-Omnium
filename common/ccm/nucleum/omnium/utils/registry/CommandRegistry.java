@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.utils.handler;
+package ccm.nucleum.omnium.utils.registry;
 
 import net.minecraft.command.CommandBase;
 
@@ -16,7 +16,7 @@ import ccm.nucleum.omnium.command.CommandTPS;
 import ccm.nucleum.omnium.command.CommandTPX;
 import ccm.nucleum.omnium.utils.lib.Properties;
 
-public final class CommandHandler extends BaseNIC
+public final class CommandRegistry extends BaseNIC
 {
 
     public static void init(final FMLServerStartingEvent event)

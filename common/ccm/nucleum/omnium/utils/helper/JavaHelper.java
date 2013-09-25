@@ -13,8 +13,7 @@ import ccm.nucleum.omnium.BaseNIC;
 
 public final class JavaHelper extends BaseNIC
 {
-    private static final List<String> trues = Arrays.asList(new String[]
-    { "true", "on", "active", "yes", "right", "sure" });
+    private static final List<String> trues = Arrays.asList("true", "on", "active", "yes", "right", "sure");
 
     /**
      * @return <code>true</code> if it is a Number. <code>false</code> otherwise

@@ -15,10 +15,13 @@ import ccm.nucleum.omnium.IMod;
 public abstract class IModHandler
 {
 
+    /**
+     * @return The IMod that this IModHandler belongs to
+     */
     public abstract IMod getMod();
 
     /**
-     * @return The Name of the mod that it is supporting. Ex: Harvestry
+     * @return The Name of the mod that it is checking if it's loaded. Ex: Buildcraft
      */
     public abstract String getAPIModName();
 

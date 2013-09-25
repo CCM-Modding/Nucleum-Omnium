@@ -7,8 +7,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.IMod;
-import ccm.nucleum.omnium.utils.handler.config.ConfigurationHandler;
-import ccm.nucleum.omnium.utils.handler.config.IConfig;
+import ccm.nucleum.omnium.utils.handler.configuration.ConfigurationHandler;
+import ccm.nucleum.omnium.utils.handler.configuration.IConfig;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 public final class ModLoadingHandler extends BaseNIC

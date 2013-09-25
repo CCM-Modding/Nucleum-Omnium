@@ -1,11 +1,11 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.utils.handler.config;
+package ccm.nucleum.omnium.utils.handler.configuration;
 
 import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.IMod;
-import ccm.nucleum.omnium.configuration.AdvConfiguration;
+import ccm.nucleum.omnium.configuration.ConfigurationWrapper;
 
 public final class ConfigurationHandler extends BaseNIC
 {
@@ -15,7 +15,7 @@ public final class ConfigurationHandler extends BaseNIC
      */
     public static void init(final IMod mod, final IConfig config)
     {
-        final AdvConfiguration temp = config.getConfiguration();
+        final ConfigurationWrapper temp = config.getConfiguration();
         try
         {
             mod.getLogger().debug("LOADING CONFIGURATION FOR %s", mod.getName());

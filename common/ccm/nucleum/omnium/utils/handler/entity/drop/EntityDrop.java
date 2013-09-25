@@ -16,7 +16,7 @@ import ccm.nucleum.omnium.utils.helper.MathHelper;
  * 
  * @author Captain_Shadows
  */
-public final class EntityDrop
+final class EntityDrop
 {
     /** The mod registering this coin */
     private final IMod mod;

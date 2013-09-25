@@ -8,7 +8,7 @@ import java.io.File;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-import ccm.nucleum.omnium.configuration.AdvConfiguration;
+import ccm.nucleum.omnium.configuration.ConfigurationWrapper;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 /**
@@ -22,18 +22,18 @@ public abstract class CCMMod implements IMod
     private File configFolder;
 
     /** Current Configuration File */
-    private static AdvConfiguration config;
+    private static ConfigurationWrapper config;
     
     /** Current Logger */
     private static CCMLogger logger;
 
     /* INSTANCE METHODS */
     /**
-     * @return A new instance of {@link AdvConfiguration}
+     * @return A new instance of {@link ConfigurationWrapper}
      */
-    protected AdvConfiguration getAdvConfigFile()
+    protected ConfigurationWrapper getAdvConfigFile()
     {
-        return new AdvConfiguration(getConfigurationFile(), true);
+        return new ConfigurationWrapper(getConfigurationFile(), true);
     }
 
     /**
@@ -70,13 +70,13 @@ public abstract class CCMMod implements IMod
     }
     
     @Override
-    public AdvConfiguration getConfiguration()
+    public ConfigurationWrapper getConfiguration()
     {
         return config;
     }
 
     @Override
-    public void setConfiguration(final AdvConfiguration conf)
+    public void setConfiguration(final ConfigurationWrapper conf)
     {
         config = conf;
     }

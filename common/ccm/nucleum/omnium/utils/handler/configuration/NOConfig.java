@@ -1,11 +1,11 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.utils.handler.config;
+package ccm.nucleum.omnium.utils.handler.configuration;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 
-import ccm.nucleum.omnium.configuration.AdvConfiguration;
+import ccm.nucleum.omnium.configuration.ConfigurationWrapper;
 import ccm.nucleum.omnium.utils.lib.Archive;
 import ccm.nucleum.omnium.utils.lib.Properties;
 
@@ -31,19 +31,19 @@ public final class NOConfig extends IConfig
         }
     }
 
-    private void initConfigs(final AdvConfiguration config)
+    private void initConfigs(final ConfigurationWrapper config)
     {
         config.addCustomCategoryComment(UNIVERSAL, "This Category has options that affect both Client and Server");
 
         Properties.DEBUG = config.getProp(UNIVERSAL, "Should debug information be displayed?", true);
     }
 
-    private void initServerConfigs(final AdvConfiguration config)
+    private void initServerConfigs(final ConfigurationWrapper config)
     {
         // config.addCustomCategoryComment(SERVER_SIDE, "This Category only has server side options");
     }
 
-    private void initClientConfigs(final AdvConfiguration config)
+    private void initClientConfigs(final ConfigurationWrapper config)
     {
         config.addCustomCategoryComment(CLIENT_SIDE, "This Category only has client side options");
 
