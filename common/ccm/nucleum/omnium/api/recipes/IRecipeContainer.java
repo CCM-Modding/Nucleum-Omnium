@@ -32,7 +32,7 @@ public abstract class IRecipeContainer
 
     public void addRecipe(final Object input, final Object output)
     {
-        if (input != null && output != null)
+        if ((input != null) && (output != null))
         {
             recipes.add(new Recipe(input, output));
         }
@@ -40,7 +40,7 @@ public abstract class IRecipeContainer
 
     public void addRecipe(final List<WrapperStack> inputs, final List<WrapperStack> outputs)
     {
-        if (inputs != null && outputs != null)
+        if ((inputs != null) && (outputs != null))
         {
             if (!inputs.isEmpty() && !outputs.isEmpty())
             {
@@ -48,7 +48,7 @@ public abstract class IRecipeContainer
             }
         }
     }
-    
+
     public void addRecipe(final Object input, final Object... outputs)
     {
         recipes.add(new Recipe(Arrays.asList(input), Arrays.asList(outputs)));
@@ -72,7 +72,7 @@ public abstract class IRecipeContainer
         }
         return null;
     }
-    
+
     public Recipe getResult(final Object item)
     {
         return getResult(new WrapperStack(item));

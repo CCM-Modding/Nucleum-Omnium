@@ -3,12 +3,9 @@
  */
 package ccm.nucleum.omnium.utils.handler.config;
 
-import java.util.logging.Level;
-
+import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.IMod;
-import ccm.nucleum.omnium.base.BaseNIC;
 import ccm.nucleum.omnium.configuration.AdvConfiguration;
-import ccm.nucleum.omnium.utils.handler.LogHandler;
 
 public final class ConfigurationHandler extends BaseNIC
 {
@@ -21,23 +18,19 @@ public final class ConfigurationHandler extends BaseNIC
         final AdvConfiguration temp = config.getConfiguration();
         try
         {
-            LogHandler.debug("Loading configuration for %s", mod.getName());
+            mod.getLogger().debug("LOADING CONFIGURATION FOR %s", mod.getName());
 
             // Loads a pre-existing Configuration file.
             temp.load();
 
-            config.init();
-
+            config.setConfiguration(temp).init();
+            
         } catch (final Exception e)
         {
-            LogHandler.log(mod, Level.SEVERE, mod.getName() + " has had a problem loading its configuration\n");
-            e.printStackTrace();
+            mod.getLogger().printCatch(e, "%s HAS HAD A PROBLEM LOADING ITS CONFIGURATION", mod.getName());
         } finally
         {
-            if (temp.hasChanged())
-            {
-                temp.save();
-            }
+            temp.save();
         }
     }
 }

@@ -5,7 +5,7 @@ package ccm.nucleum.omnium.utils.helper;
 
 import java.util.Random;
 
-import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.BaseNIC;
 
 public class MathHelper extends BaseNIC
 {

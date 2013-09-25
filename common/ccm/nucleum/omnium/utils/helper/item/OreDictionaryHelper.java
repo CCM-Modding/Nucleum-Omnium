@@ -8,7 +8,7 @@ import java.util.List;
 
 import net.minecraftforge.oredict.OreDictionary;
 
-import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.BaseNIC;
 
 public class OreDictionaryHelper extends BaseNIC
 {

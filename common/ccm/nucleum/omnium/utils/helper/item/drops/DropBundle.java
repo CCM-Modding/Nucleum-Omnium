@@ -14,7 +14,7 @@ public class DropBundle
 
     public DropBundle()
     {
-        this.drops = new ArrayList<DropItem>();
+        drops = new ArrayList<DropItem>();
     }
 
     public DropBundle(List<DropItem> drops)
@@ -40,7 +40,7 @@ public class DropBundle
         }
         return this;
     }
-    
+
     public DropBundle addDrop(WrapperStack item, int min, int max)
     {
         return addDrop(new DropItem(item, min, max));

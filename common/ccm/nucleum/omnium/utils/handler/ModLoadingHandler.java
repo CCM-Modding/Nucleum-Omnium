@@ -3,40 +3,18 @@
  */
 package ccm.nucleum.omnium.utils.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
+import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.IMod;
-import ccm.nucleum.omnium.base.BaseNIC;
-import ccm.nucleum.omnium.utils.exeptions.DupeExeption;
 import ccm.nucleum.omnium.utils.handler.config.ConfigurationHandler;
 import ccm.nucleum.omnium.utils.handler.config.IConfig;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 public final class ModLoadingHandler extends BaseNIC
 {
-
-    private static List<IMod> modsLoaded = new ArrayList<IMod>();
-
     /**
-     * Checks if the Mod has being loaded before and throws a exception. The default response is false. Other wise you should get a Exception.
-     * 
-     * @return false if the Mod has not being loaded yet.
-     */
-    public static boolean isModLoaded(final IMod mod)
-    {
-        if (modsLoaded.contains(mod))
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
-    }
-
-    /**
-     * Does all the default Pre-Initialization logic
+     * Does all the common Pre-Initialization logic
      * 
      * @param mod
      *            The mod that is Pre-Initializing
@@ -47,28 +25,11 @@ public final class ModLoadingHandler extends BaseNIC
      */
     public static void loadMod(final IMod mod, final FMLPreInitializationEvent evt, final IConfig config)
     {
-        if (!isModLoaded(mod))
+        mod.setLogger(CCMLogger.initLogger(evt));
+        mod.initConfig(evt);
+        if (config != null)
         {
-            LogHandler.init(mod);
-            mod.initConfig(evt);
-            if (config != null)
-            {
-                ConfigurationHandler.init(mod, config.setConfiguration(mod.getConfigFile()));
-            }
-        } else
-        {
-            throw new DupeExeption(mod);
-        }
-    }
-
-    /**
-     * "UnLoads" the Mod
-     */
-    public static void unLoadMod(final IMod mod)
-    {
-        if (modsLoaded.contains(mod))
-        {
-            modsLoaded.remove(mod);
+            ConfigurationHandler.init(mod, config);
         }
     }
 }

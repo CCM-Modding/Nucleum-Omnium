@@ -177,7 +177,7 @@ public final class WrapperStack implements Comparable<WrapperStack>
     @Override
     public int compareTo(WrapperStack o)
     {
-        if (itemStack != null && o.itemStack != null)
+        if ((itemStack != null) && (o.itemStack != null))
         {
             if (ItemStack.areItemStacksEqual(itemStack, o.itemStack))
             {
@@ -196,7 +196,7 @@ public final class WrapperStack implements Comparable<WrapperStack>
                     return 1;
                 }
             }
-        } else if (oreStack != null && o.oreStack != null)
+        } else if ((oreStack != null) && (o.oreStack != null))
         {
             return oreStack.compare(oreStack, o.oreStack);
         }
@@ -205,7 +205,7 @@ public final class WrapperStack implements Comparable<WrapperStack>
 
     public static int compare(Object o, Object o2)
     {
-        if (o != null && o2 != null)
+        if ((o != null) && (o2 != null))
         {
             return new WrapperStack(o).compareTo(new WrapperStack(o2));
         }
@@ -217,9 +217,9 @@ public final class WrapperStack implements Comparable<WrapperStack>
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((itemStack == null) ? 0 : itemStack.hashCode());
-        result = prime * result + ((oreStack == null) ? 0 : oreStack.hashCode());
-        result = prime * result + stackSize;
+        result = (prime * result) + ((itemStack == null) ? 0 : itemStack.hashCode());
+        result = (prime * result) + ((oreStack == null) ? 0 : oreStack.hashCode());
+        result = (prime * result) + stackSize;
         return result;
     }
 

@@ -5,7 +5,7 @@ package ccm.nucleum.omnium.utils.helper.enums;
 
 import net.minecraft.tileentity.TileEntity;
 
-import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.utils.handler.TileHandler;
 import ccm.nucleum.omnium.utils.helper.TextureHelper;
 import ccm.nucleum.omnium.utils.lib.NBTConstants;

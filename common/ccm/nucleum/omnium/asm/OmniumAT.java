@@ -10,6 +10,8 @@ import java.util.List;
 
 import cpw.mods.fml.common.asm.transformers.AccessTransformer;
 
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
+
 public class OmniumAT extends AccessTransformer
 {
 
@@ -43,7 +45,7 @@ public class OmniumAT extends AccessTransformer
 
     private void readMapFile(final String mapFile)
     {
-        System.out.println("Adding Accesstransformer map: " + mapFile);
+        CCMLogger.DEFAULT_LOGGER.debug("Adding Accesstransformer map: " + mapFile);
         try
         {
             final Method parentMapFile = AccessTransformer.class.getDeclaredMethod("readMapFile", String.class);

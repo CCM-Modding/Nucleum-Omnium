@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.BaseNIC;
 
 public class InventoryHelper extends BaseNIC
 {

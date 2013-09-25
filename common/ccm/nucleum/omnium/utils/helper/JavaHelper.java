@@ -9,8 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import ccm.nucleum.omnium.base.BaseNIC;
-import ccm.nucleum.omnium.utils.handler.LogHandler;
+import ccm.nucleum.omnium.BaseNIC;
 
 public final class JavaHelper extends BaseNIC
 {
@@ -63,7 +62,7 @@ public final class JavaHelper extends BaseNIC
             {// for each of the independent strings we perform the the "action", and then append a space
                 sb.append(s.substring(0, 1).toUpperCase() + s.substring(1));
                 sb.append(" ");
-                LogHandler.debug(sb);
+                CCMLogger.DEFAULT_LOGGER.debug(sb);
             }
             return sb.toString();
         } else
@@ -85,7 +84,7 @@ public final class JavaHelper extends BaseNIC
             {// for each of the independent strings we perform the the "action", and then append a space
                 sb.append(s.substring(0, 1).toLowerCase() + s.substring(1));
                 sb.append(" ");
-                LogHandler.debug(sb);
+                CCMLogger.DEFAULT_LOGGER.debug(sb);
             }
             return sb.toString();
         } else

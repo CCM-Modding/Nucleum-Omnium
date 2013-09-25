@@ -100,7 +100,7 @@ public final class WorldGenerator
             final Block blockToReplace)
     {
         final String ore = mod.getName() + "." + JavaHelper.titleCase(oreName);
-        final AdvConfiguration config = NucleumWorld.instance.getConfigFile();
+        final AdvConfiguration config = NucleumWorld.instance.getConfiguration();
         final ConfigCategory cat = config.getCategory(ore);
 
         clusterSize = config.get(ore, "ClusterSize", clusterSize).getInt();

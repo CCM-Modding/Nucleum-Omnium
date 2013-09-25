@@ -13,10 +13,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenDesert;
 
-import ccm.nucleum.omnium.NucleumOmnium;
-import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.block.MainBlock;
-import ccm.nucleum.omnium.utils.handler.LogHandler;
 
 public final class FunctionHelper extends BaseNIC
 {
@@ -29,7 +27,7 @@ public final class FunctionHelper extends BaseNIC
         {
             if (!(tileEntity instanceof IInventory))
             {
-                LogHandler.warning(NucleumOmnium.instance, "Tile %s was not an instance of IInventory, and called dropInventory!!", tileEntity);
+                CCMLogger.DEFAULT_LOGGER.debug("TILE %s WAS NOT AN INSTANCE OF IInventory, AND CALLED dropInventory!!!", tileEntity);
                 return;
             }
             final IInventory inventory = (IInventory) tileEntity;

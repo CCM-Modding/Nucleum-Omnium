@@ -6,8 +6,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import ccm.nucleum.omnium.block.texture.CropTexture;
-import ccm.nucleum.omnium.block.tile.TileBase;
+import ccm.nucleum.omnium.block.loader.texture.CropTexture;
+import ccm.nucleum.omnium.block.loader.tile.TileBase;
 import ccm.nucleum.omnium.utils.helper.item.drops.DropBundle;
 import ccm.nucleum.omnium.utils.helper.item.drops.DropItem;
 

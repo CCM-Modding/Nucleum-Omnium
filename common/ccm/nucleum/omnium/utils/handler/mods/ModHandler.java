@@ -8,8 +8,6 @@ import java.util.List;
 
 import cpw.mods.fml.common.Loader;
 
-import ccm.nucleum.omnium.utils.handler.LogHandler;
-
 /**
  * Registry for all mod compatibility classes inside of any of the CCM Mods
  * 
@@ -91,14 +89,14 @@ public final class ModHandler
      */
     private static void handleMod(final IModHandler handler)
     {
-        if (Loader.isModLoaded(handler.getModName()))
+        if (Loader.isModLoaded(handler.getAPIModName()))
         {
             try
             {
                 handler.init();
             } catch (final Exception e)
             {
-                LogHandler.severe(handler.getMod(), handler.toString());
+                handler.getMod().getLogger().severe(handler.toString());
                 e.printStackTrace();
             }
         }

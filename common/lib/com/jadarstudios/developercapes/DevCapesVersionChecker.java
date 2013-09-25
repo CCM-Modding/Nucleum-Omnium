@@ -11,38 +11,46 @@ import java.net.URL;
 
 import argo.jdom.JdomParser;
 
-public class DevCapesVersionChecker implements Runnable {
+public class DevCapesVersionChecker implements Runnable
+{
 
-	private static final String versionFileURL = "http://raw.github.com/Jadar/DeveloperCapesAPI/master/version";
+    private static final String versionFileURL = "http://raw.github.com/Jadar/DeveloperCapesAPI/master/version";
 
-	private byte result = 0;
-	
-	private static final byte ERROR = 0;
-	private static final byte OLD = 1;
-	private static final byte CURRENT = 2;
+    private byte result = 0;
 
-	@Override
-	public void run() {
+    private static final byte ERROR = 0;
+    private static final byte OLD = 1;
+    private static final byte CURRENT = 2;
 
-		try {
+    @Override
+    public void run()
+    {
 
-			URL url = new URL(versionFileURL);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-			double version = Double.valueOf(new JdomParser().parse(reader).getStringValue("version"));
-			
-			if(version > DevCapes.version)
-				result = OLD;
-			else if(version == DevCapes.version)
-				result = CURRENT;
-			else
-				result = ERROR;
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+        try
+        {
 
-	public byte getResult() {
-		return result;
-	}
+            URL url = new URL(versionFileURL);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            double version = Double.valueOf(new JdomParser().parse(reader).getStringValue("version"));
+
+            if (version > DevCapes.version)
+            {
+                result = OLD;
+            } else if (version == DevCapes.version)
+            {
+                result = CURRENT;
+            } else
+            {
+                result = ERROR;
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public byte getResult()
+    {
+        return result;
+    }
 }

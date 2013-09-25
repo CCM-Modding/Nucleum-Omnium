@@ -7,7 +7,7 @@ import net.minecraft.command.CommandBase;
 
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.command.CommandBanFix;
 import ccm.nucleum.omnium.command.CommandCCM;
 import ccm.nucleum.omnium.command.CommandKillFix;

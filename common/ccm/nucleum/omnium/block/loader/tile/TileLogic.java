@@ -1,16 +1,15 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.block.tile;
+package ccm.nucleum.omnium.block.loader.tile;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.block.interfaces.ITileHelper;
 import ccm.nucleum.omnium.tileentity.LogicTE;
 import ccm.nucleum.omnium.tileentity.interfaces.ITileLogic;
-import ccm.nucleum.omnium.utils.handler.LogHandler;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 public class TileLogic extends TileInventory implements ITileHelper
 {
@@ -33,9 +32,7 @@ public class TileLogic extends TileInventory implements ITileHelper
                 }
             } catch (final Exception e)
             {
-                LogHandler.severe(NucleumOmnium.instance, "TileEntity Instance with logic could not be created during createTileEntity \n");
-                e.getCause();
-                e.printStackTrace();
+                CCMLogger.DEFAULT_LOGGER.printCatch(e, "TileEntity INSTANCE COULD NOT BE CREATED DURING createTileEntity\n");
                 return null;
             }
         } else

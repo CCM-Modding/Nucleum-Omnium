@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.block.texture;
+package ccm.nucleum.omnium.block.loader.texture;
 
 import java.util.List;
 

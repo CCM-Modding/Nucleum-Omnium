@@ -6,7 +6,7 @@ package ccm.nucleum.omnium.utils.helper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.BaseNIC;
 
 /**
  * NBTHelper

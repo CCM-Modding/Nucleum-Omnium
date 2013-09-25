@@ -20,22 +20,22 @@ public class Recipe
 {
     /** All the inputs */
     private final List<WrapperStack> inputs;
-    
+
     /** All the outputs */
     private final List<WrapperStack> outputs;
-    
+
     /** True if the call to inputs.size() returns > 1 */
     private final boolean hasMultipleInputs;
-    
+
     /** True if the call to outputs.size() returns > 1 */
     private final boolean hasMultipleOutputs;
 
     public Recipe(final List<?> inputs, final List<?> outputs)
     {
-        if (inputs != null && outputs != null)
+        if ((inputs != null) && (outputs != null))
         {
-            if (inputs.size() >= 1 && outputs.size() >= 1)
-            {                
+            if ((inputs.size() >= 1) && (outputs.size() >= 1))
+            {
                 this.inputs = WrapperStack.toWrapperList(inputs);
                 this.outputs = WrapperStack.toWrapperList(outputs);
             } else
@@ -50,7 +50,7 @@ public class Recipe
         hasMultipleInputs = inputs.size() > 1 ? true : false;
         hasMultipleOutputs = outputs.size() > 1 ? true : false;
     }
-    
+
     public Recipe(final Object input, final Object output)
     {
         this(Arrays.asList(new WrapperStack(input)), Arrays.asList(new WrapperStack(output)));
@@ -90,7 +90,7 @@ public class Recipe
     {
         return inputs.contains(new WrapperStack(item));
     }
-    
+
     public boolean isOutput(Object item)
     {
         return outputs.contains(new WrapperStack(item));

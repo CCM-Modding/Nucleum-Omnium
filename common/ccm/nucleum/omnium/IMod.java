@@ -6,16 +6,16 @@ package ccm.nucleum.omnium;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import ccm.nucleum.omnium.configuration.AdvConfiguration;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 /**
  * A interface used to determine which class is actually a Main Mod class.
  * <p>
  * Thus it should only be implemented in the same class as you would annotate {@code @Mod}
- * 
- * @author CaptainShadows
  */
 public interface IMod
 {
+    /* MOD RELATED METHODS */
     /**
      * @return The Mod's ID
      */
@@ -26,16 +26,30 @@ public interface IMod
      */
     public String getName();
 
+    /* CONFIGURATION RELATED METHODS */
     /**
-     * @return The AdvConfiguration file that belongs to the mod
+     * @return The AdvConfiguration file that belongs to the Mod
      */
-    public AdvConfiguration getConfigFile();
+    public AdvConfiguration getConfiguration();
 
     /**
-     * @return The AdvConfiguration file that belongs to the mod
+     * @param conf
+     *            The AdvConfiguration file that belongs to the Mod
      */
-    public void setConfigFile(AdvConfiguration conf);
+    public void setConfiguration(AdvConfiguration conf);
 
-    /** Initializes the AdvConfiguration file that belongs to the mod */
+    /** Initializes the AdvConfiguration file that belongs to the Mod */
     public void initConfig(final FMLPreInitializationEvent evt);
+
+    /* LOGGER RELATED METHODS */
+    /**
+     * @return The CCMLogger that belongs to the Mod
+     */
+    public CCMLogger getLogger();
+
+    /**
+     * @param log
+     *            The CCMLogger that belongs to the Mod
+     */
+    public void setLogger(CCMLogger log);
 }

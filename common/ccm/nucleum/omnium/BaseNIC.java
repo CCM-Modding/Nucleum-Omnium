@@ -1,11 +1,10 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.base;
+package ccm.nucleum.omnium;
 
 import java.util.Random;
 
-import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.utils.exeptions.InstantiationExeption;
 
 /**

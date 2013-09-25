@@ -21,7 +21,7 @@ public final class MystcraftHandler extends IModHandler
     }
 
     @Override
-    public String getModName()
+    public String getAPIModName()
     {
         return "Mystcraft";
     }

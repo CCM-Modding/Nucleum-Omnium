@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 import ccm.nucleum.omnium.tileentity.interfaces.ITileLogic;
-import ccm.nucleum.omnium.utils.handler.LogHandler;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 /**
@@ -48,24 +48,24 @@ public class LogicTE extends InventoryTE
         {
             Constructor<? extends ITileLogic> c = null;
 
-            String fail = "Logic loader has failed to get the Constructor for: \n %s With error: \n %s";
+            String fail = "LOGIC LOADER HAS FAILED TO GET THE CONSTRUCTOR OF:\n%s WITH ERROR:\n%s";
 
             try
             {
                 c = srclogic.getConstructor(TileEntity.class);
             } catch (final Exception e)
             {
-                LogHandler.printCatch(e, fail, toString(), e);
+                CCMLogger.DEFAULT_LOGGER.printCatch(e, fail, toString(), e);
             }
 
-            fail = "Logic loader has failed to create a new Instance of: \n %s With error: \n %s";
+            fail = "LOGIC LOADER HAS FAILED TO CREATE A NEW INSTANCE OF:\n%s WITH ERROR:\n%s";
 
             try
             {
                 logic = c.newInstance(this);
             } catch (final Exception e)
             {
-                LogHandler.printCatch(e, fail, toString(), e);
+                CCMLogger.DEFAULT_LOGGER.printCatch(e, fail, toString(), e);
             }
         } else
         {
@@ -91,7 +91,7 @@ public class LogicTE extends InventoryTE
         if (!hasLogic())
         {
             loadLogic();
-            LogHandler.debug("Somthing went wrong while seting the Tile Entity's Logic!!!\n It was reloaded");
+            CCMLogger.DEFAULT_LOGGER.debug("SOMETHING WENT WRONG WHILE SETTING THE TILE ENTITY'S LOGIC!!!\n IT HAS BEEN RELOADED");
         }
         return logic;
     }
@@ -110,14 +110,14 @@ public class LogicTE extends InventoryTE
         if (nbt.hasKey(NBTConstants.NBT_TE_SRC_LOGIC))
         {
             final String tmp = nbt.getString(NBTConstants.NBT_TE_SRC_LOGIC);
-            LogHandler.debug(tmp);
+            CCMLogger.DEFAULT_LOGGER.debug(tmp);
             try
             {
                 setLogic((Class<? extends ITileLogic>) Class.forName(tmp));
             } catch (final ClassNotFoundException e)
             {
-                final String fail = "Logic loader has failed to find a class named: \n %s With error: \n %s";
-                LogHandler.printCatch(e, fail, tmp, e);
+                final String fail = "LOGIC LOADER HAS FAILED TO FIND A CLASS NAMED:\n%sWITH ERROR:\n%s";
+                CCMLogger.DEFAULT_LOGGER.printCatch(e, fail, tmp, e);
             }
         }
         if (hasLogic())
@@ -132,8 +132,8 @@ public class LogicTE extends InventoryTE
             }
         } else
         {
-            LogHandler.debug("%s DOES NOT HAVE LOGIC, BUT SUBCLASSED LogicTE!!", this);
-            LogHandler.debug(nbt.toString());
+            CCMLogger.DEFAULT_LOGGER.debug("%s DOES NOT HAVE LOGIC, BUT SUBCLASSED LogicTE!!", this);
+            CCMLogger.DEFAULT_LOGGER.debug(nbt.toString());
         }
     }
 
@@ -170,10 +170,10 @@ public class LogicTE extends InventoryTE
             if (srclogic != null)
             {
                 nbt.setString(NBTConstants.NBT_TE_SRC_LOGIC, srclogic.getName());
-                LogHandler.debug(srclogic.getName());
+                CCMLogger.DEFAULT_LOGGER.debug(srclogic.getName());
             } else
             {
-                LogHandler.severe("%s Source Logic was null when tring to save to NBT!", this);
+                CCMLogger.DEFAULT_LOGGER.severe("%s\nSOURCE LOGIC WAS NULL WHEN TRING TO SAVE TO NBT!!!", this);
             }
             if (logic != null)
             {

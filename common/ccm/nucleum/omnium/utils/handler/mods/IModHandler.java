@@ -20,7 +20,7 @@ public abstract class IModHandler
     /**
      * @return The Name of the mod that it is supporting. Ex: Harvestry
      */
-    public abstract String getModName();
+    public abstract String getAPIModName();
 
     /** What to do if the Mod is found to be loaded */
     public abstract void init();
@@ -28,6 +28,6 @@ public abstract class IModHandler
     @Override
     public String toString()
     {
-        return String.format("A CCM Mod has failed to load it's compatibility with %s, pleace inform the CCM Team", getModName());
+        return String.format("A CCM Mod has failed to load it's compatibility with %s, pleace inform the CCM Team", getAPIModName());
     }
 }

@@ -5,7 +5,7 @@ package ccm.nucleum.omnium.utils.helper.enums;
 
 import net.minecraft.item.ItemStack;
 
-import ccm.nucleum.omnium.base.BaseNIC;
+import ccm.nucleum.omnium.BaseNIC;
 
 /**
  * This is The class used to get a new {@link ItemStack} instance from any {@link Enum} implementing {@link IItemEnum} or {@link IBlockEnum}

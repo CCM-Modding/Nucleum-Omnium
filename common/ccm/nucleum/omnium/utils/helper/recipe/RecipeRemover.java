@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 
-import ccm.nucleum.omnium.base.BaseNIC;
-import ccm.nucleum.omnium.utils.handler.LogHandler;
+import ccm.nucleum.omnium.BaseNIC;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 public final class RecipeRemover extends BaseNIC
 {
@@ -48,7 +48,7 @@ public final class RecipeRemover extends BaseNIC
                     if ((result.itemID == removedItem.itemID) && ((removedItem.getItemDamage() == -1) || (result.getItemDamage() == removedItem.getItemDamage())))
                     {
                         minecraftRecipes.remove(i);
-                        LogHandler.debug("Recipes removed for " + removedItem.getDisplayName() + " @" + removedItem.itemID + "\n");
+                        CCMLogger.DEFAULT_LOGGER.debug("Recipes removed for " + removedItem.getDisplayName() + " @" + removedItem.itemID + "\n");
                         --i;
                     }
                 }

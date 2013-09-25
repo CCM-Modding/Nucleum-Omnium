@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 import ccm.nucleum.omnium.NucleumOmnium;
-import ccm.nucleum.omnium.utils.handler.LogHandler;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 public final class GuiHandler implements IGuiHandler
 {
@@ -128,7 +128,7 @@ public final class GuiHandler implements IGuiHandler
             player.openGui(NucleumOmnium.instance, fix, player.worldObj, x, y, z);
         } else
         {
-            LogHandler.severe(NucleumOmnium.instance, "Player: %s, tried to open %s but it is not registered!! \n", player.username, guiID);
+            CCMLogger.DEFAULT_LOGGER.severe("PLAYER: %s, TRIED TO OPEN %s BUT IT IS NOT REGISTERED!!!\n", player.username, guiID);
         }
     }
 }

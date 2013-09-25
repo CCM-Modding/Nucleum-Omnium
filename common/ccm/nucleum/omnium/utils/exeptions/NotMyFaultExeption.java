@@ -34,8 +34,6 @@ public class NotMyFaultExeption extends MainException
         errorSB.append("\nDO NOT COME TO ME WITH THIS. YOU CAUSED IT YOURSELF, AND I TOLD YOU HOW TO FIX IT!\n");
     }
 
-
-
     @Override
     public String toString()
     {

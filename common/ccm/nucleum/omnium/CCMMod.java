@@ -9,21 +9,25 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import ccm.nucleum.omnium.configuration.AdvConfiguration;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 /**
  * This class should be the super class of any CCM Mod, as it not only offers a few nice Configuration helpers, but it also keeps from having to implement some of the methods
  * inside of {@link IMod}
- * 
- * @author Captain_Shadows
  */
 public abstract class CCMMod implements IMod
 {
+    /* DATA FIELDS */
     /** Configuration Folder */
-    private File config_Folder;
+    private File configFolder;
 
     /** Current Configuration File */
-    public static AdvConfiguration config;
+    private static AdvConfiguration config;
+    
+    /** Current Logger */
+    private static CCMLogger logger;
 
+    /* INSTANCE METHODS */
     /**
      * @return A new instance of {@link AdvConfiguration}
      */
@@ -45,44 +49,48 @@ public abstract class CCMMod implements IMod
      */
     protected File getConfigurationFile()
     {
-        return new File(config_Folder.getAbsolutePath() + "/" + getName() + ".cfg");
-    }
-
-    /**
-     * This is a shorter way of creating a new Configuration File
-     * 
-     * @param evt
-     *            A FMLPreInitializationEvent
-     * @return A new instance of {@link AdvConfiguration}
-     */
-    @Override
-    public void initConfig(final FMLPreInitializationEvent evt)
-    {
-
-        setConfigFolderBase(evt.getModConfigurationDirectory());
-
-        setConfigFile(getAdvConfigFile());
+        return new File(configFolder.getAbsolutePath() + "/" + getName() + ".cfg");
     }
 
     /**
      * @param folder
      *            The Folder in which to store all files in
      */
-    protected void setConfigFolderBase(final File folder)
+    protected void setConfigurationBaseFolder(final File folder)
     {
-        config_Folder = new File(folder.getAbsolutePath() + "/" + getConfigFolder() + "/");
+        configFolder = new File(folder.getAbsolutePath() + "/" + getConfigFolder() + "/");
     }
-
+    
+    /* OVERRIDEN IMod METHODS */
     @Override
-    public AdvConfiguration getConfigFile()
+    public void initConfig(final FMLPreInitializationEvent evt)
+    {
+        setConfigurationBaseFolder(evt.getModConfigurationDirectory());
+        setConfiguration(getAdvConfigFile());
+    }
+    
+    @Override
+    public AdvConfiguration getConfiguration()
     {
         return config;
     }
 
     @Override
-    public void setConfigFile(final AdvConfiguration conf)
+    public void setConfiguration(final AdvConfiguration conf)
     {
         config = conf;
+    }
+    
+    @Override
+    public CCMLogger getLogger()
+    {
+        return logger;
+    }
+
+    @Override
+    public void setLogger(CCMLogger log)
+    {
+        logger = log;
     }
 
     @Override

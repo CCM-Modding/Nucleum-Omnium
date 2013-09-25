@@ -10,8 +10,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
+import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.NucleumOmnium;
-import ccm.nucleum.omnium.base.BaseNIC;
 import ccm.nucleum.omnium.utils.exeptions.WTFExeption;
 
 public final class TeleportHelper extends BaseNIC

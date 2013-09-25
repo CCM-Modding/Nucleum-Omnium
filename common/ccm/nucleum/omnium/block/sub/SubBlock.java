@@ -32,13 +32,13 @@ import ccm.nucleum.omnium.block.interfaces.ICollisionListener;
 import ccm.nucleum.omnium.block.interfaces.IDisplayListener;
 import ccm.nucleum.omnium.block.interfaces.ITextureHelper;
 import ccm.nucleum.omnium.block.interfaces.ITileHelper;
-import ccm.nucleum.omnium.block.texture.BasicTexture;
-import ccm.nucleum.omnium.block.tile.NoTile;
+import ccm.nucleum.omnium.block.loader.texture.BasicTexture;
+import ccm.nucleum.omnium.block.loader.tile.NoTile;
 import ccm.nucleum.omnium.tileentity.BaseTE;
-import ccm.nucleum.omnium.utils.handler.LogHandler;
 import ccm.nucleum.omnium.utils.handler.gui.GuiHandler;
 import ccm.nucleum.omnium.utils.helper.BlockHelper;
 import ccm.nucleum.omnium.utils.helper.FunctionHelper;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import ccm.nucleum.omnium.utils.helper.TextureHelper;
 import ccm.nucleum.omnium.utils.helper.enums.IBlockEnum;
 
@@ -95,14 +95,14 @@ public class SubBlock
                 c = block.getConstructor(int.class, Material.class);
             } catch (final Exception e)
             {
-                LogHandler.printCatch(e, "FAILED TO GET CONSTRUCTOR FOR %s", block);
+                CCMLogger.DEFAULT_LOGGER.printCatch(e, "FAILED TO GET CONSTRUCTOR FOR %s", block);
             }
             try
             {
                 mainBlock = c.newInstance(id, material);
             } catch (final Exception e)
             {
-                LogHandler.printCatch(e, "FAILED TO CREATE A NEW INSTANCE OF %s", block);
+                CCMLogger.DEFAULT_LOGGER.printCatch(e, "FAILED TO CREATE A NEW INSTANCE OF %s", block);
             }
             mainBlock.addSubBlock(this, meta);
         } else
@@ -299,7 +299,7 @@ public class SubBlock
                 return true;
             } else
             {
-                LogHandler.debug("TileEntity at %s, %s, %s, was null", x, y, z);
+                CCMLogger.DEFAULT_LOGGER.debug("TileEntity at %s, %s, %s, was null", x, y, z);
             }
         }
         return false;

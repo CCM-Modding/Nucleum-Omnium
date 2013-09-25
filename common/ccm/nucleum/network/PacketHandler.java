@@ -11,6 +11,11 @@ import cpw.mods.fml.common.network.Player;
 
 import ccm.nucleum.network.packet.PacketBase;
 
+/**
+ * A VERY simple Packet Handler, taken from EE3
+ * 
+ * @author pahimar
+ */
 public class PacketHandler implements IPacketHandler
 {
 

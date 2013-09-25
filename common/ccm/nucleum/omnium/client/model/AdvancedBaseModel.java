@@ -7,8 +7,8 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-import ccm.nucleum.omnium.utils.handler.LogHandler;
 import ccm.nucleum.omnium.utils.handler.ResourceHandler;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 /**
  * Advanced Base Model, to use with the Advanced Model Loader
@@ -29,8 +29,8 @@ public class AdvancedBaseModel
     public AdvancedBaseModel(final String resourceName)
     {
         name = resourceName;
-        LogHandler.debug(name);
-        LogHandler.debug(ResourceHandler.getModelLocation(name));
+        CCMLogger.DEFAULT_LOGGER.debug(name);
+        CCMLogger.DEFAULT_LOGGER.debug(ResourceHandler.getModelLocation(name));
         model = ResourceHandler.loadModel(name);
     }
 

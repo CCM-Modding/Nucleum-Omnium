@@ -10,6 +10,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -17,84 +18,98 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class DevCapesTickHandler implements ITickHandler {
+public class DevCapesTickHandler implements ITickHandler
+{
 
-	private static final Minecraft mc = Minecraft.getMinecraft();
-	private static final DevCapes instance = DevCapesUtil.getInstance();
+    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final DevCapes instance = DevCapesUtil.getInstance();
 
-	// Keep at false when packaging..
-	private boolean debug = false;
+    // Keep at false when packaging..
+    private boolean debug = false;
 
+    private int counter = 0;
+    private boolean notified = false;
 
-	private int counter = 0;
-	private boolean notified = false;
+    @Override
+    public void tickStart(EnumSet<TickType> type, Object... tickData)
+    {
 
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
+        // Will not run if there is no world, and if there are no player entities
+        // in the playerEntities list.
+        if ((mc.theWorld != null) && (mc.theWorld.playerEntities.size() > 0))
+        {
+            // List of players.
+            @SuppressWarnings("unchecked")
+            List<AbstractClientPlayer> players = mc.theWorld.playerEntities;
 
+            // resets the counter if it is too high.
+            if (counter >= players.size())
+            {
+                counter = 0;
+            }
 
-		// Will not run if there is no world, and if there are no player entities
-		// in the playerEntities list. 
-		if ((mc.theWorld != null) && (mc.theWorld.playerEntities.size() > 0)){
-			// List of players.
-			@SuppressWarnings("unchecked")
-			List<AbstractClientPlayer> players = mc.theWorld.playerEntities;
+            AbstractClientPlayer p = players.get(counter);
+            if (p != null)
+            {
 
-			// resets the counter if it is too high.
-			if(counter >= players.size())
-				counter = 0;
+                String lowerUsername = p.username.toLowerCase();
 
-			AbstractClientPlayer p = players.get(counter);
-			if(p != null) {
+                if (instance.getUserGroup(lowerUsername) != null)
+                {
+                    // If the player had no cape before, (or is some cases
+                    // has a cape from another mod,) then it will be true.
+                    // This statement checks for false. Will not replace any
+                    // capes.
+                    if (!p.downloadImageCape.isTextureUploaded())
+                    {
+                        String userGroup = instance.getUserGroup(lowerUsername);
 
-				String lowerUsername = p.username.toLowerCase();
+                        if (debug)
+                        {
+                            System.out.println("Changing the cape of: " + p.username);
+                        }
+                        // Sets the cape URL.
+                        p.locationCape = instance.getCapeResource(userGroup);
+                        p.downloadImageCape = instance.getDownloadThread(userGroup);
+                    }
 
-				if (instance.getUserGroup(lowerUsername) != null){
-					// If the player had no cape before, (or is some cases
-					// has a cape from another mod,) then it will be true.
-					// This statement checks for false. Will not replace any
-					// capes.
-					if (!p.downloadImageCape.isTextureUploaded()) {
-						String userGroup = instance.getUserGroup(lowerUsername);
+                    // notifies qualified user that developer capes is outdated.
+                    if (!notified)
+                    {
+                        if (FMLClientHandler.instance().getClient().currentScreen == null)
+                        {
+                            if (instance.versionChecker.getResult() == 1)
+                            {
 
-						if(debug)
-							System.out.println("Changing the cape of: " + p.username);
-						// Sets the cape URL.
-						p.locationCape = instance.getCapeResource(userGroup);
-						p.downloadImageCape = instance.getDownloadThread(userGroup);
-					}
+                                notified = true;
 
-					//notifies qualified user that developer capes is outdated.
-					if(!notified){
-						if (FMLClientHandler.instance().getClient().currentScreen == null) {
-							if (instance.versionChecker.getResult() == 1) {
+                                FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage("§6[DevCapes]: §fDevCapes is outdated.");
+                            }
+                        }
+                    }
+                }
+            }
 
-								notified = true;
+            counter++;
+        }
+    }
 
-								FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage("§6[DevCapes]: §fDevCapes is outdated.");
-							}
-						}
-					}
-				}
-			}
+    /*
+     * Not used, stub method.
+     */
+    @Override
+    public void tickEnd(EnumSet<TickType> type, Object... tickData)
+    {}
 
-			counter++;
-		}
-	}
+    @Override
+    public EnumSet<TickType> ticks()
+    {
+        return EnumSet.of(TickType.CLIENT);
+    }
 
-	/*
-	 * Not used, stub method.
-	 */
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {}
-
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.CLIENT);
-	}
-
-	@Override
-	public String getLabel() {
-		return "DeveloperCapesTickHandler";
-	}
+    @Override
+    public String getLabel()
+    {
+        return "DeveloperCapesTickHandler";
+    }
 }

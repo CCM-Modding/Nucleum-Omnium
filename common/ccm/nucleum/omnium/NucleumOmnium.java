@@ -43,9 +43,7 @@ public class NucleumOmnium extends CCMMod implements IMod
     @SidedProxy(serverSide = SERVER_PROXY, clientSide = CLIENT_PROXY)
     public static CommonProxy proxy;
 
-    /**
-     * The current MC Server Instance
-     */
+    /** The current MC Server Instance */
     public static MinecraftServer server;
 
     @EventHandler

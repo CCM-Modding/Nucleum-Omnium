@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.block.tile;
+package ccm.nucleum.omnium.block.loader.tile;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

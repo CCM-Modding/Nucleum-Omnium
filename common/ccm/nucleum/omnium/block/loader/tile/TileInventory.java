@@ -1,15 +1,14 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.block.tile;
+package ccm.nucleum.omnium.block.loader.tile;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.block.interfaces.ITileHelper;
 import ccm.nucleum.omnium.tileentity.InventoryTE;
-import ccm.nucleum.omnium.utils.handler.LogHandler;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 public class TileInventory extends TileBase implements ITileHelper
 {
@@ -32,9 +31,7 @@ public class TileInventory extends TileBase implements ITileHelper
             }
         } catch (final Exception e)
         {
-            LogHandler.severe(NucleumOmnium.instance, "TileEntity Instance could not be created during createTileEntity \n");
-            e.getCause();
-            e.printStackTrace();
+            CCMLogger.DEFAULT_LOGGER.printCatch(e, "TileEntity INSTANCE COULD NOT BE CREATED DURING createTileEntity\n");
             return null;
         }
     }

@@ -9,8 +9,8 @@ import ccm.nucleum.omnium.block.MainBlock;
 import ccm.nucleum.omnium.block.ModelBlock;
 import ccm.nucleum.omnium.block.interfaces.ITextureHelper;
 import ccm.nucleum.omnium.block.interfaces.ITileHelper;
-import ccm.nucleum.omnium.block.texture.ModelTexture;
-import ccm.nucleum.omnium.block.tile.NoTile;
+import ccm.nucleum.omnium.block.loader.texture.ModelTexture;
+import ccm.nucleum.omnium.block.loader.tile.NoTile;
 
 public class SubModelled extends SubBlock
 {

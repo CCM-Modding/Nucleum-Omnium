@@ -12,10 +12,13 @@ import net.minecraft.network.INetworkManager;
 
 import cpw.mods.fml.common.network.Player;
 
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
+
 public class PacketBase
 {
-
+    /** The packet's ID */
     public int packetType;
+    /** If it is a ChunkDataPacket */
     public boolean isChunkDataPacket;
 
     public PacketBase(final int packetType, final boolean isChunkDataPacket)
@@ -26,6 +29,12 @@ public class PacketBase
     }
 
     public void execute(final INetworkManager network, final Player player)
+    {}
+
+    public void writeData(final DataOutputStream dos) throws IOException
+    {}
+
+    public void readData(final DataInputStream data) throws IOException
     {}
 
     public byte[] populate()
@@ -40,30 +49,20 @@ public class PacketBase
             writeData(data);
         } catch (final IOException e)
         {
-            e.printStackTrace(System.err);
+            CCMLogger.DEFAULT_LOGGER.printCatch(e, "populate FAILED\n");
         }
 
         return byteArr.toByteArray();
     }
 
-    public void readData(final DataInputStream data) throws IOException
-    {}
-
     public void readPopulate(final DataInputStream data)
     {
-
         try
         {
             readData(data);
-        } catch (final IOException e)
+        } catch (final Exception e)
         {
-            e.printStackTrace(System.err);
+            CCMLogger.DEFAULT_LOGGER.printCatch(e, "readPopulate FAILED\nDATA:\n%s", data);
         }
     }
-
-    public void setKey(final int key)
-    {}
-
-    public void writeData(final DataOutputStream dos) throws IOException
-    {}
 }
