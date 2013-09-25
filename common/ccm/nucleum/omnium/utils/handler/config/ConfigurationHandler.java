@@ -23,7 +23,7 @@ public final class ConfigurationHandler extends BaseNIC
             // Loads a pre-existing Configuration file.
             temp.load();
 
-            config.setConfiguration(temp).init();
+            config.init();
             
         } catch (final Exception e)
         {

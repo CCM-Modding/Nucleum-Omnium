@@ -29,7 +29,7 @@ public final class ModLoadingHandler extends BaseNIC
         mod.initConfig(evt);
         if (config != null)
         {
-            ConfigurationHandler.init(mod, config);
+            ConfigurationHandler.init(mod, config.setConfiguration(mod.getConfiguration()));
         }
     }
 }
