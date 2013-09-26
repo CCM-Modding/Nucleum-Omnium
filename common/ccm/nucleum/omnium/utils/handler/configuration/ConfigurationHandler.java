@@ -24,7 +24,7 @@ public final class ConfigurationHandler extends BaseNIC
             temp.load();
 
             config.init();
-            
+
         } catch (final Exception e)
         {
             mod.getLogger().printCatch(e, "%s HAS HAD A PROBLEM LOADING ITS CONFIGURATION", mod.getName());

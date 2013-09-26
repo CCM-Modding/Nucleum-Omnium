@@ -55,8 +55,7 @@ public final class ModHandler
                 handler.init();
             } catch (final Exception e)
             {
-                handler.getMod().getLogger().severe(handler.toString());
-                e.printStackTrace();
+                handler.getMod().getLogger().printCatch(e, handler.toString());
             }
         }
     }

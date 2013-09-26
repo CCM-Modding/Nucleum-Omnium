@@ -22,6 +22,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import ccm.nucleum.omnium.item.MainItem;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 /**
  * SubItem
@@ -53,7 +54,7 @@ public class SubItem
                 item = (MainItem) Item.itemsList[itemID];
             } else
             {
-                System.out.println("CONFLICT @ " + id + " item slot already occupied by " + Item.itemsList[itemID] + " while adding " + this);
+                CCMLogger.DEFAULT_LOGGER.severe("CONFLICT @ %s item slot already occupied by %s while adding %s", id, Item.itemsList[itemID], this);
             }
         }
 

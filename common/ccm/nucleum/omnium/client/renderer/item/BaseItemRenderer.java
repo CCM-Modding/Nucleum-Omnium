@@ -7,9 +7,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * BaseItemRenderer 
+ * BaseItemRenderer
  * <p>
- *
+ * 
  * @author Captain_Shadows
  */
 @SideOnly(Side.CLIENT)

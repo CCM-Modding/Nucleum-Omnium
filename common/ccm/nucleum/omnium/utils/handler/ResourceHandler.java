@@ -46,7 +46,7 @@ public final class ResourceHandler
     /** Adds a GUI texture */
     public static void addGUI(final IMod mod, final String name)
     {
-        resources().put(hashGUI(name), new ResourceLocation(mod.getModId(), fixGUILocation(name)));
+        resources().put(hashGUI(name), new ResourceLocation(mod.getModID(), fixGUILocation(name)));
     }
 
     /** Returns a GUI texture */
@@ -57,8 +57,8 @@ public final class ResourceHandler
 
     public static void addModel(final IMod mod, final String name)
     {
-        resources().put(hashModel(name), new ResourceLocation(mod.getModId(), fixModelLocation(name)));
-        resources().put(hashModelTexture(name), new ResourceLocation(mod.getModId(), fixModelTextureLocation(name)));
+        resources().put(hashModel(name), new ResourceLocation(mod.getModID(), fixModelLocation(name)));
+        resources().put(hashModelTexture(name), new ResourceLocation(mod.getModID(), fixModelTextureLocation(name)));
     }
 
     /** Gets a Model */

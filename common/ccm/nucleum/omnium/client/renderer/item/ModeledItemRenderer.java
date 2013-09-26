@@ -5,9 +5,6 @@ package ccm.nucleum.omnium.client.renderer.item;
 
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import ccm.nucleum.omnium.client.model.SimpleModel;
 
 /**

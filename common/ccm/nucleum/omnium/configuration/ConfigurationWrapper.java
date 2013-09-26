@@ -63,7 +63,7 @@ public class ConfigurationWrapper extends Configuration
 
         return super.get(category, key, defaultValue).getString();
     }
-    
+
     /**
      * @return the double property
      */

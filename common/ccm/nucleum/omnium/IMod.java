@@ -19,7 +19,7 @@ public interface IMod
     /**
      * @return The Mod's ID
      */
-    public String getModId();
+    public String getModID();
 
     /**
      * @return The Mod's Name

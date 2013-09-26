@@ -27,6 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import ccm.nucleum.omnium.block.sub.SubBlock;
 import ccm.nucleum.omnium.item.block.MainItemBlock;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import ccm.nucleum.omnium.utils.helper.FunctionHelper;
 
 /**
@@ -62,6 +63,9 @@ public class MainBlock extends Block
         {
             GameRegistry.registerBlock(block, MainItemBlock.class, block.getUnlocalizedName());
             registeredIDs.add(id);
+        } else
+        {
+            CCMLogger.DEFAULT_LOGGER.severe("CONFLICT @ %s slot already occupied by %s while adding %s", id, Block.blocksList[id], block);
         }
     }
 

@@ -23,7 +23,7 @@ public abstract class CCMMod implements IMod
 
     /** Current Configuration File */
     private static ConfigurationWrapper config;
-    
+
     /** Current Logger */
     private static CCMLogger logger;
 
@@ -60,7 +60,7 @@ public abstract class CCMMod implements IMod
     {
         configFolder = new File(folder.getAbsolutePath() + "/" + getConfigFolder() + "/");
     }
-    
+
     /* OVERRIDEN IMod METHODS */
     @Override
     public void initConfig(final FMLPreInitializationEvent evt)
@@ -68,7 +68,7 @@ public abstract class CCMMod implements IMod
         setConfigurationBaseFolder(evt.getModConfigurationDirectory());
         setConfiguration(getAdvConfigFile());
     }
-    
+
     @Override
     public ConfigurationWrapper getConfiguration()
     {
@@ -80,7 +80,7 @@ public abstract class CCMMod implements IMod
     {
         config = conf;
     }
-    
+
     @Override
     public CCMLogger getLogger()
     {
@@ -94,7 +94,7 @@ public abstract class CCMMod implements IMod
     }
 
     @Override
-    public String getModId()
+    public String getModID()
     {
         return this.getClass().getAnnotation(Mod.class).modid();
     }

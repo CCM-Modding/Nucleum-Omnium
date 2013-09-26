@@ -49,7 +49,7 @@ public class PacketBase
             writeData(data);
         } catch (final IOException e)
         {
-            CCMLogger.DEFAULT_LOGGER.printCatch(e, "populate FAILED\n");
+            CCMLogger.DEFAULT_LOGGER.printCatch(e, "populate FAILED");
         }
 
         return byteArr.toByteArray();

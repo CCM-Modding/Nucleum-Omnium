@@ -157,7 +157,7 @@ public final class OreStack implements Comparator<OreStack>
         {
             builder.append("super toString() = ").append(super.toString());
         }
-        builder.append("] \n");
+        builder.append("]\n");
         return builder.toString();
     }
 

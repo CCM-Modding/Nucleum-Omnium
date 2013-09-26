@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 /**
  * MultyTextureItemRenderer
  * <p>
- *
  */
 public class MultyTextureItemRenderer extends BaseItemRenderer
 {

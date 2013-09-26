@@ -37,7 +37,7 @@ public final class DataHelper extends BaseNIC
      */
     public static File getModFolder(final IMod mod)
     {
-        final File folder = new File(DataHelper.root, mod.getModId());
+        final File folder = new File(DataHelper.root, mod.getModID());
         folder.mkdirs();
         return folder;
     }

@@ -44,7 +44,7 @@ public final class IconHandler
 
     public static void addIcon(final IMod mod, final String location, final Icon icon)
     {
-        addIcon(new ResourceLocation(mod.getModId(), location), icon);
+        addIcon(new ResourceLocation(mod.getModID(), location), icon);
     }
 
     public static void addIcon(final IMod mod, final String location)

@@ -4,6 +4,7 @@
 package ccm.nucleum.omnium.utils.helper;
 
 import static ccm.nucleum.omnium.utils.lib.Debug.DEBUG;
+import static java.lang.String.format;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,11 @@ public class CCMLogger
      */
     public void log(final Level level, final Object message, final Object... data)
     {
-        logger.log(level, String.format(message.toString(), data));
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n#########################\n");
+        sb.append(format(message.toString(), data));
+        sb.append("\n#########################\n");
+        logger.log(level, sb.toString());
     }
 
     public void finest(final Object message, final Object... data)
@@ -86,11 +91,17 @@ public class CCMLogger
 
     public void printCatch(final Exception e, final Object message, final Object... data)
     {
-        severe(message, data);
+        StringBuilder sb = new StringBuilder();
+        sb.append(format(message.toString(), data));
+        sb.append("\nThe Following Exeption has happend inside a catch statement:\n");
+        sb.append(e);
         if (e.getCause() != null)
         {
-            severe("\n And Cause: %s", e.getCause());
+            sb.append("\nWith the following cause:\n");
+            sb.append(e.getCause().toString());
         }
-        e.printStackTrace();
+        sb.append("\nAnd the Exeption has the stackTrace described below");
+        severe(sb.toString());
+        e.getStackTrace();
     }
 }

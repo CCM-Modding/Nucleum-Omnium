@@ -25,10 +25,10 @@ public final class JavaHelper extends BaseNIC
             @SuppressWarnings("unused")
             final double d = Double.parseDouble(str);
         } catch (final NumberFormatException nfe)
-        {// if an exeption is created the it is not a number
+        {// if an exception is created the it is not a number
             return false;
         }
-        // if we get here an exeption was not raised thus it is a number, and we can return true
+        // if we get here an exception was not raised thus it is a number, and we can return true
         return true;
     }
 
@@ -52,9 +52,9 @@ public final class JavaHelper extends BaseNIC
      * @return The date that results after appling the offset in the specified unit to the current date
      */
     public static String titleCase(final String input)
-    {// if the input has a space the it conins more than 1 word and we have to split them
+    {// if the input has a space the it contains more than 1 word and we have to split them
         if (input.contains(" "))
-        {// Slipit at the spaces and then create a StringBuilder to re-create the original string
+        {// Split at the spaces and then create a StringBuilder to re-create the original string
             final String[] strings = input.split(" ");
             final StringBuilder sb = new StringBuilder();
             for (final String s : strings)
@@ -74,9 +74,9 @@ public final class JavaHelper extends BaseNIC
      * @return The date that results after appling the offset in the specified unit to the current date
      */
     public static String camelCase(final String input)
-    {// if the input has a space the it conins more than 1 word and we have to split them
+    {// if the input has a space the it contains more than 1 word and we have to split them
         if (input.contains(" "))
-        {// Slipit at the spaces and then create a StringBuilder to re-create the original string
+        {// Split at the spaces and then create a StringBuilder to re-create the original string
             final String[] strings = input.split(" ");
             final StringBuilder sb = new StringBuilder();
             for (final String s : strings)

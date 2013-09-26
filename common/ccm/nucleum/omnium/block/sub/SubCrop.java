@@ -8,22 +8,20 @@ import net.minecraft.world.World;
 
 import ccm.nucleum.omnium.block.loader.texture.CropTexture;
 import ccm.nucleum.omnium.block.loader.tile.TileBase;
-import ccm.nucleum.omnium.utils.helper.item.drops.DropBundle;
-import ccm.nucleum.omnium.utils.helper.item.drops.DropItem;
 
 public class SubCrop extends SubBlock
 {
-    private DropBundle drops;
+    // private DropBundle drops;
 
-    public SubCrop(final int id, final int meta, final Material material, final String iconName, final int stages, DropBundle drops)
+    public SubCrop(final int id, final int meta, final Material material, final String iconName, final int stages/* , DropBundle drops */)
     {
         super(id, meta, material, new CropTexture(iconName, stages), new TileBase());
-        this.drops = drops;
+        // this.drops = drops;
     }
 
-    public SubCrop(final int id, final int meta, final String iconName, final int stages, DropBundle drops)
+    public SubCrop(final int id, final int meta, final String iconName, final int stages/* , DropBundle drops */)
     {
-        this(id, meta, Material.plants, iconName, stages, drops);
+        this(id, meta, Material.plants, iconName, stages/* , drops */);
     }
 
     @Override
@@ -31,15 +29,10 @@ public class SubCrop extends SubBlock
     {
         final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
-        for (DropItem item : drops.getDrops())
-        {
-            final int count = quantityDroppedWithBonus(item.getMin(), item.getMax(), fortune, world.rand);
-            item.getItem().getWrappedStack().stackSize = 1;
-            for (int i = 0; i < count; i++)
-            {
-                ret.add(item.getItem().getWrappedStack());
-            }
-        }
+        /*
+         * for (DropItem item : drops.getDrops()) { final int count = quantityDroppedWithBonus(item.getMin(), item.getMax(), fortune, world.rand);
+         * item.getItem().getWrappedStack().stackSize = 1; for (int i = 0; i < count; i++) { ret.add(item.getItem().getWrappedStack()); } }
+         */
         return ret;
     }
 }

@@ -37,8 +37,8 @@ import ccm.nucleum.omnium.block.loader.tile.NoTile;
 import ccm.nucleum.omnium.tileentity.BaseTE;
 import ccm.nucleum.omnium.utils.handler.gui.GuiHandler;
 import ccm.nucleum.omnium.utils.helper.BlockHelper;
-import ccm.nucleum.omnium.utils.helper.FunctionHelper;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
+import ccm.nucleum.omnium.utils.helper.FunctionHelper;
 import ccm.nucleum.omnium.utils.helper.TextureHelper;
 import ccm.nucleum.omnium.utils.helper.enums.IBlockEnum;
 
