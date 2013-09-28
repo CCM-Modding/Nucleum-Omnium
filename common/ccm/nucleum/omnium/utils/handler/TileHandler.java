@@ -80,7 +80,7 @@ public final class TileHandler
     /**
      * @param name
      *            The name of the Tile Entity
-     * @return The "unique" hash code of the Block's name
+     * @return The "unique" hash code of the Tile's name
      */
     private static String hash(final String name)
     {
