@@ -13,50 +13,32 @@ import cpw.mods.fml.common.Loader;
  * 
  * @author Captain_Shadows
  */
-public final class ModHandler
-{
-    /** List of all {@link IModHandler}s that this "Registry" needs to handle */
-    private static final List<IModHandler> modsHandling = new ArrayList<IModHandler>();
+public final class ModHandler {
+	/** List of all {@link IModHandler}s that this "Registry" needs to handle */
+	private static final List<APIHandler> modsHandling = new ArrayList<APIHandler>();
 
-    /**
-     * @param handler
-     *            The {@link IModHandler} to add to the List
-     */
-    public static void addModHandler(final IModHandler handler)
-    {
-        modsHandling.add(handler);
-    }
+	/**
+	 * @param name
+	 *            The name of the mod that you are adding compatibility for. EX:
+	 *            Buildcraft
+	 * @param handler
+	 *            The {@link IModHandler} to add to the List
+	 */
+	public static void addModHandler(final String name,
+			final IModHandler handler) {
+		modsHandling.add(new APIHandler(name, handler));
+	}
 
-    /**
-     * THIS METHOD SHOULD NEVER BE CALLED BY ANY CLASS.
-     * <p>
-     * Except NucleumOmnium.java
-     */
-    public static void init()
-    {
-        for (final IModHandler handler : modsHandling)
-        {
-            handleMod(handler);
-        }
-    }
-
-    /**
-     * Private method that initializes the IModHandler
-     * 
-     * @param handler
-     *            The handler to init
-     */
-    private static void handleMod(final IModHandler handler)
-    {
-        if (Loader.isModLoaded(handler.getAPIModName()))
-        {
-            try
-            {
-                handler.init();
-            } catch (final Exception e)
-            {
-                handler.getMod().getLogger().printCatch(e, handler.toString());
-            }
-        }
-    }
+	/**
+	 * THIS METHOD SHOULD NEVER BE CALLED BY ANY CLASS.
+	 * <p>
+	 * Except NucleumOmnium.java
+	 */
+	public static void init() {
+		for (final APIHandler handler : modsHandling) {
+			if (Loader.isModLoaded(handler.getName())) {
+				handler.init();
+			}
+		}
+	}
 }

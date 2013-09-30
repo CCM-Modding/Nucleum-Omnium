@@ -12,20 +12,8 @@ import ccm.nucleum.omnium.utils.lib.Properties;
  * 
  * @author Captain_Shadows
  */
-public final class MystcraftHandler extends IModHandler
+public final class MystcraftHandler implements IModHandler
 {
-    @Override
-    public IMod getMod()
-    {
-        return NucleumOmnium.instance;
-    }
-
-    @Override
-    public String getAPIModName()
-    {
-        return "Mystcraft";
-    }
-
     @Override
     public void init()
     {
