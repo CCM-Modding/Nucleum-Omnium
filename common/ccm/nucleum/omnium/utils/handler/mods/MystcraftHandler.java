@@ -18,5 +18,6 @@ public final class MystcraftHandler implements IModHandler
     public void init()
     {
         Properties.MYSTCARFT_LOADED = true;
+        NucleumOmnium.instance.getLogger().debug("MYSTCRAFT IS LOADED");
     }
 }
