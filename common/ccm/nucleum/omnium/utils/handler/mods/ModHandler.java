@@ -22,9 +22,9 @@ public final class ModHandler {
 	 *            The name of the mod that you are adding compatibility for. EX:
 	 *            Buildcraft
 	 * @param handler
-	 *            The {@link IModHandler} to add to the List
+	 *            The location of you Handler class. EX: "ccm.nucleum.omnium.utils.handler.mods.MystcraftHandler"
 	 */
-	public static void addModHandler(final String name, final Class<? extends IModHandler> handler) {
+	public static void addModHandler(final String name, final String handler) {
 		modsHandling.add(new APIHandler(name, handler));
 	}
 

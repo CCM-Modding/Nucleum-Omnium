@@ -58,7 +58,7 @@ public class NucleumOmnium extends CCMMod implements IMod
         proxy.initCapes();
         proxy.initEventHandling();
 
-        ModHandler.addModHandler("Mystcraft", MystcraftHandler.class);
+        ModHandler.addModHandler("Mystcraft", "ccm.nucleum.omnium.utils.handler.mods.MystcraftHandler");
 
         // Registers the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GuiHandler.instance());
