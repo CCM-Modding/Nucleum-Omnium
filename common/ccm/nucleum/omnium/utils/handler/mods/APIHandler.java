@@ -1,5 +1,6 @@
 package ccm.nucleum.omnium.utils.handler.mods;
 
+import cpw.mods.fml.common.Loader;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 /**
@@ -18,11 +19,8 @@ final class APIHandler {
 		this.handler = handler;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public void init() {
+		if (Loader.isModLoaded(name)) {
 		try
         {
 			handler.init();
@@ -30,5 +28,6 @@ final class APIHandler {
         {
             CCMLogger.DEFAULT_LOGGER.printCatch(e, "A CCM Mod has failed to load it's compatibility with %s, pleace inform the CCM Team", name);
         }
+		}
 	}
 }

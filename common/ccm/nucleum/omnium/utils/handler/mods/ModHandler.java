@@ -36,9 +36,7 @@ public final class ModHandler {
 	 */
 	public static void init() {
 		for (final APIHandler handler : modsHandling) {
-			if (Loader.isModLoaded(handler.getName())) {
-				handler.init();
-			}
+			handler.init();
 		}
 	}
 }
