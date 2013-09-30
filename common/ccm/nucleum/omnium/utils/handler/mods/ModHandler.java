@@ -24,8 +24,7 @@ public final class ModHandler {
 	 * @param handler
 	 *            The {@link IModHandler} to add to the List
 	 */
-	public static void addModHandler(final String name,
-			final IModHandler handler) {
+	public static void addModHandler(final String name, final Class<? extends IModHandler> handler) {
 		modsHandling.add(new APIHandler(name, handler));
 	}
 
