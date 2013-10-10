@@ -22,7 +22,6 @@ sourceSets {
 
 minecraft {
     minecraftVersion = '1.6.4'
-    forgeVersion = '916'
     accessTransformers += 'resources/ccm_at.cfg'
 }
 
