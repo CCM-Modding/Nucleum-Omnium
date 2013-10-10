@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
-    dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.8.2-SNAPSHOT' }
+    dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.8' }
 }
 
 apply plugin: "gmcp"
