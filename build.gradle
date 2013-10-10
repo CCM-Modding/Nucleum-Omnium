@@ -2,7 +2,7 @@
 buildscript {
     repositories {
         mavenCentral()
-        //maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.8' }
 }
@@ -10,7 +10,7 @@ buildscript {
 apply plugin: "gmcp"
 
 group = 'ccm.nucleum_omnium'
-version = "1.0.0.${System.env.BUILD_NUMBER}.ALPHA"
+version = "1.0.0.${System.env.BUILD_NUMBER}"
 archivesBaseName = 'Nucleum-Omnium'
 
 sourceSets {
