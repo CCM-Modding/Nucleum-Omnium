@@ -22,7 +22,6 @@ public final class JavaHelper extends BaseNIC
     {
         try
         {// Try to parse the string as a double
-            @SuppressWarnings("unused")
             final double d = Double.parseDouble(str);
         } catch (final NumberFormatException nfe)
         {// if an exception is created the it is not a number

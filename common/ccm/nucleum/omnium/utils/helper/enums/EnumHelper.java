@@ -31,7 +31,7 @@ public class EnumHelper extends BaseNIC
      */
     public static TileEntity getTile(final Enum<? extends IBlockEnum> enu)
     {
-        return TileHandler.getTile(enu.name());
+        return TileHandler.getTileInstance(enu.name());
     }
 
     /**

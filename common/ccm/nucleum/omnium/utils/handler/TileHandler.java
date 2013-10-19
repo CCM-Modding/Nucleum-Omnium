@@ -6,35 +6,14 @@ package ccm.nucleum.omnium.utils.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import net.minecraft.tileentity.TileEntity;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class TileHandler
 {
-    /** Single instance of this class */
-    private static final TileHandler INSTANCE = new TileHandler();
-
-    // /////////////////////////////
-    // Instance Stuff
-    // /////////////////////////////
     /** Map of all the TileEntitys */
-    private final Map<Integer, TileEntity> tiles;
-
-    private TileHandler()
-    {
-        tiles = new HashMap<Integer, TileEntity>();
-    }
-
-    public static TileHandler instance()
-    {
-        return INSTANCE;
-    }
-
-    static Map<Integer, TileEntity> tiles()
-    {
-        return instance().tiles;
-    }
+    private static final Map<Integer, Class<? extends TileEntity>> tiles = new HashMap<Integer, Class<? extends TileEntity>>();
 
     // /////////////////////////////
     // Getters and "Setters"
@@ -44,18 +23,28 @@ public final class TileHandler
      *            The name of the TileEntity that you wish to get
      * @return The TileEntity's instance
      */
-    public static TileEntity getTile(final String name)
+    public static Class<? extends TileEntity> getTile(final String name)
     {
         final int id = hash(name).hashCode();
 
-        if (tiles().containsKey(id))
+        if (tiles.containsKey(id))
         {
-            return tiles().get(hash(name).hashCode());
+            return tiles.get(id);
         } else
         {
             throw new RuntimeException(String.format("Tring to retrive: %s but it didn't exist", name));
         }
     }
+    
+	public static TileEntity getTileInstance(String name) {
+		TileEntity tile = null;
+		try {
+			tile = getTile(name).newInstance();
+		} catch (Exception e) {
+			CCMLogger.DEFAULT_LOGGER.printCatch(e, "FAILED TO CREATE A NEW INSTANCE OF %s", name);
+		}
+		return tile;
+	}
 
     /**
      * Registers a TileEntity into the game and stores the instance for later use
@@ -65,13 +54,13 @@ public final class TileHandler
      * @param tile
      *            The TileEntity's instance
      */
-    public static void registerTile(final String name, final TileEntity tile)
+    public static void registerTile(final String name, final Class<? extends TileEntity> tile)
     {
         final String id = hash(name);
 
-        GameRegistry.registerTileEntity(tile.getClass(), id);
+        GameRegistry.registerTileEntity(tile, id);
 
-        tiles().put(id.hashCode(), tile);
+        tiles.put(id.hashCode(), tile);
     }
 
     // /////////////////////////////
