@@ -119,7 +119,7 @@ public class ItemHelper extends BaseNIC
      *            The second ItemStack
      * @return Adds the stack size of both items and if it is bigger than the max of the first it returns the first.getMaxStackSize() as the size
      */
-    public static ItemStack getUniun(final ItemStack item, final ItemStack item2)
+    public static ItemStack getUnion(final ItemStack item, final ItemStack item2)
     {// Get the size of both stacks put together, we assume that they are the same...
         final int size = item.stackSize + item2.stackSize;
         if (size > item.getMaxStackSize())

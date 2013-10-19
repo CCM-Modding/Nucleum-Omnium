@@ -18,48 +18,44 @@ import cpw.mods.fml.common.FMLCommonHandler;
  * 
  * @author Captain_Shadows
  */
-public class CommandHelper
-{
-    /**
-     * Gets a player
-     * 
-     * @return The EntityPlayerMP corresponding to who send it
-     */
-    public static EntityPlayerMP getPlayer(final ICommandSender sender)
-    {
-        return CommandBase.getCommandSenderAsPlayer(sender);
-    }
+public class CommandHelper {
+	/**
+	 * Gets a player
+	 * 
+	 * @return The EntityPlayerMP corresponding to who send it
+	 */
+	public static EntityPlayerMP getPlayer(final ICommandSender sender) {
+		return CommandBase.getCommandSenderAsPlayer(sender);
+	}
 
-    public static void sendChat(final ICommandSender sender)
-    {
-        sender.sendChatToPlayer(ChatMessageComponent.createFromText(""));
-    }
+	public static void sendChat(final ICommandSender sender) {
+		sender.sendChatToPlayer(ChatMessageComponent.createFromText(""));
+	}
 
-    public static void sendChat(final ICommandSender sender, final String msg, final Object... objects)
-    {
-        sender.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(msg, objects));
-    }
+	public static void sendChat(final ICommandSender sender, final String msg,
+			final Object... objects) {
+		sender.sendChatToPlayer(ChatMessageComponent
+				.createFromTranslationWithSubstitutions(msg, objects));
+	}
 
-    /** OP detection */
-    public static boolean isPlayerOp(final String username)
-    {
-        if (FMLCommonHandler.instance().getEffectiveSide().isClient())
-        {
-            return true;
-        }
+	/** OP detection */
+	public static boolean isPlayerOp(final String username) {
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+			return true;
+		}
+		
+		final MinecraftServer server = FMLCommonHandler.instance()
+				.getSidedDelegate().getServer();
 
-        final MinecraftServer server = FMLCommonHandler.instance().getSidedDelegate().getServer();
+		// SP and LAN
+		if (server.isSinglePlayer()) {
+			if ((server instanceof IntegratedServer)
+					&& server.getServerOwner().equalsIgnoreCase(username)) {
+				return true;
+			}
+		}
 
-        // SP and LAN
-        if (server.isSinglePlayer())
-        {
-            if ((server instanceof IntegratedServer) && server.getServerOwner().equalsIgnoreCase(username))
-            {
-                return true;
-            }
-        }
-
-        // SMP
-        return server.getConfigurationManager().getOps().contains(username);
-    }
+		// SMP
+		return server.getConfigurationManager().getOps().contains(username);
+	}
 }
