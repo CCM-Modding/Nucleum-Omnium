@@ -28,7 +28,6 @@ import ccm.nucleum.omnium.utils.handler.ModLoadingHandler;
 import ccm.nucleum.omnium.utils.handler.configuration.NOConfig;
 import ccm.nucleum.omnium.utils.handler.gui.GuiHandler;
 import ccm.nucleum.omnium.utils.handler.mods.ModHandler;
-import ccm.nucleum.omnium.utils.handler.mods.MystcraftHandler;
 import ccm.nucleum.omnium.utils.helper.DataHelper;
 import ccm.nucleum.omnium.utils.registry.CommandRegistry;
 

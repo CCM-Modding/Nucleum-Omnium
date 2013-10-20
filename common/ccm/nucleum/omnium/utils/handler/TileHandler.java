@@ -6,9 +6,11 @@ package ccm.nucleum.omnium.utils.handler;
 import java.util.HashMap;
 import java.util.Map;
 
-import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import net.minecraft.tileentity.TileEntity;
+
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 public final class TileHandler
 {
@@ -35,16 +37,19 @@ public final class TileHandler
             throw new RuntimeException(String.format("Tring to retrive: %s but it didn't exist", name));
         }
     }
-    
-	public static TileEntity getTileInstance(String name) {
-		TileEntity tile = null;
-		try {
-			tile = getTile(name).newInstance();
-		} catch (Exception e) {
-			CCMLogger.DEFAULT_LOGGER.printCatch(e, "FAILED TO CREATE A NEW INSTANCE OF %s", name);
-		}
-		return tile;
-	}
+
+    public static TileEntity getTileInstance(String name)
+    {
+        TileEntity tile = null;
+        try
+        {
+            tile = getTile(name).newInstance();
+        } catch (Exception e)
+        {
+            CCMLogger.DEFAULT_LOGGER.printCatch(e, "FAILED TO CREATE A NEW INSTANCE OF %s", name);
+        }
+        return tile;
+    }
 
     /**
      * Registers a TileEntity into the game and stores the instance for later use

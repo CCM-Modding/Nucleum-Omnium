@@ -19,7 +19,7 @@ public final class IconHandler
     // /////////////////////////////
     // Instance Stuff
     // /////////////////////////////
-    /** All the stored resources */
+    /** All the stored Icons */
     private final Map<ResourceLocation, Icon> icons;
 
     private IconHandler()
@@ -32,35 +32,30 @@ public final class IconHandler
         return INSTANCE;
     }
 
-    private static Map<ResourceLocation, Icon> resources()
+    public static Map<ResourceLocation, Icon> icons()
     {
         return instance().icons;
     }
 
-    public static void addIcon(final ResourceLocation resource, final Icon icon)
+    public static void addIcon(final ResourceLocation resource)
     {
-        resources().put(resource, icon);
-    }
-
-    public static void addIcon(final IMod mod, final String location, final Icon icon)
-    {
-        addIcon(new ResourceLocation(mod.getModID(), location), icon);
+        icons().put(resource, null);
     }
 
     public static void addIcon(final IMod mod, final String location)
     {
-        addIcon(mod, location, (Icon) null);
+        addIcon(new ResourceLocation(mod.getModID(), location));
     }
 
     public static Icon getIcon(final IMod mod, final String location)
     {
-        return resources().get(location);
+        return icons().get(new ResourceLocation(mod.getModID(), location));
     }
 
     @ForgeSubscribe
     public void loadIcons(final TextureStitchEvent.Pre evt)
     {
-        for (Entry<ResourceLocation, Icon> entry : resources().entrySet())
+        for (Entry<ResourceLocation, Icon> entry : icons().entrySet())
         {
             entry.setValue(evt.map.registerIcon(entry.getKey().toString()));
         }

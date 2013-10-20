@@ -3,7 +3,6 @@
  */
 package ccm.nucleum.omnium.utils.handler.mods;
 
-import ccm.nucleum.omnium.IMod;
 import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.utils.lib.Properties;
 
