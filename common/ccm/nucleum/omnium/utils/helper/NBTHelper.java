@@ -135,7 +135,7 @@ public final class NBTHelper extends BaseNIC
     }
 
     // int
-    public static int getInt(final ItemStack item, final String keyName)
+    public static int getInteger(final ItemStack item, final String keyName)
     {
 
         initCompound(item);
