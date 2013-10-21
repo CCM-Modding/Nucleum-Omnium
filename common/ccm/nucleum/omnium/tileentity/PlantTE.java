@@ -100,8 +100,8 @@ public class PlantTE extends TileEntity implements IPlantable
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        stage = NBTHelper.getInt(nbt, NBTConstants.NBT_PLANT_STAGE);
-        stages = NBTHelper.getInt(nbt, NBTConstants.NBT_PLANT_STAGES);
+        stage = NBTHelper.getInteger(nbt, NBTConstants.NBT_PLANT_STAGE);
+        stages = NBTHelper.getInteger(nbt, NBTConstants.NBT_PLANT_STAGES);
         growthRate = NBTHelper.getFloat(nbt, NBTConstants.NBT_PLANT_RATE);
     }
 

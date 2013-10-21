@@ -269,7 +269,7 @@ public final class NBTHelper extends BaseNIC
     }
 
     // int
-    public static int getInt(final NBTTagCompound nbt, final String keyName)
+    public static int getInteger(final NBTTagCompound nbt, final String keyName)
     {
         if (!nbt.hasKey(keyName))
         {
