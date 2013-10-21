@@ -23,7 +23,6 @@ public class CommonProxy
     public void initEventHandling()
     {
         registerEvent(new EventBoneMeal());
-        registerEvent(IconHandler.instance());
     }
 
     void registerEvent(final Object target)
