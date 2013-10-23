@@ -1,16 +1,13 @@
 // CCM Modding, Nucleum Omnium
 buildscript {
-    repositories {
-        mavenCentral()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    }
-    dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.8.1' }
+    repositories { mavenCentral() }
+    dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:latest.integration' }
 }
 
 apply plugin: "gmcp"
 
 group = 'ccm.nucleum_omnium'
-version = "1.0.0.${System.env.BUILD_NUMBER}"
+version = "1.0.0.${System.getenv().BUILD_NUMBER}"
 archivesBaseName = 'Nucleum-Omnium'
 
 sourceSets {
@@ -26,11 +23,15 @@ minecraft {
 }
 
 processResources {
-    // Iterate through files to expand version on things not PNGs, or OBJs
-    eachFile { file ->
-        if (!(file.getPath().endsWith('png') || file.getPath().endsWith('obj'))){
-            expand version: version, mcversion: minecraft.minecraftVersion
-        }
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.lang'
+        include '**/*.info'
+        expand version: version, mcversion: minecraft.minecraftVersion
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude '**/*.lang'
+        exclude '**/*.info'
     }
 }
 
@@ -50,10 +51,12 @@ task sourceJar(type: Jar) {
 }
 
 // Doesn't work for some odd reason
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//	appendix = 'javadoc'
-//	from 'build/docs/javadoc'
-//}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    appendix = 'javadoc'
+    from 'build/docs/javadoc'
+}
 
-//archives javadocJar
-artifacts {  archives sourceJar  }
+artifacts {
+    archives sourceJar
+	//archives javadocJar
+}
