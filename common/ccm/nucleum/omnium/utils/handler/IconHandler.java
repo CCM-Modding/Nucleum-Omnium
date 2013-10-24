@@ -40,7 +40,7 @@ public final class IconHandler
     @ForgeSubscribe
     public void loadIcons(final TextureStitchEvent.Pre evt)
     {
-        if (evt.map.textureType != 1)
+        if (evt.map.getTextureType() != 1)
         {
             for (Entry<ResourceLocation, Icon> entry : icons.entrySet())
             {

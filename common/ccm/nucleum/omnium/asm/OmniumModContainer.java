@@ -13,7 +13,6 @@ import cpw.mods.fml.common.versioning.VersionRange;
 
 public class OmniumModContainer extends DummyModContainer
 {
-
     private ModMetadata md = new ModMetadata();
     private ArtifactVersion processedVersion;
     private final String label = "OmniumCore";
@@ -23,12 +22,6 @@ public class OmniumModContainer extends DummyModContainer
         md.modId = label;
         md.name = "CCM Core";
         md.version = "TEST";
-    }
-
-    @Override
-    public VersionRange acceptableMinecraftVersionRange()
-    {
-        return Loader.instance().getMinecraftModContainer().getStaticVersionRange();
     }
 
     @Override
@@ -50,12 +43,6 @@ public class OmniumModContainer extends DummyModContainer
     }
 
     @Override
-    public Object getMod()
-    {
-        return this;
-    }
-
-    @Override
     public String getModId()
     {
         return md.modId;
@@ -65,16 +52,6 @@ public class OmniumModContainer extends DummyModContainer
     public String getName()
     {
         return md.name;
-    }
-
-    @Override
-    public ArtifactVersion getProcessedVersion()
-    {
-        if (processedVersion == null)
-        {
-            processedVersion = new DefaultArtifactVersion(getModId(), getVersion());
-        }
-        return processedVersion;
     }
 
     @Override

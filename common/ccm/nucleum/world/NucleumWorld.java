@@ -24,7 +24,7 @@ import ccm.nucleum.world.generator.WorldGenHandler;
 import ccm.nucleum.world.utils.TickHandlerWorld;
 import ccm.nucleum.world.utils.lib.Properties;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true)
+@Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true, dependencies = "required-after:nucleum_omnium")
 public class NucleumWorld extends CCMMod implements IMod
 {
 
