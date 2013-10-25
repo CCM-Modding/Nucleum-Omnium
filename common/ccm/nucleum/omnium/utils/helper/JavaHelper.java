@@ -58,14 +58,14 @@ public final class JavaHelper extends BaseNIC
             final StringBuilder sb = new StringBuilder();
             for (final String s : strings)
             {// for each of the independent strings we perform the the "action", and then append a space
-                sb.append(s.substring(0, 1).toUpperCase() + s.substring(1));
+                sb.append(s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase());
                 sb.append(" ");
                 CCMLogger.DEFAULT_LOGGER.debug(sb);
             }
             return sb.toString();
         } else
         {// otherwise just perform the "action"
-            return input.substring(0, 1).toUpperCase() + input.substring(1);
+            return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
         }
     }
 
@@ -80,14 +80,14 @@ public final class JavaHelper extends BaseNIC
             final StringBuilder sb = new StringBuilder();
             for (final String s : strings)
             {// for each of the independent strings we perform the the "action", and then append a space
-                sb.append(s.substring(0, 1).toLowerCase() + s.substring(1));
+                sb.append(s.substring(0, 1).toLowerCase() + s.substring(1).toLowerCase());
                 sb.append(" ");
                 CCMLogger.DEFAULT_LOGGER.debug(sb);
             }
             return sb.toString();
         } else
         {// otherwise just perform the "action"
-            return input.substring(0, 1).toLowerCase() + input.substring(1);
+            return input.substring(0, 1).toLowerCase() + input.substring(1).toLowerCase();
         }
     }
 
