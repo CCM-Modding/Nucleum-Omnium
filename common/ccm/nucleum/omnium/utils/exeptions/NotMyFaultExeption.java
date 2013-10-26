@@ -3,7 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.exeptions;
 
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
+
 
 /**
  * This Exception, and All its sub-Classes are NOT my Fault
@@ -13,11 +14,11 @@ public class NotMyFaultExeption extends MainException
 
     private static final long serialVersionUID = -501876681172804351L;
 
-    protected final IMod mod;
+    protected final CCMMod mod;
 
     protected final StringBuilder errorSB = new StringBuilder();
 
-    public NotMyFaultExeption(final IMod mod)
+    public NotMyFaultExeption(final CCMMod mod)
     {
         super("THIS EXEPTION WAS NOT MY FAULT!");
         this.mod = mod;

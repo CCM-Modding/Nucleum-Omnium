@@ -3,6 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.helper;
 
+import static ccm.nucleum.omnium.utils.helper.MathHelper.random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -13,12 +15,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenDesert;
 
-import ccm.nucleum.omnium.BaseNIC;
-import ccm.nucleum.omnium.block.MainBlock;
-
-public final class FunctionHelper extends BaseNIC
-{
-
+public final class FunctionHelper
+{    
     /** Drops the Inventory that is contained in the {@link TileEntity} */
     public static void dropInventory(final World world, final int x, final int y, final int z)
     {
@@ -36,28 +34,23 @@ public final class FunctionHelper extends BaseNIC
                 final ItemStack itemStack = inventory.getStackInSlot(i);
                 if ((itemStack != null) && (itemStack.stackSize > 0))
                 {
-                    final float dX = (rand.nextFloat() * 0.8F) + 0.1F;
-                    final float dY = (rand.nextFloat() * 0.8F) + 0.1F;
-                    final float dZ = (rand.nextFloat() * 0.8F) + 0.1F;
+                    final float dX = (random().nextFloat() * 0.8F) + 0.1F;
+                    final float dY = (random().nextFloat() * 0.8F) + 0.1F;
+                    final float dZ = (random().nextFloat() * 0.8F) + 0.1F;
                     final EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.itemID, itemStack.stackSize, itemStack.getItemDamage()));
                     if (itemStack.hasTagCompound())
                     {
                         entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
                     }
                     final float factor = 0.05F;
-                    entityItem.motionX = rand.nextGaussian() * factor;
-                    entityItem.motionY = (rand.nextGaussian() * factor) + 0.2F;
-                    entityItem.motionZ = rand.nextGaussian() * factor;
+                    entityItem.motionX = random().nextGaussian() * factor;
+                    entityItem.motionY = (random().nextGaussian() * factor) + 0.2F;
+                    entityItem.motionZ = random().nextGaussian() * factor;
                     world.spawnEntityInWorld(entityItem);
                     itemStack.stackSize = 0;
                 }
             }
         }
-    }
-
-    public static String getTEName(final World world, final int x, final int y, final int z)
-    {
-        return "container." + ((MainBlock) Block.blocksList[world.getBlockId(x, y, z)]).getSubBlocks()[world.getBlockMetadata(x, y, z)].getUnlocalizedName();
     }
 
     /**

@@ -22,9 +22,9 @@ import ccm.nucleum.world.NucleumWorld;
 import ccm.nucleum.world.utils.TickHandlerWorld;
 import ccm.nucleum.world.utils.lib.Properties;
 
-import lib.cofh.world.IFeatureGenerator;
-import lib.cofh.world.IFeatureHandler;
-import lib.cofh.world.util.ChunkCoord;
+import lib.cofh.api.world.IFeatureGenerator;
+import lib.cofh.api.world.IFeatureHandler;
+import lib.cofh.util.ChunkCoord;
 
 public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
 {

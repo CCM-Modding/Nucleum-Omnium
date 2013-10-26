@@ -5,10 +5,9 @@ package ccm.nucleum.omnium.utils.helper;
 
 import java.util.Random;
 
-import ccm.nucleum.omnium.BaseNIC;
-
-public class MathHelper extends BaseNIC
+public class MathHelper
 {
+    private static Random rand = new Random();
 
     /**
      * @return The value if it is more than the min and less than the max
@@ -44,7 +43,7 @@ public class MathHelper extends BaseNIC
         return MathHelper.clampInt(minValue, maxValue, rand.nextInt(maxValue));
     }
 
-    public static Random rand()
+    public static Random random()
     {
         return rand;
     }

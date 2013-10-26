@@ -3,9 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.lib;
 
-import ccm.nucleum.omnium.BaseNIC;
 
-public final class Locations extends BaseNIC
+public final class Locations
 {
     public static final String PROXY = "ccm.nucleum.omnium.proxy.";
 

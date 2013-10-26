@@ -9,8 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
-import ccm.nucleum.omnium.IMod;
-import ccm.nucleum.omnium.utils.helper.CCMLogger;
+import ccm.nucleum.omnium.CCMMod;
 
 public final class IconHandler
 {
@@ -22,7 +21,7 @@ public final class IconHandler
         icons.put(resource, null);
     }
 
-    public static void addIcon(final IMod mod, final String location)
+    public static void addIcon(final CCMMod mod, final String location)
     {
         addIcon(new ResourceLocation(mod.getModID(), location));
     }
@@ -32,7 +31,7 @@ public final class IconHandler
         return icons.get(resource);
     }
 
-    public static Icon getIcon(final IMod mod, final String location)
+    public static Icon getIcon(final CCMMod mod, final String location)
     {
         return getIcon(new ResourceLocation(mod.getModID(), location));
     }

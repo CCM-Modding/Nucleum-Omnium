@@ -9,10 +9,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.utils.helper.MathHelper;
 
-public class ItemHelper extends BaseNIC
+public class ItemHelper
 {
     /**
      * Damages a Item inside of a inventory.
@@ -74,10 +73,9 @@ public class ItemHelper extends BaseNIC
             return new ItemStack(item.itemID, size, item.getItemDamage());
         }
     }
-    
+
     /**
-     * Compares two ItemStacks for equality, testing itemID, metaData,
-     * stackSize, and their NBTTagCompounds (if they are present)
+     * Compares two ItemStacks for equality, testing itemID, metaData, stackSize, and their NBTTagCompounds (if they are present)
      * 
      * @param first
      *            The first ItemStack being tested for equality
@@ -85,58 +83,67 @@ public class ItemHelper extends BaseNIC
      *            The second ItemStack being tested for equality
      * @return true if the two ItemStacks are equivalent, false otherwise
      */
-    public static boolean compare(ItemStack first, ItemStack second) {
+    public static boolean compare(ItemStack first, ItemStack second)
+    {
 
         return (ItemStackComparator.compare(first, second) == 0);
     }
-    
-    public static Comparator<ItemStack> ItemStackComparator = new Comparator<ItemStack>() {
 
-        public int compare(ItemStack itemStack1, ItemStack itemStack2) {
+    public static Comparator<ItemStack> ItemStackComparator = new Comparator<ItemStack>()
+    {
 
-            if (itemStack1 != null && itemStack2 != null) {
+        @Override
+        public int compare(ItemStack itemStack1, ItemStack itemStack2)
+        {
+
+            if ((itemStack1 != null) && (itemStack2 != null))
+            {
                 // Sort on itemID
-                if (itemStack1.itemID == itemStack2.itemID) {
+                if (itemStack1.itemID == itemStack2.itemID)
+                {
 
                     // Then sort on meta
-                    if (itemStack1.getItemDamage() == itemStack2.getItemDamage()) {
+                    if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
+                    {
 
                         // Then sort on NBT
-                        if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
+                        if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
+                        {
 
                             // Then sort on stack size
-                            if (itemStack1.getTagCompound().equals(itemStack2.getTagCompound())) {
+                            if (itemStack1.getTagCompound().equals(itemStack2.getTagCompound()))
+                            {
                                 return (itemStack1.stackSize - itemStack2.stackSize);
-                            }
-                            else {
+                            } else
+                            {
                                 return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
                             }
-                        }
-                        else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound()) {
+                        } else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound())
+                        {
                             return -1;
-                        }
-                        else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound())) {
+                        } else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound()))
+                        {
                             return 1;
-                        }
-                        else {
+                        } else
+                        {
                             return (itemStack1.stackSize - itemStack2.stackSize);
                         }
-                    }
-                    else {
+                    } else
+                    {
                         return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
                     }
-                }
-                else {
+                } else
+                {
                     return (itemStack1.itemID - itemStack2.itemID);
                 }
-            }
-            else if (itemStack1 != null && itemStack2 == null) {
+            } else if ((itemStack1 != null) && (itemStack2 == null))
+            {
                 return -1;
-            }
-            else if (itemStack1 == null && itemStack2 != null) {
+            } else if ((itemStack1 == null) && (itemStack2 != null))
+            {
                 return 1;
-            }
-            else {
+            } else
+            {
                 return 0;
             }
 

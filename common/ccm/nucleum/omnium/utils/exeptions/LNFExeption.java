@@ -3,7 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.exeptions;
 
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
+
 
 /**
  * Logger Not Found Exception
@@ -19,7 +20,7 @@ public class LNFExeption extends NotMyFaultExeption
 
     private final StringBuilder tmpErrorSB = new StringBuilder();
 
-    public LNFExeption(final IMod mod)
+    public LNFExeption(final CCMMod mod)
     {
         super(mod);
         addString();

@@ -12,7 +12,7 @@ import net.minecraft.block.material.Material;
  * 
  * @author Captain_Shadows
  */
-public class ModelBlock extends MainBlock
+public class ModelBlock extends BaseBlock
 {
 
     public ModelBlock(final int id)

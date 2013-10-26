@@ -12,7 +12,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 
 import ccm.nucleum.network.packet.PacketBase;
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import ccm.nucleum.omnium.utils.lib.Archive;
 
@@ -66,7 +66,7 @@ public final class PacketTypeHandler
     }
 
     /** Populates the given packet */
-    public static Packet populatePacket(final IMod mod, final PacketBase packetBase)
+    public static Packet populatePacket(final CCMMod mod, final PacketBase packetBase)
     {
         final byte[] data = packetBase.populate();
 

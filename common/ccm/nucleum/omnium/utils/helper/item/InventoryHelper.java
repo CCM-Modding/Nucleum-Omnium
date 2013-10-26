@@ -8,13 +8,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import ccm.nucleum.omnium.BaseNIC;
+import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
-public class InventoryHelper extends BaseNIC
+public class InventoryHelper
 {
-
-    private static final String SLOT = "CCM.INVENTORY.SLOT";
-
     /**
      * Decreases the {@link ItemStack} size in a slot
      * 
@@ -126,7 +123,7 @@ public class InventoryHelper extends BaseNIC
         for (int i = 0; i < list.tagCount(); i++)
         {
             nbt = (NBTTagCompound) list.tagAt(i);
-            stacks[nbt.getInteger(SLOT)] = ItemStack.loadItemStackFromNBT(nbt);
+            stacks[nbt.getInteger(NBTConstants.SLOT)] = ItemStack.loadItemStackFromNBT(nbt);
         }
         return stacks;
     }
@@ -155,7 +152,7 @@ public class InventoryHelper extends BaseNIC
                 continue;
             }
             nbt = new NBTTagCompound();
-            nbt.setInteger(SLOT, i);
+            nbt.setInteger(NBTConstants.SLOT, i);
             stacks[i].writeToNBT(nbt);
             list.appendTag(nbt);
         }

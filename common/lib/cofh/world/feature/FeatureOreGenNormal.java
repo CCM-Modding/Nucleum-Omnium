@@ -13,7 +13,7 @@ public class FeatureOreGenNormal extends FeatureBase
     final int meanY;
     final int maxVar;
 
-    public FeatureOreGenNormal(final String name, final WorldGenerator worldGen, final int count, final int meanY, final int maxVar, final boolean regen)
+    public FeatureOreGenNormal(String name, WorldGenerator worldGen, int count, int meanY, int maxVar, boolean regen)
     {
 
         super(name, regen);
@@ -25,20 +25,20 @@ public class FeatureOreGenNormal extends FeatureBase
 
     /* IFeatureGenerator */
     @Override
-    public boolean generateFeature(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
+    public boolean generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGen)
     {
 
         if (!newGen && !regen)
         {
             return false;
         }
-        final int blockX = chunkX * 16;
-        final int blockZ = chunkZ * 16;
+        int blockX = chunkX * 16;
+        int blockZ = chunkZ * 16;
 
         if (type > 0)
         {
-            final String biomeName = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase();
-            final boolean onList = biomes.contains(biomeName);
+            String biomeName = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase();
+            boolean onList = biomes.contains(biomeName);
 
             if (((type == 1) && !onList) || ((type == 2) && onList))
             {
@@ -47,12 +47,11 @@ public class FeatureOreGenNormal extends FeatureBase
         }
         for (int i = 0; i < count; i++)
         {
-            final int x = blockX + random.nextInt(16);
-            final int y = (random.nextInt(maxVar) + random.nextInt(maxVar) + meanY) - maxVar;
-            final int z = blockZ + random.nextInt(16);
+            int x = blockX + random.nextInt(16);
+            int y = (random.nextInt(maxVar) + random.nextInt(maxVar) + meanY) - maxVar;
+            int z = blockZ + random.nextInt(16);
             worldGen.generate(world, random, x, y, z);
         }
         return true;
     }
-
 }

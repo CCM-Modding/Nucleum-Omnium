@@ -23,7 +23,6 @@ public class PacketBase
 
     public PacketBase(final int packetType, final boolean isChunkDataPacket)
     {
-
         this.packetType = packetType;
         this.isChunkDataPacket = isChunkDataPacket;
     }
@@ -39,7 +38,6 @@ public class PacketBase
 
     public byte[] populate()
     {
-
         final ByteArrayOutputStream byteArr = new ByteArrayOutputStream();
         final DataOutputStream data = new DataOutputStream(byteArr);
 

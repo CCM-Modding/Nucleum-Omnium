@@ -135,7 +135,7 @@ public class WrappedStack implements Comparable<WrappedStack>
         }
         return null;
     }
-    
+
     /**
      * Returns the wrapped item stack
      * 
@@ -163,10 +163,10 @@ public class WrappedStack implements Comparable<WrappedStack>
 
         WrappedStack WrappedStack = (WrappedStack) object;
 
-        if ((this.getWrappedStack() instanceof ItemStack) && (WrappedStack.getWrappedStack() instanceof ItemStack))
+        if ((getWrappedStack() instanceof ItemStack) && (WrappedStack.getWrappedStack() instanceof ItemStack))
         {
             return (ItemHelper.compare(itemStack, WrappedStack.itemStack) && (stackSize == WrappedStack.itemStack.stackSize));
-        } else if ((this.getWrappedStack() instanceof OreStack) && (WrappedStack.getWrappedStack() instanceof OreStack))
+        } else if ((getWrappedStack() instanceof OreStack) && (WrappedStack.getWrappedStack() instanceof OreStack))
         {
             return (oreStack.equals(WrappedStack.getWrappedStack()) && (stackSize == WrappedStack.stackSize));
         }
@@ -204,17 +204,17 @@ public class WrappedStack implements Comparable<WrappedStack>
     {
         int hashCode = 1;
 
-        hashCode = 37 * hashCode + stackSize;
+        hashCode = (37 * hashCode) + stackSize;
 
         if (itemStack != null)
         {
-            hashCode = 37 * hashCode + itemStack.itemID;
-            hashCode = 37 * hashCode + itemStack.getItemDamage();
+            hashCode = (37 * hashCode) + itemStack.itemID;
+            hashCode = (37 * hashCode) + itemStack.getItemDamage();
         } else if (oreStack != null)
         {
             if (oreStack.oreName != null)
             {
-                hashCode = 37 * hashCode + oreStack.oreName.hashCode();
+                hashCode = (37 * hashCode) + oreStack.oreName.hashCode();
             }
         }
         return hashCode;
@@ -222,7 +222,7 @@ public class WrappedStack implements Comparable<WrappedStack>
 
     public static boolean canBeWrapped(Object object)
     {
-        return object instanceof WrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof Item || object instanceof Block;
+        return (object instanceof WrappedStack) || (object instanceof ItemStack) || (object instanceof OreStack) || (object instanceof Item) || (object instanceof Block);
     }
 
     /*
@@ -232,36 +232,51 @@ public class WrappedStack implements Comparable<WrappedStack>
     @Override
     public int compareTo(WrappedStack WrappedStack)
     {
-        if (this.getWrappedStack() instanceof OreStack)
+        if (getWrappedStack() instanceof OreStack)
         {
             if (WrappedStack.getWrappedStack() instanceof OreStack)
             {
                 if (oreStack.equals(WrappedStack.oreStack))
+                {
                     return stackSize - WrappedStack.stackSize;
-                else
+                } else
+                {
                     return oreStack.compareTo(WrappedStack.oreStack);
+                }
             } else if (WrappedStack.getWrappedStack() instanceof ItemStack)
+            {
                 return -1;
-            else
+            } else
+            {
                 return 1;
-        } else if (this.getWrappedStack() instanceof ItemStack)
+            }
+        } else if (getWrappedStack() instanceof ItemStack)
         {
             if (WrappedStack.getWrappedStack() instanceof OreStack)
+            {
                 return 1;
-            else if (WrappedStack.getWrappedStack() instanceof ItemStack)
+            } else if (WrappedStack.getWrappedStack() instanceof ItemStack)
             {
                 if (ItemHelper.compare(itemStack, WrappedStack.itemStack))
+                {
                     return stackSize - WrappedStack.stackSize;
-                else
+                } else
+                {
                     return ItemHelper.ItemStackComparator.compare(itemStack, WrappedStack.itemStack);
+                }
             } else
+            {
                 return 1;
+            }
         } else
         {
             if (WrappedStack.getWrappedStack() != null)
+            {
                 return -1;
-            else
+            } else
+            {
                 return 0;
+            }
         }
     }
 

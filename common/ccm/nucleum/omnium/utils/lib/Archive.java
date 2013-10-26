@@ -3,9 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.lib;
 
-import ccm.nucleum.omnium.BaseNIC;
 
-public final class Archive extends BaseNIC
+public final class Archive
 {
     public static final String MOD_ID = "nucleum_omnium";
 

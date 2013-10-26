@@ -11,7 +11,6 @@ import ccm.nucleum.omnium.utils.helper.CCMLogger;
  */
 final class APIHandler
 {
-
     private final String name;
     private final String handler;
 
@@ -34,7 +33,7 @@ final class APIHandler
             try
             {
                 // Try to find the Handler Class
-                tmpHandler = (Class<? extends IModHandler>) Class.forName(handler);
+                tmpHandler = (Class<? extends IModHandler>) Class.forName(handler, false, Loader.instance().getModClassLoader());
             } catch (ClassNotFoundException e)
             {
                 CCMLogger.DEFAULT_LOGGER.printCatch(e, "A CCM Mod has failed to find it's compatibility class with %s, pleace inform the CCM Team", name);

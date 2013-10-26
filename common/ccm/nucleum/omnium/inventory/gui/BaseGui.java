@@ -9,6 +9,5 @@ public abstract class BaseGui extends GuiContainer
     {
         super(container);
     }
-    
-    
+
 }

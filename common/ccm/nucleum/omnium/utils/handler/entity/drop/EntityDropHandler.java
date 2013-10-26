@@ -1,5 +1,5 @@
 /**
- * CCM Modding, ModJam
+ * CCM Modding, Nucleum Omnium
  */
 package ccm.nucleum.omnium.utils.handler.entity.drop;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
 
 /**
  * EntityDrops
@@ -28,7 +28,7 @@ public final class EntityDropHandler
      * @param item
      *            The Item to drop
      */
-    public static void registerDrop(final IMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
+    public static void registerDrop(final CCMMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
     {
         drops.add(new EntityDrop(mod, item, dropRate, minValue, maxValue, entity));
     }

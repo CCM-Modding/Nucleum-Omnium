@@ -4,12 +4,9 @@
 package ccm.nucleum.omnium.asm;
 
 import cpw.mods.fml.common.DummyModContainer;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.MetadataCollection;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
-import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
-import cpw.mods.fml.common.versioning.VersionRange;
 
 public class OmniumModContainer extends DummyModContainer
 {

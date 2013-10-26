@@ -29,8 +29,8 @@ final class GuiWrapper
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((client == null) ? 0 : client.hashCode());
-        result = prime * result + ((server == null) ? 0 : server.hashCode());
+        result = (prime * result) + ((client == null) ? 0 : client.hashCode());
+        result = (prime * result) + ((server == null) ? 0 : server.hashCode());
         return result;
     }
 

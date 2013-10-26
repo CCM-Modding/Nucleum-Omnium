@@ -3,7 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.exeptions;
 
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
+
 
 /**
  * This Exception is not MY Fault, You tried to make a instance of a class that was not meant to be instantiated
@@ -15,7 +16,7 @@ public class InstantiationExeption extends NotMyFaultExeption
 
     private final StringBuilder tmpErrorSB = new StringBuilder();
 
-    public InstantiationExeption(final IMod mod)
+    public InstantiationExeption(final CCMMod mod)
     {
         super(mod);
         addString();

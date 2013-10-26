@@ -3,9 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.lib;
 
-import ccm.nucleum.omnium.BaseNIC;
 
-public final class NBTConstants extends BaseNIC
+public final class NBTConstants
 {
     /*
      * Base Stuff
@@ -17,6 +16,8 @@ public final class NBTConstants extends BaseNIC
     public static final String TE = "CCM.ENTITY.TILE.";
 
     public static final String TE_PLANT = TE + "PLANT.";
+    
+    public static final String SLOT = "CCM.INVENTORY.SLOT";
 
     /*
      * NBT TE Stuff

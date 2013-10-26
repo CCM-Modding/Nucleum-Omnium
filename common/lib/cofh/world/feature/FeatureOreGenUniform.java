@@ -14,7 +14,7 @@ public class FeatureOreGenUniform extends FeatureBase
     final int minY;
     final int maxY;
 
-    public FeatureOreGenUniform(final String name, final WorldGenerator worldGen, final int count, final int minY, final int maxY, final boolean regen)
+    public FeatureOreGenUniform(String name, WorldGenerator worldGen, int count, int minY, int maxY, boolean regen)
     {
 
         super(name, regen);
@@ -26,20 +26,20 @@ public class FeatureOreGenUniform extends FeatureBase
 
     /* IFeatureGenerator */
     @Override
-    public boolean generateFeature(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
+    public boolean generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGen)
     {
 
         if (!newGen && !regen)
         {
             return false;
         }
-        final int blockX = chunkX * 16;
-        final int blockZ = chunkZ * 16;
+        int blockX = chunkX * 16;
+        int blockZ = chunkZ * 16;
 
         if (type > 0)
         {
-            final String biomeName = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase(Locale.ENGLISH);
-            final boolean onList = biomes.contains(biomeName);
+            String biomeName = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase(Locale.ENGLISH);
+            boolean onList = biomes.contains(biomeName);
 
             if (((type == 1) && !onList) || ((type == 2) && onList))
             {
@@ -48,12 +48,11 @@ public class FeatureOreGenUniform extends FeatureBase
         }
         for (int i = 0; i < count; i++)
         {
-            final int x = blockX + random.nextInt(16);
-            final int y = minY + random.nextInt(maxY - minY);
-            final int z = blockZ + random.nextInt(16);
+            int x = blockX + random.nextInt(16);
+            int y = minY + random.nextInt(maxY - minY);
+            int z = blockZ + random.nextInt(16);
             worldGen.generate(world, random, x, y, z);
         }
         return true;
     }
-
 }

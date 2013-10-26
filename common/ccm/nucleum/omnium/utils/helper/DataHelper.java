@@ -9,15 +9,14 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.DimensionManager;
 
-import ccm.nucleum.omnium.BaseNIC;
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
 
 /**
  * Use this class to save per-server data.
  * 
  * @author Dries007
  */
-public final class DataHelper extends BaseNIC
+public final class DataHelper
 {
     private static File root;
 
@@ -35,7 +34,7 @@ public final class DataHelper extends BaseNIC
      *            The mod in "control" of the file
      * @return File instance of the folder. It exists
      */
-    public static File getModFolder(final IMod mod)
+    public static File getModFolder(final CCMMod mod)
     {
         final File folder = new File(DataHelper.root, mod.getModID());
         folder.mkdirs();
@@ -51,7 +50,7 @@ public final class DataHelper extends BaseNIC
      *            DO NOT add an extension
      * @return data stored or new NBTTagCompound if file didn't exist
      */
-    public static NBTTagCompound readData(final IMod mod, final String fileName)
+    public static NBTTagCompound readData(final CCMMod mod, final String fileName)
     {
         try
         {
@@ -85,7 +84,7 @@ public final class DataHelper extends BaseNIC
      *            in NBT format
      * @return <code>true</code> if it succedes
      */
-    public static boolean saveData(final IMod mod, final String fileName, final NBTTagCompound data)
+    public static boolean saveData(final CCMMod mod, final String fileName, final NBTTagCompound data)
     {
         try
         {
@@ -120,7 +119,7 @@ public final class DataHelper extends BaseNIC
      *            DO NOT add an extension
      * @return <code>true</code> if and only if the file or directory is successfully deleted; <code>false</code> otherwise
      */
-    public static boolean deleteFile(final IMod mod, final String fileName)
+    public static boolean deleteFile(final CCMMod mod, final String fileName)
     {
         try
         {

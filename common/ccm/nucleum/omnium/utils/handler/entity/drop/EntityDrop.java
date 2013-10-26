@@ -1,12 +1,12 @@
 /**
- * CCM Modding, ModJam
+ * CCM Modding, Nucleum Omnium
  */
 package ccm.nucleum.omnium.utils.handler.entity.drop;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.utils.helper.MathHelper;
 
 /**
@@ -19,7 +19,7 @@ import ccm.nucleum.omnium.utils.helper.MathHelper;
 final class EntityDrop
 {
     /** The mod registering this coin */
-    private final IMod mod;
+    private final CCMMod mod;
 
     /** Item to drop */
     private final ItemStack item;
@@ -44,7 +44,7 @@ final class EntityDrop
      * @param entitys
      *            The entity's that are allowed to drop it
      */
-    public EntityDrop(final IMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
+    public EntityDrop(final CCMMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
     {
         this.mod = mod;
         this.item = item;
@@ -57,7 +57,7 @@ final class EntityDrop
     /**
      * @return The mod that registered this coin
      */
-    public IMod getMod()
+    public CCMMod getMod()
     {
         return mod;
     }
@@ -104,7 +104,7 @@ final class EntityDrop
     {
         if (shouldDrop(entity.getClass()))
         {
-            if (MathHelper.rand().nextDouble() < dropRate)
+            if (MathHelper.random().nextDouble() < dropRate)
             {
                 entity.entityDropItem(new ItemStack(item.itemID, MathHelper.getRandInt(minValue, maxValue), item.getItemDamage()), 0.0F);
             }

@@ -3,7 +3,7 @@
  */
 package ccm.nucleum.omnium.utils.exeptions;
 
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
 
 /**
  * The User tried to use the TPX command with coordinates
@@ -15,7 +15,7 @@ public class WTFExeption extends NotMyFaultExeption
 
     private final StringBuilder tmpErrorSB = new StringBuilder();
 
-    public WTFExeption(final IMod mod)
+    public WTFExeption(final CCMMod mod)
     {
         super(mod);
         addString();

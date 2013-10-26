@@ -16,7 +16,7 @@ public class OreStack implements Comparable<OreStack>
 
     public OreStack(String oreName, int stackSize)
     {
-        if (oreName != null && oreName.length() > 0)
+        if ((oreName != null) && (oreName.length() > 0))
         {
             if (this.oreName == null)
             {
@@ -24,14 +24,14 @@ public class OreStack implements Comparable<OreStack>
                 {
                     if (oreDictionaryName.equalsIgnoreCase(oreName))
                     {
-                        this.oreId = OreDictionary.getOreID(oreDictionaryName);
+                        oreId = OreDictionary.getOreID(oreDictionaryName);
                         this.oreName = oreDictionaryName;
                     }
                 }
             }
         } else
         {
-            this.oreId = -1;
+            oreId = -1;
             this.oreName = OreDictionary.getOreName(oreId);
         }
         this.stackSize = stackSize;
@@ -59,14 +59,15 @@ public class OreStack implements Comparable<OreStack>
 
     public ArrayList<ItemStack> getOres()
     {
-        if (this.oreId != -1)
+        if (oreId != -1)
         {
-            return OreDictionary.getOres(this.oreId);
+            return OreDictionary.getOres(oreId);
         }
         return new ArrayList<ItemStack>();
     }
-    
-    public ItemStack getItemStack(){
+
+    public ItemStack getItemStack()
+    {
         return OreDictionary.getOres(oreId).get(0);
     }
 
@@ -84,7 +85,9 @@ public class OreStack implements Comparable<OreStack>
     public boolean equals(Object object)
     {
         if (!(object instanceof OreStack))
+        {
             return false;
+        }
 
         OreStack oreStackObject = (OreStack) object;
 
@@ -93,7 +96,7 @@ public class OreStack implements Comparable<OreStack>
 
     public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2)
     {
-        if (oreStack1 != null && oreStack2 != null)
+        if ((oreStack1 != null) && (oreStack2 != null))
         {
             if ((oreStack1.oreName != null) && (oreStack2.oreName != null))
             {
@@ -108,9 +111,9 @@ public class OreStack implements Comparable<OreStack>
     {
         if (oreStack != null)
         {
-            if (this.oreId != oreStack.oreId)
+            if (oreId != oreStack.oreId)
             {
-                if (this.oreId > oreStack.oreId)
+                if (oreId > oreStack.oreId)
                 {
                     return 1;
                 } else
@@ -119,24 +122,24 @@ public class OreStack implements Comparable<OreStack>
                 }
             } else
             {
-                if ((this.oreName != null) && (oreStack.oreName != null))
+                if ((oreName != null) && (oreStack.oreName != null))
                 {
-                    if (this.oreName.equalsIgnoreCase(oreStack.oreName))
+                    if (oreName.equalsIgnoreCase(oreStack.oreName))
                     {
-                        return (this.stackSize - oreStack.stackSize);
+                        return (stackSize - oreStack.stackSize);
                     } else
                     {
-                        return this.oreName.compareToIgnoreCase(oreStack.oreName);
+                        return oreName.compareToIgnoreCase(oreStack.oreName);
                     }
-                } else if ((this.oreName != null) && (oreStack.oreName == null))
+                } else if ((oreName != null) && (oreStack.oreName == null))
                 {
                     return 1;
-                } else if ((this.oreName == null) && (oreStack.oreName != null))
+                } else if ((oreName == null) && (oreStack.oreName != null))
                 {
                     return -1;
                 } else
                 {
-                    return (this.stackSize - oreStack.stackSize);
+                    return (stackSize - oreStack.stackSize);
                 }
             }
         } else

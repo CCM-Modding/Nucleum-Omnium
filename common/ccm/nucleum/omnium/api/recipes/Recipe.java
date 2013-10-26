@@ -36,7 +36,7 @@ public class Recipe
         {
             if ((inputs.size() >= 1) && (outputs.size() >= 1))
             {
-                this.inputs = null;//WrappedStack.toWrappedList(inputs);
+                this.inputs = null;// WrappedStack.toWrappedList(inputs);
                 this.outputs = null;// WrappedStack.toWrappedList(outputs);
             } else
             {

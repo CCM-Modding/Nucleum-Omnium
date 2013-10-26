@@ -3,9 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.lib;
 
-import ccm.nucleum.omnium.BaseNIC;
 
-public final class Properties extends BaseNIC
+public final class Properties
 {
     public static boolean MYSTCARFT_LOADED = false;
 

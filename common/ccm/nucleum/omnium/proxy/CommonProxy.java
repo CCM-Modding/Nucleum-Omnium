@@ -5,7 +5,6 @@ package ccm.nucleum.omnium.proxy;
 
 import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 
-import ccm.nucleum.omnium.utils.handler.IconHandler;
 import ccm.nucleum.omnium.utils.handler.events.EventBoneMeal;
 
 public class CommonProxy

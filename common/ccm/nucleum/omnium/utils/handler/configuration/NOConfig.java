@@ -5,9 +5,10 @@ package ccm.nucleum.omnium.utils.handler.configuration;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 
-import ccm.nucleum.omnium.configuration.ConfigurationWrapper;
 import ccm.nucleum.omnium.utils.lib.Archive;
 import ccm.nucleum.omnium.utils.lib.Properties;
+
+import lib.cofh.util.ConfigHandler;
 
 public final class NOConfig extends IConfig
 {
@@ -31,24 +32,24 @@ public final class NOConfig extends IConfig
         }
     }
 
-    private void initConfigs(final ConfigurationWrapper config)
+    private void initConfigs(final ConfigHandler config)
     {
-        config.addCustomCategoryComment(UNIVERSAL, "This Category has options that affect both Client and Server");
+        config.getConfiguration().addCustomCategoryComment(UNIVERSAL, "This Category has options that affect both Client and Server");
 
-        Properties.DEBUG = config.getProp(UNIVERSAL, "Should debug information be displayed?", true);
+        Properties.DEBUG = config.get(UNIVERSAL, "Should debug information be displayed?", true);
     }
 
-    private void initServerConfigs(final ConfigurationWrapper config)
+    private void initServerConfigs(final ConfigHandler config)
     {
         // config.addCustomCategoryComment(SERVER_SIDE, "This Category only has server side options");
     }
 
-    private void initClientConfigs(final ConfigurationWrapper config)
+    private void initClientConfigs(final ConfigHandler config)
     {
-        config.addCustomCategoryComment(CLIENT_SIDE, "This Category only has client side options");
+        config.getConfiguration().addCustomCategoryComment(CLIENT_SIDE, "This Category only has client side options");
 
-        Properties.RAIN = config.getProp(CLIENT_SIDE, "Should " + Archive.MOD_NAME + " turn off the rain sound for your client?", false);
+        Properties.RAIN = config.get(CLIENT_SIDE, "Should " + Archive.MOD_NAME + " turn off the rain sound for your client?", false);
 
-        Properties.CAPE_HD = config.getProp(CLIENT_SIDE, "Should capes be High Definition?", true);
+        Properties.CAPE_HD = config.get(CLIENT_SIDE, "Should capes be High Definition?", true);
     }
 }

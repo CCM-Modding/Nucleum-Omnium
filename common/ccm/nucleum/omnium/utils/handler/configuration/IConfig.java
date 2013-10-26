@@ -3,46 +3,27 @@
  */
 package ccm.nucleum.omnium.utils.handler.configuration;
 
-import ccm.nucleum.omnium.configuration.ConfigurationWrapper;
+import net.minecraftforge.common.Configuration;
+
+import lib.cofh.util.ConfigHandler;
 
 public abstract class IConfig
 {
-    protected ConfigurationWrapper config;
+    protected ConfigHandler config;
 
     /**
      * @return The configuration file
      */
-    public ConfigurationWrapper getConfiguration()
+    public ConfigHandler getConfiguration()
     {
         return config;
     }
 
     /** sets the configuration file */
-    public IConfig setConfiguration(final ConfigurationWrapper config)
+    public IConfig setConfiguration(final ConfigHandler configHandler)
     {
-        this.config = config;
+        this.config = configHandler;
         return this;
-    }
-
-    /** loads the configuration file */
-    public void load()
-    {
-        if (config != null)
-        {
-            config.load();
-        }
-    }
-
-    /** saves the configuration file if changes have been made */
-    public void save()
-    {
-        if (config != null)
-        {
-            if (config.hasChanged())
-            {
-                config.load();
-            }
-        }
     }
 
     /** Initializes the configuration file */

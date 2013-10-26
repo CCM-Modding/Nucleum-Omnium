@@ -19,7 +19,7 @@ public abstract class Inventory implements IInventory
      */
     public Inventory(int inventorySize, int inventoryStackLimit)
     {
-        this.inventory = new WrappedStack[inventorySize];
+        inventory = new WrappedStack[inventorySize];
         this.inventorySize = inventorySize;
         this.inventoryStackLimit = inventoryStackLimit;
     }
@@ -41,7 +41,7 @@ public abstract class Inventory implements IInventory
     {
         ItemStack item = inventory[slot].getItemStack();
         inventory[slot] = null;
-        
+
         return item;
     }
 

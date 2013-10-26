@@ -32,7 +32,6 @@ public class PacketHandler implements IPacketHandler
     @Override
     public void onPacketData(final INetworkManager manager, final Packet250CustomPayload packet, final Player player)
     {
-
         final PacketBase packetBase = PacketTypeHandler.buildPacket(packet.data);
 
         packetBase.execute(manager, player);

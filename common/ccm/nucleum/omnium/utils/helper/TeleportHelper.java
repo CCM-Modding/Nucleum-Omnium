@@ -10,11 +10,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
-import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.utils.exeptions.WTFExeption;
 
-public final class TeleportHelper extends BaseNIC
+public final class TeleportHelper
 {
 
     public static double checkPosition(final ICommandSender sender, final double postion, final String argPos)

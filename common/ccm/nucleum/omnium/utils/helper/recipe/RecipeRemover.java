@@ -10,10 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 
-import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
-public final class RecipeRemover extends BaseNIC
+public final class RecipeRemover
 {
     public static void delete(final List<String> noCraft)
     {

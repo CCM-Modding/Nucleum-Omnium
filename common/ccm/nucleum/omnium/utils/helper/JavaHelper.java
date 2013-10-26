@@ -9,9 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import ccm.nucleum.omnium.BaseNIC;
-
-public final class JavaHelper extends BaseNIC
+public final class JavaHelper
 {
     private static final List<String> trues = Arrays.asList("true", "on", "active", "yes", "right", "sure");
 

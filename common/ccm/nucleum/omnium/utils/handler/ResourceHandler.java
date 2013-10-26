@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
 
 public final class ResourceHandler
@@ -44,7 +44,7 @@ public final class ResourceHandler
     // Getters and "Setters"
     // /////////////////////////////
     /** Adds a GUI texture */
-    public static void addGUI(final IMod mod, final String name)
+    public static void addGUI(final CCMMod mod, final String name)
     {
         resources().put(hashGUI(name), new ResourceLocation(mod.getModID(), fixGUILocation(name)));
     }
@@ -55,7 +55,7 @@ public final class ResourceHandler
         return resources().get(hashGUI(name));
     }
 
-    public static void addModel(final IMod mod, final String name)
+    public static void addModel(final CCMMod mod, final String name)
     {
         resources().put(hashModel(name), new ResourceLocation(mod.getModID(), fixModelLocation(name)));
         resources().put(hashModelTexture(name), new ResourceLocation(mod.getModID(), fixModelTextureLocation(name)));

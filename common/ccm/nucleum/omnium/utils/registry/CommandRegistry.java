@@ -7,7 +7,6 @@ import net.minecraft.command.CommandBase;
 
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-import ccm.nucleum.omnium.BaseNIC;
 import ccm.nucleum.omnium.command.CommandBanFix;
 import ccm.nucleum.omnium.command.CommandCCM;
 import ccm.nucleum.omnium.command.CommandKillFix;
@@ -16,7 +15,7 @@ import ccm.nucleum.omnium.command.CommandTPS;
 import ccm.nucleum.omnium.command.CommandTPX;
 import ccm.nucleum.omnium.utils.lib.Properties;
 
-public final class CommandRegistry extends BaseNIC
+public final class CommandRegistry
 {
 
     public static void init(final FMLServerStartingEvent event)

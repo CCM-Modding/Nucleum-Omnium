@@ -1,6 +1,3 @@
-/**
- * CCM Modding, Nucleum Omnium
- */
 package ccm.nucleum.omnium.utils.handler.mods;
 
 /**

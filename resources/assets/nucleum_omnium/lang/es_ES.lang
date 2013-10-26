@@ -10,4 +10,4 @@ commands.ban.fix.usage=/ban <nombre> [razón ...] [scala de tiempo] {tiempo}
 ###########
 #Errors
 ###########
-error.invalid.dim=%s ah intentado teleportarse ah una dimension que no existe (Dimension ID: %s)
+error.invalid.dim=%s ah intentado teleportarse a una dimension que no existe (Dimension ID: %s)

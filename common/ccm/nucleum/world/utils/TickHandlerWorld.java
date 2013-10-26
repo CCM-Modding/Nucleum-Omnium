@@ -15,7 +15,7 @@ import cpw.mods.fml.common.TickType;
 
 import ccm.nucleum.world.generator.WorldGenHandler;
 
-import lib.cofh.world.util.ChunkCoord;
+import lib.cofh.util.ChunkCoord;
 
 public class TickHandlerWorld implements ITickHandler
 {

@@ -3,9 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.lib;
 
-import ccm.nucleum.omnium.BaseNIC;
 
-public final class Commands extends BaseNIC
+public final class Commands
 {
     // ////////////////////////
     // Base

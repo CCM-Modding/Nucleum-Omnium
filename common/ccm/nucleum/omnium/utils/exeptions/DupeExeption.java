@@ -3,7 +3,8 @@
  */
 package ccm.nucleum.omnium.utils.exeptions;
 
-import ccm.nucleum.omnium.IMod;
+import ccm.nucleum.omnium.CCMMod;
+
 
 /**
  * This Exception is not MY Fault, The user put 2 of my mods in, and somehow forge let it through
@@ -15,7 +16,7 @@ public class DupeExeption extends NotMyFaultExeption
 
     private final StringBuilder tmpErrorSB = new StringBuilder();
 
-    public DupeExeption(final IMod mod)
+    public DupeExeption(final CCMMod mod)
     {
         super(mod);
         addString();
