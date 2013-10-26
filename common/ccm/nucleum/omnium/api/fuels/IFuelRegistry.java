@@ -6,7 +6,7 @@ package ccm.nucleum.omnium.api.fuels;
 import java.util.HashSet;
 import java.util.Set;
 
-import ccm.nucleum.omnium.utils.helper.item.WrapperStack;
+import ccm.nucleum.omnium.utils.helper.item.WrappedStack;
 
 /**
  * IFuelRegistry
@@ -17,18 +17,18 @@ import ccm.nucleum.omnium.utils.helper.item.WrapperStack;
  */
 public abstract class IFuelRegistry
 {
-    protected final Set<WrapperStack> fuels = new HashSet<WrapperStack>();
+    protected final Set<WrappedStack> fuels = new HashSet<WrappedStack>();
 
     public boolean isFuel(final Object stack)
     {
-        return fuels.contains(new WrapperStack(stack));
+        return fuels.contains(new WrappedStack(stack));
     }
 
     public void registerFuel(final Object stack)
     {
         if (stack != null)
         {
-            fuels.add(new WrapperStack(stack));
+            fuels.add(new WrappedStack(stack));
         }
     }
 }

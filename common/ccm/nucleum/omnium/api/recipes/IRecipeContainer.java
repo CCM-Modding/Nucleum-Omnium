@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import ccm.nucleum.omnium.utils.helper.item.WrapperStack;
+import ccm.nucleum.omnium.utils.helper.item.WrappedStack;
 
 /**
  * IRecipeContainer
@@ -38,7 +38,7 @@ public abstract class IRecipeContainer
         }
     }
 
-    public void addRecipe(final List<WrapperStack> inputs, final List<WrapperStack> outputs)
+    public void addRecipe(final List<WrappedStack> inputs, final List<WrappedStack> outputs)
     {
         if ((inputs != null) && (outputs != null))
         {
@@ -57,7 +57,7 @@ public abstract class IRecipeContainer
     /**
      * @return The recipe that contains the Item as an input or null if none was found
      */
-    public Recipe getResult(final WrapperStack item)
+    public Recipe getResult(final WrappedStack item)
     {// Check if it contains it before looping
         if (recipes.contains(item))
         {
@@ -75,7 +75,7 @@ public abstract class IRecipeContainer
 
     public Recipe getResult(final Object item)
     {
-        return getResult(new WrapperStack(item));
+        return getResult(new WrappedStack(item));
     }
 
     /**

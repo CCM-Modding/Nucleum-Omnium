@@ -60,7 +60,7 @@ public class NucleumOmnium extends CCMMod implements IMod
         ModHandler.addModHandler("Mystcraft", "ccm.nucleum.omnium.utils.handler.mods.MystcraftHandler");
 
         // Registers the GUI Handler
-        NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GuiHandler.instance());
+       // NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GuiHandler.instance());
     }
 
     @EventHandler
