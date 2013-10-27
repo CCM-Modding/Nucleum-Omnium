@@ -13,7 +13,7 @@ import ccm.nucleum.omnium.utils.helper.NBTHelper;
 import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 /**
- * BaseTE
+ * REDO BaseTE
  * <p>
  * Default Implementation for a Tile Entity
  * 

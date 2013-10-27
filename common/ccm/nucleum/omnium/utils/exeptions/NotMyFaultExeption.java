@@ -5,7 +5,6 @@ package ccm.nucleum.omnium.utils.exeptions;
 
 import ccm.nucleum.omnium.CCMMod;
 
-
 /**
  * This Exception, and All its sub-Classes are NOT my Fault
  */

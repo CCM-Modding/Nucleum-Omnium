@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenDesert;
 
 public final class FunctionHelper
-{    
+{
     /** Drops the Inventory that is contained in the {@link TileEntity} */
     public static void dropInventory(final World world, final int x, final int y, final int z)
     {

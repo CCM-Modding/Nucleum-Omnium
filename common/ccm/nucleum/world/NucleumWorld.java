@@ -8,8 +8,6 @@ import static ccm.nucleum.world.utils.lib.Archive.MOD_NAME;
 import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 import static net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS;
 
-import net.minecraft.src.ModLoader;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

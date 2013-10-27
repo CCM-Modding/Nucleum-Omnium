@@ -14,7 +14,7 @@ import ccm.nucleum.omnium.utils.helper.item.InventoryHelper;
 import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 /**
- * InventoryTE
+ * REDO InventoryTE
  * <p>
  * Default Implementation for a Tile Entity with an Inventory
  * 
@@ -155,7 +155,7 @@ public class InventoryTE extends BaseTE implements IInventory
         super.readFromNBT(nbt);
 
         setInventorySize(NBTHelper.getInteger(nbt, NBTConstants.NBT_INVENTORY_SIZE));
-        
+
         if (nbt.hasKey(NBTConstants.NBT_INVENTORY))
         {
             setInventory(InventoryHelper.readInventoryFromNBT(nbt.getTagList(NBTConstants.NBT_INVENTORY), getSizeInventory()));

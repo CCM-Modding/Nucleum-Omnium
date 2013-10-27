@@ -34,15 +34,15 @@ public abstract class CCMMod
         // Get all the files
         File configFolder = new File(evt.getModConfigurationDirectory().getAbsolutePath() + "/CCM-Modding/");
         File configFile = new File(configFolder.getAbsolutePath() + "/" + getName() + ".cfg");
-        
+
         // Create the config handler
         ConfigHandler config = new ConfigHandler(this.getClass().getAnnotation(Mod.class).version());
-        
+
         // Set the Configuration inside the Handler
         config.setConfiguration(new Configuration(configFile, true));
-        
+
         // Set the handler
-        this.config = config;
+        CCMMod.config = config;
     }
 
     public ConfigHandler getConfigHandler()
@@ -84,7 +84,7 @@ public abstract class CCMMod
     {
         mod.setLogger(CCMLogger.initLogger(evt));
         mod.initConfig(evt);
-        
+
         if (config != null)
         {
             try

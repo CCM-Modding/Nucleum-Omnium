@@ -5,7 +5,6 @@ package ccm.nucleum.omnium.utils.exeptions;
 
 import ccm.nucleum.omnium.CCMMod;
 
-
 /**
  * This Exception is not MY Fault, You tried to make a instance of a class that was not meant to be instantiated
  */

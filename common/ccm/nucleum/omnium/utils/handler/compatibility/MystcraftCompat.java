@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.utils.handler.mods;
+package ccm.nucleum.omnium.utils.handler.compatibility;
 
 import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.utils.lib.Properties;
@@ -11,7 +11,7 @@ import ccm.nucleum.omnium.utils.lib.Properties;
  * 
  * @author Captain_Shadows
  */
-public final class MystcraftHandler implements IModHandler
+public final class MystcraftCompat implements ICompatibility
 {
     @Override
     public void init()

@@ -6,7 +6,7 @@ package ccm.nucleum.omnium.block;
 import net.minecraft.block.material.Material;
 
 /**
- * ModelBlock
+ * REDO ModelBlock
  * <p>
  * Modeled version of MainBlock
  * 

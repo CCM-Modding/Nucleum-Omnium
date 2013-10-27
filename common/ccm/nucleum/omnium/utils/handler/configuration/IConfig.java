@@ -3,8 +3,6 @@
  */
 package ccm.nucleum.omnium.utils.handler.configuration;
 
-import net.minecraftforge.common.Configuration;
-
 import lib.cofh.util.ConfigHandler;
 
 public abstract class IConfig
@@ -22,7 +20,7 @@ public abstract class IConfig
     /** sets the configuration file */
     public IConfig setConfiguration(final ConfigHandler configHandler)
     {
-        this.config = configHandler;
+        config = configHandler;
         return this;
     }
 

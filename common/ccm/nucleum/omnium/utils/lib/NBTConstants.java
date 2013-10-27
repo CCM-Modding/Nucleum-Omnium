@@ -3,7 +3,6 @@
  */
 package ccm.nucleum.omnium.utils.lib;
 
-
 public final class NBTConstants
 {
     /*
@@ -14,11 +13,11 @@ public final class NBTConstants
     public static final String NBT_INVENTORY = NBT_CMM + ".INVENTORY";
 
     public static final String NBT_ENTITY = NBT_CMM + ".ENTITY";
-    
+
     public static final String NBT_TILE_ENTITY = NBT_ENTITY + ".TILE";
-    
+
     public static final String NBT_INVENTORY_SLOT = NBT_INVENTORY + ".SLOT";
-    
+
     public static final String NBT_INVENTORY_SIZE = NBT_INVENTORY + ".SIZE";
 
     /*

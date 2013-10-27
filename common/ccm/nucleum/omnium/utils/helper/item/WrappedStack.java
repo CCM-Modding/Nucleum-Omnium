@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+//REDO
 public class WrappedStack implements Comparable<WrappedStack>
 {
     public static final int ORE_DICTIONARY_NOT_FOUND = -1;

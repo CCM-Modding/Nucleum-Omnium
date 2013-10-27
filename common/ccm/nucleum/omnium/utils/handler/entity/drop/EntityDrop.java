@@ -55,7 +55,7 @@ final class EntityDrop
     }
 
     /**
-     * @return The mod that registered this coin
+     * @return The mod that registered this drop
      */
     public CCMMod getMod()
     {

@@ -239,7 +239,7 @@ public class ConfigHandler
         }
         save();
     }
-    
+
     public void load()
     {
         modConfiguration.load();
@@ -248,7 +248,9 @@ public class ConfigHandler
     public void save()
     {
         if (modConfiguration.hasChanged())
+        {
             modConfiguration.save();
+        }
     }
 
     public boolean renameProperty(String category, String key, String newCategory, String newKey, boolean forceValue)

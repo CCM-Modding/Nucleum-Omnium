@@ -37,9 +37,8 @@ public class SimpleModel
     /** When calling this method the texture doesn't need to be binded */
     public void render()
     {
-        // Bind texture
         bindTexture();
-        // Render
+
         model.renderAll();
     }
 

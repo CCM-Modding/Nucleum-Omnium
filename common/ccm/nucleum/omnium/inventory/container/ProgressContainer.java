@@ -3,7 +3,6 @@
  */
 package ccm.nucleum.omnium.inventory.container;
 
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 
@@ -28,7 +27,7 @@ public abstract class ProgressContainer extends BaseContainer
     // drawPlayerFullInv(player, x, y);
     // }
 
-    // TODO DELETE
+    // FINISH
     public ProgressContainer(IInventory inventory)
     {
         super(inventory);

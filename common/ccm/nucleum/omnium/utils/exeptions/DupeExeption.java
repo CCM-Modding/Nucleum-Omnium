@@ -5,7 +5,6 @@ package ccm.nucleum.omnium.utils.exeptions;
 
 import ccm.nucleum.omnium.CCMMod;
 
-
 /**
  * This Exception is not MY Fault, The user put 2 of my mods in, and somehow forge let it through
  */

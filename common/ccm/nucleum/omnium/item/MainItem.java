@@ -6,7 +6,7 @@ package ccm.nucleum.omnium.item;
 import net.minecraft.item.Item;
 
 /**
- * MainItem
+ * FINISH MainItem
  * <p>
  * A Item that redirects all of it's data to a specific meta data value
  * <p>
@@ -20,7 +20,6 @@ public class MainItem extends Item
     public MainItem(int id)
     {
         super(id);
-        // TODO Auto-generated constructor stub
     }
-    
+
 }

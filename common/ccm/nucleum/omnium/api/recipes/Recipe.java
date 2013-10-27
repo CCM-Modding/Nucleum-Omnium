@@ -10,7 +10,7 @@ import java.util.List;
 import ccm.nucleum.omnium.utils.helper.item.WrappedStack;
 
 /**
- * Recipe
+ * REDO Recipe
  * <p>
  * Recipe Class
  * 

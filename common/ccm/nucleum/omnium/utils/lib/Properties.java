@@ -3,7 +3,6 @@
  */
 package ccm.nucleum.omnium.utils.lib;
 
-
 public final class Properties
 {
     public static boolean MYSTCARFT_LOADED = false;

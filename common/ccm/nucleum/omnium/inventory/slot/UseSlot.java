@@ -11,7 +11,6 @@ import ccm.nucleum.omnium.api.fuels.IFuelRegistry;
 
 public class UseSlot extends Slot
 {
-
     private IFuelRegistry fuel;
 
     public UseSlot(final IInventory inventory, final int index, final int x, final int y)

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+// REDO
 public class OreStack implements Comparable<OreStack>
 {
     public int oreId;

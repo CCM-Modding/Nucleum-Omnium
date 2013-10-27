@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.utils.handler.mods;
+package ccm.nucleum.omnium.utils.handler.compatibility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.List;
  * 
  * @author Captain_Shadows
  */
-public final class ModHandler
+public final class CompatibilityHandler
 {
-    /** List of all {@link IModHandler}s that this "Registry" needs to handle */
-    private static final List<APIHandler> modsHandling = new ArrayList<APIHandler>();
+    /** List of all {@link ICompatibility}s that this "Registry" needs to handle */
+    private static final List<Handler> modsHandling = new ArrayList<Handler>();
 
     /**
      * @param name
@@ -24,7 +24,7 @@ public final class ModHandler
      */
     public static void addModHandler(final String name, final String handler)
     {
-        modsHandling.add(new APIHandler(name, handler));
+        modsHandling.add(new Handler(name, handler));
     }
 
     /**
@@ -34,7 +34,7 @@ public final class ModHandler
      */
     public static void init()
     {
-        for (final APIHandler handler : modsHandling)
+        for (final Handler handler : modsHandling)
         {
             handler.init();
         }

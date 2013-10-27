@@ -9,7 +9,7 @@ import java.util.Set;
 import ccm.nucleum.omnium.utils.helper.item.WrappedStack;
 
 /**
- * IFuelRegistry
+ * REDO IFuelRegistry
  * <p>
  * An Abstract Class for any class that wishes to be a Fuel Registry, Most likely also a part of the mod's API
  * 

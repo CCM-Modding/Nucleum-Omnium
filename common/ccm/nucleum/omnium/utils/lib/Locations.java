@@ -3,7 +3,6 @@
  */
 package ccm.nucleum.omnium.utils.lib;
 
-
 public final class Locations
 {
     public static final String PROXY = "ccm.nucleum.omnium.proxy.";

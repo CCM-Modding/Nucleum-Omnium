@@ -5,7 +5,6 @@ package ccm.nucleum.omnium.utils.exeptions;
 
 import ccm.nucleum.omnium.CCMMod;
 
-
 /**
  * Logger Not Found Exception
  * <p>

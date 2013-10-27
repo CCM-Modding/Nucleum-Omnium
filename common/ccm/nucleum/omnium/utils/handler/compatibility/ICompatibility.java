@@ -1,4 +1,4 @@
-package ccm.nucleum.omnium.utils.handler.mods;
+package ccm.nucleum.omnium.utils.handler.compatibility;
 
 /**
  * Runnable Interface implemented by all classes that contain code to add support for other mods.
@@ -7,7 +7,7 @@ package ccm.nucleum.omnium.utils.handler.mods;
  * 
  * @author Captain_Shadows
  */
-public interface IModHandler
+public interface ICompatibility
 {
     /** What to do if the Mod is found to be loaded */
     public void init();
