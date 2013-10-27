@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import ccm.nucleum.omnium.utils.helper.FunctionHelper;
+import ccm.nucleum.omnium.utils.helper.NBTHelper;
 import ccm.nucleum.omnium.utils.helper.item.InventoryHelper;
 import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
@@ -32,10 +32,6 @@ public class InventoryTE extends BaseTE implements IInventory
      * Size of the Inventory
      */
     private int size = 0;
-
-    @Override
-    public void closeChest()
-    {}// Useless
 
     @Override
     public ItemStack decrStackSize(final int slot, final int amount)
@@ -62,7 +58,7 @@ public class InventoryTE extends BaseTE implements IInventory
     @Override
     public String getInvName()
     {
-        return getData().hasCustomName() ? getData().getCustomName() : FunctionHelper.getTEName(worldObj, xCoord, yCoord, zCoord);
+        return hasCustomName() ? getCustomName() : "";// FunctionHelper.getTEName(worldObj, xCoord, yCoord, zCoord);
     }
 
     @Override
@@ -94,7 +90,7 @@ public class InventoryTE extends BaseTE implements IInventory
     @Override
     public boolean isInvNameLocalized()
     {
-        return getData().hasCustomName();
+        return hasCustomName();
     }
 
     @Override
@@ -114,24 +110,6 @@ public class InventoryTE extends BaseTE implements IInventory
     public boolean isUseableByPlayer(final EntityPlayer player)
     {
         return player.getDistance(xCoord, yCoord, zCoord) <= 10;
-    }
-
-    @Override
-    public void openChest()
-    {}// Useless
-
-    @Override
-    public void readFromNBT(final NBTTagCompound nbt)
-    {
-        super.readFromNBT(nbt);
-        if (nbt.hasKey(NBTConstants.NBT_TE_INVENTORY_SIZE))
-        {
-            setInventorySize(nbt.getInteger(NBTConstants.NBT_TE_INVENTORY_SIZE));
-        }
-        if (nbt.hasKey(NBTConstants.INVENTORY))
-        {
-            setInventory(InventoryHelper.readInventoryFromNBT(nbt.getTagList(NBTConstants.INVENTORY), getSizeInventory()));
-        }
     }
 
     /**
@@ -167,7 +145,28 @@ public class InventoryTE extends BaseTE implements IInventory
     public void writeToNBT(final NBTTagCompound nbt)
     {
         super.writeToNBT(nbt);
-        nbt.setInteger(NBTConstants.NBT_TE_INVENTORY_SIZE, getSizeInventory());
-        nbt.setTag(NBTConstants.INVENTORY, InventoryHelper.writeInventoryToNBT(getInventory()));
+        nbt.setInteger(NBTConstants.NBT_INVENTORY_SIZE, getSizeInventory());
+        nbt.setTag(NBTConstants.NBT_INVENTORY, InventoryHelper.writeInventoryToNBT(getInventory()));
     }
+
+    @Override
+    public void readFromNBT(final NBTTagCompound nbt)
+    {
+        super.readFromNBT(nbt);
+
+        setInventorySize(NBTHelper.getInteger(nbt, NBTConstants.NBT_INVENTORY_SIZE));
+        
+        if (nbt.hasKey(NBTConstants.NBT_INVENTORY))
+        {
+            setInventory(InventoryHelper.readInventoryFromNBT(nbt.getTagList(NBTConstants.NBT_INVENTORY), getSizeInventory()));
+        }
+    }
+
+    @Override
+    public void closeChest()
+    {}// Useless
+
+    @Override
+    public void openChest()
+    {}// Useless
 }

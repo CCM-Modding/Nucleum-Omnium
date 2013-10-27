@@ -4,13 +4,13 @@
 package ccm.nucleum.omnium.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-import ccm.nucleum.omnium.tileentity.helpers.BaseTEData;
+import ccm.nucleum.omnium.utils.helper.NBTHelper;
+import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
 /**
  * BaseTE
@@ -21,23 +21,29 @@ import ccm.nucleum.omnium.tileentity.helpers.BaseTEData;
  */
 public class BaseTE extends TileEntity
 {
+    /**
+     * The orientation of the {@link TileEntity}
+     */
+    private ForgeDirection orientation;
 
-    private final BaseTEData data;
+    /**
+     * The owner of the {@link TileEntity}
+     */
+    private String owner;
+
+    /**
+     * The custom name of the {@link TileEntity}
+     */
+    private String customName;
 
     /**
      * Creates a new {@link BaseTE} Instance.
      */
     public BaseTE()
     {
-        data = new BaseTEData(this);
-    }
-
-    /**
-     * @return A copy of the current data stored inside of the Tile
-     */
-    public BaseTEData getData()
-    {
-        return data.clone();
+        orientation = ForgeDirection.SOUTH;
+        owner = "";
+        customName = "";
     }
 
     @Override
@@ -49,35 +55,72 @@ public class BaseTE extends TileEntity
     }
 
     /**
-     * @return The ordinal of the Tile's orientation
+     * Gets the {@link TileEntity}'s Custom Name
+     * 
+     * @return the {@link TileEntity}'s Custom Name
      */
-    public int getOrientationOrdinal()
+    public String getCustomName()
     {
-        return data.getOrientation().ordinal();
-    }
-
-    @Override
-    public final void onDataPacket(final INetworkManager netManager, final Packet132TileEntityData packet)
-    {
-        readFromNBT(packet.data);
-    }
-
-    @Override
-    public void readFromNBT(final NBTTagCompound nbt)
-    {
-        super.readFromNBT(nbt);
-        data.readFromNBT(nbt);
+        return customName;
     }
 
     /**
-     * Sets the {@link TileEntity}'s Custom Name.
+     * Gets the {@link TileEntity}'s Orientation
      * 
-     * @param name
-     *            A {@link String} with the {@link TileEntity}'s Custom Name.
+     * @return The {@link TileEntity}'s Orientation
      */
-    public void setCustomName(final String name)
+    public ForgeDirection getOrientation()
     {
-        data.setCustomName(name);
+        return orientation;
+    }
+
+    /**
+     * Gets the {@link TileEntity}'s Owner
+     * 
+     * @return The {@link TileEntity}'s Owner
+     */
+    public String getOwner()
+    {
+        return owner;
+    }
+
+    /**
+     * Checks if the {@link TileEntity} has a Custom Name
+     * 
+     * @return true if the {@link TileEntity} has a Custom Name
+     */
+    public boolean hasCustomName()
+    {
+        return (customName != null) && (customName.length() > 0);
+    }
+
+    /**
+     * Checks if the {@link TileEntity} has a Owner
+     * 
+     * @return true if the {@link TileEntity} has a Owner
+     */
+    public boolean hasOwner()
+    {
+        return (owner != null) && (owner.length() > 0);
+    }
+
+    /**
+     * Sets the {@link TileEntity}'s Custom Name
+     * 
+     * @param customName
+     *            A {@link String} with the {@link TileEntity}'s Custom Name
+     */
+    public void setCustomName(final String customName)
+    {
+        this.customName = customName;
+    }
+
+    /**
+     * Sets the {@link TileEntity}'s Orientation
+     */
+    public void setOrientation(final ForgeDirection orientation)
+    {
+        this.orientation = orientation;
     }
 
     /**
@@ -88,18 +131,44 @@ public class BaseTE extends TileEntity
      */
     public void setOrientation(final int direction)
     {
-        data.setOrientation(direction);
+        orientation = ForgeDirection.getOrientation(direction);
     }
 
     /**
      * Sets the Owner of the {@link TileEntity}.
      * 
      * @param owner
-     *            A {@link String} with the Owner's Name.
+     *            A {@link String} with the Owner's Name
      */
     public void setOwner(final String owner)
     {
-        data.setOwner(owner);
+        this.owner = owner != null ? owner : "Unkown";
+    }
+
+    @Override
+    public void writeToNBT(final NBTTagCompound nbt)
+    {
+        super.writeToNBT(nbt);
+
+        nbt.setByte(NBTConstants.NBT_TE_DIRECTION, (byte) orientation.ordinal());
+        if (hasOwner())
+        {
+            nbt.setString(NBTConstants.NBT_TE_OWNER, owner);
+        }
+        if (hasCustomName())
+        {
+            nbt.setString(NBTConstants.NBT_TE_CUSTOM_NAME, customName);
+        }
+    }
+
+    @Override
+    public void readFromNBT(final NBTTagCompound nbt)
+    {
+        super.readFromNBT(nbt);
+
+        orientation = ForgeDirection.getOrientation(NBTHelper.getByte(nbt, NBTConstants.NBT_TE_DIRECTION));
+        owner = NBTHelper.getString(nbt, NBTConstants.NBT_TE_OWNER);
+        customName = NBTHelper.getString(nbt, NBTConstants.NBT_TE_CUSTOM_NAME);
     }
 
     @Override
@@ -109,12 +178,5 @@ public class BaseTE extends TileEntity
         sb.append("Tile Entity: ");
         sb.append(this.getClass() + "\n");
         return sb.toString();
-    }
-
-    @Override
-    public void writeToNBT(final NBTTagCompound nbt)
-    {
-        super.writeToNBT(nbt);
-        data.writeToNBT(nbt);
     }
 }

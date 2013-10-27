@@ -9,36 +9,28 @@ public final class NBTConstants
     /*
      * Base Stuff
      */
-    public static final String CONTAINER = "container.";
+    public static final String NBT_CMM = "CCM";
 
-    public static final String INVENTORY = CONTAINER + "inventory";
+    public static final String NBT_INVENTORY = NBT_CMM + ".INVENTORY";
 
-    public static final String TE = "CCM.ENTITY.TILE.";
-
-    public static final String TE_PLANT = TE + "PLANT.";
+    public static final String NBT_ENTITY = NBT_CMM + ".ENTITY";
     
-    public static final String SLOT = "CCM.INVENTORY.SLOT";
+    public static final String NBT_TILE_ENTITY = NBT_ENTITY + ".TILE";
+    
+    public static final String NBT_INVENTORY_SLOT = NBT_INVENTORY + ".SLOT";
+    
+    public static final String NBT_INVENTORY_SIZE = NBT_INVENTORY + ".SIZE";
 
     /*
-     * NBT TE Stuff
+     * NBT Tile Stuff
      */
-    public static final String NBT_TE_DIRECTION = TE + "DIRECTION";
+    public static final String NBT_TE_DIRECTION = NBT_TILE_ENTITY + ".DIRECTION";
 
-    public static final String NBT_TE_CUSTOM_NAME = TE + "NAME";
+    public static final String NBT_TE_CUSTOM_NAME = NBT_TILE_ENTITY + ".NAME";
 
-    public static final String NBT_TE_OWNER = TE + "OWNER";
+    public static final String NBT_TE_OWNER = NBT_TILE_ENTITY + ".OWNER";
 
-    public static final String NBT_TE_INVENTORY_SIZE = TE + "INVENTORY_SIZE";
+    public static final String NBT_TE_PROGRESS = NBT_TILE_ENTITY + ".PROGRESS";
 
-    public static final String NBT_TE_SRC_LOGIC = TE + "SRC_LOGIC";
-
-    public static final String NBT_TE_PROGRESS = TE + "PROGRESS";
-
-    public static final String NBT_TE_STATE = TE + "STATE";
-
-    public static final String NBT_PLANT_STAGE = TE_PLANT + "STAGE";
-
-    public static final String NBT_PLANT_STAGES = TE_PLANT + "STAGES";
-
-    public static final String NBT_PLANT_RATE = TE_PLANT + "RATE";
+    public static final String NBT_TE_STATE = NBT_TILE_ENTITY + ".STATE";
 }

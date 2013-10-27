@@ -123,7 +123,7 @@ public class InventoryHelper
         for (int i = 0; i < list.tagCount(); i++)
         {
             nbt = (NBTTagCompound) list.tagAt(i);
-            stacks[nbt.getInteger(NBTConstants.SLOT)] = ItemStack.loadItemStackFromNBT(nbt);
+            stacks[nbt.getInteger(NBTConstants.NBT_INVENTORY_SLOT)] = ItemStack.loadItemStackFromNBT(nbt);
         }
         return stacks;
     }
@@ -152,7 +152,7 @@ public class InventoryHelper
                 continue;
             }
             nbt = new NBTTagCompound();
-            nbt.setInteger(NBTConstants.SLOT, i);
+            nbt.setInteger(NBTConstants.NBT_INVENTORY_SLOT, i);
             stacks[i].writeToNBT(nbt);
             list.appendTag(nbt);
         }

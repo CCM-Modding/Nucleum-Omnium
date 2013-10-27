@@ -5,8 +5,6 @@ package ccm.nucleum.omnium.proxy;
 
 import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 
-import ccm.nucleum.omnium.utils.handler.events.EventBoneMeal;
-
 public class CommonProxy
 {
 
@@ -20,9 +18,7 @@ public class CommonProxy
      * Initializes All the events
      */
     public void initEventHandling()
-    {
-        registerEvent(new EventBoneMeal());
-    }
+    {}
 
     void registerEvent(final Object target)
     {

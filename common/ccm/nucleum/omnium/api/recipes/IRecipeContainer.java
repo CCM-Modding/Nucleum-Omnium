@@ -79,10 +79,10 @@ public abstract class IRecipeContainer
     }
 
     /**
-     * @return A <strong>copy</strong> of the current {@code Set<Recipe>} of stored recipes
+     * @return The current {@code Set<Recipe>} of stored recipes
      */
     public Set<Recipe> getRecipes()
     {
-        return new HashSet<Recipe>(recipes);
+        return recipes;
     }
 }
