@@ -13,7 +13,6 @@ import argo.jdom.JdomParser;
 
 public class DevCapesVersionChecker implements Runnable
 {
-
     private static final String versionFileURL = "http://raw.github.com/Jadar/DeveloperCapesAPI/master/version";
 
     private byte result = 0;
@@ -25,10 +24,8 @@ public class DevCapesVersionChecker implements Runnable
     @Override
     public void run()
     {
-
         try
         {
-
             URL url = new URL(versionFileURL);
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             double version = Double.valueOf(new JdomParser().parse(reader).getStringValue("version"));

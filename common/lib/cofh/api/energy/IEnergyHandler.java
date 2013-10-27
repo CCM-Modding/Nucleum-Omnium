@@ -10,7 +10,6 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public interface IEnergyHandler
 {
-
     /**
      * Add energy to an IEnergyHandler, internal distribution is left entirely to the IEnergyHandler.
      * 

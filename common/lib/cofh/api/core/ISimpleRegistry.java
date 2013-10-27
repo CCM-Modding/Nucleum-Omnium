@@ -7,7 +7,6 @@ package lib.cofh.api.core;
  */
 public interface ISimpleRegistry
 {
-
     /**
      * Register a new entry.
      * 

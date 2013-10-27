@@ -13,7 +13,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
  */
 public interface IFeatureGenerator
 {
-
     /**
      * Returns the name of the feature, used for displaying in the World.cfg file.
      */

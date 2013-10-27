@@ -2,7 +2,6 @@ package lib.cofh.api.tileentity;
 
 public interface IEnergyInfo
 {
-
     public int getEnergyPerTick();
 
     public int getMaxEnergyPerTick();

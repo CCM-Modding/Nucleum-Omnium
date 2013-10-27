@@ -9,7 +9,6 @@ public final class ContainerFalse extends Container
     @Override
     public boolean canInteractWith(EntityPlayer player)
     {
-
         return false;
     }
 }

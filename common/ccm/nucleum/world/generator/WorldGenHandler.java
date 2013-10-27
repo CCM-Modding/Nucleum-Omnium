@@ -28,7 +28,6 @@ import lib.cofh.util.ChunkCoord;
 
 public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
 {
-
     public static boolean addOre(final IFeatureGenerator Ore)
     {
         return WorldGenHandler.instance.registerFeature(Ore);

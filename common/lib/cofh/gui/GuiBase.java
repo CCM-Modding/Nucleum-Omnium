@@ -25,7 +25,6 @@ import lib.cofh.util.MathHelper;
  */
 public abstract class GuiBase extends GuiContainer
 {
-
     public static final String PATH_ELEMENTS = "nucleum_omnium:textures/gui/elements/";
     public static final String PATH_ICONS = "nucleum_omnium:textures/gui/icons/";
 
@@ -39,13 +38,11 @@ public abstract class GuiBase extends GuiContainer
 
     public GuiBase(Container container)
     {
-
         super(container);
     }
 
     public GuiBase(Container container, ResourceLocation texture)
     {
-
         super(container);
         this.texture = texture;
     }
@@ -53,7 +50,6 @@ public abstract class GuiBase extends GuiContainer
     @Override
     public void initGui()
     {
-
         super.initGui();
         tabs.clear();
         elements.clear();
@@ -62,7 +58,6 @@ public abstract class GuiBase extends GuiContainer
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-
         GL11.glDisable(GL11.GL_LIGHTING);
         drawTooltips();
         GL11.glEnable(GL11.GL_LIGHTING);
@@ -71,7 +66,6 @@ public abstract class GuiBase extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y)
     {
-
         updateElements();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(texture);
@@ -84,7 +78,6 @@ public abstract class GuiBase extends GuiContainer
     @Override
     protected void mouseClicked(int x, int y, int mouseButton)
     {
-
         super.mouseClicked(x, y, mouseButton);
 
         TabBase tab = getTabAtPosition(mouseX, mouseY);
@@ -105,7 +98,6 @@ public abstract class GuiBase extends GuiContainer
     @Override
     public void handleMouseInput()
     {
-
         int x = (Mouse.getEventX() * width) / mc.displayWidth;
         int y = height - ((Mouse.getEventY() * height) / mc.displayHeight) - 1;
 
@@ -120,7 +112,6 @@ public abstract class GuiBase extends GuiContainer
      */
     protected void drawElements()
     {
-
         for (ElementBase element : elements)
         {
             element.draw();
@@ -132,7 +123,6 @@ public abstract class GuiBase extends GuiContainer
      */
     protected void drawTabs()
     {
-
         int yPosRight = 4;
         int yPosLeft = 4;
 
@@ -157,7 +147,6 @@ public abstract class GuiBase extends GuiContainer
 
     protected void drawTooltips()
     {
-
         TabBase tab = getTabAtPosition(mouseX, mouseY);
 
         if (tab != null)
@@ -177,14 +166,12 @@ public abstract class GuiBase extends GuiContainer
     /* ELEMENTS */
     public ElementBase addElement(ElementBase element)
     {
-
         elements.add(element);
         return element;
     }
 
     public TabBase addTab(TabBase tab)
     {
-
         tabs.add(tab);
         if ((TabTracker.getOpenedLeftTab() != null) && tab.getClass().equals(TabTracker.getOpenedLeftTab()))
         {
@@ -198,7 +185,6 @@ public abstract class GuiBase extends GuiContainer
 
     protected ElementBase getElementAtPosition(int mX, int mY)
     {
-
         for (ElementBase element : elements)
         {
             if (element.intersectsWith(mX, mY))
@@ -211,7 +197,6 @@ public abstract class GuiBase extends GuiContainer
 
     protected TabBase getTabAtPosition(int mX, int mY)
     {
-
         int xShift = 0;
         int yShift = 4;
 
@@ -251,9 +236,7 @@ public abstract class GuiBase extends GuiContainer
     }
 
     protected void updateElements()
-    {
-
-    }
+    {}
 
     /* HELPERS */
     /**
@@ -261,13 +244,11 @@ public abstract class GuiBase extends GuiContainer
      */
     public void drawButton(Icon icon, int x, int y, int spriteSheet, int mode)
     {
-
         drawIcon(icon, x, y, spriteSheet);
     }
 
     public void drawButton(String iconName, int x, int y, int spriteSheet, int mode)
     {
-
         drawButton(IconRegistry.getIcon(iconName), x, y, spriteSheet, mode);
     }
 
@@ -276,7 +257,6 @@ public abstract class GuiBase extends GuiContainer
      */
     public void drawFluid(int x, int y, FluidStack fluid, int width, int height)
     {
-
         if ((fluid == null) || (fluid.getFluid() == null))
         {
             return;
@@ -287,7 +267,6 @@ public abstract class GuiBase extends GuiContainer
 
     public void drawTiledTexture(int x, int y, Icon icon, int width, int height)
     {
-
         int i = 0;
         int j = 0;
 
@@ -308,7 +287,6 @@ public abstract class GuiBase extends GuiContainer
 
     public void drawIcon(Icon icon, int x, int y, int spriteSheet)
     {
-
         if (spriteSheet == 0)
         {
             RenderHelper.setBlockTextureSheet();
@@ -322,13 +300,11 @@ public abstract class GuiBase extends GuiContainer
 
     public void drawIcon(String iconName, int x, int y, int spriteSheet)
     {
-
         drawIcon(IconRegistry.getIcon(iconName), x, y, spriteSheet);
     }
 
     public void drawSizedTexturedModalRect(int x, int y, int u, int v, int width, int height, float texW, float texH)
     {
-
         float texU = 1 / texW;
         float texV = 1 / texH;
         Tessellator tessellator = Tessellator.instance;
@@ -342,7 +318,6 @@ public abstract class GuiBase extends GuiContainer
 
     public void drawScaledTexturedModelRectFromIcon(int x, int y, Icon icon, int width, int height)
     {
-
         if (icon == null)
         {
             return;
@@ -363,7 +338,6 @@ public abstract class GuiBase extends GuiContainer
 
     public void drawTooltip(String tooltip)
     {
-
         if ((tooltip == null) || tooltip.equals(""))
         {
             return;
@@ -376,31 +350,26 @@ public abstract class GuiBase extends GuiContainer
      */
     public void mouseClicked(int mouseButton)
     {
-
         super.mouseClicked(guiLeft + mouseX, guiTop + mouseY, mouseButton);
     }
 
     protected int getCenteredOffset(String string)
     {
-
         return this.getCenteredOffset(string, xSize);
     }
 
     protected int getCenteredOffset(String string, int xWidth)
     {
-
         return (xWidth - fontRenderer.getStringWidth(string)) / 2;
     }
 
     public int getGuiLeft()
     {
-
         return guiLeft;
     }
 
     public int getGuiTop()
     {
-
         return guiTop;
     }
 }

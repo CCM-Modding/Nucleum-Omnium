@@ -20,7 +20,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class DevCapesTickHandler implements ITickHandler
 {
-
     private static final Minecraft mc = Minecraft.getMinecraft();
     private static final DevCapes instance = DevCapesUtil.getInstance();
 
@@ -33,7 +32,6 @@ public class DevCapesTickHandler implements ITickHandler
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData)
     {
-
         // Will not run if there is no world, and if there are no player entities
         // in the playerEntities list.
         if ((mc.theWorld != null) && (mc.theWorld.playerEntities.size() > 0))

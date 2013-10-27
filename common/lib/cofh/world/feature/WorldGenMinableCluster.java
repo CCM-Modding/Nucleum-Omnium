@@ -15,14 +15,12 @@ import lib.cofh.api.world.WeightedRandomBlock;
 
 public class WorldGenMinableCluster extends WorldGenerator
 {
-
     private List<WeightedRandomBlock> cluster;
     private int genClusterSize;
     private int genBlockID = Block.stone.blockID;
 
     public WorldGenMinableCluster(ItemStack ore, int clusterSize)
     {
-
         cluster = new ArrayList<WeightedRandomBlock>();
         cluster.add(new WeightedRandomBlock(ore));
         genClusterSize = clusterSize;
@@ -30,7 +28,6 @@ public class WorldGenMinableCluster extends WorldGenerator
 
     public WorldGenMinableCluster(WeightedRandomBlock resource, int clusterSize)
     {
-
         cluster = new ArrayList<WeightedRandomBlock>();
         cluster.add(resource);
         genClusterSize = clusterSize;
@@ -38,14 +35,12 @@ public class WorldGenMinableCluster extends WorldGenerator
 
     public WorldGenMinableCluster(List<WeightedRandomBlock> resource, int clusterSize)
     {
-
         cluster = resource;
         genClusterSize = clusterSize;
     }
 
     public WorldGenMinableCluster(ItemStack ore, int clusterSize, int blockID)
     {
-
         cluster = new ArrayList<WeightedRandomBlock>();
         cluster.add(new WeightedRandomBlock(ore, 1));
         genClusterSize = clusterSize;
@@ -54,7 +49,6 @@ public class WorldGenMinableCluster extends WorldGenerator
 
     public WorldGenMinableCluster(WeightedRandomBlock resource, int clusterSize, int blockID)
     {
-
         cluster = new ArrayList<WeightedRandomBlock>();
         cluster.add(resource);
         genClusterSize = clusterSize;
@@ -63,7 +57,6 @@ public class WorldGenMinableCluster extends WorldGenerator
 
     public WorldGenMinableCluster(List<WeightedRandomBlock> resource, int clusterSize, int blockID)
     {
-
         cluster = resource;
         genClusterSize = clusterSize;
         genBlockID = blockID;
@@ -72,7 +65,6 @@ public class WorldGenMinableCluster extends WorldGenerator
     @Override
     public boolean generate(World world, Random rand, int x, int y, int z)
     {
-
         float f = rand.nextFloat() * (float) Math.PI;
         double d0 = x + 8 + ((MathHelper.sin(f) * genClusterSize) / 8.0F);
         double d1 = (x + 8) - ((MathHelper.sin(f) * genClusterSize) / 8.0F);

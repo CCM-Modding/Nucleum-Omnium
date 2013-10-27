@@ -17,7 +17,6 @@ import lib.cofh.util.ColorHelper;
  */
 public class TickHandlerVersion implements IScheduledTickHandler
 {
-
     public static TickHandlerVersion instance = new TickHandlerVersion();
 
     private static ArrayList<VersionHandler> modVersionInfo = new ArrayList();
@@ -30,7 +29,6 @@ public class TickHandlerVersion implements IScheduledTickHandler
      */
     public static boolean initialize()
     {
-
         if (initialized)
         {
             return false;
@@ -49,7 +47,6 @@ public class TickHandlerVersion implements IScheduledTickHandler
 
     public static boolean registerModVersionInfo(VersionHandler info)
     {
-
         if (modVersionInfo.contains(info))
         {
             return false;
@@ -61,7 +58,6 @@ public class TickHandlerVersion implements IScheduledTickHandler
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData)
     {
-
         if (sent)
         {
             return;
@@ -90,7 +86,6 @@ public class TickHandlerVersion implements IScheduledTickHandler
     @Override
     public EnumSet<TickType> ticks()
     {
-
         if (TickHandlerVersion.sent)
         {
             return EnumSet.noneOf(TickType.class);
@@ -107,7 +102,6 @@ public class TickHandlerVersion implements IScheduledTickHandler
     @Override
     public int nextTickSpacing()
     {
-
         if (!sent)
         {
             return 200;

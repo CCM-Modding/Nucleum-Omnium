@@ -10,13 +10,11 @@ import net.minecraft.util.WeightedRandomItem;
  */
 public final class WeightedRandomBlock extends WeightedRandomItem
 {
-
     public final int blockId;
     public final int metadata;
 
     public WeightedRandomBlock(ItemStack ore)
     {
-
         super(100);
         blockId = ore.itemID;
         metadata = ore.getItemDamage();
@@ -24,7 +22,6 @@ public final class WeightedRandomBlock extends WeightedRandomItem
 
     public WeightedRandomBlock(ItemStack ore, int weight)
     {
-
         super(weight);
         blockId = ore.itemID;
         metadata = ore.getItemDamage();

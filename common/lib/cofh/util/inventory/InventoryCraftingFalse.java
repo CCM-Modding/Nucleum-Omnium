@@ -12,23 +12,18 @@ import net.minecraft.inventory.InventoryCrafting;
  */
 public final class InventoryCraftingFalse extends InventoryCrafting
 {
-
     private static final NullContainer nullContainer = new NullContainer();
 
     /* NULL INNER CLASS */
     public static class NullContainer extends Container
     {
-
         @Override
         public void onCraftMatrixChanged(IInventory inventory)
-        {
-
-        }
+        {}
 
         @Override
         public boolean canInteractWith(EntityPlayer player)
         {
-
             return false;
         }
     }

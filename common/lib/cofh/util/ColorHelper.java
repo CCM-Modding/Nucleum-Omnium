@@ -7,7 +7,6 @@ package lib.cofh.util;
  */
 public final class ColorHelper
 {
-
     private ColorHelper()
     {}
 
@@ -52,7 +51,6 @@ public final class ColorHelper
 
     public static int getDyeColor(int color)
     {
-
         return (color < 0) || (color > 15) ? 0xFFFFFF : DYE_COLORS[color];
     }
 }

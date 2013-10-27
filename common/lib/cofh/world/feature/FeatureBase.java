@@ -10,7 +10,6 @@ import lib.cofh.api.world.IFeatureGenerator;
 
 public abstract class FeatureBase implements IFeatureGenerator
 {
-
     final String name;
     final byte type;
     final boolean regen;
@@ -18,7 +17,6 @@ public abstract class FeatureBase implements IFeatureGenerator
 
     public FeatureBase(String name, boolean regen)
     {
-
         this.name = name;
         type = 0;
         this.regen = regen;
@@ -26,7 +24,6 @@ public abstract class FeatureBase implements IFeatureGenerator
 
     public FeatureBase(String name, WorldGenerator worldGen, byte type, boolean regen)
     {
-
         this.name = name;
         this.type = type;
         this.regen = regen;

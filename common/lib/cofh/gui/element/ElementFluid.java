@@ -6,18 +6,15 @@ import lib.cofh.gui.GuiBase;
 
 public class ElementFluid extends ElementBase
 {
-
     public FluidStack fluid;
 
     public ElementFluid(GuiBase gui, int posX, int posY)
     {
-
         super(gui, posX, posY);
     }
 
     public ElementFluid setFluid(FluidStack fluid)
     {
-
         this.fluid = fluid;
         return this;
     }
@@ -25,7 +22,6 @@ public class ElementFluid extends ElementBase
     @Override
     public void draw()
     {
-
         if (!visible)
         {
             return;
@@ -36,7 +32,6 @@ public class ElementFluid extends ElementBase
     @Override
     public String getTooltip()
     {
-
         return null;
     }
 }

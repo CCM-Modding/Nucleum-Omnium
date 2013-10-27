@@ -23,7 +23,6 @@ public final class ItemHelper
 
     public static ItemStack consumeItem(ItemStack stack)
     {
-
         if (stack.stackSize == 1)
         {
             if (stack.getItem().hasContainerItem())
@@ -43,7 +42,6 @@ public final class ItemHelper
      */
     public static ItemStack findMatchingRecipe(InventoryCrafting inv, World world)
     {
-
         ItemStack[] dmgItems = new ItemStack[2];
         for (int i = 0; i < inv.getSizeInventory(); i++)
         {
@@ -93,7 +91,6 @@ public final class ItemHelper
      */
     public static int getHashCode(ItemStack stack)
     {
-
         return stack.getItemDamage() | (stack.itemID << 16);
     }
 
@@ -108,7 +105,6 @@ public final class ItemHelper
      */
     public static int getHashCode(int id, int metadata)
     {
-
         return metadata | (id << 16);
     }
 
@@ -117,7 +113,6 @@ public final class ItemHelper
      */
     public static int getIDFromHashCode(int hashCode)
     {
-
         return hashCode >> 16;
     }
 
@@ -126,25 +121,21 @@ public final class ItemHelper
      */
     public static int getMetaFromHashCode(int hashCode)
     {
-
         return hashCode & 0xFF;
     }
 
     public static String getOreName(ItemStack stack)
     {
-
         return OreDictionary.getOreName(OreDictionary.getOreID(stack));
     }
 
     public static boolean isOreID(ItemStack stack, int oreID)
     {
-
         return OreDictionary.getOreID(stack) == oreID;
     }
 
     public static boolean isOreName(ItemStack stack, String oreName)
     {
-
         return OreDictionary.getOreName(OreDictionary.getOreID(stack)).equals(oreName);
     }
 
@@ -153,7 +144,6 @@ public final class ItemHelper
      */
     public static boolean isPlayerHoldingFluidContainer(EntityPlayer player)
     {
-
         return FluidContainerRegistry.isContainer(player.getCurrentEquippedItem());
     }
 
@@ -162,7 +152,6 @@ public final class ItemHelper
      */
     public static boolean isPlayerHoldingItem(Item item, EntityPlayer player)
     {
-
         Item equipped = player.getCurrentEquippedItem() != null ? player.getCurrentEquippedItem().getItem() : null;
         return item == null ? equipped == null : item.equals(equipped);
     }
@@ -172,7 +161,6 @@ public final class ItemHelper
      */
     public static boolean isPlayerHoldingItemStack(ItemStack stack, EntityPlayer player)
     {
-
         ItemStack equipped = player.getCurrentEquippedItem() != null ? player.getCurrentEquippedItem() : null;
         return stack == null ? equipped == null : (equipped != null) && stack.isItemEqual(equipped) && ItemStack.areItemStackTagsEqual(stack, equipped);
     }
@@ -183,7 +171,6 @@ public final class ItemHelper
      */
     public static ItemStack[] cloneInventory(ItemStack[] stacks)
     {
-
         ItemStack[] inventoryCopy = new ItemStack[stacks.length];
         for (int i = 0; i < stacks.length; i++)
         {
@@ -204,7 +191,6 @@ public final class ItemHelper
      */
     public static boolean addItemStackToInventory(ItemStack[] inventory, ItemStack stack, int startIndex)
     {
-
         if (stack == null)
         {
             return true;
@@ -248,13 +234,11 @@ public final class ItemHelper
      */
     public static boolean addItemStackToInventory(ItemStack[] inventory, ItemStack stack)
     {
-
         return addItemStackToInventory(inventory, stack, 0);
     }
 
     public static boolean areItemStacksEqualNoNBT(ItemStack stackA, ItemStack stackB)
     {
-
         if (stackB == null)
         {
             return false;
@@ -266,13 +250,11 @@ public final class ItemHelper
 
     public static boolean craftingEquivalence(ItemStack checked, ItemStack source, String oreDict)
     {
-
         return areItemStacksEqualNoNBT(checked, source) ? true : oreDict == null ? false : getOreName(checked).equalsIgnoreCase(oreDict);
     }
 
     public static String getItemNBTString(ItemStack theItem, String nbtKey, String invalidReturn)
     {
-
         return theItem.stackTagCompound != null ? theItem.stackTagCompound.hasKey(nbtKey) ? theItem.stackTagCompound.getString(nbtKey) : invalidReturn : invalidReturn;
     }
 }

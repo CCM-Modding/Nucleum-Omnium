@@ -17,7 +17,6 @@ import ccm.nucleum.omnium.utils.lib.Properties;
 
 public final class CommandRegistry
 {
-
     public static void init(final FMLServerStartingEvent event)
     {
         register(event, new CommandCCM());

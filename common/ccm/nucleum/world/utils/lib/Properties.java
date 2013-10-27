@@ -5,7 +5,6 @@ package ccm.nucleum.world.utils.lib;
 
 public final class Properties
 {
-
     public static boolean retroOreGen = false;
 
     public static boolean genFlatBedrock = false;

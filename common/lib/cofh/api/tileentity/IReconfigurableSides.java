@@ -7,7 +7,6 @@ package lib.cofh.api.tileentity;
  */
 public interface IReconfigurableSides
 {
-
     /**
      * Decrement the config for a given side.
      * 

@@ -28,7 +28,6 @@ import cpw.mods.fml.relauncher.Side;
  */
 public class DevCapes
 {
-
     private static DevCapes instance;
     public static final double version = 2.1;
 

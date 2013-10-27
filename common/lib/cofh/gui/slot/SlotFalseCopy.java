@@ -12,12 +12,10 @@ import net.minecraft.item.ItemStack;
  */
 public class SlotFalseCopy extends Slot
 {
-
     public int slotIndex = 0;
 
     public SlotFalseCopy(IInventory inventory, int x, int y, int z)
     {
-
         super(inventory, x, y, z);
         slotIndex = x;
     }
@@ -25,7 +23,6 @@ public class SlotFalseCopy extends Slot
     @Override
     public boolean canTakeStack(EntityPlayer player)
     {
-
         inventory.setInventorySlotContents(slotIndex, null);
         return false;
     }
@@ -33,7 +30,6 @@ public class SlotFalseCopy extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-
         if (inventory.getStackInSlot(slotIndex) == null)
         {
             ItemStack phantomStack = stack.copy();

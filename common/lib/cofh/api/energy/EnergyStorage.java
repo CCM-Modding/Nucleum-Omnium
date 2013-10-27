@@ -11,7 +11,6 @@ import lib.cofh.util.MathHelper;
  */
 public class EnergyStorage implements IEnergyStorage
 {
-
     protected int energy;
     protected int capacity;
     protected int maxReceive;
@@ -19,19 +18,16 @@ public class EnergyStorage implements IEnergyStorage
 
     public EnergyStorage(int capacity)
     {
-
         this(capacity, capacity, capacity);
     }
 
     public EnergyStorage(int capacity, int maxTransfer)
     {
-
         this(capacity, maxTransfer, maxTransfer);
     }
 
     public EnergyStorage(int capacity, int maxReceive, int maxExtract)
     {
-
         this.capacity = capacity;
         this.maxReceive = maxReceive;
         this.maxExtract = maxExtract;
@@ -39,21 +35,18 @@ public class EnergyStorage implements IEnergyStorage
 
     public EnergyStorage readFromNBT(NBTTagCompound nbt)
     {
-
         energy = nbt.getInteger("Energy");
         return this;
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound nbt)
     {
-
         nbt.setInteger("Energy", energy);
         return nbt;
     }
 
     public void setCapacity(int capacity)
     {
-
         this.capacity = capacity;
 
         if (energy > capacity)
@@ -64,20 +57,17 @@ public class EnergyStorage implements IEnergyStorage
 
     public void setMaxTransfer(int maxTransfer)
     {
-
         setMaxReceive(maxTransfer);
         setMaxExtract(maxTransfer);
     }
 
     public void setMaxReceive(int maxReceive)
     {
-
         this.maxReceive = maxReceive;
     }
 
     public void setMaxExtract(int maxExtract)
     {
-
         this.maxExtract = maxExtract;
     }
 
@@ -89,7 +79,6 @@ public class EnergyStorage implements IEnergyStorage
      */
     public void setEnergyStored(int energy)
     {
-
         this.energy = energy;
 
         if (this.energy > capacity)
@@ -109,7 +98,6 @@ public class EnergyStorage implements IEnergyStorage
      */
     public void modifyEnergyStored(int energy)
     {
-
         this.energy += energy;
 
         if (this.energy > capacity)
@@ -125,7 +113,6 @@ public class EnergyStorage implements IEnergyStorage
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate)
     {
-
         int energyReceived = MathHelper.minI(capacity - energy, MathHelper.minI(this.maxReceive, maxReceive));
 
         if (!simulate)
@@ -138,7 +125,6 @@ public class EnergyStorage implements IEnergyStorage
     @Override
     public int extractEnergy(int maxExtract, boolean simulate)
     {
-
         int energyExtracted = MathHelper.minI(energy, MathHelper.minI(this.maxExtract, maxExtract));
 
         if (!simulate)
@@ -151,14 +137,12 @@ public class EnergyStorage implements IEnergyStorage
     @Override
     public int getEnergyStored()
     {
-
         return energy;
     }
 
     @Override
     public int getMaxEnergyStored()
     {
-
         return capacity;
     }
 }

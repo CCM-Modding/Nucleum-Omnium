@@ -15,7 +15,6 @@ import lib.cofh.util.ItemHelper;
 
 public class BucketHandler
 {
-
     public static BucketHandler instance = new BucketHandler();
 
     private static BiMap<Integer, Integer> buckets = HashBiMap.create();
@@ -26,7 +25,6 @@ public class BucketHandler
     @ForgeSubscribe
     public void onBucketFill(FillBucketEvent event)
     {
-
         if (!event.current.getItem().equals(Item.bucketEmpty))
         {
             return;
@@ -43,7 +41,6 @@ public class BucketHandler
 
     public static boolean registerBucket(int blockId, int blockMeta, ItemStack bucket)
     {
-
         if ((blockId <= 0) || (blockMeta < 0) || (bucket == null) || buckets.containsKey(ItemHelper.getHashCode(blockId, blockMeta))
                 || buckets.inverse().containsKey(ItemHelper.getHashCode(bucket)))
         {
@@ -55,13 +52,11 @@ public class BucketHandler
 
     public static ItemStack fillBucket(World world, MovingObjectPosition pos)
     {
-
         return fillBucket(world, pos.blockX, pos.blockY, pos.blockZ);
     }
 
     public static ItemStack fillBucket(World world, int x, int y, int z)
     {
-
         int blockId = world.getBlockId(x, y, z);
         int blockMeta = world.getBlockMetadata(x, y, z);
 
@@ -76,7 +71,6 @@ public class BucketHandler
 
     public static boolean emptyBucket(World world, int x, int y, int z, ItemStack bucket)
     {
-
         if (!buckets.inverse().containsKey(ItemHelper.getHashCode(bucket)))
         {
             return false;

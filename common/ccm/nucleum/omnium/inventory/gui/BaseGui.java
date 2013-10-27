@@ -5,8 +5,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
 
-//FINISH
-public abstract class BaseGui extends GuiContainer
+import lib.cofh.gui.GuiBase;
+
+public abstract class BaseGui extends GuiBase
 {
     public BaseGui(Container container)
     {

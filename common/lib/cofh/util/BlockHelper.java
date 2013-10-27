@@ -21,7 +21,6 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public final class BlockHelper
 {
-
     private BlockHelper()
     {}
 
@@ -47,7 +46,6 @@ public final class BlockHelper
 
     public static final class RotationType
     {
-
         public static final int FOUR_WAY = 1;
         public static final int SIX_WAY = 2;
         public static final int RAIL = 3;
@@ -99,7 +97,6 @@ public final class BlockHelper
 
     public static int getCurrentMousedOverSide(World world, EntityPlayer player)
     {
-
         double distance = player.capabilities.isCreativeMode ? 5.0F : 4.5F;
         Vec3 posVec = Vec3.createVectorHelper(player.posX, player.posY, player.posZ);
         Vec3 lookVec = player.getLook(1);
@@ -116,83 +113,70 @@ public final class BlockHelper
 
     public static TileEntity getAdjacentTileEntity(World world, int x, int y, int z, ForgeDirection dir)
     {
-
         return world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
     }
 
     public static TileEntity getAdjacentTileEntity(World world, int x, int y, int z, int side)
     {
-
         return getAdjacentTileEntity(world, x, y, z, ForgeDirection.values()[side]);
     }
 
     public static TileEntity getAdjacentTileEntity(TileEntity refTile, ForgeDirection dir)
     {
-
         return getAdjacentTileEntity(refTile.worldObj, refTile.xCoord, refTile.yCoord, refTile.zCoord, dir);
     }
 
     public static TileEntity getAdjacentTileEntity(TileEntity refTile, int side)
     {
-
         return getAdjacentTileEntity(refTile.worldObj, refTile.xCoord, refTile.yCoord, refTile.zCoord, ForgeDirection.values()[side]);
     }
 
     /* COORDINATE TRANSFORM */
     public static int[] getAdjacentCoordinatesForSide(int x, int y, int z, int side)
     {
-
         return new int[]
         { x + SIDE_COORD_MOD[side][0], y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2] };
     }
 
     public static int[] getAdjacentCoordinatesForSide(TileEntity tile, int side)
     {
-
         return new int[]
         { tile.xCoord + SIDE_COORD_MOD[side][0], tile.yCoord + SIDE_COORD_MOD[side][1], tile.zCoord + SIDE_COORD_MOD[side][2] };
     }
 
     public static int getLeftSide(int side)
     {
-
         return SIDE_LEFT[side];
     }
 
     public static int getRightSide(int side)
     {
-
         return SIDE_RIGHT[side];
     }
 
     public static int getOppositeSide(int side)
     {
-
         return SIDE_OPPOSITE[side];
     }
 
     public static int getAboveSide(int side)
     {
-
         return SIDE_ABOVE[side];
     }
 
     public static int getBelowSide(int side)
     {
-
         return SIDE_BELOW[side];
     }
 
     /* BLOCK ROTATION */
     public static boolean canRotate(int blockId)
     {
-
         return rotateType[blockId] != 0;
     }
 
     public static int rotateVanillaBlock(World world, int bId, int bMeta, int x, int y, int z)
     {
-
         switch (rotateType[bId])
         {
             case RotationType.FOUR_WAY:
@@ -263,7 +247,6 @@ public final class BlockHelper
 
     public static int rotateVanillaBlockAlt(World world, int bId, int bMeta, int x, int y, int z)
     {
-
         switch (rotateType[bId])
         {
             case RotationType.FOUR_WAY:
@@ -333,13 +316,11 @@ public final class BlockHelper
 
     public static boolean isBlock(int bId)
     {
-
         return (bId < 0) || (bId >= Block.blocksList.length) ? null : Block.blocksList[bId] != null;
     }
 
     public static List<ItemStack> breakBlock(World worldObj, int x, int y, int z, int blockId, int fortune, boolean doBreak)
     {
-
         if (Block.blocksList[blockId].getBlockHardness(worldObj, x, y, z) == -1)
         {
             return new LinkedList<ItemStack>();

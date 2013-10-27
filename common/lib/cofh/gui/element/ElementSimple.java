@@ -10,19 +10,16 @@ import lib.cofh.render.RenderHelper;
  */
 public class ElementSimple extends ElementBase
 {
-
     int texU = 0;
     int texV = 0;
 
     public ElementSimple(GuiBase gui, int posX, int posY)
     {
-
         super(gui, posX, posY);
     }
 
     public ElementSimple setTextureOffsets(int u, int v)
     {
-
         texU = u;
         texV = v;
         return this;
@@ -31,7 +28,6 @@ public class ElementSimple extends ElementBase
     @Override
     public void draw()
     {
-
         if (!visible)
         {
             return;
@@ -43,7 +39,6 @@ public class ElementSimple extends ElementBase
     @Override
     public String getTooltip()
     {
-
         return null;
     }
 }

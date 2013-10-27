@@ -22,7 +22,6 @@ import lib.cofh.util.ServerHelper;
  */
 public class FluidHelper
 {
-
     public static final FluidStack WATER = new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME);
     public static final FluidStack LAVA = new FluidStack(FluidRegistry.LAVA, FluidContainerRegistry.BUCKET_VOLUME);
 
@@ -31,7 +30,6 @@ public class FluidHelper
 
     public static boolean fillTankWithContainer(World world, IFluidHandler handler, EntityPlayer player)
     {
-
         ItemStack container = player.getCurrentEquippedItem();
         FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(container);
 
@@ -57,7 +55,6 @@ public class FluidHelper
 
     public static boolean fillContainerFromTank(World world, IFluidHandler handler, EntityPlayer player, FluidStack tankFluid)
     {
-
         ItemStack container = player.getCurrentEquippedItem();
 
         if (FluidContainerRegistry.isEmptyContainer(container))
@@ -97,7 +94,6 @@ public class FluidHelper
 
     public static int fillAdjacentFluidHandler(TileEntity tile, int from, FluidStack fluid, boolean doFill)
     {
-
         TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
 
         if (handler instanceof IFluidHandler)

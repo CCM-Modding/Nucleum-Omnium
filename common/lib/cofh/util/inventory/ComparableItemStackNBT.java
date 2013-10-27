@@ -10,12 +10,10 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class ComparableItemStackNBT extends ComparableItemStack
 {
-
     public NBTTagCompound tag;
 
     public ComparableItemStackNBT(ItemStack stack)
     {
-
         super(stack);
 
         if (stack != null)
@@ -41,7 +39,6 @@ public class ComparableItemStackNBT extends ComparableItemStack
     @Override
     public ItemStack toItemStack()
     {
-
         if (tag == null)
         {
             return super.toItemStack();

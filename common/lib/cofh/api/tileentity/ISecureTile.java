@@ -2,7 +2,6 @@ package lib.cofh.api.tileentity;
 
 public interface ISecureTile
 {
-
     public static enum AccessMode
     {
         PUBLIC,
@@ -11,19 +10,16 @@ public interface ISecureTile
 
         public boolean isPublic()
         {
-
             return this == PUBLIC;
         }
 
         public boolean isRestricted()
         {
-
             return this == RESTRICTED;
         }
 
         public boolean isPrivate()
         {
-
             return this == PRIVATE;
         }
     }

@@ -8,7 +8,6 @@ import lib.cofh.render.RenderHelper;
 
 public class ElementFluidTank extends ElementBase
 {
-
     public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(GuiBase.PATH_ELEMENTS + "FluidTank.png");
     public static final int DEFAULT_SCALE = 60;
 
@@ -17,7 +16,6 @@ public class ElementFluidTank extends ElementBase
 
     public ElementFluidTank(GuiBase gui, int posX, int posY, IFluidTank tank)
     {
-
         super(gui, posX, posY);
         this.tank = tank;
 
@@ -31,7 +29,6 @@ public class ElementFluidTank extends ElementBase
 
     public ElementFluidTank(GuiBase gui, int posX, int posY, IFluidTank tank, String texture)
     {
-
         super(gui, posX, posY);
         this.tank = tank;
 
@@ -45,7 +42,6 @@ public class ElementFluidTank extends ElementBase
 
     public ElementFluidTank setGauge(int gaugeType)
     {
-
         this.gaugeType = gaugeType;
         return this;
     }
@@ -53,7 +49,6 @@ public class ElementFluidTank extends ElementBase
     @Override
     public void draw()
     {
-
         if (!visible)
         {
             return;
@@ -67,20 +62,17 @@ public class ElementFluidTank extends ElementBase
     @Override
     public String getTooltip()
     {
-
         return "" + tank.getFluidAmount() + " / " + tank.getCapacity() + " mB";
     }
 
     @Override
     public boolean handleMouseClicked(int x, int y, int mouseButton)
     {
-
         return false;
     }
 
     int getScaled()
     {
-
         return (tank.getFluidAmount() * sizeY) / tank.getCapacity();
     }
 }

@@ -7,7 +7,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class FeatureOreGenNormal extends FeatureBase
 {
-
     final WorldGenerator worldGen;
     final int count;
     final int meanY;
@@ -15,7 +14,6 @@ public class FeatureOreGenNormal extends FeatureBase
 
     public FeatureOreGenNormal(String name, WorldGenerator worldGen, int count, int meanY, int maxVar, boolean regen)
     {
-
         super(name, regen);
         this.worldGen = worldGen;
         this.count = count;
@@ -27,7 +25,6 @@ public class FeatureOreGenNormal extends FeatureBase
     @Override
     public boolean generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGen)
     {
-
         if (!newGen && !regen)
         {
             return false;

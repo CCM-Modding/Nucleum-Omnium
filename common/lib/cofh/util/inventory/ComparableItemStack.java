@@ -11,7 +11,6 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class ComparableItemStack
 {
-
     public int itemID = -1;
     public int metadata = -1;
     public int stackSize = -1;
@@ -19,7 +18,6 @@ public class ComparableItemStack
 
     public ComparableItemStack(ItemStack stack)
     {
-
         if (stack != null)
         {
             itemID = stack.itemID;
@@ -31,7 +29,6 @@ public class ComparableItemStack
 
     public ComparableItemStack(int itemID, int damage, int stackSize)
     {
-
         this.itemID = itemID;
         metadata = damage;
         this.stackSize = stackSize;
@@ -40,7 +37,6 @@ public class ComparableItemStack
 
     public ComparableItemStack(ComparableItemStack stack)
     {
-
         itemID = stack.itemID;
         metadata = stack.metadata;
         stackSize = stack.stackSize;
@@ -49,7 +45,6 @@ public class ComparableItemStack
 
     public ComparableItemStack(String oreName)
     {
-
         if (!OreDictionary.getOres(oreName).isEmpty())
         {
             ItemStack ore = OreDictionary.getOres(oreName).get(0);
@@ -62,7 +57,6 @@ public class ComparableItemStack
 
     public ComparableItemStack set(ItemStack stack)
     {
-
         if (stack != null)
         {
             itemID = stack.itemID;
@@ -81,7 +75,6 @@ public class ComparableItemStack
 
     public ComparableItemStack set(ComparableItemStack stack)
     {
-
         if (stack != null)
         {
             itemID = stack.itemID;
@@ -138,7 +131,6 @@ public class ComparableItemStack
     @Override
     public boolean equals(Object o)
     {
-
         if (!(o instanceof ComparableItemStack))
         {
             return false;

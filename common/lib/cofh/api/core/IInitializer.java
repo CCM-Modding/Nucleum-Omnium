@@ -7,7 +7,6 @@ package lib.cofh.api.core;
  */
 public interface IInitializer
 {
-
     public boolean preInit();
 
     public boolean initialize();

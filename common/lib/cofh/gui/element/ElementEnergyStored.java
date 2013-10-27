@@ -9,7 +9,6 @@ import lib.cofh.util.MathHelper;
 
 public class ElementEnergyStored extends ElementBase
 {
-
     public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(GuiBase.PATH_ELEMENTS + "Energy.png");
     public static final int DEFAULT_SCALE = 42;
 
@@ -17,7 +16,6 @@ public class ElementEnergyStored extends ElementBase
 
     public ElementEnergyStored(GuiBase gui, int posX, int posY, IEnergyStorage storage)
     {
-
         super(gui, posX, posY);
         this.storage = storage;
 
@@ -32,7 +30,6 @@ public class ElementEnergyStored extends ElementBase
     @Override
     public void draw()
     {
-
         if (!visible)
         {
             return;
@@ -46,13 +43,11 @@ public class ElementEnergyStored extends ElementBase
     @Override
     public String getTooltip()
     {
-
         return "" + storage.getEnergyStored() + " / " + storage.getMaxEnergyStored() + " RF";
     }
 
     int getScaled()
     {
-
         return MathHelper.round((storage.getEnergyStored() * sizeY) / storage.getMaxEnergyStored());
     }
 }

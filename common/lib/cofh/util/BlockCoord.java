@@ -11,7 +11,6 @@ import net.minecraft.tileentity.TileEntity;
  */
 public final class BlockCoord implements Comparable<BlockCoord>, Serializable
 {
-
     /**
      * long, serialVersionUID
      */
@@ -22,7 +21,6 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
 
     public BlockCoord(int x, int y, int z)
     {
-
         this.x = x;
         this.y = y;
         this.z = z;
@@ -30,7 +28,6 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
 
     public BlockCoord(TileEntity tile)
     {
-
         x = tile.xCoord;
         y = tile.yCoord;
         z = tile.zCoord;
@@ -38,7 +35,6 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
 
     public void step(int dir)
     {
-
         x += BlockHelper.SIDE_COORD_MOD[dir][0];
         y += BlockHelper.SIDE_COORD_MOD[dir][1];
         z += BlockHelper.SIDE_COORD_MOD[dir][2];
@@ -46,7 +42,6 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
 
     public void step(int dir, int dist)
     {
-
         switch (dir)
         {
             case 0:
@@ -73,14 +68,12 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
 
     public BlockCoord copy()
     {
-
         return new BlockCoord(x, y, z);
     }
 
     @Override
     public boolean equals(Object obj)
     {
-
         if (!(obj instanceof BlockCoord))
         {
             return false;
@@ -92,7 +85,6 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
     @Override
     public int hashCode()
     {
-
         int hash = x;
         hash *= 31 + y;
         hash *= 31 + z;
@@ -102,7 +94,6 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
     @Override
     public String toString()
     {
-
         return "[" + x + ", " + y + ", " + z + "]";
     }
 
@@ -110,7 +101,6 @@ public final class BlockCoord implements Comparable<BlockCoord>, Serializable
     @Override
     public int compareTo(BlockCoord other)
     {
-
         return x == other.x ? y == other.y ? z - other.z : y - other.y : x - other.x;
     }
 }

@@ -7,7 +7,6 @@ package lib.cofh.api.core;
  */
 public class RegistryAccess
 {
-
     public static ISimpleRegistry capeRegistry = new NullSimpleRegistry();
     public static ISimpleRegistry skinRegistry = new NullSimpleRegistry();
 }

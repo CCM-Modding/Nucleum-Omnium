@@ -13,13 +13,11 @@ import lib.cofh.util.inventory.ComparableItemStack;
  */
 public class SlotSpecificItem extends Slot
 {
-
     final ComparableItemStack stack;
     int slotStackLimit = -1;
 
     public SlotSpecificItem(IInventory inventory, int x, int y, int z, ItemStack stack)
     {
-
         super(inventory, x, y, z);
 
         this.stack = new ComparableItemStack(stack);
@@ -28,13 +26,11 @@ public class SlotSpecificItem extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-
         return this.stack.isItemEqual(new ComparableItemStack(stack));
     }
 
     public SlotSpecificItem setSlotStackLimit(int slotStackLimit)
     {
-
         this.slotStackLimit = slotStackLimit;
         return this;
     }
@@ -42,7 +38,6 @@ public class SlotSpecificItem extends Slot
     @Override
     public int getSlotStackLimit()
     {
-
         if (slotStackLimit <= 0)
         {
             return inventory.getInventoryStackLimit();

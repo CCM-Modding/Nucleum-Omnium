@@ -7,7 +7,6 @@ package lib.cofh.api.tileentity;
  */
 public interface IReconfigurableFacing
 {
-
     /**
      * Returns the current facing of the block.
      */

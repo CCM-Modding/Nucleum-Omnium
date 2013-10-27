@@ -5,34 +5,29 @@ import lib.cofh.render.RenderHelper;
 
 public class ElementDualScaled extends ElementBase
 {
-
     public int quantity;
     public int mode;
     public boolean background = true;
 
     public ElementDualScaled(GuiBase gui, int posX, int posY)
     {
-
         super(gui, posX, posY);
     }
 
     public ElementDualScaled setMode(int mode)
     {
-
         this.mode = mode;
         return this;
     }
 
     public ElementDualScaled setQuantity(int quantity)
     {
-
         this.quantity = quantity;
         return this;
     }
 
     public ElementDualScaled setBackground(boolean background)
     {
-
         this.background = background;
         return this;
     }
@@ -40,7 +35,6 @@ public class ElementDualScaled extends ElementBase
     @Override
     public void draw()
     {
-
         if (!visible)
         {
             return;
@@ -71,7 +65,6 @@ public class ElementDualScaled extends ElementBase
     @Override
     public String getTooltip()
     {
-
         return null;
     }
 }

@@ -16,7 +16,6 @@ import cpw.mods.fml.common.FMLLog;
  */
 public class VersionHandler
 {
-
     public static final String MC_VERSION = "1.5.2";
 
     boolean criticalUpdate;
@@ -35,7 +34,6 @@ public class VersionHandler
 
     public static boolean beforeTargetVersion(String version, String target)
     {
-
         try
         {
             String[] versionTokens = version.trim().split("\\.");
@@ -91,7 +89,6 @@ public class VersionHandler
 
     public VersionHandler(String name, String version, String url)
     {
-
         modName = name;
         modVersion = latestModVersion = version;
         releaseURL = url;
@@ -99,7 +96,6 @@ public class VersionHandler
 
     public VersionHandler(String name, String version, String url, Logger logger)
     {
-
         modName = name;
         modVersion = latestModVersion = version;
         releaseURL = url;
@@ -108,7 +104,6 @@ public class VersionHandler
 
     public void checkForNewVersion()
     {
-
         Thread versionCheckThread = new VersionCheckThread();
         versionCheckThread.start();
     }
@@ -155,11 +150,9 @@ public class VersionHandler
 
     private class VersionCheckThread extends Thread
     {
-
         @Override
         public void run()
         {
-
             try
             {
                 URL versionFile = new URL(releaseURL);

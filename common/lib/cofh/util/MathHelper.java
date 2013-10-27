@@ -7,7 +7,6 @@ package lib.cofh.util;
  */
 public final class MathHelper
 {
-
     private MathHelper()
     {}
 
@@ -28,49 +27,41 @@ public final class MathHelper
 
     public static double sin(double d)
     {
-
         return SIN_TABLE[(int) ((float) d * 10430.378F) & 65535];
     }
 
     public static double cos(double d)
     {
-
         return SIN_TABLE[(int) (((float) d * 10430.378F) + 16384.0F) & 65535];
     }
 
     public static float approachLinear(float a, float b, float max)
     {
-
         return a > b ? (a - b) < max ? b : a - max : (b - a) < max ? b : a + max;
     }
 
     public static double approachLinear(double a, double b, double max)
     {
-
         return a > b ? (a - b) < max ? b : a - max : (b - a) < max ? b : a + max;
     }
 
     public static float interpolate(float a, float b, float d)
     {
-
         return a + ((b - a) * d);
     }
 
     public static double interpolate(double a, double b, double d)
     {
-
         return a + ((b - a) * d);
     }
 
     public static double approachExp(double a, double b, double ratio)
     {
-
         return a + ((b - a) * ratio);
     }
 
     public static double approachExp(double a, double b, double ratio, double cap)
     {
-
         double d = (b - a) * ratio;
 
         if (Math.abs(d) > cap)
@@ -82,7 +73,6 @@ public final class MathHelper
 
     public static double retreatExp(double a, double b, double c, double ratio, double kick)
     {
-
         double d = (Math.abs(c - a) + kick) * ratio;
 
         if (d > Math.abs(b - a))
@@ -94,7 +84,6 @@ public final class MathHelper
 
     public static double clip(double value, double min, double max)
     {
-
         if (value > max)
         {
             value = max;
@@ -107,27 +96,23 @@ public final class MathHelper
 
     public static boolean between(double a, double x, double b)
     {
-
         return (a <= x) && (x <= b);
     }
 
     public static int approachExpI(int a, int b, double ratio)
     {
-
         int r = (int) Math.round(approachExp(a, b, ratio));
         return r == a ? b : r;
     }
 
     public static int retreatExpI(int a, int b, int c, double ratio, int kick)
     {
-
         int r = (int) Math.round(retreatExp(a, b, c, ratio, kick));
         return r == a ? b : r;
     }
 
     public static int floor_double(double d)
     {
-
         return net.minecraft.util.MathHelper.floor_double(d);
     }
 
@@ -136,7 +121,6 @@ public final class MathHelper
      */
     public static int round(double d)
     {
-
         return (int) (d + 0.5D);
     }
 
@@ -145,7 +129,6 @@ public final class MathHelper
      */
     public static int ceil(double d)
     {
-
         return (int) (d + 0.9999D);
     }
 
@@ -154,19 +137,16 @@ public final class MathHelper
      */
     public static float minF(float a, float b)
     {
-
         return a < b ? a : b;
     }
 
     public static float minF(int a, float b)
     {
-
         return a < b ? a : b;
     }
 
     public static float minF(float a, int b)
     {
-
         return a < b ? a : b;
     }
 
@@ -175,19 +155,16 @@ public final class MathHelper
      */
     public static float maxF(float a, float b)
     {
-
         return a > b ? a : b;
     }
 
     public static float maxF(int a, float b)
     {
-
         return a > b ? a : b;
     }
 
     public static float maxF(float a, int b)
     {
-
         return a > b ? a : b;
     }
 
@@ -196,7 +173,6 @@ public final class MathHelper
      */
     public static int minI(int a, int b)
     {
-
         return a < b ? a : b;
     }
 
@@ -205,7 +181,6 @@ public final class MathHelper
      */
     public static int maxI(int a, int b)
     {
-
         return a > b ? a : b;
     }
 }

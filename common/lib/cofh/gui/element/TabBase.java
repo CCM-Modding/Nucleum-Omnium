@@ -15,7 +15,6 @@ import lib.cofh.render.RenderHelper;
  */
 public abstract class TabBase extends ElementBase
 {
-
     public boolean open;
     public int side = 1;
 
@@ -37,14 +36,12 @@ public abstract class TabBase extends ElementBase
 
     public TabBase(GuiBase gui)
     {
-
         super(gui, 0, 0);
         texture = DEFAULT_TEXTURE_RIGHT;
     }
 
     public TabBase(GuiBase gui, int side)
     {
-
         super(gui, 0, 0);
         this.side = side;
 
@@ -60,7 +57,6 @@ public abstract class TabBase extends ElementBase
     @Override
     public void update()
     {
-
         if (open && (currentWidth < maxWidth))
         {
             currentWidth += 8;
@@ -101,7 +97,6 @@ public abstract class TabBase extends ElementBase
 
     public boolean intersectsWith(int mouseX, int mouseY, int shiftX, int shiftY)
     {
-
         if (side == 0)
         {
             if ((mouseX <= shiftX) && (mouseX >= (shiftX - currentWidth)) && (mouseY >= shiftY) && (mouseY <= (shiftY + currentHeight)))
@@ -117,7 +112,6 @@ public abstract class TabBase extends ElementBase
 
     protected void drawBackground()
     {
-
         float colorR = ((backgroundColor >> 16) & 255) / 255.0F;
         float colorG = ((backgroundColor >> 8) & 255) / 255.0F;
         float colorB = (backgroundColor & 255) / 255.0F;
@@ -144,7 +138,6 @@ public abstract class TabBase extends ElementBase
 
     protected void drawTabIcon(String iconName)
     {
-
         int offsetX = 2;
         if (side == 0)
         {
@@ -155,13 +148,11 @@ public abstract class TabBase extends ElementBase
 
     public boolean isFullyOpened()
     {
-
         return currentWidth >= maxWidth;
     }
 
     public void setFullyOpen()
     {
-
         open = true;
         currentWidth = maxWidth;
         currentHeight = maxHeight;
@@ -169,7 +160,6 @@ public abstract class TabBase extends ElementBase
 
     public void toggleOpen()
     {
-
         if (open)
         {
             open = false;

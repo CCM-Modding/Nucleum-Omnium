@@ -15,7 +15,6 @@ import lib.cofh.gui.GuiBase;
  */
 public abstract class ElementBase
 {
-
     public static final SoundManager elementSoundManager = FMLClientHandler.instance().getClient().sndManager;
     public static final FontRenderer elementFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
 
@@ -35,7 +34,6 @@ public abstract class ElementBase
 
     public ElementBase(GuiBase gui, int posX, int posY)
     {
-
         this.gui = gui;
         this.posX = gui.getGuiLeft() + posX;
         this.posY = gui.getGuiTop() + posY;
@@ -43,7 +41,6 @@ public abstract class ElementBase
 
     public ElementBase setTexture(String texture, int texW, int texH)
     {
-
         this.texture = new ResourceLocation(texture);
         this.texW = texW;
         this.texH = texH;
@@ -52,7 +49,6 @@ public abstract class ElementBase
 
     public ElementBase setPosition(int posX, int posY)
     {
-
         this.posX = gui.getGuiLeft() + posX;
         this.posY = gui.getGuiTop() + posY;
         return this;
@@ -60,7 +56,6 @@ public abstract class ElementBase
 
     public ElementBase setSize(int sizeX, int sizeY)
     {
-
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         return this;
@@ -68,27 +63,22 @@ public abstract class ElementBase
 
     public ElementBase setVisible(boolean visible)
     {
-
         this.visible = visible;
         return this;
     }
 
     public boolean isVisible()
     {
-
         return visible;
     }
 
     public void update()
-    {
-
-    }
+    {}
 
     public abstract void draw();
 
     public void draw(int x, int y)
     {
-
         posX = x;
         posY = y;
         draw();
@@ -98,7 +88,6 @@ public abstract class ElementBase
 
     public boolean intersectsWith(int mouseX, int mouseY)
     {
-
         mouseX += gui.getGuiLeft();
         mouseY += gui.getGuiTop();
 
@@ -111,13 +100,11 @@ public abstract class ElementBase
 
     public boolean handleMouseClicked(int x, int y, int mouseButton)
     {
-
         return false;
     }
 
     public void drawTexturedModalRect(int x, int y, int u, int v, int width, int height)
     {
-
         gui.drawSizedTexturedModalRect(x, y, u, v, width, height, texW, texH);
     }
 }

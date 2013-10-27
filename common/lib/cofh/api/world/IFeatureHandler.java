@@ -7,7 +7,6 @@ package lib.cofh.api.world;
  */
 public interface IFeatureHandler
 {
-
     /**
      * Register a feature with an IFeatureHandler.
      * 

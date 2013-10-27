@@ -16,7 +16,6 @@ import cpw.mods.fml.relauncher.Side;
  */
 public class DevCapesUtil
 {
-
     /**
      * Wrapper for getting the DevCapes singleton.
      */

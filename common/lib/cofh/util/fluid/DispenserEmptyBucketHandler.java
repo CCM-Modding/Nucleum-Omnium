@@ -12,13 +12,11 @@ import net.minecraft.world.World;
 
 public final class DispenserEmptyBucketHandler extends BehaviorDefaultDispenseItem
 {
-
     private final BehaviorDefaultDispenseItem defaultDispenserItemBehavior = new BehaviorDefaultDispenseItem();
 
     @Override
     public ItemStack dispenseStack(IBlockSource blockSource, ItemStack stackBucket)
     {
-
         EnumFacing facing = BlockDispenser.getFacing(blockSource.getBlockMetadata());
         World world = blockSource.getWorld();
 

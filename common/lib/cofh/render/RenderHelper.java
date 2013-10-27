@@ -20,7 +20,6 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public final class RenderHelper
 {
-
     public static final double RENDER_OFFSET = 1.0D / 1024.0D;
     public static final ResourceLocation MC_BLOCK_SHEET = new ResourceLocation("textures/atlas/blocks.png");
     public static final ResourceLocation MC_ITEM_SHEET = new ResourceLocation("textures/atlas/items.png");
@@ -28,25 +27,20 @@ public final class RenderHelper
     public static final ResourceLocation MC_FONT_ALTERNATE = new ResourceLocation("textures/font/ascii_sga.png");
 
     private RenderHelper()
-    {
-
-    }
+    {}
 
     public static final TextureManager engine()
     {
-
         return Minecraft.getMinecraft().renderEngine;
     }
 
     public static final Tessellator tessellator()
     {
-
         return Tessellator.instance;
     }
 
     public static void renderItemAsBlock(RenderBlocks renderer, ItemStack item, double translateX, double translateY, double translateZ)
     {
-
         Tessellator tessellator = tessellator();
         Block block = Block.stone;
         Icon texture = item.getIconIndex();
@@ -82,7 +76,6 @@ public final class RenderHelper
 
     public static final Icon getFluidTexture(FluidStack fluid)
     {
-
         if ((fluid == null) || (fluid.getFluid() == null))
         {
             return FluidRegistry.LAVA.getIcon();
@@ -92,37 +85,31 @@ public final class RenderHelper
 
     public static final void bindItemTexture(ItemStack stack)
     {
-
         engine().bindTexture(stack.getItemSpriteNumber() == 0 ? MC_BLOCK_SHEET : MC_ITEM_SHEET);
     }
 
     public static final void bindTexture(ResourceLocation texture)
     {
-
         engine().bindTexture(texture);
     }
 
     public static final void setBlockTextureSheet()
     {
-
         bindTexture(MC_BLOCK_SHEET);
     }
 
     public static final void setItemTextureSheet()
     {
-
         bindTexture(MC_ITEM_SHEET);
     }
 
     public static final void setDefaultFontTextureSheet()
     {
-
         bindTexture(MC_FONT_DEFAULT);
     }
 
     public static final void setSGAFontTextureSheet()
     {
-
         bindTexture(MC_FONT_ALTERNATE);
     }
 }

@@ -14,14 +14,12 @@ public class SlotOutput extends Slot
 
     public SlotOutput(IInventory inventory, int x, int y, int z)
     {
-
         super(inventory, x, y, z);
     }
 
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-
         return false;
     }
 }

@@ -13,32 +13,27 @@ import lib.cofh.util.MathHelper;
  */
 public class ItemEnergyContainer extends Item implements IEnergyContainerItem
 {
-
     protected int capacity;
     protected int maxReceive;
     protected int maxExtract;
 
     public ItemEnergyContainer(int itemID)
     {
-
         super(itemID);
     }
 
     public ItemEnergyContainer(int itemID, int capacity)
     {
-
         this(itemID, capacity, capacity, capacity);
     }
 
     public ItemEnergyContainer(int itemID, int capacity, int maxTransfer)
     {
-
         this(itemID, capacity, maxTransfer, maxTransfer);
     }
 
     public ItemEnergyContainer(int itemID, int capacity, int maxReceive, int maxExtract)
     {
-
         super(itemID);
         this.capacity = capacity;
         this.maxReceive = maxReceive;
@@ -47,27 +42,23 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem
 
     public ItemEnergyContainer setCapacity(int capacity)
     {
-
         this.capacity = capacity;
         return this;
     }
 
     public void setMaxTransfer(int maxTransfer)
     {
-
         setMaxReceive(maxTransfer);
         setMaxExtract(maxTransfer);
     }
 
     public void setMaxReceive(int maxReceive)
     {
-
         this.maxReceive = maxReceive;
     }
 
     public void setMaxExtract(int maxExtract)
     {
-
         this.maxExtract = maxExtract;
     }
 
@@ -75,7 +66,6 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem
     @Override
     public int receiveEnergy(ItemStack container, int maxReceive, boolean doReceive)
     {
-
         if (container.stackTagCompound == null)
         {
             container.stackTagCompound = new NBTTagCompound();
@@ -94,7 +84,6 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem
     @Override
     public int extractEnergy(ItemStack container, int maxExtract, boolean doExtract)
     {
-
         if ((container.stackTagCompound == null) || !container.stackTagCompound.hasKey("Energy"))
         {
             return 0;
@@ -113,7 +102,6 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem
     @Override
     public int getEnergyStored(ItemStack container)
     {
-
         if ((container.stackTagCompound == null) || !container.stackTagCompound.hasKey("Energy"))
         {
             return 0;
@@ -124,7 +112,6 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem
     @Override
     public int getMaxEnergyStored(ItemStack container)
     {
-
         return capacity;
     }
 }

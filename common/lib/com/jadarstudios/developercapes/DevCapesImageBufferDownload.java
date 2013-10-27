@@ -17,7 +17,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class DevCapesImageBufferDownload implements IImageBuffer
 {
-
     private int imageWidth;
     private int imageHeight;
 
