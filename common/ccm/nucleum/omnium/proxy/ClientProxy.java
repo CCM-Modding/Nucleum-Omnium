@@ -3,7 +3,6 @@
  */
 package ccm.nucleum.omnium.proxy;
 
-import ccm.nucleum.omnium.utils.handler.IconHandler;
 import ccm.nucleum.omnium.utils.handler.events.EventRain;
 import ccm.nucleum.omnium.utils.lib.Locations;
 import ccm.nucleum.omnium.utils.lib.Properties;
@@ -31,6 +30,5 @@ public class ClientProxy extends CommonProxy
     public void initEventHandling()
     {
         registerEvent(new EventRain());
-        registerEvent(new IconHandler());
     }
 }
