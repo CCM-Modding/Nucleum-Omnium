@@ -9,14 +9,21 @@ import static java.lang.String.format;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import ccm.nucleum.omnium.utils.lib.Properties;
 
 public class CCMLogger
 {
-    public static final CCMLogger DEFAULT_LOGGER = new CCMLogger(Logger.getLogger("CCM"));
-
+    public static final CCMLogger DEFAULT_LOGGER;
+    
+    static{
+        Logger log = Logger.getLogger("CCM");
+        log.setParent(FMLLog.getLogger());
+        DEFAULT_LOGGER = new CCMLogger(log);
+    }
+    
     /* Class Internals */
     private Logger logger;
 
@@ -31,6 +38,7 @@ public class CCMLogger
      */
     public static CCMLogger initLogger(FMLPreInitializationEvent event)
     {
+        event.getModLog().setParent(DEFAULT_LOGGER.logger);
         return new CCMLogger(event.getModLog());
     }
 
