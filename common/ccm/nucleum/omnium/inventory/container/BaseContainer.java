@@ -116,5 +116,5 @@ public abstract class BaseContainer extends Container
         return drawBoxInventory(player, index, x, y, 3, 9);
     }
 
-    public abstract Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z);
+    public abstract Object getServerGuiElement(EntityPlayer player, World world, int x, int y, int z);
 }

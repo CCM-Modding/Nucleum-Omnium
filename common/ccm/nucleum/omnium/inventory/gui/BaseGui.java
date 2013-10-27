@@ -14,5 +14,5 @@ public abstract class BaseGui extends GuiBase
         super(container);
     }
 
-    public abstract Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z);
+    public abstract Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z);
 }
