@@ -20,10 +20,12 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 import ccm.nucleum.network.PacketHandler;
 import ccm.nucleum.omnium.proxy.CommonProxy;
 import ccm.nucleum.omnium.utils.handler.configuration.NOConfig;
+import ccm.nucleum.omnium.utils.handler.gui.GuiHandler;
 import ccm.nucleum.omnium.utils.handler.mods.ModHandler;
 import ccm.nucleum.omnium.utils.helper.DataHelper;
 import ccm.nucleum.omnium.utils.registry.CommandRegistry;
@@ -56,7 +58,7 @@ public class NucleumOmnium extends CCMMod
         ModHandler.addModHandler("Mystcraft", "ccm.nucleum.omnium.utils.handler.mods.MystcraftHandler");
 
         // Registers the GUI Handler
-        // NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GuiHandler.instance());
+        NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GuiHandler.INSTANCE);
     }
 
     @EventHandler

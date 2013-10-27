@@ -5,8 +5,8 @@ import ccm.nucleum.omnium.inventory.gui.BaseGui;
 
 final class GuiWrapper
 {
-    final BaseContainer server;
-    final BaseGui client;
+    private final BaseContainer server;
+    private final BaseGui client;
 
     public GuiWrapper(BaseContainer container, BaseGui gui)
     {

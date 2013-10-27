@@ -10,6 +10,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.world.World;
 
 import ccm.nucleum.omnium.inventory.slot.OutputSlot;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
@@ -114,4 +115,6 @@ public abstract class BaseContainer extends Container
     {
         return drawBoxInventory(player, index, x, y, 3, 9);
     }
+    
+    public abstract Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z);
 }
