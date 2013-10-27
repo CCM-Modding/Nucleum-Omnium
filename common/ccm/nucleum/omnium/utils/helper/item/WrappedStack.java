@@ -64,7 +64,6 @@ public class WrappedStack implements Comparable<WrappedStack>
             oreStack.stackSize = 1;
         } else if (object instanceof ArrayList)
         {
-
             itemStack = null;
 
             ArrayList<?> objectList = (ArrayList<?>) object;
