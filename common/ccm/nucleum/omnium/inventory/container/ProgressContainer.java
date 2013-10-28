@@ -5,18 +5,15 @@ package ccm.nucleum.omnium.inventory.container;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import ccm.nucleum.omnium.inventory.container.element.TimedElement;
 import ccm.nucleum.omnium.tileentity.ProgressTE;
 
 public abstract class ProgressContainer extends BaseContainer
 {
     protected final ProgressTE tile;
-    protected int lastCookTime;
 
     public ProgressContainer(final ProgressTE tile)
     {
@@ -36,7 +33,7 @@ public abstract class ProgressContainer extends BaseContainer
         super.addCraftingToCrafters(crafting);
         for (int t = 0; t < tile.getTimedElements().length; ++t)
         {
-            crafting.sendProgressBarUpdate(this, t, tile.getTimedElements()[t].getTimeLeft());
+            crafting.sendProgressBarUpdate(this, t, tile.getTimeLeft(t));
         }
     }
 
@@ -54,15 +51,15 @@ public abstract class ProgressContainer extends BaseContainer
                 for (int i = 0; i < crafters.size(); ++i)
                 {
                     final ICrafting icrafting = (ICrafting) crafters.get(i);
-                    if (!tile.getTimedElements()[t].isUpdated())
+                    if (!tile.isUpdated(t))
                     {
-                        icrafting.sendProgressBarUpdate(this, t, tile.getTimedElements()[t].getTimeLeft());
+                        icrafting.sendProgressBarUpdate(this, t, tile.getTimeLeft(t));
                     }
                 }
-                tile.getTimedElements()[t].updateRecord();
+                tile.updateRecord(t);
             } else
             {
-                tile.getTimedElements()[t].destroyRecord();
+                tile.destroyRecord(t);
             }
         }
     }
@@ -71,6 +68,6 @@ public abstract class ProgressContainer extends BaseContainer
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(final int progressIndex, final int progress)
     {
-        tile.getTimedElements()[progressIndex].setTimeLeft(progress);
+        tile.setTimeLeft(progressIndex, progress);
     }
 }
