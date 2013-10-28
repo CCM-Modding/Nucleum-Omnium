@@ -21,26 +21,29 @@ public class TimedElement
     /**
      * Updates the recorded time
      */
-    public void updateRecord()
+    public TimedElement updateRecord()
     {
         recordedTime = timeLeft;
+        return this;
     }
 
     /**
      * Sets the recorded time equal to 0
      */
-    public void destroyRecord()
+    public TimedElement destroyRecord()
     {
         recordedTime = 0;
+        return this;
     }
 
     /**
      * @param extra
      *            Will get added, thus pass a -1 to subtract
      */
-    public void update(int extra)
+    public TimedElement update(int extra)
     {
         timeLeft += extra;
+        return this;
     }
 
     /**
@@ -55,9 +58,10 @@ public class TimedElement
      * @param timeLeft
      *            the amount of time left
      */
-    public void setTimeLeft(int timeLeft)
+    public TimedElement setTimeLeft(int timeLeft)
     {
         this.timeLeft = timeLeft;
+        return this;
     }
 
     public void writeToNBT(NBTTagCompound nbt)
