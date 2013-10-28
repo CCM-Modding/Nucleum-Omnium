@@ -10,22 +10,23 @@ import net.minecraft.inventory.IInventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import ccm.nucleum.omnium.inventory.container.element.TimedElement;
 import ccm.nucleum.omnium.tileentity.ProgressTE;
 
 public abstract class ProgressContainer extends BaseContainer
 {
-    protected final ProgressTE guiLogic;
+    protected final ProgressTE tile;
     protected int lastCookTime;
 
-    public ProgressContainer(final ProgressTE guiLogic)
+    public ProgressContainer(final ProgressTE tile)
     {
-        super(guiLogic);
-        this.guiLogic = guiLogic;
+        super(tile);
+        this.tile = tile;
     }
 
-    public ProgressContainer(final ProgressTE guiLogic, final InventoryPlayer player, final int x, final int y)
+    public ProgressContainer(final ProgressTE tile, final InventoryPlayer player, final int x, final int y)
     {
-        this(guiLogic);
+        this(tile);
         drawPlayerFullInv(player, x, y);
     }
 
@@ -33,7 +34,10 @@ public abstract class ProgressContainer extends BaseContainer
     public void addCraftingToCrafters(final ICrafting crafting)
     {
         super.addCraftingToCrafters(crafting);
-        crafting.sendProgressBarUpdate(this, 0, guiLogic.getTimeLeft());
+        for (int t = 0; t < tile.getTimedElements().length; ++t)
+        {
+            crafting.sendProgressBarUpdate(this, t, tile.getTimedElements()[t].getTimeLeft());
+        }
     }
 
     /**
@@ -43,20 +47,23 @@ public abstract class ProgressContainer extends BaseContainer
     public void detectAndSendChanges()
     {
         super.detectAndSendChanges();
-        if (guiLogic.canRun())
+        for (int t = 0; t < tile.getTimedElements().length; ++t)
         {
-            for (int i = 0; i < crafters.size(); ++i)
+            if (tile.canRun())
             {
-                final ICrafting icrafting = (ICrafting) crafters.get(i);
-                if (lastCookTime != guiLogic.getTimeLeft())
+                for (int i = 0; i < crafters.size(); ++i)
                 {
-                    icrafting.sendProgressBarUpdate(this, 0, guiLogic.getTimeLeft());
+                    final ICrafting icrafting = (ICrafting) crafters.get(i);
+                    if (!tile.getTimedElements()[t].isUpdated())
+                    {
+                        icrafting.sendProgressBarUpdate(this, t, tile.getTimedElements()[t].getTimeLeft());
+                    }
                 }
+                tile.getTimedElements()[t].updateRecord();
+            } else
+            {
+                tile.getTimedElements()[t].destroyRecord();
             }
-            lastCookTime = guiLogic.getTimeLeft();
-        } else
-        {
-            lastCookTime = 0;
         }
     }
 
@@ -64,9 +71,6 @@ public abstract class ProgressContainer extends BaseContainer
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(final int progressIndex, final int progress)
     {
-        if (progressIndex == 0)
-        {
-            guiLogic.setTimeLeft(progress);
-        }
+        tile.getTimedElements()[progressIndex].setTimeLeft(progress);
     }
 }

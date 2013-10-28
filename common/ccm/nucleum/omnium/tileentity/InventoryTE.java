@@ -142,9 +142,9 @@ public class InventoryTE extends BaseTE implements IInventory
     }
 
     @Override
-    public void writeToNBT(final NBTTagCompound nbt)
+    public void writeSubsNBT(final NBTTagCompound nbt)
     {
-        super.writeToNBT(nbt);
+        super.writeSubsNBT(nbt);
         nbt.setInteger(NBTConstants.NBT_INVENTORY_SIZE, getSizeInventory());
         nbt.setTag(NBTConstants.NBT_INVENTORY, InventoryHelper.writeInventoryToNBT(getInventory()));
     }

@@ -78,6 +78,6 @@ public final class TileHandler
      */
     private static String hash(final String name)
     {
-        return ("CCM.ENTITY.TILE." + name + "." + name.hashCode());
+        return ("CCM.ENTITY.TILE." + name.toUpperCase() + "." + name.hashCode());
     }
 }

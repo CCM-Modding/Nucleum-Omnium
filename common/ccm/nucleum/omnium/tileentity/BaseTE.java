@@ -149,7 +149,15 @@ public class BaseTE extends TileEntity
     public void writeToNBT(final NBTTagCompound nbt)
     {
         super.writeToNBT(nbt);
+        NBTTagCompound ccmNBT = new NBTTagCompound();
+        
+        writeSubsNBT(ccmNBT);
+        
+        nbt.setCompoundTag(NBTConstants.NBT_TILE_ENTITY, ccmNBT);
+    }
 
+    protected void writeSubsNBT(NBTTagCompound nbt)
+    {
         nbt.setByte(NBTConstants.NBT_TE_DIRECTION, (byte) orientation.ordinal());
         if (hasOwner())
         {
