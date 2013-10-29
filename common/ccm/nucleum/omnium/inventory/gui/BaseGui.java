@@ -1,9 +1,7 @@
 package ccm.nucleum.omnium.inventory.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import ccm.nucleum.omnium.utils.handler.ResourceHandler;
@@ -16,7 +14,7 @@ public abstract class BaseGui extends GuiBase
     {
         super(container);
     }
-    
+
     public BaseGui(Container container, String name)
     {
         super(container, ResourceHandler.getGUI(name));

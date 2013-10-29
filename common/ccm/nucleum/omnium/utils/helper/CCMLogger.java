@@ -17,13 +17,14 @@ import ccm.nucleum.omnium.utils.lib.Properties;
 public class CCMLogger
 {
     public static final CCMLogger DEFAULT_LOGGER;
-    
-    static{
+
+    static
+    {
         Logger log = Logger.getLogger("CCM");
         log.setParent(FMLLog.getLogger());
         DEFAULT_LOGGER = new CCMLogger(log);
     }
-    
+
     /* Class Internals */
     private Logger logger;
 

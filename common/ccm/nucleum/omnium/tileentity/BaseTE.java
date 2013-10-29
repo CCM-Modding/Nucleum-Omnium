@@ -150,9 +150,9 @@ public class BaseTE extends TileEntity
     {
         super.writeToNBT(nbt);
         NBTTagCompound ccmNBT = new NBTTagCompound();
-        
+
         writeSubsNBT(ccmNBT);
-        
+
         nbt.setCompoundTag(NBTConstants.NBT_TILE_ENTITY, ccmNBT);
     }
 

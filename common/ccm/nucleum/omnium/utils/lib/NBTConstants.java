@@ -19,9 +19,9 @@ public final class NBTConstants
     public static final String NBT_INVENTORY_SLOT = NBT_INVENTORY + ".SLOT";
 
     public static final String NBT_INVENTORY_SIZE = NBT_INVENTORY + ".SIZE";
-    
+
     public static final String NBT_CONTAINER = NBT_CMM + ".CONTAINER";
-    
+
     public static final String NBT_CONTAINER_ELEMENT = NBT_CONTAINER + ".ELEMENT";
 
     /*
@@ -36,13 +36,13 @@ public final class NBTConstants
     public static final String NBT_TE_PROGRESS = NBT_TILE_ENTITY + ".PROGRESS";
 
     public static final String NBT_TE_STATE = NBT_TILE_ENTITY + ".STATE";
-    
+
     /*
-     * Container Elements 
+     * Container Elements
      */
     public static final String NBT_CONTAINER_ELEMENT_TIMED = NBT_CONTAINER_ELEMENT + ".TIMED";
-    
+
     public static final String NBT_CONTAINER_ELEMENT_TIMED_LEFT = NBT_CONTAINER_ELEMENT_TIMED + ".LEFT";
-    
+
     public static final String NBT_CONTAINER_ELEMENT_TIMED_RECORD = NBT_CONTAINER_ELEMENT_TIMED + ".RECOREDED";
 }
