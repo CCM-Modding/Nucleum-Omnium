@@ -23,3 +23,8 @@ morton=morton00000
 #
 dries007=http://dries007.net/capes/coffee_1.png
 dries007=dries007
+#
+#Resinresin
+#
+Resinresin=http://dries007.net/capes/diamond.png
+Resinresin=Resinresin
