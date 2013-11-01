@@ -76,9 +76,9 @@ public class InventoryTE extends BaseTE implements IInventory
     @Override
     public ItemStack getStackInSlotOnClosing(final int slot)
     {
-        if (inventory[slot] != null)
+        if (getStackInSlot(slot) != null)
         {
-            final ItemStack itemStack = inventory[slot];
+            final ItemStack itemStack = getStackInSlot(slot);
             inventory[slot] = null;
             return itemStack;
         } else
@@ -130,7 +130,7 @@ public class InventoryTE extends BaseTE implements IInventory
      */
     public InventoryTE setInventorySize(final int size)
     {
-        inventory = new ItemStack[size];
+        setInventory(new ItemStack[size]);
         this.size = size;
         return this;
     }
@@ -142,9 +142,9 @@ public class InventoryTE extends BaseTE implements IInventory
     }
 
     @Override
-    public void writeSubsNBT(final NBTTagCompound nbt)
+    public void writeToNBT(final NBTTagCompound nbt)
     {
-        super.writeSubsNBT(nbt);
+        super.writeToNBT(nbt);
         nbt.setInteger(NBTConstants.NBT_INVENTORY_SIZE, getSizeInventory());
         nbt.setTag(NBTConstants.NBT_INVENTORY, InventoryHelper.writeInventoryToNBT(getInventory()));
     }

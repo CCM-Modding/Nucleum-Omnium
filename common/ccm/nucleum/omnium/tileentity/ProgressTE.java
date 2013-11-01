@@ -89,9 +89,9 @@ public class ProgressTE extends ActiveTE
     }
 
     @Override
-    public void writeSubsNBT(NBTTagCompound nbt)
+    public void writeToNBT(NBTTagCompound nbt)
     {
-        super.writeSubsNBT(nbt);
+        super.writeToNBT(nbt);
         NBTTagCompound tmpNBT;
         final NBTTagList list = new NBTTagList();
         for (int i = 0; i < progresses.length; i++)
