@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import ccm.nucleum.omnium.utils.helper.NBTHelper;
 import ccm.nucleum.omnium.utils.lib.NBTConstants;
 
-public class TimedElement
+public class TimedElement implements IContainerElement
 {
     protected int timeLeft;
     protected int recordedTime;
@@ -64,6 +64,7 @@ public class TimedElement
         return this;
     }
 
+    @Override
     public void writeToNBT(NBTTagCompound nbt)
     {
         nbt.setInteger(NBTConstants.NBT_CONTAINER_ELEMENT_TIMED_LEFT, getTimeLeft());

@@ -78,9 +78,9 @@ public final class ResourceHandler
     // /////////////////////////////
 
     /** Binds a GUI texture to it's GUI */
-    public static void bindGUI(final Minecraft mc, final String name)
+    public static void bindGUI(final String name)
     {
-        mc.getTextureManager().bindTexture(getGUI(name));
+        Minecraft.getMinecraft().getTextureManager().bindTexture(getGUI(name));
     }
 
     /** Returns the file path to the Resource */
