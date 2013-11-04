@@ -1,7 +1,7 @@
 #
 #Captain
 #
-captain=http://i.imgur.com/i0r3WGh.png
+captain=http://i.imgur.com/ymtAM3N.png
 captain=captain_shadows
 #
 #Clay
