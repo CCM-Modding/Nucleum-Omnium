@@ -8,31 +8,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public final class DispenserFilledBucketHandler extends BehaviorDefaultDispenseItem
-{
-    private final BehaviorDefaultDispenseItem defaultDispenserItemBehavior = new BehaviorDefaultDispenseItem();
+public final class DispenserFilledBucketHandler extends BehaviorDefaultDispenseItem {
 
-    /**
-     * Dispense the specified stack, play the dispense sound and spawn particles.
-     */
-    @Override
-    public ItemStack dispenseStack(IBlockSource blockSource, ItemStack stackBucket)
-    {
-        EnumFacing facing = BlockDispenser.getFacing(blockSource.getBlockMetadata());
-        World world = blockSource.getWorld();
+	private final BehaviorDefaultDispenseItem defaultDispenserItemBehavior = new BehaviorDefaultDispenseItem();
 
-        int x = blockSource.getXInt() + facing.getFrontOffsetX();
-        int y = blockSource.getYInt() + facing.getFrontOffsetY();
-        int z = blockSource.getZInt() + facing.getFrontOffsetZ();
+	/**
+	 * Dispense the specified stack, play the dispense sound and spawn particles.
+	 */
+	@Override
+	public ItemStack dispenseStack(IBlockSource blockSource, ItemStack stackBucket) {
+		EnumFacing facing = BlockDispenser.getFacing(blockSource.getBlockMetadata());
+		World world = blockSource.getWorld();
 
-        if (!world.isAirBlock(x, y, z) && world.getBlockMaterial(x, y, z).isSolid())
-        {
-            return stackBucket;
-        }
-        if (BucketHandler.emptyBucket(blockSource.getWorld(), x, y, z, stackBucket))
-        {
-            return new ItemStack(Item.bucketEmpty);
-        }
-        return defaultDispenserItemBehavior.dispense(blockSource, stackBucket);
-    }
+		int x = blockSource.getXInt() + facing.getFrontOffsetX();
+		int y = blockSource.getYInt() + facing.getFrontOffsetY();
+		int z = blockSource.getZInt() + facing.getFrontOffsetZ();
+
+		if (!world.isAirBlock(x, y, z) && world.getBlockMaterial(x, y, z).isSolid()) {
+			return stackBucket;
+		}
+		if (BucketHandler.emptyBucket(blockSource.getWorld(), x, y, z, stackBucket)) {
+			return new ItemStack(Item.bucketEmpty);
+		}
+		return defaultDispenserItemBehavior.dispense(blockSource, stackBucket);
+	}
 }

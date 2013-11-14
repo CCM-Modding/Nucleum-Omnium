@@ -1,8 +1,8 @@
 package lib.cofh.gui.element;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 
 import lib.cofh.gui.GuiBase;
 import lib.cofh.gui.TabTracker;
@@ -13,173 +13,141 @@ import lib.cofh.render.RenderHelper;
  * 
  * @author King Lemming
  */
-public abstract class TabBase extends ElementBase
-{
-    public boolean open;
-    public int side = 1;
+public abstract class TabBase extends ElementBase {
 
-    public int backgroundColor = 0xffffff;
+	public boolean open;
+	public int side = 1;
 
-    public int currentShiftX = 0;
-    public int currentShiftY = 0;
+	public int backgroundColor = 0xffffff;
 
-    public int minWidth = 22;
-    public int maxWidth = 124;
-    public int currentWidth = minWidth;
+	public int currentShiftX = 0;
+	public int currentShiftY = 0;
 
-    public int minHeight = 22;
-    public int maxHeight = 22;
-    public int currentHeight = minHeight;
+	public int minWidth = 22;
+	public int maxWidth = 124;
+	public int currentWidth = minWidth;
 
-    public static final ResourceLocation DEFAULT_TEXTURE_LEFT = new ResourceLocation(GuiBase.PATH_ELEMENTS + "Tab_Left.png");
-    public static final ResourceLocation DEFAULT_TEXTURE_RIGHT = new ResourceLocation(GuiBase.PATH_ELEMENTS + "Tab_Right.png");
+	public int minHeight = 22;
+	public int maxHeight = 22;
+	public int currentHeight = minHeight;
 
-    public TabBase(GuiBase gui)
-    {
-        super(gui, 0, 0);
-        texture = DEFAULT_TEXTURE_RIGHT;
-    }
+	public static final ResourceLocation DEFAULT_TEXTURE_LEFT = new ResourceLocation(GuiBase.PATH_ELEMENTS + "Tab_Left.png");
+	public static final ResourceLocation DEFAULT_TEXTURE_RIGHT = new ResourceLocation(GuiBase.PATH_ELEMENTS + "Tab_Right.png");
 
-    public TabBase(GuiBase gui, int side)
-    {
-        super(gui, 0, 0);
-        this.side = side;
+	public TabBase(GuiBase gui) {
+		super(gui, 0, 0);
+		texture = DEFAULT_TEXTURE_RIGHT;
+	}
 
-        if (side == 0)
-        {
-            texture = DEFAULT_TEXTURE_LEFT;
-        } else
-        {
-            texture = DEFAULT_TEXTURE_RIGHT;
-        }
-    }
+	public TabBase(GuiBase gui, int side) {
+		super(gui, 0, 0);
+		this.side = side;
 
-    @Override
-    public void update()
-    {
-        if (open && (currentWidth < maxWidth))
-        {
-            currentWidth += 8;
-        } else if (!open && (currentWidth > minWidth))
-        {
-            currentWidth -= 8;
-        }
+		if (side == 0) {
+			texture = DEFAULT_TEXTURE_LEFT;
+		} else {
+			texture = DEFAULT_TEXTURE_RIGHT;
+		}
+	}
 
-        if (currentWidth > maxWidth)
-        {
-            currentWidth = maxWidth;
-        } else if (currentWidth < minWidth)
-        {
-            currentWidth = minWidth;
-        }
+	@Override
+	public void update() {
+		if (open && currentWidth < maxWidth) {
+			currentWidth += 8;
+		} else if (!open && currentWidth > minWidth) {
+			currentWidth -= 8;
+		}
 
-        if (open && (currentHeight < maxHeight))
-        {
-            currentHeight += 8;
-        } else if (!open && (currentHeight > minHeight))
-        {
-            currentHeight -= 8;
-        }
+		if (currentWidth > maxWidth) {
+			currentWidth = maxWidth;
+		} else if (currentWidth < minWidth) {
+			currentWidth = minWidth;
+		}
 
-        if (currentHeight > maxHeight)
-        {
-            currentHeight = maxHeight;
-        } else if (currentHeight < minHeight)
-        {
-            currentHeight = minHeight;
-        }
+		if (open && currentHeight < maxHeight) {
+			currentHeight += 8;
+		} else if (!open && currentHeight > minHeight) {
+			currentHeight -= 8;
+		}
 
-        if (open && (currentWidth == maxWidth) && (currentHeight == maxHeight))
-        {
-            setFullyOpen();
-        }
-    }
+		if (currentHeight > maxHeight) {
+			currentHeight = maxHeight;
+		} else if (currentHeight < minHeight) {
+			currentHeight = minHeight;
+		}
 
-    public boolean intersectsWith(int mouseX, int mouseY, int shiftX, int shiftY)
-    {
-        if (side == 0)
-        {
-            if ((mouseX <= shiftX) && (mouseX >= (shiftX - currentWidth)) && (mouseY >= shiftY) && (mouseY <= (shiftY + currentHeight)))
-            {
-                return true;
-            }
-        } else if ((mouseX >= shiftX) && (mouseX <= (shiftX + currentWidth)) && (mouseY >= shiftY) && (mouseY <= (shiftY + currentHeight)))
-        {
-            return true;
-        }
-        return false;
-    }
+		if (open && currentWidth == maxWidth && currentHeight == maxHeight) {
+			setFullyOpen();
+		}
+	}
 
-    protected void drawBackground()
-    {
-        float colorR = ((backgroundColor >> 16) & 255) / 255.0F;
-        float colorG = ((backgroundColor >> 8) & 255) / 255.0F;
-        float colorB = (backgroundColor & 255) / 255.0F;
+	public boolean intersectsWith(int mouseX, int mouseY, int shiftX, int shiftY) {
+		if (side == 0) {
+			if (mouseX <= shiftX && mouseX >= shiftX - currentWidth && mouseY >= shiftY && mouseY <= shiftY + currentHeight) {
+				return true;
+			}
+		} else if (mouseX >= shiftX && mouseX <= shiftX + currentWidth && mouseY >= shiftY && mouseY <= shiftY + currentHeight) {
+			return true;
+		}
+		return false;
+	}
 
-        GL11.glColor4f(colorR, colorG, colorB, 1.0F);
+	protected void drawBackground() {
+		float colorR = (backgroundColor >> 16 & 255) / 255.0F;
+		float colorG = (backgroundColor >> 8 & 255) / 255.0F;
+		float colorB = (backgroundColor & 255) / 255.0F;
 
-        RenderHelper.bindTexture(texture);
+		GL11.glColor4f(colorR, colorG, colorB, 1.0F);
 
-        if (side == 0)
-        {
-            gui.drawTexturedModalRect(posX - currentWidth, posY + 4, 0, (256 - currentHeight) + 4, 4, currentHeight - 4);
-            gui.drawTexturedModalRect((posX - currentWidth) + 4, posY, (256 - currentWidth) + 4, 0, currentWidth - 4, 4);
-            gui.drawTexturedModalRect(posX - currentWidth, posY, 0, 0, 4, 4);
-            gui.drawTexturedModalRect((posX - currentWidth) + 4, posY + 4, (256 - currentWidth) + 4, (256 - currentHeight) + 4, currentWidth - 4, currentHeight - 4);
-        } else
-        {
-            gui.drawTexturedModalRect(posX, posY, 0, 256 - currentHeight, 4, currentHeight);
-            gui.drawTexturedModalRect(posX + 4, posY, (256 - currentWidth) + 4, 0, currentWidth - 4, 4);
-            gui.drawTexturedModalRect(posX, posY, 0, 0, 4, 4);
-            gui.drawTexturedModalRect(posX + 4, posY + 4, (256 - currentWidth) + 4, (256 - currentHeight) + 4, currentWidth - 4, currentHeight - 4);
-        }
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
-    }
+		RenderHelper.bindTexture(texture);
 
-    protected void drawTabIcon(String iconName)
-    {
-        int offsetX = 2;
-        if (side == 0)
-        {
-            offsetX = 4 - currentWidth;
-        }
-        gui.drawIcon(iconName, posX + offsetX, posY + 3, 1);
-    }
+		if (side == 0) {
+			gui.drawTexturedModalRect(posX - currentWidth, posY + 4, 0, 256 - currentHeight + 4, 4, currentHeight - 4);
+			gui.drawTexturedModalRect(posX - currentWidth + 4, posY, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
+			gui.drawTexturedModalRect(posX - currentWidth, posY, 0, 0, 4, 4);
+			gui.drawTexturedModalRect(posX - currentWidth + 4, posY + 4, 256 - currentWidth + 4, 256 - currentHeight + 4, currentWidth - 4, currentHeight - 4);
+		} else {
+			gui.drawTexturedModalRect(posX, posY, 0, 256 - currentHeight, 4, currentHeight);
+			gui.drawTexturedModalRect(posX + 4, posY, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
+			gui.drawTexturedModalRect(posX, posY, 0, 0, 4, 4);
+			gui.drawTexturedModalRect(posX + 4, posY + 4, 256 - currentWidth + 4, 256 - currentHeight + 4, currentWidth - 4, currentHeight - 4);
+		}
+		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
+	}
 
-    public boolean isFullyOpened()
-    {
-        return currentWidth >= maxWidth;
-    }
+	protected void drawTabIcon(String iconName) {
+		int offsetX = 2;
+		if (side == 0) {
+			offsetX = 4 - currentWidth;
+		}
+		gui.drawIcon(iconName, posX + offsetX, posY + 3, 1);
+	}
 
-    public void setFullyOpen()
-    {
-        open = true;
-        currentWidth = maxWidth;
-        currentHeight = maxHeight;
-    }
+	public boolean isFullyOpened() {
+		return currentWidth >= maxWidth;
+	}
 
-    public void toggleOpen()
-    {
-        if (open)
-        {
-            open = false;
-            if (side == 0)
-            {
-                TabTracker.setOpenedLeftTab(null);
-            } else
-            {
-                TabTracker.setOpenedRightTab(null);
-            }
-        } else
-        {
-            open = true;
-            if (side == 0)
-            {
-                TabTracker.setOpenedLeftTab(this.getClass());
-            } else
-            {
-                TabTracker.setOpenedRightTab(this.getClass());
-            }
-        }
-    }
+	public void setFullyOpen() {
+		open = true;
+		currentWidth = maxWidth;
+		currentHeight = maxHeight;
+	}
+
+	public void toggleOpen() {
+		if (open) {
+			open = false;
+			if (side == 0) {
+				TabTracker.setOpenedLeftTab(null);
+			} else {
+				TabTracker.setOpenedRightTab(null);
+			}
+		} else {
+			open = true;
+			if (side == 0) {
+				TabTracker.setOpenedLeftTab(this.getClass());
+			} else {
+				TabTracker.setOpenedRightTab(this.getClass());
+			}
+		}
+	}
 }

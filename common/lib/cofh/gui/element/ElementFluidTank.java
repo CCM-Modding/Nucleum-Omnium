@@ -2,77 +2,68 @@ package lib.cofh.gui.element;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.IFluidTank;
-
 import lib.cofh.gui.GuiBase;
 import lib.cofh.render.RenderHelper;
 
-public class ElementFluidTank extends ElementBase
-{
-    public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(GuiBase.PATH_ELEMENTS + "FluidTank.png");
-    public static final int DEFAULT_SCALE = 60;
+public class ElementFluidTank extends ElementBase {
 
-    protected IFluidTank tank;
-    protected int gaugeType;
+	public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(GuiBase.PATH_ELEMENTS + "FluidTank.png");
+	public static final int DEFAULT_SCALE = 60;
 
-    public ElementFluidTank(GuiBase gui, int posX, int posY, IFluidTank tank)
-    {
-        super(gui, posX, posY);
-        this.tank = tank;
+	protected IFluidTank tank;
+	protected int gaugeType;
 
-        texture = DEFAULT_TEXTURE;
-        texW = 64;
-        texH = 64;
+	public ElementFluidTank(GuiBase gui, int posX, int posY, IFluidTank tank) {
+		super(gui, posX, posY);
+		this.tank = tank;
 
-        sizeX = 16;
-        sizeY = DEFAULT_SCALE;
-    }
+		this.texture = DEFAULT_TEXTURE;
+		this.texW = 64;
+		this.texH = 64;
 
-    public ElementFluidTank(GuiBase gui, int posX, int posY, IFluidTank tank, String texture)
-    {
-        super(gui, posX, posY);
-        this.tank = tank;
+		this.sizeX = 16;
+		this.sizeY = DEFAULT_SCALE;
+	}
 
-        this.texture = new ResourceLocation(texture);
-        texW = 64;
-        texH = 64;
+	public ElementFluidTank(GuiBase gui, int posX, int posY, IFluidTank tank, String texture) {
+		super(gui, posX, posY);
+		this.tank = tank;
 
-        sizeX = 16;
-        sizeY = DEFAULT_SCALE;
-    }
+		this.texture = new ResourceLocation(texture);
+		this.texW = 64;
+		this.texH = 64;
 
-    public ElementFluidTank setGauge(int gaugeType)
-    {
-        this.gaugeType = gaugeType;
-        return this;
-    }
+		this.sizeX = 16;
+		this.sizeY = DEFAULT_SCALE;
+	}
 
-    @Override
-    public void draw()
-    {
-        if (!visible)
-        {
-            return;
-        }
-        int amount = getScaled();
-        gui.drawFluid(posX, (posY + sizeY) - amount, tank.getFluid(), sizeX, amount);
-        RenderHelper.bindTexture(texture);
-        drawTexturedModalRect(posX, posY, 32 + (gaugeType * 16), 1, sizeX, sizeY);
-    }
+	public ElementFluidTank setGauge(int gaugeType) {
+		this.gaugeType = gaugeType;
+		return this;
+	}
 
-    @Override
-    public String getTooltip()
-    {
-        return "" + tank.getFluidAmount() + " / " + tank.getCapacity() + " mB";
-    }
+	@Override
+	public void draw() {
+		if (!visible) {
+			return;
+		}
+		int amount = getScaled();
+		gui.drawFluid(posX, posY + sizeY - amount, tank.getFluid(), sizeX, amount);
+		RenderHelper.bindTexture(texture);
+		drawTexturedModalRect(posX, posY, 32 + gaugeType * 16, 1, sizeX, sizeY);
+	}
 
-    @Override
-    public boolean handleMouseClicked(int x, int y, int mouseButton)
-    {
-        return false;
-    }
+	@Override
+	public String getTooltip() {
+		return "" + tank.getFluidAmount() + " / " + tank.getCapacity() + " mB";
+	}
 
-    int getScaled()
-    {
-        return (tank.getFluidAmount() * sizeY) / tank.getCapacity();
-    }
+	@Override
+	public boolean handleMouseClicked(int x, int y, int mouseButton) {
+		return false;
+	}
+
+	int getScaled() {
+		return tank.getFluidAmount() * sizeY / tank.getCapacity();
+	}
 }

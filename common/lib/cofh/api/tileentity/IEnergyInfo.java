@@ -1,12 +1,18 @@
 package lib.cofh.api.tileentity;
 
-public interface IEnergyInfo
-{
-    public int getEnergyPerTick();
+/**
+ * Implement this interface on Tile Entities which can report information about their energy usage.
+ * 
+ * @author King Lemming
+ * 
+ */
+public interface IEnergyInfo {
 
-    public int getMaxEnergyPerTick();
+	public int getEnergyPerTick();
 
-    public int getEnergy();
+	public int getMaxEnergyPerTick();
 
-    public int getMaxEnergy();
+	public int getEnergy();
+
+	public int getMaxEnergy();
 }

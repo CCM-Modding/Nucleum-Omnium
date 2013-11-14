@@ -3,108 +3,106 @@ package lib.cofh.gui.element;
 import net.minecraft.client.audio.SoundManager;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.client.FMLClientHandler;
-
 import lib.cofh.gui.GuiBase;
+import cpw.mods.fml.client.FMLClientHandler;
 
 /**
  * Base class for a modular GUI element. Has self-contained rendering methods and a link back to the {@link GuiBase} it is a part of.
  * 
  * @author King Lemming
+ * 
  */
-public abstract class ElementBase
-{
-    public static final SoundManager elementSoundManager = FMLClientHandler.instance().getClient().sndManager;
-    public static final FontRenderer elementFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
+public abstract class ElementBase {
 
-    protected GuiBase gui;
-    protected ResourceLocation texture;
+	public static final SoundManager elementSoundManager = FMLClientHandler.instance().getClient().sndManager;
+	public static final FontRenderer elementFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
 
-    protected int posX;
-    protected int posY;
+	protected GuiBase gui;
+	protected ResourceLocation texture;
 
-    protected int sizeX;
-    protected int sizeY;
+	protected int posX;
+	protected int posY;
 
-    public int texW = 256;
-    public int texH = 256;
+	protected int sizeX;
+	protected int sizeY;
 
-    protected boolean visible = true;
+	public int texW = 256;
+	public int texH = 256;
 
-    public ElementBase(GuiBase gui, int posX, int posY)
-    {
-        this.gui = gui;
-        this.posX = gui.getGuiLeft() + posX;
-        this.posY = gui.getGuiTop() + posY;
-    }
+	protected String name;
 
-    public ElementBase setTexture(String texture, int texW, int texH)
-    {
-        this.texture = new ResourceLocation(texture);
-        this.texW = texW;
-        this.texH = texH;
-        return this;
-    }
+	protected boolean visible = true;
 
-    public ElementBase setPosition(int posX, int posY)
-    {
-        this.posX = gui.getGuiLeft() + posX;
-        this.posY = gui.getGuiTop() + posY;
-        return this;
-    }
+	public ElementBase(GuiBase gui, int posX, int posY) {
+		this.gui = gui;
+		this.posX = gui.getGuiLeft() + posX;
+		this.posY = gui.getGuiTop() + posY;
+	}
 
-    public ElementBase setSize(int sizeX, int sizeY)
-    {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
-        return this;
-    }
+	public ElementBase setTexture(String texture, int texW, int texH) {
+		this.texture = new ResourceLocation(texture);
+		this.texW = texW;
+		this.texH = texH;
+		return this;
+	}
 
-    public ElementBase setVisible(boolean visible)
-    {
-        this.visible = visible;
-        return this;
-    }
+	public ElementBase setPosition(int posX, int posY) {
+		this.posX = gui.getGuiLeft() + posX;
+		this.posY = gui.getGuiTop() + posY;
+		return this;
+	}
 
-    public boolean isVisible()
-    {
-        return visible;
-    }
+	public ElementBase setSize(int sizeX, int sizeY) {
+		this.sizeX = sizeX;
+		this.sizeY = sizeY;
+		return this;
+	}
 
-    public void update()
-    {}
+	public ElementBase setVisible(boolean visible) {
+		this.visible = visible;
+		return this;
+	}
 
-    public abstract void draw();
+	public ElementBase setName(String name) {
+		this.name = name;
+		return this;
+	}
 
-    public void draw(int x, int y)
-    {
-        posX = x;
-        posY = y;
-        draw();
-    }
+	public boolean isVisible() {
+		return visible;
+	}
 
-    public abstract String getTooltip();
+	public void update() {}
 
-    public boolean intersectsWith(int mouseX, int mouseY)
-    {
-        mouseX += gui.getGuiLeft();
-        mouseY += gui.getGuiTop();
+	public abstract void draw();
 
-        if ((mouseX >= posX) && (mouseX <= (posX + sizeX)) && (mouseY >= posY) && (mouseY <= (posY + sizeY)))
-        {
-            return true;
-        }
-        return false;
-    }
+	public void draw(int x, int y) {
+		this.posX = x;
+		this.posY = y;
+		draw();
+	}
 
-    public boolean handleMouseClicked(int x, int y, int mouseButton)
-    {
-        return false;
-    }
+	public abstract String getTooltip();
 
-    public void drawTexturedModalRect(int x, int y, int u, int v, int width, int height)
-    {
-        gui.drawSizedTexturedModalRect(x, y, u, v, width, height, texW, texH);
-    }
+	public boolean intersectsWith(int mouseX, int mouseY) {
+		mouseX += gui.getGuiLeft();
+		mouseY += gui.getGuiTop();
+
+		if (mouseX >= this.posX && mouseX <= this.posX + this.sizeX && mouseY >= this.posY && mouseY <= this.posY + this.sizeY) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean handleMouseClicked(int x, int y, int mouseButton) {
+		return false;
+	}
+
+	public void drawTexturedModalRect(int x, int y, int u, int v, int width, int height) {
+		gui.drawSizedTexturedModalRect(x, y, u, v, width, height, texW, texH);
+	}
+
+	public String getName() {
+		return name;
+	}
 }

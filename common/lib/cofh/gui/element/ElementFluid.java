@@ -1,37 +1,31 @@
 package lib.cofh.gui.element;
 
 import net.minecraftforge.fluids.FluidStack;
-
 import lib.cofh.gui.GuiBase;
 
-public class ElementFluid extends ElementBase
-{
-    public FluidStack fluid;
+public class ElementFluid extends ElementBase {
 
-    public ElementFluid(GuiBase gui, int posX, int posY)
-    {
-        super(gui, posX, posY);
-    }
+	public FluidStack fluid;
 
-    public ElementFluid setFluid(FluidStack fluid)
-    {
-        this.fluid = fluid;
-        return this;
-    }
+	public ElementFluid(GuiBase gui, int posX, int posY) {
+		super(gui, posX, posY);
+	}
 
-    @Override
-    public void draw()
-    {
-        if (!visible)
-        {
-            return;
-        }
-        gui.drawFluid(posX, posY, fluid, sizeX, sizeY);
-    }
+	public ElementFluid setFluid(FluidStack fluid) {
+		this.fluid = fluid;
+		return this;
+	}
 
-    @Override
-    public String getTooltip()
-    {
-        return null;
-    }
+	@Override
+	public void draw() {
+		if (!visible) {
+			return;
+		}
+		gui.drawFluid(posX, posY, fluid, sizeX, sizeY);
+	}
+
+	@Override
+	public String getTooltip() {
+		return null;
+	}
 }

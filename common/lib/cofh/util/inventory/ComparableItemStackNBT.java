@@ -4,52 +4,47 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * Extension of {@link ComparableItemStack} except NBT sensitive. It is expected that this will have limited use, so this is a child class for overhead performance reasons.
+ * Extension of {@link ComparableItemStack} except NBT sensitive.
+ * 
+ * It is expected that this will have limited use, so this is a child class for overhead performance reasons.
  * 
  * @author King Lemming
+ * 
  */
-public class ComparableItemStackNBT extends ComparableItemStack
-{
-    public NBTTagCompound tag;
+public class ComparableItemStackNBT extends ComparableItemStack {
 
-    public ComparableItemStackNBT(ItemStack stack)
-    {
-        super(stack);
+	public NBTTagCompound tag;
 
-        if (stack != null)
-        {
-            if (stack.stackTagCompound != null)
-            {
-                tag = (NBTTagCompound) stack.stackTagCompound.copy();
-            }
-        }
-    }
+	public ComparableItemStackNBT(ItemStack stack) {
+		super(stack);
 
-    @Override
-    public boolean isStackEqual(ComparableItemStack other)
-    {
-        return super.isStackEqual(other) && isStackTagEqual((ComparableItemStackNBT) other);
-    }
+		if (stack != null) {
+			if (stack.stackTagCompound != null) {
+				tag = (NBTTagCompound) stack.stackTagCompound.copy();
+			}
+		}
+	}
 
-    private boolean isStackTagEqual(ComparableItemStackNBT other)
-    {
-        return tag == null ? other.tag == null : other.tag == null ? false : tag.equals(other.tag);
-    }
+	@Override
+	public boolean isStackEqual(ComparableItemStack other) {
+		return super.isStackEqual(other) && isStackTagEqual((ComparableItemStackNBT) other);
+	}
 
-    @Override
-    public ItemStack toItemStack()
-    {
-        if (tag == null)
-        {
-            return super.toItemStack();
-        }
-        if ((itemID < 0) || (itemID >= 32000))
-        {
-            return null;
-        }
-        ItemStack ret = new ItemStack(itemID, stackSize, metadata);
-        ret.stackTagCompound = (NBTTagCompound) tag.copy();
+	private boolean isStackTagEqual(ComparableItemStackNBT other) {
+		return tag == null ? other.tag == null : other.tag == null ? false : tag.equals(other.tag);
+	}
 
-        return ret;
-    }
+	@Override
+	public ItemStack toItemStack() {
+		if (tag == null) {
+			return super.toItemStack();
+		}
+		if (itemID < 0 || itemID >= 32000) {
+			return null;
+		}
+		ItemStack ret = new ItemStack(itemID, stackSize, metadata);
+		ret.stackTagCompound = (NBTTagCompound) tag.copy();
+
+		return ret;
+	}
 }

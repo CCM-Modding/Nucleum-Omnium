@@ -10,26 +10,23 @@ import net.minecraft.inventory.InventoryCrafting;
  * 
  * @author King Lemming
  */
-public final class InventoryCraftingFalse extends InventoryCrafting
-{
-    private static final NullContainer nullContainer = new NullContainer();
+public final class InventoryCraftingFalse extends InventoryCrafting {
 
-    /* NULL INNER CLASS */
-    public static class NullContainer extends Container
-    {
-        @Override
-        public void onCraftMatrixChanged(IInventory inventory)
-        {}
+	private static final NullContainer nullContainer = new NullContainer();
 
-        @Override
-        public boolean canInteractWith(EntityPlayer player)
-        {
-            return false;
-        }
-    }
+	/* NULL INNER CLASS */
+	public static class NullContainer extends Container {
 
-    public InventoryCraftingFalse(int width, int height)
-    {
-        super(nullContainer, width, height);
-    }
+		@Override
+		public void onCraftMatrixChanged(IInventory inventory) {}
+
+		@Override
+		public boolean canInteractWith(EntityPlayer player) {
+			return false;
+		}
+	}
+
+	public InventoryCraftingFalse(int width, int height) {
+		super(nullContainer, width, height);
+	}
 }

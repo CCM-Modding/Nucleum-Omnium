@@ -10,23 +10,19 @@ import net.minecraft.item.ItemStack;
  * 
  * @author King Lemming
  */
-public class SlotLocked extends Slot
-{
+public class SlotLocked extends Slot {
 
-    public SlotLocked(IInventory inventory, int x, int y, int z)
-    {
-        super(inventory, x, y, z);
-    }
+	public SlotLocked(IInventory inventory, int x, int y, int z) {
+		super(inventory, x, y, z);
+	}
 
-    @Override
-    public boolean isItemValid(ItemStack stack)
-    {
-        return false;
-    }
+	@Override
+	public boolean isItemValid(ItemStack stack) {
+		return false;
+	}
 
-    @Override
-    public boolean canTakeStack(EntityPlayer player)
-    {
-        return false;
-    }
+	@Override
+	public boolean canTakeStack(EntityPlayer player) {
+		return false;
+	}
 }
