@@ -92,7 +92,7 @@ public abstract class CCMMod
                 mod.getLogger().debug("LOADING CONFIGURATION FOR %s", mod.getName());
 
                 // Loads a pre-existing Configuration file.
-                mod.getConfigHandler().load();
+                mod.getConfigHandler().getConfiguration().load();
 
                 config.setConfiguration(mod.getConfigHandler());
                 config.init();

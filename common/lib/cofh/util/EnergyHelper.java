@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import buildcraft.api.power.IPowerReceptor;
+
 import lib.cofh.api.energy.IEnergyContainerItem;
 import lib.cofh.api.energy.IEnergyHandler;
 
@@ -63,9 +63,9 @@ public class EnergyHelper {
 	}
 
 	public static boolean isPowerReceptorFromSide(TileEntity theTile, ForgeDirection orientation) {
-		if (theTile instanceof IPowerReceptor) {
-			return ((IPowerReceptor) theTile).getPowerReceiver(orientation) != null;
-		}
+	//	if (theTile instanceof IPowerReceptor) {
+	//		return ((IPowerReceptor) theTile).getPowerReceiver(orientation) != null;
+	//	}
 		return false;
 	}
 }

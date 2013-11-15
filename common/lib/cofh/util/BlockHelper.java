@@ -14,7 +14,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import lib.cofh.entity.PlayerFalse;
 
 /**
  * Contains various helper functions to assist with {@link Block} and Block-related manipulation and interaction.
@@ -314,13 +313,13 @@ public final class BlockHelper {
 		return new ItemStack(theBlock.blockID, 1, 0);
 	}
 
-	public static boolean isBlockBreakable(PlayerFalse myFakePlayer, World worldObj, int x, int y, int z) {
-		int blockID = worldObj.getBlockId(x, y, z);
-		if (myFakePlayer == null) {
-			return Block.blocksList[blockID] != null ? Block.blocksList[blockID].getBlockHardness(worldObj, x, y, z) > -1 ? true : false : false;
-		} else {
-			return Block.blocksList[blockID] != null ? Block.blocksList[blockID].getPlayerRelativeBlockHardness(myFakePlayer, worldObj, x, y, z) > -1 ? true
-					: false : false;
-		}
-	}
+	//public static boolean isBlockBreakable(PlayerFalse myFakePlayer, World worldObj, int x, int y, int z) {
+	//	int blockID = worldObj.getBlockId(x, y, z);
+	//	if (myFakePlayer == null) {
+	//		return Block.blocksList[blockID] != null ? Block.blocksList[blockID].getBlockHardness(worldObj, x, y, z) > -1 ? true : false : false;
+	//	} else {
+	//		return Block.blocksList[blockID] != null ? Block.blocksList[blockID].getPlayerRelativeBlockHardness(myFakePlayer, worldObj, x, y, z) > -1 ? true
+	//				: false : false;
+	//	}
+	//}
 }
