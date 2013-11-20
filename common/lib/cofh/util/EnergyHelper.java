@@ -6,66 +6,81 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
+//import buildcraft.api.power.IPowerReceptor;
 import lib.cofh.api.energy.IEnergyContainerItem;
 import lib.cofh.api.energy.IEnergyHandler;
 
-public class EnergyHelper {
+public class EnergyHelper
+{
+    private EnergyHelper()
+    {}
 
-	private EnergyHelper() {}
+    public static boolean chargeStorageWithContainer(World world, IEnergyHandler handler, EntityPlayer player)
+    {
+        ItemStack container = player.getCurrentEquippedItem();
 
-	public static boolean chargeStorageWithContainer(World world, IEnergyHandler handler, EntityPlayer player) {
-		ItemStack container = player.getCurrentEquippedItem();
+        if (isEnergyContainerItem(container))
+        {
 
-		if (isEnergyContainerItem(container)) {}
+        }
+        return false;
+    }
 
-		return false;
-	}
+    public static boolean chargeContainerFromStorage(World world, IEnergyHandler handler, EntityPlayer player, int energy)
+    {
+        ItemStack container = player.getCurrentEquippedItem();
 
-	public static boolean chargeContainerFromStorage(World world, IEnergyHandler handler, EntityPlayer player, int energy) {
-		ItemStack container = player.getCurrentEquippedItem();
+        if (isEnergyContainerItem(container))
+        {}
+        return false;
+    }
 
-		if (isEnergyContainerItem(container)) {}
+    public static int chargeAdjacentEnergyHandler(TileEntity tile, int from, int energy, boolean simulate)
+    {
+        TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
 
-		return false;
-	}
+        if (handler instanceof IEnergyHandler)
+        {
+            return ((IEnergyHandler) handler).receiveEnergy(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(), energy, simulate);
+        }
+        return 0;
+    }
 
-	public static int chargeAdjacentEnergyHandler(TileEntity tile, int from, int energy, boolean simulate) {
-		TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
+    public static boolean isEnergyContainerItem(ItemStack container)
+    {
+        return (container != null) && (container.getItem() instanceof IEnergyContainerItem);
+    }
 
-		if (handler instanceof IEnergyHandler) {
-			return ((IEnergyHandler) handler).receiveEnergy(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(), energy, simulate);
-		}
-		return 0;
-	}
+    public static boolean isAdjacentEnergyHandler(TileEntity tile, int from)
+    {
+        return BlockHelper.getAdjacentTileEntity(tile, from) instanceof IEnergyHandler;
+    }
 
-	public static boolean isEnergyContainerItem(ItemStack container) {
-		return container != null && container.getItem() instanceof IEnergyContainerItem;
-	}
+    public static boolean isAdjacentEnergyHandlerFromSide(TileEntity tile, int from)
+    {
+        TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
 
-	public static boolean isAdjacentEnergyHandler(TileEntity tile, int from) {
-		return BlockHelper.getAdjacentTileEntity(tile, from) instanceof IEnergyHandler;
-	}
+        if (handler instanceof IEnergyHandler)
+        {
+            return ((IEnergyHandler) handler).canInterface(ForgeDirection.VALID_DIRECTIONS[from].getOpposite());
+        }
+        return false;
+    }
 
-	public static boolean isAdjacentEnergyHandlerFromSide(TileEntity tile, int from) {
-		TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
+    public static boolean isEnergyHandlerFromSide(TileEntity tile, ForgeDirection from)
+    {
+        if (tile instanceof IEnergyHandler)
+        {
+            return ((IEnergyHandler) tile).canInterface(from);
+        }
+        return false;
+    }
 
-		if (handler instanceof IEnergyHandler) {
-			return ((IEnergyHandler) handler).canInterface(ForgeDirection.VALID_DIRECTIONS[from].getOpposite());
-		}
-		return false;
-	}
-
-	public static boolean isEnergyHandlerFromSide(TileEntity tile, ForgeDirection from) {
-		if (tile instanceof IEnergyHandler) {
-			return ((IEnergyHandler) tile).canInterface(from);
-		}
-		return false;
-	}
-
-	public static boolean isPowerReceptorFromSide(TileEntity theTile, ForgeDirection orientation) {
-	//	if (theTile instanceof IPowerReceptor) {
-	//		return ((IPowerReceptor) theTile).getPowerReceiver(orientation) != null;
-	//	}
-		return false;
-	}
+    public static boolean isPowerReceptorFromSide(TileEntity theTile, ForgeDirection orientation)
+    {
+        // if (theTile instanceof IPowerReceptor) {
+        // return ((IPowerReceptor) theTile).getPowerReceiver(orientation) != null;
+        // }
+        return false;
+    }
 }

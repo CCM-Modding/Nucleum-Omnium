@@ -49,7 +49,6 @@ public class DevCapesTickHandler implements ITickHandler
             AbstractClientPlayer p = players.get(counter);
             if (p != null)
             {
-
                 String lowerUsername = p.username.toLowerCase();
 
                 if (instance.getUserGroup(lowerUsername) != null)
@@ -87,7 +86,6 @@ public class DevCapesTickHandler implements ITickHandler
                     }
                 }
             }
-
             counter++;
         }
     }

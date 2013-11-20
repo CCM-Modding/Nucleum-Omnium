@@ -9,30 +9,38 @@ import net.minecraft.item.ItemStack;
  * Slot which copies an ItemStack when clicked on, does not decrement the ItemStack on the cursor.
  * 
  * @author King Lemming
- * 
  */
-public class SlotFalseCopy extends Slot {
+public class SlotFalseCopy extends Slot
+{
+    public int slotIndex = 0;
 
-	public int slotIndex = 0;
+    public SlotFalseCopy(IInventory inventory, int slot, int x, int z)
+    {
+        super(inventory, slot, x, z);
+        slotIndex = slot;
+    }
 
-	public SlotFalseCopy(IInventory inventory, int slot, int x, int z) {
-		super(inventory, slot, x, z);
-		slotIndex = slot;
-	}
+    @Override
+    public boolean canTakeStack(EntityPlayer player)
+    {
+        // putStack(null);
+        return false;
+    }
 
-	@Override
-	public boolean canTakeStack(EntityPlayer player) {
-		inventory.setInventorySlotContents(this.slotIndex, null);
-		return false;
-	}
+    @Override
+    public boolean isItemValid(ItemStack stack)
+    {
+        return true;
+    }
 
-	@Override
-	public boolean isItemValid(ItemStack stack) {
-		if (inventory.getStackInSlot(this.slotIndex) == null) {
-			ItemStack phantomStack = stack.copy();
-			phantomStack.stackSize = 1;
-			inventory.setInventorySlotContents(this.slotIndex, phantomStack);
-		}
-		return false;
-	}
+    @Override
+    public void putStack(ItemStack stack)
+    {
+        if (stack != null)
+        {
+            stack.stackSize = 1;
+        }
+        inventory.setInventorySlotContents(slotIndex, stack);
+        onSlotChanged();
+    }
 }

@@ -165,12 +165,12 @@ public class BaseTE extends TileEntity
     public void readFromNBT(final NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        
+
         orientation = ForgeDirection.getOrientation(NBTHelper.getByte(nbt, NBTConstants.NBT_TE_DIRECTION));
         owner = NBTHelper.getString(nbt, NBTConstants.NBT_TE_OWNER);
         customName = NBTHelper.getString(nbt, NBTConstants.NBT_TE_CUSTOM_NAME);
     }
-    
+
     @Override
     public String toString()
     {

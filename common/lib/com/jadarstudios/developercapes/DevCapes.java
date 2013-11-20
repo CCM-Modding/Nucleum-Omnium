@@ -152,7 +152,6 @@ public class DevCapes
         if (getUserGroup(parUsername) == null)
         {
             users.put(parUsername, parGroup);
-
         }
     }
 

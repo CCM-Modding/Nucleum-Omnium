@@ -1,335 +1,528 @@
 package lib.cofh.gui;
 
 import java.util.ArrayList;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.Icon;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidStack;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.FluidStack;
 
 import lib.cofh.gui.element.ElementBase;
 import lib.cofh.gui.element.TabBase;
+import lib.cofh.gui.slot.SlotFalseCopy;
 import lib.cofh.render.IconRegistry;
 import lib.cofh.render.RenderHelper;
-import lib.cofh.util.MathHelper;
+import lib.cofh.util.StringHelper;
 
 /**
  * Base class for a modular GUIs. Works with Elements {@link ElementBase} and Tabs {@link TabBase} which are both modular elements.
  * 
  * @author King Lemming
  */
-public abstract class GuiBase extends GuiContainer {
+public abstract class GuiBase extends GuiContainer
+{
+    protected boolean drawInventory = true;
+    protected int mouseX = 0;
+    protected int mouseY = 0;
 
-	public static final String PATH_ELEMENTS = "lib.cofh:textures/gui/elements/";
-	public static final String PATH_ICONS = "lib.cofh:textures/gui/icons/";
+    protected int lastIndex = -1;
 
-	protected int mouseX = 0;
-	protected int mouseY = 0;
+    protected String name;
+    protected ResourceLocation texture;
+    protected ArrayList<TabBase> tabs = new ArrayList<TabBase>();
+    protected ArrayList<ElementBase> elements = new ArrayList<ElementBase>();
 
-	protected String name;
-	protected ResourceLocation texture;
-	protected ArrayList<TabBase> tabs = new ArrayList<TabBase>();
-	protected ArrayList<ElementBase> elements = new ArrayList<ElementBase>();
+    public GuiBase(Container container)
+    {
+        super(container);
+    }
 
-	public GuiBase(Container container) {
-		super(container);
-	}
+    public GuiBase(Container container, ResourceLocation texture)
+    {
+        super(container);
+        this.texture = texture;
+    }
 
-	public GuiBase(Container container, ResourceLocation texture) {
-		super(container);
-		this.texture = texture;
-	}
+    @Override
+    public void initGui()
+    {
+        super.initGui();
+        tabs.clear();
+        elements.clear();
+    }
 
-	@Override
-	public void initGui() {
-		super.initGui();
-		tabs.clear();
-		elements.clear();
-	}
+    @Override
+    protected void drawGuiContainerForegroundLayer(int x, int y)
+    {
+        fontRenderer.drawString(StringHelper.localize(name), getCenteredOffset(StringHelper.localize(name)), 6, 0x404040);
+        if (drawInventory)
+        {
+            fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, (ySize - 96) + 3, 0x404040);
+        }
+        drawTooltips();
+    }
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		GL11.glDisable(GL11.GL_LIGHTING);
-		drawTooltips();
-		GL11.glEnable(GL11.GL_LIGHTING);
-	}
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float f, int x, int y)
+    {
+        updateElements();
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        mc.renderEngine.bindTexture(texture);
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
-		updateElements();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(texture);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+        drawElements();
+        drawTabs();
+    }
 
-		drawElements();
-		drawTabs();
-	}
+    @Override
+    protected void mouseClicked(int x, int y, int mouseButton)
+    {
+        super.mouseClicked(x, y, mouseButton);
 
-	@Override
-	protected void mouseClicked(int x, int y, int mouseButton) {
-		super.mouseClicked(x, y, mouseButton);
+        TabBase tab = getTabAtPosition(mouseX, mouseY);
 
-		TabBase tab = getTabAtPosition(mouseX, mouseY);
+        if ((tab != null) && !tab.handleMouseClicked(mouseX, mouseY, mouseButton))
+        {
+            for (TabBase other : tabs)
+            {
+                if ((other != tab) && other.open && (other.side == tab.side))
+                {
+                    other.toggleOpen();
+                }
+            }
+            tab.toggleOpen();
+        }
+        ElementBase element = getElementAtPosition(mouseX, mouseY);
 
-		if (tab != null && !tab.handleMouseClicked(mouseX, mouseY, mouseButton)) {
-			for (TabBase other : tabs) {
-				if (other != tab && other.open && other.side == tab.side) {
-					other.toggleOpen();
-				}
-			}
-			tab.toggleOpen();
-		}
+        if (element != null)
+        {
+            element.handleMouseClicked(mouseX, mouseY, mouseButton);
+        }
+    }
 
-		ElementBase element = getElementAtPosition(mouseX, mouseY);
-		if (element != null) {
-			element.handleMouseClicked(mouseX, mouseY, mouseButton);
-		}
-	}
+    /**
+     * Returns the slot at the given coordinates or null if there is none.
+     */
+    protected Slot getSlotAtPosition(int par1, int par2)
+    {
+        for (int k = 0; k < inventorySlots.inventorySlots.size(); ++k)
+        {
+            Slot slot = (Slot) inventorySlots.inventorySlots.get(k);
 
-	@Override
-	public void handleMouseInput() {
-		int x = Mouse.getEventX() * this.width / this.mc.displayWidth;
-		int y = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
+            if (isMouseOverSlot(slot, par1, par2))
+            {
+                return slot;
+            }
+        }
 
-		mouseX = x - guiLeft;
-		mouseY = y - guiTop;
+        return null;
+    }
 
-		super.handleMouseInput();
-	}
+    /**
+     * Returns if the passed mouse position is over the specified slot.
+     */
+    protected boolean isMouseOverSlot(Slot par1Slot, int par2, int par3)
+    {
+        return isPointInRegion(par1Slot.xDisplayPosition, par1Slot.yDisplayPosition, 16, 16, par2, par3);
+    }
 
-	/**
-	 * Draws the elements for this GUI.
-	 */
-	protected void drawElements() {
-		for (ElementBase element : elements) {
-			element.draw();
-		}
-	}
+    @Override
+    protected void mouseClickMove(int mX, int mY, int lastClick, long timeSinceClick)
+    {
+        Slot slot = getSlotAtPosition(mX, mY);
+        ItemStack itemstack = mc.thePlayer.inventory.getItemStack();
 
-	/**
-	 * Draws the tabs for this GUI. Handles Tab open/close animation.
-	 */
-	protected void drawTabs() {
-		int yPosRight = 4;
-		int yPosLeft = 4;
+        if (field_94076_q && (slot != null) && (itemstack != null) && (slot instanceof SlotFalseCopy))
+        {
+            if (lastIndex != slot.slotNumber)
+            {
+                lastIndex = slot.slotNumber;
+                handleMouseClick(slot, slot.slotNumber, 0, 0);
+            }
+        } else
+        {
+            lastIndex = -1;
+            super.mouseClickMove(mX, mY, lastClick, timeSinceClick);
+        }
+    }
 
-		for (TabBase tab : tabs) {
-			tab.update();
-			if (!tab.isVisible()) {
-				continue;
-			}
-			if (tab.side == 0) {
-				tab.draw(guiLeft, guiTop + yPosLeft);
-				yPosLeft += tab.currentHeight;
-			} else {
-				tab.draw(guiLeft + xSize, guiTop + yPosRight);
-				yPosRight += tab.currentHeight;
-			}
-		}
-	}
+    @Override
+    public void handleMouseInput()
+    {
+        int x = (Mouse.getEventX() * width) / mc.displayWidth;
+        int y = height - ((Mouse.getEventY() * height) / mc.displayHeight) - 1;
 
-	protected void drawTooltips() {
-		TabBase tab = getTabAtPosition(mouseX, mouseY);
+        mouseX = x - guiLeft;
+        mouseY = y - guiTop;
 
-		if (tab != null) {
-			drawTooltip(tab.getTooltip());
-			return;
-		}
-		ElementBase element = getElementAtPosition(mouseX, mouseY);
+        super.handleMouseInput();
+    }
 
-		if (element != null) {
-			drawTooltip(element.getTooltip());
-			return;
-		}
+    /**
+     * Draws the elements for this GUI.
+     */
+    protected void drawElements()
+    {
+        for (ElementBase element : elements)
+        {
+            element.draw();
+        }
+    }
 
-	}
+    /**
+     * Draws the tabs for this GUI. Handles Tab open/close animation.
+     */
+    protected void drawTabs()
+    {
+        int yPosRight = 4;
+        int yPosLeft = 4;
 
-	/* ELEMENTS */
-	public ElementBase addElement(ElementBase element) {
-		elements.add(element);
-		return element;
-	}
+        for (TabBase tab : tabs)
+        {
+            tab.update();
+            if (!tab.isVisible())
+            {
+                continue;
+            }
+            if (tab.side == 0)
+            {
+                tab.draw(guiLeft, guiTop + yPosLeft);
+                yPosLeft += tab.currentHeight;
+            } else
+            {
+                tab.draw(guiLeft + xSize, guiTop + yPosRight);
+                yPosRight += tab.currentHeight;
+            }
+        }
+    }
 
-	public TabBase addTab(TabBase tab) {
-		tabs.add(tab);
-		if (TabTracker.getOpenedLeftTab() != null && tab.getClass().equals(TabTracker.getOpenedLeftTab())) {
-			tab.setFullyOpen();
-		} else if (TabTracker.getOpenedRightTab() != null && tab.getClass().equals(TabTracker.getOpenedRightTab())) {
-			tab.setFullyOpen();
-		}
-		return tab;
-	}
+    protected void drawTooltips()
+    {
+        TabBase tab = getTabAtPosition(mouseX, mouseY);
 
-	protected ElementBase getElementAtPosition(int mX, int mY) {
-		for (ElementBase element : elements) {
-			if (element.intersectsWith(mX, mY)) {
-				return element;
-			}
-		}
-		return null;
-	}
+        if (tab != null)
+        {
+            drawTooltip(tab.getTooltip());
+            return;
+        }
+        ElementBase element = getElementAtPosition(mouseX, mouseY);
 
-	protected TabBase getTabAtPosition(int mX, int mY) {
-		int xShift = 0;
-		int yShift = 4;
+        if (element != null)
+        {
+            drawTooltip(element.getTooltip());
+            return;
+        }
 
-		for (TabBase tab : tabs) {
-			if (!tab.isVisible() || tab.side == 1) {
-				continue;
-			}
-			tab.currentShiftX = xShift;
-			tab.currentShiftY = yShift;
-			if (tab.intersectsWith(mX, mY, xShift, yShift)) {
-				return tab;
-			}
-			yShift += tab.currentHeight;
-		}
+    }
 
-		xShift = xSize;
-		yShift = 4;
+    /* ELEMENTS */
+    public ElementBase addElement(ElementBase element)
+    {
+        elements.add(element);
+        return element;
+    }
 
-		for (TabBase tab : tabs) {
-			if (!tab.isVisible() || tab.side == 0) {
-				continue;
-			}
-			tab.currentShiftX = xShift;
-			tab.currentShiftY = yShift;
-			if (tab.intersectsWith(mX, mY, xShift, yShift)) {
-				return tab;
-			}
-			yShift += tab.currentHeight;
-		}
-		return null;
-	}
+    public TabBase addTab(TabBase tab)
+    {
+        tabs.add(tab);
+        if ((TabTracker.getOpenedLeftTab() != null) && tab.getClass().equals(TabTracker.getOpenedLeftTab()))
+        {
+            tab.setFullyOpen();
+        } else if ((TabTracker.getOpenedRightTab() != null) && tab.getClass().equals(TabTracker.getOpenedRightTab()))
+        {
+            tab.setFullyOpen();
+        }
+        return tab;
+    }
 
-	protected void updateElements() {}
+    protected ElementBase getElementAtPosition(int mX, int mY)
+    {
+        for (ElementBase element : elements)
+        {
+            if (element.intersectsWith(mX, mY))
+            {
+                return element;
+            }
+        }
+        return null;
+    }
 
-	public void handleElementButtonClick(String buttonName, int mouseButton) {}
+    protected TabBase getTabAtPosition(int mX, int mY)
+    {
+        int xShift = 0;
+        int yShift = 4;
 
-	/* HELPERS */
-	/**
-	 * Essentially a placeholder method for tabs to use should they need to draw a button.
-	 */
-	public void drawButton(Icon icon, int x, int y, int spriteSheet, int mode) {
-		drawIcon(icon, x, y, spriteSheet);
-	}
+        for (TabBase tab : tabs)
+        {
+            if (!tab.isVisible() || (tab.side == 1))
+            {
+                continue;
+            }
+            tab.currentShiftX = xShift;
+            tab.currentShiftY = yShift;
+            if (tab.intersectsWith(mX, mY, xShift, yShift))
+            {
+                return tab;
+            }
+            yShift += tab.currentHeight;
+        }
 
-	public void drawButton(String iconName, int x, int y, int spriteSheet, int mode) {
-		drawButton(IconRegistry.getIcon(iconName), x, y, spriteSheet, mode);
-	}
+        xShift = xSize;
+        yShift = 4;
 
-	/**
-	 * Simple method used to draw a fluid of arbitrary size.
-	 */
-	public void drawFluid(int x, int y, FluidStack fluid, int width, int height) {
-		if (fluid == null || fluid.getFluid() == null) {
-			return;
-		}
-		RenderHelper.setBlockTextureSheet();
-		drawTiledTexture(x, y, fluid.getFluid().getIcon(fluid), width, height);
-	}
+        for (TabBase tab : tabs)
+        {
+            if (!tab.isVisible() || (tab.side == 0))
+            {
+                continue;
+            }
+            tab.currentShiftX = xShift;
+            tab.currentShiftY = yShift;
+            if (tab.intersectsWith(mX, mY, xShift, yShift))
+            {
+                return tab;
+            }
+            yShift += tab.currentHeight;
+        }
+        return null;
+    }
 
-	public void drawTiledTexture(int x, int y, Icon icon, int width, int height) {
-		int i = 0;
-		int j = 0;
+    protected void updateElements()
+    {}
 
-		int drawHeight = 0;
-		int drawWidth = 0;
+    public void handleElementButtonClick(String buttonName, int mouseButton)
+    {}
 
-		for (i = 0; i < width; i += 16) {
-			for (j = 0; j < height; j += 16) {
-				drawWidth = MathHelper.minI(width - i, 16);
-				drawHeight = MathHelper.minI(height - j, 16);
-				drawScaledTexturedModelRectFromIcon(x + i, y + j, icon, drawWidth, drawHeight);
-			}
-		}
-		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
-	}
+    /* HELPERS */
+    /**
+     * Essentially a placeholder method for tabs to use should they need to draw a button.
+     */
+    public void drawButton(Icon icon, int x, int y, int spriteSheet, int mode)
+    {
+        drawIcon(icon, x, y, spriteSheet);
+    }
 
-	public void drawIcon(Icon icon, int x, int y, int spriteSheet) {
-		if (spriteSheet == 0) {
-			RenderHelper.setBlockTextureSheet();
-		} else {
-			RenderHelper.setItemTextureSheet();
-		}
-		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
-		drawTexturedModelRectFromIcon(x, y, icon, 16, 16);
-	}
+    public void drawButton(String iconName, int x, int y, int spriteSheet, int mode)
+    {
+        drawButton(IconRegistry.getIcon(iconName), x, y, spriteSheet, mode);
+    }
 
-	public void drawIcon(String iconName, int x, int y, int spriteSheet) {
-		drawIcon(IconRegistry.getIcon(iconName), x, y, spriteSheet);
-	}
+    /**
+     * Simple method used to draw a fluid of arbitrary size.
+     */
+    public void drawFluid(int x, int y, FluidStack fluid, int width, int height)
+    {
+        if ((fluid == null) || (fluid.getFluid() == null))
+        {
+            return;
+        }
+        RenderHelper.setBlockTextureSheet();
+        drawTiledTexture(x, y, fluid.getFluid().getIcon(fluid), width, height);
+    }
 
-	public void drawSizedTexturedModalRect(int x, int y, int u, int v, int width, int height, float texW, float texH) {
-		float texU = 1 / texW;
-		float texV = 1 / texH;
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(x + 0, y + height, this.zLevel, (u + 0) * texU, (v + height) * texV);
-		tessellator.addVertexWithUV(x + width, y + height, this.zLevel, (u + width) * texU, (v + height) * texV);
-		tessellator.addVertexWithUV(x + width, y + 0, this.zLevel, (u + width) * texU, (v + 0) * texV);
-		tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, (u + 0) * texU, (v + 0) * texV);
-		tessellator.draw();
-	}
+    public void drawTiledTexture(int x, int y, Icon icon, int width, int height)
+    {
+        int i = 0;
+        int j = 0;
 
-	public void drawScaledTexturedModelRectFromIcon(int x, int y, Icon icon, int width, int height) {
-		if (icon == null) {
-			return;
-		}
-		double minU = icon.getMinU();
-		double maxU = icon.getMaxU();
-		double minV = icon.getMinV();
-		double maxV = icon.getMaxV();
+        int drawHeight = 0;
+        int drawWidth = 0;
 
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(x + 0, y + height, this.zLevel, minU, minV + (maxV - minV) * height / 16F);
-		tessellator.addVertexWithUV(x + width, y + height, this.zLevel, minU + (maxU - minU) * width / 16F, minV + (maxV - minV) * height / 16F);
-		tessellator.addVertexWithUV(x + width, y + 0, this.zLevel, minU + (maxU - minU) * width / 16F, minV);
-		tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, minU, minV);
-		tessellator.draw();
-	}
+        for (i = 0; i < width; i += 16)
+        {
+            for (j = 0; j < height; j += 16)
+            {
+                drawWidth = Math.min(width - i, 16);
+                drawHeight = Math.min(height - j, 16);
+                drawScaledTexturedModelRectFromIcon(x + i, y + j, icon, drawWidth, drawHeight);
+            }
+        }
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
+    }
 
-	public void drawTooltip(String tooltip) {
-		if (tooltip == null || tooltip.equals("")) {
-			return;
-		}
-		drawCreativeTabHoveringText(tooltip, mouseX, mouseY);
-	}
+    public void drawIcon(Icon icon, int x, int y, int spriteSheet)
+    {
+        if (spriteSheet == 0)
+        {
+            RenderHelper.setBlockTextureSheet();
+        } else
+        {
+            RenderHelper.setItemTextureSheet();
+        }
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
+        drawTexturedModelRectFromIcon(x, y, icon, 16, 16);
+    }
 
-	/**
-	 * Passthrough method for tab use.
-	 */
-	public void mouseClicked(int mouseButton) {
-		super.mouseClicked(guiLeft + mouseX, guiTop + mouseY, mouseButton);
-	}
+    public void drawIcon(String iconName, int x, int y, int spriteSheet)
+    {
+        drawIcon(IconRegistry.getIcon(iconName), x, y, spriteSheet);
+    }
 
-	protected int getCenteredOffset(String string) {
-		return this.getCenteredOffset(string, xSize);
-	}
+    public void drawSizedTexturedModalRect(int x, int y, int u, int v, int width, int height, float texW, float texH)
+    {
+        float texU = 1 / texW;
+        float texV = 1 / texH;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(x + 0, y + height, zLevel, (u + 0) * texU, (v + height) * texV);
+        tessellator.addVertexWithUV(x + width, y + height, zLevel, (u + width) * texU, (v + height) * texV);
+        tessellator.addVertexWithUV(x + width, y + 0, zLevel, (u + width) * texU, (v + 0) * texV);
+        tessellator.addVertexWithUV(x + 0, y + 0, zLevel, (u + 0) * texU, (v + 0) * texV);
+        tessellator.draw();
+    }
 
-	protected int getCenteredOffset(String string, int xWidth) {
-		return (xWidth - fontRenderer.getStringWidth(string)) / 2;
-	}
+    public void drawScaledTexturedModelRectFromIcon(int x, int y, Icon icon, int width, int height)
+    {
+        if (icon == null)
+        {
+            return;
+        }
+        double minU = icon.getMinU();
+        double maxU = icon.getMaxU();
+        double minV = icon.getMinV();
+        double maxV = icon.getMaxV();
 
-	public int getGuiLeft() {
-		return guiLeft;
-	}
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(x + 0, y + height, zLevel, minU, minV + (((maxV - minV) * height) / 16F));
+        tessellator.addVertexWithUV(x + width, y + height, zLevel, minU + (((maxU - minU) * width) / 16F), minV + (((maxV - minV) * height) / 16F));
+        tessellator.addVertexWithUV(x + width, y + 0, zLevel, minU + (((maxU - minU) * width) / 16F), minV);
+        tessellator.addVertexWithUV(x + 0, y + 0, zLevel, minU, minV);
+        tessellator.draw();
+    }
 
-	public int getGuiTop() {
-		return guiTop;
-	}
+    public void drawTooltip(String tooltip)
+    {
+        if ((tooltip == null) || tooltip.equals(""))
+        {
+            return;
+        }
+        drawTooltipHoveringText(Arrays.asList(new String[]
+        { tooltip }), mouseX, mouseY, fontRenderer);
+    }
 
-	public int getMouseX() {
-		return mouseX;
-	}
+    protected void drawTooltipHoveringText(List list, int x, int y, FontRenderer font)
+    {
+        if (list.isEmpty())
+        {
+            return;
+        }
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        int k = 0;
+        Iterator iterator = list.iterator();
 
-	public int getMouseY() {
-		return mouseY;
-	}
+        while (iterator.hasNext())
+        {
+            String s = (String) iterator.next();
+            int l = font.getStringWidth(s);
+
+            if (l > k)
+            {
+                k = l;
+            }
+        }
+        int i1 = x + 12;
+        int j1 = y - 12;
+        int k1 = 8;
+
+        if (list.size() > 1)
+        {
+            k1 += 2 + ((list.size() - 1) * 10);
+        }
+        if ((i1 + k) > width)
+        {
+            i1 -= 28 + k;
+        }
+        if ((j1 + k1 + 6) > height)
+        {
+            j1 = height - k1 - 6;
+        }
+        zLevel = 300.0F;
+        itemRenderer.zLevel = 300.0F;
+        int l1 = -267386864;
+        drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
+        drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
+        drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
+        drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
+        drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
+        int i2 = 1347420415;
+        int j2 = ((i2 & 16711422) >> 1) | (i2 & -16777216);
+        drawGradientRect(i1 - 3, (j1 - 3) + 1, (i1 - 3) + 1, (j1 + k1 + 3) - 1, i2, j2);
+        drawGradientRect(i1 + k + 2, (j1 - 3) + 1, i1 + k + 3, (j1 + k1 + 3) - 1, i2, j2);
+        drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, (j1 - 3) + 1, i2, i2);
+        drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
+
+        for (int k2 = 0; k2 < list.size(); ++k2)
+        {
+            String s1 = (String) list.get(k2);
+            font.drawStringWithShadow(s1, i1, j1, -1);
+
+            if (k2 == 0)
+            {
+                j1 += 2;
+            }
+            j1 += 10;
+        }
+        zLevel = 0.0F;
+        itemRenderer.zLevel = 0.0F;
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+    }
+
+    /**
+     * Passthrough method for tab use.
+     */
+    public void mouseClicked(int mouseButton)
+    {
+        super.mouseClicked(guiLeft + mouseX, guiTop + mouseY, mouseButton);
+    }
+
+    protected int getCenteredOffset(String string)
+    {
+        return this.getCenteredOffset(string, xSize);
+    }
+
+    protected int getCenteredOffset(String string, int xWidth)
+    {
+        return (xWidth - fontRenderer.getStringWidth(string)) / 2;
+    }
+
+    public int getGuiLeft()
+    {
+        return guiLeft;
+    }
+
+    public int getGuiTop()
+    {
+        return guiTop;
+    }
+
+    public int getMouseX()
+    {
+        return mouseX;
+    }
+
+    public int getMouseY()
+    {
+        return mouseY;
+    }
+
+    public void overlayRecipe()
+    {}
 }

@@ -11,7 +11,6 @@ import static ccm.nucleum.omnium.utils.lib.Locations.SERVER_PROXY;
 
 import net.minecraft.server.MinecraftServer;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

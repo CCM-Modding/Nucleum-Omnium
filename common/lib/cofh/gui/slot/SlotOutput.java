@@ -9,14 +9,16 @@ import net.minecraft.item.ItemStack;
  * 
  * @author King Lemming
  */
-public class SlotOutput extends Slot {
+public class SlotOutput extends Slot
+{
+    public SlotOutput(IInventory inventory, int x, int y, int z)
+    {
+        super(inventory, x, y, z);
+    }
 
-	public SlotOutput(IInventory inventory, int x, int y, int z) {
-		super(inventory, x, y, z);
-	}
-
-	@Override
-	public boolean isItemValid(ItemStack stack) {
-		return false;
-	}
+    @Override
+    public boolean isItemValid(ItemStack stack)
+    {
+        return false;
+    }
 }
