@@ -1,10 +1,18 @@
 // CCM Modding, Nucleum Omnium
 buildscript {
-    repositories { mavenCentral() }
-    dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:latest.integration' }
+	repositories {
+		mavenCentral()
+		maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
+    }
 }
 
-apply plugin: "gmcp"
+apply plugin: "forge"
 
 group = 'ccm.nucleum_omnium'
 version = "1.0.0.${System.getenv().BUILD_NUMBER}"
@@ -18,15 +26,15 @@ sourceSets {
 }
 
 minecraft {
-    minecraftVersion = '1.6.4'
-    accessTransformers += 'resources/ccm_at.cfg'
+    version = "1.6.4-LATEST"
+	assetDir = "run/assets"
 }
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
         include '**/*.lang'
         include '**/*.info'
-        expand version: version, mcversion: minecraft.minecraftVersion
+        expand version: version, mcversion: minecraft.version
     }
 
     from(sourceSets.main.resources.srcDirs) {
@@ -38,7 +46,7 @@ processResources {
 jar {
     appendix = 'universal'
     manifest {
-        attributes 'MCVersion' : project.minecraft.minecraftVersion
+        attributes 'MCVersion' : project.minecraft.version
         attributes 'Version' : project.version
         attributes 'FMLCorePlugin' : 'ccm.nucleum.omnium.asm.OmniumLoader'
         attributes 'FMLCorePluginContainsFMLMod' : 'true'
@@ -57,5 +65,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 artifacts {
-    archives sourceJar //archives javadocJar
+    archives sourceJar
+	//archives javadocJar
 }
