@@ -80,6 +80,7 @@ Icon
 # Minecraft
 ############
 minecraft/
+run/
 
 ############
 # Gradle
