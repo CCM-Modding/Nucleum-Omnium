@@ -1,15 +1,13 @@
 // CCM Modding, Nucleum Omnium
 buildscript {
-	repositories {
-		mavenCentral()
-		maven {
+    repositories {
+        mavenCentral()
+        maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
     }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
-    }
+    dependencies { classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT' }
 }
 
 apply plugin: "forge"
@@ -27,18 +25,16 @@ sourceSets {
 
 minecraft {
     version = "1.6.4-LATEST"
-	assetDir = "run/assets"
+    assetDir = "run/assets"
 }
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
-        include '**/*.lang'
         include '**/*.info'
         expand version: version, mcversion: minecraft.version
     }
 
     from(sourceSets.main.resources.srcDirs) {
-        exclude '**/*.lang'
         exclude '**/*.info'
     }
 }
@@ -64,7 +60,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from 'build/docs/javadoc'
 }
 
-artifacts {
-    archives sourceJar
-	//archives javadocJar
+artifacts { 
+    archives sourceJar 
+    //archives javadocJar
 }
