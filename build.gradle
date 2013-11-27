@@ -7,7 +7,9 @@ buildscript {
             url = "http://files.minecraftforge.net/maven"
         }
     }
-    dependencies { classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT' }
+    dependencies { 
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT' 
+    }
 }
 
 apply plugin: "forge"
