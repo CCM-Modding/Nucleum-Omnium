@@ -6,11 +6,11 @@ package ccm.nucleum.omnium.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import ccm.nucleum.omnium.utils.lib.Commands;
 
@@ -74,5 +74,12 @@ public class CommandCCM extends CommandBase
                 commands.add(cmd);
             }
         }
+    }
+
+    @Override
+    public int compareTo(Object o)
+    { 
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

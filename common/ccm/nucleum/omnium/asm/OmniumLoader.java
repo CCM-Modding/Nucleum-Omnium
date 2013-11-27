@@ -23,12 +23,6 @@ public class OmniumLoader implements IFMLLoadingPlugin
     }
 
     @Override
-    public String[] getLibraryRequestClass()
-    {
-        return null;
-    }
-
-    @Override
     public String getModContainerClass()
     {
         return "ccm.nucleum.omnium.asm.OmniumModContainer";

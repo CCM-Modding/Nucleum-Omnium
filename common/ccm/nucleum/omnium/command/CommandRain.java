@@ -5,7 +5,6 @@ package ccm.nucleum.omnium.command;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
 import ccm.nucleum.omnium.utils.lib.Commands;
 import ccm.nucleum.omnium.utils.lib.Properties;
@@ -41,5 +40,12 @@ public class CommandRain extends CommandBase
         {
             Properties.RAIN = false;
         }
+    }
+
+    @Override
+    public int compareTo(Object o)
+    {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

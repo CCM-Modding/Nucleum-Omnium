@@ -11,7 +11,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.world.World;
-
 import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
 import ccm.nucleum.omnium.utils.lib.Commands;
@@ -171,5 +170,12 @@ public class CommandTPS extends CommandBase
 
             sendChat(sender, "--------------------------------------------------");
         }
+    }
+
+    @Override
+    public int compareTo(Object o)
+    {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

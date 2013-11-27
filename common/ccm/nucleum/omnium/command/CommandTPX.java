@@ -13,7 +13,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-
 import ccm.nucleum.omnium.utils.helper.CommandHelper;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
 import ccm.nucleum.omnium.utils.helper.TeleportHelper;
@@ -31,10 +30,8 @@ public class CommandTPX extends CommandBase
         if ((args.length != 1) && (args.length != 2))
         {
             return null;
-        } else
-        {
-            return CommandBase.getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames());
         }
+        return CommandBase.getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames());
     }
 
     @Override
@@ -134,5 +131,12 @@ public class CommandTPX extends CommandBase
         {
             throw new WrongUsageException("commands.tpx.usage", new Object[0]);
         }
+    }
+
+    @Override
+    public int compareTo(Object o)
+    {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }
