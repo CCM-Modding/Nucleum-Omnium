@@ -7,7 +7,7 @@ buildscript {
             url = "http://files.minecraftforge.net/maven"
         }
     }
-    dependencies { 
+    dependencies {  
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT' 
     }
 }
@@ -36,8 +36,8 @@ processResources {
         expand version: version, mcversion: minecraft.version
     }
 
-    from(sourceSets.main.resources.srcDirs) {
-        exclude '**/*.info'
+    from(sourceSets.main.resources.srcDirs) { 
+        exclude '**/*.info' 
     }
 }
 
@@ -56,13 +56,18 @@ task sourceJar(type: Jar) {
     appendix = 'src'
 }
 
-// Doesn't work for some odd reason
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    appendix = 'dev'
+}
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     appendix = 'javadoc'
     from 'build/docs/javadoc'
 }
 
-artifacts { 
-    archives sourceJar 
-    //archives javadocJar
+artifacts {
+    archives sourceJar
+    archives deobfJar
+    archives javadocJar
 }
