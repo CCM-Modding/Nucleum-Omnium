@@ -1,8 +1,7 @@
 package ccm.nucleum.omnium.utils.handler.compatibility;
 
-import cpw.mods.fml.common.Loader;
-
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
+import cpw.mods.fml.common.Loader;
 
 /**
  * Internal Helper used to keep data values and run the init method

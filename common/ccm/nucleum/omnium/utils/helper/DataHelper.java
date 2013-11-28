@@ -8,7 +8,6 @@ import java.io.File;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.DimensionManager;
-
 import ccm.nucleum.omnium.CCMMod;
 
 /**

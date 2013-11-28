@@ -5,7 +5,6 @@ package ccm.nucleum.omnium.utils.handler.entity.drop;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-
 import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.utils.helper.MathHelper;
 

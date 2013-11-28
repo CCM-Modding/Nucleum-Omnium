@@ -8,7 +8,6 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-
 import ccm.nucleum.omnium.CCMMod;
 
 /**

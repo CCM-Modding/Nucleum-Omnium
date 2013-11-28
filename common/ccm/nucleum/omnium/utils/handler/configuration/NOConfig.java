@@ -3,12 +3,10 @@
  */
 package ccm.nucleum.omnium.utils.handler.configuration;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-
+import lib.cofh.util.ConfigHandler;
 import ccm.nucleum.omnium.utils.lib.Archive;
 import ccm.nucleum.omnium.utils.lib.Properties;
-
-import lib.cofh.util.ConfigHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public final class NOConfig extends IConfig
 {

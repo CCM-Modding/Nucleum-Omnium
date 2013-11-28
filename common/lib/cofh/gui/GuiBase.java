@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
+import lib.cofh.gui.element.ElementBase;
+import lib.cofh.gui.element.TabBase;
+import lib.cofh.gui.slot.SlotFalseCopy;
+import lib.cofh.render.IconRegistry;
+import lib.cofh.render.RenderHelper;
+import lib.cofh.util.StringHelper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
@@ -20,12 +22,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
-import lib.cofh.gui.element.ElementBase;
-import lib.cofh.gui.element.TabBase;
-import lib.cofh.gui.slot.SlotFalseCopy;
-import lib.cofh.render.IconRegistry;
-import lib.cofh.render.RenderHelper;
-import lib.cofh.util.StringHelper;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 /**
  * Base class for a modular GUIs. Works with Elements {@link ElementBase} and Tabs {@link TabBase} which are both modular elements.

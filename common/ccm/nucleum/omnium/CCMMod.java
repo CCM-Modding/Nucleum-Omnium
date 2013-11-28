@@ -5,15 +5,12 @@ package ccm.nucleum.omnium;
 
 import java.io.File;
 
+import lib.cofh.util.ConfigHandler;
 import net.minecraftforge.common.Configuration;
-
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-
 import ccm.nucleum.omnium.utils.handler.configuration.IConfig;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
-
-import lib.cofh.util.ConfigHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * This class should be the super class of any CCM Mod, as it not only offers a few nice Configuration helpers, but it also keeps from having to implement some of the methods

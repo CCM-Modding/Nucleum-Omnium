@@ -3,12 +3,10 @@ package lib.cofh.util.version;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
+import lib.cofh.util.StringHelper;
 import net.minecraft.entity.player.EntityPlayer;
-
 import cpw.mods.fml.common.IScheduledTickHandler;
 import cpw.mods.fml.common.TickType;
-
-import lib.cofh.util.StringHelper;
 
 /**
  * Handles chat notifications to players regarding mod updates. Please note the initialization structure.

@@ -1,11 +1,10 @@
 package lib.cofh.gui.element;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.IFluidTank;
-
 import lib.cofh.gui.GuiBase;
 import lib.cofh.gui.GuiProps;
 import lib.cofh.render.RenderHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.IFluidTank;
 
 public class ElementFluidTank extends ElementBase
 {

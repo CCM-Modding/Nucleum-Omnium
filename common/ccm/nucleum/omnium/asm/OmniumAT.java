@@ -8,9 +8,8 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 
-import cpw.mods.fml.common.asm.transformers.AccessTransformer;
-
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
+import cpw.mods.fml.common.asm.transformers.AccessTransformer;
 
 public class OmniumAT extends AccessTransformer
 {

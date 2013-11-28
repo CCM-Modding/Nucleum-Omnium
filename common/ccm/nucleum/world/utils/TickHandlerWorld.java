@@ -8,14 +8,11 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Random;
 
+import lib.cofh.util.ChunkCoord;
 import net.minecraft.world.World;
-
+import ccm.nucleum.world.generator.WorldGenHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
-
-import ccm.nucleum.world.generator.WorldGenHandler;
-
-import lib.cofh.util.ChunkCoord;
 
 public class TickHandlerWorld implements ITickHandler
 {

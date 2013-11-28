@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 import net.minecraft.client.renderer.IImageBuffer;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import lib.cofh.api.world.IFeatureGenerator;
+import lib.cofh.api.world.IFeatureHandler;
+import lib.cofh.util.ChunkCoord;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -15,16 +18,10 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.ChunkDataEvent.Load;
 import net.minecraftforge.event.world.ChunkDataEvent.Save;
-
-import cpw.mods.fml.common.IWorldGenerator;
-
 import ccm.nucleum.world.NucleumWorld;
 import ccm.nucleum.world.utils.TickHandlerWorld;
 import ccm.nucleum.world.utils.lib.Properties;
-
-import lib.cofh.api.world.IFeatureGenerator;
-import lib.cofh.api.world.IFeatureHandler;
-import lib.cofh.util.ChunkCoord;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
 {

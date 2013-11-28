@@ -2,10 +2,10 @@ package lib.cofh.util;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.StatCollector;
+
+import org.lwjgl.input.Keyboard;
 
 /**
  * Contains various helper functions to assist with String manipulation.

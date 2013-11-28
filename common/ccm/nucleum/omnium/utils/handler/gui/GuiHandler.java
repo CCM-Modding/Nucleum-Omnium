@@ -8,17 +8,15 @@ import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.common.network.IGuiHandler;
-
 import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.inventory.container.BaseContainer;
 import ccm.nucleum.omnium.inventory.gui.BaseGui;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
+import cpw.mods.fml.common.network.IGuiHandler;
 
 public final class GuiHandler implements IGuiHandler
 {
-    private Map<Integer, GuiWrapper> guis;
+    private final Map<Integer, GuiWrapper> guis;
 
     public static final GuiHandler INSTANCE = new GuiHandler();
 

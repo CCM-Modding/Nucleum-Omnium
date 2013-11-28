@@ -5,11 +5,9 @@ package ccm.nucleum.network;
 
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-
+import ccm.nucleum.network.packet.PacketBase;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
-
-import ccm.nucleum.network.packet.PacketBase;
 
 /**
  * A VERY simple Packet Handler, taken from EE3

@@ -5,11 +5,9 @@ package ccm.nucleum.omnium.inventory.container;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
-
+import ccm.nucleum.omnium.tileentity.ProgressTE;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import ccm.nucleum.omnium.tileentity.ProgressTE;
 
 public abstract class ProgressContainer extends BaseContainer
 {

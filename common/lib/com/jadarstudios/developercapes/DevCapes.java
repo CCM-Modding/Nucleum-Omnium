@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.util.ResourceLocation;
-
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
@@ -32,9 +31,9 @@ public class DevCapes
     public static final double version = 2.1;
 
     public DevCapesVersionChecker versionChecker;
-    private HashMap<String, String> users;
-    private HashMap<String, ResourceLocation> capeResources;
-    private HashMap<String, ThreadDownloadImageData> downloadThreads;
+    private final HashMap<String, String> users;
+    private final HashMap<String, ResourceLocation> capeResources;
+    private final HashMap<String, ThreadDownloadImageData> downloadThreads;
 
     private DevCapesTickHandler tickHandler = null;
 

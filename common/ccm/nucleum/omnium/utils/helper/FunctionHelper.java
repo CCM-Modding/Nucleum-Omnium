@@ -4,7 +4,6 @@
 package ccm.nucleum.omnium.utils.helper;
 
 import static ccm.nucleum.omnium.utils.helper.MathHelper.random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -51,6 +50,19 @@ public final class FunctionHelper
                 }
             }
         }
+    }
+
+    /** Checks if a block is like cobble */
+    public static boolean isNormalBlock(Block block, int meta)
+    {
+        return (block.isOpaqueCube() && (block.getRenderType() == 0) && (!block.hasTileEntity(meta)) && block.renderAsNormalBlock() && hasNormalBounds(block));
+    }
+
+    /** Checks if the block is a full 1m^3 */
+    public static boolean hasNormalBounds(Block block)
+    {
+        return ((block.getBlockBoundsMaxX() == 1) && (block.getBlockBoundsMaxY() == 1) && (block.getBlockBoundsMaxZ() == 1) && (block.getBlockBoundsMinX() == 0)
+                && (block.getBlockBoundsMinY() == 0) && (block.getBlockBoundsMinZ() == 0));
     }
 
     /**

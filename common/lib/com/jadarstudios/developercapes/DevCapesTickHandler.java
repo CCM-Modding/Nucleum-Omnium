@@ -23,7 +23,7 @@ public class DevCapesTickHandler implements ITickHandler
     private static final DevCapes instance = DevCapesUtil.getInstance();
 
     // Keep at false when packaging..
-    private boolean debug = false;
+    private final boolean debug = false;
 
     private int counter = 0;
     private boolean notified = false;

@@ -11,7 +11,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.world.World;
-
 import ccm.nucleum.omnium.inventory.slot.OutputSlot;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 

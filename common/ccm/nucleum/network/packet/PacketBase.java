@@ -9,10 +9,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.network.INetworkManager;
-
-import cpw.mods.fml.common.network.Player;
-
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
+import cpw.mods.fml.common.network.Player;
 
 public class PacketBase
 {

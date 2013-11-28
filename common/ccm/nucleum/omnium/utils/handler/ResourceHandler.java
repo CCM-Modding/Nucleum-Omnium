@@ -10,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
-
 import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
 

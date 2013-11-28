@@ -7,7 +7,10 @@ import static ccm.nucleum.world.utils.lib.Archive.MOD_ID;
 import static ccm.nucleum.world.utils.lib.Archive.MOD_NAME;
 import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 import static net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS;
-
+import ccm.nucleum.omnium.CCMMod;
+import ccm.nucleum.world.generator.WorldGenHandler;
+import ccm.nucleum.world.utils.TickHandlerWorld;
+import ccm.nucleum.world.utils.lib.Properties;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -16,11 +19,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-
-import ccm.nucleum.omnium.CCMMod;
-import ccm.nucleum.world.generator.WorldGenHandler;
-import ccm.nucleum.world.utils.TickHandlerWorld;
-import ccm.nucleum.world.utils.lib.Properties;
 
 @Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true, dependencies = "required-after:nucleum_omnium")
 public class NucleumWorld extends CCMMod

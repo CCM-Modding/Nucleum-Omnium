@@ -10,7 +10,6 @@ import java.util.Map;
 
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
-
 import ccm.nucleum.network.packet.PacketBase;
 import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
@@ -21,7 +20,7 @@ public final class PacketTypeHandler
     /** SINGLETON Instance */
     private static final PacketTypeHandler INSTANCE = new PacketTypeHandler();
     /** PRIVATE Map used to keep all the PacketTypes */
-    private Map<Integer, Class<? extends PacketBase>> types;
+    private final Map<Integer, Class<? extends PacketBase>> types;
     /** The current Packet ID */
     private int packetID;
 

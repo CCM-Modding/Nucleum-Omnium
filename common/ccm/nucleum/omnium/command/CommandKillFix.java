@@ -4,12 +4,10 @@
 package ccm.nucleum.omnium.command;
 
 import static ccm.nucleum.omnium.utils.helper.CommandHelper.sendChat;
-
 import net.minecraft.command.CommandKill;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
-
 import ccm.nucleum.omnium.utils.helper.CommandHelper;
 
 public class CommandKillFix extends CommandKill

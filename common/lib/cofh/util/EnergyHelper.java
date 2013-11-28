@@ -1,14 +1,13 @@
 package lib.cofh.util;
 
+//import buildcraft.api.power.IPowerReceptor;
+import lib.cofh.api.energy.IEnergyContainerItem;
+import lib.cofh.api.energy.IEnergyHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-
-//import buildcraft.api.power.IPowerReceptor;
-import lib.cofh.api.energy.IEnergyContainerItem;
-import lib.cofh.api.energy.IEnergyHandler;
 
 public class EnergyHelper
 {

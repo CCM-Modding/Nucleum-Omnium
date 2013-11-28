@@ -2,7 +2,6 @@ package ccm.nucleum.omnium.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-
 import ccm.nucleum.omnium.inventory.container.element.TimedElement;
 import ccm.nucleum.omnium.utils.lib.NBTConstants;
 

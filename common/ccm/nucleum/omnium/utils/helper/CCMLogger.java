@@ -9,10 +9,9 @@ import static java.lang.String.format;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import ccm.nucleum.omnium.utils.lib.Properties;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-
-import ccm.nucleum.omnium.utils.lib.Properties;
 
 public class CCMLogger
 {
@@ -26,7 +25,7 @@ public class CCMLogger
     }
 
     /* Class Internals */
-    private Logger logger;
+    private final Logger logger;
 
     private CCMLogger(Logger log)
     {
