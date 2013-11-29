@@ -36,14 +36,15 @@ public class CustomInventoryCrafting extends InventoryCrafting
     }
 
     @Override
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int slot)
     {
-        return par1 >= getSizeInventory() ? null : myMaster.getStackInSlot(invOffset + par1);
+        return slot >= getSizeInventory() ? null : myMaster.getStackInSlot(invOffset + slot);
     }
 
     @Override
     public ItemStack getStackInRowAndColumn(int par1, int par2)
     {
+
         if ((par1 >= 0) && (par1 < inventoryWidth))
         {
             int k = par1 + (par2 * inventoryWidth);
@@ -65,12 +66,12 @@ public class CustomInventoryCrafting extends InventoryCrafting
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int par1)
+    public ItemStack getStackInSlotOnClosing(int slot)
     {
-        if (myMaster.getStackInSlot(invOffset + par1) != null)
+        if (myMaster.getStackInSlot(invOffset + slot) != null)
         {
-            ItemStack itemstack = myMaster.getStackInSlot(invOffset + par1);
-            myMaster.setInventorySlotContents(invOffset + par1, null);
+            ItemStack itemstack = myMaster.getStackInSlot(invOffset + slot);
+            myMaster.setInventorySlotContents(invOffset + slot, null);
             return itemstack;
         }
         return null;

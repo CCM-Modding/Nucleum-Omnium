@@ -178,11 +178,6 @@ public final class ItemHelper
         return FluidContainerRegistry.isContainer(player.getCurrentEquippedItem());
     }
 
-    public static final boolean isPlayerHoldingFluidContainerItem(EntityPlayer player)
-    {
-        return lib.cofh.util.FluidHelper.isPlayerHoldingFluidContainerItem(player);
-    }
-
     public static final boolean isPlayerHoldingEnergyContainerItem(EntityPlayer player)
     {
         return EnergyHelper.isPlayerHoldingEnergyContainerItem(player);

@@ -113,6 +113,14 @@ public abstract class GuiBase extends GuiContainer
     }
 
     /**
+     * Returns if the passed mouse position is over the specified slot.
+     */
+    protected boolean isMouseOverSlot(Slot par1Slot, int par2, int par3)
+    {
+        return isPointInRegion(par1Slot.xDisplayPosition, par1Slot.yDisplayPosition, 16, 16, par2, par3);
+    }
+
+    /**
      * Returns the slot at the given coordinates or null if there is none.
      */
     protected Slot getSlotAtPosition(int par1, int par2)
@@ -126,15 +134,8 @@ public abstract class GuiBase extends GuiContainer
                 return slot;
             }
         }
-        return null;
-    }
 
-    /**
-     * Returns if the passed mouse position is over the specified slot.
-     */
-    protected boolean isMouseOverSlot(Slot par1Slot, int par2, int par3)
-    {
-        return isPointInRegion(par1Slot.xDisplayPosition, par1Slot.yDisplayPosition, 16, 16, par2, par3);
+        return null;
     }
 
     @Override
@@ -418,7 +419,7 @@ public abstract class GuiBase extends GuiContainer
         }
     }
 
-    protected void drawTooltipHoveringText(List<String> list, int x, int y, FontRenderer font)
+    protected void drawTooltipHoveringText(List list, int x, int y, FontRenderer font)
     {
         if ((list == null) || list.isEmpty())
         {
@@ -428,11 +429,11 @@ public abstract class GuiBase extends GuiContainer
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         int k = 0;
-        Iterator<String> iterator = list.iterator();
+        Iterator iterator = list.iterator();
 
         while (iterator.hasNext())
         {
-            String s = iterator.next();
+            String s = (String) iterator.next();
             int l = font.getStringWidth(s);
 
             if (l > k)
@@ -473,7 +474,7 @@ public abstract class GuiBase extends GuiContainer
 
         for (int k2 = 0; k2 < list.size(); ++k2)
         {
-            String s1 = list.get(k2);
+            String s1 = (String) list.get(k2);
             font.drawStringWithShadow(s1, i1, j1, -1);
 
             if (k2 == 0)
@@ -499,7 +500,7 @@ public abstract class GuiBase extends GuiContainer
 
     protected int getCenteredOffset(String string)
     {
-        return this.getCenteredOffset(string, xSize);
+        return getCenteredOffset(string, xSize);
     }
 
     protected int getCenteredOffset(String string, int xWidth)

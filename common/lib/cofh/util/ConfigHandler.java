@@ -25,21 +25,18 @@ public class ConfigHandler
     TreeMap<String, Property> itemIds = new TreeMap<String, Property>();
 
     Configuration modConfiguration;
-    String modVersion;
 
     int blockIdStart = 1000;
     int itemIdStart = 10000;
 
-    public ConfigHandler(String version)
+    public ConfigHandler()
     {
-        modVersion = version;
         blockEntries = new ArrayList<String>();
         itemEntries = new ArrayList<String>();
     }
 
-    public ConfigHandler(String version, int blockStart, int itemStart)
+    public ConfigHandler(int blockStart, int itemStart)
     {
-        modVersion = version;
         blockIdStart = blockStart;
         itemIdStart = itemStart;
 
@@ -50,17 +47,12 @@ public class ConfigHandler
     public void setConfiguration(Configuration config)
     {
         modConfiguration = config;
-        modConfiguration.load();
+        load();
     }
 
     public Configuration getConfiguration()
     {
         return modConfiguration;
-    }
-
-    public String getVersion()
-    {
-        return modVersion;
     }
 
     public void addBlockEntry(String name)
@@ -196,7 +188,9 @@ public class ConfigHandler
     public void save()
     {
         if (modConfiguration.hasChanged())
+        {
             modConfiguration.save();
+        }
     }
 
     public void load()

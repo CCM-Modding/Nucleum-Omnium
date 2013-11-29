@@ -26,7 +26,6 @@ public final class InventoryCraftingFalse extends InventoryCrafting
         {
             return false;
         }
-
     }
 
     public InventoryCraftingFalse(int width, int height)

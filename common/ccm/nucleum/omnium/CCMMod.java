@@ -32,7 +32,7 @@ public abstract class CCMMod
         File configFile = new File(configFolder.getAbsolutePath() + "/" + getName() + ".cfg");
 
         // Create the config handler
-        ConfigHandler config = new ConfigHandler(this.getClass().getAnnotation(Mod.class).version());
+        ConfigHandler config = new ConfigHandler();
 
         // Set the Configuration inside the Handler
         config.setConfiguration(new Configuration(configFile, true));

@@ -152,12 +152,14 @@ public class FluidHelper
             {
                 return new FluidStack(FluidRegistry.WATER, 1000);
             }
+            return null;
         } else if ((bId == 10) || (bId == 11))
         {
             if (bMeta == 0)
             {
                 return new FluidStack(FluidRegistry.LAVA, 1000);
             }
+            return null;
         } else if ((Block.blocksList[bId] != null) && (Block.blocksList[bId] instanceof IFluidBlock))
         {
             IFluidBlock block = (IFluidBlock) Block.blocksList[bId];

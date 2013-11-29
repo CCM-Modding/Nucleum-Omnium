@@ -66,6 +66,7 @@ public abstract class TabBase extends ElementBase
         {
             currentWidth -= tabExpandSpeed;
         }
+
         if (currentWidth > maxWidth)
         {
             currentWidth = maxWidth;
@@ -73,6 +74,7 @@ public abstract class TabBase extends ElementBase
         {
             currentWidth = minWidth;
         }
+
         if (open && (currentHeight < maxHeight))
         {
             currentHeight += tabExpandSpeed;
@@ -80,6 +82,7 @@ public abstract class TabBase extends ElementBase
         {
             currentHeight -= tabExpandSpeed;
         }
+
         if (currentHeight > maxHeight)
         {
             currentHeight = maxHeight;
@@ -87,6 +90,7 @@ public abstract class TabBase extends ElementBase
         {
             currentHeight = minHeight;
         }
+
         if (open && (currentWidth == maxWidth) && (currentHeight == maxHeight))
         {
             setFullyOpen();
