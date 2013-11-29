@@ -179,10 +179,8 @@ public class DevCapes
     }
 
     /**
-     * Gets a cape ResourceLocation.
-     * 
      * @param parGroup
-     * @return
+     * @return the cape's ResourceLocation
      */
     public ResourceLocation getCapeResource(String parGroup)
     {
@@ -204,10 +202,8 @@ public class DevCapes
     }
 
     /**
-     * Gets the ThreadDownloadImageData that is associated with the group.
-     * 
      * @param parGroup
-     * @return
+     * @return the ThreadDownloadImageData that is associated with the group
      */
     public ThreadDownloadImageData getDownloadThread(String parGroup)
     {
@@ -221,7 +217,6 @@ public class DevCapes
      * @param par1Str
      * @param par2ResourceLocation
      * @param par3IImageBuffer
-     * @return
      */
     public static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation, String par1Str, ResourceLocation par2ResourceLocation,
             IImageBuffer par3IImageBuffer)

@@ -13,8 +13,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 /**
- * This class should be the super class of any CCM Mod, as it not only offers a few nice Configuration helpers, but it also keeps from having to implement some of the methods
- * inside of {@link IMod}
+ * This class should be the super class of any CCM Mod, as it offers a few nice Configuration helpers
  */
 public abstract class CCMMod
 {

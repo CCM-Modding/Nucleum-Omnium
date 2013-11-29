@@ -149,7 +149,7 @@ public class InventoryTE extends BaseTE implements IInventory
     /**
      * Set's the size of the Inventory
      * 
-     * @return
+     * @return the tile
      */
     public InventoryTE setInventorySize(final int size)
     {
