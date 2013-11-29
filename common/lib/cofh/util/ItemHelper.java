@@ -180,7 +180,7 @@ public final class ItemHelper
 
     public static final boolean isPlayerHoldingFluidContainerItem(EntityPlayer player)
     {
-        return FluidHelper.isPlayerHoldingFluidContainerItem(player);
+        return lib.cofh.util.FluidHelper.isPlayerHoldingFluidContainerItem(player);
     }
 
     public static final boolean isPlayerHoldingEnergyContainerItem(EntityPlayer player)
