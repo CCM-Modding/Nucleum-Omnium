@@ -80,10 +80,8 @@ public class InventoryTE extends BaseTE implements IInventory
             final ItemStack itemStack = getStackInSlot(slot);
             inventory[slot] = null;
             return itemStack;
-        } else
-        {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -120,6 +118,32 @@ public class InventoryTE extends BaseTE implements IInventory
     public void setInventory(final ItemStack[] inventory)
     {
         this.inventory = inventory;
+    }
+
+    /**
+     * Sets the size of the itemstack at the specified slot
+     * 
+     * @param slot
+     *            The slot
+     * @param size
+     *            The new size of the itemstack
+     */
+    public void setSize(final int slot, final int size)
+    {
+        inventory[slot].stackSize = size;
+    }
+
+    /**
+     * Changes the size of the itemstack at the specified slot, by adding it to the existing size
+     * 
+     * @param slot
+     *            The slot
+     * @param size
+     *            The new size of the itemstack
+     */
+    public void changeSize(final int slot, final int size)
+    {
+        inventory[slot].stackSize += size;
     }
 
     /**
