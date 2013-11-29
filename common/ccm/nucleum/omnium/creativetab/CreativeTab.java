@@ -18,8 +18,6 @@ public class CreativeTab extends CreativeTabs
      * 
      * @param name
      *            The Tab Name
-     * @param tabIcon
-     *            The Tab Icon
      */
     public CreativeTab(final String name)
     {
