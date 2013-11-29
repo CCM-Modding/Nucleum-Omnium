@@ -1,10 +1,12 @@
 package lib.cofh.util;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.ConfigCategory;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
@@ -16,17 +18,11 @@ import net.minecraftforge.common.Property;
  */
 public class ConfigHandler
 {
-    ArrayList<String>[] blockEntries = new ArrayList[3];
-    ArrayList<String>[] itemEntries = new ArrayList[3];
+    ArrayList<String> blockEntries = new ArrayList<String>();
+    ArrayList<String> itemEntries = new ArrayList<String>();
 
-    TreeMap<String, Property> blockIds = new TreeMap();
-    TreeMap<String, Property> itemIds = new TreeMap();
-
-    int blockIdCounter = 0;
-    int itemIdCounter = 0;
-    int moduleCounter = 0;
-
-    Set assignedIds = new HashSet();
+    TreeMap<String, Property> blockIds = new TreeMap<String, Property>();
+    TreeMap<String, Property> itemIds = new TreeMap<String, Property>();
 
     Configuration modConfiguration;
     String modVersion;
@@ -37,14 +33,8 @@ public class ConfigHandler
     public ConfigHandler(String version)
     {
         modVersion = version;
-        for (int i = 0; i < blockEntries.length; i++)
-        {
-            blockEntries[i] = new ArrayList();
-        }
-        for (int i = 0; i < itemEntries.length; i++)
-        {
-            itemEntries[i] = new ArrayList();
-        }
+        blockEntries = new ArrayList<String>();
+        itemEntries = new ArrayList<String>();
     }
 
     public ConfigHandler(String version, int blockStart, int itemStart)
@@ -53,14 +43,8 @@ public class ConfigHandler
         blockIdStart = blockStart;
         itemIdStart = itemStart;
 
-        for (int i = 0; i < blockEntries.length; i++)
-        {
-            blockEntries[i] = new ArrayList();
-        }
-        for (int i = 0; i < itemEntries.length; i++)
-        {
-            itemEntries[i] = new ArrayList();
-        }
+        blockEntries = new ArrayList<String>();
+        itemEntries = new ArrayList<String>();
     }
 
     public void setConfiguration(Configuration config)
@@ -81,24 +65,12 @@ public class ConfigHandler
 
     public void addBlockEntry(String name)
     {
-        addBlockEntry(name, 0);
+        blockEntries.add(name);
     }
 
     public void addItemEntry(String name)
     {
-        addItemEntry(name, 0);
-    }
-
-    public void addBlockEntry(String name, int level)
-    {
-        blockEntries[level].add(name);
-        blockIdCounter++;
-    }
-
-    public void addItemEntry(String name, int level)
-    {
-        itemEntries[level].add(name);
-        itemIdCounter++;
+        itemEntries.add(name);
     }
 
     public int getBlockId(String name)
@@ -158,6 +130,16 @@ public class ConfigHandler
         return modConfiguration.getCategory(category);
     }
 
+    public Map<?, ?> getCategoryMap(String category)
+    {
+        return modConfiguration.getCategory(category).getValues();
+    }
+
+    public Set<String> getCategoryKeys(String category)
+    {
+        return modConfiguration.getCategory(category).getValues().keySet();
+    }
+
     public boolean hasCategory(String category)
     {
         return modConfiguration.hasCategory(category);
@@ -170,80 +152,56 @@ public class ConfigHandler
 
     public void init()
     {
-        // get ids for existing blocks
-        for (ArrayList<String> blockEntrie : blockEntries)
+        for (String entry : blockEntries)
         {
-            for (String entry : blockEntrie)
-            {
-                if (modConfiguration.hasKey(Configuration.CATEGORY_BLOCK, entry))
+            if (modConfiguration.hasKey(Configuration.CATEGORY_BLOCK, entry))
+            { // get ids for existing blocks
+                int existingId = modConfiguration.getCategory(Configuration.CATEGORY_BLOCK).getValues().get(entry).getInt();
+                blockIds.put(entry, modConfiguration.getBlock(entry, existingId));
+            } else
+            { // get ids for new blocks
+                boolean idFound = false;
+                for (int id = blockIdStart; (id > Block.blocksList.length) && !idFound; ++id)
                 {
-                    int existingId = modConfiguration.getCategory(Configuration.CATEGORY_BLOCK).getValues().get(entry).getInt();
-                    assignedIds.add(existingId);
-                    blockIds.put(entry, modConfiguration.getBlock(entry, existingId));
-                }
-            }
-        }
-        // get ids for new blocks
-        for (ArrayList<String> blockEntrie : blockEntries)
-        {
-            for (String entry : blockEntrie)
-            {
-                if (!modConfiguration.hasKey(Configuration.CATEGORY_BLOCK, entry))
-                {
-                    boolean idFound = false;
-                    for (int j = blockIdStart; (j < (blockIdStart + blockIdCounter)) && !idFound; ++j)
+                    if (Block.blocksList[id] == null)
                     {
-                        if (!assignedIds.contains(j))
-                        {
-                            assignedIds.add(j);
-                            blockIds.put(entry, modConfiguration.getBlock(entry, j));
-                            idFound = true;
-                        }
+                        blockIds.put(entry, modConfiguration.getBlock(entry, id));
+                        idFound = true;
                     }
                 }
             }
         }
-        // get ids for existing items
-        for (ArrayList<String> itemEntrie : itemEntries)
+        for (String entry : itemEntries)
         {
-            for (String entry : itemEntrie)
-            {
-                if (modConfiguration.hasKey(Configuration.CATEGORY_ITEM, entry))
+            if (modConfiguration.hasKey(Configuration.CATEGORY_ITEM, entry))
+            {// get ids for existing items
+                int existingId = modConfiguration.getCategory(Configuration.CATEGORY_ITEM).getValues().get(entry).getInt();
+                itemIds.put(entry, modConfiguration.getItem(entry, existingId));
+            } else
+            {// get ids for new items
+                boolean idFound = false;
+                for (int id = itemIdStart; (id > Item.itemsList.length) && !idFound; ++id)
                 {
-                    int existingId = modConfiguration.getCategory(Configuration.CATEGORY_ITEM).getValues().get(entry).getInt();
-                    assignedIds.add(existingId);
-                    itemIds.put(entry, modConfiguration.getItem(entry, existingId));
-                }
-            }
-        }
-        // get ids for new items
-        for (ArrayList<String> itemEntrie : itemEntries)
-        {
-            for (String entry : itemEntrie)
-            {
-                if (!modConfiguration.hasKey(Configuration.CATEGORY_ITEM, entry))
-                {
-
-                    boolean idFound = false;
-                    for (int j = itemIdStart; (j < (itemIdStart + itemIdCounter)) && !idFound; ++j)
+                    if (Item.itemsList[id] == null)
                     {
-                        if (!assignedIds.contains(j))
-                        {
-
-                            assignedIds.add(j);
-                            itemIds.put(entry, modConfiguration.getItem(entry, j));
-                            idFound = true;
-                        }
+                        itemIds.put(entry, modConfiguration.getItem(entry, id));
+                        idFound = true;
                     }
                 }
             }
         }
-        modConfiguration.save();
+        save();
     }
 
     public void save()
     {
-        modConfiguration.save();
+        if (modConfiguration.hasChanged())
+            modConfiguration.save();
+    }
+
+    public void load()
+    {
+        modConfiguration.load();
     }
 
     public boolean renameProperty(String category, String key, String newCategory, String newKey, boolean forceValue)
@@ -330,35 +288,5 @@ public class ConfigHandler
         }
         modConfiguration.removeCategory(modConfiguration.getCategory(category));
         return true;
-    }
-
-    public void cleanUp(boolean delConfig)
-    {
-        removeProperty("general", "version");
-        removeProperty("general", "Version");
-        get("general", "Version", modVersion);
-
-        modConfiguration.save();
-
-        for (ArrayList<String> blockEntrie : blockEntries)
-        {
-            blockEntrie.clear();
-        }
-        blockEntries = null;
-
-        for (ArrayList<String> itemEntrie : itemEntries)
-        {
-            itemEntrie.clear();
-        }
-        itemEntries = null;
-
-        blockIds.clear();
-        itemIds.clear();
-        assignedIds.clear();
-
-        if (delConfig)
-        {
-            modConfiguration = null;
-        }
     }
 }

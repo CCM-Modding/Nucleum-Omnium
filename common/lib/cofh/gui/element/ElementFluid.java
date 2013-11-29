@@ -27,10 +27,4 @@ public class ElementFluid extends ElementBase
         }
         gui.drawFluid(posX, posY, fluid, sizeX, sizeY);
     }
-
-    @Override
-    public String getTooltip()
-    {
-        return null;
-    }
 }

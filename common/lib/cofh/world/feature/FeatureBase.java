@@ -9,19 +9,26 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public abstract class FeatureBase implements IFeatureGenerator
 {
+    public static enum BiomeRestriction
+    {
+        NONE,
+        BLACKLIST,
+        WHITELIST
+    }
+
     final String name;
-    final byte type;
+    final BiomeRestriction type;
     final boolean regen;
-    final HashSet biomes = new HashSet<String>();
+    final HashSet<String> biomes = new HashSet<String>();
 
     public FeatureBase(String name, boolean regen)
     {
         this.name = name;
-        type = 0;
+        type = BiomeRestriction.NONE;
         this.regen = regen;
     }
 
-    public FeatureBase(String name, WorldGenerator worldGen, byte type, boolean regen)
+    public FeatureBase(String name, WorldGenerator worldGen, BiomeRestriction type, boolean regen)
     {
         this.name = name;
         this.type = type;

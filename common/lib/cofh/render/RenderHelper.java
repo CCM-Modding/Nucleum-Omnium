@@ -41,6 +41,21 @@ public final class RenderHelper
         return Tessellator.instance;
     }
 
+    public static void setColor3ub(int color)
+    {
+        GL11.glColor3ub((byte) ((color >> 16) & 0xFF), (byte) ((color >> 8) & 0xFF), (byte) (color & 0xFF));
+    }
+
+    public static void setColor4ub(int color)
+    {
+        GL11.glColor4ub((byte) ((color >> 24) & 0xFF), (byte) ((color >> 16) & 0xFF), (byte) ((color >> 8) & 0xFF), (byte) (color & 0xFF));
+    }
+
+    public static void resetColor()
+    {
+        GL11.glColor4f(1F, 1F, 1F, 1F);
+    }
+
     public static void renderItemAsBlock(RenderBlocks renderer, ItemStack item, double translateX, double translateY, double translateZ)
     {
         Tessellator tessellator = tessellator();
@@ -113,7 +128,7 @@ public final class RenderHelper
 
     public static final Icon getFluidTexture(FluidStack fluid)
     {
-        if ((fluid == null) || (fluid.getFluid() == null))
+        if ((fluid == null) || (fluid.getFluid() == null) || (fluid.getFluid().getIcon(fluid) == null))
         {
             return FluidRegistry.LAVA.getIcon();
         }

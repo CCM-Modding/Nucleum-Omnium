@@ -17,7 +17,7 @@ public class TickHandlerVersion implements IScheduledTickHandler
 {
     public static TickHandlerVersion instance = new TickHandlerVersion();
 
-    private static ArrayList<VersionHandler> modVersionInfo = new ArrayList();
+    private static ArrayList<VersionHandler> modVersionInfo = new ArrayList<VersionHandler>();
     private static boolean initialized;
     private static boolean sent;
     private static int modIndex = 0;

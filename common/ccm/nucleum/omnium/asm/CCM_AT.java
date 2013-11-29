@@ -11,32 +11,32 @@ import java.util.List;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import cpw.mods.fml.common.asm.transformers.AccessTransformer;
 
-public class OmniumAT extends AccessTransformer
+public class CCM_AT extends AccessTransformer
 {
 
-    private static OmniumAT instance;
+    private static CCM_AT instance;
 
     private static List<String> mapFileList = new LinkedList<String>();
 
     public static void addTransformerMap(final String mapFile)
     {
-        if (OmniumAT.instance == null)
+        if (CCM_AT.instance == null)
         {
-            OmniumAT.mapFileList.add(mapFile);
+            CCM_AT.mapFileList.add(mapFile);
         } else
         {
-            OmniumAT.instance.readMapFile(mapFile);
+            CCM_AT.instance.readMapFile(mapFile);
         }
     }
 
-    public OmniumAT() throws IOException
+    public CCM_AT() throws IOException
     {
         super();
-        OmniumAT.instance = this;
+        CCM_AT.instance = this;
 
-        OmniumAT.mapFileList.add("ccm_at.cfg");
+        CCM_AT.mapFileList.add("ccm_at.cfg");
 
-        for (final String file : OmniumAT.mapFileList)
+        for (final String file : CCM_AT.mapFileList)
         {
             readMapFile(file);
         }

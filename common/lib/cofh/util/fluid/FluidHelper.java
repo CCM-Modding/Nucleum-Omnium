@@ -151,18 +151,12 @@ public class FluidHelper
             if (bMeta == 0)
             {
                 return new FluidStack(FluidRegistry.WATER, 1000);
-            } else
-            {
-                return null;
             }
         } else if ((bId == 10) || (bId == 11))
         {
             if (bMeta == 0)
             {
                 return new FluidStack(FluidRegistry.LAVA, 1000);
-            } else
-            {
-                return null;
             }
         } else if ((Block.blocksList[bId] != null) && (Block.blocksList[bId] instanceof IFluidBlock))
         {
@@ -192,11 +186,9 @@ public class FluidHelper
         if (length < 0)
         {
             return null;
-        } else
-        {
-            byte[] abyte = new byte[length];
-            data.readFully(abyte);
-            return FluidStack.loadFluidStackFromNBT(CompressedStreamTools.decompress(abyte));
         }
+        byte[] abyte = new byte[length];
+        data.readFully(abyte);
+        return FluidStack.loadFluidStackFromNBT(CompressedStreamTools.decompress(abyte));
     }
 }

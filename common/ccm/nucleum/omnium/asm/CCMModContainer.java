@@ -6,18 +6,16 @@ package ccm.nucleum.omnium.asm;
 import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.MetadataCollection;
 import cpw.mods.fml.common.ModMetadata;
-import cpw.mods.fml.common.versioning.ArtifactVersion;
 
-public class OmniumModContainer extends DummyModContainer
+public class CCMModContainer extends DummyModContainer
 {
     private ModMetadata md = new ModMetadata();
-    private ArtifactVersion processedVersion;
-    private final String label = "OmniumCore";
+    private final String label = "ccmasm";
 
-    public OmniumModContainer()
+    public CCMModContainer()
     {
         md.modId = label;
-        md.name = "CCM Core";
+        md.name = "CCM ASM";
         md.version = "TEST";
     }
 

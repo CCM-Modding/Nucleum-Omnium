@@ -47,25 +47,20 @@ public class InventoryHelper
                     inventory[i].stackSize += stack.stackSize;
                     stack = null;
                     return true;
-                } else
-                {
-                    stack.stackSize -= hold;
-                    inventory[i].stackSize += hold;
                 }
+                stack.stackSize -= hold;
+                inventory[i].stackSize += hold;
             } else if ((inventory[i] == null) && (openSlot == -1))
             {
                 openSlot = i;
             }
         }
-        if (stack != null)
+        if (openSlot > -1)
         {
-            if (openSlot > -1)
-            {
-                inventory[openSlot] = stack;
-            } else
-            {
-                return false;
-            }
+            inventory[openSlot] = stack;
+        } else
+        {
+            return false;
         }
         return true;
     }

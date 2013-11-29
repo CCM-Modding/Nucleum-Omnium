@@ -1,7 +1,7 @@
 package lib.cofh.api.core;
 
 /**
- * Basic interface for the Cape and Skin Registers.
+ * Basic interface for the Cape and Skin Registries.
  * 
  * @author Zeldo Kavira
  */

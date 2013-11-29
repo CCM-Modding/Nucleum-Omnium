@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
  */
 public abstract class TabBase extends ElementBase
 {
-    public static int tabExpandSpeed = 4;
+    public static int tabExpandSpeed = 8;
 
     public boolean open;
     public int side = 1;
@@ -66,7 +66,6 @@ public abstract class TabBase extends ElementBase
         {
             currentWidth -= tabExpandSpeed;
         }
-
         if (currentWidth > maxWidth)
         {
             currentWidth = maxWidth;
@@ -74,7 +73,6 @@ public abstract class TabBase extends ElementBase
         {
             currentWidth = minWidth;
         }
-
         if (open && (currentHeight < maxHeight))
         {
             currentHeight += tabExpandSpeed;
@@ -82,7 +80,6 @@ public abstract class TabBase extends ElementBase
         {
             currentHeight -= tabExpandSpeed;
         }
-
         if (currentHeight > maxHeight)
         {
             currentHeight = maxHeight;
@@ -90,7 +87,6 @@ public abstract class TabBase extends ElementBase
         {
             currentHeight = minHeight;
         }
-
         if (open && (currentWidth == maxWidth) && (currentHeight == maxHeight))
         {
             setFullyOpen();

@@ -1,5 +1,7 @@
 package lib.cofh.gui.element;
 
+import java.util.List;
+
 import lib.cofh.gui.GuiBase;
 import lib.cofh.render.RenderHelper;
 import lib.cofh.util.StringHelper;
@@ -13,6 +15,7 @@ public class ElementButton extends ElementBase
     int disabledX = 0;
     int disabledY = 0;
     boolean disabled = false;
+    boolean tooltipLocalized = false;
     String tooltip;
 
     public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int sizeX, int sizeY, String texture)
@@ -65,14 +68,29 @@ public class ElementButton extends ElementBase
     }
 
     @Override
-    public String getTooltip()
+    public void addTooltip(List<String> list)
     {
-        return StringHelper.localize(tooltip);
+        if (tooltip != null)
+        {
+            if (tooltipLocalized)
+            {
+                list.add(tooltip);
+            } else
+            {
+                list.add(StringHelper.localize(tooltip));
+            }
+        }
     }
 
     public ElementButton setToolTip(String tooltip)
     {
         this.tooltip = tooltip;
+        return this;
+    }
+
+    public ElementButton setToolTipLocalized(boolean localized)
+    {
+        tooltipLocalized = localized;
         return this;
     }
 

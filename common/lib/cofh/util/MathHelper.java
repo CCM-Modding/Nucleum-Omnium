@@ -35,6 +35,16 @@ public final class MathHelper
         return SIN_TABLE[(int) (((float) d * 10430.378F) + 16384.0F) & 65535];
     }
 
+    public static int clampI(int a, int min, int max)
+    {
+        return a < min ? min : (a > max ? max : a);
+    }
+
+    public static float clampF(float a, float min, float max)
+    {
+        return a < min ? min : (a > max ? max : a);
+    }
+
     public static float approachLinear(float a, float b, float max)
     {
         return a > b ? (a - b) < max ? b : a - max : (b - a) < max ? b : a + max;
@@ -111,11 +121,6 @@ public final class MathHelper
         return r == a ? b : r;
     }
 
-    public static int floor_double(double d)
-    {
-        return net.minecraft.util.MathHelper.floor_double(d);
-    }
-
     /**
      * Unchecked implementation to round a number. Parameter should be known to be valid in advance.
      */
@@ -130,6 +135,12 @@ public final class MathHelper
     public static int ceil(double d)
     {
         return (int) (d + 0.9999D);
+    }
+
+    public static int floor(double d)
+    {
+        int i = (int) d;
+        return d < i ? i - 1 : i;
     }
 
     /**
@@ -166,5 +177,16 @@ public final class MathHelper
     public static float maxF(float a, int b)
     {
         return a > b ? a : b;
+    }
+
+    public static int setBit(int mask, int bit, boolean value)
+    {
+        mask |= (value ? 1 : 0) << bit;
+        return mask;
+    }
+
+    public static boolean isBitSet(int mask, int bit)
+    {
+        return (mask & (1 << bit)) != 0;
     }
 }

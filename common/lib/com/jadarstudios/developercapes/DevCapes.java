@@ -113,11 +113,9 @@ public class DevCapes
                                 addDownloadThread(group, t);
 
                                 continue;
-                            } else
-                            {
-                                username = subLine.toLowerCase();
-                                addUser(username, group);
                             }
+                            username = subLine.toLowerCase();
+                            addUser(username, group);
                         }
                     }
                 }

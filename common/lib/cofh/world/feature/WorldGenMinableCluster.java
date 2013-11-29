@@ -107,7 +107,7 @@ public class WorldGenMinableCluster extends WorldGenerator
                                 if ((((d12 * d12) + (d13 * d13) + (d14 * d14)) < 1.0D) && (block != null) && block.isGenMineableReplaceable(world, k2, l2, i3, genBlockID))
                                 {
                                     WeightedRandomBlock ore = (WeightedRandomBlock) WeightedRandom.getRandomItem(world.rand, cluster);
-                                    world.setBlock(k2, l2, i3, ore.blockId, ore.metadata, 1);
+                                    world.setBlock(k2, l2, i3, ore.blockId, ore.metadata, 0);
                                 }
                             }
                         }

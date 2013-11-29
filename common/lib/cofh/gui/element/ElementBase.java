@@ -1,5 +1,7 @@
 package lib.cofh.gui.element;
 
+import java.util.List;
+
 import lib.cofh.gui.GuiBase;
 import net.minecraft.client.audio.SoundManager;
 import net.minecraft.client.gui.FontRenderer;
@@ -90,7 +92,8 @@ public abstract class ElementBase
         draw();
     }
 
-    public abstract String getTooltip();
+    public void addTooltip(List<String> list)
+    {}
 
     public boolean intersectsWith(int mouseX, int mouseY)
     {

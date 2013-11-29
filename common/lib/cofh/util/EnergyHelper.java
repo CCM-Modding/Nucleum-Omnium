@@ -1,48 +1,43 @@
 package lib.cofh.util;
 
-//import buildcraft.api.power.IPowerReceptor;
 import lib.cofh.api.energy.IEnergyContainerItem;
 import lib.cofh.api.energy.IEnergyHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
+/**
+ * This class contains helper functions related to Redstone Flux, the basis of the lib.cofh Energy System.
+ * 
+ * @author King Lemming
+ */
 public class EnergyHelper
 {
+    public final int RF_PER_MJ = 10; // Official Ratio of RF to MJ (BuildCraft)
+    public final int RF_PER_EU = 4; // Official Ratio of RF to EU (IndustrialCraft)
+
     private EnergyHelper()
     {}
 
-    public static boolean chargeStorageWithContainer(World world, IEnergyHandler handler, EntityPlayer player)
+    /* IEnergyContainer Interaction */
+    public static int extractEnergyFromHeldContainer(EntityPlayer player, int maxExtract, boolean simulate)
     {
         ItemStack container = player.getCurrentEquippedItem();
 
-        if (isEnergyContainerItem(container))
-        {
-
-        }
-        return false;
+        return isEnergyContainerItem(container) ? ((IEnergyContainerItem) container.getItem()).extractEnergy(container, maxExtract, simulate) : 0;
     }
 
-    public static boolean chargeContainerFromStorage(World world, IEnergyHandler handler, EntityPlayer player, int energy)
+    public static int insertEnergyIntoHeldContainer(EntityPlayer player, int maxReceive, boolean simulate)
     {
         ItemStack container = player.getCurrentEquippedItem();
 
-        if (isEnergyContainerItem(container))
-        {}
-        return false;
+        return isEnergyContainerItem(container) ? ((IEnergyContainerItem) container.getItem()).receiveEnergy(container, maxReceive, simulate) : 0;
     }
 
-    public static int chargeAdjacentEnergyHandler(TileEntity tile, int from, int energy, boolean simulate)
+    public static boolean isPlayerHoldingEnergyContainerItem(EntityPlayer player)
     {
-        TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
-
-        if (handler instanceof IEnergyHandler)
-        {
-            return ((IEnergyHandler) handler).receiveEnergy(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(), energy, simulate);
-        }
-        return 0;
+        return isEnergyContainerItem(player.getCurrentEquippedItem());
     }
 
     public static boolean isEnergyContainerItem(ItemStack container)
@@ -50,36 +45,30 @@ public class EnergyHelper
         return (container != null) && (container.getItem() instanceof IEnergyContainerItem);
     }
 
-    public static boolean isAdjacentEnergyHandler(TileEntity tile, int from)
+    /* IEnergyHandler Interaction */
+    public static int extractEnergyFromAdjacentEnergyHandler(TileEntity tile, int from, int energy, boolean simulate)
     {
-        return BlockHelper.getAdjacentTileEntity(tile, from) instanceof IEnergyHandler;
+        TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
+
+        return handler instanceof IEnergyHandler ? ((IEnergyHandler) handler).extractEnergy(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(), energy, simulate) : 0;
+    }
+
+    public static int insertEnergyIntoAdjacentEnergyHandler(TileEntity tile, int from, int energy, boolean simulate)
+    {
+        TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
+
+        return handler instanceof IEnergyHandler ? ((IEnergyHandler) handler).receiveEnergy(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(), energy, simulate) : 0;
     }
 
     public static boolean isAdjacentEnergyHandlerFromSide(TileEntity tile, int from)
     {
         TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
 
-        if (handler instanceof IEnergyHandler)
-        {
-            return ((IEnergyHandler) handler).canInterface(ForgeDirection.VALID_DIRECTIONS[from].getOpposite());
-        }
-        return false;
+        return isEnergyHandlerFromSide(handler, ForgeDirection.VALID_DIRECTIONS[from].getOpposite());
     }
 
     public static boolean isEnergyHandlerFromSide(TileEntity tile, ForgeDirection from)
     {
-        if (tile instanceof IEnergyHandler)
-        {
-            return ((IEnergyHandler) tile).canInterface(from);
-        }
-        return false;
-    }
-
-    public static boolean isPowerReceptorFromSide(TileEntity theTile, ForgeDirection orientation)
-    {
-        // if (theTile instanceof IPowerReceptor) {
-        // return ((IPowerReceptor) theTile).getPowerReceiver(orientation) != null;
-        // }
-        return false;
+        return tile instanceof IEnergyHandler ? ((IEnergyHandler) tile).canInterface(from) : false;
     }
 }

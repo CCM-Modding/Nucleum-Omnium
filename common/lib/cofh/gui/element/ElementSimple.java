@@ -35,10 +35,4 @@ public class ElementSimple extends ElementBase
         RenderHelper.bindTexture(texture);
         drawTexturedModalRect(posX, posY, texU, texV, sizeX, sizeY);
     }
-
-    @Override
-    public String getTooltip()
-    {
-        return null;
-    }
 }

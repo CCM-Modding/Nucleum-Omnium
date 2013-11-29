@@ -25,12 +25,12 @@ public interface ISecureTile
 
         public static AccessMode stepForward(AccessMode curAccess)
         {
-            return curAccess.isPublic() ? AccessMode.RESTRICTED : curAccess.isPrivate() ? AccessMode.PUBLIC : AccessMode.PRIVATE;
+            return curAccess == AccessMode.PUBLIC ? AccessMode.RESTRICTED : curAccess == AccessMode.PRIVATE ? AccessMode.PUBLIC : AccessMode.PRIVATE;
         }
 
         public static AccessMode stepBackward(AccessMode curAccess)
         {
-            return curAccess.isPublic() ? AccessMode.PRIVATE : curAccess.isPrivate() ? AccessMode.RESTRICTED : AccessMode.PUBLIC;
+            return curAccess == AccessMode.PUBLIC ? AccessMode.PRIVATE : curAccess == AccessMode.PRIVATE ? AccessMode.RESTRICTED : AccessMode.PUBLIC;
         }
     }
 

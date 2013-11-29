@@ -61,10 +61,4 @@ public class ElementDualScaled extends ElementBase
                 return;
         }
     }
-
-    @Override
-    public String getTooltip()
-    {
-        return null;
-    }
 }

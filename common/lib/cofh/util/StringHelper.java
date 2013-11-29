@@ -3,7 +3,10 @@ package lib.cofh.util;
 import java.util.List;
 
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.input.Keyboard;
 
@@ -34,7 +37,7 @@ public final class StringHelper
 
     public static int getSplitStringHeight(FontRenderer fontRenderer, String input, int width)
     {
-        List stringRows = fontRenderer.listFormattedStringToWidth(input, width);
+        List<?> stringRows = fontRenderer.listFormattedStringToWidth(input, width);
         return stringRows.size() * fontRenderer.FONT_HEIGHT;
     }
 
@@ -51,6 +54,29 @@ public final class StringHelper
     public static String localize(String key)
     {
         return StatCollector.translateToLocal(key);
+    }
+
+    public static String getFluidName(FluidStack fluid)
+    {
+        return getFluidName(fluid.getFluid());
+    }
+
+    public static String getFluidName(Fluid fluid)
+    {
+        String fluidName = "";
+        if (fluid.getRarity() == EnumRarity.uncommon)
+        {
+            fluidName += YELLOW;
+        } else if (fluid.getRarity() == EnumRarity.rare)
+        {
+            fluidName += BRIGHT_BLUE;
+        } else if (fluid.getRarity() == EnumRarity.epic)
+        {
+            fluidName += PINK;
+        }
+        fluidName += fluid.getLocalizedName() + END;
+
+        return fluidName;
     }
 
     /** When formatting a string, always apply color before font modification. */
@@ -78,6 +104,6 @@ public final class StringHelper
     public static final String ITALIC = (char) 167 + "o";
     public static final String END = (char) 167 + "r";
 
-    public static String shiftForInfo = StringHelper.GRAY + localize("message.cofh.holdShift1") + " " + StringHelper.BRIGHT_GREEN + StringHelper.ITALIC
-            + localize("message.cofh.holdShift2") + " " + StringHelper.END + StringHelper.GRAY + localize("message.cofh.holdShift3");
+    public static String shiftForInfo = StringHelper.GRAY + localize("message.lib.cofh.holdShift1") + " " + StringHelper.BRIGHT_GREEN + StringHelper.ITALIC
+            + localize("message.lib.cofh.holdShift2") + " " + StringHelper.END + StringHelper.GRAY + localize("message.lib.cofh.holdShift3") + StringHelper.END;
 }

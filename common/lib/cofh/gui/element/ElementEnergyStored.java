@@ -1,5 +1,7 @@
 package lib.cofh.gui.element;
 
+import java.util.List;
+
 import lib.cofh.api.energy.IEnergyStorage;
 import lib.cofh.gui.GuiBase;
 import lib.cofh.gui.GuiProps;
@@ -41,13 +43,15 @@ public class ElementEnergyStored extends ElementBase
     }
 
     @Override
-    public String getTooltip()
+    public void addTooltip(List<String> list)
     {
         if (storage.getMaxEnergyStored() < 0)
         {
-            return "Infinite RF";
+            list.add("Infinite RF");
+        } else
+        {
+            list.add("" + storage.getEnergyStored() + " / " + storage.getMaxEnergyStored() + " RF");
         }
-        return "" + storage.getEnergyStored() + " / " + storage.getMaxEnergyStored() + " RF";
     }
 
     int getScaled()

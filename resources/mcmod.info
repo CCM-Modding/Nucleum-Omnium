@@ -1,46 +1,31 @@
 [
 {
-  "modid": "OmniumCore",
-  "name": "CCM Core",
+  "modid": "nucleum_omnium",
+  "name": "Nucleum Omnium",
   "description": "Core functionality for all CCM Mods",
-  "credits": "Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
+  "credits": "Made By Captain Shadows, ClayCorp, Morton, Dries007, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
   "logoFile": "/assets/nucleum-omnium/textures/logo.png",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
+  "updateUrl": "http://jenkins.dries007.net/view/CCM/job/Nucleum-Omnium/",
+  "authors": [ "captain_shadows", "dries007" ],
+},
+{
+  "modid": "ccmasm",
+  "name": "CCM ASM",
+  "description": "CCM ASM mod",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
   "updateUrl": "http://jenkins.dries007.net/view/CCM/job/Nucleum-Omnium/",
   "authors": [ "captain_shadows" ],
   "parent":"nucleum_omnium",
-  "dependencies": [
-     "required-after:Forge@[7.8.0.688,)"
-  ]
-},
-{
-  "modid": "nucleum_omnium",
-  "name": "Nucleum Omnium",
-  "description": "Main CCM Mod",
-  "credits": "Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
-  "logoFile": "/assets/nucleum-omnium/textures/logo.png",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
-  "updateUrl": "http://jenkins.dries007.net/view/CCM/job/Nucleum-Omnium/",
-  "authors": [ "captain_shadows", 
-			   "dries007"],
-  "dependencies": [
-     "required-after:OmniumCore"
-  ]
 },
 {
   "modid": "nucleum_world",
   "name": "Nucleum World",
   "description": "World Generation for all CCM Mods",
-  "credits": "Made By Captain Shadows, ClayCorp, Morton, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team, including Dries007), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API, and last but not least Shedar for ModStats. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
-  "logoFile": "/assets/nucleum-omnium/textures/logo.png",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
-  "updateUrl": "http://jenkins.dries007.net/view/CCM/job/Nucleum-Omnium/",
   "authors": [  "captain_shadows", 
 				"Hologuard"],
   "parent":"nucleum_omnium",

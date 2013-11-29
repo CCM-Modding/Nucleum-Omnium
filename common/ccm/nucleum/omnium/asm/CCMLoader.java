@@ -10,22 +10,22 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.Name;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
-@Name("OmniumCore")
+@Name("ccmasm")
 @MCVersion("1.6.4")
 @TransformerExclusions("ccm.nucleum.omnium.asm")
-public class OmniumLoader implements IFMLLoadingPlugin
+public class CCMLoader implements IFMLLoadingPlugin
 {
     @Override
     public String[] getASMTransformerClass()
     {
         return new String[]
-        { "ccm.nucleum.omnium.asm.OmniumAT" };
+        { "ccm.nucleum.omnium.asm.CCM_AT" };
     }
 
     @Override
     public String getModContainerClass()
     {
-        return "ccm.nucleum.omnium.asm.OmniumModContainer";
+        return "ccm.nucleum.omnium.asm.CCMModContainer";
     }
 
     @Override

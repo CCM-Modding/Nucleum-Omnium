@@ -20,7 +20,7 @@ public class ComparableItemStackSafe extends ComparableItemStack
     {
         int id = OreDictionary.getOreID(stack);
 
-        if (!safeOreType(OreDictionary.getOreName(id)))
+        if ((id == -1) || !safeOreType(OreDictionary.getOreName(id)))
         {
             return -1;
         }

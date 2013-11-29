@@ -46,7 +46,7 @@ jar {
     manifest {
         attributes 'MCVersion' : project.minecraft.version
         attributes 'Version' : project.version
-        attributes 'FMLCorePlugin' : 'ccm.nucleum.omnium.asm.OmniumLoader'
+        attributes 'FMLCorePlugin' : 'ccm.nucleum.omnium.asm.CCMLoader'
         attributes 'FMLCorePluginContainsFMLMod' : 'true'
     }
 }

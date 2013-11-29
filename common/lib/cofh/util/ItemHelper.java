@@ -14,8 +14,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-//import lib.cofh.core.CoFHProps;
-
 /**
  * Contains various helper functions to assist with {@link Item} and {@link ItemStack} manipulation and interaction.
  * 
@@ -25,6 +23,17 @@ public final class ItemHelper
 {
     private ItemHelper()
     {}
+
+    public static ItemStack cloneStack(Item item, int stackSize)
+    {
+        if (item == null)
+        {
+            return null;
+        }
+        ItemStack stack = new ItemStack(item, stackSize);
+
+        return stack;
+    }
 
     public static ItemStack cloneStack(ItemStack stack, int stackSize)
     {
@@ -38,6 +47,15 @@ public final class ItemHelper
         return retStack;
     }
 
+    public static ItemStack copyTag(ItemStack container, ItemStack other)
+    {
+        if ((other != null) && (other.stackTagCompound != null))
+        {
+            container.stackTagCompound = (NBTTagCompound) other.stackTagCompound.copy();
+        }
+        return container;
+    }
+
     public static ItemStack consumeItem(ItemStack stack)
     {
         if (stack.stackSize == 1)
@@ -45,10 +63,8 @@ public final class ItemHelper
             if (stack.getItem().hasContainerItem())
             {
                 return stack.getItem().getContainerItemStack(stack);
-            } else
-            {
-                return null;
             }
+            return null;
         }
         stack.splitStack(1);
         return stack;
@@ -83,20 +99,18 @@ public final class ItemHelper
             int var9 = var13 + var8 + ((theItem.getMaxDamage() * 5) / 100);
             int var10 = Math.max(0, theItem.getMaxDamage() - var9);
             return new ItemStack(dmgItems[0].itemID, 1, var10);
-        } else
-        {
-            IRecipe recipe;
-            for (int i = 0; i < CraftingManager.getInstance().getRecipeList().size(); ++i)
-            {
-                recipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(i);
-
-                if (recipe.matches(inv, world))
-                {
-                    return recipe.getCraftingResult(inv);
-                }
-            }
-            return null;
         }
+        IRecipe recipe;
+        for (int i = 0; i < CraftingManager.getInstance().getRecipeList().size(); ++i)
+        {
+            recipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(i);
+
+            if (recipe.matches(inv, world))
+            {
+                return recipe.getCraftingResult(inv);
+            }
+        }
+        return null;
     }
 
     /**
@@ -159,15 +173,25 @@ public final class ItemHelper
     /**
      * Determine if a player is holding a registered Fluid Container.
      */
-    public static boolean isPlayerHoldingFluidContainer(EntityPlayer player)
+    public static final boolean isPlayerHoldingFluidContainer(EntityPlayer player)
     {
         return FluidContainerRegistry.isContainer(player.getCurrentEquippedItem());
+    }
+
+    public static final boolean isPlayerHoldingFluidContainerItem(EntityPlayer player)
+    {
+        return FluidHelper.isPlayerHoldingFluidContainerItem(player);
+    }
+
+    public static final boolean isPlayerHoldingEnergyContainerItem(EntityPlayer player)
+    {
+        return EnergyHelper.isPlayerHoldingEnergyContainerItem(player);
     }
 
     /**
      * Determine if a player is holding an ItemStack of a specific Item type.
      */
-    public static boolean isPlayerHoldingItem(Item item, EntityPlayer player)
+    public static final boolean isPlayerHoldingItem(Item item, EntityPlayer player)
     {
         Item equipped = player.getCurrentEquippedItem() != null ? player.getCurrentEquippedItem().getItem() : null;
         return item == null ? equipped == null : item.equals(equipped);
@@ -176,10 +200,15 @@ public final class ItemHelper
     /**
      * Determine if a player is holding an ItemStack with a specific Item ID, Metadata, and NBT.
      */
-    public static boolean isPlayerHoldingItemStack(ItemStack stack, EntityPlayer player)
+    public static final boolean isPlayerHoldingItemStack(ItemStack stack, EntityPlayer player)
     {
         ItemStack equipped = player.getCurrentEquippedItem() != null ? player.getCurrentEquippedItem() : null;
         return stack == null ? equipped == null : (equipped != null) && stack.isItemEqual(equipped) && ItemStack.areItemStackTagsEqual(stack, equipped);
+    }
+
+    public static boolean areItemStacksEqual(ItemStack stackA, ItemStack stackB)
+    {
+        return ItemStack.areItemStacksEqual(stackA, stackB);
     }
 
     public static boolean areItemStacksEqualNoNBT(ItemStack stackA, ItemStack stackB)
@@ -220,20 +249,21 @@ public final class ItemHelper
 
     public static boolean itemsEqualWithMetadata(ItemStack stackA, ItemStack stackB, boolean checkNBT)
     {
-        return (stackA.itemID == stackB.itemID) && (stackA.getItemDamage() == stackB.getItemDamage()) && (!checkNBT || NBTsMatch(stackA.stackTagCompound, stackB.stackTagCompound));
+        return (stackA.itemID == stackB.itemID) && (stackA.getItemDamage() == stackB.getItemDamage())
+                && (!checkNBT || doNBTsMatch(stackA.stackTagCompound, stackB.stackTagCompound));
     }
 
     public static boolean itemsEqualWithoutMetadata(ItemStack stackA, ItemStack stackB, boolean checkNBT)
     {
-        return (stackA.itemID == stackB.itemID) && (!checkNBT || NBTsMatch(stackA.stackTagCompound, stackB.stackTagCompound));
+        return (stackA.itemID == stackB.itemID) && (!checkNBT || doNBTsMatch(stackA.stackTagCompound, stackB.stackTagCompound));
     }
 
-    public static boolean OreIDMatches(ItemStack stackA, ItemStack stackB)
+    public static boolean doOreIDsMatch(ItemStack stackA, ItemStack stackB)
     {
         return (OreDictionary.getOreID(stackA) >= 0) && (OreDictionary.getOreID(stackA) == OreDictionary.getOreID(stackB));
     }
 
-    public static boolean NBTsMatch(NBTTagCompound nbtA, NBTTagCompound nbtB)
+    public static boolean doNBTsMatch(NBTTagCompound nbtA, NBTTagCompound nbtB)
     {
         return nbtA == null ? nbtB == null ? true : false : nbtB == null ? false : nbtA.equals(nbtB);
     }
@@ -241,11 +271,11 @@ public final class ItemHelper
     /**
      * Adds Inventory information to ItemStacks which themselves hold things. Called in addInformation().
      */
-    public static void addInventoryInformation(ItemStack stack, List list)
+    public static void addInventoryInformation(ItemStack stack, List<String> list)
     {
         if (stack.stackTagCompound.hasKey("Inventory") && (stack.stackTagCompound.getTagList("Inventory").tagCount() > 0))
         {
-            if (/* CoFHProps.displayShiftForDetail && */!StringHelper.isShiftKeyDown())
+            if (!StringHelper.isShiftKeyDown())
             {
                 list.add(StringHelper.shiftForInfo);
             }
@@ -268,11 +298,11 @@ public final class ItemHelper
         }
     }
 
-    public static void addInventoryInformation(ItemStack stack, List list, int minSlot, int maxSlot)
+    public static void addInventoryInformation(ItemStack stack, List<String> list, int minSlot, int maxSlot)
     {
         if (stack.stackTagCompound.hasKey("Inventory") && (stack.stackTagCompound.getTagList("Inventory").tagCount() > 0))
         {
-            if (/* CoFHProps.displayShiftForDetail && */!StringHelper.isShiftKeyDown())
+            if (!StringHelper.isShiftKeyDown())
             {
                 list.add(StringHelper.shiftForInfo);
             }

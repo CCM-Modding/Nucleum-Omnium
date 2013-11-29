@@ -32,12 +32,12 @@ public class FeatureOreGenNormal extends FeatureBase
         int blockX = chunkX * 16;
         int blockZ = chunkZ * 16;
 
-        if (type > 0)
+        if (type != BiomeRestriction.NONE)
         {
             String biomeName = world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.toLowerCase();
             boolean onList = biomes.contains(biomeName);
 
-            if (((type == 1) && !onList) || ((type == 2) && onList))
+            if (((type == BiomeRestriction.BLACKLIST) && onList) || ((type == BiomeRestriction.WHITELIST) && !onList))
             {
                 return false;
             }

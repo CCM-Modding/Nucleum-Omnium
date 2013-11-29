@@ -19,12 +19,12 @@ public class CustomInventoryCrafting extends InventoryCrafting
      */
     public final Container eventHandler;
 
-    public CustomInventoryCrafting(Container container, int width, int height, IInventory masterTile, int startingInventoryIndex)
+    public CustomInventoryCrafting(Container par1Container, int par2, int par3, IInventory masterTile, int startingInventoryIndex)
     {
-        super(container, width, height);
-        invSize = width * height;
-        eventHandler = container;
-        inventoryWidth = width;
+        super(par1Container, par2, par3);
+        invSize = par2 * par3;
+        eventHandler = par1Container;
+        inventoryWidth = par2;
         invOffset = startingInventoryIndex;
         myMaster = masterTile;
     }
@@ -36,22 +36,20 @@ public class CustomInventoryCrafting extends InventoryCrafting
     }
 
     @Override
-    public ItemStack getStackInSlot(int slot)
+    public ItemStack getStackInSlot(int par1)
     {
-        return slot >= getSizeInventory() ? null : myMaster.getStackInSlot(invOffset + slot);
+        return par1 >= getSizeInventory() ? null : myMaster.getStackInSlot(invOffset + par1);
     }
 
     @Override
-    public ItemStack getStackInRowAndColumn(int x, int y)
+    public ItemStack getStackInRowAndColumn(int par1, int par2)
     {
-        if ((x >= 0) && (x < inventoryWidth))
+        if ((par1 >= 0) && (par1 < inventoryWidth))
         {
-            int k = x + (y * inventoryWidth);
+            int k = par1 + (par2 * inventoryWidth);
             return getStackInSlot(k);
-        } else
-        {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -74,10 +72,8 @@ public class CustomInventoryCrafting extends InventoryCrafting
             ItemStack itemstack = myMaster.getStackInSlot(invOffset + par1);
             myMaster.setInventorySlotContents(invOffset + par1, null);
             return itemstack;
-        } else
-        {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -93,22 +89,18 @@ public class CustomInventoryCrafting extends InventoryCrafting
                 myMaster.setInventorySlotContents(invOffset + par1, null);
                 eventHandler.onCraftMatrixChanged(this);
                 return itemstack;
-            } else
-            {
-                itemstack = myMaster.getStackInSlot(invOffset + par1).splitStack(par2);
-
-                if (myMaster.getStackInSlot(invOffset + par1).stackSize == 0)
-                {
-                    myMaster.setInventorySlotContents(invOffset + par1, null);
-                }
-
-                eventHandler.onCraftMatrixChanged(this);
-                return itemstack;
             }
-        } else
-        {
-            return null;
+            itemstack = myMaster.getStackInSlot(invOffset + par1).splitStack(par2);
+
+            if (myMaster.getStackInSlot(invOffset + par1).stackSize == 0)
+            {
+                myMaster.setInventorySlotContents(invOffset + par1, null);
+            }
+
+            eventHandler.onCraftMatrixChanged(this);
+            return itemstack;
         }
+        return null;
     }
 
     @Override
