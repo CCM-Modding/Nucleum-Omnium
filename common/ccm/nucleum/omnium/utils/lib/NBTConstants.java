@@ -10,15 +10,15 @@ public final class NBTConstants
      */
     public static final String NBT_CMM = "CCM";
 
-    public static final String NBT_INVENTORY = NBT_CMM + ".INVENTORY";
+    public static final String NBT_INVENTORY = "Items";
 
     public static final String NBT_ENTITY = NBT_CMM + ".ENTITY";
 
     public static final String NBT_TILE_ENTITY = NBT_ENTITY + ".TILE";
 
-    public static final String NBT_INVENTORY_SLOT = NBT_INVENTORY + ".SLOT";
+    public static final String NBT_INVENTORY_SLOT = "Slot";
 
-    public static final String NBT_INVENTORY_SIZE = NBT_INVENTORY + ".SIZE";
+    public static final String NBT_INVENTORY_SIZE = NBT_CMM + "INVENTORY.SIZE";
 
     public static final String NBT_CONTAINER = NBT_CMM + ".CONTAINER";
 
@@ -29,7 +29,7 @@ public final class NBTConstants
      */
     public static final String NBT_TE_DIRECTION = NBT_TILE_ENTITY + ".DIRECTION";
 
-    public static final String NBT_TE_CUSTOM_NAME = NBT_TILE_ENTITY + ".NAME";
+    public static final String NBT_TE_CUSTOM_NAME = "CustomName";
 
     public static final String NBT_TE_OWNER = NBT_TILE_ENTITY + ".OWNER";
 

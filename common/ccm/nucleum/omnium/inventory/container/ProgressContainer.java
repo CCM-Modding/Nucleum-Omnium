@@ -29,9 +29,9 @@ public abstract class ProgressContainer extends BaseContainer
     public void addCraftingToCrafters(final ICrafting crafting)
     {
         super.addCraftingToCrafters(crafting);
-        for (int t = 0; t < tile.getTimedElements().length; ++t)
+        for (int elementID = 0; elementID < tile.getTimedElements().length; ++elementID)
         {
-            crafting.sendProgressBarUpdate(this, t, tile.getTimeLeft(t));
+            crafting.sendProgressBarUpdate(this, elementID, tile.getTimeLeft(elementID));
         }
     }
 
@@ -42,30 +42,30 @@ public abstract class ProgressContainer extends BaseContainer
     public void detectAndSendChanges()
     {
         super.detectAndSendChanges();
-        for (int t = 0; t < tile.getTimedElements().length; ++t)
+        for (int elementID = 0; elementID < tile.getTimedElements().length; ++elementID)
         {
             if (tile.canRun())
             {
-                for (int i = 0; i < crafters.size(); ++i)
+                for (int crafterID = 0; crafterID < crafters.size(); ++crafterID)
                 {
-                    final ICrafting icrafting = (ICrafting) crafters.get(i);
-                    if (!tile.isUpdated(t))
+                    final ICrafting crafter = (ICrafting) crafters.get(crafterID);
+                    if (!tile.isUpdated(elementID))
                     {
-                        icrafting.sendProgressBarUpdate(this, t, tile.getTimeLeft(t));
+                        crafter.sendProgressBarUpdate(this, elementID, tile.getTimeLeft(elementID));
                     }
                 }
-                tile.updateRecord(t);
+                tile.updateRecord(elementID);
             } else
             {
-                tile.destroyRecord(t);
+                tile.destroyRecord(elementID);
             }
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateProgressBar(final int progressIndex, final int progress)
+    public void updateProgressBar(final int elementID, final int progress)
     {
-        tile.setTimeLeft(progressIndex, progress);
+        tile.setTimeLeft(elementID, progress);
     }
 }

@@ -1,7 +1,6 @@
 package lib.cofh.gui;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import lib.cofh.gui.element.ElementBase;
@@ -419,7 +418,7 @@ public abstract class GuiBase extends GuiContainer
         }
     }
 
-    protected void drawTooltipHoveringText(List list, int x, int y, FontRenderer font)
+    protected void drawTooltipHoveringText(List<String> list, int x, int y, FontRenderer font)
     {
         if ((list == null) || list.isEmpty())
         {
@@ -428,17 +427,15 @@ public abstract class GuiBase extends GuiContainer
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
-        int k = 0;
-        Iterator iterator = list.iterator();
+        int maxWidth = 0;
 
-        while (iterator.hasNext())
+        for (String s : list)
         {
-            String s = (String) iterator.next();
-            int l = font.getStringWidth(s);
+            int width = font.getStringWidth(s);
 
-            if (l > k)
+            if (width > maxWidth)
             {
-                k = l;
+                maxWidth = width;
             }
         }
         int i1 = x + 12;
@@ -449,9 +446,9 @@ public abstract class GuiBase extends GuiContainer
         {
             k1 += 2 + ((list.size() - 1) * 10);
         }
-        if ((i1 + k) > width)
+        if ((i1 + maxWidth) > width)
         {
-            i1 -= 28 + k;
+            i1 -= 28 + maxWidth;
         }
         if ((j1 + k1 + 6) > height)
         {
@@ -460,21 +457,21 @@ public abstract class GuiBase extends GuiContainer
         zLevel = 300.0F;
         itemRenderer.zLevel = 300.0F;
         int l1 = -267386864;
-        drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
-        drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
-        drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
+        drawGradientRect(i1 - 3, j1 - 4, i1 + maxWidth + 3, j1 - 3, l1, l1);
+        drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + maxWidth + 3, j1 + k1 + 4, l1, l1);
+        drawGradientRect(i1 - 3, j1 - 3, i1 + maxWidth + 3, j1 + k1 + 3, l1, l1);
         drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
-        drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
+        drawGradientRect(i1 + maxWidth + 3, j1 - 3, i1 + maxWidth + 4, j1 + k1 + 3, l1, l1);
         int i2 = 1347420415;
         int j2 = ((i2 & 16711422) >> 1) | (i2 & -16777216);
         drawGradientRect(i1 - 3, (j1 - 3) + 1, (i1 - 3) + 1, (j1 + k1 + 3) - 1, i2, j2);
-        drawGradientRect(i1 + k + 2, (j1 - 3) + 1, i1 + k + 3, (j1 + k1 + 3) - 1, i2, j2);
-        drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, (j1 - 3) + 1, i2, i2);
-        drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
+        drawGradientRect(i1 + maxWidth + 2, (j1 - 3) + 1, i1 + maxWidth + 3, (j1 + k1 + 3) - 1, i2, j2);
+        drawGradientRect(i1 - 3, j1 - 3, i1 + maxWidth + 3, (j1 - 3) + 1, i2, i2);
+        drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + maxWidth + 3, j1 + k1 + 3, j2, j2);
 
         for (int k2 = 0; k2 < list.size(); ++k2)
         {
-            String s1 = (String) list.get(k2);
+            String s1 = list.get(k2);
             font.drawStringWithShadow(s1, i1, j1, -1);
 
             if (k2 == 0)
