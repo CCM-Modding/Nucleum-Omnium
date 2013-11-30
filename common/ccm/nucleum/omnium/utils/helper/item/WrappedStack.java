@@ -239,10 +239,8 @@ public class WrappedStack implements Comparable<WrappedStack>
                 if (oreStack.equals(WrappedStack.oreStack))
                 {
                     return stackSize - WrappedStack.stackSize;
-                } else
-                {
-                    return oreStack.compareTo(WrappedStack.oreStack);
                 }
+                return oreStack.compareTo(WrappedStack.oreStack);
             } else if (WrappedStack.getWrappedStack() instanceof ItemStack)
             {
                 return -1;
@@ -260,10 +258,8 @@ public class WrappedStack implements Comparable<WrappedStack>
                 if (ItemHelper.compare(itemStack, WrappedStack.itemStack))
                 {
                     return stackSize - WrappedStack.stackSize;
-                } else
-                {
-                    return ItemHelper.ItemStackComparator.compare(itemStack, WrappedStack.itemStack);
                 }
+                return ItemHelper.compareInt(itemStack, WrappedStack.itemStack);
             } else
             {
                 return 1;
@@ -273,10 +269,8 @@ public class WrappedStack implements Comparable<WrappedStack>
             if (WrappedStack.getWrappedStack() != null)
             {
                 return -1;
-            } else
-            {
-                return 0;
             }
+            return 0;
         }
     }
 
