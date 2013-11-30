@@ -91,39 +91,39 @@ public class ItemHelper
      *            The second ItemStack being tested for equality
      * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second
      */
-    public static int compareInt(ItemStack itemStack1, ItemStack itemStack2)
+    public static int compareInt(ItemStack first, ItemStack second)
     {
-        if ((itemStack1 != null) && (itemStack2 != null))
+        if ((first != null) && (second != null))
         { // Sort on itemID
-            if (itemStack1.itemID == itemStack2.itemID)
+            if (first.itemID == second.itemID)
             { // Then sort on meta
-                if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
+                if (first.getItemDamage() == second.getItemDamage())
                 { // Then sort on NBT
-                    if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
+                    if (first.hasTagCompound() && second.hasTagCompound())
                     { // Then sort on stack size
-                        if (itemStack1.getTagCompound().equals(itemStack2.getTagCompound()))
+                        if (first.getTagCompound().equals(second.getTagCompound()))
                         {
-                            return (itemStack1.stackSize - itemStack2.stackSize);
+                            return (first.stackSize - second.stackSize);
                         }
-                        return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
-                    } else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound())
+                        return (first.getTagCompound().hashCode() - second.getTagCompound().hashCode());
+                    } else if (!(first.hasTagCompound()) && second.hasTagCompound())
                     {
                         return -1;
-                    } else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound()))
+                    } else if (first.hasTagCompound() && !(second.hasTagCompound()))
                     {
                         return 1;
                     } else
                     {
-                        return (itemStack1.stackSize - itemStack2.stackSize);
+                        return (first.stackSize - second.stackSize);
                     }
                 }
-                return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
+                return (first.getItemDamage() - second.getItemDamage());
             }
-            return (itemStack1.itemID - itemStack2.itemID);
-        } else if ((itemStack1 != null) && (itemStack2 == null))
+            return (first.itemID - second.itemID);
+        } else if ((first != null) && (second == null))
         {
             return -1;
-        } else if ((itemStack1 == null) && (itemStack2 != null))
+        } else if ((first == null) && (second != null))
         {
             return 1;
         } else
@@ -153,35 +153,35 @@ public class ItemHelper
      *            The second ItemStack being tested for equality
      * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second
      */
-    public static int compareIntNoSize(ItemStack itemStack1, ItemStack itemStack2)
+    public static int compareIntNoSize(ItemStack first, ItemStack second)
     {
-        if ((itemStack1 != null) && (itemStack2 != null))
+        if ((first != null) && (second != null))
         { // Sort on itemID
-            if (itemStack1.itemID == itemStack2.itemID)
+            if (first.itemID == second.itemID)
             { // Then sort on meta
-                if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
+                if (first.getItemDamage() == second.getItemDamage())
                 { // Then sort on NBT
-                    if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
+                    if (first.hasTagCompound() && second.hasTagCompound())
                     {
-                        return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
-                    } else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound())
+                        return (first.getTagCompound().hashCode() - second.getTagCompound().hashCode());
+                    } else if (!(first.hasTagCompound()) && second.hasTagCompound())
                     {
                         return -1;
-                    } else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound()))
+                    } else if (first.hasTagCompound() && !(second.hasTagCompound()))
                     {
                         return 1;
                     } else
                     {
-                        return (itemStack1.stackSize - itemStack2.stackSize);
+                        return (first.stackSize - second.stackSize);
                     }
                 }
-                return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
+                return (first.getItemDamage() - second.getItemDamage());
             }
-            return (itemStack1.itemID - itemStack2.itemID);
-        } else if ((itemStack1 != null) && (itemStack2 == null))
+            return (first.itemID - second.itemID);
+        } else if ((first != null) && (second == null))
         {
             return -1;
-        } else if ((itemStack1 == null) && (itemStack2 != null))
+        } else if ((first == null) && (second != null))
         {
             return 1;
         } else
