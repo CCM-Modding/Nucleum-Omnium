@@ -41,12 +41,17 @@ public abstract class ElementBase
         this.posY = gui.getGuiTop() + posY;
     }
 
-    public ElementBase setTexture(String texture, int texW, int texH)
+    public ElementBase setTexture(ResourceLocation texture, int texW, int texH)
     {
-        this.texture = new ResourceLocation(texture);
+        this.texture = texture;
         this.texW = texW;
         this.texH = texH;
         return this;
+    }
+
+    public ElementBase setTexture(String texture, int texW, int texH)
+    {
+        return setTexture(new ResourceLocation(texture), texW, texH);
     }
 
     public ElementBase setPosition(int posX, int posY)

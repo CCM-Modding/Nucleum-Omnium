@@ -5,7 +5,6 @@ package ccm.nucleum.omnium.client.model;
 
 import net.minecraftforge.client.model.IModelCustom;
 import ccm.nucleum.omnium.utils.handler.ResourceHandler;
-import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import cpw.mods.fml.client.FMLClientHandler;
 
 /**
@@ -15,14 +14,11 @@ import cpw.mods.fml.client.FMLClientHandler;
  */
 public class SimpleModel
 {
-
     protected IModelCustom model;
     protected String name;
 
     public SimpleModel(final String resourceName)
     {
-        CCMLogger.DEFAULT_LOGGER.debug("RESOURCE NAME: " + resourceName + "\n");
-        CCMLogger.DEFAULT_LOGGER.debug("RESOURCE LOCATION: " + ResourceHandler.getModelLocation(resourceName) + "\n");
         name = resourceName;
         model = ResourceHandler.loadModel(name);
     }

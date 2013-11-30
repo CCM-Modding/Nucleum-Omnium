@@ -5,8 +5,15 @@ import lib.cofh.render.RenderHelper;
 
 public class ElementDualScaled extends ElementBase
 {
+    public enum Mode
+    {
+        UP, 
+        RIGHT,
+        LEFT;
+    }
+
     public int quantity;
-    public int mode;
+    public Mode mode;
     public boolean background = true;
 
     public ElementDualScaled(GuiBase gui, int posX, int posY)
@@ -14,7 +21,7 @@ public class ElementDualScaled extends ElementBase
         super(gui, posX, posY);
     }
 
-    public ElementDualScaled setMode(int mode)
+    public ElementDualScaled setMode(Mode mode)
     {
         this.mode = mode;
         return this;
@@ -47,15 +54,15 @@ public class ElementDualScaled extends ElementBase
         }
         switch (mode)
         {
-            case 0:
+            case UP:
                 // vertical bottom -> top
                 drawTexturedModalRect(posX, (posY + sizeY) - quantity, sizeX, sizeY - quantity, sizeX, quantity);
                 return;
-            case 1:
+            case RIGHT:
                 // horizontal left -> right
                 drawTexturedModalRect(posX, posY, sizeX, 0, quantity, sizeY);
                 return;
-            case 2:
+            case LEFT:
                 // horizontal right -> left
                 drawTexturedModalRect((posX + sizeX) - quantity, posY, (sizeX + sizeX) - quantity, 0, quantity, sizeY);
                 return;
