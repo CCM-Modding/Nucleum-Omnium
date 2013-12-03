@@ -54,6 +54,18 @@ public final class ResourceHandler
         return resources().get(hashGUI(name));
     }
 
+    /** Adds a Element texture */
+    public static void addElement(final CCMMod mod, final String elementName, final String name)
+    {
+        resources().put(hashElement(elementName, name), new ResourceLocation(mod.getModID(), fixElementLocation(elementName, name)));
+    }
+
+    /** Returns a Element texture */
+    public static ResourceLocation getElement(final String elementName, final String name)
+    {
+        return resources().get(hashElement(elementName, name));
+    }
+
     public static void addModel(final CCMMod mod, final String name)
     {
         resources().put(hashModel(name), new ResourceLocation(mod.getModID(), fixModelLocation(name)));
@@ -118,6 +130,16 @@ public final class ResourceHandler
 
     /**
      * @param name
+     *            The name of the GUI
+     * @return The "unique" hash code of the GUI's name
+     */
+    static int hashElement(final String elementName, final String name)
+    {
+        return ("CCM.GUI.ELEMENT." + elementName.toUpperCase() + "." + name.toUpperCase() + "." + name.hashCode()).hashCode();
+    }
+
+    /**
+     * @param name
      *            The name of the Model
      * @return The "unique" hash code of the Model's name
      */
@@ -145,6 +167,16 @@ public final class ResourceHandler
     static String fixGUILocation(final String name)
     {
         return "textures/guis/gui" + JavaHelper.titleCase(name) + ".png";
+    }
+
+    /**
+     * @param name
+     *            The name of the GUI
+     * @return The "fixed" location of the Element
+     */
+    static String fixElementLocation(final String elementName, final String name)
+    {
+        return "textures/guis/elements/" + elementName.toLowerCase() + JavaHelper.titleCase(name) + ".png";
     }
 
     /**

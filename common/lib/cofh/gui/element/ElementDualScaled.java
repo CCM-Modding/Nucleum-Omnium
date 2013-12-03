@@ -7,7 +7,7 @@ public class ElementDualScaled extends ElementBase
 {
     public enum Mode
     {
-        UP, 
+        UP,
         RIGHT,
         LEFT;
     }

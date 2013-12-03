@@ -49,6 +49,11 @@ public abstract class BaseContainer extends Container
         }
     }
 
+    public IInventory getIInventory()
+    {
+        return inventory;
+    }
+
     @Override
     public boolean canInteractWith(final EntityPlayer player)
     {

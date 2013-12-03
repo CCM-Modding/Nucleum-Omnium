@@ -4,6 +4,7 @@
 package ccm.nucleum.omnium.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
@@ -120,6 +121,12 @@ public class BaseTE extends TileEntity
     public void setOrientation(final ForgeDirection orientation)
     {
         this.orientation = orientation;
+    }
+
+    @Override
+    public final void onDataPacket(final INetworkManager netManager, final Packet132TileEntityData packet)
+    {
+        readFromNBT(packet.data);
     }
 
     /**

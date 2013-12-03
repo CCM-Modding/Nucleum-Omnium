@@ -83,7 +83,7 @@ public class ItemHelper
     {
         return (compareInt(first, second) == 0);
     }
-    
+
     /**
      * @param first
      *            The first ItemStack being tested for equality
@@ -131,7 +131,7 @@ public class ItemHelper
             return 0;
         }
     }
-    
+
     /**
      * Compares two ItemStacks for equality, testing itemID, metaData, and their NBTTagCompounds (if they are present)
      * 
@@ -145,7 +145,7 @@ public class ItemHelper
     {
         return (compareIntNoSize(first, second) == 0);
     }
-    
+
     /**
      * @param first
      *            The first ItemStack being tested for equality
