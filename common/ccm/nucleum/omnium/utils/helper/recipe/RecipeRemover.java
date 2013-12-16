@@ -56,11 +56,10 @@ public final class RecipeRemover
 
     private static ItemStack getItemStack(final String itemID)
     {
-        int id;
-        int meta;
+        int id = 0;
+        int meta = 0;
 
         // Decompose String into (item ID, Meta) pairs
-        id = meta = 0;
         final String[] tmp = itemID.split(":");
         if ((tmp != null) && (tmp.length > 0))
         {
