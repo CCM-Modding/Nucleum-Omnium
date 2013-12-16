@@ -9,7 +9,7 @@
   "mcversion": "${mcversion}",
   "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
   "updateUrl": "http://dries007.net:8080/view/CCM/job/Nucleum-Omnium/",
-  "authors": [ "captain_shadows", "dries007" ],
+  "authors": [ "captain_shadows", "dries007" ]
 },
 {
   "modid": "ccmasm",
@@ -18,17 +18,18 @@
   "version": "${version}",
   "mcversion": "${mcversion}",
   "authors": [ "captain_shadows" ],
-  "parent":"nucleum_omnium",
+  "parent":"nucleum_omnium"
 },
 {
   "modid": "nucleum_world",
   "name": "Nucleum World",
   "description": "World Generation for all CCM Mods",
   "authors": [  "captain_shadows", 
-				"Hologuard"],
+    			"Hologuard"],
   "parent":"nucleum_omnium",
   "dependencies": [
      "required-after:nucleum_omnium"
   ]
 }
+]
 ]
