@@ -97,8 +97,8 @@ public final class WorldGenerator
     public static void addWorldGen(final CCMMod mod, final ItemStack stack, final String oreName, int clusterSize, int numClusters, int minY, int maxY, final boolean enable,
             final Block blockToReplace)
     {
-        final String ore = mod.getName() + "." + JavaHelper.titleCase(oreName);
-        final Configuration config = NucleumWorld.instance.getConfigHandler().getConfiguration();
+        final String ore = mod.name() + "." + JavaHelper.titleCase(oreName);
+        final Configuration config = NucleumWorld.instance.config().getConfiguration();
         final ConfigCategory cat = config.getCategory(ore);
 
         clusterSize = config.get(ore, "ClusterSize", clusterSize).getInt();

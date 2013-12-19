@@ -29,7 +29,7 @@ public abstract class CCMMod
     {
         // Get all the files
         File configFolder = new File(evt.getModConfigurationDirectory().getAbsolutePath() + "/CCM-Modding/");
-        File configFile = new File(configFolder.getAbsolutePath() + "/" + getName() + ".cfg");
+        File configFile = new File(configFolder.getAbsolutePath() + "/" + name() + ".cfg");
 
         // Create the config handler
         ConfigHandler config = new ConfigHandler();
@@ -41,12 +41,12 @@ public abstract class CCMMod
         CCMMod.config = config;
     }
 
-    public ConfigHandler getConfigHandler()
+    public ConfigHandler config()
     {
         return config;
     }
 
-    public CCMLogger getLogger()
+    public CCMLogger logger()
     {
         return logger;
     }
@@ -56,12 +56,12 @@ public abstract class CCMMod
         logger = log;
     }
 
-    public String getModID()
+    public String id()
     {
         return this.getClass().getAnnotation(Mod.class).modid();
     }
 
-    public String getName()
+    public String name()
     {
         return this.getClass().getAnnotation(Mod.class).name();
     }
@@ -85,23 +85,23 @@ public abstract class CCMMod
         {
             try
             {
-                mod.getLogger().debug("LOADING CONFIGURATION FOR %s", mod.getName());
+                mod.logger().debug("LOADING CONFIGURATION FOR %s", mod.name());
 
                 // Loads a pre-existing Configuration file.
-                mod.getConfigHandler().getConfiguration().load();
+                mod.config().getConfiguration().load();
 
-                config.setConfiguration(mod.getConfigHandler());
+                config.setConfiguration(mod.config());
                 config.init();
 
                 // Init the config
-                mod.getConfigHandler().init();
+                mod.config().init();
 
             } catch (final Exception e)
             {
-                mod.getLogger().printCatch(e, "%s HAS HAD A PROBLEM LOADING ITS CONFIGURATION", mod.getName());
+                mod.logger().printCatch(e, "%s HAS HAD A PROBLEM LOADING ITS CONFIGURATION", mod.name());
             } finally
             {
-                mod.getConfigHandler().save();
+                mod.config().save();
             }
         }
     }

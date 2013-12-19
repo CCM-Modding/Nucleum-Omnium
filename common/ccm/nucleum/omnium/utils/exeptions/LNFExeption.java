@@ -27,7 +27,7 @@ public class LNFExeption extends NotMyFaultExeption
 
     private void addString()
     {
-        tmpErrorSB.append(mod.getName());
+        tmpErrorSB.append(mod.name());
         tmpErrorSB.append(" Forgot to register it's Logger before using it! \n");
         tmpErrorSB.append("Please go tell the creator to fix it!! \n");
         errorSB.replace(errorSB.lastIndexOf("|"), errorSB.lastIndexOf("|") + 1, tmpErrorSB.toString());

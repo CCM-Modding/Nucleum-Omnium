@@ -108,12 +108,12 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         }
         if (bedrock)
         {
-            NucleumWorld.instance.getLogger().finest("Regenerating flat bedrock for the chunk at %s", cCoord.toString());
+            NucleumWorld.instance.logger().finest("Regenerating flat bedrock for the chunk at %s", cCoord.toString());
             regen = true;
         }
         if (ores)
         {
-            NucleumWorld.instance.getLogger().finest("Regenerating ores for the chunk at %s", cCoord.toString());
+            NucleumWorld.instance.logger().finest("Regenerating ores for the chunk at %s", cCoord.toString());
             regen = true;
         }
         if (regen)

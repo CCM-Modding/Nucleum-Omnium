@@ -45,7 +45,7 @@ public final class ResourceHandler
     /** Adds a GUI texture */
     public static void addGUI(final CCMMod mod, final String name)
     {
-        resources().put(hashGUI(name), new ResourceLocation(mod.getModID(), fixGUILocation(name)));
+        resources().put(hashGUI(name), new ResourceLocation(mod.id(), fixGUILocation(name)));
     }
 
     /** Returns a GUI texture */
@@ -57,7 +57,7 @@ public final class ResourceHandler
     /** Adds a Element texture */
     public static void addElement(final CCMMod mod, final String elementName, final String name)
     {
-        resources().put(hashElement(elementName, name), new ResourceLocation(mod.getModID(), fixElementLocation(elementName, name)));
+        resources().put(hashElement(elementName, name), new ResourceLocation(mod.id(), fixElementLocation(elementName, name)));
     }
 
     /** Returns a Element texture */
@@ -68,8 +68,8 @@ public final class ResourceHandler
 
     public static void addModel(final CCMMod mod, final String name)
     {
-        resources().put(hashModel(name), new ResourceLocation(mod.getModID(), fixModelLocation(name)));
-        resources().put(hashModelTexture(name), new ResourceLocation(mod.getModID(), fixModelTextureLocation(name)));
+        resources().put(hashModel(name), new ResourceLocation(mod.id(), fixModelLocation(name)));
+        resources().put(hashModelTexture(name), new ResourceLocation(mod.id(), fixModelTextureLocation(name)));
     }
 
     /** Gets a Model */

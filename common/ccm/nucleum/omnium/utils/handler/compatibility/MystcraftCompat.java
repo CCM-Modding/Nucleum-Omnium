@@ -17,6 +17,6 @@ public final class MystcraftCompat implements ICompatibility
     public void init()
     {
         Properties.MYSTCARFT_LOADED = true;
-        NucleumOmnium.instance.getLogger().debug("MYSTCRAFT IS LOADED");
+        NucleumOmnium.instance.logger().debug("MYSTCRAFT IS LOADED");
     }
 }

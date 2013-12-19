@@ -27,7 +27,7 @@ public class NotMyFaultExeption extends MainException
     private void addString()
     {
         errorSB.append("The mod '");
-        errorSB.append(mod.getName());
+        errorSB.append(mod.name());
         errorSB.append("' has a Problem.\nIT'S NOT MY FAULT! ");
         errorSB.append("Below is how to fix it.\n \n");
         errorSB.append("|");

@@ -35,7 +35,7 @@ public final class DataHelper
      */
     public static File getModFolder(final CCMMod mod)
     {
-        final File folder = new File(DataHelper.root, mod.getModID());
+        final File folder = new File(DataHelper.root, mod.id());
         folder.mkdirs();
         return folder;
     }
