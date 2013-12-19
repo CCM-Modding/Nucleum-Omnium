@@ -90,8 +90,7 @@ public abstract class CCMMod
                 // Loads a pre-existing Configuration file.
                 mod.config().getConfiguration().load();
 
-                config.setConfiguration(mod.config());
-                config.init();
+                config.init(mod.config());
 
                 // Init the config
                 mod.config().init();

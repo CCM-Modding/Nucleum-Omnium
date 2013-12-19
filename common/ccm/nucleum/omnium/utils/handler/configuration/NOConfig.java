@@ -17,7 +17,7 @@ public final class NOConfig extends IConfig
     public static final String SERVER_SIDE = "Server Only";
 
     @Override
-    public void init()
+    public void init(ConfigHandler config)
     {
         initConfigs(config);
 
@@ -39,7 +39,7 @@ public final class NOConfig extends IConfig
 
     private void initServerConfigs(final ConfigHandler config)
     {
-        // config.addCustomCategoryComment(SERVER_SIDE, "This Category only has server side options");
+        config.getConfiguration().addCustomCategoryComment(SERVER_SIDE, "This Category only has server side options");
     }
 
     private void initClientConfigs(final ConfigHandler config)

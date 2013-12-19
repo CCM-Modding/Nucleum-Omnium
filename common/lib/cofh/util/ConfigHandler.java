@@ -27,7 +27,7 @@ public class ConfigHandler
     Configuration modConfiguration;
 
     int blockIdStart = 1000;
-    int itemIdStart = 10000;
+    int itemIdStart = 3000;
 
     public ConfigHandler()
     {
@@ -153,7 +153,7 @@ public class ConfigHandler
             } else
             { // get ids for new blocks
                 boolean idFound = false;
-                for (int id = blockIdStart; (id > Block.blocksList.length) && !idFound; ++id)
+                for (int id = blockIdStart; (id < Block.blocksList.length) && !idFound; ++id)
                 {
                     if (Block.blocksList[id] == null)
                     {
@@ -172,7 +172,7 @@ public class ConfigHandler
             } else
             {// get ids for new items
                 boolean idFound = false;
-                for (int id = itemIdStart; (id > Item.itemsList.length) && !idFound; ++id)
+                for (int id = itemIdStart; (id < Item.itemsList.length) && !idFound; ++id)
                 {
                     if (Item.itemsList[id] == null)
                     {
