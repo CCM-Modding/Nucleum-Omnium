@@ -34,7 +34,7 @@ public final class NOConfig extends IConfig
     {
         config.getConfiguration().addCustomCategoryComment(UNIVERSAL, "This Category has options that affect both Client and Server");
 
-        Properties.DEBUG = config.get(UNIVERSAL, "Should debug information be displayed?", true);
+        Properties.DEBUG = config.get(UNIVERSAL, "Should debug information be displayed?", false);
     }
 
     private void initServerConfigs(final ConfigHandler config)
