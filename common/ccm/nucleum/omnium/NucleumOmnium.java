@@ -5,7 +5,6 @@ package ccm.nucleum.omnium;
 
 import static ccm.nucleum.omnium.utils.lib.Archive.MOD_CHANNEL;
 import static ccm.nucleum.omnium.utils.lib.Archive.MOD_ID;
-import static ccm.nucleum.omnium.utils.lib.Archive.MOD_NAME;
 import static ccm.nucleum.omnium.utils.lib.Locations.CLIENT_PROXY;
 import static ccm.nucleum.omnium.utils.lib.Locations.SERVER_PROXY;
 import net.minecraft.server.MinecraftServer;
@@ -27,7 +26,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true)
+@Mod(modid = MOD_ID, useMetadata = true)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = MOD_CHANNEL, packetHandler = PacketHandler.class)
 public class NucleumOmnium extends CCMMod
 {

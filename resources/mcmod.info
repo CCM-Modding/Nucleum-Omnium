@@ -1,35 +1,41 @@
 [
-{
-  "modid": "nucleum_omnium",
-  "name": "Nucleum Omnium",
-  "description": "Core functionality for all CCM Mods",
-  "credits": "Made By Captain Shadows, ClayCorp, Morton, Dries007, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
-  "logoFile": "/assets/nucleum-omnium/textures/logo.png",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
-  "updateUrl": "http://dries007.net:8080/view/CCM/job/Nucleum-Omnium/",
-  "authors": [ "captain_shadows", "dries007" ]
-},
-{
-  "modid": "ccmasm",
-  "name": "CCM ASM",
-  "description": "CCM ASM mod",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "authors": [ "captain_shadows" ],
-  "parent":"nucleum_omnium"
-},
-{
-  "modid": "nucleum_world",
-  "name": "Nucleum World",
-  "description": "World Generation for all CCM Mods",
-  "authors": [  "captain_shadows", 
-    			"Hologuard"],
-  "parent":"nucleum_omnium",
-  "dependencies": [
-     "required-after:nucleum_omnium"
-  ]
-}
-]
+  {
+    "modid": "nucleum_omnium",
+    "name": "Nucleum Omnium",
+    "description": "Core functionality for all CCM Mods",
+    "credits": "Made By Captain Shadows, ClayCorp, Morton, Dries007, and The rest of the CCM Modding Team, with special help from AbrarSyed(and the rest of the FE team), RebelKeithy, and a bunch of other people, Also a big thanks to The COFH Team for their Library, Jadar for Developer Capes API. Also to the Forge and MCP crew, who without them no Minecraft mods would be possible",
+    "logoFile": "/assets/nucleum-omnium/textures/logo.png",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/CCM-Modding/Nucleum-Omnium",
+    "updateUrl": "http://dries007.net:8080/view/CCM/job/Nucleum-Omnium/",
+    "authors": [
+      "captain_shadows",
+      "dries007"
+    ]
+  },
+  {
+    "modid": "ccmasm",
+    "name": "CCM ASM",
+    "description": "CCM ASM mod",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "parent": "nucleum_omnium",
+    "authors": [
+      "captain_shadows"
+    ]
+  },
+  {
+    "modid": "nucleum_world",
+    "name": "Nucleum World",
+    "description": "World Generation for all CCM Mods",
+    "parent": "nucleum_omnium",
+    "dependencies": [
+      "required-after:nucleum_omnium"
+    ],
+    "authors": [
+      "captain_shadows",
+      "Hologuard"
+    ]
+  }
 ]

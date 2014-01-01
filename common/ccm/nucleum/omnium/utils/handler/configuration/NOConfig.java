@@ -4,7 +4,7 @@
 package ccm.nucleum.omnium.utils.handler.configuration;
 
 import lib.cofh.util.ConfigHandler;
-import ccm.nucleum.omnium.utils.lib.Archive;
+import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.utils.lib.Properties;
 import cpw.mods.fml.common.FMLCommonHandler;
 
@@ -46,7 +46,7 @@ public final class NOConfig extends IConfig
     {
         config.getConfiguration().addCustomCategoryComment(CLIENT_SIDE, "This Category only has client side options");
 
-        Properties.RAIN = config.get(CLIENT_SIDE, "Should " + Archive.MOD_NAME + " turn off the rain sound for your client?", false);
+        Properties.RAIN = config.get(CLIENT_SIDE, "Should " + NucleumOmnium.instance.name() + " turn off the rain sound for your client?", false);
 
         Properties.CAPE_HD = config.get(CLIENT_SIDE, "Should capes be High Definition?", true);
     }

@@ -4,7 +4,6 @@
 package ccm.nucleum.world;
 
 import static ccm.nucleum.world.utils.lib.Archive.MOD_ID;
-import static ccm.nucleum.world.utils.lib.Archive.MOD_NAME;
 import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 import static net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS;
 import ccm.nucleum.omnium.CCMMod;
@@ -20,7 +19,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, useMetadata = true, dependencies = "required-after:nucleum_omnium")
+@Mod(modid = MOD_ID, useMetadata = true)
 public class NucleumWorld extends CCMMod
 {
 

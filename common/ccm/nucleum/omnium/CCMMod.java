@@ -9,7 +9,9 @@ import lib.cofh.util.ConfigHandler;
 import net.minecraftforge.common.Configuration;
 import ccm.nucleum.omnium.utils.handler.configuration.IConfig;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 /**
@@ -25,7 +27,7 @@ public abstract class CCMMod
     private static CCMLogger logger;
 
     /* Methods */
-    public void initConfig(final FMLPreInitializationEvent evt)
+    void initConfig(final FMLPreInitializationEvent evt)
     {
         // Get all the files
         File configFolder = new File(evt.getModConfigurationDirectory().getAbsolutePath() + "/CCM-Modding/");
@@ -51,9 +53,14 @@ public abstract class CCMMod
         return logger;
     }
 
-    public void setLogger(CCMLogger log)
+    void setLogger(CCMLogger log)
     {
         logger = log;
+    }
+
+    public ModContainer mod()
+    {
+        return Loader.instance().getIndexedModList().get(id());
     }
 
     public String id()
@@ -63,7 +70,12 @@ public abstract class CCMMod
 
     public String name()
     {
-        return this.getClass().getAnnotation(Mod.class).name();
+        return mod().getName();
+    }
+
+    public String version()
+    {
+        return mod().getVersion();
     }
 
     /**
@@ -83,25 +95,17 @@ public abstract class CCMMod
 
         if (config != null)
         {
-            try
-            {
-                mod.logger().debug("LOADING CONFIGURATION FOR %s", mod.name());
+            mod.logger().debug("LOADING CONFIGURATION FOR %s", mod.name());
 
-                // Loads a pre-existing Configuration file.
-                mod.config().getConfiguration().load();
+            // Loads a pre-existing Configuration file.
+            mod.config().getConfiguration().load();
 
-                config.init(mod.config());
+            config.init(mod.config());
 
-                // Init the config
-                mod.config().init();
+            // Init the config
+            mod.config().init();
 
-            } catch (final Exception e)
-            {
-                mod.logger().printCatch(e, "%s HAS HAD A PROBLEM LOADING ITS CONFIGURATION", mod.name());
-            } finally
-            {
-                mod.config().save();
-            }
+            mod.config().save();
         }
     }
 }
