@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.ConfigCategory;
 import net.minecraftforge.common.Configuration;
@@ -18,16 +19,21 @@ import net.minecraftforge.common.Property;
  */
 public class ConfigHandler
 {
+    private static final String CATEGORY_ENCHANT = "enchantment";
+
     ArrayList<String> blockEntries = new ArrayList<String>();
     ArrayList<String> itemEntries = new ArrayList<String>();
+    ArrayList<String> enchantEntries = new ArrayList<String>();
 
     TreeMap<String, Property> blockIds = new TreeMap<String, Property>();
     TreeMap<String, Property> itemIds = new TreeMap<String, Property>();
+    TreeMap<String, Property> enchantIds = new TreeMap<String, Property>();
 
     Configuration modConfiguration;
 
     int blockIdStart = 1000;
     int itemIdStart = 3000;
+    int enchantIdStart = 52;
 
     public ConfigHandler()
     {
@@ -35,10 +41,11 @@ public class ConfigHandler
         itemEntries = new ArrayList<String>();
     }
 
-    public ConfigHandler(int blockStart, int itemStart)
+    public ConfigHandler(int blockStart, int itemStart, int enchantStart)
     {
         blockIdStart = blockStart;
         itemIdStart = itemStart;
+        enchantIdStart = enchantStart;
 
         blockEntries = new ArrayList<String>();
         itemEntries = new ArrayList<String>();
@@ -64,6 +71,11 @@ public class ConfigHandler
         itemEntries.add(name);
     }
 
+    public void addEnchantment(String name)
+    {
+        enchantEntries.add(name);
+    }
+
     public int getBlockID(String name)
     {
         Property ret = blockIds.get(name);
@@ -78,6 +90,17 @@ public class ConfigHandler
     public int getItemID(String name)
     {
         Property ret = itemIds.get(name);
+
+        if (ret == null)
+        {
+            return -1;
+        }
+        return ret.getInt();
+    }
+
+    public int getEnchantmentID(String name)
+    {
+        Property ret = enchantIds.get(name);
 
         if (ret == null)
         {
@@ -151,7 +174,7 @@ public class ConfigHandler
                 blockIds.put(entry, modConfiguration.getBlock(entry, existingId));
             } else
             { // get ids for new blocks
-                for (int id = blockIdStart; (id < Block.blocksList.length); ++id)
+                for (int id = blockIdStart; id < Block.blocksList.length; ++id)
                 {
                     if (Block.blocksList[id] == null)
                     {
@@ -169,11 +192,29 @@ public class ConfigHandler
                 itemIds.put(entry, modConfiguration.getItem(entry, existingId));
             } else
             {// get ids for new items
-                for (int id = itemIdStart; (id < Item.itemsList.length); ++id)
+                for (int id = itemIdStart; id < Item.itemsList.length; ++id)
                 {
                     if (Item.itemsList[id] == null)
                     {
                         itemIds.put(entry, modConfiguration.getItem(entry, id));
+                        break;
+                    }
+                }
+            }
+        }
+        for (String entry : enchantEntries)
+        {
+            if (modConfiguration.hasKey(CATEGORY_ENCHANT, entry))
+            {// get ids for existing enchantments
+                int existingId = modConfiguration.getCategory(CATEGORY_ENCHANT).getValues().get(entry).getInt();
+                enchantIds.put(entry, modConfiguration.get(CATEGORY_ENCHANT, entry, existingId));
+            } else
+            {// get ids for new enchantments
+                for (int id = enchantIdStart; id < Enchantment.enchantmentsList.length; ++id)
+                {
+                    if (Enchantment.enchantmentsList[id] == null)
+                    {
+                        enchantIds.put(entry, modConfiguration.get(CATEGORY_ENCHANT, entry, id));
                         break;
                     }
                 }
