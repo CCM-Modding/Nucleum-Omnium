@@ -35,7 +35,7 @@ final class Handler
                 tmpHandler = (Class<? extends ICompatibility>) Class.forName(handler, false, Loader.instance().getModClassLoader());
             } catch (ClassNotFoundException e)
             {
-                CCMLogger.DEFAULT_LOGGER.printCatch(e, "A CCM Mod has failed to find it's compatibility class with %s, pleace inform the CCM Team", name);
+                CCMLogger.DEFAULT_LOGGER.printCatch(e, "CCM has failed to find a compatibility class with %s, please inform the CCM Team", name);
                 return;
             }
             try
@@ -44,7 +44,7 @@ final class Handler
                 tmp = tmpHandler.newInstance();
             } catch (Exception e)
             {
-                CCMLogger.DEFAULT_LOGGER.printCatch(e, "A CCM Mod has failed to create a new instance of it's compatibility with %s, pleace inform the CCM Team", name);
+                CCMLogger.DEFAULT_LOGGER.printCatch(e, "CCM has failed to create a new instance of a compatibility with %s, please inform the CCM Team", name);
                 return;
             }
             try
@@ -53,7 +53,7 @@ final class Handler
                 tmp.init();
             } catch (final Exception e)
             {
-                CCMLogger.DEFAULT_LOGGER.printCatch(e, "A CCM Mod has failed to load it's compatibility with %s, pleace inform the CCM Team", name);
+                CCMLogger.DEFAULT_LOGGER.printCatch(e, "CCM has failed to load a compatibility with %s, please inform the CCM Team", name);
                 return;
             }
         }

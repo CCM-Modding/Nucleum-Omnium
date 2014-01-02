@@ -20,7 +20,7 @@ public final class CompatibilityHandler
      * @param name
      *            The name of the mod that you are adding compatibility for. EX: Buildcraft
      * @param handler
-     *            The location of you Handler class. EX: "ccm.nucleum.omnium.utils.handler.mods.MystcraftHandler"
+     *            The location of you Handler class. EX: "ccm.nucleum.omnium.utils.handler.compatibility.MystcraftHandler"
      */
     public static void addModHandler(final String name, final String handler)
     {
