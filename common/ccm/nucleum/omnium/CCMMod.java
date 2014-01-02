@@ -21,26 +21,24 @@ public abstract class CCMMod
 {
     /* DATA FIELDS */
     /** Current Configuration File */
-    private static ConfigHandler config;
+    private ConfigHandler config;
 
     /** Current Logger */
-    private static CCMLogger logger;
+    private CCMLogger logger;
 
     /* Methods */
     void initConfig(final FMLPreInitializationEvent evt)
     {
         // Get all the files
         File configFolder = new File(evt.getModConfigurationDirectory().getAbsolutePath() + "/CCM-Modding/");
+        configFolder.mkdirs();
         File configFile = new File(configFolder.getAbsolutePath() + "/" + name() + ".cfg");
 
         // Create the config handler
-        ConfigHandler config = new ConfigHandler();
+        config = new ConfigHandler();
 
         // Set the Configuration inside the Handler
         config.setConfiguration(new Configuration(configFile, true));
-
-        // Set the handler
-        CCMMod.config = config;
     }
 
     public ConfigHandler config()
@@ -90,7 +88,7 @@ public abstract class CCMMod
      */
     public static void loadMod(final CCMMod mod, final FMLPreInitializationEvent evt, final IConfig config)
     {
-        mod.setLogger(CCMLogger.initLogger(evt));
+        mod.setLogger(CCMLogger.init(evt));
         mod.initConfig(evt);
 
         if (config != null)
@@ -98,7 +96,7 @@ public abstract class CCMMod
             mod.logger().debug("LOADING CONFIGURATION FOR %s", mod.name());
 
             // Loads a pre-existing Configuration file.
-            mod.config().getConfiguration().load();
+            mod.config().load();
 
             config.init(mod.config());
 

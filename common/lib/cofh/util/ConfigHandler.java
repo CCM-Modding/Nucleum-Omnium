@@ -47,7 +47,6 @@ public class ConfigHandler
     public void setConfiguration(Configuration config)
     {
         modConfiguration = config;
-        load();
     }
 
     public Configuration getConfiguration()
@@ -55,17 +54,17 @@ public class ConfigHandler
         return modConfiguration;
     }
 
-    public void addBlockEntry(String name)
+    public void addBlock(String name)
     {
         blockEntries.add(name);
     }
 
-    public void addItemEntry(String name)
+    public void addItem(String name)
     {
         itemEntries.add(name);
     }
 
-    public int getBlockId(String name)
+    public int getBlockID(String name)
     {
         Property ret = blockIds.get(name);
 
@@ -76,7 +75,7 @@ public class ConfigHandler
         return ret.getInt();
     }
 
-    public int getItemId(String name)
+    public int getItemID(String name)
     {
         Property ret = itemIds.get(name);
 
@@ -152,13 +151,12 @@ public class ConfigHandler
                 blockIds.put(entry, modConfiguration.getBlock(entry, existingId));
             } else
             { // get ids for new blocks
-                boolean idFound = false;
-                for (int id = blockIdStart; (id < Block.blocksList.length) && !idFound; ++id)
+                for (int id = blockIdStart; (id < Block.blocksList.length); ++id)
                 {
                     if (Block.blocksList[id] == null)
                     {
                         blockIds.put(entry, modConfiguration.getBlock(entry, id));
-                        idFound = true;
+                        break;
                     }
                 }
             }
@@ -171,13 +169,12 @@ public class ConfigHandler
                 itemIds.put(entry, modConfiguration.getItem(entry, existingId));
             } else
             {// get ids for new items
-                boolean idFound = false;
-                for (int id = itemIdStart; (id < Item.itemsList.length) && !idFound; ++id)
+                for (int id = itemIdStart; (id < Item.itemsList.length); ++id)
                 {
                     if (Item.itemsList[id] == null)
                     {
                         itemIds.put(entry, modConfiguration.getItem(entry, id));
-                        idFound = true;
+                        break;
                     }
                 }
             }

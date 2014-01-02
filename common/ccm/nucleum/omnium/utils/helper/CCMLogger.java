@@ -36,7 +36,7 @@ public class CCMLogger
     /**
      * Initializes the Logger for this Mod
      */
-    public static CCMLogger initLogger(FMLPreInitializationEvent event)
+    public static CCMLogger init(FMLPreInitializationEvent event)
     {
         event.getModLog().setParent(DEFAULT_LOGGER.logger);
         return new CCMLogger(event.getModLog());
