@@ -17,7 +17,6 @@ import ccm.nucleum.omnium.utils.lib.Properties;
  */
 public class CommandRain extends CommandBase
 {
-
     @Override
     public String getCommandName()
     {

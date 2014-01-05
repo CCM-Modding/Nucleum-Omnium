@@ -47,7 +47,6 @@ public class ElementDualScaled extends ElementBase
             return;
         }
         RenderHelper.bindTexture(texture);
-
         if (background)
         {
             drawTexturedModalRect(posX, posY, 0, 0, sizeX, sizeY);

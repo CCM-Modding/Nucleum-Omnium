@@ -4,7 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomItem;
 
 /**
- * This class essentially allows for ores to be generated in clusters, with Features randomly choosing one or more blocks from a weighted list.
+ * This class essentially allows for ores to be generated in clusters, with Features randomly choosing one or more blocks from a weighted
+ * list.
  * 
  * @author King Lemming
  */

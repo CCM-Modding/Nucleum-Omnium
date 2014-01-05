@@ -17,7 +17,6 @@ import cpw.mods.fml.common.network.IGuiHandler;
 public final class GuiHandler implements IGuiHandler
 {
     private final Map<Integer, GuiWrapper> guis;
-
     public static final GuiHandler INSTANCE = new GuiHandler();
 
     private GuiHandler()

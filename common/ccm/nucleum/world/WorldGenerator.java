@@ -40,8 +40,14 @@ public final class WorldGenerator
      * @param enable
      *            is the ore enabled?
      */
-    public static void addEndGen(final CCMMod mod, final ItemStack stack, final String oreName, final int clusterSize, final int numClusters, final int minY, final int maxY,
-            final boolean enable)
+    public static void addEndGen(final CCMMod mod,
+                                 final ItemStack stack,
+                                 final String oreName,
+                                 final int clusterSize,
+                                 final int numClusters,
+                                 final int minY,
+                                 final int maxY,
+                                 final boolean enable)
     {
         WorldGenerator.addWorldGen(mod, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.whiteStone);
     }
@@ -64,8 +70,14 @@ public final class WorldGenerator
      * @param enable
      *            is the ore enabled?
      */
-    public static void addNetherGen(final CCMMod mod, final ItemStack stack, final String oreName, final int clusterSize, final int numClusters, final int minY, final int maxY,
-            final boolean enable)
+    public static void addNetherGen(final CCMMod mod,
+                                    final ItemStack stack,
+                                    final String oreName,
+                                    final int clusterSize,
+                                    final int numClusters,
+                                    final int minY,
+                                    final int maxY,
+                                    final boolean enable)
     {
         WorldGenerator.addWorldGen(mod, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.netherrack);
     }
@@ -88,36 +100,49 @@ public final class WorldGenerator
      * @param enable
      *            is the ore enabled?
      */
-    public static void addOverworldGen(final CCMMod mod, final ItemStack stack, final String oreName, final int clusterSize, final int numClusters, final int minY, final int maxY,
-            final boolean enable)
+    public static void addOverworldGen(final CCMMod mod,
+                                       final ItemStack stack,
+                                       final String oreName,
+                                       final int clusterSize,
+                                       final int numClusters,
+                                       final int minY,
+                                       final int maxY,
+                                       final boolean enable)
     {
         WorldGenerator.addWorldGen(mod, stack, oreName, clusterSize, numClusters, minY, maxY, enable, Block.stone);
     }
 
-    public static void addWorldGen(final CCMMod mod, final ItemStack stack, final String oreName, int clusterSize, int numClusters, int minY, int maxY, final boolean enable,
-            final Block blockToReplace)
+    public static void addWorldGen(final CCMMod mod,
+                                   final ItemStack stack,
+                                   final String oreName,
+                                   int clusterSize,
+                                   int numClusters,
+                                   int minY,
+                                   int maxY,
+                                   final boolean enable,
+                                   final Block blockToReplace)
     {
         final String ore = mod.name() + "." + JavaHelper.titleCase(oreName);
         final Configuration config = NucleumWorld.instance.config().getConfiguration();
         final ConfigCategory cat = config.getCategory(ore);
-
         clusterSize = config.get(ore, "ClusterSize", clusterSize).getInt();
         numClusters = config.get(ore, "NumClusters", numClusters).getInt();
         minY = config.get(ore, "MinHeight", minY).getInt();
         maxY = config.get(ore, "MaxHeight", maxY).getInt();
         final boolean regen = config.get(ore, "RetroGen", enable).getBoolean(enable);
-
         cat.setComment("Configurations for " + JavaHelper.titleCase(oreName));
-
         config.save();
-
         if (!enable)
         {
             return;
         }
-
         final List<WeightedRandomBlock> resList = new ArrayList<WeightedRandomBlock>();
         resList.add(new WeightedRandomBlock(stack));
-        WorldGenHandler.addOre(new FeatureOreGenUniform(oreName, new WorldGenMinableCluster(resList, clusterSize, blockToReplace.blockID), numClusters, minY, maxY, regen));
+        WorldGenHandler.addOre(new FeatureOreGenUniform(oreName,
+                                                        new WorldGenMinableCluster(resList, clusterSize, blockToReplace.blockID),
+                                                        numClusters,
+                                                        minY,
+                                                        maxY,
+                                                        regen));
     }
 }

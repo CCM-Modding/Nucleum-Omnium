@@ -89,5 +89,4 @@ final class GuiWrapper
         }
         return true;
     }
-
 }

@@ -14,9 +14,7 @@ import argo.jdom.JdomParser;
 public class DevCapesVersionChecker implements Runnable
 {
     private static final String versionFileURL = "https://raw.github.com/jadar/DeveloperCapes/master/version.json";
-
     private byte result = 0;
-
     private static final byte ERROR = 0;
     private static final byte OLD = 1;
     private static final byte CURRENT = 2;
@@ -29,7 +27,6 @@ public class DevCapesVersionChecker implements Runnable
             URL url = new URL(versionFileURL);
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             double version = Double.valueOf(new JdomParser().parse(reader).getStringValue("version"));
-
             if (version > DevCapes.version)
             {
                 result = OLD;

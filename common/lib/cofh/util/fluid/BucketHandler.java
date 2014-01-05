@@ -15,7 +15,6 @@ import com.google.common.collect.HashBiMap;
 public class BucketHandler
 {
     public static BucketHandler instance = new BucketHandler();
-
     private static BiMap<Integer, Integer> buckets = HashBiMap.create();
 
     private BucketHandler()
@@ -29,7 +28,6 @@ public class BucketHandler
             return;
         }
         ItemStack bucket = fillBucket(event.world, event.target);
-
         if (bucket == null)
         {
             return;
@@ -40,8 +38,11 @@ public class BucketHandler
 
     public static boolean registerBucket(int blockId, int blockMeta, ItemStack bucket)
     {
-        if ((blockId <= 0) || (blockMeta < 0) || (bucket == null) || buckets.containsKey(ItemHelper.getHashCode(blockId, blockMeta))
-                || buckets.inverse().containsKey(ItemHelper.getHashCode(bucket)))
+        if ((blockId <= 0)
+            || (blockMeta < 0)
+            || (bucket == null)
+            || buckets.containsKey(ItemHelper.getHashCode(blockId, blockMeta))
+            || buckets.inverse().containsKey(ItemHelper.getHashCode(bucket)))
         {
             return false;
         }
@@ -58,7 +59,6 @@ public class BucketHandler
     {
         int blockId = world.getBlockId(x, y, z);
         int blockMeta = world.getBlockMetadata(x, y, z);
-
         if (!buckets.containsKey(ItemHelper.getHashCode(blockId, blockMeta)))
         {
             return null;

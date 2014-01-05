@@ -19,19 +19,14 @@ final class EntityDrop
 {
     /** The mod registering this coin */
     private final CCMMod mod;
-
     /** Item to drop */
     private final ItemStack item;
-
     /** The drop rate of it */
     private final float dropRate;
-
     /** The Maximum to drop */
     private final int maxValue;
-
     /** The Minimum to drop */
     private final int minValue;
-
     /** The entity that should drop it */
     private final Class<? extends Entity> entity;
 
@@ -43,7 +38,12 @@ final class EntityDrop
      * @param entitys
      *            The entity's that are allowed to drop it
      */
-    public EntityDrop(final CCMMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
+    public EntityDrop(final CCMMod mod,
+                      final ItemStack item,
+                      final float dropRate,
+                      final int minValue,
+                      final int maxValue,
+                      final Class<? extends Entity> entity)
     {
         this.mod = mod;
         this.item = item;

@@ -27,7 +27,12 @@ public final class EntityDropHandler
      * @param item
      *            The Item to drop
      */
-    public static void registerDrop(final CCMMod mod, final ItemStack item, final float dropRate, final int minValue, final int maxValue, final Class<? extends Entity> entity)
+    public static void registerDrop(final CCMMod mod,
+                                    final ItemStack item,
+                                    final float dropRate,
+                                    final int minValue,
+                                    final int maxValue,
+                                    final Class<? extends Entity> entity)
     {
         drops.add(new EntityDrop(mod, item, dropRate, minValue, maxValue, entity));
     }

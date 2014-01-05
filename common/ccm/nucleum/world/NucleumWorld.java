@@ -22,7 +22,6 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(modid = MOD_ID, useMetadata = true)
 public class NucleumWorld extends CCMMod
 {
-
     @Instance(MOD_ID)
     public static NucleumWorld instance;
 
@@ -30,11 +29,8 @@ public class NucleumWorld extends CCMMod
     public void preInit(final FMLPreInitializationEvent evt)
     {
         loadMod(this, evt, null);
-
         GameRegistry.registerWorldGenerator(WorldGenHandler.instance);
-
         EVENT_BUS.register(WorldGenHandler.instance);
-
         ORE_GEN_BUS.register(WorldGenHandler.instance);
     }
 

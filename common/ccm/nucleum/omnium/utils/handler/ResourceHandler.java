@@ -17,7 +17,6 @@ public final class ResourceHandler
 {
     /** Single instance of this class */
     private static final ResourceHandler INSTANCE = new ResourceHandler();
-
     // /////////////////////////////
     // Instance Stuff
     // /////////////////////////////
@@ -87,7 +86,6 @@ public final class ResourceHandler
     // /////////////////////////////
     // Exterior Helpers
     // /////////////////////////////
-
     /** Binds a GUI texture to it's GUI */
     public static void bindGUI(final String name)
     {
@@ -116,7 +114,6 @@ public final class ResourceHandler
     // /////////////////////////////
     // Internal Helpers
     // /////////////////////////////
-
     // Hash Fixes
     /**
      * @param name

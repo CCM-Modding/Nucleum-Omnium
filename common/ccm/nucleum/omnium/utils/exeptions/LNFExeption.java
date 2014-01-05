@@ -14,9 +14,7 @@ import ccm.nucleum.omnium.CCMMod;
  */
 public class LNFExeption extends NotMyFaultExeption
 {
-
     private static final long serialVersionUID = 1080172170005877086L;
-
     private final StringBuilder tmpErrorSB = new StringBuilder();
 
     public LNFExeption(final CCMMod mod)

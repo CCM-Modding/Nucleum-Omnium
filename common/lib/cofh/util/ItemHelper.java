@@ -31,7 +31,6 @@ public final class ItemHelper
             return null;
         }
         ItemStack stack = new ItemStack(item, stackSize);
-
         return stack;
     }
 
@@ -43,7 +42,6 @@ public final class ItemHelper
         }
         ItemStack retStack = stack.copy();
         retStack.stackSize = stackSize;
-
         return retStack;
     }
 
@@ -90,8 +88,11 @@ public final class ItemHelper
                 }
             }
         }
-        if ((dmgItems[1] != null) && (dmgItems[0].itemID == dmgItems[1].itemID) && (dmgItems[0].stackSize == 1) && (dmgItems[1].stackSize == 1)
-                && Item.itemsList[dmgItems[0].itemID].isRepairable())
+        if ((dmgItems[1] != null)
+            && (dmgItems[0].itemID == dmgItems[1].itemID)
+            && (dmgItems[0].stackSize == 1)
+            && (dmgItems[1].stackSize == 1)
+            && Item.itemsList[dmgItems[0].itemID].isRepairable())
         {
             Item theItem = Item.itemsList[dmgItems[0].itemID];
             int var13 = theItem.getMaxDamage() - dmgItems[0].getItemDamageForDisplay();
@@ -104,7 +105,6 @@ public final class ItemHelper
         for (int i = 0; i < CraftingManager.getInstance().getRecipeList().size(); ++i)
         {
             recipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(i);
-
             if (recipe.matches(inv, world))
             {
                 return recipe.getCraftingResult(inv);
@@ -114,7 +114,8 @@ public final class ItemHelper
     }
 
     /**
-     * Get a hashcode based on the ItemStack's ID and Metadata. As both of these are shorts, this should be collision-free for non-NBT sensitive ItemStacks.
+     * Get a hashcode based on the ItemStack's ID and Metadata. As both of these are shorts, this should be collision-free for non-NBT
+     * sensitive ItemStacks.
      * 
      * @param stack
      *            The ItemStack to get a hashcode for.
@@ -198,7 +199,9 @@ public final class ItemHelper
     public static final boolean isPlayerHoldingItemStack(ItemStack stack, EntityPlayer player)
     {
         ItemStack equipped = player.getCurrentEquippedItem() != null ? player.getCurrentEquippedItem() : null;
-        return stack == null ? equipped == null : (equipped != null) && stack.isItemEqual(equipped) && ItemStack.areItemStackTagsEqual(stack, equipped);
+        return stack == null ? equipped == null : (equipped != null)
+                                                  && stack.isItemEqual(equipped)
+                                                  && ItemStack.areItemStackTagsEqual(stack, equipped);
     }
 
     public static boolean areItemStacksEqual(ItemStack stackA, ItemStack stackB)
@@ -213,18 +216,24 @@ public final class ItemHelper
             return false;
         }
         return (stackA.itemID == stackB.itemID)
-                && (stackA.getItemDamage() == OreDictionary.WILDCARD_VALUE ? true : stackB.getItemDamage() == OreDictionary.WILDCARD_VALUE ? true
-                        : stackA.getHasSubtypes() == false ? true : stackB.getItemDamage() == stackA.getItemDamage());
+               && (stackA.getItemDamage() == OreDictionary.WILDCARD_VALUE ? true
+                                                                         : stackB.getItemDamage() == OreDictionary.WILDCARD_VALUE ? true
+                                                                                                                                 : stackA.getHasSubtypes() == false ? true
+                                                                                                                                                                   : stackB.getItemDamage() == stackA.getItemDamage());
     }
 
     public static boolean craftingEquivalent(ItemStack checked, ItemStack source, String oreDict)
     {
-        return areItemStacksEqualNoNBT(checked, source) ? true : oreDict == null ? false : oreDict.equals("Unknown") ? false : getOreName(checked).equalsIgnoreCase(oreDict);
+        return areItemStacksEqualNoNBT(checked, source) ? true
+                                                       : oreDict == null ? false
+                                                                        : oreDict.equals("Unknown") ? false
+                                                                                                   : getOreName(checked).equalsIgnoreCase(oreDict);
     }
 
     public static String getItemNBTString(ItemStack theItem, String nbtKey, String invalidReturn)
     {
-        return theItem.stackTagCompound != null ? theItem.stackTagCompound.hasKey(nbtKey) ? theItem.stackTagCompound.getString(nbtKey) : invalidReturn : invalidReturn;
+        return theItem.stackTagCompound != null ? theItem.stackTagCompound.hasKey(nbtKey) ? theItem.stackTagCompound.getString(nbtKey)
+                                                                                         : invalidReturn : invalidReturn;
     }
 
     public static Item getItemFromStack(ItemStack theStack)
@@ -244,8 +253,9 @@ public final class ItemHelper
 
     public static boolean itemsEqualWithMetadata(ItemStack stackA, ItemStack stackB, boolean checkNBT)
     {
-        return (stackA.itemID == stackB.itemID) && (stackA.getItemDamage() == stackB.getItemDamage())
-                && (!checkNBT || doNBTsMatch(stackA.stackTagCompound, stackB.stackTagCompound));
+        return (stackA.itemID == stackB.itemID)
+               && (stackA.getItemDamage() == stackB.getItemDamage())
+               && (!checkNBT || doNBTsMatch(stackA.stackTagCompound, stackB.stackTagCompound));
     }
 
     public static boolean itemsEqualWithoutMetadata(ItemStack stackA, ItemStack stackB, boolean checkNBT)
@@ -312,7 +322,6 @@ public final class ItemHelper
             {
                 NBTTagCompound tag = (NBTTagCompound) nbtlist.tagAt(i);
                 int slot = tag.getInteger("Slot");
-
                 if ((slot < minSlot) || (slot > maxSlot))
                 {
                     continue;

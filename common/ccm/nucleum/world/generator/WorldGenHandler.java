@@ -31,11 +31,8 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     }
 
     private final List<IFeatureGenerator> ores = new ArrayList<IFeatureGenerator>();
-
     private final HashSet<String> oreNames = new HashSet<String>();
-
     private final HashSet<Integer> dimensionBlacklist = new HashSet<Integer>();
-
     public static WorldGenHandler instance = new WorldGenHandler();
 
     private void replaceBR(final int chunkX, final int chunkZ, final World world, final Block block)
@@ -56,7 +53,12 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     }
 
     @Override
-    public void generate(final Random random, final int chunkX, final int chunkZ, final World world, final IChunkProvider chunkGenerator, final IChunkProvider chunkProvider)
+    public void generate(final Random random,
+                         final int chunkX,
+                         final int chunkZ,
+                         final World world,
+                         final IChunkProvider chunkGenerator,
+                         final IChunkProvider chunkProvider)
     {
         generateWorld(random, chunkX, chunkZ, world, true);
     }
@@ -64,7 +66,6 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     public void generateWorld(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
         replaceBedrock(random, chunkX, chunkZ, world, newGen);
-
         if (!newGen && !Properties.retroOreGen)
         {
             return;
@@ -80,12 +81,10 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     }
 
     @ForgeSubscribe
-    @SuppressWarnings(
-    { "unchecked", "rawtypes" })
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void handleChunkLoadEvent(final Load event)
     {
         final int dim = event.world.provider.dimensionId;
-
         if (dimensionBlacklist.contains(Integer.valueOf(dim)))
         {
             return;
@@ -94,14 +93,12 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         boolean ores = false;
         boolean regen = false;
         final NBTTagCompound tag = (NBTTagCompound) event.getData().getTag("CCM-Properties");
-
         if (tag != null)
         {
             bedrock = !tag.hasKey("CCM-Bedrock") && Properties.retroFlatBedrock && Properties.genFlatBedrock;
             ores = !tag.hasKey("CCM-Ores") && Properties.retroOreGen;
         }
         final ChunkCoord cCoord = new ChunkCoord(event.getChunk());
-
         if ((tag == null) && ((Properties.retroFlatBedrock && Properties.genFlatBedrock) || Properties.retroOreGen))
         {
             regen = true;
@@ -119,7 +116,6 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         if (regen)
         {
             ArrayList chunks = TickHandlerWorld.chunksToGen.get(Integer.valueOf(dim));
-
             if (chunks == null)
             {
                 TickHandlerWorld.chunksToGen.put(Integer.valueOf(dim), new ArrayList<ChunkCoord>());
@@ -137,7 +133,6 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     public void handleChunkSaveEvent(final Save event)
     {
         final NBTTagCompound tag = new NBTTagCompound();
-
         if (Properties.retroFlatBedrock && Properties.genFlatBedrock)
         {
             tag.setBoolean("CCM-Bedrock", true);
@@ -168,11 +163,9 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
             return;
         }
         final boolean isNether = world.provider.isHellWorld;
-
         if (isNether)
         {
             replaceBR(chunkX, chunkZ, world, Block.netherrack);
-
             for (int blockX = 0; blockX < 16; blockX++)
             {
                 for (int blockZ = 0; blockZ < 16; blockZ++)

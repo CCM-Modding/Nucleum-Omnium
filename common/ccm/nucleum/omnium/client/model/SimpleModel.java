@@ -32,7 +32,6 @@ public class SimpleModel
     public void render()
     {
         bindTexture();
-
         model.renderAll();
     }
 

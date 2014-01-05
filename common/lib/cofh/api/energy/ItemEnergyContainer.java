@@ -70,7 +70,6 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem
         }
         int energy = container.stackTagCompound.getInteger("Energy");
         int energyReceived = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive));
-
         if (!simulate)
         {
             energy += energyReceived;
@@ -88,7 +87,6 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem
         }
         int energy = container.stackTagCompound.getInteger("Energy");
         int energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract));
-
         if (!simulate)
         {
             energy -= energyExtracted;

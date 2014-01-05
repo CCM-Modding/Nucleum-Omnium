@@ -13,7 +13,6 @@ public class ElementFluidTank extends ElementBase
 {
     public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(GuiProps.PATH_ELEMENTS + "FluidTank.png");
     public static final int DEFAULT_SCALE = 60;
-
     protected IFluidTank tank;
     protected int gaugeType;
 
@@ -21,11 +20,9 @@ public class ElementFluidTank extends ElementBase
     {
         super(gui, posX, posY);
         this.tank = tank;
-
         texture = DEFAULT_TEXTURE;
         texW = 64;
         texH = 64;
-
         sizeX = 16;
         sizeY = DEFAULT_SCALE;
     }
@@ -34,11 +31,9 @@ public class ElementFluidTank extends ElementBase
     {
         super(gui, posX, posY);
         this.tank = tank;
-
         this.texture = new ResourceLocation(texture);
         texW = 64;
         texH = 64;
-
         sizeX = 16;
         sizeY = DEFAULT_SCALE;
     }
@@ -57,7 +52,6 @@ public class ElementFluidTank extends ElementBase
             return;
         }
         int amount = getScaled();
-
         gui.drawFluid(posX, (posY + sizeY) - amount, tank.getFluid(), sizeX, amount);
         RenderHelper.bindTexture(texture);
         drawTexturedModalRect(posX, posY, 32 + (gaugeType * 16), 1, sizeX, sizeY);

@@ -32,10 +32,8 @@ public class NucleumOmnium extends CCMMod
 {
     @Instance(MOD_ID)
     public static NucleumOmnium instance;
-
     @SidedProxy(serverSide = SERVER_PROXY, clientSide = CLIENT_PROXY)
     public static CommonProxy proxy;
-
     /** The current MC Server Instance */
     public static MinecraftServer server;
 
@@ -50,9 +48,7 @@ public class NucleumOmnium extends CCMMod
     {
         proxy.initCapes();
         proxy.initEventHandling();
-
         CompatibilityHandler.addModHandler("Mystcraft", "ccm.nucleum.omnium.utils.handler.compatibility.MystcraftCompat");
-
         // Registers the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(NucleumOmnium.instance, GuiHandler.INSTANCE);
     }
@@ -67,9 +63,7 @@ public class NucleumOmnium extends CCMMod
     public void serverStarting(final FMLServerStartingEvent event)
     { // Initialize the custom commands
         CommandRegistry.init(event);
-
         server = event.getServer();
-
         DataHelper.init();
     }
 }

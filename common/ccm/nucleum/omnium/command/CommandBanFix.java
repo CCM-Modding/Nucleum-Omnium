@@ -38,12 +38,10 @@ public class CommandBanFix extends CommandServerBan
             banentry.setBannedBy(sender.getCommandSenderName());
             final StringBuilder sb = new StringBuilder();
             sb.append("You have been banned from the server for ");
-
             if (args.length >= 2)
             {
                 banentry.setBanReason(func_82360_a(sender, args, 1));
             }
-
             if (args.length >= 4)
             {
                 if (JavaHelper.isNumeric(args[2]))
@@ -55,16 +53,12 @@ public class CommandBanFix extends CommandServerBan
                     sb.append(scale.name());
                 }
             }
-
             MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().put(banentry);
-
             if (entityplayermp != null)
             {
                 entityplayermp.playerNetServerHandler.kickPlayerFromServer(sb.toString());
             }
-
-            notifyAdmins(sender, "commands.ban.success", new Object[]
-            { args[0] });
+            notifyAdmins(sender, "commands.ban.success", new Object[] { args[0] });
         } else
         {
             throw new WrongUsageException("commands.ban.usage", new Object[0]);

@@ -11,7 +11,6 @@ import net.minecraft.block.material.Material;
  */
 public class BaseBlock extends Block
 {
-
     public BaseBlock(int id, Material material)
     {
         super(id, material);

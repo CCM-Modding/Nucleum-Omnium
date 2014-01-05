@@ -28,7 +28,6 @@ final class Handler
             // Create the temporal variables for internal usage
             Class<? extends ICompatibility> tmpHandler = null;
             ICompatibility tmp = null;
-
             try
             {
                 // Try to find the Handler Class
@@ -44,7 +43,9 @@ final class Handler
                 tmp = tmpHandler.newInstance();
             } catch (Exception e)
             {
-                CCMLogger.DEFAULT_LOGGER.printCatch(e, "CCM has failed to create a new instance of a compatibility with %s, please inform the CCM Team", name);
+                CCMLogger.DEFAULT_LOGGER.printCatch(e,
+                                                    "CCM has failed to create a new instance of a compatibility with %s, please inform the CCM Team",
+                                                    name);
                 return;
             }
             try

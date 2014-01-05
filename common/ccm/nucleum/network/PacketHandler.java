@@ -16,7 +16,6 @@ import cpw.mods.fml.common.network.Player;
  */
 public class PacketHandler implements IPacketHandler
 {
-
     /***
      * Handles Packet250CustomPayload packets
      * 
@@ -31,7 +30,6 @@ public class PacketHandler implements IPacketHandler
     public void onPacketData(final INetworkManager manager, final Packet250CustomPayload packet, final Player player)
     {
         final PacketBase packetBase = PacketTypeHandler.buildPacket(packet.data);
-
         packetBase.execute(manager, player);
     }
 }

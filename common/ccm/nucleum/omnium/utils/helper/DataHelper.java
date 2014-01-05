@@ -54,9 +54,7 @@ public final class DataHelper
         try
         {
             final File folder = DataHelper.getModFolder(mod);
-
             final File file = new File(folder, fileName.trim() + ".dat");
-
             if (!file.exists())
             {
                 return new NBTTagCompound();
@@ -64,7 +62,6 @@ public final class DataHelper
             {
                 return CompressedStreamTools.read(file);
             }
-
         } catch (final Exception e)
         {
             e.printStackTrace();
@@ -88,19 +85,14 @@ public final class DataHelper
         try
         {
             final File folder = DataHelper.getModFolder(mod);
-
             final File tempFile = new File(folder, fileName.trim() + "_tmp.dat");
             final File realFile = new File(folder, fileName.trim() + ".dat");
-
             CompressedStreamTools.write(data, tempFile);
-
             if (realFile.exists())
             {
                 realFile.delete();
             }
-
             tempFile.renameTo(realFile);
-
             return true;
         } catch (final Exception e)
         {
@@ -124,7 +116,6 @@ public final class DataHelper
         {
             final File folder = DataHelper.getModFolder(mod);
             final File file = new File(folder, fileName.trim() + ".dat");
-
             return file.delete();
         } catch (final Exception e)
         {

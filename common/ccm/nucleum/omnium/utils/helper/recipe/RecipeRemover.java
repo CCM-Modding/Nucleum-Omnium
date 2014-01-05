@@ -16,7 +16,6 @@ public final class RecipeRemover
     public static void delete(final List<String> noCraft)
     {
         final List<ItemStack> items = new ArrayList<ItemStack>();
-
         // Decompose list into StringItems
         for (final String s : noCraft)
         {
@@ -43,7 +42,8 @@ public final class RecipeRemover
                     /*
                      * Remove the item if the ID & meta match, OR if the IDs match, and banned meta is -1.
                      */
-                    if ((result.itemID == removedItem.itemID) && ((removedItem.getItemDamage() == -1) || (result.getItemDamage() == removedItem.getItemDamage())))
+                    if ((result.itemID == removedItem.itemID)
+                        && ((removedItem.getItemDamage() == -1) || (result.getItemDamage() == removedItem.getItemDamage())))
                     {
                         minecraftRecipes.remove(i);
                         CCMLogger.DEFAULT_LOGGER.debug("Recipes removed for " + removedItem.getDisplayName() + " @" + removedItem.itemID + "\n");
@@ -58,7 +58,6 @@ public final class RecipeRemover
     {
         int id = 0;
         int meta = 0;
-
         // Decompose String into (item ID, Meta) pairs
         final String[] tmp = itemID.split(":");
         if ((tmp != null) && (tmp.length > 0))

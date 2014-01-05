@@ -16,23 +16,17 @@ import org.lwjgl.opengl.GL11;
 public abstract class TabBase extends ElementBase
 {
     public static int tabExpandSpeed = 8;
-
     public boolean open;
     public int side = 1;
-
     public int backgroundColor = 0xffffff;
-
     public int currentShiftX = 0;
     public int currentShiftY = 0;
-
     public int minWidth = 22;
     public int maxWidth = 124;
     public int currentWidth = minWidth;
-
     public int minHeight = 22;
     public int maxHeight = 22;
     public int currentHeight = minHeight;
-
     public static final ResourceLocation DEFAULT_TEXTURE_LEFT = new ResourceLocation(GuiProps.PATH_ELEMENTS + "Tab_Left.png");
     public static final ResourceLocation DEFAULT_TEXTURE_RIGHT = new ResourceLocation(GuiProps.PATH_ELEMENTS + "Tab_Right.png");
 
@@ -46,7 +40,6 @@ public abstract class TabBase extends ElementBase
     {
         super(gui, 0, 0);
         this.side = side;
-
         if (side == 0)
         {
             texture = DEFAULT_TEXTURE_LEFT;
@@ -66,7 +59,6 @@ public abstract class TabBase extends ElementBase
         {
             currentWidth -= tabExpandSpeed;
         }
-
         if (currentWidth > maxWidth)
         {
             currentWidth = maxWidth;
@@ -74,7 +66,6 @@ public abstract class TabBase extends ElementBase
         {
             currentWidth = minWidth;
         }
-
         if (open && (currentHeight < maxHeight))
         {
             currentHeight += tabExpandSpeed;
@@ -82,7 +73,6 @@ public abstract class TabBase extends ElementBase
         {
             currentHeight -= tabExpandSpeed;
         }
-
         if (currentHeight > maxHeight)
         {
             currentHeight = maxHeight;
@@ -90,7 +80,6 @@ public abstract class TabBase extends ElementBase
         {
             currentHeight = minHeight;
         }
-
         if (open && (currentWidth == maxWidth) && (currentHeight == maxHeight))
         {
             setFullyOpen();
@@ -117,17 +106,19 @@ public abstract class TabBase extends ElementBase
         float colorR = ((backgroundColor >> 16) & 255) / 255.0F;
         float colorG = ((backgroundColor >> 8) & 255) / 255.0F;
         float colorB = (backgroundColor & 255) / 255.0F;
-
         GL11.glColor4f(colorR, colorG, colorB, 1.0F);
-
         RenderHelper.bindTexture(texture);
-
         if (side == 0)
         {
             gui.drawTexturedModalRect(posX - currentWidth, posY + 4, 0, (256 - currentHeight) + 4, 4, currentHeight - 4);
             gui.drawTexturedModalRect((posX - currentWidth) + 4, posY, (256 - currentWidth) + 4, 0, currentWidth - 4, 4);
             gui.drawTexturedModalRect(posX - currentWidth, posY, 0, 0, 4, 4);
-            gui.drawTexturedModalRect((posX - currentWidth) + 4, posY + 4, (256 - currentWidth) + 4, (256 - currentHeight) + 4, currentWidth - 4, currentHeight - 4);
+            gui.drawTexturedModalRect((posX - currentWidth) + 4,
+                                      posY + 4,
+                                      (256 - currentWidth) + 4,
+                                      (256 - currentHeight) + 4,
+                                      currentWidth - 4,
+                                      currentHeight - 4);
         } else
         {
             gui.drawTexturedModalRect(posX, posY, 0, 256 - currentHeight, 4, currentHeight);

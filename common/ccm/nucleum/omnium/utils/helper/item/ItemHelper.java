@@ -29,7 +29,6 @@ public class ItemHelper
             final int dmg = MathHelper.getRandInt(damage);
             // set the damage to whatever it was plus the random amount
             tmp.setItemDamage(tmp.getItemDamage() + dmg);
-
             if (tmp.getItemDamage() > tmp.getMaxDamage())
             {// if the damage is more than the max the set it to null
                 inventory.setInventorySlotContents(slot, null);
@@ -57,7 +56,8 @@ public class ItemHelper
      *            The main ItemStack
      * @param item2
      *            The second ItemStack
-     * @return Adds the stack size of both items and if it is bigger than the max of the first it returns the first.getMaxStackSize() as the size
+     * @return Adds the stack size of both items and if it is bigger than the max of the first it returns the first.getMaxStackSize() as the
+     *         size
      */
     public static ItemStack getUnion(final ItemStack item, final ItemStack item2)
     {// Get the size of both stacks put together, we assume that they are the same...

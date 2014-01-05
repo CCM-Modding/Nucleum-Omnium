@@ -26,10 +26,22 @@ public final class ColorHelper
     public static final int DYE_MAGENTA = 0xE57FD8;
     public static final int DYE_ORANGE = 0xF2B233;
     public static final int DYE_WHITE = 0xFFFFFF;
-
-    public static final int[] DYE_COLORS =
-    { DYE_BLACK, DYE_RED, DYE_GREEN, DYE_BROWN, DYE_BLUE, DYE_PURPLE, DYE_CYAN, DYE_LIGHT_GRAY, DYE_GRAY, DYE_PINK, DYE_LIME, DYE_YELLOW, DYE_LIGHT_BLUE, DYE_MAGENTA, DYE_ORANGE,
-            DYE_WHITE };
+    public static final int[] DYE_COLORS = { DYE_BLACK,
+                                            DYE_RED,
+                                            DYE_GREEN,
+                                            DYE_BROWN,
+                                            DYE_BLUE,
+                                            DYE_PURPLE,
+                                            DYE_CYAN,
+                                            DYE_LIGHT_GRAY,
+                                            DYE_GRAY,
+                                            DYE_PINK,
+                                            DYE_LIME,
+                                            DYE_YELLOW,
+                                            DYE_LIGHT_BLUE,
+                                            DYE_MAGENTA,
+                                            DYE_ORANGE,
+                                            DYE_WHITE };
 
     public static int getDyeColor(int color)
     {

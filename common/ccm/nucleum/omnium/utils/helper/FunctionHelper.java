@@ -36,7 +36,9 @@ public final class FunctionHelper
                     final float dX = (random().nextFloat() * 0.8F) + 0.1F;
                     final float dY = (random().nextFloat() * 0.8F) + 0.1F;
                     final float dZ = (random().nextFloat() * 0.8F) + 0.1F;
-                    final EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.itemID, itemStack.stackSize, itemStack.getItemDamage()));
+                    final EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.itemID,
+                                                                                                              itemStack.stackSize,
+                                                                                                              itemStack.getItemDamage()));
                     if (itemStack.hasTagCompound())
                     {
                         entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
@@ -61,7 +63,10 @@ public final class FunctionHelper
     /** Checks if the block is a full 1m^3 */
     public static boolean hasNormalBounds(Block block)
     {
-        return ((block.getBlockBoundsMaxX() == 1) && (block.getBlockBoundsMaxY() == 1) && (block.getBlockBoundsMaxZ() == 1) && (block.getBlockBoundsMinX() == 0)
+        return ((block.getBlockBoundsMaxX() == 1)
+                && (block.getBlockBoundsMaxY() == 1)
+                && (block.getBlockBoundsMaxZ() == 1)
+                && (block.getBlockBoundsMinX() == 0)
                 && (block.getBlockBoundsMinY() == 0) && (block.getBlockBoundsMinZ() == 0));
     }
 
@@ -88,7 +93,9 @@ public final class FunctionHelper
      */
     public static boolean isSunVisible(final World world, final int xCoord, final int yCoord, final int zCoord)
     {
-        return world.isDaytime() && !world.provider.hasNoSky && world.canBlockSeeTheSky(xCoord, yCoord, zCoord)
-                && ((world.getWorldChunkManager().getBiomeGenAt(xCoord, yCoord) instanceof BiomeGenDesert) || (!world.isRaining() && !world.isThundering()));
+        return world.isDaytime()
+               && !world.provider.hasNoSky
+               && world.canBlockSeeTheSky(xCoord, yCoord, zCoord)
+               && ((world.getWorldChunkManager().getBiomeGenAt(xCoord, yCoord) instanceof BiomeGenDesert) || (!world.isRaining() && !world.isThundering()));
     }
 }

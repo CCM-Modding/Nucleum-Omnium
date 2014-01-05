@@ -76,9 +76,7 @@ public class OreStack implements Comparable<OreStack>
     public String toString()
     {
         StringBuilder stringBuilder = new StringBuilder();
-
         stringBuilder.append(String.format("%dxoreDictionary.%s[oreId:%s]", stackSize, oreName, oreId));
-
         return stringBuilder.toString();
     }
 
@@ -89,9 +87,7 @@ public class OreStack implements Comparable<OreStack>
         {
             return false;
         }
-
         OreStack oreStackObject = (OreStack) object;
-
         return (compareTo(oreStackObject) == 0);
     }
 

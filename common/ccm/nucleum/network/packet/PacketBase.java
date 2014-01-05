@@ -38,7 +38,6 @@ public class PacketBase
     {
         final ByteArrayOutputStream byteArr = new ByteArrayOutputStream();
         final DataOutputStream data = new DataOutputStream(byteArr);
-
         try
         {
             data.writeByte(packetType);
@@ -47,7 +46,6 @@ public class PacketBase
         {
             CCMLogger.DEFAULT_LOGGER.printCatch(e, "populate FAILED");
         }
-
         return byteArr.toByteArray();
     }
 

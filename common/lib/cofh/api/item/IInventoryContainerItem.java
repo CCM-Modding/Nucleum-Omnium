@@ -3,7 +3,8 @@ package lib.cofh.api.item;
 import net.minecraft.item.ItemStack;
 
 /**
- * Implement this interface on Item classes that are themselves inventories. There's no real interaction here - the point of this is to correctly identify these items and prevent
+ * Implement this interface on Item classes that are themselves inventories. There's no real interaction here - the point of this is to
+ * correctly identify these items and prevent
  * nesting.
  * 
  * @author King Lemming
@@ -11,7 +12,8 @@ import net.minecraft.item.ItemStack;
 public interface IInventoryContainerItem
 {
     /**
-     * Add something to the inventory of this container item. This returns what is remaining of the original stack - a null return means that the entire stack was accepted!
+     * Add something to the inventory of this container item. This returns what is remaining of the original stack - a null return means
+     * that the entire stack was accepted!
      * 
      * @param container
      *            ItemStack with the inventory.
@@ -19,12 +21,14 @@ public interface IInventoryContainerItem
      *            ItemStack to add to the inventory.
      * @param simulate
      *            If TRUE, the insertion will only be simulated.
-     * @return An ItemStack representing how much is remaining after the item was inserted (or would have been, if simulated) into the container inventory.
+     * @return An ItemStack representing how much is remaining after the item was inserted (or would have been, if simulated) into the
+     *         container inventory.
      */
     ItemStack insertItem(ItemStack container, ItemStack item, boolean simulate);
 
     /**
-     * Extract something from the inventory of this container item. This returns the resulting stack - a null return means that nothing was extracted!
+     * Extract something from the inventory of this container item. This returns the resulting stack - a null return means that nothing was
+     * extracted!
      * 
      * @param container
      *            ItemStack with the inventory.

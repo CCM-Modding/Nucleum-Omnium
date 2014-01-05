@@ -10,9 +10,7 @@ import ccm.nucleum.omnium.CCMMod;
  */
 public class DupeExeption extends NotMyFaultExeption
 {
-
     private static final long serialVersionUID = -2394035866442734958L;
-
     private final StringBuilder tmpErrorSB = new StringBuilder();
 
     public DupeExeption(final CCMMod mod)

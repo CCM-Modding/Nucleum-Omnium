@@ -40,7 +40,6 @@ public class FluidHelper
     {
         ItemStack container = player.getCurrentEquippedItem();
         FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(container);
-
         if (fluid != null)
         {
             if ((handler.fill(ForgeDirection.UNKNOWN, fluid, false) == fluid.amount) || player.capabilities.isCreativeMode)
@@ -50,7 +49,6 @@ public class FluidHelper
                     return true;
                 }
                 handler.fill(ForgeDirection.UNKNOWN, fluid, true);
-
                 if (!player.capabilities.isCreativeMode)
                 {
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemHelper.consumeItem(container));
@@ -64,12 +62,10 @@ public class FluidHelper
     public static boolean fillContainerFromTank(World world, IFluidHandler handler, EntityPlayer player, FluidStack tankFluid)
     {
         ItemStack container = player.getCurrentEquippedItem();
-
         if (FluidContainerRegistry.isEmptyContainer(container))
         {
             ItemStack returnStack = FluidContainerRegistry.fillFluidContainer(tankFluid, container);
             FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(returnStack);
-
             if ((fluid == null) || (returnStack == null))
             {
                 return false;
@@ -86,7 +82,6 @@ public class FluidHelper
                 }
                 handler.drain(ForgeDirection.UNKNOWN, fluid.amount, true);
                 container.stackSize--;
-
                 if (container.stackSize <= 0)
                 {
                     container = null;
@@ -103,7 +98,6 @@ public class FluidHelper
     public static int fillAdjacentFluidHandler(TileEntity tile, int from, FluidStack fluid, boolean doFill)
     {
         TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
-
         if (handler instanceof IFluidHandler)
         {
             return ((IFluidHandler) handler).fill(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(), fluid, doFill);
@@ -145,7 +139,6 @@ public class FluidHelper
     {
         int bId = worldObj.getBlockId(x, y, z);
         int bMeta = worldObj.getBlockMetadata(x, y, z);
-
         if ((bId == 9) || (bId == 8))
         {
             if (bMeta == 0)
@@ -184,7 +177,6 @@ public class FluidHelper
     public static FluidStack readFluidStackFromPacket(DataInput data) throws IOException
     {
         short length = data.readShort();
-
         if (length < 0)
         {
             return null;

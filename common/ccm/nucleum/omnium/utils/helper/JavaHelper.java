@@ -30,7 +30,8 @@ public final class JavaHelper
     }
 
     /**
-     * @return <code>true</code> if it is any common word for it. <code>false</code> otherwise {@code If it returns false on a string that shoud be true please make an issue}
+     * @return <code>true</code> if it is any common word for it. <code>false</code> otherwise
+     *         {@code If it returns false on a string that shoud be true please make an issue}
      */
     public static boolean toBoolean(final String input)
     { // Make sure that the string is not null and then check common words for true
@@ -96,12 +97,10 @@ public final class JavaHelper
     {
         // Get the default representation of "now".
         final Calendar when = Calendar.getInstance();
-
         // Scale the offset according to its unit.
         // Note that this defines a day as exactly 60*60*24 seconds,
         // and ignores things like Daylight Savings Time.
         long seconds = unit.toSeconds(offset);
-
         // We do not support time increments longer than 24 millenia.
         if (seconds > Integer.MAX_VALUE)
         {
@@ -110,9 +109,7 @@ public final class JavaHelper
         {
             seconds = Integer.MIN_VALUE;
         }
-
         when.add(Calendar.SECOND, (int) seconds);
-
         // Convert to a Date object.
         return when.getTime();
     }

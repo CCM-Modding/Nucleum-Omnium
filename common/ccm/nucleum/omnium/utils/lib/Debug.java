@@ -14,7 +14,6 @@ public final class Debug extends Level
      * long, serialVersionUID
      */
     private static final long serialVersionUID = 8515490874715990030L;
-
     /**
      * DEBUG indicates a Debugging tracing message. This level is initialized to <CODE>850</CODE>.
      */

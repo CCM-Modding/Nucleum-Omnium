@@ -16,7 +16,6 @@ import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 public abstract class BaseContainer extends Container
 {
-
     protected final IInventory inventory;
 
     public BaseContainer(final IInventory inventory)
@@ -30,7 +29,13 @@ public abstract class BaseContainer extends Container
         drawPlayerFullInv(player, x, y);
     }
 
-    private void createSlot(final IInventory inventory, final Class<? extends Slot> slot, final int index, final int x, final int y, final int row, final int column)
+    private void createSlot(final IInventory inventory,
+                            final Class<? extends Slot> slot,
+                            final int index,
+                            final int x,
+                            final int y,
+                            final int row,
+                            final int column)
     {
         Constructor<? extends Slot> c = null;
         try
@@ -45,7 +50,15 @@ public abstract class BaseContainer extends Container
             addSlotToContainer(c.newInstance(inventory, index, x + (column * 18), y + (row * 18)));
         } catch (final Exception e)
         {
-            CCMLogger.DEFAULT_LOGGER.printCatch(e, "FAILED @ createSlot DURING newInstance WITH %s, %s, %s, %s, %s, %s, %s", inventory, slot, index, x, y, row, column);
+            CCMLogger.DEFAULT_LOGGER.printCatch(e,
+                                                "FAILED @ createSlot DURING newInstance WITH %s, %s, %s, %s, %s, %s, %s",
+                                                inventory,
+                                                slot,
+                                                index,
+                                                x,
+                                                y,
+                                                row,
+                                                column);
         }
     }
 
@@ -71,7 +84,13 @@ public abstract class BaseContainer extends Container
      *            The Amount of Columns
      * @return The last index + 1
      */
-    public int drawBoxInventory(final IInventory inventory, final Class<? extends Slot> slot, int index, final int x, final int y, final int rowSize, final int columnSize)
+    public int drawBoxInventory(final IInventory inventory,
+                                final Class<? extends Slot> slot,
+                                int index,
+                                final int x,
+                                final int y,
+                                final int rowSize,
+                                final int columnSize)
     {
         for (int row = 0; row < rowSize; ++row)
         {

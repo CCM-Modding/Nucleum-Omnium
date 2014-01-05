@@ -9,7 +9,8 @@ import java.util.logging.Logger;
 import cpw.mods.fml.common.FMLLog;
 
 /**
- * This class allows a mod to easily implement a version update checker. It also contains some version comparison functions which may be used at any point. Instances of this class
+ * This class allows a mod to easily implement a version update checker. It also contains some version comparison functions which may be
+ * used at any point. Instances of this class
  * should be registered with {@link TickHandlerVersion}.
  * 
  * @author King Lemming
@@ -17,16 +18,13 @@ import cpw.mods.fml.common.FMLLog;
 public class VersionHandler
 {
     public static final String MC_VERSION = "1.6.4";
-
     boolean criticalUpdate;
     boolean newVersion;
     boolean newMinecraftVersion;
     boolean versionCheckComplete;
-
     String latestModVersion;
     String latestMCVersion = MC_VERSION;
     String description = "";
-
     String modName;
     String modVersion;
     String releaseURL;
@@ -38,7 +36,6 @@ public class VersionHandler
         {
             String[] versionTokens = version.trim().split("\\.");
             String[] targetTokens = target.trim().split("\\.");
-
             for (int i = 0; i < versionTokens.length; ++i)
             {
                 if (versionTokens[i].startsWith("a"))
@@ -48,7 +45,6 @@ public class VersionHandler
                 }
                 if (versionTokens[i].startsWith("b"))
                 {
-
                     if (targetTokens[i].startsWith("b"))
                     {
                         versionTokens[i] = versionTokens[i].substring(1);
@@ -66,7 +62,6 @@ public class VersionHandler
                 }
                 int v = Integer.valueOf(versionTokens[i]).intValue();
                 int t = Integer.valueOf(targetTokens[i]).intValue();
-
                 if (v < t)
                 {
                     return true;
@@ -162,12 +157,10 @@ public class VersionHandler
                 criticalUpdate = Boolean.parseBoolean(reader.readLine());
                 latestMCVersion = reader.readLine();
                 reader.close();
-
                 if (beforeTargetVersion(modVersion, latestModVersion))
                 {
                     modLogger.log(Level.INFO, "An updated version of " + modName + " is available: " + latestModVersion + ".");
                     newVersion = true;
-
                     if (criticalUpdate)
                     {
                         modLogger.log(Level.INFO, "This update has been marked as CRITICAL and will ignore notification suppression.");

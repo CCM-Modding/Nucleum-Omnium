@@ -10,9 +10,7 @@ import ccm.nucleum.omnium.CCMMod;
  */
 public class InstantiationExeption extends NotMyFaultExeption
 {
-
     private static final long serialVersionUID = -4924662681925538498L;
-
     private final StringBuilder tmpErrorSB = new StringBuilder();
 
     public InstantiationExeption(final CCMMod mod)

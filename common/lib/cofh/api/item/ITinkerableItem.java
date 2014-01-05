@@ -5,7 +5,8 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 
 /**
- * Implement this interface on Item classes which can be externally modified through tinkering. Basically a catch all for "upgrading" a given ItemStack, which may represent an Item
+ * Implement this interface on Item classes which can be externally modified through tinkering. Basically a catch all for "upgrading" a
+ * given ItemStack, which may represent an Item
  * or a Block.
  * 
  * @author King Lemming

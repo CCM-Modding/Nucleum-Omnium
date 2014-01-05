@@ -13,18 +13,15 @@ public class ElementEnergyStored extends ElementBase
 {
     public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(GuiProps.PATH_ELEMENTS + "Energy.png");
     public static final int DEFAULT_SCALE = 42;
-
     protected IEnergyStorage storage;
 
     public ElementEnergyStored(GuiBase gui, int posX, int posY, IEnergyStorage storage)
     {
         super(gui, posX, posY);
         this.storage = storage;
-
         texture = DEFAULT_TEXTURE;
         sizeX = 16;
         sizeY = DEFAULT_SCALE;
-
         texW = 32;
         texH = 64;
     }

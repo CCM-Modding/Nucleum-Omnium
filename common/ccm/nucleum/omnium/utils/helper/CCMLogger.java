@@ -16,14 +16,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class CCMLogger
 {
     public static final CCMLogger DEFAULT_LOGGER;
-
     static
     {
         Logger log = Logger.getLogger("CCM");
         log.setParent(FMLLog.getLogger());
         DEFAULT_LOGGER = new CCMLogger(log);
     }
-
     /* Class Internals */
     private final Logger logger;
 

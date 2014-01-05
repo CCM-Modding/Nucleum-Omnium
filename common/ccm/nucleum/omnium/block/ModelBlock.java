@@ -14,7 +14,6 @@ import net.minecraft.block.material.Material;
  */
 public class ModelBlock extends BaseBlock
 {
-
     public ModelBlock(final int id)
     {
         this(id, Material.rock);

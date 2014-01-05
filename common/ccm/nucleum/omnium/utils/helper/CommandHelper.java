@@ -46,9 +46,7 @@ public class CommandHelper
         {
             return true;
         }
-
         final MinecraftServer server = FMLCommonHandler.instance().getSidedDelegate().getServer();
-
         // SP and LAN
         if (server.isSinglePlayer())
         {
@@ -57,7 +55,6 @@ public class CommandHelper
                 return true;
             }
         }
-
         // SMP
         return server.getConfigurationManager().getOps().contains(username);
     }

@@ -20,13 +20,10 @@ public class Recipe
 {
     /** All the inputs */
     private final List<WrappedStack> inputs;
-
     /** All the outputs */
     private final List<WrappedStack> outputs;
-
     /** True if the call to inputs.size() returns > 1 */
     private final boolean hasMultipleInputs;
-
     /** True if the call to outputs.size() returns > 1 */
     private final boolean hasMultipleOutputs;
 
@@ -46,7 +43,6 @@ public class Recipe
         {
             throw new RuntimeException("The lists where null");
         }
-
         hasMultipleInputs = inputs.size() > 1 ? true : false;
         hasMultipleOutputs = outputs.size() > 1 ? true : false;
     }

@@ -20,7 +20,6 @@ import ccm.nucleum.omnium.utils.lib.Commands;
 
 public class CommandTPX extends CommandBase
 {
-
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
@@ -75,11 +74,15 @@ public class CommandTPX extends CommandBase
                 if (dimension != null)
                 {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();
-                    TeleportHelper.teleportPlayer(sender, CommandHelper.getPlayer(sender), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
+                    TeleportHelper.teleportPlayer(sender,
+                                                  CommandHelper.getPlayer(sender),
+                                                  dimension.provider.dimensionId,
+                                                  spawn.posX,
+                                                  spawn.posY,
+                                                  spawn.posZ);
                 } else
                 {
-                    CommandBase.notifyAdmins(sender, "error.invalid.dim", new Object[]
-                    { sender.getCommandSenderName(), args[args.length - 1] });
+                    CommandBase.notifyAdmins(sender, "error.invalid.dim", new Object[] { sender.getCommandSenderName(), args[args.length - 1] });
                 }
             } else
             {
@@ -93,11 +96,15 @@ public class CommandTPX extends CommandBase
                 if (dimension != null)
                 {
                     final ChunkCoordinates spawn = dimension.getSpawnPoint();
-                    TeleportHelper.teleportPlayer(sender, getPlayer(sender, args[args.length - 2]), dimension.provider.dimensionId, spawn.posX, spawn.posY, spawn.posZ);
+                    TeleportHelper.teleportPlayer(sender,
+                                                  getPlayer(sender, args[args.length - 2]),
+                                                  dimension.provider.dimensionId,
+                                                  spawn.posX,
+                                                  spawn.posY,
+                                                  spawn.posZ);
                 } else
                 {
-                    CommandBase.notifyAdmins(sender, "error.invalid.dim", new Object[]
-                    { sender.getCommandSenderName(), args[args.length - 1] });
+                    CommandBase.notifyAdmins(sender, "error.invalid.dim", new Object[] { sender.getCommandSenderName(), args[args.length - 1] });
                 }
             } else
             {

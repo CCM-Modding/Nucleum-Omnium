@@ -16,7 +16,6 @@ import cpw.mods.fml.common.TickType;
 public class TickHandlerVersion implements IScheduledTickHandler
 {
     public static TickHandlerVersion instance = new TickHandlerVersion();
-
     private static ArrayList<VersionHandler> modVersionInfo = new ArrayList<VersionHandler>();
     private static boolean initialized;
     private static boolean sent;
@@ -36,7 +35,8 @@ public class TickHandlerVersion implements IScheduledTickHandler
     }
 
     /**
-     * This should be checked by all mods making use of this class. If this returns true, then the tick handler should NOT be registered again.
+     * This should be checked by all mods making use of this class. If this returns true, then the tick handler should NOT be registered
+     * again.
      */
     public static boolean isInitialized()
     {
@@ -66,12 +66,17 @@ public class TickHandlerVersion implements IScheduledTickHandler
             return;
         }
         VersionHandler anInfo = modVersionInfo.get(modIndex);
-
         if (anInfo.isNewVersionAvailable())
         {
             EntityPlayer player = (EntityPlayer) tickData[0];
-            player.addChatMessage(StringHelper.YELLOW + "[" + anInfo.modName + "] " + StringHelper.WHITE + "A new version is available: " + StringHelper.LIGHT_BLUE
-                    + anInfo.getLatestVersion());
+            player.addChatMessage(StringHelper.YELLOW
+                                  + "["
+                                  + anInfo.modName
+                                  + "] "
+                                  + StringHelper.WHITE
+                                  + "A new version is available: "
+                                  + StringHelper.LIGHT_BLUE
+                                  + anInfo.getLatestVersion());
             player.addChatMessage(StringHelper.LIGHT_GRAY + anInfo.getVersionDescription());
         }
         modIndex++;

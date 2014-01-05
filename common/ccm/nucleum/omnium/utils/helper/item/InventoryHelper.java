@@ -61,7 +61,6 @@ public class InventoryHelper
         } else
         {
             int bestSlot = startSlot;
-
             for (int slot = startSlot; slot < inventory.getSizeInventory(); slot++)
             {
                 if (inventory.getStackInSlot(slot) == null)
@@ -89,7 +88,6 @@ public class InventoryHelper
         } else
         {
             int bestSlot = startSlot;
-
             for (int slot = startSlot; slot < endSlot; slot++)
             {
                 if (inventory.getStackInSlot(slot) == null)

@@ -20,7 +20,6 @@ public enum Arrows
     SOUTHWEST(8664),
     WEST(8678),
     NOTHWEST(8662);
-
     public static Arrows getArrowFromAngle(double angle)
     {
         angle %= 360;

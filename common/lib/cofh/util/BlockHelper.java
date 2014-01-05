@@ -28,54 +28,23 @@ public final class BlockHelper
     {}
 
     public static byte[] rotateType = new byte[4096];
-    public static final int[][] SIDE_COORD_MOD =
-    {
-    { 0, -1, 0 },
-    { 0, 1, 0 },
-    { 0, 0, -1 },
-    { 0, 0, 1 },
-    { -1, 0, 0 },
-    { 1, 0, 0 } };
-    public static float[][] SIDE_COORD_AABB =
-    {
-    { 1, -2, 1 },
-    { 1, 2, 1 },
-    { 1, 1, 1 },
-    { 1, 1, 2 },
-    { 1, 1, 1 },
-    { 2, 1, 1 } };
-    public static final byte[] SIDE_LEFT =
-    { 4, 5, 5, 4, 2, 3 };
-    public static final byte[] SIDE_RIGHT =
-    { 5, 4, 4, 5, 3, 2 };
-    public static final byte[] SIDE_OPPOSITE =
-    { 1, 0, 3, 2, 5, 4 };
-    public static final byte[] SIDE_ABOVE =
-    { 3, 2, 1, 1, 1, 1 };
-    public static final byte[] SIDE_BELOW =
-    { 2, 3, 0, 0, 0, 0 };
-
+    public static final int[][] SIDE_COORD_MOD = { { 0, -1, 0 }, { 0, 1, 0 }, { 0, 0, -1 }, { 0, 0, 1 }, { -1, 0, 0 }, { 1, 0, 0 } };
+    public static float[][] SIDE_COORD_AABB = { { 1, -2, 1 }, { 1, 2, 1 }, { 1, 1, 1 }, { 1, 1, 2 }, { 1, 1, 1 }, { 2, 1, 1 } };
+    public static final byte[] SIDE_LEFT = { 4, 5, 5, 4, 2, 3 };
+    public static final byte[] SIDE_RIGHT = { 5, 4, 4, 5, 3, 2 };
+    public static final byte[] SIDE_OPPOSITE = { 1, 0, 3, 2, 5, 4 };
+    public static final byte[] SIDE_ABOVE = { 3, 2, 1, 1, 1, 1 };
+    public static final byte[] SIDE_BELOW = { 2, 3, 0, 0, 0, 0 };
     // These assume facing is towards negative - looking AT side 1, 3, or 5.
-    public static final byte[] ROTATE_CLOCK_Y =
-    { 0, 1, 4, 5, 3, 2 };
-    public static final byte[] ROTATE_CLOCK_Z =
-    { 5, 4, 2, 3, 0, 1 };
-    public static final byte[] ROTATE_CLOCK_X =
-    { 2, 3, 1, 0, 4, 5 };
-
-    public static final byte[] ROTATE_COUNTER_Y =
-    { 0, 1, 5, 4, 2, 3 };
-    public static final byte[] ROTATE_COUNTER_Z =
-    { 4, 5, 2, 3, 1, 0 };
-    public static final byte[] ROTATE_COUNTER_X =
-    { 3, 2, 0, 1, 4, 5 };
-
-    public static final byte[] INVERT_AROUND_Y =
-    { 0, 1, 3, 2, 5, 4 };
-    public static final byte[] INVERT_AROUND_Z =
-    { 1, 0, 2, 3, 5, 4 };
-    public static final byte[] INVERT_AROUND_X =
-    { 1, 0, 3, 2, 4, 5 };
+    public static final byte[] ROTATE_CLOCK_Y = { 0, 1, 4, 5, 3, 2 };
+    public static final byte[] ROTATE_CLOCK_Z = { 5, 4, 2, 3, 0, 1 };
+    public static final byte[] ROTATE_CLOCK_X = { 2, 3, 1, 0, 4, 5 };
+    public static final byte[] ROTATE_COUNTER_Y = { 0, 1, 5, 4, 2, 3 };
+    public static final byte[] ROTATE_COUNTER_Z = { 4, 5, 2, 3, 1, 0 };
+    public static final byte[] ROTATE_COUNTER_X = { 3, 2, 0, 1, 4, 5 };
+    public static final byte[] INVERT_AROUND_Y = { 0, 1, 3, 2, 5, 4 };
+    public static final byte[] INVERT_AROUND_Z = { 1, 0, 2, 3, 5, 4 };
+    public static final byte[] INVERT_AROUND_X = { 1, 0, 3, 2, 4, 5 };
 
     public static final class RotationType
     {
@@ -138,7 +107,6 @@ public final class BlockHelper
         posVec.yCoord += player.getEyeHeight();
         lookVec = posVec.addVector(lookVec.xCoord * distance, lookVec.yCoord * distance, lookVec.zCoord * distance);
         MovingObjectPosition mouseOver = player.worldObj.clip(posVec, lookVec);
-
         if (mouseOver != null)
         {
             return mouseOver.sideHit;
@@ -149,7 +117,6 @@ public final class BlockHelper
     public static int determineXZPlaceFacing(EntityLivingBase living)
     {
         int quadrant = MathHelper.floor_double(((living.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
-
         switch (quadrant)
         {
             case 0:
@@ -187,20 +154,22 @@ public final class BlockHelper
     /* COORDINATE TRANSFORM */
     public static int[] getAdjacentCoordinatesForSide(int x, int y, int z, int side)
     {
-        return new int[]
-        { x + SIDE_COORD_MOD[side][0], y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2] };
+        return new int[] { x + SIDE_COORD_MOD[side][0], y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2] };
     }
 
     public static int[] getAdjacentCoordinatesForSide(TileEntity tile, int side)
     {
-        return new int[]
-        { tile.xCoord + SIDE_COORD_MOD[side][0], tile.yCoord + SIDE_COORD_MOD[side][1], tile.zCoord + SIDE_COORD_MOD[side][2] };
+        return new int[] { tile.xCoord + SIDE_COORD_MOD[side][0], tile.yCoord + SIDE_COORD_MOD[side][1], tile.zCoord + SIDE_COORD_MOD[side][2] };
     }
 
     public static AxisAlignedBB getAdjacentAABBForSide(int x, int y, int z, int side)
     {
-        return AxisAlignedBB.getAABBPool().getAABB(x + SIDE_COORD_MOD[side][0], y + SIDE_COORD_MOD[side][1], z + SIDE_COORD_MOD[side][2], x + SIDE_COORD_AABB[side][0],
-                y + SIDE_COORD_AABB[side][1], z + SIDE_COORD_AABB[side][2]);
+        return AxisAlignedBB.getAABBPool().getAABB(x + SIDE_COORD_MOD[side][0],
+                                                   y + SIDE_COORD_MOD[side][1],
+                                                   z + SIDE_COORD_MOD[side][2],
+                                                   x + SIDE_COORD_AABB[side][0],
+                                                   y + SIDE_COORD_AABB[side][1],
+                                                   z + SIDE_COORD_AABB[side][2]);
     }
 
     public static int getLeftSide(int side)
@@ -395,14 +364,12 @@ public final class BlockHelper
         {
             stacks = Block.blocksList[bId].getBlockDropped(worldObj, x, y, z, meta, fortune);
         }
-
         if (!doBreak)
         {
             return stacks;
         }
         worldObj.playAuxSFXAtEntity(null, 2001, x, y, z, bId + (meta << 12));
         worldObj.setBlock(x, y, z, 0);
-
         List<?> result = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x - 2, y - 2, z - 2, x + 3, y + 3, z + 3));
         for (int i = 0; i < result.size(); i++)
         {

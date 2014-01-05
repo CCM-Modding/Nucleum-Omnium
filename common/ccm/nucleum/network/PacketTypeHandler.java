@@ -57,10 +57,8 @@ public final class PacketTypeHandler
         final ByteArrayInputStream bytArray = new ByteArrayInputStream(data);
         final int selector = bytArray.read();
         final DataInputStream dataStream = new DataInputStream(bytArray);
-
         PacketBase packet = buildPacket(selector);
         packet.readPopulate(dataStream);
-
         return packet;
     }
 
@@ -68,13 +66,11 @@ public final class PacketTypeHandler
     public static Packet populatePacket(final CCMMod mod, final PacketBase packetBase)
     {
         final byte[] data = packetBase.populate();
-
         final Packet250CustomPayload packet250 = new Packet250CustomPayload();
         packet250.channel = Archive.MOD_CHANNEL;
         packet250.data = data;
         packet250.length = data.length;
         packet250.isChunkDataPacket = packetBase.isChunkDataPacket;
-
         return packet250;
     }
 

@@ -7,9 +7,9 @@ import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 
 public class CommonProxy
 {
-
     /**
-     * Initializes the Capes Client Side Only. Original code that adds capes is found in this Github repository: http://www.github.com/jadar/DeveloperCapesAPI
+     * Initializes the Capes Client Side Only. Original code that adds capes is found in this Github repository:
+     * http://www.github.com/jadar/DeveloperCapesAPI
      */
     public void initCapes()
     {}

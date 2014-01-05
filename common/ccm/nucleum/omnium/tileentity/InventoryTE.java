@@ -21,12 +21,10 @@ import ccm.nucleum.omnium.utils.lib.NBTConstants;
  */
 public class InventoryTE extends BaseTE implements IInventory
 {
-
     /**
      * The ItemStacks that hold the items currently being used in the Tile Entity
      */
     protected ItemStack[] inventory;
-
     /**
      * Size of the Inventory
      */
@@ -176,9 +174,7 @@ public class InventoryTE extends BaseTE implements IInventory
     public void readFromNBT(final NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-
         setInventorySize(NBTHelper.getInteger(nbt, NBTConstants.NBT_INVENTORY_SIZE));
-
         if (nbt.hasKey(NBTConstants.NBT_INVENTORY))
         {
             setInventory(InventoryHelper.readInventoryFromNBT(nbt.getTagList(NBTConstants.NBT_INVENTORY), getSizeInventory()));

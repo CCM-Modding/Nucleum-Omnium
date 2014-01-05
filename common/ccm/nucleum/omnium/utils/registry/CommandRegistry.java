@@ -18,13 +18,9 @@ public final class CommandRegistry
     public static void init(final FMLServerStartingEvent event)
     {
         register(event, new CommandCCM());
-
         register(event, new CommandTPS());
-
         register(event, new CommandKillFix());
-
         register(event, new CommandBanFix());
-
         if (!Properties.MYSTCARFT_LOADED)
         {
             register(event, new CommandTPX());
@@ -32,7 +28,6 @@ public final class CommandRegistry
         {
             CommandCCM.registerSub(new CommandTPX());
         }
-
         CommandCCM.registerSub(new CommandRain());
     }
 

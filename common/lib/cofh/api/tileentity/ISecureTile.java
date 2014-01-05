@@ -7,7 +7,6 @@ public interface ISecureTile
         PUBLIC,
         RESTRICTED,
         PRIVATE;
-
         public boolean isPublic()
         {
             return this == PUBLIC;

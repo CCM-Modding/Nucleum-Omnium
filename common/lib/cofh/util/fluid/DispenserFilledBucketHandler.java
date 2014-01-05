@@ -20,11 +20,9 @@ public final class DispenserFilledBucketHandler extends BehaviorDefaultDispenseI
     {
         EnumFacing facing = BlockDispenser.getFacing(blockSource.getBlockMetadata());
         World world = blockSource.getWorld();
-
         int x = blockSource.getXInt() + facing.getFrontOffsetX();
         int y = blockSource.getYInt() + facing.getFrontOffsetY();
         int z = blockSource.getZInt() + facing.getFrontOffsetZ();
-
         if (!world.isAirBlock(x, y, z) && world.getBlockMaterial(x, y, z).isSolid())
         {
             return stackBucket;

@@ -9,16 +9,13 @@ import cpw.mods.fml.common.FMLCommonHandler;
 public abstract class IConfig
 {
     public static final String UNIVERSAL = "Universal";
-
     public static final String CLIENT_SIDE = "Client";
-
     public static final String SERVER_SIDE = "Server";
 
     /** Initializes the configuration file */
     public void init(ConfigHandler config)
     {
         initCommon(config);
-
         if (FMLCommonHandler.instance().getSide().isServer())
         {
             initServer(config);

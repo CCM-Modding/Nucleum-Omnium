@@ -17,7 +17,6 @@ import cpw.mods.fml.common.TickType;
 public class TickHandlerWorld implements ITickHandler
 {
     public static TickHandlerWorld instance = new TickHandlerWorld();
-
     public static HashMap<Integer, ArrayList<?>> chunksToGen = new HashMap<Integer, ArrayList<?>>();
 
     @Override
@@ -33,7 +32,6 @@ public class TickHandlerWorld implements ITickHandler
         final World world = (World) tickData[0];
         final int dim = world.provider.dimensionId;
         final ArrayList<?> chunks = chunksToGen.get(Integer.valueOf(dim));
-
         if ((chunks != null) && (chunks.size() > 0))
         {
             final ChunkCoord c = (ChunkCoord) chunks.get(0);

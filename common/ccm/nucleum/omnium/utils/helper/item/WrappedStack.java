@@ -10,17 +10,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-//REDO
+// REDO
 public class WrappedStack implements Comparable<WrappedStack>
 {
     public static final int ORE_DICTIONARY_NOT_FOUND = -1;
-
     private int stackSize;
     private final ItemStack itemStack;
     private final OreStack oreStack;
 
     /**
-     * Creates a new WrappedStack object which wraps the given input. Valid inputs would be ItemStacks or OreStacks. If something other than an ItemStack or an OreStack is used as
+     * Creates a new WrappedStack object which wraps the given input. Valid inputs would be ItemStacks or OreStacks. If something other than
+     * an ItemStack or an OreStack is used as
      * input, nothing is wrapped and the size of the wrapped stack is set to -1 to indicate an invalid wrapped stack.
      * 
      * @param object
@@ -38,15 +38,12 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             object = new ItemStack((Block) object);
         }
-
         /*
          * We are given an ItemStack to wrap
          */
         if (object instanceof ItemStack)
         {
-
             ItemStack itemStack = (ItemStack) object;
-
             this.itemStack = itemStack.copy();
             oreStack = null;
             stackSize = this.itemStack.stackSize;
@@ -57,7 +54,6 @@ public class WrappedStack implements Comparable<WrappedStack>
          */
         else if (object instanceof OreStack)
         {
-
             itemStack = null;
             oreStack = (OreStack) object;
             stackSize = oreStack.stackSize;
@@ -65,11 +61,8 @@ public class WrappedStack implements Comparable<WrappedStack>
         } else if (object instanceof ArrayList)
         {
             itemStack = null;
-
             ArrayList<?> objectList = (ArrayList<?>) object;
-
             OreStack tempOreStack = getOreStackFromList(objectList);
-
             if (tempOreStack != null)
             {
                 oreStack = new OreStack(tempOreStack.oreName, 1);
@@ -82,7 +75,6 @@ public class WrappedStack implements Comparable<WrappedStack>
         } else if (object instanceof WrappedStack)
         {
             WrappedStack wrappedStack = (WrappedStack) object;
-
             itemStack = wrappedStack.itemStack;
             oreStack = wrappedStack.oreStack;
             stackSize = wrappedStack.stackSize;
@@ -122,7 +114,8 @@ public class WrappedStack implements Comparable<WrappedStack>
     /**
      * Returns the wrapped stack
      * 
-     * @return The wrapped ItemStack, OreStack, or EnergyStack, or null if something other than an ItemStack, OreStack, or EnergyStack was used to create this object
+     * @return The wrapped ItemStack, OreStack, or EnergyStack, or null if something other than an ItemStack, OreStack, or EnergyStack was
+     *         used to create this object
      */
     public Object getWrappedStack()
     {
@@ -160,9 +153,7 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             return false;
         }
-
         WrappedStack WrappedStack = (WrappedStack) object;
-
         if ((getWrappedStack() instanceof ItemStack) && (WrappedStack.getWrappedStack() instanceof ItemStack))
         {
             return (ItemHelper.compare(itemStack, WrappedStack.itemStack) && (stackSize == WrappedStack.itemStack.stackSize));
@@ -177,17 +168,18 @@ public class WrappedStack implements Comparable<WrappedStack>
     public String toString()
     {
         StringBuilder stringBuilder = new StringBuilder();
-
         if (itemStack != null)
         {
             try
             {
-                stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack
-                        .getItem().getClass().getCanonicalName()));
+                stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]",
+                                                   stackSize,
+                                                   itemStack.itemID,
+                                                   itemStack.getItemDamage(),
+                                                   itemStack.getUnlocalizedName(),
+                                                   itemStack.getItem().getClass().getCanonicalName()));
             } catch (ArrayIndexOutOfBoundsException e)
-            {
-
-            }
+            {}
         } else if (oreStack != null)
         {
             stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreStack.oreName));
@@ -195,7 +187,6 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             stringBuilder.append("null");
         }
-
         return stringBuilder.toString();
     }
 
@@ -203,9 +194,7 @@ public class WrappedStack implements Comparable<WrappedStack>
     public int hashCode()
     {
         int hashCode = 1;
-
         hashCode = (37 * hashCode) + stackSize;
-
         if (itemStack != null)
         {
             hashCode = (37 * hashCode) + itemStack.itemID;
@@ -222,7 +211,11 @@ public class WrappedStack implements Comparable<WrappedStack>
 
     public static boolean canBeWrapped(Object object)
     {
-        return (object instanceof WrappedStack) || (object instanceof ItemStack) || (object instanceof OreStack) || (object instanceof Item) || (object instanceof Block);
+        return (object instanceof WrappedStack)
+               || (object instanceof ItemStack)
+               || (object instanceof OreStack)
+               || (object instanceof Item)
+               || (object instanceof Block);
     }
 
     /*
@@ -281,14 +274,12 @@ public class WrappedStack implements Comparable<WrappedStack>
             if (listElement instanceof ItemStack)
             {
                 ItemStack stack = (ItemStack) listElement;
-
                 if (OreDictionary.getOreID(stack) != ORE_DICTIONARY_NOT_FOUND)
                 {
                     return new OreStack(stack);
                 }
             }
         }
-
         return null;
     }
 }

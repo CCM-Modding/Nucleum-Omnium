@@ -19,21 +19,16 @@ public final class DispenserEmptyBucketHandler extends BehaviorDefaultDispenseIt
     {
         EnumFacing facing = BlockDispenser.getFacing(blockSource.getBlockMetadata());
         World world = blockSource.getWorld();
-
         int x = blockSource.getXInt() + facing.getFrontOffsetX();
         int y = blockSource.getYInt() + facing.getFrontOffsetY();
         int z = blockSource.getZInt() + facing.getFrontOffsetZ();
-
         ItemStack filledBucket = BucketHandler.fillBucket(world, x, y, z);
-
         if (filledBucket == null)
         {
             int bMeta = world.getBlockMetadata(x, y, z);
-
             if (bMeta == 0)
             {
                 int bId = world.getBlockId(x, y, z);
-
                 if ((bId == Block.waterStill.blockID) || (bId == Block.waterMoving.blockID))
                 {
                     filledBucket = new ItemStack(Item.bucketWater);

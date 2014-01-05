@@ -18,7 +18,17 @@ public class ElementButton extends ElementBase
     boolean tooltipLocalized = false;
     String tooltip;
 
-    public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int sizeX, int sizeY, String texture)
+    public ElementButton(GuiBase gui,
+                         int posX,
+                         int posY,
+                         String name,
+                         int sheetX,
+                         int sheetY,
+                         int hoverX,
+                         int hoverY,
+                         int sizeX,
+                         int sizeY,
+                         String texture)
     {
         super(gui, posX, posY);
         setName(name);
@@ -30,8 +40,19 @@ public class ElementButton extends ElementBase
         this.hoverY = hoverY;
     }
 
-    public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int disabledX, int disabledY, int sizeX, int sizeY,
-            String texture)
+    public ElementButton(GuiBase gui,
+                         int posX,
+                         int posY,
+                         String name,
+                         int sheetX,
+                         int sheetY,
+                         int hoverX,
+                         int hoverY,
+                         int disabledX,
+                         int disabledY,
+                         int sizeX,
+                         int sizeY,
+                         String texture)
     {
         super(gui, posX, posY);
         setName(name);
@@ -55,7 +76,6 @@ public class ElementButton extends ElementBase
         {
             if (intersectsWith(gui.getMouseX(), gui.getMouseY()))
             {
-
                 drawTexturedModalRect(posX, posY, hoverX, hoverY, sizeX, sizeY);
             } else
             {

@@ -21,7 +21,8 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 /**
- * This library adds capes for people you specify. Use DevCapesUtil to add your capes if you do not call the addFileUrl method in a client proxy.
+ * This library adds capes for people you specify. Use DevCapesUtil to add your capes if you do not call the addFileUrl method in a client
+ * proxy.
  * 
  * @author Jadar
  */
@@ -29,12 +30,10 @@ public class DevCapes
 {
     private static DevCapes instance;
     public static final double version = 2.2;
-
     public DevCapesVersionChecker versionChecker;
     private final HashMap<String, String> users;
     private final HashMap<String, ResourceLocation> capeResources;
     private final HashMap<String, ThreadDownloadImageData> downloadThreads;
-
     private DevCapesTickHandler tickHandler = null;
 
     /**
@@ -45,7 +44,6 @@ public class DevCapes
         users = new HashMap<String, String>();
         capeResources = new HashMap<String, ResourceLocation>();
         downloadThreads = new HashMap<String, ThreadDownloadImageData>();
-
         versionChecker = new DevCapesVersionChecker();
         Thread vc = new Thread(versionChecker);
         vc.setDaemon(true);
@@ -82,14 +80,11 @@ public class DevCapes
             URL url = new URL(parTxtUrl);
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
-
             String username = "";
             String group = "";
             String capeUrl = "";
-
             while ((line = reader.readLine()) != null)
             {
-
                 // excludes commented lines
                 if (!line.startsWith("#"))
                 {
@@ -101,17 +96,13 @@ public class DevCapes
                         {
                             group = line.substring(0, i);
                             String subLine = line.substring(i + 1);
-
                             if (subLine.startsWith("http"))
                             {
                                 capeUrl = subLine;
-
                                 ResourceLocation r = new ResourceLocation("DevCapes/" + group);
                                 ThreadDownloadImageData t = makeDownloadThread(r, capeUrl, null, new DevCapesImageBufferDownload());
-
                                 addCapeResource(group, r);
                                 addDownloadThread(group, t);
-
                                 continue;
                             }
                             username = subLine.toLowerCase();
@@ -221,15 +212,15 @@ public class DevCapes
      * @param par3IImageBuffer
      * @return
      */
-    public static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation, String par1Str, ResourceLocation par2ResourceLocation,
-            IImageBuffer par3IImageBuffer)
+    public static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation,
+                                                             String par1Str,
+                                                             ResourceLocation par2ResourceLocation,
+                                                             IImageBuffer par3IImageBuffer)
     {
         TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
-
         TextureObject object = new ThreadDownloadImageData(par1Str, par2ResourceLocation, par3IImageBuffer);
         // Binds ResourceLocation to this.
         texturemanager.loadTexture(par0ResourceLocation, object);
-
         return (ThreadDownloadImageData) object;
     }
 }

@@ -12,7 +12,6 @@ public final class MathHelper
 
     public static final double PHI = 1.618034;
     public static final double[] SIN_TABLE = new double[65536];
-
     static
     {
         for (int i = 0; i < 65536; i++)
@@ -73,7 +72,6 @@ public final class MathHelper
     public static double approachExp(double a, double b, double ratio, double cap)
     {
         double d = (b - a) * ratio;
-
         if (Math.abs(d) > cap)
         {
             d = Math.signum(d) * cap;
@@ -84,7 +82,6 @@ public final class MathHelper
     public static double retreatExp(double a, double b, double c, double ratio, double kick)
     {
         double d = (Math.abs(c - a) + kick) * ratio;
-
         if (d > Math.abs(b - a))
         {
             return b;

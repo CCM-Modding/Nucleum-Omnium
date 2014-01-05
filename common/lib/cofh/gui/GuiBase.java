@@ -34,10 +34,8 @@ public abstract class GuiBase extends GuiContainer
     protected boolean drawInventory = true;
     protected int mouseX = 0;
     protected int mouseY = 0;
-
     protected int lastIndex = -1;
     protected ArrayList<String> tooltip = new ArrayList<String>();
-
     protected String name;
     protected ResourceLocation texture;
     protected ArrayList<TabBase> tabs = new ArrayList<TabBase>();
@@ -80,7 +78,6 @@ public abstract class GuiBase extends GuiContainer
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(texture);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-
         drawElements();
         drawTabs();
     }
@@ -89,9 +86,7 @@ public abstract class GuiBase extends GuiContainer
     protected void mouseClicked(int x, int y, int mouseButton)
     {
         super.mouseClicked(x, y, mouseButton);
-
         TabBase tab = getTabAtPosition(mouseX, mouseY);
-
         if ((tab != null) && !tab.handleMouseClicked(mouseX, mouseY, mouseButton))
         {
             for (TabBase other : tabs)
@@ -104,7 +99,6 @@ public abstract class GuiBase extends GuiContainer
             tab.toggleOpen();
         }
         ElementBase element = getElementAtPosition(mouseX, mouseY);
-
         if (element != null)
         {
             element.handleMouseClicked(mouseX, mouseY, mouseButton);
@@ -127,13 +121,11 @@ public abstract class GuiBase extends GuiContainer
         for (int k = 0; k < inventorySlots.inventorySlots.size(); ++k)
         {
             Slot slot = (Slot) inventorySlots.inventorySlots.get(k);
-
             if (isMouseOverSlot(slot, par1, par2))
             {
                 return slot;
             }
         }
-
         return null;
     }
 
@@ -142,7 +134,6 @@ public abstract class GuiBase extends GuiContainer
     {
         Slot slot = getSlotAtPosition(mX, mY);
         ItemStack itemstack = mc.thePlayer.inventory.getItemStack();
-
         if (field_94076_q && (slot != null) && (itemstack != null) && (slot instanceof SlotFalseCopy))
         {
             if (lastIndex != slot.slotNumber)
@@ -162,10 +153,8 @@ public abstract class GuiBase extends GuiContainer
     {
         int x = (Mouse.getEventX() * width) / mc.displayWidth;
         int y = height - ((Mouse.getEventY() * height) / mc.displayHeight) - 1;
-
         mouseX = x - guiLeft;
         mouseY = y - guiTop;
-
         super.handleMouseInput();
     }
 
@@ -187,7 +176,6 @@ public abstract class GuiBase extends GuiContainer
     {
         int yPosRight = 4;
         int yPosLeft = 4;
-
         for (TabBase tab : tabs)
         {
             tab.update();
@@ -210,13 +198,11 @@ public abstract class GuiBase extends GuiContainer
     protected void drawTooltips()
     {
         TabBase tab = getTabAtPosition(mouseX, mouseY);
-
         if (tab != null)
         {
             tab.addTooltip(tooltip);
         }
         ElementBase element = getElementAtPosition(mouseX, mouseY);
-
         if (element != null)
         {
             element.addTooltip(tooltip);
@@ -260,7 +246,6 @@ public abstract class GuiBase extends GuiContainer
     {
         int xShift = 0;
         int yShift = 4;
-
         for (TabBase tab : tabs)
         {
             if (!tab.isVisible() || (tab.side == 1))
@@ -275,10 +260,8 @@ public abstract class GuiBase extends GuiContainer
             }
             yShift += tab.currentHeight;
         }
-
         xShift = xSize;
         yShift = 4;
-
         for (TabBase tab : tabs)
         {
             if (!tab.isVisible() || (tab.side == 0))
@@ -327,7 +310,6 @@ public abstract class GuiBase extends GuiContainer
         }
         RenderHelper.setBlockTextureSheet();
         RenderHelper.setColor3ub(fluid.getFluid().getColor(fluid));
-
         drawTiledTexture(x, y, fluid.getFluid().getIcon(fluid), width, height);
     }
 
@@ -335,10 +317,8 @@ public abstract class GuiBase extends GuiContainer
     {
         int i = 0;
         int j = 0;
-
         int drawHeight = 0;
         int drawWidth = 0;
-
         for (i = 0; i < width; i += 16)
         {
             for (j = 0; j < height; j += 16)
@@ -392,7 +372,6 @@ public abstract class GuiBase extends GuiContainer
         double maxU = icon.getMaxU();
         double minV = icon.getMinV();
         double maxV = icon.getMaxV();
-
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(x + 0, y + height, zLevel, minU, minV + (((maxV - minV) * height) / 16F));
@@ -411,7 +390,6 @@ public abstract class GuiBase extends GuiContainer
     public void drawTooltip(List<String> list)
     {
         drawTooltipHoveringText(list, mouseX, mouseY, fontRenderer);
-
         if (list != null)
         {
             list.clear();
@@ -428,11 +406,9 @@ public abstract class GuiBase extends GuiContainer
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         int maxWidth = 0;
-
         for (String s : list)
         {
             int width = font.getStringWidth(s);
-
             if (width > maxWidth)
             {
                 maxWidth = width;
@@ -441,7 +417,6 @@ public abstract class GuiBase extends GuiContainer
         int i1 = x + 12;
         int j1 = y - 12;
         int k1 = 8;
-
         if (list.size() > 1)
         {
             k1 += 2 + ((list.size() - 1) * 10);
@@ -468,12 +443,10 @@ public abstract class GuiBase extends GuiContainer
         drawGradientRect(i1 + maxWidth + 2, (j1 - 3) + 1, i1 + maxWidth + 3, (j1 + k1 + 3) - 1, i2, j2);
         drawGradientRect(i1 - 3, j1 - 3, i1 + maxWidth + 3, (j1 - 3) + 1, i2, i2);
         drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + maxWidth + 3, j1 + k1 + 3, j2, j2);
-
         for (int k2 = 0; k2 < list.size(); ++k2)
         {
             String s1 = list.get(k2);
             font.drawStringWithShadow(s1, i1, j1, -1);
-
             if (k2 == 0)
             {
                 j1 += 2;

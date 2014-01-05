@@ -24,13 +24,10 @@ public class DevCapesTickHandler implements ITickHandler
     private static final Minecraft mc = Minecraft.getMinecraft();
     @SuppressWarnings("deprecation")
     private static final DevCapes instance = DevCapesUtil.getInstance();
-
     // Keep at false when packaging..
     private final boolean debug = false;
-
     private static Field downloadImageCapeField = getHackField(2);
     private static Field locationCapeField = getHackField(4);
-
     private int counter = 0;
     private boolean notified = false;
 
@@ -46,18 +43,15 @@ public class DevCapesTickHandler implements ITickHandler
                 // List of players.
                 @SuppressWarnings("unchecked")
                 List<AbstractClientPlayer> players = mc.theWorld.playerEntities;
-
                 // resets the counter if it is too high.
                 if (counter >= players.size())
                 {
                     counter = 0;
                 }
-
                 AbstractClientPlayer p = players.get(counter);
                 if (p != null)
                 {
                     String lowerUsername = p.username.toLowerCase();
-
                     if (instance.getUserGroup(lowerUsername) != null)
                     {
                         // If the player had no cape before, (or is some cases
@@ -67,7 +61,6 @@ public class DevCapesTickHandler implements ITickHandler
                         if (!((ThreadDownloadImageData) downloadImageCapeField.get(p)).isTextureUploaded())
                         {
                             String userGroup = instance.getUserGroup(lowerUsername);
-
                             if (debug)
                             {
                                 System.out.println("Changing the cape of: " + p.username);
@@ -84,8 +77,8 @@ public class DevCapesTickHandler implements ITickHandler
                                 if (instance.versionChecker.getResult() == 1)
                                 {
                                     notified = true;
-
-                                    FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage("§6[DevCapes]: §fDevCapes is outdated.");
+                                    FMLClientHandler.instance().getClient().ingameGUI.getChatGUI()
+                                                                                     .printChatMessage("§6[DevCapes]: §fDevCapes is outdated.");
                                 }
                             }
                         }

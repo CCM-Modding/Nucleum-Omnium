@@ -20,17 +20,13 @@ import net.minecraftforge.common.Property;
 public class ConfigHandler
 {
     private static final String CATEGORY_ENCHANT = "enchantment";
-
     ArrayList<String> blockEntries = new ArrayList<String>();
     ArrayList<String> itemEntries = new ArrayList<String>();
     ArrayList<String> enchantEntries = new ArrayList<String>();
-
     TreeMap<String, Property> blockIds = new TreeMap<String, Property>();
     TreeMap<String, Property> itemIds = new TreeMap<String, Property>();
     TreeMap<String, Property> enchantIds = new TreeMap<String, Property>();
-
     Configuration modConfiguration;
-
     int blockIdStart = 1000;
     int itemIdStart = 3000;
     int enchantIdStart = 52;
@@ -46,7 +42,6 @@ public class ConfigHandler
         blockIdStart = blockStart;
         itemIdStart = itemStart;
         enchantIdStart = enchantStart;
-
         blockEntries = new ArrayList<String>();
         itemEntries = new ArrayList<String>();
     }
@@ -79,7 +74,6 @@ public class ConfigHandler
     public int getBlockID(String name)
     {
         Property ret = blockIds.get(name);
-
         if (ret == null)
         {
             return -1;
@@ -90,7 +84,6 @@ public class ConfigHandler
     public int getItemID(String name)
     {
         Property ret = itemIds.get(name);
-
         if (ret == null)
         {
             return -1;
@@ -101,7 +94,6 @@ public class ConfigHandler
     public int getEnchantmentID(String name)
     {
         Property ret = enchantIds.get(name);
-
         if (ret == null)
         {
             return -1;
@@ -241,12 +233,10 @@ public class ConfigHandler
         if (modConfiguration.hasKey(category, key))
         {
             Property prop = modConfiguration.getCategory(category).get(key);
-
             if (prop.isIntValue())
             {
                 int value = modConfiguration.getCategory(category).getValues().get(key).getInt();
                 removeProperty(category, key);
-
                 if (forceValue)
                 {
                     removeProperty(newCategory, newKey);
@@ -256,7 +246,6 @@ public class ConfigHandler
             {
                 boolean value = modConfiguration.getCategory(category).getValues().get(key).getBoolean(false);
                 removeProperty(category, key);
-
                 if (forceValue)
                 {
                     removeProperty(newCategory, newKey);
@@ -266,7 +255,6 @@ public class ConfigHandler
             {
                 double value = modConfiguration.getCategory(category).getValues().get(key).getDouble(0.0);
                 removeProperty(category, key);
-
                 if (forceValue)
                 {
                     removeProperty(newCategory, newKey);
@@ -276,7 +264,6 @@ public class ConfigHandler
             {
                 String value = modConfiguration.getCategory(category).getValues().get(key).getString();
                 removeProperty(category, key);
-
                 if (forceValue)
                 {
                     removeProperty(newCategory, newKey);

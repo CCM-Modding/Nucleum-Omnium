@@ -5,7 +5,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
- * This class allows for OreDictionary-compatible ItemStack comparisons. The intended purpose of this is for things such as Recipe Handlers or HashMaps of ItemStacks.
+ * This class allows for OreDictionary-compatible ItemStack comparisons. The intended purpose of this is for things such as Recipe Handlers
+ * or HashMaps of ItemStacks.
  * 
  * @author King Lemming
  */

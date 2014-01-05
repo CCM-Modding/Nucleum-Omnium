@@ -9,7 +9,8 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 
 /**
- * Wraps methods from DevCapes so it does not crash due to client-only class references. Use this class to add a file URL instead of DevCapes to avoid a crash when starting a
+ * Wraps methods from DevCapes so it does not crash due to client-only class references. Use this class to add a file URL instead of
+ * DevCapes to avoid a crash when starting a
  * server.
  * 
  * @author Jadar
@@ -26,8 +27,7 @@ public class DevCapesUtil
         {
             return DevCapes.getInstance();
         }
-        System.out
-                .println("[SEVERE] [DevCapes] **Someone tried to call DevCapesUtil.getInstance() on a server! If you are attempting to add a file url then use DevCapesUtil.addFileUrl().**");
+        System.out.println("[SEVERE] [DevCapes] **Someone tried to call DevCapesUtil.getInstance() on a server! If you are attempting to add a file url then use DevCapesUtil.addFileUrl().**");
         return null;
     }
 

@@ -25,12 +25,10 @@ public class BaseTE extends TileEntity
      * The orientation of the {@link TileEntity}
      */
     private ForgeDirection orientation;
-
     /**
      * The owner of the {@link TileEntity}
      */
     private String owner;
-
     /**
      * The custom name of the {@link TileEntity}
      */
@@ -155,7 +153,6 @@ public class BaseTE extends TileEntity
     public void writeToNBT(final NBTTagCompound nbt)
     {
         super.writeToNBT(nbt);
-
         nbt.setByte(NBTConstants.NBT_TE_DIRECTION, (byte) orientation.ordinal());
         if (hasOwner())
         {
@@ -171,7 +168,6 @@ public class BaseTE extends TileEntity
     public void readFromNBT(final NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-
         orientation = ForgeDirection.getOrientation(NBTHelper.getByte(nbt, NBTConstants.NBT_TE_DIRECTION));
         owner = NBTHelper.getString(nbt, NBTConstants.NBT_TE_OWNER);
         customName = NBTHelper.getString(nbt, NBTConstants.NBT_TE_CUSTOM_NAME);

@@ -13,7 +13,6 @@ public class CustomInventoryCrafting extends InventoryCrafting
     public int invSize = 0;
     /** the width of the crafting inventory */
     public final int inventoryWidth;
-
     /**
      * Class containing the callbacks for the events on_GUIClosed and on_CraftMaxtrixChanged.
      */
@@ -44,7 +43,6 @@ public class CustomInventoryCrafting extends InventoryCrafting
     @Override
     public ItemStack getStackInRowAndColumn(int par1, int par2)
     {
-
         if ((par1 >= 0) && (par1 < inventoryWidth))
         {
             int k = par1 + (par2 * inventoryWidth);
@@ -83,7 +81,6 @@ public class CustomInventoryCrafting extends InventoryCrafting
         if (myMaster.getStackInSlot(invOffset + par1) != null)
         {
             ItemStack itemstack;
-
             if (myMaster.getStackInSlot(invOffset + par1).stackSize <= par2)
             {
                 itemstack = myMaster.getStackInSlot(invOffset + par1);
@@ -92,12 +89,10 @@ public class CustomInventoryCrafting extends InventoryCrafting
                 return itemstack;
             }
             itemstack = myMaster.getStackInSlot(invOffset + par1).splitStack(par2);
-
             if (myMaster.getStackInSlot(invOffset + par1).stackSize == 0)
             {
                 myMaster.setInventorySlotContents(invOffset + par1, null);
             }
-
             eventHandler.onCraftMatrixChanged(this);
             return itemstack;
         }

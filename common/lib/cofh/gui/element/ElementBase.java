@@ -17,21 +17,15 @@ public abstract class ElementBase
 {
     public static final SoundManager elementSoundManager = FMLClientHandler.instance().getClient().sndManager;
     public static final FontRenderer elementFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
-
     protected GuiBase gui;
     protected ResourceLocation texture;
-
     protected int posX;
     protected int posY;
-
     protected int sizeX;
     protected int sizeY;
-
     public int texW = 256;
     public int texH = 256;
-
     protected String name;
-
     protected boolean visible = true;
 
     public ElementBase(GuiBase gui, int posX, int posY)
@@ -104,7 +98,6 @@ public abstract class ElementBase
     {
         mouseX += gui.getGuiLeft();
         mouseY += gui.getGuiTop();
-
         if ((mouseX >= posX) && (mouseX <= (posX + sizeX)) && (mouseY >= posY) && (mouseY <= (posY + sizeY)))
         {
             return true;

@@ -14,7 +14,6 @@ import ccm.nucleum.omnium.utils.exeptions.WTFExeption;
 
 public final class TeleportHelper
 {
-
     public static double checkPosition(final ICommandSender sender, final double postion, final String argPos)
     {
         return TeleportHelper.checkPositionWithBounds(sender, postion, argPos, -30000000, 30000000);
@@ -24,32 +23,26 @@ public final class TeleportHelper
     {
         final boolean flag = argPos.startsWith("~");
         double d1 = flag ? postion : 0.0D;
-
         if (!flag || (argPos.length() > 1))
         {
             final boolean flag1 = argPos.contains(".");
-
             if (flag)
             {
                 argPos = argPos.substring(1);
             }
-
             d1 += CommandBase.parseDouble(sender, argPos);
-
             if (!flag1 && !flag)
             {
                 d1 += 0.5D;
             }
         }
-
         if ((min != 0) || (max != 0))
         {
             if (d1 < min)
             {
                 if ((d1 < -30000000) && (d1 >= -300000000))
                 {
-                    throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[]
-                    { Double.valueOf(d1), Integer.valueOf(max) });
+                    throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
                 } else if ((d1 < -300000000) && (d1 >= Integer.MIN_VALUE))
                 {
                     throw new WTFExeption(NucleumOmnium.instance);
@@ -59,15 +52,13 @@ public final class TeleportHelper
             {
                 if ((d1 > 30000000) && (d1 <= 300000000))
                 {
-                    throw new NumberInvalidException("commands.generic.double.tooBig", new Object[]
-                    { Double.valueOf(d1), Integer.valueOf(max) });
+                    throw new NumberInvalidException("commands.generic.double.tooBig", new Object[] { Double.valueOf(d1), Integer.valueOf(max) });
                 } else if ((d1 > 300000000) && (d1 <= Integer.MAX_VALUE))
                 {
                     throw new WTFExeption(NucleumOmnium.instance);
                 }
             }
         }
-
         return d1;
     }
 
@@ -90,14 +81,18 @@ public final class TeleportHelper
         player.prevPosX = player.posX = player1.posX;
         player.prevPosY = player.posY = player1.posY;
         player.prevPosZ = player.posZ = player1.posZ;
-        tellAdmins(sender, "commands.tpx.success", new Object[]
-        { player.getEntityName(), player1.getEntityName() });
+        tellAdmins(sender, "commands.tpx.success", new Object[] { player.getEntityName(), player1.getEntityName() });
     }
 
     /**
      * Teleports a player to coordinates
      */
-    public static void teleportPlayer(final ICommandSender sender, final EntityPlayerMP player, final int dimension, final double x, final double y, final double z)
+    public static void teleportPlayer(final ICommandSender sender,
+                                      final EntityPlayerMP player,
+                                      final int dimension,
+                                      final double x,
+                                      final double y,
+                                      final double z)
     {
         player.mountEntity((Entity) null);
         if (player.dimension != dimension)
@@ -108,8 +103,11 @@ public final class TeleportHelper
         player.prevPosX = player.posX = x;
         player.prevPosY = player.posY = y;
         player.prevPosZ = player.posZ = z;
-        tellAdmins(sender, "commands.tpx.success.coordinates", new Object[]
-        { player.getEntityName(), Integer.valueOf(dimension), Double.valueOf(x), Double.valueOf(y), Double.valueOf(z) });
+        tellAdmins(sender, "commands.tpx.success.coordinates", new Object[] { player.getEntityName(),
+                                                                             Integer.valueOf(dimension),
+                                                                             Double.valueOf(x),
+                                                                             Double.valueOf(y),
+                                                                             Double.valueOf(z) });
     }
 
     public static void tellAdmins(final ICommandSender sender, final String message, final Object... objects)

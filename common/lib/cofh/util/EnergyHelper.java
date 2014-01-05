@@ -24,14 +24,12 @@ public class EnergyHelper
     public static int extractEnergyFromHeldContainer(EntityPlayer player, int maxExtract, boolean simulate)
     {
         ItemStack container = player.getCurrentEquippedItem();
-
         return isEnergyContainerItem(container) ? ((IEnergyContainerItem) container.getItem()).extractEnergy(container, maxExtract, simulate) : 0;
     }
 
     public static int insertEnergyIntoHeldContainer(EntityPlayer player, int maxReceive, boolean simulate)
     {
         ItemStack container = player.getCurrentEquippedItem();
-
         return isEnergyContainerItem(container) ? ((IEnergyContainerItem) container.getItem()).receiveEnergy(container, maxReceive, simulate) : 0;
     }
 
@@ -49,21 +47,22 @@ public class EnergyHelper
     public static int extractEnergyFromAdjacentEnergyHandler(TileEntity tile, int from, int energy, boolean simulate)
     {
         TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
-
-        return handler instanceof IEnergyHandler ? ((IEnergyHandler) handler).extractEnergy(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(), energy, simulate) : 0;
+        return handler instanceof IEnergyHandler ? ((IEnergyHandler) handler).extractEnergy(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(),
+                                                                                            energy,
+                                                                                            simulate) : 0;
     }
 
     public static int insertEnergyIntoAdjacentEnergyHandler(TileEntity tile, int from, int energy, boolean simulate)
     {
         TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
-
-        return handler instanceof IEnergyHandler ? ((IEnergyHandler) handler).receiveEnergy(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(), energy, simulate) : 0;
+        return handler instanceof IEnergyHandler ? ((IEnergyHandler) handler).receiveEnergy(ForgeDirection.VALID_DIRECTIONS[from].getOpposite(),
+                                                                                            energy,
+                                                                                            simulate) : 0;
     }
 
     public static boolean isAdjacentEnergyHandlerFromSide(TileEntity tile, int from)
     {
         TileEntity handler = BlockHelper.getAdjacentTileEntity(tile, from);
-
         return isEnergyHandlerFromSide(handler, ForgeDirection.VALID_DIRECTIONS[from].getOpposite());
     }
 

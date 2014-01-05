@@ -13,13 +13,16 @@ public class ComparableItemStackSafe extends ComparableItemStack
 
     public static boolean safeOreType(String oreName)
     {
-        return oreName.startsWith(BLOCK) || oreName.startsWith(ORE) || oreName.startsWith(DUST) || oreName.startsWith(INGOT) || oreName.startsWith(NUGGET);
+        return oreName.startsWith(BLOCK)
+               || oreName.startsWith(ORE)
+               || oreName.startsWith(DUST)
+               || oreName.startsWith(INGOT)
+               || oreName.startsWith(NUGGET);
     }
 
     public static int getOreID(ItemStack stack)
     {
         int id = OreDictionary.getOreID(stack);
-
         if ((id == -1) || !safeOreType(OreDictionary.getOreName(id)))
         {
             return -1;
@@ -53,7 +56,6 @@ public class ComparableItemStackSafe extends ComparableItemStack
     {
         super.set(stack);
         oreID = getOreID(stack);
-
         return this;
     }
 }

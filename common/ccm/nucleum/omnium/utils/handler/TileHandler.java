@@ -26,7 +26,6 @@ public final class TileHandler
     public static Class<? extends TileEntity> getTile(final String name)
     {
         final int id = hash(name).hashCode();
-
         if (tiles.containsKey(id))
         {
             return tiles.get(id);
@@ -60,9 +59,7 @@ public final class TileHandler
     public static void registerTile(final String name, final Class<? extends TileEntity> tile)
     {
         final String id = hash(name);
-
         GameRegistry.registerTileEntity(tile, id);
-
         tiles.put(id.hashCode(), tile);
     }
 

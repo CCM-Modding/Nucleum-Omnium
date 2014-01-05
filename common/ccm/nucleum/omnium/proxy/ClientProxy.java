@@ -10,7 +10,6 @@ import ccm.nucleum.omnium.utils.lib.Properties;
 
 public class ClientProxy extends CommonProxy
 {
-
     @Override
     public void initCapes()
     {

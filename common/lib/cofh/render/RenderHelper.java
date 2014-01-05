@@ -61,7 +61,6 @@ public final class RenderHelper
         Tessellator tessellator = tessellator();
         Block block = Block.stone;
         Icon texture = item.getIconIndex();
-
         if (texture == null)
         {
             return;
@@ -69,31 +68,31 @@ public final class RenderHelper
         renderer.setRenderBoundsFromBlock(block);
         GL11.glTranslated(translateX, translateY, translateZ);
         tessellator.startDrawingQuads();
-
         tessellator.setNormal(0.0F, -1.0F, 0.0F);
         renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, texture);
-
         tessellator.setNormal(0.0F, 1.0F, 0.0F);
         renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, texture);
-
         tessellator.setNormal(0.0F, 0.0F, -1.0F);
         renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, texture);
-
         tessellator.setNormal(0.0F, 0.0F, 1.0F);
         renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, texture);
-
         tessellator.setNormal(-1.0F, 0.0F, 0.0F);
         renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, texture);
-
         tessellator.setNormal(1.0F, 0.0F, 0.0F);
         renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, texture);
-
         tessellator.draw();
     }
 
     public static void renderItemIn2D(Icon icon)
     {
-        ItemRenderer.renderItemIn2D(Tessellator.instance, icon.getMaxU(), icon.getMinV(), icon.getMinU(), icon.getMaxV(), icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
+        ItemRenderer.renderItemIn2D(Tessellator.instance,
+                                    icon.getMaxU(),
+                                    icon.getMinV(),
+                                    icon.getMinU(),
+                                    icon.getMaxV(),
+                                    icon.getIconWidth(),
+                                    icon.getIconHeight(),
+                                    0.0625F);
     }
 
     public static void renderIcon(Icon icon, double z)
