@@ -15,17 +15,6 @@
     ]
   },
   {
-    "modid": "ccmasm",
-    "name": "CCM ASM",
-    "description": "CCM ASM mod",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
-    "parent": "nucleum_omnium",
-    "authors": [
-      "captain_shadows"
-    ]
-  },
-  {
     "modid": "nucleum_world",
     "name": "Nucleum World",
     "description": "World Generation for all CCM Mods",

@@ -28,7 +28,7 @@ import cpw.mods.fml.relauncher.Side;
 public class DevCapes
 {
     private static DevCapes instance;
-    public static final double version = 2.1;
+    public static final double version = 2.2;
 
     public DevCapesVersionChecker versionChecker;
     private final HashMap<String, String> users;
@@ -124,7 +124,6 @@ public class DevCapes
         {
             e.printStackTrace();
         }
-
         // Makes sure to set up only one tick handler.
         if (tickHandler == null)
         {
@@ -133,7 +132,6 @@ public class DevCapes
             // Sets up the tick handler for capes.
             TickRegistry.registerTickHandler(tickHandler, Side.CLIENT);
         }
-
     }
 
     /**
@@ -179,8 +177,10 @@ public class DevCapes
     }
 
     /**
+     * Gets a cape ResourceLocation.
+     * 
      * @param parGroup
-     * @return the cape's ResourceLocation
+     * @return
      */
     public ResourceLocation getCapeResource(String parGroup)
     {
@@ -202,8 +202,10 @@ public class DevCapes
     }
 
     /**
+     * Gets the ThreadDownloadImageData that is associated with the group.
+     * 
      * @param parGroup
-     * @return the ThreadDownloadImageData that is associated with the group
+     * @return
      */
     public ThreadDownloadImageData getDownloadThread(String parGroup)
     {
@@ -217,6 +219,7 @@ public class DevCapes
      * @param par1Str
      * @param par2ResourceLocation
      * @param par3IImageBuffer
+     * @return
      */
     public static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation, String par1Str, ResourceLocation par2ResourceLocation,
             IImageBuffer par3IImageBuffer)

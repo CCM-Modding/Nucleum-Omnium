@@ -25,12 +25,10 @@ public class DevCapesUtil
         if (FMLCommonHandler.instance().getSide().equals(Side.CLIENT))
         {
             return DevCapes.getInstance();
-        } else
-        {
-            System.out
-                    .println("[SEVERE] [DevCapes] **Someone tried to call DevCapesUtil.getInstance() on a server! If you are attempting to add a file url then use DevCapesUtil.addFileUrl().**");
-            return null;
         }
+        System.out
+                .println("[SEVERE] [DevCapes] **Someone tried to call DevCapesUtil.getInstance() on a server! If you are attempting to add a file url then use DevCapesUtil.addFileUrl().**");
+        return null;
     }
 
     /**
@@ -38,6 +36,7 @@ public class DevCapesUtil
      * This is recommended over <i>DevCapes.addFileUrl(String);</i><br>
      * *Will not run if on a server.*
      * <p>
+     * <p/>
      * Set up capes. All cape URLs are in the txt file passed in.<br>
      * <a href="https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt">Sample Cape Config</a>
      * 
