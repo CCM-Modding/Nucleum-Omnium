@@ -29,10 +29,8 @@ public final class TileHandler
         if (tiles.containsKey(id))
         {
             return tiles.get(id);
-        } else
-        {
-            throw new RuntimeException(String.format("Tring to retrive: %s but it didn't exist", name));
         }
+        throw new RuntimeException(String.format("Tring to retrive: %s but it didn't exist", name));
     }
 
     public static TileEntity getTileInstance(String name)
@@ -43,7 +41,7 @@ public final class TileHandler
             tile = getTile(name).newInstance();
         } catch (Exception e)
         {
-            CCMLogger.DEFAULT_LOGGER.printCatch(e, "FAILED TO CREATE A NEW INSTANCE OF %s", name);
+            CCMLogger.DEFAULT.printCatch(e, "FAILED TO CREATE A NEW INSTANCE OF %s", name);
         }
         return tile;
     }

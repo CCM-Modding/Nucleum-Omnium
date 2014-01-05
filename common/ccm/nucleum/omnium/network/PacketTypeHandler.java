@@ -10,7 +10,6 @@ import java.util.Map;
 
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.network.packet.PacketBase;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import ccm.nucleum.omnium.utils.lib.Archive;
@@ -46,7 +45,7 @@ public final class PacketTypeHandler
             packet = instance().types.get(Integer.valueOf(id)).newInstance();
         } catch (Exception e)
         {
-            CCMLogger.DEFAULT_LOGGER.printCatch(e, "FAILED TO CREATE A NEW INTANCE OF\n%s\nWITH ID %s", INSTANCE.types.get(Integer.valueOf(id)), id);
+            CCMLogger.DEFAULT.printCatch(e, "FAILED TO CREATE A NEW INTANCE OF\n%s\nWITH ID %s", INSTANCE.types.get(Integer.valueOf(id)), id);
         }
         return packet;
     }
@@ -63,7 +62,7 @@ public final class PacketTypeHandler
     }
 
     /** Populates the given packet */
-    public static Packet populatePacket(final CCMMod mod, final PacketBase packetBase)
+    public static Packet populatePacket(final PacketBase packetBase)
     {
         final byte[] data = packetBase.populate();
         final Packet250CustomPayload packet250 = new Packet250CustomPayload();

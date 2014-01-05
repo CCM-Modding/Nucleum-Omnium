@@ -43,14 +43,14 @@ public abstract class BaseContainer extends Container
             c = slot.getConstructor(IInventory.class, int.class, int.class, int.class);
         } catch (final Exception e)
         {
-            CCMLogger.DEFAULT_LOGGER.printCatch(e, "FAILED @ createSlot DURING getConstructor WITH %s, %s, %s, %s", inventory, index, x, y);;
+            CCMLogger.DEFAULT.printCatch(e, "FAILED @ createSlot DURING getConstructor WITH %s, %s, %s, %s", inventory, index, x, y);;
         }
         try
         {
             addSlotToContainer(c.newInstance(inventory, index, x + (column * 18), y + (row * 18)));
         } catch (final Exception e)
         {
-            CCMLogger.DEFAULT_LOGGER.printCatch(e,
+            CCMLogger.DEFAULT.printCatch(e,
                                                 "FAILED @ createSlot DURING newInstance WITH %s, %s, %s, %s, %s, %s, %s",
                                                 inventory,
                                                 slot,

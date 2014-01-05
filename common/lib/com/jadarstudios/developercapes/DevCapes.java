@@ -70,14 +70,14 @@ public class DevCapes
      * Set up capes. All cape URLs are in the txt file passed in.<br>
      * <a href="https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt">Sample Cape Config</a>
      * 
-     * @param parTxtUrl
+     * @param txtUrl
      *            The URL of the .txt file containing the groups, members of said groups, and the group's cape URL.
      */
-    public void addFileUrl(String parTxtUrl)
+    public void addFileUrl(String txtUrl)
     {
         try
         {
-            URL url = new URL(parTxtUrl);
+            URL url = new URL(txtUrl);
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
             String username = "";
@@ -128,99 +128,96 @@ public class DevCapes
     /**
      * Used to add user to users HashMap.
      * 
-     * @param parUsername
-     *            The Username to add.
-     * @param parGroup
-     *            The group to add that Username to.
+     * @param user
+     *            The Username to add
+     * @param group
+     *            The group to add that Username to
      */
-    public void addUser(String parUsername, String parGroup)
+    public void addUser(String user, String group)
     {
-        if (getUserGroup(parUsername) == null)
+        if (getUserGroup(user) == null)
         {
-            users.put(parUsername, parGroup);
+            users.put(user, group);
         }
     }
 
     /**
-     * Used to get user from users HashMap.
-     * 
-     * @param parUsername
-     *            The Username to get from the users HashMap.
-     * @return The Username found in the users HashMap.
+     * @param user
+     *            The Username to get from the users HashMap
+     * @return The group found in the users HashMap
      */
-    public String getUserGroup(String parUsername)
+    public String getUserGroup(String user)
     {
-        return users.get(parUsername.toLowerCase());
+        return users.get(user.toLowerCase());
     }
 
     /**
      * Adds a cape ResourceLocation that is predownloaded.
      * 
-     * @param parGroup
-     * @param parResource
+     * @param group
+     *            The group that the cape belongs to
+     * @param res
+     *            The {@link ResourceLocation} of the cape
      */
-    public void addCapeResource(String parGroup, ResourceLocation parResource)
+    public void addCapeResource(String group, ResourceLocation res)
     {
-        if (getCapeResource(parGroup) == null)
+        if (getCapeResource(group) == null)
         {
-            capeResources.put(parGroup, parResource);
+            capeResources.put(group, res);
         }
     }
 
     /**
-     * Gets a cape ResourceLocation.
-     * 
-     * @param parGroup
-     * @return
+     * @param group
+     *            The cape's group
+     * @return The cape's ResourceLocation
      */
-    public ResourceLocation getCapeResource(String parGroup)
+    public ResourceLocation getCapeResource(String group)
     {
-        return capeResources.get(parGroup);
+        return capeResources.get(group);
     }
 
     /**
      * Adds an ThreadDownloadImageData. Needed to change cape.
      * 
-     * @param parGroup
-     * @param parResource
+     * @param group
+     *            The group that the cape belongs to
+     * @param res
+     *            The {@link ThreadDownloadImageData} to download the cape
      */
-    public void addDownloadThread(String parGroup, ThreadDownloadImageData parResource)
+    public void addDownloadThread(String group, ThreadDownloadImageData res)
     {
-        if (getDownloadThread(parGroup) == null)
+        if (getDownloadThread(group) == null)
         {
-            downloadThreads.put(parGroup, parResource);
+            downloadThreads.put(group, res);
         }
     }
 
     /**
-     * Gets the ThreadDownloadImageData that is associated with the group.
-     * 
-     * @param parGroup
-     * @return
+     * @param group
+     *            The group that the cape belongs to
+     * @return The {@link ThreadDownloadImageData} to download the cape
      */
-    public ThreadDownloadImageData getDownloadThread(String parGroup)
+    public ThreadDownloadImageData getDownloadThread(String group)
     {
-        return downloadThreads.get(parGroup);
+        return downloadThreads.get(group);
     }
 
     /**
      * Used to download images. Copied from AbstractClientPlayer to remove a conditional.
      * 
-     * @param par0ResourceLocation
-     * @param par1Str
-     * @param par2ResourceLocation
-     * @param par3IImageBuffer
-     * @return
+     * @param storage
+     * @param url
+     * @param location
+     * @param buffer
+     * @return The {@link ThreadDownloadImageData} to download the cape
      */
-    public static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation,
-                                                             String par1Str,
-                                                             ResourceLocation par2ResourceLocation,
-                                                             IImageBuffer par3IImageBuffer)
+    public static ThreadDownloadImageData makeDownloadThread(ResourceLocation storage, String url, ResourceLocation location, IImageBuffer buffer)
     {
         TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
-        TextureObject object = new ThreadDownloadImageData(par1Str, par2ResourceLocation, par3IImageBuffer);
+        TextureObject object = new ThreadDownloadImageData(url, location, buffer);
         // Binds ResourceLocation to this.
-        texturemanager.loadTexture(par0ResourceLocation, object);
+        texturemanager.loadTexture(storage, object);
         return (ThreadDownloadImageData) object;
     }
 }

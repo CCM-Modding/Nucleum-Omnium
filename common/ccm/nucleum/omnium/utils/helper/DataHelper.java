@@ -58,10 +58,8 @@ public final class DataHelper
             if (!file.exists())
             {
                 return new NBTTagCompound();
-            } else
-            {
-                return CompressedStreamTools.read(file);
             }
+            return CompressedStreamTools.read(file);
         } catch (final Exception e)
         {
             e.printStackTrace();

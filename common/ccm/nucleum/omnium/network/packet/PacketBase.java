@@ -25,12 +25,15 @@ public class PacketBase
         this.isChunkDataPacket = isChunkDataPacket;
     }
 
+    @SuppressWarnings("unused")
     public void execute(final INetworkManager network, final Player player)
     {}
 
+    @SuppressWarnings("unused")
     public void writeData(final DataOutputStream dos) throws IOException
     {}
 
+    @SuppressWarnings("unused")
     public void readData(final DataInputStream data) throws IOException
     {}
 
@@ -44,7 +47,7 @@ public class PacketBase
             writeData(data);
         } catch (final IOException e)
         {
-            CCMLogger.DEFAULT_LOGGER.printCatch(e, "populate FAILED");
+            CCMLogger.DEFAULT.printCatch(e, "populate FAILED");
         }
         return byteArr.toByteArray();
     }
@@ -56,7 +59,7 @@ public class PacketBase
             readData(data);
         } catch (final Exception e)
         {
-            CCMLogger.DEFAULT_LOGGER.printCatch(e, "readPopulate FAILED\nDATA:\n%s", data);
+            CCMLogger.DEFAULT.printCatch(e, "readPopulate FAILED\nDATA:\n%s", data);
         }
     }
 }

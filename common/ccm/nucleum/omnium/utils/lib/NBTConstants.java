@@ -30,4 +30,11 @@ public final class NBTConstants
     public static final String NBT_CONTAINER_ELEMENT_TIMED = NBT_CONTAINER_ELEMENT + ".TIMED";
     public static final String NBT_CONTAINER_ELEMENT_TIMED_LEFT = NBT_CONTAINER_ELEMENT_TIMED + ".LEFT";
     public static final String NBT_CONTAINER_ELEMENT_TIMED_RECORD = NBT_CONTAINER_ELEMENT_TIMED + ".RECOREDED";
+    /*
+     * World Gen
+     */
+    public static final String NBT_WORLD = NBT_CMM + ".WORLD";
+    public static final String NBT_WORLD_PROPERTIES = NBT_WORLD + ".PROPERTIES";
+    public static final String NBT_WORLD_PROPERTY_BEDROCK = NBT_WORLD_PROPERTIES + ".BEDROCK";
+    public static final String NBT_WORLD_PROPERTY_ORES = NBT_WORLD_PROPERTIES + ".ORES";
 }

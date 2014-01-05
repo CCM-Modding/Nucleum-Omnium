@@ -16,6 +16,7 @@ public final class JavaHelper
     /**
      * @return <code>true</code> if it is a Number. <code>false</code> otherwise
      */
+    @SuppressWarnings("unused")
     public static boolean isNumeric(final String str)
     {
         try
@@ -59,13 +60,11 @@ public final class JavaHelper
             {// for each of the independent strings we perform the the "action", and then append a space
                 sb.append(s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase());
                 sb.append(" ");
-                CCMLogger.DEFAULT_LOGGER.debug(sb);
+                CCMLogger.DEFAULT.debug(sb);
             }
             return sb.toString();
-        } else
-        {// otherwise just perform the "action"
-            return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
-        }
+        }// otherwise just perform the "action"
+        return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
 
     /**
@@ -81,13 +80,11 @@ public final class JavaHelper
             {// for each of the independent strings we perform the the "action", and then append a space
                 sb.append(s.substring(0, 1).toLowerCase() + s.substring(1).toLowerCase());
                 sb.append(" ");
-                CCMLogger.DEFAULT_LOGGER.debug(sb);
+                CCMLogger.DEFAULT.debug(sb);
             }
             return sb.toString();
-        } else
-        {// otherwise just perform the "action"
-            return input.substring(0, 1).toLowerCase() + input.substring(1).toLowerCase();
-        }
+        }// otherwise just perform the "action"
+        return input.substring(0, 1).toLowerCase() + input.substring(1).toLowerCase();
     }
 
     /**

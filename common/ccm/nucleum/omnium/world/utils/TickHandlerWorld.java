@@ -10,7 +10,8 @@ import java.util.Random;
 
 import lib.cofh.util.ChunkCoord;
 import net.minecraft.world.World;
-import ccm.nucleum.omnium.world.generator.WorldGenHandler;
+import ccm.nucleum.omnium.utils.lib.Archive;
+import ccm.nucleum.omnium.world.WorldGenHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -20,11 +21,10 @@ public class TickHandlerWorld implements ITickHandler
     public static HashMap<Integer, ArrayList<?>> chunksToGen = new HashMap<Integer, ArrayList<?>>();
 
     @Override
-    public String getLabel()
-    {
-        return "nucleum_world.tick";
-    }
-
+    @SuppressWarnings("rawtypes")
+    public void tickStart(final EnumSet type, final Object... tickData)
+    {}
+    
     @Override
     @SuppressWarnings("rawtypes")
     public void tickEnd(final EnumSet type, final Object... tickData)
@@ -45,15 +45,16 @@ public class TickHandlerWorld implements ITickHandler
             chunksToGen.put(Integer.valueOf(dim), chunks);
         }
     }
+    
+    @Override
+    public String getLabel()
+    {
+        return Archive.MOD_ID + ".world.tick";
+    }
 
     @Override
     public EnumSet<TickType> ticks()
     {
         return EnumSet.of(TickType.WORLD);
     }
-
-    @Override
-    @SuppressWarnings("rawtypes")
-    public void tickStart(final EnumSet type, final Object... tickData)
-    {}
 }

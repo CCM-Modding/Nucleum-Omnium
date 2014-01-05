@@ -16,7 +16,6 @@ import net.minecraftforge.common.ConfigCategory;
 import net.minecraftforge.common.Configuration;
 import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
-import ccm.nucleum.omnium.world.generator.WorldGenHandler;
 
 /**
  * @author Captain_Shadows

@@ -46,7 +46,7 @@ public final class RecipeRemover
                         && ((removedItem.getItemDamage() == -1) || (result.getItemDamage() == removedItem.getItemDamage())))
                     {
                         minecraftRecipes.remove(i);
-                        CCMLogger.DEFAULT_LOGGER.debug("Recipes removed for " + removedItem.getDisplayName() + " @" + removedItem.itemID + "\n");
+                        CCMLogger.DEFAULT.debug("Recipes removed for " + removedItem.getDisplayName() + " @" + removedItem.itemID + "\n");
                         --i;
                     }
                 }

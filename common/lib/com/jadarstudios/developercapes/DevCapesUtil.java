@@ -5,7 +5,10 @@
  */
 package lib.com.jadarstudios.developercapes;
 
+import java.util.logging.Logger;
+
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 
 /**
@@ -17,6 +20,14 @@ import cpw.mods.fml.relauncher.Side;
  */
 public class DevCapesUtil
 {
+    public static final Logger logger;
+    static
+    {
+        Logger log = Logger.getLogger("DevCapes");
+        log.setParent(FMLLog.getLogger());
+        logger = log;
+    }
+
     /**
      * Wrapper for getting the DevCapes singleton.
      */
@@ -27,7 +38,7 @@ public class DevCapesUtil
         {
             return DevCapes.getInstance();
         }
-        System.out.println("[SEVERE] [DevCapes] **Someone tried to call DevCapesUtil.getInstance() on a server! If you are attempting to add a file url then use DevCapesUtil.addFileUrl().**");
+        logger.severe("**Someone tried to call DevCapesUtil.getInstance() on a server! If you are attempting to add a file url then use DevCapesUtil.addFileUrl().**");
         return null;
     }
 

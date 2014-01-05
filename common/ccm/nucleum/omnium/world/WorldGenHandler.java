@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.omnium.world.generator;
+package ccm.nucleum.omnium.world;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,39 +19,23 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.ChunkDataEvent.Load;
 import net.minecraftforge.event.world.ChunkDataEvent.Save;
 import ccm.nucleum.omnium.NucleumOmnium;
+import ccm.nucleum.omnium.utils.lib.NBTConstants;
+import ccm.nucleum.omnium.utils.lib.Properties;
 import ccm.nucleum.omnium.world.utils.TickHandlerWorld;
-import ccm.nucleum.omnium.world.utils.lib.Properties;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
 {
-    public static boolean addOre(final IFeatureGenerator Ore)
-    {
-        return WorldGenHandler.instance.registerFeature(Ore);
-    }
-
     private final List<IFeatureGenerator> ores = new ArrayList<IFeatureGenerator>();
     private final HashSet<String> oreNames = new HashSet<String>();
     private final HashSet<Integer> dimensionBlacklist = new HashSet<Integer>();
     public static WorldGenHandler instance = new WorldGenHandler();
 
-    private void replaceBR(final int chunkX, final int chunkZ, final World world, final Block block)
+    public static boolean addOre(final IFeatureGenerator Ore)
     {
-        for (int blockX = 0; blockX < 16; blockX++)
-        {
-            for (int blockZ = 0; blockZ < 16; blockZ++)
-            {
-                for (int blockY = 5; blockY > 0; blockY--)
-                {
-                    if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID)
-                    {
-                        world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, block.blockID, 0, 2);
-                    }
-                }
-            }
-        }
+        return WorldGenHandler.instance.registerFeature(Ore);
     }
-
+    
     @Override
     public void generate(final Random random,
                          final int chunkX,
@@ -65,7 +49,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
 
     public void generateWorld(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
-        replaceBedrock(random, chunkX, chunkZ, world, newGen);
+        replaceBedrock(chunkX, chunkZ, world, newGen);
         if (!newGen && !Properties.RETRO_ORE_GEN)
         {
             return;
@@ -92,11 +76,11 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         boolean bedrock = false;
         boolean ores = false;
         boolean regen = false;
-        final NBTTagCompound tag = (NBTTagCompound) event.getData().getTag("CCM-Properties");
+        final NBTTagCompound tag = (NBTTagCompound) event.getData().getTag(NBTConstants.NBT_WORLD_PROPERTIES);
         if (tag != null)
         {
-            bedrock = !tag.hasKey("CCM-Bedrock") && Properties.RETRO_FLAT_BEDROCK && Properties.FLAT_BEDROCK;
-            ores = !tag.hasKey("CCM-Ores") && Properties.RETRO_ORE_GEN;
+            bedrock = !tag.hasKey(NBTConstants.NBT_WORLD_PROPERTY_BEDROCK) && Properties.RETRO_FLAT_BEDROCK && Properties.FLAT_BEDROCK;
+            ores = !tag.hasKey(NBTConstants.NBT_WORLD_PROPERTY_ORES) && Properties.RETRO_ORE_GEN;
         }
         final ChunkCoord cCoord = new ChunkCoord(event.getChunk());
         if ((tag == null) && ((Properties.RETRO_FLAT_BEDROCK && Properties.FLAT_BEDROCK) || Properties.RETRO_ORE_GEN))
@@ -135,13 +119,13 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         final NBTTagCompound tag = new NBTTagCompound();
         if (Properties.RETRO_FLAT_BEDROCK && Properties.FLAT_BEDROCK)
         {
-            tag.setBoolean("CCM-Bedrock", true);
+            tag.setBoolean(NBTConstants.NBT_WORLD_PROPERTY_BEDROCK, true);
         }
         if (Properties.RETRO_ORE_GEN)
         {
-            tag.setBoolean("CCM-Ores", true);
+            tag.setBoolean(NBTConstants.NBT_WORLD_PROPERTY_ORES, true);
         }
-        event.getData().setTag("CCM-Properties", tag);
+        event.getData().setTag(NBTConstants.NBT_WORLD_PROPERTIES, tag);
     }
 
     @Override
@@ -156,7 +140,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         return true;
     }
 
-    public void replaceBedrock(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
+    public void replaceBedrock(final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
         if (!Properties.FLAT_BEDROCK || (!newGen && !Properties.RETRO_FLAT_BEDROCK))
         {
@@ -182,6 +166,23 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         } else
         {
             replaceBR(chunkX, chunkZ, world, Block.stone);
+        }
+    }
+    
+    private void replaceBR(final int chunkX, final int chunkZ, final World world, final Block block)
+    {
+        for (int blockX = 0; blockX < 16; blockX++)
+        {
+            for (int blockZ = 0; blockZ < 16; blockZ++)
+            {
+                for (int blockY = 5; blockY > 0; blockY--)
+                {
+                    if (world.getBlockId((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ) == Block.bedrock.blockID)
+                    {
+                        world.setBlock((chunkX * 16) + blockX, blockY, (chunkZ * 16) + blockZ, block.blockID, 0, 2);
+                    }
+                }
+            }
         }
     }
 }

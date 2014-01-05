@@ -17,7 +17,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 /**
  * This class should be the super class of any CCM Mod, as it offers a few nice Configuration helpers
  */
-public abstract class CCMMod
+public class CCMMod
 {
     public static File configDir;
     static
@@ -32,7 +32,7 @@ public abstract class CCMMod
     private CCMLogger logger;
 
     /* Methods */
-    void initConfig(final FMLPreInitializationEvent evt)
+    protected void initConfig()
     {
         // Get all the files
         File configFile = new File(configDir.getAbsolutePath() + "/" + name() + ".cfg");
@@ -52,9 +52,9 @@ public abstract class CCMMod
         return logger;
     }
 
-    void setLogger(CCMLogger log)
+    protected void initLogger()
     {
-        logger = log;
+        logger = CCMLogger.init(name());
     }
 
     public ModContainer mod()
@@ -87,13 +87,13 @@ public abstract class CCMMod
      * @param config
      *            The configuration class for this mod
      */
-    public static void loadMod(final CCMMod mod, final FMLPreInitializationEvent evt, final IConfig config)
+    protected static void loadMod(final CCMMod mod, final IConfig config)
     {
-        mod.setLogger(CCMLogger.init(evt));
-        mod.initConfig(evt);
+        mod.initLogger();
+        mod.initConfig();
         if (config != null)
         {
-            CCMLogger.DEFAULT_LOGGER.info("Loading configuration for %s", mod.name());
+            CCMLogger.DEFAULT.info("Loading configuration for %s", mod.name());
             // Loads a pre-existing Configuration file.
             mod.config().load();
             config.init(mod.config());

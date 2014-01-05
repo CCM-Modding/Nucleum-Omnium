@@ -24,7 +24,7 @@ public final class FunctionHelper
         {
             if (!(tileEntity instanceof IInventory))
             {
-                CCMLogger.DEFAULT_LOGGER.debug("TILE %s WAS NOT AN INSTANCE OF IInventory, AND CALLED dropInventory!!!", tileEntity);
+                CCMLogger.DEFAULT.debug("TILE %s WAS NOT AN INSTANCE OF IInventory, AND CALLED dropInventory!!!", tileEntity);
                 return;
             }
             final IInventory inventory = (IInventory) tileEntity;

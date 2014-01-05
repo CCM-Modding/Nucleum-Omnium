@@ -36,12 +36,11 @@ public class DevCapesTickHandler implements ITickHandler
     {
         try
         {
-            // Will not run if there is no world, and if there are no player entities
-            // in the playerEntities list.
+            // Will not run if there is no world, and if there are no player entities in the playerEntities list.
             if ((mc.theWorld != null) && (mc.theWorld.playerEntities.size() > 0))
             {
-                // List of players.
                 @SuppressWarnings("unchecked")
+                // List of players
                 List<AbstractClientPlayer> players = mc.theWorld.playerEntities;
                 // resets the counter if it is too high.
                 if (counter >= players.size())
@@ -54,10 +53,8 @@ public class DevCapesTickHandler implements ITickHandler
                     String lowerUsername = p.username.toLowerCase();
                     if (instance.getUserGroup(lowerUsername) != null)
                     {
-                        // If the player had no cape before, (or is some cases
-                        // has a cape from another mod,) then it will be true.
-                        // This statement checks for false. Will not replace any
-                        // capes.
+                        // If the player had no cape before, (or is some cases has a cape from another mod) then it will be true.
+                        // This statement checks for false. Will not replace any capes.
                         if (!((ThreadDownloadImageData) downloadImageCapeField.get(p)).isTextureUploaded())
                         {
                             String userGroup = instance.getUserGroup(lowerUsername);

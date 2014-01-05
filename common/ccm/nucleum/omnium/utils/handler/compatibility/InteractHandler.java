@@ -8,12 +8,12 @@ import cpw.mods.fml.common.Loader;
  * 
  * @author Captain_Shadows
  */
-final class Handler
+final class InteractHandler
 {
     private final String name;
     private final String handler;
 
-    public Handler(String name, String handler)
+    public InteractHandler(String name, String handler)
     {
         super();
         this.name = name;
@@ -26,15 +26,15 @@ final class Handler
         if (Loader.isModLoaded(name))
         {
             // Create the temporal variables for internal usage
-            Class<? extends ICompatibility> tmpHandler = null;
-            ICompatibility tmp = null;
+            Class<? extends InteractCompatibility> tmpHandler = null;
+            InteractCompatibility tmp = null;
             try
             {
                 // Try to find the Handler Class
-                tmpHandler = (Class<? extends ICompatibility>) Class.forName(handler, false, Loader.instance().getModClassLoader());
+                tmpHandler = (Class<? extends InteractCompatibility>) Class.forName(handler, false, Loader.instance().getModClassLoader());
             } catch (ClassNotFoundException e)
             {
-                CCMLogger.DEFAULT_LOGGER.printCatch(e, "CCM has failed to find a compatibility class with %s, please inform the CCM Team", name);
+                CCMLogger.DEFAULT.printCatch(e, "CCM has failed to find a compatibility class with %s, please inform the CCM Team", name);
                 return;
             }
             try
@@ -43,7 +43,7 @@ final class Handler
                 tmp = tmpHandler.newInstance();
             } catch (Exception e)
             {
-                CCMLogger.DEFAULT_LOGGER.printCatch(e,
+                CCMLogger.DEFAULT.printCatch(e,
                                                     "CCM has failed to create a new instance of a compatibility with %s, please inform the CCM Team",
                                                     name);
                 return;
@@ -54,7 +54,7 @@ final class Handler
                 tmp.init();
             } catch (final Exception e)
             {
-                CCMLogger.DEFAULT_LOGGER.printCatch(e, "CCM has failed to load a compatibility with %s, please inform the CCM Team", name);
+                CCMLogger.DEFAULT.printCatch(e, "CCM has failed to load a compatibility with %s, please inform the CCM Team", name);
                 return;
             }
         }

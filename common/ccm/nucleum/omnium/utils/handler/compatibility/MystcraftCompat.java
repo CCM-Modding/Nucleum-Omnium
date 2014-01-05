@@ -11,8 +11,14 @@ import ccm.nucleum.omnium.utils.lib.Properties;
  * 
  * @author Captain_Shadows
  */
-public final class MystcraftCompat implements ICompatibility
+public final class MystcraftCompat implements NonInteractCompatibility
 {
+    @Override
+    public String id()
+    {
+        return "Mystcraft";
+    }
+    
     @Override
     public void init()
     {

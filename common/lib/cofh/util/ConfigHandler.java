@@ -116,6 +116,27 @@ public class ConfigHandler
         return modConfiguration.get(category, key, defaultValue).getString();
     }
 
+    public int get(String category, String key, String comment, int defaultValue)
+    {
+        Property prop = modConfiguration.get(category, key, defaultValue);
+        prop.comment = comment;
+        return prop.getInt(defaultValue);
+    }
+
+    public boolean get(String category, String key, String comment, boolean defaultValue)
+    {
+        Property prop = modConfiguration.get(category, key, defaultValue);
+        prop.comment = comment;
+        return prop.getBoolean(defaultValue);
+    }
+
+    public String get(String category, String key, String comment, String defaultValue)
+    {
+        Property prop = modConfiguration.get(category, key, defaultValue);
+        prop.comment = comment;
+        return prop.getString();
+    }
+
     public Property getProperty(String category, String key, int defaultValue)
     {
         return modConfiguration.get(category, key, defaultValue);

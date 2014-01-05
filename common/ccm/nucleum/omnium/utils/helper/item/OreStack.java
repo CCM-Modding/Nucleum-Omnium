@@ -113,35 +113,27 @@ public class OreStack implements Comparable<OreStack>
                 if (oreId > oreStack.oreId)
                 {
                     return 1;
-                } else
-                {
-                    return -1;
                 }
-            } else
+                return -1;
+            }
+            if ((oreName != null) && (oreStack.oreName != null))
             {
-                if ((oreName != null) && (oreStack.oreName != null))
-                {
-                    if (oreName.equalsIgnoreCase(oreStack.oreName))
-                    {
-                        return (stackSize - oreStack.stackSize);
-                    } else
-                    {
-                        return oreName.compareToIgnoreCase(oreStack.oreName);
-                    }
-                } else if ((oreName != null) && (oreStack.oreName == null))
-                {
-                    return 1;
-                } else if ((oreName == null) && (oreStack.oreName != null))
-                {
-                    return -1;
-                } else
+                if (oreName.equalsIgnoreCase(oreStack.oreName))
                 {
                     return (stackSize - oreStack.stackSize);
                 }
+                return oreName.compareToIgnoreCase(oreStack.oreName);
+            } else if ((oreName != null) && (oreStack.oreName == null))
+            {
+                return 1;
+            } else if ((oreName == null) && (oreStack.oreName != null))
+            {
+                return -1;
+            } else
+            {
+                return (stackSize - oreStack.stackSize);
             }
-        } else
-        {
-            return 1;
         }
+        return 1;
     }
 }
