@@ -18,7 +18,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.ChunkDataEvent.Load;
 import net.minecraftforge.event.world.ChunkDataEvent.Save;
-import ccm.nucleum.omnium.world.NucleumWorld;
+import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.world.utils.TickHandlerWorld;
 import ccm.nucleum.omnium.world.utils.lib.Properties;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -66,7 +66,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     public void generateWorld(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
         replaceBedrock(random, chunkX, chunkZ, world, newGen);
-        if (!newGen && !Properties.retroOreGen)
+        if (!newGen && !Properties.RETRO_ORE_GEN)
         {
             return;
         }
@@ -95,22 +95,22 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
         final NBTTagCompound tag = (NBTTagCompound) event.getData().getTag("CCM-Properties");
         if (tag != null)
         {
-            bedrock = !tag.hasKey("CCM-Bedrock") && Properties.retroFlatBedrock && Properties.genFlatBedrock;
-            ores = !tag.hasKey("CCM-Ores") && Properties.retroOreGen;
+            bedrock = !tag.hasKey("CCM-Bedrock") && Properties.RETRO_FLAT_BEDROCK && Properties.FLAT_BEDROCK;
+            ores = !tag.hasKey("CCM-Ores") && Properties.RETRO_ORE_GEN;
         }
         final ChunkCoord cCoord = new ChunkCoord(event.getChunk());
-        if ((tag == null) && ((Properties.retroFlatBedrock && Properties.genFlatBedrock) || Properties.retroOreGen))
+        if ((tag == null) && ((Properties.RETRO_FLAT_BEDROCK && Properties.FLAT_BEDROCK) || Properties.RETRO_ORE_GEN))
         {
             regen = true;
         }
         if (bedrock)
         {
-            NucleumWorld.instance.logger().finest("Regenerating flat bedrock for the chunk at %s", cCoord.toString());
+            NucleumOmnium.instance.logger().finest("Regenerating flat bedrock for the chunk at %s", cCoord.toString());
             regen = true;
         }
         if (ores)
         {
-            NucleumWorld.instance.logger().finest("Regenerating ores for the chunk at %s", cCoord.toString());
+            NucleumOmnium.instance.logger().finest("Regenerating ores for the chunk at %s", cCoord.toString());
             regen = true;
         }
         if (regen)
@@ -133,11 +133,11 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     public void handleChunkSaveEvent(final Save event)
     {
         final NBTTagCompound tag = new NBTTagCompound();
-        if (Properties.retroFlatBedrock && Properties.genFlatBedrock)
+        if (Properties.RETRO_FLAT_BEDROCK && Properties.FLAT_BEDROCK)
         {
             tag.setBoolean("CCM-Bedrock", true);
         }
-        if (Properties.retroOreGen)
+        if (Properties.RETRO_ORE_GEN)
         {
             tag.setBoolean("CCM-Ores", true);
         }
@@ -158,7 +158,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
 
     public void replaceBedrock(final Random random, final int chunkX, final int chunkZ, final World world, final boolean newGen)
     {
-        if (!Properties.genFlatBedrock || (!newGen && !Properties.retroFlatBedrock))
+        if (!Properties.FLAT_BEDROCK || (!newGen && !Properties.RETRO_FLAT_BEDROCK))
         {
             return;
         }

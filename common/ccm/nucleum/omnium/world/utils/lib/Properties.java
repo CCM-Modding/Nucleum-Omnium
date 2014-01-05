@@ -5,8 +5,8 @@ package ccm.nucleum.omnium.world.utils.lib;
 
 public final class Properties
 {
-    public static boolean retroOreGen = false;
-    public static boolean genFlatBedrock = false;
-    public static boolean retroFlatBedrock = false;
-    public static boolean forceFullRegeneration = false;
+    public static boolean RETRO_ORE_GEN = false;
+    public static boolean FLAT_BEDROCK = false;
+    public static boolean RETRO_FLAT_BEDROCK = false;
+    public static boolean FULL_REGEN = false;
 }

@@ -3,6 +3,7 @@
  */
 package ccm.nucleum.omnium.world;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,7 +124,7 @@ public final class WorldGenerator
                                    final Block blockToReplace)
     {
         final String ore = mod.name() + "." + JavaHelper.titleCase(oreName);
-        final Configuration config = NucleumWorld.instance.config().getConfiguration();
+        final Configuration config = new Configuration(new File(CCMMod.configDir.getAbsolutePath() + "/WorldGen.cfg"), true);
         final ConfigCategory cat = config.getCategory(ore);
         clusterSize = config.get(ore, "ClusterSize", clusterSize).getInt();
         numClusters = config.get(ore, "NumClusters", numClusters).getInt();

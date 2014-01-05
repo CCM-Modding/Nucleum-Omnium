@@ -13,18 +13,5 @@
       "captain_shadows",
       "dries007"
     ]
-  },
-  {
-    "modid": "nucleum_world",
-    "name": "Nucleum World",
-    "description": "World Generation for all CCM Mods",
-    "parent": "nucleum_omnium",
-    "dependencies": [
-      "required-after:nucleum_omnium"
-    ],
-    "authors": [
-      "captain_shadows",
-      "Hologuard"
-    ]
   }
 ]

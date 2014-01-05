@@ -19,6 +19,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
  */
 public abstract class CCMMod
 {
+    public static File configDir;
+    static
+    {
+        configDir = new File(Loader.instance().getConfigDir().getAbsolutePath() + "/CCM-Modding/");
+        configDir.mkdirs();
+    }
     /* DATA FIELDS */
     /** Current Configuration File */
     private ConfigHandler config;
@@ -29,9 +35,7 @@ public abstract class CCMMod
     void initConfig(final FMLPreInitializationEvent evt)
     {
         // Get all the files
-        File configFolder = new File(evt.getModConfigurationDirectory().getAbsolutePath() + "/CCM-Modding/");
-        configFolder.mkdirs();
-        File configFile = new File(configFolder.getAbsolutePath() + "/" + name() + ".cfg");
+        File configFile = new File(configDir.getAbsolutePath() + "/" + name() + ".cfg");
         // Create the config handler
         config = new ConfigHandler();
         // Set the Configuration inside the Handler
@@ -89,7 +93,7 @@ public abstract class CCMMod
         mod.initConfig(evt);
         if (config != null)
         {
-            mod.logger().debug("LOADING CONFIGURATION FOR %s", mod.name());
+            CCMLogger.DEFAULT_LOGGER.info("Loading configuration for %s", mod.name());
             // Loads a pre-existing Configuration file.
             mod.config().load();
             config.init(mod.config());

@@ -48,7 +48,7 @@ public class CCMLogger
         StringBuilder sb = new StringBuilder();
         sb.append("\n#########################\n");
         sb.append(format(message.toString(), data));
-        sb.append("\n#########################\n");
+        sb.append("\n#########################");
         logger.log(level, sb.toString());
     }
 
