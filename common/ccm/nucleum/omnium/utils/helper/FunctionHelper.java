@@ -98,4 +98,33 @@ public final class FunctionHelper
                && world.canBlockSeeTheSky(xCoord, yCoord, zCoord)
                && ((world.getWorldChunkManager().getBiomeGenAt(xCoord, yCoord) instanceof BiomeGenDesert) || (!world.isRaining() && !world.isThundering()));
     }
+
+    public static ItemStack getItemFromString(final String itemID, final String splitter)
+    {
+        int id = 0;
+        int meta = 0;
+        // Decompose String into (item ID, Meta) pairs
+        final String[] tmp = itemID.split(splitter);
+        if ((tmp != null) && (tmp.length > 0))
+        {
+            try
+            {
+                id = Integer.parseInt(tmp[0]);
+                if (tmp.length > 1)
+                {
+                    try
+                    {
+                        meta = Integer.parseInt(tmp[1]);
+                    } catch (final Exception ex)
+                    {
+                        meta = 0;
+                    }
+                }
+            } catch (final Exception ex)
+            {
+                id = 0;
+            }
+        }
+        return new ItemStack(id, 1, meta);
+    }
 }

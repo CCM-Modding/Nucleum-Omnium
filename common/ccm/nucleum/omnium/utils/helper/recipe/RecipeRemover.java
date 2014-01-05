@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
+import ccm.nucleum.omnium.utils.helper.FunctionHelper;
 
 public final class RecipeRemover
 {
@@ -19,7 +20,7 @@ public final class RecipeRemover
         // Decompose list into StringItems
         for (final String s : noCraft)
         {
-            items.add(getItemStack(s));
+            items.add(FunctionHelper.getItemFromString(s, ":"));
         }
         deleteRecipes(items);
     }
@@ -52,34 +53,5 @@ public final class RecipeRemover
                 }
             }
         }
-    }
-
-    private static ItemStack getItemStack(final String itemID)
-    {
-        int id = 0;
-        int meta = 0;
-        // Decompose String into (item ID, Meta) pairs
-        final String[] tmp = itemID.split(":");
-        if ((tmp != null) && (tmp.length > 0))
-        {
-            try
-            {
-                id = Integer.parseInt(tmp[0]);
-                if (tmp.length > 1)
-                {
-                    try
-                    {
-                        meta = Integer.parseInt(tmp[1]);
-                    } catch (final Exception ex)
-                    {
-                        meta = 0;
-                    }
-                }
-            } catch (final Exception ex)
-            {
-                id = 0;
-            }
-        }
-        return new ItemStack(id, 1, meta);
     }
 }

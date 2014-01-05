@@ -3,12 +3,9 @@
  */
 package ccm.nucleum.omnium.utils.lib;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public final class Properties
 {
-    public static List<Integer> blackList = new ArrayList<Integer>();
     public static boolean MYSTCARFT_LOADED;
     public static boolean RAIN;
     public static boolean CAPE_HD;
