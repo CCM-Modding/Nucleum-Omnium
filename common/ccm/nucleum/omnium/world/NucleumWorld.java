@@ -1,15 +1,15 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.world;
+package ccm.nucleum.omnium.world;
 
-import static ccm.nucleum.world.utils.lib.Archive.MOD_ID;
+import static ccm.nucleum.omnium.world.utils.lib.Archive.MOD_ID;
 import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 import static net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS;
 import ccm.nucleum.omnium.CCMMod;
-import ccm.nucleum.world.generator.WorldGenHandler;
-import ccm.nucleum.world.utils.TickHandlerWorld;
-import ccm.nucleum.world.utils.lib.Properties;
+import ccm.nucleum.omnium.world.generator.WorldGenHandler;
+import ccm.nucleum.omnium.world.utils.TickHandlerWorld;
+import ccm.nucleum.omnium.world.utils.lib.Properties;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

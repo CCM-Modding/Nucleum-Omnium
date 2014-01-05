@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.world.utils;
+package ccm.nucleum.omnium.world.utils;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -10,7 +10,7 @@ import java.util.Random;
 
 import lib.cofh.util.ChunkCoord;
 import net.minecraft.world.World;
-import ccm.nucleum.world.generator.WorldGenHandler;
+import ccm.nucleum.omnium.world.generator.WorldGenHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 

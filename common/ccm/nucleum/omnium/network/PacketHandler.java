@@ -1,11 +1,11 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.network;
+package ccm.nucleum.omnium.network;
 
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import ccm.nucleum.network.packet.PacketBase;
+import ccm.nucleum.omnium.network.packet.PacketBase;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 

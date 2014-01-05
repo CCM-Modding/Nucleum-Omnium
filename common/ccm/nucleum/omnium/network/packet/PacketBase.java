@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.network.packet;
+package ccm.nucleum.omnium.network.packet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;

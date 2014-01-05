@@ -8,7 +8,7 @@ import static ccm.nucleum.omnium.utils.lib.Archive.MOD_ID;
 import static ccm.nucleum.omnium.utils.lib.Locations.CLIENT_PROXY;
 import static ccm.nucleum.omnium.utils.lib.Locations.SERVER_PROXY;
 import net.minecraft.server.MinecraftServer;
-import ccm.nucleum.network.PacketHandler;
+import ccm.nucleum.omnium.network.PacketHandler;
 import ccm.nucleum.omnium.proxy.CommonProxy;
 import ccm.nucleum.omnium.utils.handler.compatibility.CompatibilityHandler;
 import ccm.nucleum.omnium.utils.handler.configuration.NOConfig;

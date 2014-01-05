@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.world.generator;
+package ccm.nucleum.omnium.world.generator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,9 +18,9 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.ChunkDataEvent.Load;
 import net.minecraftforge.event.world.ChunkDataEvent.Save;
-import ccm.nucleum.world.NucleumWorld;
-import ccm.nucleum.world.utils.TickHandlerWorld;
-import ccm.nucleum.world.utils.lib.Properties;
+import ccm.nucleum.omnium.world.NucleumWorld;
+import ccm.nucleum.omnium.world.utils.TickHandlerWorld;
+import ccm.nucleum.omnium.world.utils.lib.Properties;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenHandler implements IWorldGenerator, IFeatureHandler

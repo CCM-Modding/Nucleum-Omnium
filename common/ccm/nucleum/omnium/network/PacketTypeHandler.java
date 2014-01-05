@@ -1,7 +1,7 @@
 /**
  * CCM Modding, Nucleum Omnium
  */
-package ccm.nucleum.network;
+package ccm.nucleum.omnium.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -10,8 +10,8 @@ import java.util.Map;
 
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import ccm.nucleum.network.packet.PacketBase;
 import ccm.nucleum.omnium.CCMMod;
+import ccm.nucleum.omnium.network.packet.PacketBase;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import ccm.nucleum.omnium.utils.lib.Archive;
 
