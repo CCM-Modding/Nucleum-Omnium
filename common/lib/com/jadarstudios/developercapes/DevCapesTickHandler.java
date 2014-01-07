@@ -60,7 +60,7 @@ public class DevCapesTickHandler implements ITickHandler
                             String userGroup = instance.getUserGroup(lowerUsername);
                             if (debug)
                             {
-                                System.out.println("Changing the cape of: " + p.username);
+                                DevCapesUtil.logger.info("Changing the cape of: " + p.username);
                             }
                             // Sets the cape URL.
                             locationCapeField.set(p, instance.getCapeResource(userGroup));

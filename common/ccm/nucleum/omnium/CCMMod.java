@@ -12,7 +12,6 @@ import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.ModContainer;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * This class should be the super class of any CCM Mod, as it offers a few nice Configuration helpers
@@ -82,8 +81,6 @@ public class CCMMod
      * 
      * @param mod
      *            The mod that is Pre-Initializing
-     * @param evt
-     *            The {@link FMLPreInitializationEvent} that is passed to the method
      * @param config
      *            The configuration class for this mod
      */
