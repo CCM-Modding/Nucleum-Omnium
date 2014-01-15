@@ -3,9 +3,10 @@
  */
 package ccm.nucleum.omnium.utils.handler.configuration;
 
-import lib.cofh.util.ConfigHandler;
 import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.utils.lib.Properties;
+
+import lib.cofh.util.ConfigHandler;
 
 public final class NOConfig extends IConfig
 {

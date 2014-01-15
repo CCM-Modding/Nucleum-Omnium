@@ -1,9 +1,10 @@
 package lib.cofh.gui.slot;
 
-import lib.cofh.util.EnergyHelper;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import lib.cofh.util.EnergyHelper;
 
 public class SlotEnergy extends Slot
 {

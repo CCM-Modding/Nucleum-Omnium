@@ -5,6 +5,7 @@ package ccm.nucleum.omnium.proxy;
 
 import static net.minecraftforge.common.MinecraftForge.EVENT_BUS;
 import static net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS;
+
 import ccm.nucleum.omnium.world.WorldGenHandler;
 
 public class CommonProxy

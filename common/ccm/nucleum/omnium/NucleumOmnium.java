@@ -7,18 +7,9 @@ import static ccm.nucleum.omnium.utils.lib.Archive.MOD_CHANNEL;
 import static ccm.nucleum.omnium.utils.lib.Archive.MOD_ID;
 import static ccm.nucleum.omnium.utils.lib.Locations.CLIENT_PROXY;
 import static ccm.nucleum.omnium.utils.lib.Locations.SERVER_PROXY;
+
 import net.minecraft.server.MinecraftServer;
-import ccm.nucleum.omnium.network.PacketHandler;
-import ccm.nucleum.omnium.proxy.CommonProxy;
-import ccm.nucleum.omnium.utils.handler.compatibility.CompatibilityHandler;
-import ccm.nucleum.omnium.utils.handler.compatibility.MystcraftCompat;
-import ccm.nucleum.omnium.utils.handler.configuration.NOConfig;
-import ccm.nucleum.omnium.utils.handler.gui.GuiHandler;
-import ccm.nucleum.omnium.utils.helper.DataHelper;
-import ccm.nucleum.omnium.utils.lib.Properties;
-import ccm.nucleum.omnium.utils.registry.CommandRegistry;
-import ccm.nucleum.omnium.world.WorldGenHandler;
-import ccm.nucleum.omnium.world.utils.TickHandlerWorld;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -32,6 +23,18 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+
+import ccm.nucleum.omnium.network.PacketHandler;
+import ccm.nucleum.omnium.proxy.CommonProxy;
+import ccm.nucleum.omnium.utils.handler.compatibility.CompatibilityHandler;
+import ccm.nucleum.omnium.utils.handler.compatibility.MystcraftCompat;
+import ccm.nucleum.omnium.utils.handler.configuration.NOConfig;
+import ccm.nucleum.omnium.utils.handler.gui.GuiHandler;
+import ccm.nucleum.omnium.utils.helper.DataHelper;
+import ccm.nucleum.omnium.utils.lib.Properties;
+import ccm.nucleum.omnium.utils.registry.CommandRegistry;
+import ccm.nucleum.omnium.world.WorldGenHandler;
+import ccm.nucleum.omnium.world.utils.TickHandlerWorld;
 
 @Mod(modid = MOD_ID, useMetadata = true)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = MOD_CHANNEL, packetHandler = PacketHandler.class)

@@ -1,9 +1,10 @@
 package ccm.nucleum.omnium.utils.handler.gui;
 
-import ccm.nucleum.omnium.inventory.container.BaseContainer;
-import ccm.nucleum.omnium.inventory.gui.BaseGui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import ccm.nucleum.omnium.inventory.container.BaseContainer;
+import ccm.nucleum.omnium.inventory.gui.BaseGui;
 
 final class Wrapper
 {

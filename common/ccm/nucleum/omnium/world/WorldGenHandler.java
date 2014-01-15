@@ -8,9 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import lib.cofh.api.world.IFeatureGenerator;
-import lib.cofh.api.world.IFeatureHandler;
-import lib.cofh.util.ChunkCoord;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -18,11 +15,17 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.ChunkDataEvent.Load;
 import net.minecraftforge.event.world.ChunkDataEvent.Save;
+
+import cpw.mods.fml.common.IWorldGenerator;
+
 import ccm.nucleum.omnium.NucleumOmnium;
 import ccm.nucleum.omnium.utils.lib.NBTConstants;
 import ccm.nucleum.omnium.utils.lib.Properties;
 import ccm.nucleum.omnium.world.utils.TickHandlerWorld;
-import cpw.mods.fml.common.IWorldGenerator;
+
+import lib.cofh.api.world.IFeatureGenerator;
+import lib.cofh.api.world.IFeatureHandler;
+import lib.cofh.util.ChunkCoord;
 
 public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
 {
@@ -35,7 +38,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
     {
         return WorldGenHandler.instance.registerFeature(Ore);
     }
-    
+
     @Override
     public void generate(final Random random,
                          final int chunkX,
@@ -168,7 +171,7 @@ public class WorldGenHandler implements IWorldGenerator, IFeatureHandler
             replaceBR(chunkX, chunkZ, world, Block.stone);
         }
     }
-    
+
     private void replaceBR(final int chunkX, final int chunkZ, final World world, final Block block)
     {
         for (int blockX = 0; blockX < 16; blockX++)

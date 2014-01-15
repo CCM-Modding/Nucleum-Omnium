@@ -7,8 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.tileentity.TileEntity;
-import ccm.nucleum.omnium.utils.helper.CCMLogger;
+
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 public final class TileHandler
 {

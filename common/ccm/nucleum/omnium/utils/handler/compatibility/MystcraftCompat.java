@@ -18,7 +18,7 @@ public final class MystcraftCompat implements NonInteractCompatibility
     {
         return "Mystcraft";
     }
-    
+
     @Override
     public void init()
     {

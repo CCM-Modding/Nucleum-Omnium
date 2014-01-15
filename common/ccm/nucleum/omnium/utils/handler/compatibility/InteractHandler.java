@@ -1,7 +1,8 @@
 package ccm.nucleum.omnium.utils.handler.compatibility;
 
-import ccm.nucleum.omnium.utils.helper.CCMLogger;
 import cpw.mods.fml.common.Loader;
+
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
 /**
  * Internal Helper used to keep data values and run the init method
@@ -44,8 +45,8 @@ final class InteractHandler
             } catch (Exception e)
             {
                 CCMLogger.DEFAULT.printCatch(e,
-                                                    "CCM has failed to create a new instance of a compatibility with %s, please inform the CCM Team",
-                                                    name);
+                                             "CCM has failed to create a new instance of a compatibility with %s, please inform the CCM Team",
+                                             name);
                 return;
             }
             try

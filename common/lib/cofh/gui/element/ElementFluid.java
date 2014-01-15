@@ -1,7 +1,8 @@
 package lib.cofh.gui.element;
 
-import lib.cofh.gui.GuiBase;
 import net.minecraftforge.fluids.FluidStack;
+
+import lib.cofh.gui.GuiBase;
 
 public class ElementFluid extends ElementBase
 {

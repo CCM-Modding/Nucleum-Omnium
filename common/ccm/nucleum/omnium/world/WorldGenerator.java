@@ -7,15 +7,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import lib.cofh.api.world.WeightedRandomBlock;
-import lib.cofh.world.feature.FeatureOreGenUniform;
-import lib.cofh.world.feature.WorldGenMinableCluster;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ConfigCategory;
 import net.minecraftforge.common.Configuration;
+
 import ccm.nucleum.omnium.CCMMod;
 import ccm.nucleum.omnium.utils.helper.JavaHelper;
+
+import lib.cofh.api.world.WeightedRandomBlock;
+import lib.cofh.world.feature.FeatureOreGenUniform;
+import lib.cofh.world.feature.WorldGenMinableCluster;
 
 /**
  * @author Captain_Shadows

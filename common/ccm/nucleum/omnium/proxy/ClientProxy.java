@@ -3,10 +3,11 @@
  */
 package ccm.nucleum.omnium.proxy;
 
-import lib.com.jadarstudios.developercapes.DevCapesUtil;
 import ccm.nucleum.omnium.utils.handler.events.EventRain;
 import ccm.nucleum.omnium.utils.lib.Locations;
 import ccm.nucleum.omnium.utils.lib.Properties;
+
+import lib.com.jadarstudios.developercapes.DevCapesUtil;
 
 public class ClientProxy extends CommonProxy
 {
@@ -29,7 +30,7 @@ public class ClientProxy extends CommonProxy
     {
         super.preInit();
     }
-    
+
     @Override
     public void init()
     {

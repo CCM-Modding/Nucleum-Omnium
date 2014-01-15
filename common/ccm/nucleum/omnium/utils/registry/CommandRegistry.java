@@ -4,6 +4,9 @@
 package ccm.nucleum.omnium.utils.registry;
 
 import net.minecraft.command.CommandBase;
+
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+
 import ccm.nucleum.omnium.command.CommandBanFix;
 import ccm.nucleum.omnium.command.CommandCCM;
 import ccm.nucleum.omnium.command.CommandKillFix;
@@ -11,7 +14,6 @@ import ccm.nucleum.omnium.command.CommandRain;
 import ccm.nucleum.omnium.command.CommandTPS;
 import ccm.nucleum.omnium.command.CommandTPX;
 import ccm.nucleum.omnium.utils.lib.Properties;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public final class CommandRegistry
 {

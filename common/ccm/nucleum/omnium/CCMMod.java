@@ -5,13 +5,16 @@ package ccm.nucleum.omnium;
 
 import java.io.File;
 
-import lib.cofh.util.ConfigHandler;
 import net.minecraftforge.common.Configuration;
-import ccm.nucleum.omnium.utils.handler.configuration.IConfig;
-import ccm.nucleum.omnium.utils.helper.CCMLogger;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.ModContainer;
+
+import ccm.nucleum.omnium.utils.handler.configuration.IConfig;
+import ccm.nucleum.omnium.utils.helper.CCMLogger;
+
+import lib.cofh.util.ConfigHandler;
 
 /**
  * This class should be the super class of any CCM Mod, as it offers a few nice Configuration helpers

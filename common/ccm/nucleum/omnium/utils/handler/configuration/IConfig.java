@@ -3,8 +3,9 @@
  */
 package ccm.nucleum.omnium.utils.handler.configuration;
 
-import lib.cofh.util.ConfigHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+
+import lib.cofh.util.ConfigHandler;
 
 public abstract class IConfig
 {

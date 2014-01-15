@@ -4,8 +4,10 @@
 package ccm.nucleum.omnium.client.model;
 
 import net.minecraftforge.client.model.IModelCustom;
-import ccm.nucleum.omnium.utils.handler.ResourceHandler;
+
 import cpw.mods.fml.client.FMLClientHandler;
+
+import ccm.nucleum.omnium.utils.handler.ResourceHandler;
 
 /**
  * SimpleModel, to use with the Advanced Model Loader. It loads and allows the user to render the loaded model

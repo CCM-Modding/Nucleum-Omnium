@@ -1,10 +1,12 @@
 package ccm.nucleum.omnium.inventory.gui;
 
-import lib.cofh.gui.GuiBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
+
 import ccm.nucleum.omnium.utils.handler.ResourceHandler;
+
+import lib.cofh.gui.GuiBase;
 
 public abstract class BaseGui extends GuiBase
 {

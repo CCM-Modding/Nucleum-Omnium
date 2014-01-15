@@ -2,11 +2,13 @@ package lib.cofh.gui.element;
 
 import java.util.List;
 
-import lib.cofh.gui.GuiBase;
 import net.minecraft.client.audio.SoundManager;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
+
 import cpw.mods.fml.client.FMLClientHandler;
+
+import lib.cofh.gui.GuiBase;
 
 /**
  * Base class for a modular GUI element. Has self-contained rendering methods and a link back to the {@link GuiBase} it is a part of.

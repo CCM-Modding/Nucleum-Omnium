@@ -11,6 +11,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.world.World;
+
 import ccm.nucleum.omnium.inventory.slot.OutputSlot;
 import ccm.nucleum.omnium.utils.helper.CCMLogger;
 
@@ -51,14 +52,14 @@ public abstract class BaseContainer extends Container
         } catch (final Exception e)
         {
             CCMLogger.DEFAULT.printCatch(e,
-                                                "FAILED @ createSlot DURING newInstance WITH %s, %s, %s, %s, %s, %s, %s",
-                                                inventory,
-                                                slot,
-                                                index,
-                                                x,
-                                                y,
-                                                row,
-                                                column);
+                                         "FAILED @ createSlot DURING newInstance WITH %s, %s, %s, %s, %s, %s, %s",
+                                         inventory,
+                                         slot,
+                                         index,
+                                         x,
+                                         y,
+                                         row,
+                                         column);
         }
     }
 

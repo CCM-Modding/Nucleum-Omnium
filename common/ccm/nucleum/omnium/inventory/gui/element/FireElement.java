@@ -1,8 +1,9 @@
 package ccm.nucleum.omnium.inventory.gui.element;
 
+import ccm.nucleum.omnium.utils.handler.ResourceHandler;
+
 import lib.cofh.gui.GuiBase;
 import lib.cofh.gui.element.ElementDualScaled;
-import ccm.nucleum.omnium.utils.handler.ResourceHandler;
 
 public class FireElement extends ElementDualScaled
 {

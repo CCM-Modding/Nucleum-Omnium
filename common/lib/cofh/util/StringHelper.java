@@ -2,13 +2,13 @@ package lib.cofh.util;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-
-import org.lwjgl.input.Keyboard;
 
 /**
  * Contains various helper functions to assist with String manipulation.
