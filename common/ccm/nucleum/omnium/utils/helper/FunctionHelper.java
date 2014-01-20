@@ -59,7 +59,7 @@ public final class FunctionHelper
     /** Checks if a block is like cobble */
     public static boolean isNormalBlock(Block block, int meta)
     {
-        return (block.isOpaqueCube() && (!block.hasTileEntity(meta)) && block.renderAsNormalBlock() && (!block.hasTileEntity(meta)) && hasNormalBounds(block));
+        return (block.isOpaqueCube() && !block.hasTileEntity(meta) && block.renderAsNormalBlock() && hasNormalBounds(block));
     }
 
     /** Checks if the block is a full 1m^3 */
