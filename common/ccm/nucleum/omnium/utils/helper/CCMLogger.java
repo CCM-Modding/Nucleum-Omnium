@@ -96,6 +96,11 @@ public class CCMLogger
         log(Level.SEVERE, message, data);
     }
 
+    public void bug(final Object message, final Object... data)
+    {
+        log(Level.SEVERE, message + "\nThis is a BUG please REPORT IT!!!", data);
+    }
+
     public void printCatch(final Exception e, final Object message, final Object... data)
     {
         StringBuilder sb = new StringBuilder();

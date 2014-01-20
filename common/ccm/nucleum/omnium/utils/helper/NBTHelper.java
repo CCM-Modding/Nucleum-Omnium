@@ -175,6 +175,22 @@ public final class NBTHelper
         item.getTagCompound().setDouble(keyName, keyValue);
     }
 
+    public static NBTTagCompound getTag(final ItemStack item, final String keyName)
+    {
+        initCompound(item);
+        if (!item.getTagCompound().hasKey(keyName))
+        {
+            setTag(item, keyName, new NBTTagCompound());
+        }
+        return item.getTagCompound().getCompoundTag(keyName);
+    }
+
+    public static void setTag(final ItemStack item, final String keyName, final NBTTagCompound keyValue)
+    {
+        initCompound(item);
+        item.getTagCompound().setTag(keyName, keyValue);
+    }
+
     // NON ITEM BASED NBT
     // String
     public static String getString(final NBTTagCompound nbt, final String keyName)
@@ -254,5 +270,15 @@ public final class NBTHelper
             nbt.setDouble(keyName, 0);
         }
         return nbt.getDouble(keyName);
+    }
+
+    // Tag
+    public static NBTTagCompound getTag(final NBTTagCompound nbt, final String keyName)
+    {
+        if (!nbt.hasKey(keyName))
+        {
+            nbt.setCompoundTag(keyName, new NBTTagCompound());
+        }
+        return nbt.getCompoundTag(keyName);
     }
 }
