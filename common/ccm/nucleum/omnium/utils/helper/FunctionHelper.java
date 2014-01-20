@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenDesert;
+import net.minecraftforge.oredict.OreDictionary;
 
 public final class FunctionHelper
 {
@@ -118,7 +119,13 @@ public final class FunctionHelper
                         meta = Integer.parseInt(tmp[1]);
                     } catch (final Exception ex)
                     {
-                        meta = 0;
+                        if (tmp[1].equalsIgnoreCase("*"))
+                        {
+                            meta = OreDictionary.WILDCARD_VALUE;
+                        } else
+                        {
+                            meta = 0;
+                        }
                     }
                 }
             } catch (final Exception ex)
