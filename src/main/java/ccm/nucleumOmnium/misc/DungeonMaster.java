@@ -1,0 +1,76 @@
+/*
+ * Copyright (c) 2014 CCM modding crew.
+ * View members of the CCM modding crew on https://github.com/orgs/CCM-Modding/members
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+package ccm.nucleumOmnium.misc;
+
+import ccm.nucleumOmnium.NucleumOmnium;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.DungeonHooks;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class DungeonMaster
+{
+    private static final String DUNGEONS_PAWNING = "DungeonSpawning";
+    private static final String DUNGEON_LIST_HELP = "A list of all dungeon mobs with rarity.\nIn vanilla: 200 for Zombie, 100 for Skeleton and Spider.\nFeel free to add ones yourself.\nWILL NOT SPAWN MORE DUNGEONS!\nFormat: 'name:rarity'.";
+
+    public static void init()
+    {
+        Configuration config = new Configuration(new File(NucleumOmnium.getCCMFolder(), "DungeonMaster.cfg"));
+
+        List<String> ourDungeonMobs = new ArrayList<String>();
+        try
+        {
+            //noinspection unchecked
+            ArrayList<DungeonHooks.DungeonMob> dungeonMobs = (ArrayList<DungeonHooks.DungeonMob>) dungeonMobsField.get(null);
+            for (DungeonHooks.DungeonMob mob : dungeonMobs.toArray(new DungeonHooks.DungeonMob[dungeonMobs.size()]))
+            {
+                ourDungeonMobs.add(mob.type + ":" + mob.itemWeight);
+                DungeonHooks.removeDungeonMob(mob.type);
+            }
+        }
+        catch (IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+
+        for (String thing : config.get(DUNGEONS_PAWNING, "dungeonList", ourDungeonMobs.toArray(new String[ourDungeonMobs.size()]), DUNGEON_LIST_HELP).getStringList())
+        {
+            String[] split = thing.split(":");
+            DungeonHooks.addDungeonMob(split[0], Integer.parseInt(split[1]));
+        }
+
+        config.save();
+    }
+
+    private static final Field dungeonMobsField;
+
+    static
+    {
+        dungeonMobsField = DungeonHooks.class.getDeclaredFields()[0];
+        dungeonMobsField.setAccessible(true);
+    }
+}
