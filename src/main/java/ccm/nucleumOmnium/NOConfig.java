@@ -44,7 +44,7 @@ public class NOConfig
 
     public NOConfig(File ccmFolder)
     {
-        this.config = new Configuration(new File(ccmFolder, "CCM.cgf"));
+        this.config = new Configuration(new File(ccmFolder, "CCM.cfg"));
 
         /**
          * CMD

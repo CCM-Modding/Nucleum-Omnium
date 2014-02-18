@@ -20,7 +20,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package ccm.nucleumOmnium.commands;
+package ccm.nucleumOmnium.worldfiller2000;
 
 import ccm.nucleumOmnium.worldfiller2000.Filler;
 import ccm.nucleumOmnium.worldfiller2000.Shape;
