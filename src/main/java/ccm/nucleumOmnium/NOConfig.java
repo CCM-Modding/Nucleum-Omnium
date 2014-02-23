@@ -39,6 +39,7 @@ public class NOConfig
 
     public boolean worldFiller   = true;
     public boolean dungeonMaster = true;
+    public String[] fuelEdits    = { "106:100" };
 
     public boolean noRainNoise = false;
 
@@ -54,14 +55,14 @@ public class NOConfig
         override_ban = config.get(CMD, "override_ban", override_ban, "Override the ban command with our own enhanced version. Allows temp bans.").getBoolean(override_ban);
         override_kill = config.get(CMD, "override_kill", override_kill, "Override the kill command with our own enhanced version. Allows killing others.").getBoolean(override_kill);
 
-
         /**
          * TWEAKS
          */
-        config.addCustomCategoryComment(TWEAKS, "Command related settings");
+        config.addCustomCategoryComment(TWEAKS, "Tweaks");
 
         worldFiller = config.get(TWEAKS, "worldFiller", worldFiller, "Enable the world filler.").getBoolean(worldFiller);
         dungeonMaster = config.get(TWEAKS, "dungeonMaster", dungeonMaster, "Enable the dungeon master, see separate config.").getBoolean(dungeonMaster);
+        fuelEdits = config.get(TWEAKS, "fuelEdits", fuelEdits, "Allows you to add fuels to the fuel registry. Fueltime is in ticks. Use itemID:metadate:fueltime or itemID:fueltime or oredictEntry:fueltime").getStringList();
 
         /**
          * CLIENT

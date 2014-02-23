@@ -27,6 +27,7 @@ import ccm.libs.org.mcstats.Metrics;
 import ccm.nucleumOmnium.commands.CommandBan;
 import ccm.nucleumOmnium.commands.CommandKill;
 import ccm.nucleumOmnium.dungeonMaster.DungeonMasterCMD;
+import ccm.nucleumOmnium.misc.CraftingFixes;
 import ccm.nucleumOmnium.worldfiller2000.CommandWorldFiller;
 import ccm.nucleumOmnium.dungeonMaster.DungeonMaster;
 import ccm.nucleumOmnium.network.ConnectionHandler;
@@ -98,6 +99,7 @@ public class NucleumOmnium
         config = new NOConfig(getCCMFolder());
 
         Players.init();
+        CraftingFixes.init();
 
         MinecraftForge.EVENT_BUS.register(EventHandler.EVENT_HANDLER);
     }
