@@ -23,6 +23,8 @@
 package ccm.nucleumOmnium.util;
 
 import ccm.nucleumOmnium.NucleumOmnium;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
@@ -32,6 +34,7 @@ public class EventHandler
 
     private EventHandler() {}
 
+    @SideOnly(Side.CLIENT)
     @ForgeSubscribe
     public void soundEvent(PlaySoundEvent event)
     {

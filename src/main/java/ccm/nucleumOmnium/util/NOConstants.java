@@ -26,9 +26,7 @@ public class NOConstants
 {
     public static final String NO_MODID = "NucleumOmnium";
 
-    /**
-     * For Handshake packet
-     */
+    // For Handshake packet
     public static final String CHANNEL_HS = "NO-hs";
 
     public static final String URL_CAPES = "https://raw2.github.com/CCM-Modding/Nucleum-Omnium/master/capes.txt";

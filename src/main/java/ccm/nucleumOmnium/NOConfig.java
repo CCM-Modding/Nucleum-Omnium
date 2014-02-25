@@ -32,14 +32,16 @@ public class NOConfig
     private static final String CLIENT = "client";
     private static final String TWEAKS = "tweaks";
 
-    public final Configuration config;
+    private final Configuration config;
 
     public boolean override_ban  = true;
     public boolean override_kill = true;
 
-    public boolean worldFiller   = true;
-    public boolean dungeonMaster = true;
-    public String[] fuelEdits    = { "106:100" };
+    public boolean  worldFiller                 = true;
+    public boolean  dungeonMaster               = true;
+    public String[] fuelEdits                   = {"106:100"};
+    public boolean  oreDictionaryFixes          = true;
+    public String[] oreDictionaryFixesWhiteList = {"ingot."};
 
     public boolean noRainNoise = false;
 
@@ -63,6 +65,8 @@ public class NOConfig
         worldFiller = config.get(TWEAKS, "worldFiller", worldFiller, "Enable the world filler.").getBoolean(worldFiller);
         dungeonMaster = config.get(TWEAKS, "dungeonMaster", dungeonMaster, "Enable the dungeon master, see separate config.").getBoolean(dungeonMaster);
         fuelEdits = config.get(TWEAKS, "fuelEdits", fuelEdits, "Allows you to add fuels to the fuel registry. Fueltime is in ticks. Use itemID:metadate:fueltime or itemID:fueltime or oredictEntry:fueltime").getStringList();
+        oreDictionaryFixes = config.get(TWEAKS, "oreDictionaryFixes", oreDictionaryFixes, "Unifies all recipe outputs, see this config file for the whitelist.").getBoolean(oreDictionaryFixes);
+        oreDictionaryFixesWhiteList = config.get(TWEAKS, "oreDictionaryFixesWhiteList", oreDictionaryFixesWhiteList, "Whitelist for oreDictionaryFixes, use . for a partial match. (aka ingot. will macht all ingots).").getStringList();
 
         /**
          * CLIENT

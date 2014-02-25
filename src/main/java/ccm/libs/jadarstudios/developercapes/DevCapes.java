@@ -55,9 +55,9 @@ public class DevCapes
     private static DevCapes instance;
     public static final double version = 2.2;
 
-    private HashMap<String, String>                  users;
-    private HashMap<String, ResourceLocation>        capeResources;
-    private HashMap<String, ThreadDownloadImageData> downloadThreads;
+    private final HashMap<String, String>                  users;
+    private final HashMap<String, ResourceLocation>        capeResources;
+    private final HashMap<String, ThreadDownloadImageData> downloadThreads;
 
     private DevCapesTickHandler tickHandler = null;
 
@@ -101,9 +101,9 @@ public class DevCapes
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
 
-            String username = "";
-            String group = "";
-            String capeUrl = "";
+            String username;
+            String group;
+            String capeUrl;
 
             while ((line = reader.readLine()) != null)
             {
@@ -129,8 +129,6 @@ public class DevCapes
 
                                 this.addCapeResource(group, r);
                                 this.addDownloadThread(group, t);
-
-                                continue;
                             }
                             else
                             {
@@ -164,7 +162,7 @@ public class DevCapes
      * @param parUsername The Username to add.
      * @param parGroup    The group to add that Username to.
      */
-    public void addUser(String parUsername, String parGroup)
+    void addUser(String parUsername, String parGroup)
     {
         if (getUserGroup(parUsername) == null)
         {
@@ -189,7 +187,7 @@ public class DevCapes
      * @param parGroup
      * @param parResource
      */
-    public void addCapeResource(String parGroup, ResourceLocation parResource)
+    void addCapeResource(String parGroup, ResourceLocation parResource)
     {
         if (getCapeResource(parGroup) == null)
         {
@@ -214,7 +212,7 @@ public class DevCapes
      * @param parGroup
      * @param parResource
      */
-    public void addDownloadThread(String parGroup, ThreadDownloadImageData parResource)
+    void addDownloadThread(String parGroup, ThreadDownloadImageData parResource)
     {
         if (getDownloadThread(parGroup) == null)
         {
@@ -243,7 +241,7 @@ public class DevCapes
      * @param par3IImageBuffer
      * @return
      */
-    public static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation, String par1Str, ResourceLocation par2ResourceLocation, IImageBuffer par3IImageBuffer)
+    private static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation, String par1Str, ResourceLocation par2ResourceLocation, IImageBuffer par3IImageBuffer)
     {
         TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
 

@@ -142,7 +142,7 @@ public class DungeonMasterCMD extends CommandBase
         DungeonMaster.saveLoot();
     }
 
-    public static String getTextFromWeightedRandomChestContent(WeightedRandomChestContent content)
+    private static String getTextFromWeightedRandomChestContent(WeightedRandomChestContent content)
     {
         return content.theItemId.getUnlocalizedName() + " - " + EnumChatFormatting.AQUA + content.itemWeight + EnumChatFormatting.WHITE + " - " + EnumChatFormatting.GREEN + content.theMinimumChanceToGenerateItem + EnumChatFormatting.WHITE + " - " + EnumChatFormatting.RED + content.theMaximumChanceToGenerateItem;
     }

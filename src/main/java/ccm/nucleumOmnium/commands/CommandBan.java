@@ -70,11 +70,11 @@ public class CommandBan extends CommandServerBan
             {
                 entityplayermp.playerNetServerHandler.kickPlayerFromServer(sb.toString());
             }
-            notifyAdmins(sender, "commands.ban.success", new Object[] {args[0]});
+            notifyAdmins(sender, "commands.ban.success", args[0]);
         }
         else
         {
-            throw new WrongUsageException("commands.ban.usage", new Object[0]);
+            throw new WrongUsageException("commands.ban.usage");
         }
     }
 

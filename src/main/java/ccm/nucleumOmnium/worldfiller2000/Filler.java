@@ -33,13 +33,13 @@ import net.minecraft.world.WorldServer;
 
 import java.util.LinkedList;
 
-public class Filler
+class Filler
 {
     private int speed = 1;
     private final int dim;
-    private LinkedList<ChunkCoordIntPair> chunkCoordIntPairs = new LinkedList<ChunkCoordIntPair>();
-    private boolean                       enabled            = false;
-    private boolean                       listGenerated      = false;
+    private final LinkedList<ChunkCoordIntPair> chunkCoordIntPairs = new LinkedList<ChunkCoordIntPair>();
+    private       boolean                       enabled            = false;
+    private       boolean                       listGenerated      = false;
 
     public Filler(int dim, final Shape shape, final int centerX, final int centerZ, final int size)
     {
@@ -68,7 +68,7 @@ public class Filler
         MinecraftServer.getServer().getConfigurationManager().sendChatMsg(ChatMessageComponent.createFromText("The filler will need " + getListSize() / getSpeed() + " ticks or " + (getListSize() / (20 * getSpeed())) + " seconds at " + speed + " chunks/sec.").setColor(EnumChatFormatting.GREEN));
     }
 
-    public int getListSize()
+    int getListSize()
     {
         return chunkCoordIntPairs.size();
     }
@@ -87,7 +87,7 @@ public class Filler
                 world.canNotSave = false;
                 try
                 {
-                    world.saveAllChunks(true, (IProgressUpdate) null);
+                    world.saveAllChunks(true, null);
                 }
                 catch (MinecraftException e)
                 {

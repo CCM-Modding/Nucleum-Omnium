@@ -40,17 +40,17 @@ import java.util.EnumSet;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class DevCapesTickHandler implements ITickHandler
+class DevCapesTickHandler implements ITickHandler
 {
 
     private static final Minecraft mc       = Minecraft.getMinecraft();
     private static final DevCapes  instance = DevCapesUtil.getInstance();
 
     // Keep at false when packaging..
-    private boolean debug = false;
+    private final boolean debug = false;
 
-    private static Field downloadImageCapeField = getHackField(2);
-    private static Field locationCapeField      = getHackField(4);
+    private static final Field downloadImageCapeField = getHackField(2);
+    private static final Field locationCapeField      = getHackField(4);
 
     private int counter = 0;
 

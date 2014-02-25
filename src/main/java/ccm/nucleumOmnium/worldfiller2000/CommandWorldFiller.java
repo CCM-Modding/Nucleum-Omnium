@@ -22,9 +22,6 @@
 
 package ccm.nucleumOmnium.worldfiller2000;
 
-import ccm.nucleumOmnium.worldfiller2000.Filler;
-import ccm.nucleumOmnium.worldfiller2000.Shape;
-import ccm.nucleumOmnium.worldfiller2000.TickHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -134,7 +131,7 @@ public class CommandWorldFiller extends CommandBase
         return null;
     }
 
-    public String[] getDimIds()
+    String[] getDimIds()
     {
         String[] out = new String[DimensionManager.getIDs().length];
         for (int i = 0; i < out.length; i++) out[i] = DimensionManager.getIDs()[i].toString();

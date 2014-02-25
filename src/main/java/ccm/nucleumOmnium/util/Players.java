@@ -38,7 +38,7 @@ import static ccm.nucleumOmnium.util.NOConstants.MESSAGE_KICK_NO_NO;
 
 public class Players
 {
-    private static HashMap<String, PlayerData> playerDataHashMap = new HashMap<String, PlayerData>();
+    private static final HashMap<String, PlayerData> playerDataHashMap = new HashMap<String, PlayerData>();
 
     public static PlayerData getPlayerData(Player player)
     {
@@ -50,7 +50,7 @@ public class Players
         return getPlayerData(player.getEntityName());
     }
 
-    public static PlayerData getPlayerData(String player)
+    private static PlayerData getPlayerData(String player)
     {
         if (!playerDataHashMap.containsKey(player)) playerDataHashMap.put(player, new PlayerData(player));
         return playerDataHashMap.get(player);

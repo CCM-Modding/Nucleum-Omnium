@@ -26,18 +26,17 @@ import ccm.nucleumOmnium.NucleumOmnium;
 import ccm.nucleumOmnium.helpers.ItemHelper;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 
-public class CraftingFixes
+public class FuelAdding
 {
-    static HashSet<ItemStackOrOreDictEntry> fuelSet = new HashSet<ItemStackOrOreDictEntry>();
+    private FuelAdding() {}
+
+    private static final HashSet<ItemStackOrOreDictEntry> fuelSet = new HashSet<ItemStackOrOreDictEntry>();
 
     public static void init()
     {
@@ -82,8 +81,8 @@ public class CraftingFixes
 
     public static final class ItemStackOrOreDictEntry
     {
-        private final int fuelLvl;
-        private final Object entry;
+        private final int     fuelLvl;
+        private final Object  entry;
         private final boolean isItemStack;
 
         public ItemStackOrOreDictEntry(ItemStack itemStack, int fuelLvl)

@@ -35,14 +35,14 @@ public abstract class CustomPacket
 {
     public abstract void handlePacker(Side side, byte[] data, Player player);
 
-    public boolean send(Player player)
+    boolean send(Player player)
     {
         if (!Players.getPlayerData(player).hasNucleum && needsNucleum()) return false;
         PacketDispatcher.sendPacketToPlayer(PacketDispatcher.getPacket(getChannel(), getDataForPlayer(player)), player);
         return true;
     }
 
-    public boolean needsNucleum()
+    protected boolean needsNucleum()
     {
         return true;
     }
@@ -85,9 +85,9 @@ public abstract class CustomPacket
         PacketDispatcher.sendPacketToServer(PacketDispatcher.getPacket(getChannel(), getDataForServer()));
     }
 
-    public abstract byte[] getDataForPlayer(Player player);
+    protected abstract byte[] getDataForPlayer(Player player);
 
-    public abstract byte[] getDataForServer();
+    protected abstract byte[] getDataForServer();
 
-    public abstract String getChannel();
+    protected abstract String getChannel();
 }

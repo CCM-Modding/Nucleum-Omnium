@@ -26,17 +26,19 @@ import ccm.libs.jadarstudios.developercapes.DevCapesUtil;
 import ccm.libs.org.mcstats.Metrics;
 import ccm.nucleumOmnium.commands.CommandBan;
 import ccm.nucleumOmnium.commands.CommandKill;
-import ccm.nucleumOmnium.dungeonMaster.DungeonMasterCMD;
-import ccm.nucleumOmnium.misc.CraftingFixes;
-import ccm.nucleumOmnium.worldfiller2000.CommandWorldFiller;
 import ccm.nucleumOmnium.dungeonMaster.DungeonMaster;
+import ccm.nucleumOmnium.dungeonMaster.DungeonMasterCMD;
+import ccm.nucleumOmnium.misc.FuelAdding;
 import ccm.nucleumOmnium.network.ConnectionHandler;
 import ccm.nucleumOmnium.network.PacketHandler;
+import ccm.nucleumOmnium.recipeStuff.OreDictionaryFixes;
 import ccm.nucleumOmnium.util.EventHandler;
 import ccm.nucleumOmnium.util.Players;
+import ccm.nucleumOmnium.worldfiller2000.CommandWorldFiller;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
@@ -62,7 +64,7 @@ public class NucleumOmnium
 
     private NOConfig config;
     private Logger   logger;
-    private File ccmFolder;
+    private File     ccmFolder;
 
     public static Logger getLogger()
     {
@@ -74,7 +76,7 @@ public class NucleumOmnium
         return instance.config;
     }
 
-    public static String getVersion()
+    private static String getVersion()
     {
         return instance.metadata.version;
     }
@@ -93,13 +95,14 @@ public class NucleumOmnium
     public void preInit(FMLPreInitializationEvent event)
     {
         ccmFolder = new File(event.getModConfigurationDirectory(), "CCM");
-        if (!ccmFolder.exists()) ccmFolder.mkdirs();
+        if (!ccmFolder.exists()) //noinspection ResultOfMethodCallIgnored
+            ccmFolder.mkdirs();
 
         logger = event.getModLog();
         config = new NOConfig(getCCMFolder());
 
         Players.init();
-        CraftingFixes.init();
+        FuelAdding.init();
 
         MinecraftForge.EVENT_BUS.register(EventHandler.EVENT_HANDLER);
     }
@@ -110,6 +113,12 @@ public class NucleumOmnium
         DevCapesUtil.addFileUrl(URL_CAPES);
 
         if (config.dungeonMaster) DungeonMaster.init();
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event)
+    {
+        if (config.oreDictionaryFixes) OreDictionaryFixes.init();
 
         try
         {

@@ -41,7 +41,7 @@ public class TickHandler implements ITickHandler
         TickRegistry.registerTickHandler(INSTANCE, Side.SERVER);
     }
 
-    public HashMap<Integer, Filler> map = new HashMap<Integer, Filler>();
+    public final HashMap<Integer, Filler> map = new HashMap<Integer, Filler>();
 
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData)

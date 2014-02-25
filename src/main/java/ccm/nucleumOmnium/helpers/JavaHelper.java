@@ -63,7 +63,7 @@ public final class JavaHelper
         {
             for (String s : trues)
             {// Iterate through all the strings and match ignoring casing
-                return s.equalsIgnoreCase(input);
+                if (s.equalsIgnoreCase(input)) return true;
             }
         }
         // if any of the past don't work just return false
@@ -81,8 +81,7 @@ public final class JavaHelper
             final StringBuilder sb = new StringBuilder();
             for (final String s : strings)
             {// for each of the independent strings we perform the the "action", and then append a space
-                sb.append(s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase());
-                sb.append(" ");
+                sb.append(s.substring(0, 1).toUpperCase()).append(s.substring(1).toLowerCase()).append(" ");
             }
             return sb.toString();
         }// otherwise just perform the "action"
@@ -100,8 +99,7 @@ public final class JavaHelper
             final StringBuilder sb = new StringBuilder();
             for (final String s : strings)
             {// for each of the independent strings we perform the the "action", and then append a space
-                sb.append(s.substring(0, 1).toLowerCase() + s.substring(1).toLowerCase());
-                sb.append(" ");
+                sb.append(s.substring(0, 1).toLowerCase()).append(s.substring(1).toLowerCase()).append(" ");
             }
             return sb.toString();
         }// otherwise just perform the "action"

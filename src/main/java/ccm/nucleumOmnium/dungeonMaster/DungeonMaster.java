@@ -39,7 +39,7 @@ import java.util.*;
 
 public class DungeonMaster
 {
-    private static final String DUNGEONS_PAWNING = "DungeonSpawning";
+    private static final String DUNGEONS_PAWNING  = "DungeonSpawning";
     private static final String DUNGEON_LIST_HELP = "A list of all dungeon mobs with rarity.\nIn vanilla: 200 for Zombie, 100 for Skeleton and Spider.\nFeel free to add ones yourself.\nWILL NOT SPAWN MORE DUNGEONS!\nFormat: 'name:rarity'.";
 
     public static void init()
@@ -119,7 +119,8 @@ public class DungeonMaster
             {
                 NBTTagCompound root = CompressedStreamTools.read(getFile());
 
-                for (NBTTagCompound tag : (Collection<NBTTagCompound>)root.getTags())
+                //noinspection unchecked
+                for (NBTTagCompound tag : (Collection<NBTTagCompound>) root.getTags())
                 {
                     ChestGenHooks chestGenHooks = ChestGenHooks.getInfo(tag.getName());
 
@@ -129,7 +130,7 @@ public class DungeonMaster
                     getContents(chestGenHooks).clear();
 
                     NBTTagList items = tag.getTagList("weightedItemList");
-                    for (int i = 0; i < items.tagCount(); i ++)
+                    for (int i = 0; i < items.tagCount(); i++)
                     {
                         NBTTagCompound contentTag = (NBTTagCompound) items.tagAt(i);
                         getContents(chestGenHooks).add(new WeightedRandomChestContent(ItemStack.loadItemStackFromNBT(contentTag.getCompoundTag("itemData")), contentTag.getInteger("min"), contentTag.getInteger("max"), contentTag.getInteger("weight")));
@@ -143,7 +144,7 @@ public class DungeonMaster
         }
     }
 
-    public static File getFile()
+    private static File getFile()
     {
         return new File(NucleumOmnium.getCCMFolder(), "DungeonChestContent.dat");
     }
@@ -177,9 +178,9 @@ public class DungeonMaster
         return null;
     }
 
-    static final Field dungeonMobsField;
-    static final Field chestInfoField;
-    static final Field contentsField;
+    private static final Field dungeonMobsField;
+    private static final Field chestInfoField;
+    private static final Field contentsField;
 
     static
     {

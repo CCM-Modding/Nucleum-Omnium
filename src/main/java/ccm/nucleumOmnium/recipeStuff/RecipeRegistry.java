@@ -20,42 +20,49 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+package ccm.nucleumOmnium.recipeStuff;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+
+import java.util.ArrayList;
+
 /**
- * DeveloperCapes by Jadar
- * License: MIT License (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
- * version 2.1
+ * Replaces a lot of the old helper crap
+ *
+ * @author Dries007
  */
-package ccm.libs.jadarstudios.developercapes;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.IImageBuffer;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
-@SideOnly(Side.CLIENT)
-class DevCapesImageBufferDownload implements IImageBuffer
+class RecipeRegistry
 {
-    @Override
-    public BufferedImage parseUserSkin(BufferedImage par1BufferedImage)
+    private static final ArrayList<BaseType<IRecipe>> typeList = new ArrayList<BaseType<IRecipe>>();
+
+    public static void apply()
     {
-        if (par1BufferedImage == null)
+        for (BaseType<IRecipe> baseType : typeList)
         {
-            return null;
+            baseType.apply();
         }
-        else
+    }
+
+    /**
+     * Used on both sides.
+     */
+    static void register(BaseType<IRecipe> baseType)
+    {
+        typeList.add(baseType);
+    }
+
+    public static void unify(IRecipe recipe, ItemStack newOut)
+    {
+        for (BaseType<IRecipe> baseType : typeList)
         {
-            int imageWidth = (par1BufferedImage.getWidth(null) <= 64) ? 64 : (par1BufferedImage.getWidth(null));
-            int imageHeight = (par1BufferedImage.getHeight(null) <= 32) ? 32 : (par1BufferedImage.getHeight(null));
+            if (baseType.accept(recipe))
+            {
+                System.out.println("Unifying " + recipe.getRecipeOutput() + " with " + newOut);
+                baseType.applyNewOutput(recipe, newOut);
 
-            BufferedImage capeImage = new BufferedImage(imageWidth, imageHeight, 2);
-
-            Graphics graphics = capeImage.getGraphics();
-            graphics.drawImage(par1BufferedImage, 0, 0, null);
-            graphics.dispose();
-
-            return capeImage;
+                break;
+            }
         }
     }
 }
