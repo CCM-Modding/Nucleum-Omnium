@@ -22,6 +22,9 @@
 
 package ccm.nucleumOmnium.util;
 
+/**
+ * @author Dries007
+ */
 public class NOConstants
 {
     public static final String NO_MODID = "NucleumOmnium";

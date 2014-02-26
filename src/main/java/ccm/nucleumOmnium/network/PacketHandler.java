@@ -31,6 +31,9 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 
 import static ccm.nucleumOmnium.util.NOConstants.CHANNEL_HS;
 
+/**
+ * @author Dries007
+ */
 public class PacketHandler implements IPacketHandler
 {
     @Override

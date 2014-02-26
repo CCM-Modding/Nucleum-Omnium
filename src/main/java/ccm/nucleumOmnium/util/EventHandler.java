@@ -28,6 +28,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
+/**
+ * @author Dries007
+ */
 public class EventHandler
 {
     public static final EventHandler EVENT_HANDLER = new EventHandler();

@@ -33,6 +33,9 @@ import net.minecraftforge.common.DimensionManager;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author Dries007
+ */
 public class CommandWorldFiller extends CommandBase
 {
     @Override

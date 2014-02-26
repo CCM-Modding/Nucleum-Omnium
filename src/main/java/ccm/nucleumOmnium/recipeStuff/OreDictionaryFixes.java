@@ -31,6 +31,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.List;
 
+/**
+ * @author Dries007
+ */
 public class OreDictionaryFixes
 {
     private OreDictionaryFixes() {}

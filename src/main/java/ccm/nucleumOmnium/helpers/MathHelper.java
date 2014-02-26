@@ -27,14 +27,17 @@ package ccm.nucleumOmnium.helpers;
 
 import java.util.Random;
 
-class MathHelper
+/**
+ * Static helper methods
+ */
+public class MathHelper
 {
     private static final Random rand = new Random();
 
     /**
      * @return The value if it is more than the min and less than the max
      */
-    private static int clampInt(final int min, final int max, final int value)
+    public static int clampInt(final int min, final int max, final int value)
     {
         if ((value < min) || (value > max))
         {

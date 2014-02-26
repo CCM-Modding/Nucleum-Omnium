@@ -32,6 +32,9 @@ import net.minecraft.server.management.BanEntry;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Copy from N-O 1
+ */
 public class CommandBan extends CommandServerBan
 {
     @Override

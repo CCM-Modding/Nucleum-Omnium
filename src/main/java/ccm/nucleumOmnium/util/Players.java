@@ -36,6 +36,11 @@ import java.util.TimerTask;
 
 import static ccm.nucleumOmnium.util.NOConstants.MESSAGE_KICK_NO_NO;
 
+/**
+ * Store player based data
+ *
+ * @author Dries007
+ */
 public class Players
 {
     private static final HashMap<String, PlayerData> playerDataHashMap = new HashMap<String, PlayerData>();

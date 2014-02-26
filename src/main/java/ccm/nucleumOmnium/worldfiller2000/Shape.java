@@ -26,6 +26,9 @@ import net.minecraft.world.ChunkCoordIntPair;
 
 import java.util.LinkedList;
 
+/**
+ * @author Dries007
+ */
 public enum Shape
 {
     SQUARE

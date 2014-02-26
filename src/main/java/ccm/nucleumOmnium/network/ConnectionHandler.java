@@ -30,6 +30,9 @@ import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet1Login;
 import net.minecraft.server.MinecraftServer;
 
+/**
+ * @author Dries007
+ */
 public class ConnectionHandler implements IConnectionHandler
 {
     @Override

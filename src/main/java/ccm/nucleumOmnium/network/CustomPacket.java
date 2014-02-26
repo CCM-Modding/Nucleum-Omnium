@@ -31,6 +31,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
 
+/**
+ * @author Dries007
+ */
 public abstract class CustomPacket
 {
     public abstract void handlePacker(Side side, byte[] data, Player player);

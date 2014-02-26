@@ -37,6 +37,9 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 
+/**
+ * @author Dries007
+ */
 public class DungeonMaster
 {
     private static final String DUNGEONS_PAWNING  = "DungeonSpawning";

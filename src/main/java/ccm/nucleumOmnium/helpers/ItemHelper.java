@@ -25,6 +25,9 @@ package ccm.nucleumOmnium.helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+/**
+ * Static helper methods
+ */
 public class ItemHelper
 {
     public static boolean checkItemEquals(ItemStack is1, ItemStack is2)

@@ -26,13 +26,16 @@ import net.minecraftforge.common.Configuration;
 
 import java.io.File;
 
+/**
+ * Just make public field and assign them there default values in the field decelerations
+ *
+ * @author Dries007
+ */
 public class NOConfig
 {
     private static final String CMD    = "cmd";
     private static final String CLIENT = "client";
     private static final String TWEAKS = "tweaks";
-
-    private final Configuration config;
 
     public boolean override_ban  = true;
     public boolean override_kill = true;
@@ -41,13 +44,13 @@ public class NOConfig
     public boolean  dungeonMaster               = true;
     public String[] fuelEdits                   = {"106:100"};
     public boolean  oreDictionaryFixes          = true;
-    public String[] oreDictionaryFixesWhiteList = {"ingot."};
+    public String[] oreDictionaryFixesWhiteList = {"ingot.", "dus.", "ore."};
 
     public boolean noRainNoise = false;
 
     public NOConfig(File ccmFolder)
     {
-        this.config = new Configuration(new File(ccmFolder, "CCM.cfg"));
+        Configuration config = new Configuration(new File(ccmFolder, "CCM.cfg"));
 
         /**
          * CMD
@@ -75,6 +78,6 @@ public class NOConfig
 
         noRainNoise = config.get(CLIENT, "noRainNoise", noRainNoise, "Stops the rain sounds from playing.").getBoolean(noRainNoise);
 
-        this.config.save();
+        config.save();
     }
 }

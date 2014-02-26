@@ -32,6 +32,9 @@ import net.minecraft.world.WorldServer;
 import java.util.EnumSet;
 import java.util.HashMap;
 
+/**
+ * @author Dries007
+ */
 public class TickHandler implements ITickHandler
 {
     public static final TickHandler INSTANCE = new TickHandler();

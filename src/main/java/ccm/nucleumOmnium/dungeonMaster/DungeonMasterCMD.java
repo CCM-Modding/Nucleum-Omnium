@@ -36,6 +36,9 @@ import net.minecraftforge.common.ChestGenHooks;
 
 import java.util.List;
 
+/**
+ * @author Dries007
+ */
 public class DungeonMasterCMD extends CommandBase
 {
     @Override

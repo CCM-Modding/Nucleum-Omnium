@@ -29,6 +29,9 @@ import ccm.nucleumOmnium.util.Players;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 
+/**
+ * @author Dries007
+ */
 public class HandshakePacket extends CustomPacket
 {
     private static final String HANDSHAKE = "Digital fist bump!";

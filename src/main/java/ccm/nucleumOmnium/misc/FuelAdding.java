@@ -32,6 +32,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.Arrays;
 import java.util.HashSet;
 
+/**
+ * @author Dries007
+ */
 public class FuelAdding
 {
     private FuelAdding() {}

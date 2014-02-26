@@ -30,6 +30,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.DamageSource;
 
+/**
+ * Copy from N-O 1
+ */
 public class CommandKill extends net.minecraft.command.CommandKill
 {
     @Override

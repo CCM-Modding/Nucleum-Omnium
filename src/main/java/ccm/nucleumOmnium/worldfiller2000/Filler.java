@@ -33,6 +33,9 @@ import net.minecraft.world.WorldServer;
 
 import java.util.LinkedList;
 
+/**
+ * @author Dries007
+ */
 class Filler
 {
     private int speed = 1;
