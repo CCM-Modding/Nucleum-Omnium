@@ -53,11 +53,10 @@ import static ccm.nucleumOmnium.util.NOConstants.*;
 /**
  * The core for all things CCM
  *
- * @version 2.xx
- *
  * @author Dries007
  * @author ClayCorp
  * @author CaptainShadows
+ * @version 2.xx
  */
 @Mod(modid = NO_MODID, useMetadata = true)
 @NetworkMod(clientSideRequired = false, serverSideRequired = false, channels = {CHANNEL_HS}, packetHandler = PacketHandler.class, connectionHandler = ConnectionHandler.class)
