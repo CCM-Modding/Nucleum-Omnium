@@ -25,13 +25,35 @@ package ccm.nucleumOmnium.helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-/**
- * Static helper methods
- */
-public class ItemHelper
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Random;
+
+public class MiscHelper
 {
     public static boolean checkItemEquals(ItemStack is1, ItemStack is2)
     {
         return is1.itemID == is2.itemID && (is1.getItemDamage() == OreDictionary.WILDCARD_VALUE || is2.getItemDamage() == OreDictionary.WILDCARD_VALUE || is1.getItemDamage() == is2.getItemDamage());
+    }
+
+    @SafeVarargs
+    public static <T> T getRandomFromSet(Random random, T... collection)
+    {
+        return getRandomFromSet(random, Arrays.asList(collection));
+    }
+
+    public static <T> T getRandomFromSet(Random random, Collection<T> collection)
+    {
+        if (collection.isEmpty()) return null;
+        if (collection.size() == 1) //noinspection unchecked
+            return (T) collection.toArray()[0];
+        int item = random.nextInt(collection.size());
+        int i = 0;
+        for (T obj : collection)
+        {
+            if (i == item) return obj;
+            i = i + 1;
+        }
+        return null;
     }
 }

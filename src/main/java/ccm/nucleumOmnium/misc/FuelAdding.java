@@ -23,7 +23,7 @@
 package ccm.nucleumOmnium.misc;
 
 import ccm.nucleumOmnium.NucleumOmnium;
-import ccm.nucleumOmnium.helpers.ItemHelper;
+import ccm.nucleumOmnium.helpers.MiscHelper;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
@@ -109,7 +109,7 @@ public class FuelAdding
 
         public boolean is(ItemStack fuel)
         {
-            if (isItemStack) return ItemHelper.checkItemEquals(fuel, (ItemStack) entry);
+            if (isItemStack) return MiscHelper.checkItemEquals(fuel, (ItemStack) entry);
             else return OreDictionary.getOres((String) entry).contains(fuel);
         }
     }

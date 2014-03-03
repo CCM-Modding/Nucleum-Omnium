@@ -1,0 +1,14 @@
+Note: You must make "minecraft/jars" yourself, find the assets forlder and copy it there too.
+Client:
+
+net.minecraft.launchwrapper.Launch
+-Djava.library.path=../natives -XX:-UseSplitVerifier -Xms2G -Xmx2G
+--version 1.6 --tweakClass cpw.mods.fml.common.launcher.FMLTweaker --username=RealPlayer9001
+$MODULE_DIR$\minecraft\jars
+
+Server:
+
+cpw.mods.fml.relauncher.ServerLaunchWrapper
+-XX:-UseSplitVerifier -Xms2G -Xmx2G
+
+$MODULE_DIR$\minecraft\jars
