@@ -22,7 +22,9 @@
 
 package ccm.nucleumOmnium.helpers;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
