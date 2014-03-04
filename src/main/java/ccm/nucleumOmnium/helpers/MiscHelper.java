@@ -56,4 +56,26 @@ public class MiscHelper
         }
         return null;
     }
+    
+    public static NBTTagCompound getPersistentDataTag(EntityPlayer player, String name)
+    {
+        NBTTagCompound persistentTag = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
+        player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, persistentTag);
+        NBTTagCompound ccmTag = persistentTag.getCompoundTag("CCM");
+        persistentTag.setCompoundTag("CCM", ccmTag);
+        NBTTagCompound requestedData = ccmTag.getCompoundTag(name);
+        ccmTag.setCompoundTag(name, requestedData);
+
+        return requestedData;
+    }
+
+    public static void setPersistentDataTag(EntityPlayer player, String name, NBTTagCompound tag)
+    {
+        if (tag == null) tag = new NBTTagCompound();
+        NBTTagCompound persistentTag = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
+        player.getEntityData().setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, persistentTag);
+        NBTTagCompound ccmTag = persistentTag.getCompoundTag("CCM");
+        persistentTag.setCompoundTag("CCM", ccmTag);
+        ccmTag.setCompoundTag(name, tag);
+    }
 }
