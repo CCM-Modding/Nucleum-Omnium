@@ -26,6 +26,8 @@ import ccm.libs.jadarstudios.developercapes.DevCapesUtil;
 import ccm.libs.org.mcstats.Metrics;
 import ccm.nucleumOmnium.commands.CommandBan;
 import ccm.nucleumOmnium.commands.CommandKill;
+import ccm.nucleumOmnium.commands.CommandTps;
+import ccm.nucleumOmnium.commands.CommandTpx;
 import ccm.nucleumOmnium.dungeonMaster.DungeonMaster;
 import ccm.nucleumOmnium.dungeonMaster.DungeonMasterCMD;
 import ccm.nucleumOmnium.misc.FuelAdding;
@@ -144,6 +146,8 @@ public class NucleumOmnium
     {
         if (config.override_ban) event.registerServerCommand(new CommandBan());
         if (config.override_kill) event.registerServerCommand(new CommandKill());
+        if (config.add_tps) event.registerServerCommand(new CommandTps());
+        if (config.add_tpx) event.registerServerCommand(new CommandTpx());
         if (config.worldFiller) event.registerServerCommand(new CommandWorldFiller());
         if (config.dungeonMaster) event.registerServerCommand(new DungeonMasterCMD());
         if (config.dungeonMaster) DungeonMaster.loadFromFile();

@@ -39,6 +39,8 @@ public class NOConfig
 
     public boolean override_ban  = true;
     public boolean override_kill = true;
+    public boolean add_tps       = true;
+    public boolean add_tpx       = true;
 
     public boolean  worldFiller                 = true;
     public boolean  dungeonMaster               = true;
@@ -59,6 +61,8 @@ public class NOConfig
 
         override_ban = config.get(CMD, "override_ban", override_ban, "Override the ban command with our own enhanced version. Allows temp bans.").getBoolean(override_ban);
         override_kill = config.get(CMD, "override_kill", override_kill, "Override the kill command with our own enhanced version. Allows killing others.").getBoolean(override_kill);
+        add_tps = config.get(CMD, "add_tps", add_tps, "Add a tps command, usable for all users.").getBoolean(override_ban);
+        add_tpx = config.get(CMD, "add_tpx", add_tpx, "Add a tpx command to teleport between dims.").getBoolean(override_kill);
 
         /**
          * TWEAKS
