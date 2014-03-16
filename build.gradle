@@ -16,20 +16,18 @@ apply plugin: "gmcp"
 apply plugin: "maven"
 
 group = "ccm.nucleumOmnium"
-ext.env = System.getenv()
-version = file('version.txt').text + env.BUILD_NUMBER
+
+version = file('version.txt').text + System.getenv().BUILD_NUMBER
 
 targetCompatibility = 1.6
 sourceCompatibility = 1.6
 
-println 'Version: ' + project.version
 archivesBaseName = 'NucleumOmnium'
 minecraft {
 	minecraftVersion = "1.6.4"
 }
 
-processResources
-{
+processResources {
     from(sourceSets.main.resources.srcDirs) {
         include '**/*.info'
         expand 'version':project.version, 'mcversion':project.minecraft.minecraftVersion
@@ -40,8 +38,20 @@ processResources
     }
 }
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+	classifier = 'dev'
+}
+
 artifacts {
 	archives jar
+    archives sourcesJar
+    archives deobfJar
 }
 
 uploadArchives {
