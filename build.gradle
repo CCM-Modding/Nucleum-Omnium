@@ -49,75 +49,68 @@ artifacts {
 
 uploadArchives
 {
-    if (project.hasProperty("maven_url"))
+    repositories
     {
-        repositories
+        mavenDeployer
         {
-            mavenDeployer
+            repository(url: mavenUrl)
             {
-                repository(url: project.ext.maven_url)
+                authentication(userName: mavenUser, privateKey: mavenPassword)
+            }
+            pom
+            {
+                groupId = project.group
+                version = project.version
+                artifactId = project.archivesBaseName
+                project 
                 {
-                    authentication(userName: project.ext.maven_username, privateKey: project.ext.maven_key)
-                }
-                pom
-                {
-                    groupId = project.group
-                    version = project.version
-                    artifactId = project.archivesBaseName
-                    project 
+                    name project.archivesBaseName
+                    packaging 'jar'
+                    description 'Usefull core for CCM mods'
+                    url 'https://github.com/CCM-Modding/Nucleum-Omnium'
+
+                    scm 
                     {
-                        name project.archivesBaseName
-                        packaging 'jar'
-                        description 'Usefull core for CCM mods'
                         url 'https://github.com/CCM-Modding/Nucleum-Omnium'
+                        connection 'scm:git:git://github.com/CCM-Modding/Nucleum-Omnium.git'
+                        developerConnection 'scm:git:git@github.com:CCM-Modding/Nucleum-Omnium.git'
+                    }
 
-                        scm 
+                    issueManagement 
+                    {
+                        system 'github'
+                        url 'https://github.com/CCM-Modding/Nucleum-Omnium/issues'
+                    }
+
+                    licenses 
+                    {
+                        license 
                         {
-                            url 'https://github.com/CCM-Modding/Nucleum-Omnium'
-                            connection 'scm:git:git://github.com/CCM-Modding/Nucleum-Omnium.git'
-                            developerConnection 'scm:git:git@github.com:CCM-Modding/Nucleum-Omnium.git'
-                        }
-
-                        issueManagement 
-                        {
-                            system 'github'
-                            url 'https://github.com/CCM-Modding/Nucleum-Omnium/issues'
-                        }
-
-                        licenses 
-                        {
-                            license 
-                            {
-                                name 'MIT License'
-                                url 'https://raw.github.com/CCM-Modding/Nucleum-Omnium/master/LICENCE'
-                                distribution 'repo'
-                            }
-                        }
-
-                        developers {
-                            developer {
-                                id 'Dries007'
-                                name 'Dries007'
-                                roles { role 'developer' }
-                            }
-                            developer {
-                                id 'CaptainShadows'
-                                name 'CaptainShadows'
-                                roles { role 'developer' }
-                            }
-                            developer {
-                                id 'Claycorp'
-                                name 'Claycorp'
-                                roles { role 'architect' }
-                            }
+                            name 'MIT License'
+                            url 'https://raw.github.com/CCM-Modding/Nucleum-Omnium/master/LICENCE'
+                            distribution 'repo'
                         }
                     }
-               }
+
+                    developers {
+                        developer {
+                            id 'Dries007'
+                            name 'Dries007'
+                            roles { role 'developer' }
+                        }
+                        developer {
+                            id 'CaptainShadows'
+                            name 'CaptainShadows'
+                            roles { role 'developer' }
+                        }
+                        developer {
+                            id 'Claycorp'
+                            name 'Claycorp'
+                            roles { role 'architect' }
+                        }
+                    }
+                }
            }
-        }
+       }
     }
-    else
-    {
-        logger.info('No maven info, no upload...')
-    }    
 }
