@@ -1,14 +1,24 @@
 buildscript {
     repositories {
+        maven {
+            name = "ccm"
+            url = "http://maven.dries007.net/content/repositories/CCM"
+        }
         mavenCentral()
     }
+    
     dependencies {
 		classpath 'com.github.abrarsyed.gmcp:GMCP:latest.integration'
     }
 }
+configurations {
+    deployJars
+}
 
 apply plugin: "gmcp"
+apply plugin: "maven"
 
+group = "ccm.nucleumOmnium"
 ext.env = System.getenv()
 version = file('version.txt').text + env.BUILD_NUMBER
 
@@ -32,12 +42,82 @@ processResources
         exclude '**/*.info'
     }
 }
-// because the normal default jar task has been modified to be obfuscated
-task deobfJar(type: Jar) {
-	from sourceSets.main.output
-	appendix = 'dev'
-}
 
 artifacts {
-	archives deobfJar
+	archives jar
+}
+
+uploadArchives
+{
+    if (project.hasProperty("maven_url"))
+    {
+        repositories
+        {
+            mavenDeployer
+            {
+                repository(url: project.ext.maven_url)
+                {
+                    authentication(userName: project.ext.maven_username, privateKey: project.ext.maven_key)
+                }
+                pom
+                {
+                    groupId = project.group
+                    version = project.version
+                    artifactId = project.archivesBaseName
+                    project 
+                    {
+                        name project.archivesBaseName
+                        packaging 'jar'
+                        description 'Usefull core for CCM mods'
+                        url 'https://github.com/CCM-Modding/Nucleum-Omnium'
+
+                        scm 
+                        {
+                            url 'https://github.com/CCM-Modding/Nucleum-Omnium'
+                            connection 'scm:git:git://github.com/CCM-Modding/Nucleum-Omnium.git'
+                            developerConnection 'scm:git:git@github.com:CCM-Modding/Nucleum-Omnium.git'
+                        }
+
+                        issueManagement 
+                        {
+                            system 'github'
+                            url 'https://github.com/CCM-Modding/Nucleum-Omnium/issues'
+                        }
+
+                        licenses 
+                        {
+                            license 
+                            {
+                                name 'MIT License'
+                                url 'https://raw.github.com/CCM-Modding/Nucleum-Omnium/master/LICENCE'
+                                distribution 'repo'
+                            }
+                        }
+
+                        developers {
+                            developer {
+                                id 'Dries007'
+                                name 'Dries007'
+                                roles { role 'developer' }
+                            }
+                            developer {
+                                id 'CaptainShadows'
+                                name 'CaptainShadows'
+                                roles { role 'developer' }
+                            }
+                            developer {
+                                id 'Claycorp'
+                                name 'Claycorp'
+                                roles { role 'architect' }
+                            }
+                        }
+                    }
+               }
+           }
+        }
+    }
+    else
+    {
+        logger.info('No maven info, no upload...')
+    }    
 }
