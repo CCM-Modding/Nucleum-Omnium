@@ -16,8 +16,7 @@ apply plugin: "gmcp"
 apply plugin: "maven"
 
 group = "ccm.nucleumOmnium"
-
-version = file('version.txt').text + System.getenv().BUILD_NUMBER
+version = "2.0.0"
 
 targetCompatibility = 1.6
 sourceCompatibility = 1.6
@@ -26,6 +25,9 @@ archivesBaseName = 'NucleumOmnium'
 minecraft {
 	minecraftVersion = "1.6.4"
 }
+ext.BUILD_NUMBER = System.getenv().BUILD_NUMBER;
+if (ext.BUILD_NUMBER == null) ext.BUILD_NUMBER = "0"
+version = project.minecraft.minecraftVersion + "-" + version + "." + ext.BUILD_NUMBER
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
