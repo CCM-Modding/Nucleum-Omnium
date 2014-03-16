@@ -1,7 +1,7 @@
 #
 #Captain
 #
-captain=http://i.imgur.com/ymtAM3N.png
+captain=http://i.imgur.com/FwfsU12.jpg
 captain=captain_shadows
 #
 #Clay
@@ -11,7 +11,7 @@ clay=claycorp
 #
 #Kat
 #
-kat=http://i.imgur.com/kIlNDpn.png
+kat=http://i.imgur.com/q4sIKl9.jpg
 kat=nerane
 #
 #Morton
@@ -21,10 +21,15 @@ morton=morton00000
 #
 #Dries
 #
-dries007=http://dries007.net/capes/coffee_1.png
+dries007=http://dries007.net/capes/matrix.png
 dries007=dries007
 #
 #Resinresin
 #
 Resinresin=http://dries007.net/capes/diamond.png
 Resinresin=Resinresin
+#
+#AbrarSyed
+#
+AbrarSyed=http://dries007.net/capes/AbrarCape.png
+AbrarSyed=AbrarSyed

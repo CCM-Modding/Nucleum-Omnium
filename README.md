@@ -1,7 +1,9 @@
-##Nucleum-Omnium
-This is the Main Mod for all the CCM-Modding mods.
+Nucleum-Omnium
+===============
 
-It is required for all of our mods.
-***
-###Made By:
-  [Captain_Shadows] (https://github.com/CaptainShadows)
+The all around CCM mod.
+Contains all the little random things Clay and the rest come up with.
+All things are disableable.
+
+Please make an issue if you have suggestions or bug reports.
+Include a log/stacktrace and screenshot where possible!

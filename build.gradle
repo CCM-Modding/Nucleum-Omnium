@@ -1,71 +1,43 @@
-// CCM Modding, Nucleum Omnium
 buildscript {
     repositories {
         mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
     }
-    dependencies {  
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT' 
+    dependencies {
+		classpath 'com.github.abrarsyed.gmcp:GMCP:latest.integration'
     }
 }
 
-apply plugin: "forge"
+apply plugin: "gmcp"
 
-group = 'ccm.nucleum_omnium'
-version = "1.0.0.${System.getenv().BUILD_NUMBER}"
-archivesBaseName = 'Nucleum-Omnium'
+ext.env = System.getenv()
+version = file('version.txt').text + env.BUILD_NUMBER
 
-sourceSets {
-    main {
-        java { srcDir 'common' }
-        resources { srcDir 'resources' }
-    }
-}
+targetCompatibility = 1.6
+sourceCompatibility = 1.6
 
+println 'Version: ' + project.version
+archivesBaseName = 'NucleumOmnium'
 minecraft {
-    version = "1.6.4-LATEST"
-    assetDir = "run/assets"
+	minecraftVersion = "1.6.4"
 }
 
-processResources {
+processResources
+{
     from(sourceSets.main.resources.srcDirs) {
         include '**/*.info'
-        expand version: version, mcversion: minecraft.version
+        expand 'version':project.version, 'mcversion':project.minecraft.minecraftVersion
     }
 
-    from(sourceSets.main.resources.srcDirs) { 
-        exclude '**/*.info' 
+    from(sourceSets.main.resources.srcDirs) {
+        exclude '**/*.info'
     }
 }
-
-jar {
-    appendix = 'universal'
-    manifest {
-        attributes 'MCVersion' : project.minecraft.version
-        attributes 'Version' : project.version
-    }
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    appendix = 'src'
-}
-
+// because the normal default jar task has been modified to be obfuscated
 task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    appendix = 'dev'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    appendix = 'javadoc'
-    from 'build/docs/javadoc'
+	from sourceSets.main.output
+	appendix = 'dev'
 }
 
 artifacts {
-    archives sourceJar
-    archives deobfJar
-    archives javadocJar
+	archives deobfJar
 }
