@@ -1,9 +1,6 @@
 buildscript {
     repositories {
-        maven {
-            name = "ccm"
-            url = "http://maven.dries007.net/content/repositories/CCM"
-        }
+        maven { url = "http://maven.dries007.net/content/repositories/ccm/" }
         mavenCentral()
     }
     
@@ -47,45 +44,35 @@ artifacts {
 	archives jar
 }
 
-uploadArchives
-{
-    repositories
-    {
-        mavenDeployer
-        {
-            repository(url: mavenUrl)
-            {
-                authentication(userName: mavenUser, privateKey: mavenPassword)
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: mavenUrl) {
+                authentication(userName: mavenUser, password: mavenPassword)
             }
-            pom
-            {
+            pom {
                 groupId = project.group
                 version = project.version
                 artifactId = project.archivesBaseName
-                project 
-                {
+                project {
                     name project.archivesBaseName
                     packaging 'jar'
                     description 'Usefull core for CCM mods'
                     url 'https://github.com/CCM-Modding/Nucleum-Omnium'
 
-                    scm 
-                    {
+                    scm {
                         url 'https://github.com/CCM-Modding/Nucleum-Omnium'
                         connection 'scm:git:git://github.com/CCM-Modding/Nucleum-Omnium.git'
                         developerConnection 'scm:git:git@github.com:CCM-Modding/Nucleum-Omnium.git'
                     }
 
-                    issueManagement 
-                    {
+                    issueManagement {
                         system 'github'
                         url 'https://github.com/CCM-Modding/Nucleum-Omnium/issues'
                     }
 
-                    licenses 
-                    {
-                        license 
-                        {
+                    licenses  {
+                        license  {
                             name 'MIT License'
                             url 'https://raw.github.com/CCM-Modding/Nucleum-Omnium/master/LICENCE'
                             distribution 'repo'
