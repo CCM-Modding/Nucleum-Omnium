@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         maven { url = "http://maven.dries007.net/content/repositories/ccm/" }
+        maven { url = "http://files.minecraftforge.net/maven/" }
+        maven { url = "https://libraries.minecraft.net/" }
         mavenCentral()
     }
     
@@ -9,7 +11,13 @@ buildscript {
     }
 }
 configurations {
+    compile
     deployJars
+}
+repositories {
+    maven { url = "http://maven.dries007.net/content/repositories/ccm/" }
+    maven { url = "http://files.minecraftforge.net/maven/" }
+    maven { url = "https://libraries.minecraft.net/" }
 }
 
 apply plugin: "gmcp"
@@ -42,7 +50,7 @@ processResources {
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'sources'
+    classifier = 'dev-src'
 }
 
 task deobfJar(type: Jar) {
