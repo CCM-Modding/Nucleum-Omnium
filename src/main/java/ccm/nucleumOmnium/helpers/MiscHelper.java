@@ -22,9 +22,11 @@
 
 package ccm.nucleumOmnium.helpers;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
@@ -79,5 +81,19 @@ public class MiscHelper
         NBTTagCompound ccmTag = persistentTag.getCompoundTag("CCM");
         persistentTag.setCompoundTag("CCM", ccmTag);
         ccmTag.setCompoundTag(name, tag);
+    }
+
+    public static void dropItems(World world, ItemStack stack, int x, int y, int z)
+    {
+        if (stack == null || stack.stackSize <= 0) return;
+
+        float f1 = 0.7F;
+        double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+        double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+        double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+        EntityItem entityitem = new EntityItem(world, x + d, y + d1, z + d2, stack);
+        entityitem.delayBeforeCanPickup = 10;
+
+        world.spawnEntityInWorld(entityitem);
     }
 }
