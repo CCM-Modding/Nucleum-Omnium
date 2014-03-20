@@ -1,16 +1,15 @@
-[
 {
-  "modid": "NucleumOmnium",
-  "name": "NucleumOmnium",
-  "description": "The random bits and pieces that make up CCM. Also core for some other mods.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "https://github.com/CCM-Modding/NucleumOmnium",
-  "updateUrl": "",
-  "authors": ["Dries007", "Captain_Shadows", "rest of CCM"],
-  "credits": "Claycorp for comping up with weird stuff & things.",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
+  "modinfoversion": 2,
+  "modlist": [{
+    "modid": "NucleumOmnium",
+    "name": "NucleumOmnium",
+    "description": "The random bits and pieces that make up CCM. Also core for some other mods.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/CCM-Modding/NucleumOmnium",
+    "authors": ["Dries007", "Captain_Shadows", "rest of CCM"],
+    "credits": "Claycorp for comping up with weird stuff & things.",
+    "requiredMods": [ "Forge" ],
+    "useDependencyInformation": "true"
+  }]
 }
-]
