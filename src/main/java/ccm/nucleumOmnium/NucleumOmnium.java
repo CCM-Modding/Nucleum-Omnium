@@ -37,13 +37,16 @@ import ccm.nucleumOmnium.recipeStuff.OreDictionaryFixes;
 import ccm.nucleumOmnium.util.EventHandler;
 import ccm.nucleumOmnium.util.Players;
 import ccm.nucleumOmnium.worldfiller2000.CommandWorldFiller;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.versioning.ArtifactVersion;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
@@ -130,9 +133,35 @@ public class NucleumOmnium
     {
         if (config.oreDictionaryFixes) OreDictionaryFixes.init();
 
+        for (ModContainer modContainer : Loader.instance().getModList())
+        {
+            for (ArtifactVersion dep : modContainer.getRequirements())
+            {
+                if (dep.getLabel().equalsIgnoreCase(NO_MODID)) // We got ourselves a NO dependent mod
+                {
+                    if (!metadata.childMods.contains(modContainer)) metadata.childMods.add(modContainer);
+                    break;
+                }
+            }
+        }
+
         try
         {
             Metrics metrics = new Metrics(NO_MODID, getVersion());
+
+            Metrics.Graph subMods = metrics.createGraph("SubMods");
+            for (final ModContainer childMod : metadata.childMods)
+            {
+                subMods.addPlotter(new Metrics.Plotter(childMod.getName())
+                {
+                    @Override
+                    public int getValue()
+                    {
+                        return 1;
+                    }
+                });
+            }
+
             metrics.start();
         }
         catch (IOException e)
