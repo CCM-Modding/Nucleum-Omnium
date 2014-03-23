@@ -51,12 +51,15 @@ processResources {
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'dev-src'
+    classifier = 'src'
     appendix = project.minecraft.minecraftVersion
 }
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
+    from (sourceSets.main.allSource.srcDirs) {
+        include '**/*.java'
+    }
 	classifier = 'dev'
     appendix = project.minecraft.minecraftVersion
 }
