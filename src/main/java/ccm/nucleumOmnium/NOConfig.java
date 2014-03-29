@@ -49,6 +49,7 @@ public class NOConfig
     public String[] oreDictionaryFixesWhiteList = {"ingot.", "dus.", "ore."};
 
     public boolean noRainNoise = false;
+    public boolean doVersionChecking = true;
 
     public NOConfig(File ccmFolder)
     {
@@ -81,6 +82,7 @@ public class NOConfig
         config.addCustomCategoryComment(CLIENT, "Client only settings");
 
         noRainNoise = config.get(CLIENT, "noRainNoise", noRainNoise, "Stops the rain sounds from playing.").getBoolean(noRainNoise);
+        doVersionChecking = config.get(CLIENT, "doVersionChecking",doVersionChecking, "Do version checking on ALL N-O dependant mods").getBoolean(doVersionChecking);
 
         config.save();
     }

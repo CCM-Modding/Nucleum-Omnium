@@ -33,6 +33,7 @@ public class NOConstants
     public static final String CHANNEL_HS = "NO-hs";
 
     public static final String URL_CAPES = "https://raw2.github.com/CCM-Modding/Nucleum-Omnium/master/capes.txt";
+    public static final String URL_MAVEN = "http://maven.dries007.net/content/repositories/ccm/";
 
     public static final String MESSAGE_KICK_NO_NO = "NucleumOmnium is required for this server. Please install and connect again.";
 }

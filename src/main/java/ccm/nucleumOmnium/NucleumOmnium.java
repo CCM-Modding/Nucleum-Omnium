@@ -36,6 +36,7 @@ import ccm.nucleumOmnium.network.PacketHandler;
 import ccm.nucleumOmnium.recipeStuff.OreDictionaryFixes;
 import ccm.nucleumOmnium.util.EventHandler;
 import ccm.nucleumOmnium.util.Players;
+import ccm.nucleumOmnium.util.VersionChecker;
 import ccm.nucleumOmnium.worldfiller2000.CommandWorldFiller;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -135,11 +136,16 @@ public class NucleumOmnium
 
         for (ModContainer modContainer : Loader.instance().getModList())
         {
+            if (modContainer.getModId().equals(NO_MODID)) VersionChecker.addMod(modContainer); // Add N-O to the version check list
             for (ArtifactVersion dep : modContainer.getRequirements())
             {
                 if (dep.getLabel().equalsIgnoreCase(NO_MODID)) // We got ourselves a NO dependent mod
                 {
-                    if (!metadata.childMods.contains(modContainer)) metadata.childMods.add(modContainer);
+                    if (!metadata.childMods.contains(modContainer))
+                    {
+                        metadata.childMods.add(modContainer);
+                        if (event.getSide().isClient()) VersionChecker.addMod(modContainer);
+                    }
                     break;
                 }
             }
@@ -168,6 +174,8 @@ public class NucleumOmnium
         {
             e.printStackTrace();
         }
+
+        if (event.getSide().isClient() && config.doVersionChecking) VersionChecker.doVersionCheck();
     }
 
     @Mod.EventHandler

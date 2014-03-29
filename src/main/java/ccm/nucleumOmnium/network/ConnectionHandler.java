@@ -22,6 +22,7 @@
 
 package ccm.nucleumOmnium.network;
 
+import ccm.nucleumOmnium.util.VersionChecker;
 import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.Player;
 import net.minecraft.network.INetworkManager;
@@ -68,6 +69,6 @@ public class ConnectionHandler implements IConnectionHandler
     @Override
     public void clientLoggedIn(NetHandler clientHandler, INetworkManager manager, Packet1Login login)
     {
-
+        VersionChecker.sendMessage();
     }
 }
