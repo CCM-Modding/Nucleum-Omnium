@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 public class Line implements IShape
 {
-    final Point3D[] points = new Point3D[3];
+    final Point3D[] points = new Point3D[2];
 
     public Line(Point3D p1, Point3D p2)
     {

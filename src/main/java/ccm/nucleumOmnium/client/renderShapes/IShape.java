@@ -3,10 +3,10 @@ package ccm.nucleumOmnium.client.renderShapes;
 import net.minecraft.util.Icon;
 
 /**
- * For render shapes (only line, triangle and quad should uses this, more complex stuff should use IComplexShape
+ * For render shapes (only line, triangle and quad should uses this, more complex stuff should extend ComplexShape
  *
- * @see ccm.nucleumOmnium.client.renderShapes.IComplexShape
  * @author Dries007
+ * @see ccm.nucleumOmnium.client.renderShapes.complexShapes.ComplexShape
  */
 public interface IShape
 {

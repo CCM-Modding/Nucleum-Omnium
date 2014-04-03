@@ -13,18 +13,11 @@ public class Octagon extends ComplexShape
 {
     final IShape[] shapes = new IShape[3];
 
-    public Octagon(Point3D center, final double rad, final double yLevel)
+    public Octagon(Point3D center, final double rad)
     {
-        shapes[0] = new Quad(center.moveNew(-rad, yLevel, -rad / 2), center.moveNew(-rad, yLevel, rad / 2), center.moveNew(-rad / 2, yLevel, rad), center.moveNew(-rad / 2, yLevel, -rad));
-        shapes[1] = new Quad(center.moveNew(-rad / 2,    yLevel,     -rad),
-                center.moveNew(-rad / 2,    yLevel,     rad),
-                center.moveNew(rad / 2,     yLevel,     rad),
-                center.moveNew(rad / 2,     yLevel,     -rad));
-        shapes[2] = new Quad(
-                center.moveNew(rad / 2,     yLevel,     -rad),
-                center.moveNew(rad / 2,     yLevel,     rad),
-                center.moveNew(rad,         yLevel,     rad / 2),
-                center.moveNew(rad,         yLevel,     -rad / 2));
+        shapes[0] = new Quad(center.moveNew(-rad, 0, -rad / 2), center.moveNew(-rad, 0, rad / 2), center.moveNew(-rad / 2, 0, rad), center.moveNew(-rad / 2, 0, -rad));
+        shapes[1] = new Quad(center.moveNew(-rad / 2, 0, -rad), center.moveNew(-rad / 2, 0, rad), center.moveNew(rad / 2, 0, rad), center.moveNew(rad / 2, 0, -rad));
+        shapes[2] = new Quad(center.moveNew(rad / 2, 0, -rad), center.moveNew(rad / 2, 0, rad), center.moveNew(rad, 0, rad / 2), center.moveNew(rad, 0, -rad / 2));
     }
 
     @Override

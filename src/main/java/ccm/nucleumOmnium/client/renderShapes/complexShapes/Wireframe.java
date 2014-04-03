@@ -39,7 +39,7 @@ public class Wireframe extends ComplexShape
         Point3D t2 = center.moveNew(-size, size, size);
         Point3D t3 = center.moveNew(size, size, -size);
         Point3D t4 = center.moveNew(size, size, size);
-        
+
         shapes[0] = new Line(b1, b2);
         shapes[1] = new Line(b2, b3);
         shapes[2] = new Line(b3, b4);
@@ -50,8 +50,8 @@ public class Wireframe extends ComplexShape
         shapes[6] = new Line(t3, t4);
         shapes[7] = new Line(t4, t1);
 
-        shapes[8]  = new Line(b1, t1);
-        shapes[9]  = new Line(b2, t2);
+        shapes[8] = new Line(b1, t1);
+        shapes[9] = new Line(b2, t2);
         shapes[10] = new Line(b3, t3);
         shapes[11] = new Line(b4, t4);
     }
