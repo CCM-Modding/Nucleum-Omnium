@@ -10,10 +10,12 @@ buildscript {
 		classpath 'com.github.abrarsyed.gmcp:GMCP:latest.integration'
     }
 }
+
 configurations {
     compile
     deployJars
 }
+
 repositories {
     maven { url = "http://maven.dries007.net/content/repositories/ccm/" }
     maven { url = "http://files.minecraftforge.net/maven/" }
@@ -78,7 +80,7 @@ artifacts {
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: mavenUrl) {
+            repository(url: "http://maven.dries007.net/content/repositories/ccm/") {
                 authentication(userName: mavenUser, password: mavenPassword)
             }
             pom {
